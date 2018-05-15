@@ -80,7 +80,8 @@
                             <th>Repair Crew Phone</th>
                             <th>Driver License</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Edit</th>
+                            <th>Inactive</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -92,7 +93,16 @@
                                 <td><?php echo $contractor['ContPhoneNum']?></td>
                                 <td><?php echo $contractor['ContLicenseNum']?></td>
                                 <td><?php echo $contractor['ContStatus']?></td>
-                                <td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td>
+                                <td>
+                                    <a href="#" class=" btn-info btn-sm">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class=" btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </td>
                             </tr>
                         <?php } ?>
                         </tbody>
