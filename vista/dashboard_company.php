@@ -71,7 +71,7 @@
             <h3>Contractor</h3>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table" id="table_drivers">
+                    <table class="table" id="table_drivers_dashboard_company" name="table_drivers_dashboard_company">
                         <thead>
                         <tr>
                             <th>ContractorID</th>
@@ -94,7 +94,9 @@
                                 <td><?php echo $contractor['ContLicenseNum']?></td>
                                 <td><?php echo $contractor['ContStatus']?></td>
                                 <td>
-                                    <a href="#" class=" btn-info btn-sm">
+                                    <a class="btn-info btn-sm" data-toggle="modal"  
+                                        href="#myModal2" 
+                                        onClick=""> 
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
                                 </td>
@@ -163,3 +165,58 @@
     </div>
 
 </div>
+
+<!-- formulario Modal Actualizar datos-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Edit Contrator Data</h4>
+      </div>
+      <div class="modal-body">
+
+        <form role="form" method="post" action="?controlador=precontrato&accion=editaCupo">
+          <div class="form-group">
+            <label for="ContractorIDed">ContractorID</label>
+            <input type="text" class="form-control" name="ContractorIDed" id="ContractorIDed"  required readonly>
+          </div>
+          <div class="form-group">
+            <label for="ContNameFirsted">First name</label>
+            <input type="text" class="form-control" name="ContNameFirsted" id="ContNameFirsted"  required oninvalid="this.setCustomValidity('Por favor ingrese el valor del cupo')"
+            oninput="setCustomValidity('')">
+          </div>
+          <div class="form-group">
+            <label for="ContNameLasted">Last Name</label>
+            <input type="text" class="form-control" name="ContNameLasted" id="ContNameLasted" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+            oninput="setCustomValidity('')">
+          </div>
+          <div class="form-group">
+            <label for="ContPhoneNumed">Repair Crew Phone</label>
+            <input type="text" class="form-control" name="ContPhoneNumed" id="ContPhoneNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+            oninput="setCustomValidity('')">
+          </div>
+
+          <div class="form-group">
+            <label for="ContLicenseNumed">Driver License</label>
+            <input type="text" class="form-control" name="ContLicenseNumed" id="ContLicenseNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+            oninput="setCustomValidity('')">
+          </div>
+          
+          <div class="form-group">
+          <label for="ContStatused">Status</label>
+                <select class="form-control" id="ContStatused" name="ContStatused" readonly>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Terminated">Terminated</option>
+                </select>
+          </div>
+          
+
+          <button type="button" class="btn-primary btn-sm" onClick="actualizarProcesoAjax()" >Save</button>
+          <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->

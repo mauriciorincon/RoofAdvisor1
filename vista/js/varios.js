@@ -141,3 +141,22 @@ function validateCodeEmail(){
     });
     
 }
+
+
+$('#table_drivers_dashboard_company tbody').on( 'click', 'tr', function () {
+    var tableData = $(this).children("td").map(function() {
+        return $(this).text();
+    }).get();
+
+    $('#ContractorIDed').val(tableData[0]);
+    $('#ContNameFirsted').val(tableData[1]);
+    $('#ContNameLasted').val(tableData[2]);
+    $('#ContPhoneNumed').val(tableData[3]);
+    $('#ContLicenseNumed').val(tableData[4]);
+    $('#ContStatused').val(tableData[5]);
+
+    
+    //console.log(tableData[0]);
+    //console.log(tableData);
+} );
+
