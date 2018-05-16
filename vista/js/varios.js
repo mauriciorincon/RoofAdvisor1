@@ -160,3 +160,50 @@ $('#table_drivers_dashboard_company tbody').on( 'click', 'tr', function () {
     //console.log(tableData);
 } );
 
+
+function updateContractor(){
+    var contractorID = $("input#ContractorIDed").val();
+    var contratorFirstName = $("input#ContNameFirsted").val();
+    var contratorLastName = $("input#ContNameLasted").val();
+    var contratorPhoneNumber = $("input#ContPhoneNumed").val();
+    var contratorLinceseNumber = $("input#ContLicenseNumed").val();
+
+
+    $.post( "controlador/ajax/updateContract.php", { "contractorID" : contractorID,"contratorFirstName": contratorFirstName,
+                                                    "contratorLastName":contratorLastName,"contratorPhoneNumber":contratorPhoneNumber,
+                                                "contratorLinceseNumber":contratorLinceseNumber}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myModal2').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
+                $('#table_drivers_dashboard_company tr').each(function(){ //filas con clase 'small', especifica una clase, asi no tomas el nombre de las columnas
+				if($(this).find('td').eq(0).text()==contractorID){
+					$(this).find('td').eq(1).text(contratorFirstName);
+                    $(this).find('td').eq(2).text(contratorLastName);
+                    $(this).find('td').eq(3).text(contratorPhoneNumber);
+                    $(this).find('td').eq(4).text(contratorLinceseNumber);
+					
+				}
+ 				
+ 			    })
+            }else{
+                
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            return result1;
+        }
+    });
+}

@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Address 3</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd13'] ?>"/>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
                     </div>
 
                     <div class="form-group">
@@ -213,7 +213,7 @@
           </div>
           
 
-          <button type="button" class="btn-primary btn-sm" onClick="actualizarProcesoAjax()" >Save</button>
+          <button type="button" class="btn-primary btn-sm" onClick="updateContractor()" >Save</button>
           <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </form>
       </div>
