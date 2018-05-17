@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Last Name</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
                     </div>  
                     <div class="form-group">
                         <label class="control-label ">Email</label>
@@ -62,8 +62,12 @@
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
                     </div> 
                         
-                </div>    
+                </div>
+                <button type="button" class="btn-primary btn-sm" onClick="updateDataCompany()" >Update Info</button>        
             </form>
+            
+            <br>
+            <br>
         </div>
 
         <!--Div orders-->
@@ -110,9 +114,9 @@
                         </tbody>
                     </table>
                     
-                    <a class="btn-success btn-me" data-toggle="modal"  
+                    <a class="btn btn-outline-primary" data-toggle="modal"  
                                         href="#myModalInsertContractor" 
-                                        onClick=""> 
+                                        onClick="emptyTextNewDriver()"> 
                                         <span class="glyphicon glyphicon-file">New Contractor</span>
                     </a>
                     
@@ -276,7 +280,7 @@
           </div>
           
 
-          <button type="button" class="btn-primary btn-sm" onClick="insertContractor()" >Save</button>
+          <button type="button" class="btn-primary btn-sm" onClick="insertDriver()" >Save</button>
           <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </form>
       </div>

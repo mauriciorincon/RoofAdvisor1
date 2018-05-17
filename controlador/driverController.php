@@ -75,7 +75,7 @@ class driverController{
             $_tmp=intval($_tmp)+1;
             $_newDriverId="CN".str_pad($_tmp, 4, "0", STR_PAD_LEFT);
         }
-        
+        return $_newDriverId;
         
     }
 

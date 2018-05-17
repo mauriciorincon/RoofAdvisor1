@@ -243,6 +243,7 @@ class userController{
 
         foreach ($_array_contractor as $key => $contractor) {
             if(strcmp($contractor["CompanyID"],$_actual_company['CompanyID'])==0){
+                //print_r($contractor);
                 array_push($_array_contractors_to_show,$contractor);
             }
         }
@@ -265,5 +266,22 @@ class userController{
 
     }
     
+    public function updateCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCustomerName,
+                                    $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
+                                    $_companyType){
+        
+        $this->_userModel=new userModel();                                        
+        $this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
+        $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_firstCompanyName);
+        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_lastCustomerName);
+        $this->_userModel->updateContractor($_companyID.'/CompanyAdd1',$_companyAddress1);
+        $this->_userModel->updateContractor($_companyID.'/CompanyAdd2',$_companyAddress2);
+        $this->_userModel->updateContractor($_companyID.'/CompanyAdd3',$_companyAddress3);
+        $this->_userModel->updateContractor($_companyID.'/CompanyPhone',$_companyPhoneNumber);
+        $this->_userModel->updateContractor($_companyID.'/CompanyType',$_companyType);
+
+        return "The contractor identify by ".$_companyID." was updated corretly";
+
+    }
 }
 ?>

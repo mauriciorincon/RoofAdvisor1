@@ -2,19 +2,26 @@
 
 require_once("../driverController.php");
 
-
-
+$_companyID=$_POST['companyID'];
 $_array_drivers=array();
 
-for($n=0;$n<$_elementDivisor;$n++){
-    $_array=array(
-        "driverFirstName"=>$_arrayDivers[$n],
-        "driverLastName"=>$_arrayDivers[$n+$_elementDivisor],
-        "driverPhone"=>$_arrayDivers[$n+($_elementDivisor*2)],
-        "driverLicense"=>$_arrayDivers[$n+($_elementDivisor*3)],
-        "driverStatus"=>$_arrayDivers[$n+($_elementDivisor*4)],
-    );
-    array_push($_array_drivers,$_array);
+$_array=array(
+    "driverFirstName"=>$_POST['contractorFirstName'],
+    "driverLastName"=>$_POST['contractorLastName'],
+    "driverPhone"=>$_POST['contractorPhoneNumber'],
+    "driverLicense"=>$_POST['contractorLinceseNumber'],
+    "driverStatus"=>$_POST['contractorState'],
+);
+array_push($_array_drivers,$_array);
+
+
+$_driverController=new driverController();
+$_id_driver=$_driverController->insertDrivers($_companyID,$_array_drivers);
+if (is_null($_id_driver)){
+    echo "Error, an error ocurred traing to save Contractor, try again";
+}else{
+    echo $_id_driver."|Continue, Contractor was register correctly";
 }
+
 
 ?>

@@ -209,11 +209,7 @@ function updateContractor(){
 }
 
 
-
-
 $(".inactivate-contractor-button").click(function(){
-    
-
     var contractorID = $(this).parents('tr:first').find('td:eq(0)').text();
 
     if(confirm("Are you sure you want to inactive contractor "+contractorID)){
@@ -261,3 +257,104 @@ $(".inactivate-contractor-button").click(function(){
     }
 });
 
+
+function insertDriver(){
+    var companyID = $("input#companyID").val();
+    var contractorFirstName = $("input#ContNameFirstIn").val();
+    var contractorLastName = $("input#ContNameLastIn").val();
+    var contractorPhoneNumber = $("input#ContPhoneNumIn").val();
+    var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
+    var contractorState = $("select#ContStatusIn").val();
+
+    $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
+    "contractorPhoneNumber":contractorPhoneNumber,"contractorLinceseNumber":contractorLinceseNumber,
+    "contractorState":contractorState}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                var pos=data.indexOf("|");
+                var consecutivo=0;
+                if(pos!=-1){
+                    consecutivo=data.substr(0,pos);
+                    data=data.substr(consecutivo);
+                }
+                $('#myModalInsertContractor').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
+                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+            }else{
+                
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            return result1;
+        }
+    });
+
+}
+
+function emptyTextNewDriver(){
+    //$("input#companyID").val('');
+    $("input#ContNameFirstIn").val('');
+    $("input#ContNameLastIn").val('');
+    $("input#ContPhoneNumIn").val('');
+    $("input#ContLicenseNumIn").val('');
+    
+}
+
+function updateDataCompany(){
+    var companyID =$("input#companyID").val();
+    var compamnyName=$("input#compamnyName").val();
+    var firstCompanyName=$("input#firstCompanyName").val();
+    var lastCompanyName=$("input#lastCompanyName").val();
+    //var companyEmail=$("input#companyEmail").val();
+    var companyAddress1=$("input#companyAddress1").val();
+    var companyAddress2=$("input#companyAddress2").val();
+    var companyAddress3=$("input#companyAddress3").val();
+    var companyPhoneNumber=$("input#companyPhoneNumber").val();
+    var companyType=$("input#companyType").val();
+
+    if( typeof companyAddress2 === 'undefined' || companyAddress2 === null ){
+        companyAddress2="";
+    }
+    if( typeof companyAddress3 === 'undefined' || companyAddress3 === null ){
+        companyAddress3="";
+    }
+
+    $.post( "controlador/ajax/updateCompany.php", { "companyID" : companyID,"compamnyName" : compamnyName,"firstCompanyName": firstCompanyName,
+    "lastCompanyName":lastCompanyName,"companyAddress1":companyAddress1,"companyAddress2":companyAddress2,
+    "companyAddress3":companyAddress3,"companyPhoneNumber":companyPhoneNumber,"companyType":companyType}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            return result1;
+        }
+    });
+}
