@@ -207,3 +207,57 @@ function updateContractor(){
         }
     });
 }
+
+
+
+
+$(".inactivate-contractor-button").click(function(){
+    
+
+    var contractorID = $(this).parents('tr:first').find('td:eq(0)').text();
+
+    if(confirm("Are you sure you want to inactive contractor "+contractorID)){
+
+        $.post( "controlador/ajax/updateContractorState.php", { "contractorID" : contractorID,"contratorState": 'Inactive'}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                //$(this).parents('tr:first').find('td:eq(5)').text('Inactive');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
+                $('#table_drivers_dashboard_company tr').each(function(){ 
+                    if($(this).find('td').eq(0).text()==contractorID){
+                        $(this).find('td').eq(5).text('Inactive');
+                        return false;
+                    }
+                 })
+                 
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                return result1;
+            }
+        });
+
+
+
+        //$("inactivate-contractor-button").attr("href", "query.php?ACTION=delete&ID='1'");
+    }
+    else{
+        return false;
+    }
+});
+

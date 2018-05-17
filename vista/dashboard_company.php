@@ -101,7 +101,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="#" class=" btn-danger btn-sm">
+                                    <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </td>
@@ -109,6 +109,13 @@
                         <?php } ?>
                         </tbody>
                     </table>
+                    
+                    <a class="btn-success btn-me" data-toggle="modal"  
+                                        href="#myModalInsertContractor" 
+                                        onClick=""> 
+                                        <span class="glyphicon glyphicon-file">New Contractor</span>
+                    </a>
+                    
                 </div>
             </div>
         </div>
@@ -214,6 +221,62 @@
           
 
           <button type="button" class="btn-primary btn-sm" onClick="updateContractor()" >Save</button>
+          <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->
+
+
+<!-- formulario Insertar contractor datos-->
+<div class="modal fade" id="myModalInsertContractor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Contrator Data</h4>
+      </div>
+      <div class="modal-body">
+
+        <form role="form" method="post" action="?controlador=precontrato&accion=editaCupo">
+          <div class="form-group">
+            <label for="ContractorIDed">ContractorID</label>
+            <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn"  required readonly>
+          </div>
+          <div class="form-group">
+            <label for="ContNameFirsted">First name</label>
+            <input type="text" class="form-control" name="ContNameFirstIn" id="ContNameFirstIn"  required oninvalid="this.setCustomValidity('Write the First name of contractor')"
+            oninput="setCustomValidity('')">
+          </div>
+          <div class="form-group">
+            <label for="ContNameLasted">Last Name</label>
+            <input type="text" class="form-control" name="ContNameLastIn" id="ContNameLastIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the Last name of contractor')"
+            oninput="setCustomValidity('')">
+          </div>
+          <div class="form-group">
+            <label for="ContPhoneNumed">Repair Crew Phone</label>
+            <input type="text" class="form-control" name="ContPhoneNumIn" id="ContPhoneNumIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the phone number of contractor')"
+            oninput="setCustomValidity('')">
+          </div>
+
+          <div class="form-group">
+            <label for="ContLicenseNumed">Driver License</label>
+            <input type="text" class="form-control" name="ContLicenseNumIn" id="ContLicenseNumIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the license number of contractor')"
+            oninput="setCustomValidity('')">
+          </div>
+          
+          <div class="form-group">
+          <label for="ContStatused">Status</label>
+                <select class="form-control" id="ContStatusIn" name="ContStatusIn">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Terminated">Terminated</option>
+                </select>
+          </div>
+          
+
+          <button type="button" class="btn-primary btn-sm" onClick="insertContractor()" >Save</button>
           <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </form>
       </div>

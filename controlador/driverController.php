@@ -90,6 +90,13 @@ class driverController{
         return "The contractor identify by ".$_contractorID." was updated corretly";
     }
 
+    public function updateDriverState($_contractorID,$_contractorState){
+        $this->_driverModel=new driverModel();
+        $this->_driverModel->updateDriver($_contractorID.'/ContStatus',$_contractorState);
+
+        return "The contractor identify by ".$_contractorID." was updated corretly";
+    }
+
 }
 
 
