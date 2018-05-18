@@ -26,6 +26,19 @@
 							</form>
 						</div>
 					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="contact-form">
+                            <h1>you don't have an account?</h1>
+                            
+						</div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="contact-form">
+                        <a href="?controller=user&accion=showRegisterCustomer">Register Contractor</a>
+						</div>
+                    </div>
 					
 				</div>
 			</div>

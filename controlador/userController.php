@@ -48,6 +48,12 @@ class userController{
         require_once("vista/footer.php");
     }
 
+    public function showRegisterCustomer(){
+        require_once("vista/head.php");
+        require_once("vista/register_customer.php");
+        require_once("vista/footer.php");
+    }
+
     public function loginCustomer(){
         $this->_user=$_POST['userClient'];
         $this->_pass=$_POST['passwordClient'];
