@@ -89,6 +89,8 @@ class connection{
 
     }
 
+   
+
     public function insertDataTable($table,$insertNode,$data){
         $this->_firebase->set($table . "/$insertNode", $data);
     }

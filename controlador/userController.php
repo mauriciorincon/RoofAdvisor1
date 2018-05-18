@@ -115,9 +115,9 @@ class userController{
 
     }
 
-    public function validateEmail($email){
+    public function validateEmail($table,$email){
         $this->_userModel=new userModel();
-        $_result=$this->_userModel->validateEmail($email);
+        $_result=$this->_userModel->validateEmail($table,$email);
         return $_result;
     }
 
@@ -170,6 +170,39 @@ class userController{
         return $_newCompanyId;
         
     }
+
+    public function insertCustomer($arrayCustomer){
+        $this->_userModel=new userModel();
+        $_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
+        if (is_null($_lastCustomerID)){
+            $_lastCustomerID=1;
+        }else{
+            $_lastCustomerID+=1;
+        }
+        $hashActivationCode = md5( rand(0,1000) );
+        $password = rand(1000,5000);
+        $Customer = array(
+            "Address" =>  $arrayCustomer['customerAddress'],
+            "City" =>  $arrayCustomer['customerCity'],
+            "CustomerID" =>  "$_lastCustomerID",
+            "Email" =>  $arrayCustomer['emailValidation'],
+            "FBID" =>  "",
+            "Fname" =>  $arrayCustomer['firstCustomerName'],
+            "Lname" =>  $arrayCustomer['lastCustomerName'],
+            "Phone" =>  $arrayCustomer['customerPhoneNumber'],
+            "State" =>  $arrayCustomer['customerState'],
+            "Timestamp" =>  date("Y-m-d H:i:s"),
+            "ZIP" =>  $arrayCustomer['customerZipCode'],
+        );
+        $this->_userModel->insertCustomer($Customer);
+        $this->_sendMail=new emailController();
+        $this->_sendMail->sendMail($arrayCustomer['emailValidation'],$hashActivationCode);
+        return $_lastCustomerID;
+        
+
+    }
+
+
 
     public function validateCode($user,$code){
         $this->_userModel=new userModel();

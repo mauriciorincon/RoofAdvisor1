@@ -160,7 +160,7 @@ navListItems.click(function (e) {
     var $target = $($(this).attr('href')),
         $item = $(this);
 
-	console.log("entro a clic");
+	//console.log("entro a clic");
     if (!$item.hasClass('disabled')) {
 		 console.log("no tiene desabilitado");
         navListItems.removeClass('btn-success').addClass('btn-default');

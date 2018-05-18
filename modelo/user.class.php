@@ -37,8 +37,12 @@ class userModel extends connection{
         return false;
     }
 
-    public function validateEmail($email){
-        $result=$this->getQueryEqual('Company','CompanyEmail',$email);
+    public function validateEmail($table,$email){
+        if(strcmp($table,'company')==0){
+            $result=$this->getQueryEqual('Company','CompanyEmail',$email);
+        }else if(strcmp($table,'customer')==0){
+            $result=$this->getQueryEqual('Customers','Email',$email);
+        }
         if(is_array($result)){
             return true;
         }else{
@@ -55,8 +59,21 @@ class userModel extends connection{
         }
     }
 
+    public function getLastNodeCustomer($table,$field){
+        $result=$this->getLastNodeTable($table);
+        if(is_array($result)){
+            return $result[$field];
+        }else{
+            return null;
+        }
+    }
+
     public function insertContractor($id_contracto,$dataContrator){
         $this->insertDataTable("Company",$id_contracto,$dataContrator); 
+    }
+
+    public function insertCustomer($dataCustomer){
+        $this->insertDataTable("Customers",null,$dataContrator); 
     }
 
     public function updateContractor($nodeName,$data){

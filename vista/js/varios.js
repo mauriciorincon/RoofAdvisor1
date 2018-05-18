@@ -11,12 +11,12 @@ $(document).ready(function() {
 
 
 
-function validateEmail() {
+function validateEmail(table) {
     var textoBusqueda = $("input#emailValidation").val();
     var result=true;
      if (textoBusqueda != "") {
          //Equivalente a lo anterior
-            $.post( "controlador/ajax/validateEmail.php", { "emailValue" : textoBusqueda }, null, "text" )
+            $.post( "controlador/ajax/validateEmail.php", { "emailValue" : textoBusqueda,"tableSearch": table}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
                     $("#answerEmailValidate").html(data);
@@ -358,3 +358,143 @@ function updateDataCompany(){
         }
     });
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//funtions for customer suscribe
+
+$(document).ready(function () {
+
+    var navListItems = $('div.setup-panelCustomer div a'),
+        allWells = $('.setup-contentCustomer'),
+        allNextBtn = $('.nextBtnCustomer');
+        allPrevBtn = $('.prevBtnCustomer');
+    
+    allWells.hide();
+    
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+    
+        //console.log("entro a clic");
+        if (!$item.hasClass('disabled')) {
+             //console.log("no tiene desabilitado");
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            
+            
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+    
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-contentCustomer"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panelCustomer div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+    
+        $(".form-group").removeClass("has-error");
+        
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+        //if (curStepBtn=="step-1"){
+        //	isValid=validateEmail();
+        //}
+    
+        if (curStepBtn=="step-1" && isValid==true ){
+            //saveContractorData();
+        }
+    
+        if (curStepBtn=="step-3" && isValid==true ){
+            //isValid=false;
+            //isValid=validateCodeEmail();
+        }
+    
+        if(curStepBtn!="step-2"){
+            if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+        }
+    });
+    
+    allPrevBtn.click(function () {
+        
+        var curStep = $(this).closest(".setup-contentCustomer"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panelCustomer div a[href="#' + curStepBtn + '"]').parent().prev().children("a"),
+            curStepWizard = $('div.setup-panelCustomer div a[href="#' + curStepBtn + '"]').parent().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+    
+        
+        //for (var x in curStepWizard){
+        //	console.log(curStepWizard[x]);
+        //}
+        
+        $(".form-group").removeClass("has-error");
+        /*for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }*/
+        
+    
+        if (isValid) {
+        
+            nextStepWizard.removeAttr('disabled').trigger('click');
+            curStepWizard.attr('disabled', 'disabled');
+        
+        }
+    });
+    
+    $('div.setup-panelCustomer div a.btn-success').trigger('click');
+    });
+    
+
+    function saveCustomerData(){
+        var firstCustomerName = $("input#firstCustomerName").val();
+        var lastCustomerName = $("input#lastCustomerName").val();
+        var emailValidation = $("input#emailValidation").val();
+        var customerAddress = $("input#customerAddress").val();
+        var customerCity = $("input#customerCity").val();
+        var customerState = $("select#customerState").val();
+        var customerZipCode = $("select#customerZipCode").val();
+        var customerPhoneNumber = $("select#customerPhoneNumber").val();
+    
+        
+        
+        $.post( "controlador/ajax/insertContract.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
+                                                        "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}, null, "text" )
+                .done(function( data, textStatus, jqXHR ) {
+                    if ( console && console.log ) {
+                        $("#answerEmailValidate").html(data);
+                        var n = data.indexOf("Error");
+                        if(n==-1){
+                            $("input#emailValidation").closest(".form-group").addClass("has-success").removeClass('has-error');
+                            $("#firstNextValidation").show();
+                            result=true;
+                        }else{
+                            $("input#emailValidation").closest(".form-group").addClass("has-error").removeClass('has-success');
+                            $("#firstNextValidation").hide();
+                            result=false;
+                        }
+                        
+                        console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    }
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    if ( console && console.log ) {
+                        console.log( "La solicitud a fallado: " +  textStatus);
+                        result=false;
+                    }
+                });
+    }

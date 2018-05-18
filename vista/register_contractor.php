@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input maxlength="100" type="email" required="required" class="form-control" placeholder="Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail()"/>
+                    <input maxlength="100" type="email" required="required" class="form-control" placeholder="Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('company')"/>
                     <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                 </div>
                 <div class="form-group">

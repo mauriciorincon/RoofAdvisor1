@@ -36,7 +36,7 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
-                        <a href="?controller=user&accion=showRegisterCustomer">Register Contractor</a>
+                        <a href="?controller=user&accion=showRegisterCustomer">Register Customer</a>
 						</div>
                     </div>
 					
