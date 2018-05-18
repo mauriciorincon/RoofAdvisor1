@@ -3,9 +3,10 @@
 
     $email = $_POST['emailValidation'];
     $code = $_POST['codeValidateField'];
+    $table = $_POST['table'];
 
     $_userController=new userController();
-    $_result=$_userController->validateCode($email,$code);
+    $_result=$_userController->validateCode($email,$code,$table);
 
     echo $_result;
     

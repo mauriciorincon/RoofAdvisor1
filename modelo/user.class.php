@@ -72,16 +72,21 @@ class userModel extends connection{
         $this->insertDataTable("Company",$id_contracto,$dataContrator); 
     }
 
-    public function insertCustomer($dataCustomer){
-        $this->insertDataTable("Customers",null,$dataContrator); 
+    public function insertCustomer($id_customer,$dataCustomer){
+        $this->insertDataTable("Customers",$id_customer,$dataCustomer); 
     }
 
     public function updateContractor($nodeName,$data){
         $this->updateDataTable("Company",$nodeName,$data); 
     }
 
-    public function getCustomer($user){
+    public function getCompany($user){
         $result=$this->getQueryEqual('Company','CompanyEmail',$user);
+        return $result;
+    }
+
+    public function getCustomer($user){
+        $result=$this->getQueryEqual('Customers','Email',$user);
         return $result;
     }
 }

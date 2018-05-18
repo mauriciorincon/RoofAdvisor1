@@ -198,7 +198,7 @@ allNextBtn.click(function () {
 
 	if (curStepBtn=="step-3" && isValid==true ){
 		//isValid=false;
-		isValid=validateCodeEmail();
+		isValid=validateCodeEmail('Company');
 	}
 
 	if(curStepBtn!="step-3"){

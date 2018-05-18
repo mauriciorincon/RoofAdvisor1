@@ -102,30 +102,30 @@ function saveContractorData(){
 }
 
 
-function validateCodeEmail(){
+function validateCodeEmail(table){
     var emailField = $("input#emailValidation").val();
     var codeField = $("input#codeValidateField").val();
     var result1=false;
 
-    $.post( "controlador/ajax/validateCode.php", { "emailValidation" : emailField,"codeValidateField": codeField}, null, "text" )
+    $.post( "controlador/ajax/validateCode.php", { "emailValidation" : emailField,"codeValidateField": codeField,"table":table}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $("#validatingMessajeCode").html(data);
             var n = data.indexOf("Error");
             if(n==-1){
                 $("input#codeValidateField").closest(".form-group").addClass("has-success").removeClass('has-error');
-                //$("#firstNextValidation").show();
-                //nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-                //nextStepWizard.removeAttr('disabled').trigger('click');
-                curStepWizard = $('div.setup-panel div a[href="#step-4"]').parent().children("a")
+                
+                if(table=='Company'){
+                    curStepWizard = $('div.setup-panel div a[href="#step-4"]').parent().children("a")
+                }else if(table=='Customers'){
+                    curStepWizard = $('div.setup-panelCustomer div a[href="#step-3"]').parent().children("a")
+                }
+                
                 curStepWizard.removeAttr('disabled').trigger('click');
-                //result1=true;
+                
             }else{
                 $("input#codeValidateField").closest(".form-group").addClass("has-error").removeClass('has-success');
-                //$("#firstNextValidation").hide();
-                //nextStepWizard = $('div.setup-panel div a[href="#step-4"]').parent().prev().children("a")
-                //nextStepWizard.removeAttr('disabled').trigger('click');
-                //result1=false;
+                
             }
             
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
@@ -411,12 +411,11 @@ $(document).ready(function () {
         //}
     
         if (curStepBtn=="step-1" && isValid==true ){
-            //saveContractorData();
+            saveCustomerData();
         }
     
-        if (curStepBtn=="step-3" && isValid==true ){
-            //isValid=false;
-            //isValid=validateCodeEmail();
+        if (curStepBtn=="step-2" && isValid==true ){
+            isValid=validateCodeEmail('Customers');
         }
     
         if(curStepBtn!="step-2"){
@@ -465,13 +464,13 @@ $(document).ready(function () {
         var emailValidation = $("input#emailValidation").val();
         var customerAddress = $("input#customerAddress").val();
         var customerCity = $("input#customerCity").val();
-        var customerState = $("select#customerState").val();
-        var customerZipCode = $("select#customerZipCode").val();
-        var customerPhoneNumber = $("select#customerPhoneNumber").val();
+        var customerState = $("input#customerState").val();
+        var customerZipCode = $("input#customerZipCode").val();
+        var customerPhoneNumber = $("input#customerPhoneNumber").val();
     
         
         
-        $.post( "controlador/ajax/insertContract.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
+        $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
                                                     "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {

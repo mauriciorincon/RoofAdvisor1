@@ -25,7 +25,7 @@ $_arrayCompany = array(
 );
 
 $_userController=new userController();
-$_companyID=$_userController->insertContractor($_arrayCompany);
+$_companyID=$_userController->insertCustomer($_arrayCompany);
 echo "Continue, Company was register correctly";
 
 ?>

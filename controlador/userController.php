@@ -194,7 +194,7 @@ class userController{
             "Timestamp" =>  date("Y-m-d H:i:s"),
             "ZIP" =>  $arrayCustomer['customerZipCode'],
         );
-        $this->_userModel->insertCustomer($Customer);
+        $this->_userModel->insertCustomer($hashActivationCode,$Customer);
         $this->_sendMail=new emailController();
         $this->_sendMail->sendMail($arrayCustomer['emailValidation'],$hashActivationCode);
         return $_lastCustomerID;
@@ -204,22 +204,42 @@ class userController{
 
 
 
-    public function validateCode($user,$code){
-        $this->_userModel=new userModel();
-        $_customer=$this->_userModel->getCustomer($user);
-        if(is_array($_customer)){
-            //print_r($_customer);
-            if(strcmp($_customer['ComapnyLicNum'],$code)==0){
-                $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
-                $this->_userModel->updateContractor($_customer['CompanyID'].'/CompanyStatus','Active');
-                return "The code is correct";
+    public function validateCode($user,$code,$table){
+        if(strcmp($table,'Company')==0){
+            $this->_userModel=new userModel();
+            $_customer=$this->_userModel->getCompany($user);
+            if(is_array($_customer)){
+                //print_r($_customer);
+                if(strcmp($_customer['ComapnyLicNum'],$code)==0){
+                    $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
+                    $this->_userModel->updateContractor($_customer['CompanyID'].'/CompanyStatus','Active');
+                    return "The code is correct";
+                }else{
+                    return "Error, the code is incorrect";    
+                }
             }else{
-                return "Error, the code is incorrect";    
+                
+                return "Error, the user was no found";
             }
-        }else{
-            
-            return "Error, the user was no found";
+        }else if(strcmp($table,'Customers')==0){
+            $this->_userModel=new userModel();
+            $_customer=$this->_userModel->getCustomer($user);
+            if(is_array($_customer)){
+                //print_r($_customer);
+                //if(strcmp($_customer['ComapnyLicNum'],$code)==0){
+                    //$this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
+                    //$this->_userModel->updateContractor($_customer['CompanyID'].'/CompanyStatus','Active');
+                    return "The code is correct";
+                //}else{
+                //    return "Error, the code is incorrect";    
+                //}
+            }else{
+                
+                return "Error, the user was no found";
+            }
+
         }
+        
 
     }
 
