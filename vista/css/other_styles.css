@@ -1,0 +1,10 @@
+.btn:active
+{
+  background-color:yellow;
+}
+
+.btn.active
+{
+  color: #333;
+  background-color:rgba(24, 100, 9, 0.699);
+}

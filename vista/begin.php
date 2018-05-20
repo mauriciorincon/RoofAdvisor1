@@ -1,306 +1,384 @@
 <!-- slider-area start -->
-		<div class="slider-area">
-			<div class="slider-active">
-				<div class="single-slider" style="background-image:url(img/slider/1.jpg)">
-					<div class="slider-content text-center text-white">
-						<div class="container">
-							<h3>NATURAL BEAUTY</h3>
-							<h2>WE WILL HELP YOU TO FIX YOUR ROOF.</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel volutpat felis, eu condimentum <br/> massa. Pellentesque mollis eros vel mattis tempor. </p>
-							<a class="btn" href="#">read more</a>					
+<div class="slider-area">
+	
+<div class="container">
+    <div class="stepwizard">
+        <div class="stepwizard-row setup-panelOrder">
+            <div class="stepwizard-step col-xs-1"> 
+                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                <p><small>Zip Code</small></p>
+            </div>
+            <div class="stepwizard-step col-xs-1"> 
+                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <p><small>What would you like to do?</small></p>
+            </div>
+            <div class="stepwizard-step col-xs-1"> 
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <p><small>select the type of roofing</small></p>
+            </div>
+            <div class="stepwizard-step col-xs-1"> 
+                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                <p><small>aware of any leaks or damage</small></p>
+            </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                <p><small>stories is your home</small></p>
+            </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <p><small>Time</small></p>
+            </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                <p><small>Professional</small></p>
+            </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-8" type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
+                <p><small>Review</small></p>
+            </div>
+        </div>
+    </div>
+    
+    <form role="form">
+        <div class="panel panel-primary setup-contentOrder" id="step-1">
+            <div class="panel-heading">
+                 <h3 class="panel-title">ZIP CODE</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label text-center h1"><big>ZIP CODE</big></label>
+                    <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
+					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
+                </div>
+                
+				
+               
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button" id="firstNextBegin" name="firstNextBegin">Next</button>
+                
+            </div>
+        </div>
+        
+        <div class="panel panel-primary setup-contentOrder" id="step-2">
+            <div class="panel-heading">
+                 <h3 class="panel-title">What would you like to do? </h3>
+            </div>
+            <div class="panel-body">
+            
+			
+				<div class="form-group">
+						
+						<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
 						</div>
-					</div>				
+						<div class="col-md-11"> 
+							<label class="form-check-label" for="exampleRadios1">Repair existing roof leak (scheduled a week in advance) - S</label>
+						</div>
 				</div>
-				<div class="single-slider" style="background-image:url(img/slider/2.jpg)">
-					<div class="slider-content text-center text-white">
-						<div class="container">
-							<h3>NATURAL BEAUTY</h3>
-							<h2>WE WILL HELP YOU TO FIX YOUR ROOF.</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel volutpat felis, eu condimentum <br/> massa. Pellentesque mollis eros vel mattis tempor. </p>
-							<a class="btn" href="#">read more</a>					
+
+				<div class="form-group">
+						<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
 						</div>
-					</div>				
+						<div class="col-md-11">
+							<label class="form-check-label" for="exampleRadios2">
+							Emergency roof repair leak sameday service (repair today) - E
+							</label>
+						</div>
 				</div>
-				<div class="single-slider" style="background-image:url(img/slider/3.jpg)">
-					<div class="slider-content text-center text-white">
-						<div class="container">
-							<h3>NATURAL BEAUTY</h3>
-							<h2>WE WILL HELP YOU TO FIX YOUR ROOF.</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel volutpat felis, eu condimentum <br/> massa. Pellentesque mollis eros vel mattis tempor. </p>
-							<a class="btn" href="#">read more</a>					
-						</div>
-					</div>				
+
+				<div class="form-group">
+					<label class="control-label" id="answerZipCode">S-Scheduled Repair prices start from $300-$400 per square and will increase depending on the size, material and time needed to complete the  scheduled repair.</label>
+					<label class="control-label" id="answerZipCode">E-Emergency Repair price includes a $75 Emergency Repair Service Fee, $150 per hour for time plus the materials needed to complete the emergency repair.</label>
 				</div>
-			</div>	
-		</div>
-		<!-- slider-area end -->
-		<!-- feature-area-start -->
-		<div class="feature-area pt-80 pb-60">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-4 custom-width">
-						<div class="single-feature mb-20">
-							<div class="feature-image">
-								<img src="img/feature/1.jpg" alt="" />
-							</div>
-							<div class="feature-text text-center">
-							<h3>Commercial Roofing </h3>
-							<p>As the world’s largest green and clean egerngy specialist of the printing and typesetting industry. Lorem has been the industry.</p>
-							</div>
-						</div>
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+
+        </div>
+        
+        <div class="panel panel-primary setup-contentOrder" id="step-3">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Best select the type of roofing material on your property:</h3>
+            </div>
+            <div class="panel-body">
+
+				
+                <div class="form-group">
+					<div class ="col-md-5">
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 custom-width">
-						<div class="single-feature mb-20">
-							<div class="feature-image">
-								<img src="img/feature/2.jpg" alt="" />
-							</div>
-							<div class="feature-text text-center">
-							<h3>Residential Roofing </h3>
-							<p>As the world’s largest green and clean egerngy specialist of the printing and typesetting industry. Lorem has been the industry.</p>
-							</div>
-						</div>
+					<div class ="col-md-1">
+						<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 custom-width">
-						<div class="single-feature mb-20">
-							<div class="feature-image">
-								<img src="img/feature/3.jpg" alt="" />
-							</div>
-							<div class="feature-text text-center">
-							<h3>Multi-Family Roofing </h3>
-							<p>As the world’s largest green and clean egerngy specialist of the printing and typesetting industry. Lorem has been the industry.</p>
-							</div>
-						</div>
+					<div class="col-md-6"> 
+						<label class="form-check-label" for="estep3Option1">
+							Flat, Single Ply
+						</label>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!-- feature-area-end -->
-		<!-- purchase-area start -->
-		<div class="purchase-area bg-img-1 ptb-80  bg-opacity">
-			<div class="container">
-				<div class="purchase-content text-center text-white">
-					<h3>Save The roof!</h3>
-					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary</p>
-					<a class="btn btn-blue" href="#">learn more</a>
+
+				<div class="form-group">
+				<div class ="col-md-5">
+					</div>
+					<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
+						</div>
+						<div class="col-md-6">
+							<label class="form-check-label" for="estep3Option2">
+							Asphalt
+							</label>
+						</div>
+					
+				</div>
+
+				<div class="form-group">
+				<div class ="col-md-5">
+					</div>
+					<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
+						</div>
+						<div class="col-md-6">
+							<label class="form-check-label" for="estep3Option3">
+							Wood Shake/Composite
+							</label>
+						</div>
+					
+				</div>
+				<div class="form-group">
+				<div class ="col-md-5">
+					</div>
+					<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
+						</div>
+						<div class="col-md-6">
+							<label class="form-check-label" for="estep3Option4">
+							Metal
+							</label>
+						</div>
+					
+				</div>
+				<div class="form-group">
+				<div class ="col-md-5">
+					</div>
+					<div class ="col-md-1">
+							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
+						</div>
+						<div class="col-md-6">
+							<label class="form-check-label" for="estep3Option5">
+							Tile
+							</label>
+						</div>
+					
 				</div>	
-			</div>
-		</div>
-		<!-- purchase-area end -->
-		<!--  service-area start  -->
-		<div class="service-area pt-80 pb-60">
-			<div class="container">
-				<div class="section-heading text-center">
-					<h2>Why Choose Shielding</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+				
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+        
+        <div class="panel panel-primary setup-contentOrder" id="step-4">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Are you aware of any leaks or damage to the roof?</h3>
+            </div>
+            <div class="panel-body">
+				<div class="form-group">
+					<div class ="col-md-5"></div>
+					<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="water" checked></div>
+					<div class="col-md-6"><label class="form-check-label" for="estep5Option1">Yes</label></div>
 				</div>
-				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center">
-							<div class="service-image">
-								<img src="img/service/1.png" alt="" />
-							</div>
-							<h3>Roof Repaire</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center ">
-							<div class="service-image">
-								<img src="img/service/2.png" alt="" />
-							</div>
-							<h3>Shingles</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center ">
-							<div class="service-image">
-								<img src="img/service/3.png" alt="" />
-							</div>
-							<h3>Re-Roofing</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center">
-							<div class="service-image">
-								<img src="img/service/4.png" alt="" />
-							</div>
-							<h3>Fast and Efficient Work</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center">
-							<div class="service-image">
-								<img src="img/service/5.png" alt="" />
-							</div>
-							<h3>Personalized Service</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="service-box text-center ">
-							<div class="service-image">
-								<img src="img/service/6.png" alt="" />
-							</div>
-                            <h3>Best Price Guarantee</h3>
-							<p>Our services are so awesome of passages of Lerem ipsum available</p>
-						</div>
-					</div>
+
+				<div class="form-group">
+					<div class ="col-md-5"></div>
+					<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value=""></div>
+					<div class="col-md-6"><label class="form-check-label" for="estep5Option2">No</label></div>
 				</div>
-			</div>
-		</div>
-        <!--  service-area end  -->		
-        <!--  Project-area start  -->
-		<div class="Project-area pt-80 pb-60">
-			<div class="container">
-				<div class="section-heading text-center">
-					<h2>Our latest Project </h2>
-					<p>Stay up to date with all our latest news and launches. Only the best quality makes it onto our blog!</p>
+
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-5">
+            <div class="panel-heading">
+                 <h3 class="panel-title">How many stories is your home?</h3>
+            </div>
+            <div class="panel-body">
+				<div class="form-group">
+					<div class ="col-md-5"></div>
+					<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="One" checked></div>
+					<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
 				</div>
-				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/1.jpg" alt="" /></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Roofing</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/4.jpg" alt=""></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Renovating</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/3.jpg" alt=""></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Plumbing</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/5.jpg" alt=""></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Roofing</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/4.jpg" alt=""></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Renovating</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width ">
-						<div class="Project-box mb-20">
-							<div class="Project-image">
-								<a href="#"><img src="img/project/6.jpg" alt=""></a>
-							</div>
-							<div class="Project-content text-center">
-								<h4><a href="#">Project Name</a></h4>
-								<span>Plumbing</span>
-							</div>
+
+				<div class="form-group">
+					<div class ="col-md-5"></div>
+					<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="Two"></div>
+					<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
+				</div>
+
+				<div class="form-group">
+					<div class ="col-md-5"></div>
+					<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="Three or More"></div>
+					<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
+				</div>
+
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-6">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Select a time for service ....</h3>
+            </div>
+            <div class="panel-body">
+				<div class="form-group">			
+				<span ><b>Plese select the date to service: </b></span><input type="date" id="step6date" name="step6date">
+				</div>
+					
+				<div class="form-group">
+					<div class="container:'body'">
+						<div class="btn-group" role="group" arial-label="Basic example">
+							<button type="button" class="btn btn-success" name="step6time" >9:00 AM</button>
+							<button type="button" class="btn btn-success" name="step6time">10:00 AM</button>
+							<button type="button" class="btn btn-success" name="step6time">11:00 AM</button>
+							<button type="button" class="btn btn-success" name="step6time">12:00 AM</button>
+							<button type="button" class="btn btn-success" name="step6time">1:00 PM</button>
+							<button type="button" class="btn btn-success" name="step6time">2:00 PM</button>
+							<button type="button" class="btn btn-success" name="step6time">3:00 PM</button>
+							<button type="button" class="btn btn-success" name="step6time">4:00 PM</button>
+							<button type="button" class="btn btn-success" name="step6time">5:00 PM</button>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-        <!--  Project-area end  -->	
-		<!-- testimonial-area start -->
-		<div class="testimonial-area bg-img-2 pt-200 pb-150 bg-opacity">
-			<div class="container">
-				<div class="testimonial-active">
-					<div class="single-testimonial">
-						<div class="testimonial-text">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu</p>
-						</div>
-						<div class="testimonial-details text-center">
-							<h4>Madhusudan Pal</h4>
-							<span>Developer</span>
-						</div>
-					</div>
-					<div class="single-testimonial">
-						<div class="testimonial-text">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqu</p>
-						</div>
-						<div class="testimonial-details text-center">
-							<h4>Salim Rana</h4>
-							<span>Project Manager</span>
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div>
-		<!-- testimonial-area end -->
-	    <!--  blog-area start  -->
-		<div class="blog-area pt-80 pb-60">
-			<div class="container">
-				<div class="section-heading text-center">
-					<h2>OUR BLOG</h2>
-					<p>Stay up to date with all our latest news and launches. Only the best quality makes it onto our blog!</p>
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-7">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Are you aware of any leaks or damage to the roof?</h3>
+            </div>
+            <div class="panel-body">
+				<div class="form-group">
+				
+								<label class="control-label" for="exampleRadios5">
+								These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers. 
+								</label>
+								<label class="control-label" for="exampleRadios5">
+								You can select one or the first available will respond to your request?
+								</label>
+							
+							
 				</div>
-				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="blog-wrapper">
-							<div class="blog-img">
-								<a href="blog-details.html"><img src="img/blog/1.jpg" alt="" /></a>
-							</div>
-							<div class="blog-content">
-								<h4><a href="blog-details.html">swedish mega project </a></h4>
-								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature…</p>
-								<a href="blog-details.html">Read more</a>
-							</div>
+
+
+
+				<div class="list-group">
+					<a href="#" class="list-group-item ">
+						<span class="glyphicon glyphicon-wrench"></span> Pictures <span class="badge">25</span>
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">List group item heading</h5>
+							<small>3 days ago</small><br>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+							
 						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="blog-wrapper">
-							<div class="blog-img">
-								<a href="blog-details.html"><img src="img/blog/2.jpg" alt="" /></a>
-							</div>
-							<div class="blog-content">
-								<h4><a href="blog-details.html">pellentesque lacus </a></h4>
-								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature…</p>
-								<a href="blog-details.html">Read more</a>
-							</div>
+						
+					</a>
+					<a href="#" class="list-group-item">
+						<span class="glyphicon glyphicon-wrench"></span> Documents <span class="badge">145</span>
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">List group item heading</h5>
+							<small>3 days ago</small><br>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
 						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 hidden-sm custom-width mb-20">
-						<div class="blog-wrapper">
-							<div class="blog-img">
-								<a href="blog-details.html"><img src="img/blog/3.jpg" alt="" /></a>
-							</div>
-							<div class="blog-content">
-								<h4><a href="blog-details.html">Cras ornare arcu avamus</a></h4>
-								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature…</p>
-								<a href="blog-details.html">Read more</a>
-							</div>
+					</a>
+					<a href="#" class="list-group-item">
+						<span class="glyphicon glyphicon-wrench"></span> Music <span class="badge">50</span>
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">List group item heading</h5>
+							<small>3 days ago</small><br>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
 						</div>
-					</div>
+					</a>
+					<a href="#" class="list-group-item">
+						<span class="glyphicon glyphicon-wrench"></span> Videos <span class="badge">8</span>
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">List group item heading</h5>
+							<small>3 days ago</small><br>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+						</div>
+					</a>
 				</div>
-			</div>
-		</div>
-        <!--  blog-area end  -->		
+
+
+
+				
+
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-8">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Review Scheduled Repair Order Details</h3>
+            </div>
+            <div class="panel-body">
+				
+				<div class="list-group">
+						<a href="#" class="list-group-item ">
+							<span class="glyphicon glyphicon-envelope"></span> Details <span class="badge">1</span>
+							<div class="d-flex w-100 justify-content-between">
+								<span ><b>Repair Description: </b></span><span id="step8RepairDescription"></span><br>
+								<span ><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>	
+								<span ><b>Time: </b></span><span id="step8Time"></span>
+							</div>
+						</a>
+				</div>
+
+				<div class="list-group">
+						<a href="#" class="list-group-item ">
+							<span class="glyphicon glyphicon-wrench"></span> Contractor <span class="badge">1</span>
+							<div class="d-flex w-100 justify-content-between">
+								<span ><b>Name: </b></span><span id="step8RepairDescription"></span><br>
+								<span ><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>	
+								<span ><b>Time: </b></span><span id="step8Time"></span>
+							</div>
+						</a>
+				</div>
+
+                
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+</div>
+<!-- slider-area end -->
+

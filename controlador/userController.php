@@ -171,6 +171,11 @@ class userController{
         
     }
 
+    public function getListContractor(){
+        $this->_userModel=new userModel();
+        
+    }
+
     public function insertCustomer($arrayCustomer){
         $this->_userModel=new userModel();
         $_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");

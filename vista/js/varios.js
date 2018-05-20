@@ -406,10 +406,7 @@ $(document).ready(function () {
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
         }
-        //if (curStepBtn=="step-1"){
-        //	isValid=validateEmail();
-        //}
-    
+
         if (curStepBtn=="step-1" && isValid==true ){
             saveCustomerData();
         }
@@ -432,20 +429,8 @@ $(document).ready(function () {
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
     
-        
-        //for (var x in curStepWizard){
-        //	console.log(curStepWizard[x]);
-        //}
-        
         $(".form-group").removeClass("has-error");
-        /*for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }*/
         
-    
         if (isValid) {
         
             nextStepWizard.removeAttr('disabled').trigger('click');
@@ -456,7 +441,8 @@ $(document).ready(function () {
     
     $('div.setup-panelCustomer div a.btn-success').trigger('click');
     });
-    
+ 
+/////////////////////////////////////////////////////////////////////////////
 
     function saveCustomerData(){
         var firstCustomerName = $("input#firstCustomerName").val();
@@ -497,3 +483,134 @@ $(document).ready(function () {
                     }
                 });
     }
+
+    $(document).ready(function(){
+        $('#firstNextBegin').hide();
+        $('#zipCodeBegin').focusout(function(e) {
+          
+            var zipcode=$("input#zipCodeBegin").val();
+            if (zipcode!==''){
+                $.post( "controlador/ajax/getZipCode.php", { "zipcode" : zipcode}, null, "text" )
+                .done(function( data, textStatus, jqXHR ) {
+                    if ( console && console.log ) {
+                        $("#answerEmailValidate").html(data);
+                        var n = data.indexOf("Error");
+                        if(n==-1){
+                            $('#answerZipCode').html(data);
+                            $('#firstNextBegin').show();
+                            //result=true;
+                        }else{
+                            $('#answerZipCode').html(data);
+                            $('#firstNextBegin').hide();
+                            //result=false;
+                        }
+                        
+                        console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    }
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    if ( console && console.log ) {
+                        console.log( "La solicitud a fallado: " +  textStatus);
+                        result=false;
+                    }
+                });
+            }                    
+        });       
+      });
+
+   
+
+      $(".btn-group > .btn").click(function(){
+        $(".btn-group > .btn").removeClass("active");
+        $(this).addClass("active");
+    });
+
+
+///////////////////////////////////////////////////////////////////////////////
+//funtions for order
+
+$(document).ready(function () {
+
+    var navListItems = $('div.setup-panelOrder div a'),
+        allWells = $('.setup-contentOrder'),
+        allNextBtn = $('.nextBtnOrder');
+        allPrevBtn = $('.prevBtnOrder');
+    
+    allWells.hide();
+    
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+    
+        //console.log("entro a clic");
+        if (!$item.hasClass('disabled')) {
+             //console.log("no tiene desabilitado");
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            
+            
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+    
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-contentOrder"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panelOrder div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+    
+        $(".form-group").removeClass("has-error");
+        
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (curStepBtn=="step-7" && isValid==true ){
+            var valStep3=$('input[name=estep3Option]:checked').val();
+            var valStep5=$('input[name=estep5Option]:checked').val();
+            var valStep4=$('input[name=estep4Option]:checked').val();
+            var valStep6=$('input[name=step6date]').val();
+            var valStep6t=$('button[name=step6time].active').text();
+            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+            $('#step8Schedule').html(valStep6);
+            $('#step8Time').html(valStep6t);
+               
+        }
+    
+        
+    
+        
+            if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+        
+    });
+    
+    allPrevBtn.click(function () {
+        
+        var curStep = $(this).closest(".setup-contentOrder"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panelOrder div a[href="#' + curStepBtn + '"]').parent().prev().children("a"),
+            curStepWizard = $('div.setup-panelOrder div a[href="#' + curStepBtn + '"]').parent().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+    
+        $(".form-group").removeClass("has-error");
+        
+        if (isValid) {
+        
+            nextStepWizard.removeAttr('disabled').trigger('click');
+            curStepWizard.attr('disabled', 'disabled');
+        
+        }
+    });
+    
+    $('div.setup-panelOrder div a.btn-success').trigger('click');
+    });
+ 
+/////////////////////////////////////////////////////////////////////////////

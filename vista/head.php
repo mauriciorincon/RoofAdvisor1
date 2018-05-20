@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="vista/css/step_by_step.css">
 		
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+		
     </head>
     <body>
         <!--[if lt IE 8]>
