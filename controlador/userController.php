@@ -173,7 +173,8 @@ class userController{
 
     public function getListContractor(){
         $this->_userModel=new userModel();
-        
+        $_result=$this->_userModel->getListCompany('Company');
+        return $_result;
     }
 
     public function insertCustomer($arrayCustomer){
