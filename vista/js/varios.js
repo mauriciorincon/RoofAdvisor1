@@ -519,11 +519,24 @@ $(document).ready(function () {
       });
 
    
-
-      $(".btn-group > .btn").click(function(){
+////////////////////////////////////////////////////////////////////////////////
+//Activate or Deactivate the hours of step 6
+$(".btn-group > .btn").click(function(){
         $(".btn-group > .btn").removeClass("active");
         $(this).addClass("active");
-    });
+});
+
+////////////////////////////////////////////////////////////////////////////////
+//Activate or Deactivate the hours of step 7
+/*$("#step7ListCompany > .list-group-item").click(function(){
+    $("#step7ListCompany> .list-group-item").removeClass("active");
+    $(this).addClass("active");
+});*/
+
+$('#step7ListCompany').on('click', 'a', function(){
+    $("#step7ListCompany a").removeClass("active");
+    $(this).addClass("active");
+});
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -572,16 +585,21 @@ $(document).ready(function () {
             }
         }
 
+        if(curStepBtn=="step-6"  && isValid==true ){
+            getListCompany(); 
+        }
+
         if (curStepBtn=="step-7" && isValid==true ){
             var valStep3=$('input[name=estep3Option]:checked').val();
             var valStep5=$('input[name=estep5Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
             var valStep6=$('input[name=step6date]').val();
             var valStep6t=$('button[name=step6time].active').text();
+            var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
             $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
             $('#step8Schedule').html(valStep6);
             $('#step8Time').html(valStep6t);
-               
+            $('#step8CompanyName').html(valStep7);
         }
     
         
@@ -614,3 +632,22 @@ $(document).ready(function () {
     });
  
 /////////////////////////////////////////////////////////////////////////////
+
+function getListCompany(){
+    $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            $('#step7ListCompany').html(data);
+            
+            
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+        }
+    });
+}

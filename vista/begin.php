@@ -36,6 +36,10 @@
                 <a href="#step-8" type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
                 <p><small>Review</small></p>
             </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-9" type="button" class="btn btn-default btn-circle" disabled="disabled">9</a>
+                <p><small>Validate user</small></p>
+            </div>
         </div>
     </div>
     
@@ -278,57 +282,8 @@
 
 
 
-				<div class="list-group">
-					<a href="#" class="list-group-item ">
-						<span class="glyphicon glyphicon-wrench"></span> Pictures <span class="badge">25</span>
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">List group item heading</h5>
-							<small>3 days ago</small><br>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star"></span>
-							<span class="fa fa-star"></span>
-							
-						</div>
-						
-					</a>
-					<a href="#" class="list-group-item">
-						<span class="glyphicon glyphicon-wrench"></span> Documents <span class="badge">145</span>
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">List group item heading</h5>
-							<small>3 days ago</small><br>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star"></span>
-							<span class="fa fa-star"></span>
-						</div>
-					</a>
-					<a href="#" class="list-group-item">
-						<span class="glyphicon glyphicon-wrench"></span> Music <span class="badge">50</span>
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">List group item heading</h5>
-							<small>3 days ago</small><br>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star"></span>
-							<span class="fa fa-star"></span>
-						</div>
-					</a>
-					<a href="#" class="list-group-item">
-						<span class="glyphicon glyphicon-wrench"></span> Videos <span class="badge">8</span>
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">List group item heading</h5>
-							<small>3 days ago</small><br>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star checked"></span>
-							<span class="fa fa-star"></span>
-							<span class="fa fa-star"></span>
-						</div>
-					</a>
+				<div class="list-group" id="step7ListCompany">
+					
 				</div>
 
 
@@ -362,18 +317,116 @@
 						<a href="#" class="list-group-item ">
 							<span class="glyphicon glyphicon-wrench"></span> Contractor <span class="badge">1</span>
 							<div class="d-flex w-100 justify-content-between">
-								<span ><b>Name: </b></span><span id="step8RepairDescription"></span><br>
-								<span ><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>	
-								<span ><b>Time: </b></span><span id="step8Time"></span>
+								<span ><b>Name: </b></span><span id="step8CompanyName"></span><br>
+								
 							</div>
 						</a>
 				</div>
 
+			
+
+				<div class="list-group">
+						<a href="#" class="list-group-item ">
+							<span class="glyphicon glyphicon-info-sign"></span> Rate 
+							<div class="d-flex w-100 justify-content-between">
+								<span ><b>Prices start from $300-$400 per square and will increase depending on the size, mateiral and time needed to complete the repair.</b></span><span id="step8CompanyName"></span><br>
+								
+							</div>
+						</a>
+				</div>
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
         </div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-9">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Customer information</h3>
+            </div>
+            <div class="panel-body">
+				<div class="row">
+					<div class="col-sm-6" >
+						<div class="list-group">
+							<div class="list-group-item ">
+								<span class="glyphicon glyphicon-info-sign"></span> Info 
+								<div class="d-flex w-100 justify-content-between">
+									<span ><b>Please take just one more step, we need to verify your identity,please login o register</b></span><br><br>
+									
+								</div>
+							</div>
+
+							<div  class="list-group-item ">
+								<span class="glyphicon glyphicon-info-sign"></span> Login
+								<div class="d-flex w-100 justify-content-between">
+									<div class="form-group">
+										<label>User Name<span class="required">*</span></label>
+										<input type="text" placeholder="" required="true" id="userClient" name="userClient" />
+									</div>
+									<div class="form-group">
+										<label>Password<span class="required">*</span></label>
+										<input type="password" placeholder="" required="true" id="passwordClient" name="passwordClient"/>
+									</div>
+									<button type="submit">Login</button><br><br>
+									<a href="#">Forgot password?</a>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="list-group">
+							<div class="list-group-item ">
+								<span class="glyphicon glyphicon-info-sign"></span> Info 
+								<div class="d-flex w-100 justify-content-between">
+									<span ><b>If you are not register, please fill the fields below</b></span><br><br>
+									
+								</div>
+							</div>
+							<div class="list-group-item ">
+								<div class="form-group">
+									<label class="control-label">First Name</label>
+									<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+									</div> 
+								<div class="form-group">
+									<label class="control-label">Last Name</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+								</div>  
+								<div class="form-group">
+									<label class="control-label ">Email</label>
+									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
+									<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+								</div> 
+								<div class="form-group">
+									<label class="control-label">Address</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">City</label>
+									<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
+								</div> 
+								<div class="form-group">
+									<label class="control-label">State</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">Zip code</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+								</div> 
+								<div class="form-group">
+									<label class="control-label">Phone number</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+								</div>  
+								<button type="submit">Login</button><br><br>  
+							</div>
+							<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="firstNextValidation" name="firstNextValidation">Next</button>
+						</div>
+            		</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
     </form>
 </div>
