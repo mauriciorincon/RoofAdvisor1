@@ -5,6 +5,8 @@
 include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/autoload.php';
 include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
 
+
+
 const DEFAULT_URL = 'https://pruebabasedatos-eacf6.firebaseio.com/';
 const DEFAULT_TOKEN = '2r3VP6qms0ibMPC8ENJN3vOzr9dFaLexO5T9X3yZ';
 const DEFAULT_PATH = 'pruebabasedatos-eacf6';

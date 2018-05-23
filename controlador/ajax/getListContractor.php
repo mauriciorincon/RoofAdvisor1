@@ -1,5 +1,5 @@
 <?php
-    require_once("../userController.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
 
     $_contractorController=new userController();
     $_array_company=$_contractorController->getListCompany();

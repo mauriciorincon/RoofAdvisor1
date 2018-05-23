@@ -1,5 +1,5 @@
 <?php
-require_once("../userController.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
 
 
 $_companyID =$_POST["companyID"];

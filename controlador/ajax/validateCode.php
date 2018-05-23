@@ -1,5 +1,5 @@
 <?php
-    require_once("../userController.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
 
     $email = $_POST['emailValidation'];
     $code = $_POST['codeValidateField'];
