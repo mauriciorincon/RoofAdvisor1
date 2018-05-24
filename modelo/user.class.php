@@ -13,7 +13,6 @@ class userModel extends connection{
         $result=$this->getQueryEqual('Customers','Email',$user);
         
         if(is_array($result)){
-    
             if(strcmp($result['CustomerID'],$pass)==0){
                 return true;
             }else{
@@ -43,6 +42,7 @@ class userModel extends connection{
         }else if(strcmp($table,'customer')==0){
             $result=$this->getQueryEqual('Customers','Email',$email);
         }
+        //print_r($result);
         if(is_array($result)){
             return true;
         }else{
@@ -51,7 +51,7 @@ class userModel extends connection{
     }
 
     public function getLastNodeCompany($table,$field){
-        $result=$this->getLastNodeTable($table);
+        $result=$this->getLastNodeTable($table,$field);
         if(is_array($result)){
             return $result[$field];
         }else{
@@ -93,6 +93,27 @@ class userModel extends connection{
     public function getListCompany($table){
         $result=$this->getDataTable($table);
         return $result;
+    }
+
+    public function getOrdersCustomer($idCustomer){
+        $result=$this->getQueryEqualM('Orders','CustomerID',$idCustomer);
+        return $result;
+    }
+
+    public function getOrdersDriver($idContractor){
+        $result=$this->getQueryEqualM('Orders','ContractorID',$idContractor);
+        return $result;
+    }
+
+    public function getContractorsCompany($idCompany){
+        $result=$this->getQueryEqualM('Contractors','CompanyID',$idCompany);
+        
+        return $result;
+    }
+
+    public function createUser($_properties){
+        return $this->createUser($_properties);
+
     }
 }
 ?>

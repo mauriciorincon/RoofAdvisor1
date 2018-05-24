@@ -1,15 +1,9 @@
 <?php
-//require 'vendor/autoload.php';
-//use Kreait\Firebase\Configuration; 
-//use Kreait\Firebase\Firebase;
-include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/autoload.php';
-include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
+require $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/autoload.php';
 
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 
-
-const DEFAULT_URL = 'https://pruebabasedatos-eacf6.firebaseio.com/';
-const DEFAULT_TOKEN = '2r3VP6qms0ibMPC8ENJN3vOzr9dFaLexO5T9X3yZ';
-const DEFAULT_PATH = 'pruebabasedatos-eacf6';
 
 class connection{
 
@@ -17,8 +11,17 @@ class connection{
 
     function __construct()
 	{		
-        $this->_firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
-        //echo "se conecto";
+        $serviceAccount = ServiceAccount::fromJsonFile($_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/pruebabasedatos-eacf6-firebase.json');
+
+        $firebase_tmp = (new Factory)
+        ->withServiceAccount($serviceAccount)
+        // The following line is optional if the project id in your credentials file
+        // is identical to the subdomain of your Firebase project. If you need it,
+        // make sure to replace the URL with the URL of your project.
+        ->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
+        ->create();
+
+        $this->_firebase = $firebase_tmp->getDatabase();
     }
 
     public function getConnection(){
@@ -26,55 +29,48 @@ class connection{
     }
 
     public function getQueryEqual($table,$field,$searchValue){
-        //$value = $this->_firebase->get(DEFAULT_PATH.$table, array($field => $value));
-        //$value = $this->_firebase->get("Users/", array('fistname' => 'mauricio'));
-        $value = $this->_firebase->get($table."/");
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
 
-        $_array_company=json_decode($value,true);
-        //print_r($_array_company);
-
-        //echo "<br><br>estoy aca<br><br>";
-        
-        //print_r($_array_company[0]);
-        //print_r($_array_company['CO000001'][CompanyEmail] );
-        //echo "Email ".$_array_company['CO000001'][CompanyEmail];
-
-        //echo "<br><br>estoy aca<br><br>";
-        
-        foreach ($_array_company as $key => $value1) {
-            //echo $value1["$field"]." ".strcmp($value1["$field"],$searchValue)." ".$searchValue."<br>";
-            if(strcmp($value1["$field"],$searchValue)==0){
+        $value = $snapshot->getValue();
+        if(is_array($value)){
+            foreach($value as $key => $value1){
                 return $value1;
             }
-            //echo $value1["CompanyEmail"] . ", " . $value1["ComapnyLicNum"] . "<br>";
-          }
+            //return $value;
+        }else{
+            return "null";
+        }
+    }
 
-        //$value = $this->_firebase->get('Users/0/age');
-        
-        /*$test = array(
-            "foo" => "bar",
-            "i_love" => "lamp",
-            "id" => 42
-        );
-        $dateTime = new DateTime();
-        
-        $this->_firebase->set(DEFAULT_PATH . '/name/contact001', $test);
-        
-        // --- storing a string ---
-        $this->_firebase->set(DEFAULT_PATH . '/name/contact001', $test);
-        
-        // --- reading the stored string ---
-        $value = $this->_firebase->get(DEFAULT_PATH . '/name/contact001');*/
+    public function getQueryEqualM($table,$field,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
 
+        $value = $snapshot->getValue();
         
         
-        return "null";
-
+        if(is_array($value)){
+        
+            return $value;
+        }else{
+            return "null";
+        }
     }
 
     public function getQueryEqual2($table,$field,$searchValue,$field2,$searchValue2){
-        $value = $this->_firebase->get($table."/");
-        $_array_contractor=json_decode($value,true);
+        $snapshot=$this->_firebase->getReference($table)
+                            ->shallow()
+                            ->getSnapshot();
+        $value = $snapshot->getValue();
+
+        //$value = $this->_firebase->get($table."/");
+        //$_array_contractor=json_decode($value,true);
+        $_array_company=$value;
         foreach ($_array_company as $key => $value1) {
             if(strcmp($value1["$field"],$searchValue)==0 and strcmp($value1["$field2"],$searchValue2)==0){
                 return $value1;
@@ -83,10 +79,29 @@ class connection{
         return "null";
     }
 
-    public function getLastNodeTable($table){
-        $value = $this->_firebase->get($table."/");
+    public function getLastNodeTable($table,$field){
+        $snapshot=$this->_firebase->getReference($table)
+            ->orderByChild($field)
+            ->limitToLast(1)
+            ->getSnapshot();
+            $value = $snapshot->getValue();
+            if(is_array($value)){
+                foreach($value as $key => $value1){
+                    return $value1;
+                }
+                //return $value;
+            }else{
+                return "null";
+            }
+        /*$snapshot=$this->_firebase->getReference($table)
+                            ->shallow()
+                            ->getSnapshot();
+        $value = $snapshot->getValue();*/
 
-        $_array_company=json_decode($value,true);
+        //$value = $this->_firebase->get($table."/");
+
+        //$_array_company=json_decode($value,true);
+        $_array_company=$value;
         return end($_array_company);
 
     }
@@ -94,21 +109,52 @@ class connection{
    
 
     public function insertDataTable($table,$insertNode,$data){
-        $this->_firebase->set($table . "/$insertNode", $data);
+        echo "llegue aca insertDataTable $table $insertNode";
+        $this->_firebase->getReference($table.'/'.$insertNode)
+            ->set($data);
+
+        //$this->_firebase->set($table . "/$insertNode", $data);
     }
 
     public function updateDataTable($table,$updateNode,$data){
         //echo $table."/$updateNode".$data;
-        $this->_firebase->set($table . "/$updateNode", $data);
+        $updates = [
+            $table.'/'.$updateNode => $data,
+        ];
+        
+        $this->_firebase->getReference() // this is the root reference
+           ->update($updates);
+
+        //$this->_firebase->set($table . "/$updateNode", $data);
     }
 
     public function getDataTable($table){
-        $value = $this->_firebase->get($table."/");
+        $snapshot=$this->_firebase->getReference($table)
+                            ->shallow()
+                            ->getSnapshot();
+        $value = $snapshot->getValue();
+        $_array_company=$value;
+        //$value = $this->_firebase->get($table."/");
 
-        $_array_company=json_decode($value,true);
+        //$_array_company=json_decode($value,true);
         return $_array_company;
     }
 
+    public function createUser($_properties){
+        try {
+            $createdUser = $auth->createUser($userProperties);
+            $auth->sendEmailVerification($createdUser->uid);
+            return $createdUser;
+        } catch (Kreait\Firebase\Exception\Auth\EmailExists $e) {
+            echo $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\PhoneNumberExists $e) {
+            echo $e->getMessage();
+        }
+
+        
+        
+
+    }
 
 }
 

@@ -21,7 +21,7 @@ class driverModel extends connection{
     }
 
     public function getLastNodeDriver($table,$field){
-        $result=$this->getLastNodeTable($table);
+        $result=$this->getLastNodeTable($table,$field);
         if(is_array($result)){
             return $result[$field];
         }else{

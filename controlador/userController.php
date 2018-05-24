@@ -60,7 +60,7 @@ class userController{
 
         $this->_userModel=new userModel();
         $_result=$this->_userModel->validateCustomer($this->_user,$this->_pass);
-        //return;
+        
         if($_result==true){
             $this->dashboardCustomer($this->_user);
             //Header("Location: ?aditionalMessage=Welcome to the aplication&controller=user&accion=showLoginClient");
@@ -69,28 +69,6 @@ class userController{
             Header("Location: ?aditionalMessage=User or password are wrong, please try again&controller=user&accion=showLoginClient");
             //Header("Location: index.php?controller=user&accion=showLoginClient");
         }
-        //echo "Hola los datos son client $_usuario -  $_password";
-
-        //$firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
-
-
-        /*
-        // --- storing an array ---
-        $test = array(
-            "foo" => "bar",
-            "i_love" => "lamp",
-            "id" => 42
-        );
-        $dateTime = new DateTime();
-        $firebase->set(DEFAULT_PATH . '/' . $dateTime->format('c'), $test);
-
-        // --- storing a string ---
-        $firebase->set(DEFAULT_PATH . '/name/contact001', "John Doe");
-
-        // --- reading the stored string ---
-        $name = $firebase->get(DEFAULT_PATH . '/name/contact001');*/
-
-        //echo "Resultado:".$_result;
     }
 
     public function loginContractor(){
@@ -124,6 +102,7 @@ class userController{
     public function insertContractor($arrayContractor){
         $this->_userModel=new userModel();
         $_lastCompanyID=$this->_userModel->getLastNodeCompany("Company","CompanyID");
+        echo "last node company:".$_lastCompanyID;
         if (is_null($_lastCompanyID)){
             $_newCompanyId="CO000001";
         }else{
@@ -165,9 +144,11 @@ class userController{
                 "Status_Rating" => ""
         );
         $this->_userModel->insertContractor($_newCompanyId,$Company);
-        $this->_sendMail=new emailController();
-        $this->_sendMail->sendMail($arrayContractor['emailValidation'],$hashActivationCode);
-        return $_newCompanyId;
+        //$this->_sendMail=new emailController();
+        //$this->_sendMail->sendMail($arrayContractor['emailValidation'],$hashActivationCode);
+        //$_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'');
+        $_response="";
+        return $_newCompanyId."|".$_response;
         
     }
 
@@ -266,25 +247,11 @@ class userController{
 
         $_userMail=$_id_customer;
         $this->_userModel=new userModel();
-        $_array_customers=$this->_userModel->getDataTable("Customers");
-        $_actual_customer="";
-        foreach ($_array_customers as $key => $customer) {
-            if(strcmp($customer["Email"],$_userMail)==0){
-                $_actual_customer=$customer;
-                break;
-            }
-        }
 
-        $_array_customer_to_show=array();
-        $_array_orders=$this->_userModel->getDataTable("Orders");
+        $_actual_customer=$this->_userModel->getCustomer($_userMail);
         
-        foreach ($_array_orders as $key => $order) {
-            if(strcmp($order["CustomerID"],$_actual_customer['CustomerID'])==0){
-                array_push($_array_customer_to_show,$order);
-            }
-        }
-
-//print_r($_array_customer_to_show);
+        $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+        
         require_once("vista/head.php");
 		require_once("vista/dashboard_customer.php");
 		require_once("vista/footer.php");
@@ -294,37 +261,23 @@ class userController{
         $_userMail=$_id_company;
         $this->_userModel=new userModel();
 
+        $_actual_company=$this->_userModel->getCompany($_userMail);
 
-        $_array_company=$this->_userModel->getDataTable("Company");
-        $_actual_company="";
-        foreach ($_array_company as $key => $company) {
-            if(strcmp($company["CompanyEmail"],$_userMail)==0){
-                $_actual_company=$company;
-                break;
-            }
-        }
-
-        $_array_contractor=$this->_userModel->getDataTable("Contractors");
-        $_array_contractors_to_show=array();
-
-        foreach ($_array_contractor as $key => $contractor) {
-            if(strcmp($contractor["CompanyID"],$_actual_company['CompanyID'])==0){
-                //print_r($contractor);
-                array_push($_array_contractors_to_show,$contractor);
-            }
-        }
-
-
-        $_array_orders_to_show=array();
-        $_array_orders=$this->_userModel->getDataTable("Orders");
+        $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
         
+        $_array_orders_to_show=array();
+        
+        //print_r($_array_orders);
         foreach ($_array_contractors_to_show as $key => $contractor) {
-            foreach ($_array_orders as $key => $order) {
-                if(strcmp($order["ContractorID"],$contractor['ContractorID'])==0){
-                    array_push($_array_orders_to_show,$order);
-                }
+            //echo $contractor['ContractorID']."<br>";
+            $_array_orders=$this->_userModel->getOrdersDriver($contractor['ContractorID']);
+            foreach($_array_orders as $data => $order){
+                array_push($_array_orders_to_show,$order);   
             }
+            //print_r($_array_orders);
+            
         }    
+        //print_r($_array_orders_to_show);
         
         require_once("vista/head.php");
 		require_once("vista/dashboard_company.php");
@@ -347,6 +300,24 @@ class userController{
         $this->_userModel->updateContractor($_companyID.'/CompanyType',$_companyType);
 
         return "The contractor identify by ".$_companyID." was updated corretly";
+
+    }
+
+    public function insertUserDatabase($mail,$number,$name,$url){
+        $password = rand(1000,5000);
+        $userProperties = [
+            'email' => $mail,
+            'emailVerified' => false,
+            'phoneNumber' => $number,
+            'password' => $password,
+            'displayName' => $name,
+            'photoUrl' => $url,
+            'disabled' => false,
+        ];
+        $this->_userModel=new userModel();
+        $_user_created=$this->_userModel->$createUser($userProperties);
+        
+        return $password;
 
     }
 }

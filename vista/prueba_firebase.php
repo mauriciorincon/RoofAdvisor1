@@ -66,17 +66,17 @@
       //print_r($user);
 
       $userProperties = [
-        'email' => 'mauricio.rincon@gmail.com',
+        'email' => 'mauricio.rincon1@gmail.com',
         'emailVerified' => false,
-        'phoneNumber' => '+15555550100',
+        'phoneNumber' => '+15555552100',
         'password' => 'secretPassword',
         'displayName' => 'John Doe',
         'photoUrl' => 'http://www.example.com/12345678/photo.png',
         'disabled' => false,
     ];
     echo "crear usuario<br><br>";
-    //$createdUser = $auth->createUser($userProperties);
-    
+    $createdUser = $auth->createUser($userProperties);
+    echo $createdUser->uid;
     $user = $auth->getUser('D7BAuXfiPuhtoCXtz5ScSFw3pRz1');
     echo "usuario:<br><br>";
     print_r($user);
