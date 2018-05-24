@@ -147,6 +147,17 @@ class connection{
         }
     }
 
+    public function validateUser($_user,$password){
+        try {
+            $auth = $this->_factory_firebase->getAuth();
+            $user = $auth->verifyPassword($_user, $password);
+            //print_r($user);
+            return $user;
+        } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
 
 ?>

@@ -76,15 +76,22 @@ class userController{
         $this->_pass=$_POST['passwordContractor'];
         $this->_userModel=new userModel();
         $_result=$this->_userModel->validateCompany($this->_user,$this->_pass);
-        //return;
-        if($_result==true){
-            $this->dashboardCompany($this->_user);
 
-            //Header("Location: ?aditionalMessage=Welcome to the aplication&controller=user&accion=showLoginContractor");
+        //return;
+        if(is_array($_result) or gettype($_result)=="object"){
+            if($_result->emailVerified==1){
+                $this->dashboardCompany($this->_user);
+            }else{
+                Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
+            }
+            
+            
+
+            
         }elseif($_result==false){
-            //echo "datos no validos";
+            
             Header("Location: ?aditionalMessage=User or password are wrong, please try again&controller=user&accion=showLoginContractor");
-            //Header("Location: index.php?controller=user&accion=showLoginClient");
+            
         }
 
     }

@@ -24,14 +24,12 @@ class userModel extends connection{
 
     public function validateCompany($user,$pass){
        
-        $result=$this->getQueryEqual('Company','CompanyEmail',$user);
+        $result=$this->validateUser($user,$pass);
         
-        if(is_array($result)){
-            if(strcmp($result['CompanyID'],$pass)==0){
-                return true;
-            }else{
-                return false;
-            }
+        if(is_array($result) or gettype($result)=="object" ){
+            return $result;
+        }else{
+            return false;
         }
         return false;
     }
