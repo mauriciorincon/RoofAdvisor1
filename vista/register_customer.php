@@ -4,19 +4,16 @@
 <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelCustomer">
-            <div class="stepwizard-step col-xs-3"> 
+            <div class="stepwizard-step col-xs-6"> 
                 <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
                 <p><small>About you</small></p>
             </div>
             
-            <div class="stepwizard-step col-xs-3"> 
+            <div class="stepwizard-step col-xs-6"> 
                 <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                 <p><small>Email Verification</small></p>
             </div>
-            <div class="stepwizard-step col-xs-3"> 
-                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                <p><small>Final</small></p>
-            </div>
+            
         </div>
     </div>
     
@@ -73,30 +70,14 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label">Please enter the Code that was send to your Email</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Code verification" id="codeValidateField" name="codeValidateField" />
-                    <label class="control-label" id="validatingMessajeCode" name="validatingMessajeCode">Answer</label>
+                    <label class="control-label text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
+                    
                 </div>
-                
-                <button class="btn btn-primary nextBtnCustomer pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnCustomer pull-left" type="button">Preview</button>
             </div>
         </div>
         
-        <div class="panel panel-primary setup-contentCustomer" id="step-3">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Final</h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label" id="mensajeCorrecto" name="mensajeCorrecto">Welcome, the user was activated correctly</label>
-                    
-                </div>
-                
-                <button class="btn btn-success pull-right" type="submit">Finish!</button>
-                <!--<button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>-->
-            </div>
-        </div>
+        
     </form>
 </div>
 

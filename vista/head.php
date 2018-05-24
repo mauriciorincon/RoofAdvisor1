@@ -59,7 +59,7 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-2 col-sm-2">
 							<div class="logo">
-								<a href="index.html"><img src="img/logo.png" alt="" /></a>
+								<a href="index.php"><img src="img/logo.png" alt="" /></a>
 							</div>
 						</div>
 						<div class="col-lg-9 col-md-10 col-sm-10">
@@ -70,24 +70,24 @@
 											
 										</li>
 										
-										<li><a href="about.html">ABOUT US</a></li>
-										<li><a href="portfolio.html">PORTFOLIO</a></li>
-										<li><a href="blog.html">BLOG <i class="fa fa-angle-down"></i></a>
+										<li><a href="">ABOUT US</a></li>
+										<li><a href="">PORTFOLIO</a></li>
+										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
 											<ul>
-												<li><a href="blog-left-sidebar.html">Blog left Sidebar</a></li>
-												<li><a href="blog-right-sidebar.html">Blog right Sidebar</a></li>
-												<li><a href="blog-details.html">blog details</a></li>
+												<li><a href="">Blog left Sidebar</a></li>
+												<li><a href="">Blog right Sidebar</a></li>
+												<li><a href="">blog details</a></li>
 											</ul>
 										</li>
-										<li class="active"><a href="index.html">Login <i class="fa fa-angle-down"></i></a>
+										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=showLoginClient">Customer</a></li>
 													<li><a href="?controller=user&accion=showLoginContractor">Contractor</a></li>
 												</ul>
 											</li>
-										<li><a href="service.html">SERVICE</a></li>
-										<li><a href="contact.html">CONTACT</a></li>
-										<li><a href="contact.html">CONTACT</a></li>
+										<li><a href="#">SERVICE</a></li>
+										<li><a href="#">CONTACT</a></li>
+										<li><a href="#">CONTACT</a></li>
 									</ul>
 								</nav>
 							</div>
@@ -97,30 +97,30 @@
 								<div class="mobile-menu">
 									<nav id="mobile-menu">
 										<ul>
-											<li class="active"><a href="index.html">HOME <i class="fa fa-angle-down"></i></a>
+											<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="index-2.html">Home 2</a></li>
 													<li><a href="index-3.html">Home 3</a></li>
 												</ul>
 											</li>
-											<li class="active"><a href="index.html">Login <i class="fa fa-angle-down"></i></a>
+											<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=showLoginClient">Customer</a></li>
 													<li><a href="?controller=user&accion=showLoginContractor">Contractor</a></li>
 												</ul>
 											</li>
 											<li><a href="about.html">ABOUT US</a></li>
-											<li><a href="portfolio.html">PORTFOLIO</a></li>
-											<li><a href="blog.html">BLOG <i class="fa fa-angle-down"></i></a>
+											<li><a href="">PORTFOLIO</a></li>
+											<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
 												<ul>
-													<li><a href="blog-left-sidebar.html">Blog left Sidebar</a></li>
-													<li><a href="blog-right-sidebar.html">Blog right Sidebar</a></li>
-													<li><a href="blog-details.html">blog details</a></li>
+													<li><a href="#">Blog left Sidebar</a></li>
+													<li><a href="#">Blog right Sidebar</a></li>
+													<li><a href="#">blog details</a></li>
 												</ul>
 											</li>
-											<li><a href="service.html">SERVICE</a></li>
-											<li><a href="contact.html">CONTACT</a></li>
-											<li><a href="contact.html">CONTACT1</a></li>
+											<li><a href="#">SERVICE</a></li>
+											<li><a href="#">CONTACT</a></li>
+											<li><a href="#">CONTACT1</a></li>
 										</ul>
 									</nav>
 								</div>

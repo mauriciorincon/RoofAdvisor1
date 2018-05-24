@@ -61,14 +61,42 @@ class userController{
         $this->_userModel=new userModel();
         $_result=$this->_userModel->validateCustomer($this->_user,$this->_pass);
         
-        if($_result==true){
-            $this->dashboardCustomer($this->_user);
-            //Header("Location: ?aditionalMessage=Welcome to the aplication&controller=user&accion=showLoginClient");
-        }elseif($_result==false){
-            //echo "datos no validos";
-            Header("Location: ?aditionalMessage=User or password are wrong, please try again&controller=user&accion=showLoginClient");
-            //Header("Location: index.php?controller=user&accion=showLoginClient");
+        if(is_array($_result) or gettype($_result)=="object"){
+            if($_result->emailVerified==1){
+                $this->dashboardCustomer($this->_user);
+            }else{
+                Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
+            }
+        }elseif(is_string($_result)){
+            Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginClient");
         }
+    }
+
+    public function loginCustomerOrden($user,$password){
+        $this->_user=$user;
+        $this->_pass=$password;
+
+        //echo  $this->_user=$user;
+        //echo $this->_pass=$password;
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->validateCustomer($this->_user,$this->_pass);
+        //echo "datos de usuario:".gettype($_result)."<br>";
+        //print_r($_result);
+        if(is_array($_result) or gettype($_result)=="object"){
+            //echo " 1 ";
+            if($_result->emailVerified==1){
+                //echo " 1 ";
+                echo "Now you are logged in, please press finish button to save the order.";
+            }else{
+                //echo " 3 ";
+                echo "Error, It seems that you have not validated your email, please check your email";
+            }
+            //echo " 4 ";
+        }elseif(strcmp(gettype($_result),"string")==0){
+            //echo " 5 ";
+            echo "Error, User or password are wrong, please try again ($_result)";
+        }
+        //echo " 6 ";
     }
 
     public function loginContractor(){
@@ -84,14 +112,8 @@ class userController{
             }else{
                 Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
             }
-            
-            
-
-            
         }elseif($_result==false){
-            
             Header("Location: ?aditionalMessage=User or password are wrong, please try again&controller=user&accion=showLoginContractor");
-            
         }
 
     }
@@ -177,24 +199,28 @@ class userController{
         }else{
             $_lastCustomerID+=1;
         }
-        $hashActivationCode = md5( rand(0,1000) );
-        $password = rand(1000,5000);
-        $Customer = array(
-            "Address" =>  $arrayCustomer['customerAddress'],
-            "City" =>  $arrayCustomer['customerCity'],
-            "CustomerID" =>  "$_lastCustomerID",
-            "Email" =>  $arrayCustomer['emailValidation'],
-            "FBID" =>  "",
-            "Fname" =>  $arrayCustomer['firstCustomerName'],
-            "Lname" =>  $arrayCustomer['lastCustomerName'],
-            "Phone" =>  $arrayCustomer['customerPhoneNumber'],
-            "State" =>  $arrayCustomer['customerState'],
-            "Timestamp" =>  date("Y-m-d H:i:s"),
-            "ZIP" =>  $arrayCustomer['customerZipCode'],
-        );
-        $this->_userModel->insertCustomer($hashActivationCode,$Customer);
-        $this->_sendMail=new emailController();
-        $this->_sendMail->sendMail($arrayCustomer['emailValidation'],$hashActivationCode);
+        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'');
+        if(is_array($_response) or gettype($_response)=="object"){
+            $hashActivationCode = md5( rand(0,1000) );
+            $Customer = array(
+                "Address" =>  $arrayCustomer['customerAddress'],
+                "City" =>  $arrayCustomer['customerCity'],
+                "CustomerID" =>  "$_lastCustomerID",
+                "Email" =>  $arrayCustomer['emailValidation'],
+                "FBID" =>  "",
+                "Fname" =>  $arrayCustomer['firstCustomerName'],
+                "Lname" =>  $arrayCustomer['lastCustomerName'],
+                "Phone" =>  $arrayCustomer['customerPhoneNumber'],
+                "State" =>  $arrayCustomer['customerState'],
+                "Timestamp" =>  date("Y-m-d H:i:s"),
+                "ZIP" =>  $arrayCustomer['customerZipCode'],
+            );
+            $this->_userModel->insertCustomer($hashActivationCode,$Customer);
+            $this->_sendMail=new emailController();
+            $this->_sendMail->sendMail($arrayCustomer['emailValidation'],$hashActivationCode);
+        }else{
+            return "Error".$_response;
+        } 
         return $_lastCustomerID;
         
 
@@ -259,6 +285,8 @@ class userController{
         $this->_userModel=new userModel();
 
         $_actual_customer=$this->_userModel->getCustomer($_userMail);
+        //echo "hola".$_userMail;
+        //print_r($_actual_customer);
         
         $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
         
@@ -325,6 +353,7 @@ class userController{
             'photoUrl' => $url,
             'disabled' => false,
         ];
+        
         $this->_userModel=new userModel();
         $_user_created=$this->_userModel->createUser($userProperties);  
         //echo $_user_created;      

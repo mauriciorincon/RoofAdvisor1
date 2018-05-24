@@ -10,16 +10,13 @@ class userModel extends connection{
     }
 
     public function validateCustomer($user,$pass){
-        $result=$this->getQueryEqual('Customers','Email',$user);
-        
-        if(is_array($result)){
-            if(strcmp($result['CustomerID'],$pass)==0){
-                return true;
-            }else{
-                return false;
-            }
+        $result=$this->validateUser($user,$pass);
+        if(is_array($result) or gettype($result)=="object" ){
+            return $result;
+        }else{
+            return "Error ".$result;
         }
-        return false;
+        return "Error";
     }
 
     public function validateCompany($user,$pass){
@@ -58,7 +55,7 @@ class userModel extends connection{
     }
 
     public function getLastNodeCustomer($table,$field){
-        $result=$this->getLastNodeTable($table);
+        $result=$this->getLastNodeTable($table,$field);
         if(is_array($result)){
             return $result[$field];
         }else{

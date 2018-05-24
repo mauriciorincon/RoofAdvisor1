@@ -62,6 +62,17 @@ class connection{
         }
     }
 
+    public function getDataTable($table){
+        $snapshot=$this->_firebase->getReference($table)
+                            ->getSnapshot();
+        $value = $snapshot->getValue();
+        $_array_company=$value;
+        //$value = $this->_firebase->get($table."/");
+
+        //$_array_company=json_decode($value,true);
+        return $_array_company;
+    }
+
     public function getQueryEqual2($table,$field,$searchValue,$field2,$searchValue2){
         $snapshot=$this->_firebase->getReference($table)
                             ->shallow()
@@ -120,17 +131,7 @@ class connection{
         //$this->_firebase->set($table . "/$updateNode", $data);
     }
 
-    public function getDataTable($table){
-        $snapshot=$this->_firebase->getReference($table)
-                            ->shallow()
-                            ->getSnapshot();
-        $value = $snapshot->getValue();
-        $_array_company=$value;
-        //$value = $this->_firebase->get($table."/");
-
-        //$_array_company=json_decode($value,true);
-        return $_array_company;
-    }
+    
 
     public function createUserDatabse($_userProperties){
         try {
@@ -142,7 +143,11 @@ class connection{
             return $e->getMessage();
         } catch (Kreait\Firebase\Exception\Auth\PhoneNumberExists $e) {
             return $e->getMessage();
-        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e){
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Value\Email $e){
+            return $e->getMessage();
+        }catch (Exception $e){
             return $e->getMessage();
         }
     }
@@ -154,7 +159,15 @@ class connection{
             //print_r($user);
             return $user;
         } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
-            echo $e->getMessage();
+            
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\EmailNotFound $e){
+            return $e->getMessage();
+        }catch (Exception $e){
+            
+            return $e->getMessage();
         }
     }
 

@@ -4,7 +4,8 @@
     $_contractorController=new userController();
     $_array_company=$_contractorController->getListCompany();
 
-    
+	//print_r($_array_company);
+    $_string="";
     foreach ($_array_company as $key => $company) {
         $_string.='<a href="#" class="list-group-item " name="linkCompany">
 						<span class="glyphicon glyphicon-wrench"></span><span name="companyName">'.$company['CompanyName'].'</span><span class="badge">1</span>

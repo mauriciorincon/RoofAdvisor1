@@ -13,7 +13,7 @@ $_customerPhoneNumber = $_POST['customerPhoneNumber'];
 
 
 
-$_arrayCompany = array(
+$_arrayCustomer = array(
     "firstCustomerName" => "$_firstCustomerName",
     "lastCustomerName" => "$_lastCustomerName",
     "emailValidation" => "$_emailValidation",
@@ -25,7 +25,11 @@ $_arrayCompany = array(
 );
 
 $_userController=new userController();
-$_companyID=$_userController->insertCustomer($_arrayCompany);
-echo "Continue, Company was register correctly";
+$_customerID=$_userController->insertCustomer($_arrayCustomer);
+if(strpos($_customerID,"Error")!==false){
+    echo "Error register customer,try again <br>".$_customerID;
+}else{
+    echo "Continue, Customer was register correctly please check your email, to validate the user";
+}
 
 ?>

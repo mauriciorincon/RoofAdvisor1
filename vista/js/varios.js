@@ -466,15 +466,15 @@ $(document).ready(function () {
                                                     "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
-                        $("#answerEmailValidate").html(data);
+                        $("#validatingMessajeCode").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
-                            $("input#emailValidation").closest(".form-group").addClass("has-success").removeClass('has-error');
-                            $("#firstNextValidation").show();
+                            
+                            //$("#firstNextValidation").show();
                             result=true;
                         }else{
-                            $("input#emailValidation").closest(".form-group").addClass("has-error").removeClass('has-success');
-                            $("#firstNextValidation").hide();
+                            
+                            //$("#firstNextValidation").hide();
                             result=false;
                         }
                         
@@ -590,11 +590,11 @@ $(document).ready(function () {
             }
         }
 
-        if(curStepBtn=="step-6"  && isValid==true ){
+        if(curStepBtn=="step-3"  && isValid==true ){
             getListCompany(); 
         }
 
-        if (curStepBtn=="step-7" && isValid==true ){
+        if (curStepBtn=="step-4" && isValid==true ){
             var valStep3=$('input[name=estep3Option]:checked').val();
             var valStep5=$('input[name=estep5Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
@@ -643,9 +643,6 @@ function getListCompany(){
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $('#step7ListCompany').html(data);
-            
-            
-            
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
     })
@@ -656,3 +653,41 @@ function getListCompany(){
         }
     });
 }
+
+
+
+$(document).ready(function() {
+    $('#lastFinishButtonOrder').hide();
+    $("#buttonLoginCustomer").click(function(){
+
+        $('#lastFinishButtonOrder').hide();
+
+        var userClientOrder=$('#userClientOrder').val();
+        var passwordClientOrder=$('#passwordClientOrder').val();
+
+        $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : userClientOrder,"passwordClientOrder":passwordClientOrder}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                }else{
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result=false;
+            }
+        });
+
+        
+    });
+    
+} );
