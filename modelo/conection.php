@@ -8,20 +8,20 @@ use Kreait\Firebase\ServiceAccount;
 class connection{
 
     private $_firebase=null;
+    private $_factory_firebase=null;
 
     function __construct()
 	{		
         $serviceAccount = ServiceAccount::fromJsonFile($_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/pruebabasedatos-eacf6-firebase.json');
 
         $firebase_tmp = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        // The following line is optional if the project id in your credentials file
-        // is identical to the subdomain of your Firebase project. If you need it,
-        // make sure to replace the URL with the URL of your project.
-        ->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
-        ->create();
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
+            ->create();
 
         $this->_firebase = $firebase_tmp->getDatabase();
+        $this->_factory_firebase=$firebase_tmp;
+        
     }
 
     public function getConnection(){
@@ -93,14 +93,6 @@ class connection{
             }else{
                 return "null";
             }
-        /*$snapshot=$this->_firebase->getReference($table)
-                            ->shallow()
-                            ->getSnapshot();
-        $value = $snapshot->getValue();*/
-
-        //$value = $this->_firebase->get($table."/");
-
-        //$_array_company=json_decode($value,true);
         $_array_company=$value;
         return end($_array_company);
 
@@ -109,7 +101,7 @@ class connection{
    
 
     public function insertDataTable($table,$insertNode,$data){
-        echo "llegue aca insertDataTable $table $insertNode";
+        //echo "llegue aca insertDataTable $table $insertNode";
         $this->_firebase->getReference($table.'/'.$insertNode)
             ->set($data);
 
@@ -140,20 +132,19 @@ class connection{
         return $_array_company;
     }
 
-    public function createUser($_properties){
+    public function createUserDatabse($_userProperties){
         try {
-            $createdUser = $auth->createUser($userProperties);
+            $auth = $this->_factory_firebase->getAuth();
+            $createdUser = $auth->createUser($_userProperties);
             $auth->sendEmailVerification($createdUser->uid);
             return $createdUser;
         } catch (Kreait\Firebase\Exception\Auth\EmailExists $e) {
-            echo $e->getMessage();
+            return $e->getMessage();
         } catch (Kreait\Firebase\Exception\Auth\PhoneNumberExists $e) {
-            echo $e->getMessage();
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+            return $e->getMessage();
         }
-
-        
-        
-
     }
 
 }

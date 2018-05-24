@@ -54,6 +54,9 @@ function saveContractorData(){
 
     var driver=[];
 
+    $("#validatingMessajeCode").html('');
+    $("input#codeValidateField").closest(".form-group").removeClass("has-success").removeClass('has-error');
+
     $('input[name^="driverFirstName"]').each(function() {
         driver.push($(this).val());
     });
@@ -78,15 +81,17 @@ function saveContractorData(){
                                                 "arrayDrivers":driver}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
-                    $("#answerEmailValidate").html(data);
+                    //$("#answerEmailValidate").html(data);
                     var n = data.indexOf("Error");
                     if(n==-1){
-                        $("input#emailValidation").closest(".form-group").addClass("has-success").removeClass('has-error');
-                        $("#firstNextValidation").show();
+                        $("#step3ContractorResponse").addClass("has-success").removeClass('has-error');
+                        //$("#firstNextValidation").show();
+                        $("#step3ContractorResponse").html(data);
                         result=true;
                     }else{
-                        $("input#emailValidation").closest(".form-group").addClass("has-error").removeClass('has-success');
-                        $("#firstNextValidation").hide();
+                        $("#step3ContractorResponse").addClass("has-error").removeClass('has-success');
+                        //$("#firstNextValidation").hide();
+                        $("#step3ContractorResponse").html(data);
                         result=false;
                     }
                     

@@ -100,9 +100,11 @@ class userController{
     }
 
     public function insertContractor($arrayContractor){
+        
+
         $this->_userModel=new userModel();
         $_lastCompanyID=$this->_userModel->getLastNodeCompany("Company","CompanyID");
-        echo "last node company:".$_lastCompanyID;
+        //echo "last node company:".$_lastCompanyID;
         if (is_null($_lastCompanyID)){
             $_newCompanyId="CO000001";
         }else{
@@ -113,42 +115,43 @@ class userController{
         $hashActivationCode = md5( rand(0,1000) );
         $password = rand(1000,5000);
 
-        $Company = array(
-                "ComapnyLicNum" => "$hashActivationCode",
-                "CompanyAdd1" => "",
-                "CompanyAdd2" => "",
-                "CompanyAdd3" => "",
-                "CompanyEmail" => $arrayContractor['emailValidation'],
-                "CompanyID" => "$_newCompanyId",
-                "CompanyName" => $arrayContractor['companyName'],
-                "CompanyPhone" => $arrayContractor['phoneContactCompany'],
-                "CompanyRating" => "",
-                "CompanyStatus" => "Validating",
-                "CompanyType" => $arrayContractor['typeCompany'],
-                "InsLiabilityAgencyName" => "",
-                "InsLiabilityAgtName" => "",
-                "InsLiabilityAgtNum" => "",
-                "InsLiabilityPolNum" => "",
-                "PayInfoBillingAddress1" => "",
-                "PayInfoBillingAddress2" => "",
-                "PayInfoBillingCity" => "",
-                "PayInfoBillingST" => "",
-                "PayInfoBillingZip" => "",
-                "PayInfoCCExpMon" => "",
-                "PayInfoCCExpYr" => "",
-                "PayInfoCCNum" => "",
-                "PayInfoCCSecCode" => "",
-                "PayInfoName" => "",
-                "PrimaryFName" => $arrayContractor['firstNameCompany'],
-                "PrimaryLName" => $arrayContractor['lastNameCompany'],
-                "Status_Rating" => ""
-        );
-        $this->_userModel->insertContractor($_newCompanyId,$Company);
-        //$this->_sendMail=new emailController();
-        //$this->_sendMail->sendMail($arrayContractor['emailValidation'],$hashActivationCode);
-        //$_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'');
-        $_response="";
-        return $_newCompanyId."|".$_response;
+        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'');
+        if(is_array($_response) or gettype($_response)=="object"){
+            $Company = array(
+                    "ComapnyLicNum" => "",
+                    "CompanyAdd1" => "",
+                    "CompanyAdd2" => "",
+                    "CompanyAdd3" => "",
+                    "CompanyEmail" => $arrayContractor['emailValidation'],
+                    "CompanyID" => "$_newCompanyId",
+                    "CompanyName" => $arrayContractor['companyName'],
+                    "CompanyPhone" => $arrayContractor['phoneContactCompany'],
+                    "CompanyRating" => "",
+                    "CompanyStatus" => "Validating",
+                    "CompanyType" => $arrayContractor['typeCompany'],
+                    "InsLiabilityAgencyName" => "",
+                    "InsLiabilityAgtName" => "",
+                    "InsLiabilityAgtNum" => "",
+                    "InsLiabilityPolNum" => "",
+                    "PayInfoBillingAddress1" => "",
+                    "PayInfoBillingAddress2" => "",
+                    "PayInfoBillingCity" => "",
+                    "PayInfoBillingST" => "",
+                    "PayInfoBillingZip" => "",
+                    "PayInfoCCExpMon" => "",
+                    "PayInfoCCExpYr" => "",
+                    "PayInfoCCNum" => "",
+                    "PayInfoCCSecCode" => "",
+                    "PayInfoName" => "",
+                    "PrimaryFName" => $arrayContractor['firstNameCompany'],
+                    "PrimaryLName" => $arrayContractor['lastNameCompany'],
+                    "Status_Rating" => ""
+            );
+            $this->_userModel->insertContractor($_newCompanyId,$Company);
+            return $_newCompanyId;
+        }else{
+            return "Error".$_response;
+        }
         
     }
 
@@ -304,20 +307,21 @@ class userController{
     }
 
     public function insertUserDatabase($mail,$number,$name,$url){
-        $password = rand(1000,5000);
+        //$password = rand(1000,5000);
+        $password = "pass12345";
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
             'phoneNumber' => $number,
-            'password' => $password,
+            'password' => "P".$password,
             'displayName' => $name,
             'photoUrl' => $url,
             'disabled' => false,
         ];
         $this->_userModel=new userModel();
-        $_user_created=$this->_userModel->$createUser($userProperties);
-        
-        return $password;
+        $_user_created=$this->_userModel->createUser($userProperties);  
+        //echo $_user_created;      
+        return $_user_created;
 
     }
 }

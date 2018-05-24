@@ -112,7 +112,7 @@ class userModel extends connection{
     }
 
     public function createUser($_properties){
-        return $this->createUser($_properties);
+        return $this->createUserDatabse($_properties);
 
     }
 }

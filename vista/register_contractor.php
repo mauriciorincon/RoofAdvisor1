@@ -5,22 +5,19 @@
 <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
-            <div class="stepwizard-step col-xs-3"> 
+            <div class="stepwizard-step col-xs-4"> 
                 <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
                 <p><small>About you</small></p>
             </div>
-            <div class="stepwizard-step col-xs-3"> 
+            <div class="stepwizard-step col-xs-4"> 
                 <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                 <p><small>Register your Employees/Drivers</small></p>
             </div>
-            <div class="stepwizard-step col-xs-3"> 
+            <div class="stepwizard-step col-xs-4"> 
                 <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                 <p><small>Email Verification</small></p>
             </div>
-            <div class="stepwizard-step col-xs-3"> 
-                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                <p><small>Final</small></p>
-            </div>
+            
         </div>
     </div>
     
@@ -124,26 +121,23 @@
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Code verification" id="codeValidateField" name="codeValidateField" />
                     <label class="control-label" id="validatingMessajeCode" name="validatingMessajeCode">Answer</label>
                 </div>
+
+                <div class="list-group">
+						<a href="#" class="list-group-item ">
+							<span class="glyphicon glyphicon-info-sign"></span> Answer 
+							<div class="d-flex w-100 justify-content-between">
+								<span id="step3ContractorResponse">Hola</span><br>
+								
+							</div>
+						</a>
+				</div>
                 
-                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                <button class="btn btn-primary nextBtn pull-right" type="button">Finish</button>
                 <button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>
             </div>
         </div>
         
-        <div class="panel panel-primary setup-content" id="step-4">
-            <div class="panel-heading">
-                 <h3 class="panel-title">Final</h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label" id="mensajeCorrecto" name="mensajeCorrecto">Welcome, the user was activated correctly</label>
-                    
-                </div>
-                
-                <button class="btn btn-success pull-right" type="submit">Finish!</button>
-                <!--<button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>-->
-            </div>
-        </div>
+        
     </form>
 </div>
 
