@@ -97,7 +97,7 @@ class userController{
                 $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                 $_SESSION['email'] = $_result->email;
 
-                echo "Now you are logged in, please press finish button to save the order.";
+                echo "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
             }else{
                 //echo " 3 ";
                 echo "Error, It seems that you have not validated your email, please check your email";
@@ -197,7 +197,7 @@ class userController{
 
     public function getListCompany(){
         $this->_userModel=new userModel();
-        $_result=$this->_userModel->getListCompany('Company');
+        $_result=$this->_userModel->getListCompany('Contractors');
         return $_result;
 
     }

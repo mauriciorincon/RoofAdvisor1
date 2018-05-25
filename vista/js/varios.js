@@ -608,7 +608,7 @@ $(document).ready(function () {
         }
 
         if (curStepBtn=="step-5" && isValid==true ){
-            
+            validateIsLoggedIn();
         }
         
     
@@ -684,6 +684,10 @@ $(document).ready(function() {
                     $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').show();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
+                    var p1 = data.indexOf("[");
+                    var p2 = data.indexOf("]");
+                    var userName=data.substring(p1+1,p2)
+                    $('span#labelUserLoggedIn').html(userName);
                 }else{
                     $('#textAnswerOrder').html(data);
                     $('#headerTextAnswerOrder').html('Error');
@@ -709,6 +713,67 @@ $(document).ready(function() {
 function insertOrderCustomer(){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+    var Rtype=$("input:radio[name='estep3Option']:checked").val();
+    var Water=$("input:radio[name='estep4Option']:checked").val();
+    var Hlevels=$("input:radio[name='estep5Option']:checked").val();
+    var ActAmtTime=$("input[name='step6date']").val();
+    var ActTime=$("button[name='step6time'].active").text();
+    var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
+    $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            
 
-    
+            if(n==-1){
+
+            }else{
+                
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+        }
+    });
+}
+
+function validateIsLoggedIn(){
+    $.post( "controlador/ajax/validateLoggedIn.php", {}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                
+                var n = data.indexOf("Error");
+                
+
+                if(n==-1){
+                    $('#textAnswerOrder').html(data+'');
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }else{
+                    $('#textAnswerOrder').html('You are not logged in, please log in');
+                    $('#headerTextAnswerOrder').html('Error');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result=false;
+            }
+        });
 }

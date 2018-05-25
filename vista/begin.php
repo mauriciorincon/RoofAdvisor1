@@ -357,6 +357,7 @@
 								</div>
 							</div>
 						</div>
+						<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
 					</div>
 					<div class="col-sm-6">
 						<div class="list-group">
@@ -403,9 +404,12 @@
 								</div>  
 								<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Create Customer</button><br><br>
 							</div>
-							<button class="btn btn-primary nextBtnCustomer pull-center" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
+							
 						</div>
-            		</div>
+						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
+					</div>
+					
+						
 					</div>
 				</div>
 			</div>
@@ -419,20 +423,21 @@
 </div>
 <!-- slider-area end -->
 
-<div class="modal fade" id="myModalRespuesta" role="dialog"><div class="modal-dialog"> 
-	<!-- Modal content--> 
-	<div class="modal-content"> 
-		<div class="modal-header"> 
-			<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-			<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
 		</div> 
-		<div class="modal-body" id="textAnswerOrder"> 
-			<p >Some text in the modal.</p> 
-		</div> 
-		<div class="modal-footer" id="buttonAnswerOrder"> 
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-		</div> 
-	</div> 
-
+	</div>
 </div>
 

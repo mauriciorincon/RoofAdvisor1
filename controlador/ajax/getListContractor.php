@@ -7,11 +7,12 @@
 	//print_r($_array_company);
     $_string="";
     foreach ($_array_company as $key => $company) {
+		//print_r($company);
         $_string.='<a href="#" class="list-group-item " name="linkCompany">
-						<span class="glyphicon glyphicon-wrench"></span><span name="companyName">'.$company['CompanyName'].'</span><span class="badge">1</span>
+						<span class="glyphicon glyphicon-wrench"></span><input type="hidden" value="'.$company['ContractorID'].'" name="idContractor"> <span name="companyName">'.$company['CompanyName'].'</span><span class="badge">1</span>
 						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">'.$company['PrimaryFName'].' '.$company['PrimaryLName'].'</h5>
-							<small>3 days ago</small><br>
+							<h5 class="mb-1">'.$company['ContNameFirst'].' '.$company['ContNameLast'].'</h5>
+							Rating: <small>'.$company['ContRating'].'</small><br>
 							<span class="fa fa-star checked"></span>
 							<span class="fa fa-star checked"></span>
 							<span class="fa fa-star checked"></span>

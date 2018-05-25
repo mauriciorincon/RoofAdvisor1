@@ -61,11 +61,11 @@ if(!isset($_SESSION)) {
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-								<?php if(isset($_SESSION['username'])){
+								<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
 									echo $_SESSION['username'];
 								} else{
 									echo "Login In";
-								}?>
+								}?></span>
 								<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>

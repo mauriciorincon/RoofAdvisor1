@@ -30,6 +30,16 @@ class orderController{
 
     function insertOrder($idCustomer,$arrayDataOrder){
 
+        $_array=array(
+            "RepZIP"=>$_POST['RepZIP'],
+            "RequestType"=>$_POST['RequestType'],
+            "Rtype"=>$_POST['Rtype'],
+            "Water"=>$_POST['Water'],
+            "Hlevels"=>$_POST['Hlevels'],
+            "ActAmtTime"=>$_POST['ActAmtTime'],
+            "ActTime"=>$_POST['ActTime'],
+            "ContractorID"=>$_POST['ContractorID'],
+        );
         
         $Company = array(
             "ActAmtMat" => "",
