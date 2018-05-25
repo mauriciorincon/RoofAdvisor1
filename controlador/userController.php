@@ -63,6 +63,11 @@ class userController{
         
         if(is_array($_result) or gettype($_result)=="object"){
             if($_result->emailVerified==1){
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $_result->displayName;
+                $_SESSION['start'] = time();
+                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                $_SESSION['email'] = $_result->email;
                 $this->dashboardCustomer($this->_user);
             }else{
                 Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
@@ -86,6 +91,12 @@ class userController{
             //echo " 1 ";
             if($_result->emailVerified==1){
                 //echo " 1 ";
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $_result->displayName;
+                $_SESSION['start'] = time();
+                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                $_SESSION['email'] = $_result->email;
+
                 echo "Now you are logged in, please press finish button to save the order.";
             }else{
                 //echo " 3 ";
@@ -279,20 +290,28 @@ class userController{
 
     }
 
-    public function dashboardCustomer($_id_customer){
+    public function dashboardCustomer($_id_customer=""){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+            if(empty($_id_customer)){
+                $_id_customer=$_SESSION['email'];
+            }
+            $_userMail=$_id_customer;
+            $this->_userModel=new userModel();
 
-        $_userMail=$_id_customer;
-        $this->_userModel=new userModel();
-
-        $_actual_customer=$this->_userModel->getCustomer($_userMail);
-        //echo "hola".$_userMail;
-        //print_r($_actual_customer);
+            $_actual_customer=$this->_userModel->getCustomer($_userMail);
+            //echo "hola".$_userMail;
+            //print_r($_actual_customer);
+            
+            $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+            
+            require_once("vista/head.php");
+            require_once("vista/dashboard_customer.php");
+            require_once("vista/footer.php");
+            
+        }else{
+            $this->showLoginClient();
         
-        $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
-        
-        require_once("vista/head.php");
-		require_once("vista/dashboard_customer.php");
-		require_once("vista/footer.php");
+        }
     }
     
     public function dashboardCompany($_id_company){
@@ -358,6 +377,17 @@ class userController{
         $_user_created=$this->_userModel->createUser($userProperties);  
         //echo $_user_created;      
         return $_user_created;
+
+    }
+
+    public function logout(){
+        unset ($_SESSION['loggedin']);
+        unset ($_SESSION['username']);
+        unset ($_SESSION['start']);
+        unset ($_SESSION['expire']);
+        unset ($_SESSION['email']);
+        session_destroy();
+        header('Location: index.php');
 
     }
 }

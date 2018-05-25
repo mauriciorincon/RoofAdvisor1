@@ -63,7 +63,7 @@
 					<div class="form-group">
 			
 						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+							<input class="form-check-input" type="radio" name="typeServiceOrder" id="exampleRadios1" value="S" checked>
 						</div>
 						<div class="col-md-11"> 
 							<label class="form-check-label" for="exampleRadios1">Repair existing roof leak (scheduled a week in advance) - S</label>
@@ -72,7 +72,7 @@
 
 					<div class="form-group">
 						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+							<input class="form-check-input" type="radio" name="typeServiceOrder" id="exampleRadios2" value="E">
 						</div>
 						<div class="col-md-11">
 							<label class="form-check-label" for="exampleRadios2">
@@ -418,4 +418,21 @@
 
 </div>
 <!-- slider-area end -->
+
+<div class="modal fade" id="myModalRespuesta" role="dialog"><div class="modal-dialog"> 
+	<!-- Modal content--> 
+	<div class="modal-content"> 
+		<div class="modal-header"> 
+			<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+			<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+		</div> 
+		<div class="modal-body" id="textAnswerOrder"> 
+			<p >Some text in the modal.</p> 
+		</div> 
+		<div class="modal-footer" id="buttonAnswerOrder"> 
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+		</div> 
+	</div> 
+
+</div>
 

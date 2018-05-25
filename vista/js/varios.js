@@ -606,7 +606,10 @@ $(document).ready(function () {
             $('#step8Time').html(valStep6t);
             $('#step8CompanyName').html(valStep7);
         }
-    
+
+        if (curStepBtn=="step-5" && isValid==true ){
+            
+        }
         
     
         
@@ -670,12 +673,23 @@ $(document).ready(function() {
             if ( console && console.log ) {
                 
                 var n = data.indexOf("Error");
+                
+
                 if(n==-1){
+                    $('#textAnswerOrder').html(data+'');
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+
+                    $('#headerTextAnswerOrder').html('Success');
+                  
                     $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
                 }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             }
@@ -691,3 +705,10 @@ $(document).ready(function() {
     });
     
 } );
+
+function insertOrderCustomer(){
+    var RepZIP=$('#zipCodeBegin').val();
+    var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+
+    
+}

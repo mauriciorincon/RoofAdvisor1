@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+if(!isset($_SESSION)) { 
+        session_start(); 
+} 
+?>
+
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -33,7 +39,7 @@
 			<div class="header-top-area bg-sky">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
 								<div class="email-address">
 									<span class="email"><i class="fa fa-envelope"></i>Email: admin@shield.com</span>
@@ -41,16 +47,34 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
 							<div class="social-icon text-right">
 								<a href="#"><i class="fa fa-facebook"></i></a>
 								<a href="#"><i class="fa fa-linkedin"></i></a>
 								<a href="#"><i class="fa fa-twitter"></i></a>
 								<a href="#"><i class="fa fa-behance"></i></a>
 								<a href="#"><i class="fa fa-pinterest"></i></a>
-								<a href="#"><i class="fa fa-tumblr"></i></a>
+								<a href="#"><i class="fa fa-tumblr"></i></a>	
 							</div>
+							
 						</div>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
+								<?php if(isset($_SESSION['username'])){
+									echo $_SESSION['username'];
+								} else{
+									echo "Login In";
+								}?>
+								<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
+									<li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
+									<li class="divider"></li>
+									<li><a href="?controller=user&accion=logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -88,8 +112,11 @@
 										<li><a href="#">SERVICE</a></li>
 										<li><a href="#">CONTACT</a></li>
 										<li><a href="#">CONTACT</a></li>
+										<div class="bs-example">
+									
 									</ul>
 								</nav>
+								
 							</div>
 						</div>
 						<div class="mobile-menu-area visible-xs ">
