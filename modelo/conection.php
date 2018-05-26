@@ -39,7 +39,25 @@ class connection{
             foreach($value as $key => $value1){
                 return $value1;
             }
-            //return $value;
+            
+        }else{
+            return "null";
+        }
+    }
+
+    public function getQueryEqualKey($table,$field,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
+       
+        $value = $snapshot->getValue();
+
+        //print_r($value);
+        if(is_array($value)){
+            foreach($value as $key => $value1){
+                return $key;
+            }
         }else{
             return "null";
         }

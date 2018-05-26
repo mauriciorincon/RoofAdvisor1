@@ -28,38 +28,34 @@ class orderController{
         return $_orders;
     }
 
-    function insertOrder($idCustomer,$arrayDataOrder){
-
-        $_array=array(
-            "RepZIP"=>$_POST['RepZIP'],
-            "RequestType"=>$_POST['RequestType'],
-            "Rtype"=>$_POST['Rtype'],
-            "Water"=>$_POST['Water'],
-            "Hlevels"=>$_POST['Hlevels'],
-            "ActAmtTime"=>$_POST['ActAmtTime'],
-            "ActTime"=>$_POST['ActTime'],
-            "ContractorID"=>$_POST['ContractorID'],
-        );
-        
-        $Company = array(
+    function insertOrder($arrayDataOrder){
+        $this->_userController=new userController();
+        $_customer=$this->_userController->getCustomer($_SESSION['email']);
+        $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        //print_r($_customer);
+        //print_r($_customerK);
+        $timeparts = explode(" ",microtime());
+        $currenttime = bcadd(($timeparts[0]*1000),bcmul($timeparts[1],1000));
+        echo $currenttime;
+        $Order = array(
             "ActAmtMat" => "",
-            "ActAmtTime" => "",
-            "ActTime" => "",
+            "ActAmtTime" => $arrayDataOrder['ActAmtTime'],
+            "ActTime" => $arrayDataOrder['ActTime'],
             "AfterPICRefID" => "",
             "AmtER" => "",
             "AppEst" => "",
-            "Authorized" => "Yes",
+            "Authorized" => "",
             "BeforePicRefID" => "",
-            "ContractorID" => "CN0001",
-            "CustomerID" => "10",
-            "CutomerFBID" => "ZvZWN9sV05gzqBpn4raxor5X8Pk2",
+            "ContractorID" => $arrayDataOrder['ContractorID'],
+            "CustomerID" => $_customer['CustomerID'],
+            "CutomerFBID" => $_customerK[0],
             "DateTime" => "2018-05-09-17=>01=>56",
             "ETA" => "05/09/2018 17=>02",
             "EstAmtMat" => "300",
             "EstAmtTime" => "300.0",
             "EstTime" => "2",
             "FBID" => "-LC5hTQX5uWFOwMK_dCo",
-            "Hlevels" => "1 Story",
+            "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
             "Latitude" => "42.344149235302",
             "Longitude" => "-71.0652257502079",
@@ -68,14 +64,14 @@ class orderController{
             "RepAddress" => "474 Harrison Ave",
             "RepCity" => "Boston",
             "RepState" => "Massachusetts",
-            "RepZIP" => "02118",
-            "RequestType" => "R",
-            "Rtype" => "Flat",
+            "RepZIP" => $arrayDataOrder['RepZIP'],
+            "RequestType" => $arrayDataOrder['RequestType'],
+            "Rtype" => $arrayDataOrder['Rtype'],
             "SchDate" => "",
             "SchTime" => "",
             "Status" => "G",
             "TransNum" => "",
-            "Water" => "Yes",
+            "Water" => $arrayDataOrder['Water'],
         );
 
     }

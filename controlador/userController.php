@@ -390,5 +390,14 @@ class userController{
         header('Location: index.php');
 
     }
+
+    public function getCustomer($user){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomer($user);  
+    }
+    public function getCustomerK($user){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomerKey($user);  
+    }
 }
 ?>
