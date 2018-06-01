@@ -130,11 +130,25 @@ class connection{
    
 
     public function insertDataTable($table,$insertNode,$data){
-        //echo "llegue aca insertDataTable $table $insertNode";
-        $this->_firebase->getReference($table.'/'.$insertNode)
-            ->set($data);
-
-        //$this->_firebase->set($table . "/$insertNode", $data);
+        if(empty($insertNode)){
+            try {
+                    //echo "llegue aca insertDataTable $table $insertNode";
+                    $_key=$this->_firebase->getReference($table)
+                        ->push($data);
+                    return $_key;
+                }catch (Exception $e){
+                    return $e->getMessage();
+                }
+        }else{
+            try {
+                //echo "llegue aca insertDataTable $table $insertNode";
+                $_key=$this->_firebase->getReference($table.'/'.$insertNode)
+                    ->set($data);
+                return $_key;
+            }catch (Exception $e){
+                return $e->getMessage();
+            }
+        }
     }
 
     public function updateDataTable($table,$updateNode,$data){
@@ -187,6 +201,12 @@ class connection{
             
             return $e->getMessage();
         }
+    }
+
+    public function getDateTime(){
+
+        $ref = $$this->_firebase->getReference('posts/my-post')
+          ->set('created_at', ['.sv' => 'timestamp']);
     }
 
 }

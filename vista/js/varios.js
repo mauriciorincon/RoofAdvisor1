@@ -413,7 +413,7 @@ $(document).ready(function () {
         }
 
         if (curStepBtn=="step-1" && isValid==true ){
-            saveCustomerData();
+            saveCustomerData("register");
         }
     
         if (curStepBtn=="step-2" && isValid==true ){
@@ -449,7 +449,8 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
-    function saveCustomerData(){
+    function saveCustomerData(p_pantalla){
+        
         var firstCustomerName = $("input#firstCustomerName").val();
         var lastCustomerName = $("input#lastCustomerName").val();
         var emailValidation = $("input#emailValidation").val();
@@ -458,23 +459,58 @@ $(document).ready(function () {
         var customerState = $("input#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
         var customerPhoneNumber = $("input#customerPhoneNumber").val();
-    
+        var password=$('input:password#inputPassword').val();
+        var Repassword=$('input:password#inputPasswordConfirm').val();
+
         
+        if(p_pantalla=="Order"){
+            var flag=true;
+            var ListTextBox=$("#step6RegisterCustomerOrder").find("input");
+            for (var i = 0; i < ListTextBox.length; i++) {
+                if (!ListTextBox[i].validity.valid) {
+                    flag = false;
+                    $(ListTextBox[i]).closest(".form-group").addClass("has-error").removeClass("has-success");
+                }
+            }
+            if(password.length<6){
+                flag = false;
+            }
+            if(Repassword.length<6){
+                flag = false;
+            }
+            if(password!=Repassword){
+                flag = false;
+            }
+            if (flag==false){
+                alert('Please fill all fields to continue with register');
+                return;
+            }
+
+        }
         
         $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
-                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}, null, "text" )
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
                         $("#validatingMessajeCode").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
-                            
+                            if(p_pantalla=="Order"){
+                                $('#headerTextAnswerOrder').html('Mail Verification');
+                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click finish button');
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                                $('#myModalRespuesta').modal({backdrop: 'static'});
+                            }
                             //$("#firstNextValidation").show();
                             result=true;
                         }else{
                             
-                            //$("#firstNextValidation").hide();
+                            $('#textAnswerOrder').html(data);
+                            $('#headerTextAnswerOrder').html('Error');
+                            $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                            $('#lastFinishButtonOrder').hide();
+                            $('#myModalRespuesta').modal({backdrop: 'static'});
                             result=false;
                         }
                         
@@ -498,7 +534,7 @@ $(document).ready(function () {
                 $.post( "controlador/ajax/getZipCode.php", { "zipcode" : zipcode}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
-                        $("#answerEmailValidate").html(data);
+                        //$("#answerEmailValidate").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
                             $('#answerZipCode').html(data);
@@ -719,8 +755,10 @@ function insertOrderCustomer(){
     var ActAmtTime=$("input[name='step6date']").val();
     var ActTime=$("button[name='step6time'].active").text();
     var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
+    var email=$('input#emailValidation').val();
+    var password=$('input#inputPassword').val();
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID}, null, "text" )
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,"password":password}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -728,9 +766,22 @@ function insertOrderCustomer(){
             
 
             if(n==-1){
+                    window.location.href = "index.php?controller=user&accion=dashboardCustomer";
+                    /*$('#textAnswerOrder').html(data+'');
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+email+','+password+',datos)">Continue to Customer Area</button><br><br>');
 
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});*/
             }else{
-                
+                    $('#headerTextAnswerOrder').html('Error validating User Account');
+                    $('#textAnswerOrder').html(data+'<br><br>Please try again');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
@@ -761,9 +812,72 @@ function validateIsLoggedIn(){
                     $('#lastFinishButtonOrder').show();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in, please log in');
+                    $('#textAnswerOrder').html('You are not logged in, please log in or register');
                     $('#headerTextAnswerOrder').html('Error');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result=false;
+            }
+        });
+}
+
+function validInputPassword(){
+    var password=$('input:password#inputPassword').val();
+    if(password.length<6){
+        $('input:password#inputPassword').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $('#answerPasswordValidateStep6').html('The password must have at least 6 chararters');
+    }else{
+        $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $('#answerPasswordValidateStep6').html('');
+    }
+    
+}
+
+function validInputRePassword(){
+    var password=$('input:password#inputPassword').val();
+    var Repassword=$('input:password#inputPasswordConfirm').val();
+    
+    if(Repassword.length<6){
+        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $('#answerRePasswordValidateStep6').html('The password must have at least 6 chararters');
+    }else{
+        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $('#answerRePasswordValidateStep6').html('');
+        if(Repassword!=password){
+            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+        }else{
+            $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+            $('#answerRePasswordValidateStep6').html('');
+            $('#answerPasswordValidateStep6').html('');
+        }
+    }
+    
+    
+}
+
+function loginUser(user,password,url){
+    alert('paso aca');
+    $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : user,"passwordClientOrder":password}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                
+                if(n==-1){
+                    window.location.href = "";
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }

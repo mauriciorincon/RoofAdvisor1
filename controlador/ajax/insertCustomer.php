@@ -10,6 +10,7 @@ $_customerCity = $_POST['customerCity'];
 $_customerState = $_POST['customerState'];
 $_customerZipCode = $_POST['customerZipCode'];
 $_customerPhoneNumber = $_POST['customerPhoneNumber'];
+$_password=$_POST['password'];
 
 
 
@@ -22,6 +23,7 @@ $_arrayCustomer = array(
     "customerState" => "$_customerState",
     "customerZipCode" => "$_customerZipCode",
     "customerPhoneNumber" => "$_customerPhoneNumber",
+    "password"=>$_password,
 );
 
 $_userController=new userController();

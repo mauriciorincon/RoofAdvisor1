@@ -368,42 +368,56 @@
 									
 								</div>
 							</div>
-							<div class="list-group-item ">
-								<div class="form-group">
-									<label class="control-label">First Name</label>
-									<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+							
+								<div class="list-group-item " id="step6RegisterCustomerOrder">
+									<div class="form-group">
+										<label class="control-label">First Name</label>
+										<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+										</div> 
+									<div class="form-group">
+										<label class="control-label">Last Name</label>
+										<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+									</div>  
+									<div class="form-group">
+										<label class="control-label ">Email</label>
+										<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
+										<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+									</div>
+									<div class="form-group">
+										<label class="control-label ">Password</label>
+										<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+										<div class="help-block">Minimum of 6 characters</div>
+										<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+									</div>
+									<div class="form-group">
+										<label class="control-label ">Confirm Password</label>
+										<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+										<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+									</div>
+
+									
+									<div class="form-group">
+										<label class="control-label">Address</label>
+										<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+									</div>
+									<div class="form-group">
+										<label class="control-label">City</label>
+										<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
 									</div> 
-								<div class="form-group">
-									<label class="control-label">Last Name</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-								</div>  
-								<div class="form-group">
-									<label class="control-label ">Email</label>
-									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-									<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
-								</div> 
-								<div class="form-group">
-									<label class="control-label">Address</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+									<div class="form-group">
+										<label class="control-label">State</label>
+										<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
+									</div>
+									<div class="form-group">
+										<label class="control-label">Zip code</label>
+										<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+									</div> 
+									<div class="form-group">
+										<label class="control-label">Phone number</label>
+										<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+									</div>  
+									<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer" onclick="saveCustomerData('Order')">Register</button><br><br>
 								</div>
-								<div class="form-group">
-									<label class="control-label">City</label>
-									<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
-								</div> 
-								<div class="form-group">
-									<label class="control-label">State</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
-								</div>
-								<div class="form-group">
-									<label class="control-label">Zip code</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-								</div> 
-								<div class="form-group">
-									<label class="control-label">Phone number</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-								</div>  
-								<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Create Customer</button><br><br>
-							</div>
 							
 						</div>
 						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>

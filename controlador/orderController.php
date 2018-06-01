@@ -30,13 +30,18 @@ class orderController{
 
     function insertOrder($arrayDataOrder){
         $this->_userController=new userController();
+        $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
         $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        $_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
+        if(is_null($_lastOrderNumber)){
+            $_lastOrderNumber=1;
+        }else{
+            $_lastOrderNumber++;
+        }
         //print_r($_customer);
-        //print_r($_customerK);
-        $timeparts = explode(" ",microtime());
-        $currenttime = bcadd(($timeparts[0]*1000),bcmul($timeparts[1],1000));
-        echo $currenttime;
+        print_r($_customerK);
+        
         $Order = array(
             "ActAmtMat" => "",
             "ActAmtTime" => $arrayDataOrder['ActAmtTime'],
@@ -48,22 +53,22 @@ class orderController{
             "BeforePicRefID" => "",
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
-            "CutomerFBID" => $_customerK[0],
-            "DateTime" => "2018-05-09-17=>01=>56",
-            "ETA" => "05/09/2018 17=>02",
-            "EstAmtMat" => "300",
-            "EstAmtTime" => "300.0",
-            "EstTime" => "2",
-            "FBID" => "-LC5hTQX5uWFOwMK_dCo",
+            "CutomerFBID" => $_customerK,
+            "DateTime" => time('Y-m-d H:i:s'),
+            "ETA" => time('Y-m-d H:i:s'),
+            "EstAmtMat" => "",
+            "EstAmtTime" => "",
+            "EstTime" => "",
+            "FBID" => "",
             "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
-            "Latitude" => "42.344149235302",
-            "Longitude" => "-71.0652257502079",
-            "OrderNumber" => "112",
+            "Latitude" => "",
+            "Longitude" => "",
+            "OrderNumber" => "$_lastOrderNumber",
             "PaymentType" => "",
-            "RepAddress" => "474 Harrison Ave",
-            "RepCity" => "Boston",
-            "RepState" => "Massachusetts",
+            "RepAddress" => $_customer['Address'],
+            "RepCity" => $_customer['City'],
+            "RepState" => $_customer['State'],
             "RepZIP" => $arrayDataOrder['RepZIP'],
             "RequestType" => $arrayDataOrder['RequestType'],
             "Rtype" => $arrayDataOrder['Rtype'],
@@ -74,5 +79,9 @@ class orderController{
             "Water" => $arrayDataOrder['Water'],
         );
 
+        $result=$this->_orderModel->insertOrder("",$Order);
+        return $result;
     }
+
+
 }

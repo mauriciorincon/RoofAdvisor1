@@ -10,12 +10,13 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#orders">Orders</a></li>
+        <li><a data-toggle="tab" href="#maps">Map</a></li>
     </ul>
 
     <div class="tab-content">
         <!--Div profile-->
         <div id="profile" class="tab-pane fade in active">
-        <h3>Profile</h3>
+            <h3>Profile</h3>
             <form role="form">
                 <div class="panel-body">
                     <div class="form-group">
@@ -106,6 +107,119 @@
             </div>
         </div>
         
+        <div id="maps" class="tab-pane fade">
+            <h3>Map</h3>
+            <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    
+            <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 700px;  /* The height is 400 pixels */
+                width: 100%;  /* The width is the width of the web page */
+            }
+            </style>
+
+            <div id="map"></div>
+
+            <script>
+                // Initialize and add the map
+                function initMap() {
+                    // The location of Uluru
+                    var uluru = {lat: 27, lng: -81};
+                    // The map, centered at Uluru
+                    var map = new google.maps.Map(
+                        document.getElementById('map'), {zoom: 6, center: uluru});
+                    // The marker, positioned at Uluru
+                    //var marker = new google.maps.Marker({position: uluru, map: map});
+                    var marker="";
+                    /*var ref = firebase.app().database().ref("Orders");
+                    ref.once('value').then(function (snap) {
+                                datos=snap.val();
+                                for(k in datos){
+                                    fila=datos[k];
+                                    pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
+                                    marker = new google.maps.Marker({position: pos, map: map});
+                                }
+
+                    
+                            
+                            
+                            console.log('snap.val()', snap.val());
+                            });*/
+
+                            
+
+                    var ref = firebase.database().ref("Orders");
+                    ref.orderByChild("CustomerID").equalTo("<?php echo $_actual_customer['CustomerID'] ?>").once("value", function(snapshot) {
+
+                        datos=snapshot.val();
+                                for(k in datos){
+                                    fila=datos[k];
+                                    pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
+                                    marker = new google.maps.Marker({position: pos, map: map});
+
+                                    var contentString = '<div id="content">'+
+                                        '<div id="siteNotice">'+
+                                        '</div>'+
+                                        '<h3 id="firstHeading" class="firstHeading">Order Number:'+fila.OrderNumber+'</h3>'+
+                                        '<div id="bodyContent">'+
+                                        '<p><b>Address:</b>'+fila.RepState+', '+fila.RepCity+', '+fila.RepAddress+'</p>'+
+                                        '<p><b>Status:</b>'+fila.Status+'</p>'+
+                                        '</div>'+
+                                        '</div>';
+
+                                        var infowindow = new google.maps.InfoWindow({
+                                            content: contentString,
+                                            maxWidth: 200
+                                        });
+
+
+                                    marker.addListener('click', function() {
+                                        infowindow.open(map, marker);
+                                    });
+                                }
+
+                    console.log(snapshot.val());
+                    
+                    });
+
+                    
+                    
+                        
+                }
+            </script>
+
+            <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyB5HnjwLpr-WqknpRRU5WhrHCg6feVaYss",
+                authDomain: "pruebabasedatos-eacf6.firebaseapp.com",
+                databaseURL: "https://pruebabasedatos-eacf6.firebaseio.com",
+                projectId: "pruebabasedatos-eacf6",
+                storageBucket: "pruebabasedatos-eacf6.appspot.com",
+                messagingSenderId: "120748340913"
+            };
+            firebase.initializeApp(config);
+            //const dbRef = firebase.database().ref();
+            //const usersRef = dbRef.child('Orders');
+
+            
+            /*var ref = firebase.database().ref("Orders");
+                
+                    ref.on('value',function(snapshot){
+                        snapshot.forEach(function(childSnapshot){
+                            var childData=childSnapshot.val();
+                        });
+                    });*/
+
+            </script>
+
+
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
+            </script>
+
+        </div>
     </div>
     
 							
