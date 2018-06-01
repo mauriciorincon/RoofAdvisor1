@@ -646,16 +646,18 @@ $(document).ready(function () {
                 $.post( "controlador/ajax/getZipCode.php", { "zipcode" : zipcode}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
-                        //$("#answerEmailValidate").html(data);
                         var n = data.indexOf("Error");
+                        
                         if(n==-1){
                             $('#answerZipCode').html(data);
-                            $('#firstNextBegin').show();
-                            //result=true;
+                            if (data.indexOf("Sorry")==-1){
+                                $('#firstNextBegin').show();
+                            }else{
+                                $('#firstNextBegin').hide(); 
+                            }
                         }else{
                             $('#answerZipCode').html(data);
                             $('#firstNextBegin').hide();
-                            //result=false;
                         }
                         
                         console.log( "La solicitud se ha completado correctamente."+data+textStatus);

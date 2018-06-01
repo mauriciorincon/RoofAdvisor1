@@ -8,7 +8,7 @@ class othersModel extends connection{
     }
 
     public function validateZipCode($_zipCode){
-        $_result=$this->getQueryEqualValue('Parameters/validZIPCodes',$_zipCode);
+        $_result=$this->getQueryListEqualValue('Parameters/validZIPCodes',$_zipCode);
         return $_result;
     }
 }

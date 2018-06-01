@@ -45,19 +45,22 @@ class connection{
         }
     }
 
-    public function getQueryEqualValue($table,$searchValue){
+    public function getQueryListEqualValue($table,$searchValue){
+        $_flag=null;
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByValue()
-                        ->equalTo($searchValue)
                         ->getSnapshot();
         $value = $snapshot->getValue();
         if(is_array($value)){
             foreach($value as $key => $value1){
-                return $value1;
+                if(strcmp($value1,$searchValue)==0){
+                    $_flag=$searchValue;
+                    break;
+                }
             }
-            
+            return $_flag;
         }else{
-            return "null";
+            return null;
         }
     }
 

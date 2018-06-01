@@ -1,5 +1,6 @@
 <?php
 
+    require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/othersController.php");
     $_zipcode=$_POST['zipcode'];
     //Function to retrieve the contents of a webpage and put it into $pgdata
     $pgdata =""; //initialize $pgdata
@@ -29,10 +30,18 @@
     //$zipinfo['city']  = $city;
     //$zipinfo['state'] = $state;
     if(empty($city)){
+      $_othersController=new othersController();
+        $_result=$_othersController->verifyZipCode($_zipcode);
         echo "Error the zipcode is not asigned, try again - ".$_zipcode;
     }else{
-        
-        echo $city." - ".$state." - ".$_zipcode;
+        $_othersController=new othersController();
+        $_result=$_othersController->verifyZipCode($_zipcode);
+        if(is_null($_result)){
+          echo "Sorry, we do not have the service in your area (".$city." - ".$state." - ".$_zipcode.")";
+
+        }else{
+          echo $city." - ".$state." - ".$_zipcode;
+        }
     }
     
 ?>
