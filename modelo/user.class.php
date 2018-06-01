@@ -84,6 +84,10 @@ class userModel extends connection{
         $result=$this->getQueryEqual('Customers','Email',$user);
         return $result;
     }
+    public function getCustomerKey($user){
+        $result=$this->getQueryEqualKey('Customers','Email',$user);
+        return $result;
+    }
 
     public function getListCompany($table){
         $result=$this->getDataTable($table);

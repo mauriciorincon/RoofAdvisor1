@@ -44,6 +44,19 @@
                     <input maxlength="100" type="email" required="required" class="form-control" placeholder="Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('company')"/>
                     <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                 </div>
+
+                <div class="form-group">
+                        <label class="control-label ">Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+                        <div class="help-block">Minimum of 6 characters</div>
+                        <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label ">Confirm Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+                        <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                    </div> 
+
                 <div class="form-group">
                     <label class="control-label">Phone of Primary Contact</label>
                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Phone of Primary Contact"  id="phoneContactCompany" name="phoneContactCompany"/>
@@ -116,23 +129,19 @@
                  <h3 class="panel-title">Email Verification</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label">Please enter the Code that was send to your Email</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Code verification" id="codeValidateField" name="codeValidateField" />
-                    <label class="control-label" id="validatingMessajeCode" name="validatingMessajeCode">Answer</label>
-                </div>
+                
 
                 <div class="list-group">
 						<a href="#" class="list-group-item ">
 							<span class="glyphicon glyphicon-info-sign"></span> Answer 
 							<div class="d-flex w-100 justify-content-between">
 								<span id="step3ContractorResponse">Hola</span><br>
-								
+								<label class="control-label text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
 							</div>
 						</a>
 				</div>
                 
-                <button class="btn btn-primary nextBtn pull-right" type="button">Finish</button>
+                
                 <button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>
             </div>
         </div>

@@ -1,3 +1,104 @@
+///////////////////////////////////////////////
+//Register Company
+//////////////////////////////////////////////
+
+$(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
+        allPrevBtn = $('.prevBtn');
+    
+    allWells.hide();
+    
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+    
+        //console.log("entro a clic");
+        if (!$item.hasClass('disabled')) {
+             console.log("no tiene desabilitado");
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            
+            
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+    
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='password']"),
+            isValid = true;
+    
+        $(".form-group").removeClass("has-error");
+        
+        isValid=validInputPassword()
+        isValid=validInputRePassword();
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+        
+    
+        if (curStepBtn=="step-2" && isValid==true ){
+            saveContractorData();
+        }
+    
+        if (curStepBtn=="step-3" && isValid==true ){
+            //isValid=false;
+            isValid=validateCodeEmail('Company');
+        }
+    
+        if(curStepBtn!="step-3"){
+            if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+        }
+    });
+    
+    allPrevBtn.click(function () {
+        
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a"),
+            curStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+    
+        
+        //for (var x in curStepWizard){
+        //	console.log(curStepWizard[x]);
+        //}
+        
+        $(".form-group").removeClass("has-error");
+        /*for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }*/
+        
+    
+        if (isValid) {
+        
+            nextStepWizard.removeAttr('disabled').trigger('click');
+            curStepWizard.attr('disabled', 'disabled');
+        
+        }
+    });
+    
+    $('div.setup-panel div a.btn-success').trigger('click');
+    });
+// End Register Customer
+//////////////////////////////////////////////////
+
+
 $(document).ready(function() {
     $("#addRowDriver").click(function(){
         var rowCount = $('table#table_drivers tr:last').index() + 2;
@@ -51,6 +152,8 @@ function saveContractorData(){
     var phoneContactField = $("input#phoneContactCompany").val();
     var emailField = $("input#emailValidation").val();
     var typeCompanyField = $("select#typeCompany").val();
+    var password=$('input:password#inputPassword').val();
+    var Repassword=$('input:password#inputPasswordConfirm').val();
 
     var driver=[];
 
@@ -78,7 +181,7 @@ function saveContractorData(){
     
     $.post( "controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
                                                     "phoneContactCompany":phoneContactField,"emailValidation":emailField,"typeCompany":typeCompanyField,
-                                                "arrayDrivers":driver}, null, "text" )
+                                                "password":password,"arrayDrivers":driver}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
                     //$("#answerEmailValidate").html(data);
@@ -412,8 +515,17 @@ $(document).ready(function () {
             }
         }
 
+        var password=$('input:password#inputPassword').val();
+        var Repassword=$('input:password#inputPasswordConfirm').val();
+        if(password!=Repassword){
+            $('input:password#inputPassword').addClass("has-error").removeClass("has-success");;
+            $('input:password#inputPasswordConfirm').addClass("has-error").removeClass("has-success");;
+            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+            isValid = false;
+        }
+
         if (curStepBtn=="step-1" && isValid==true ){
-            saveCustomerData();
+            saveCustomerData("register");
         }
     
         if (curStepBtn=="step-2" && isValid==true ){
@@ -449,7 +561,8 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
-    function saveCustomerData(){
+    function saveCustomerData(p_pantalla){
+        
         var firstCustomerName = $("input#firstCustomerName").val();
         var lastCustomerName = $("input#lastCustomerName").val();
         var emailValidation = $("input#emailValidation").val();
@@ -458,23 +571,58 @@ $(document).ready(function () {
         var customerState = $("input#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
         var customerPhoneNumber = $("input#customerPhoneNumber").val();
-    
+        var password=$('input:password#inputPassword').val();
+        var Repassword=$('input:password#inputPasswordConfirm').val();
+
         
+        if(p_pantalla=="Order"){
+            var flag=true;
+            var ListTextBox=$("#step6RegisterCustomerOrder").find("input");
+            for (var i = 0; i < ListTextBox.length; i++) {
+                if (!ListTextBox[i].validity.valid) {
+                    flag = false;
+                    $(ListTextBox[i]).closest(".form-group").addClass("has-error").removeClass("has-success");
+                }
+            }
+            if(password.length<6){
+                flag = false;
+            }
+            if(Repassword.length<6){
+                flag = false;
+            }
+            if(password!=Repassword){
+                flag = false;
+            }
+            if (flag==false){
+                alert('Please fill all fields to continue with register');
+                return;
+            }
+
+        }
         
         $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
-                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}, null, "text" )
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
                         $("#validatingMessajeCode").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
-                            
+                            if(p_pantalla=="Order"){
+                                $('#headerTextAnswerOrder').html('Mail Verification');
+                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click finish button');
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                                $('#myModalRespuesta').modal({backdrop: 'static'});
+                            }
                             //$("#firstNextValidation").show();
                             result=true;
                         }else{
                             
-                            //$("#firstNextValidation").hide();
+                            $('#textAnswerOrder').html(data);
+                            $('#headerTextAnswerOrder').html('Error');
+                            $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                            $('#lastFinishButtonOrder').hide();
+                            $('#myModalRespuesta').modal({backdrop: 'static'});
                             result=false;
                         }
                         
@@ -498,7 +646,7 @@ $(document).ready(function () {
                 $.post( "controlador/ajax/getZipCode.php", { "zipcode" : zipcode}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
-                        $("#answerEmailValidate").html(data);
+                        //$("#answerEmailValidate").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
                             $('#answerZipCode').html(data);
@@ -719,8 +867,10 @@ function insertOrderCustomer(){
     var ActAmtTime=$("input[name='step6date']").val();
     var ActTime=$("button[name='step6time'].active").text();
     var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
+    var email=$('input#emailValidation').val();
+    var password=$('input#inputPassword').val();
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID}, null, "text" )
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,"password":password}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -728,9 +878,22 @@ function insertOrderCustomer(){
             
 
             if(n==-1){
+                    window.location.href = "index.php?controller=user&accion=dashboardCustomer";
+                    /*$('#textAnswerOrder').html(data+'');
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+email+','+password+',datos)">Continue to Customer Area</button><br><br>');
 
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});*/
             }else{
-                
+                    $('#headerTextAnswerOrder').html('Error validating User Account');
+                    $('#textAnswerOrder').html(data+'<br><br>Please try again');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
@@ -761,9 +924,79 @@ function validateIsLoggedIn(){
                     $('#lastFinishButtonOrder').show();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in, please log in');
+                    $('#textAnswerOrder').html('You are not logged in, please log in or register');
                     $('#headerTextAnswerOrder').html('Error');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result=false;
+            }
+        });
+}
+
+function validInputPassword(){
+    var password=$('input:password#inputPassword').val();
+    var flag=true;
+    if(password.length<6){
+        $('input:password#inputPassword').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $('#answerPasswordValidateStep6').html('The password must have at least 6 chararters');
+        flag=false;
+    }else{
+        $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $('#answerPasswordValidateStep6').html('');
+        flag=true;
+    }
+    
+}
+
+function validInputRePassword(){
+    var password=$('input:password#inputPassword').val();
+    var Repassword=$('input:password#inputPasswordConfirm').val();
+    var flag=true;
+    if(Repassword.length<6){
+        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $('#answerRePasswordValidateStep6').html('The password must have at least 6 chararters');
+        flag=false;
+    }else{
+        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $('#answerRePasswordValidateStep6').html('');
+        flag=true;
+        if(Repassword!=password){
+            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+            flag=false;
+        }else{
+            $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+            $('#answerRePasswordValidateStep6').html('');
+            $('#answerPasswordValidateStep6').html('');
+            flag=true;
+        }
+    }
+    return flag;
+    
+}
+
+function loginUser(user,password,url){
+    alert('paso aca');
+    $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : user,"passwordClientOrder":password}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                
+                if(n==-1){
+                    window.location.href = "";
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }

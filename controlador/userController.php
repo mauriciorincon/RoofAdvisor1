@@ -97,15 +97,15 @@ class userController{
                 $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                 $_SESSION['email'] = $_result->email;
 
-                echo "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
             }else{
                 //echo " 3 ";
-                echo "Error, It seems that you have not validated your email, please check your email";
+                return "Error, It seems that you have not validated your email, please check your email";
             }
             //echo " 4 ";
         }elseif(strcmp(gettype($_result),"string")==0){
             //echo " 5 ";
-            echo "Error, User or password are wrong, please try again ($_result)";
+            return "Error, User or password are wrong, please try again ($_result)";
         }
         //echo " 6 ";
     }
@@ -155,7 +155,7 @@ class userController{
         $hashActivationCode = md5( rand(0,1000) );
         $password = rand(1000,5000);
 
-        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'');
+        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'',$arrayContractor['password']);
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
@@ -210,7 +210,7 @@ class userController{
         }else{
             $_lastCustomerID+=1;
         }
-        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'');
+        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password']);
         if(is_array($_response) or gettype($_response)=="object"){
             $hashActivationCode = md5( rand(0,1000) );
             $Customer = array(
@@ -360,14 +360,15 @@ class userController{
 
     }
 
-    public function insertUserDatabase($mail,$number,$name,$url){
+    public function insertUserDatabase($mail,$number,$name,$url,$password){
         //$password = rand(1000,5000);
-        $password = "pass12345";
+        //$password = "pass12345";
+        //echo "password:".$password;
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
             'phoneNumber' => $number,
-            'password' => "P".$password,
+            'password' => $password,
             'displayName' => $name,
             'photoUrl' => $url,
             'disabled' => false,
@@ -389,6 +390,15 @@ class userController{
         session_destroy();
         header('Location: index.php');
 
+    }
+
+    public function getCustomer($user){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomer($user);  
+    }
+    public function getCustomerK($user){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomerKey($user);  
     }
 }
 ?>

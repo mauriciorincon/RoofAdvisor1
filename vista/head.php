@@ -9,7 +9,7 @@ if(!isset($_SESSION)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Shield - Roofing Service HTML Template</title>
+        <title>RoofAdviorZ</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -42,7 +42,7 @@ if(!isset($_SESSION)) {
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
 								<div class="email-address">
-									<span class="email"><i class="fa fa-envelope"></i>Email: admin@shield.com</span>
+									<span class="email"><i class="fa fa-envelope"></i>Email: suppot@roofadvisorz.com</span>
 									<span class="phone"><i class="fa fa-phone"></i>Phone: (+123) 123 321 345</span>
 								</div>
 							</div>
@@ -94,7 +94,7 @@ if(!isset($_SESSION)) {
 											
 										</li>
 										
-										<li><a href="">ABOUT US</a></li>
+										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
 										<li><a href="">PORTFOLIO</a></li>
 										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
 											<ul>
@@ -109,9 +109,9 @@ if(!isset($_SESSION)) {
 													<li><a href="?controller=user&accion=showLoginContractor">Contractor</a></li>
 												</ul>
 											</li>
-										<li><a href="#">SERVICE</a></li>
-										<li><a href="#">CONTACT</a></li>
-										<li><a href="#">CONTACT</a></li>
+										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
+										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
+										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										<div class="bs-example">
 									
 									</ul>
@@ -145,9 +145,9 @@ if(!isset($_SESSION)) {
 													<li><a href="#">blog details</a></li>
 												</ul>
 											</li>
-											<li><a href="#">SERVICE</a></li>
-											<li><a href="#">CONTACT</a></li>
-											<li><a href="#">CONTACT1</a></li>
+											<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
+											<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
+											<li><a href="?controller=contact&accion=showinfo">CONTACT1</a></li>
 										</ul>
 									</nav>
 								</div>

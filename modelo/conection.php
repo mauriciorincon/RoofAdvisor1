@@ -39,7 +39,43 @@ class connection{
             foreach($value as $key => $value1){
                 return $value1;
             }
-            //return $value;
+            
+        }else{
+            return "null";
+        }
+    }
+
+    public function getQueryEqualValue($table,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByValue()
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
+        $value = $snapshot->getValue();
+        if(is_array($value)){
+            foreach($value as $key => $value1){
+                return $value1;
+            }
+            
+        }else{
+            return "null";
+        }
+    }
+
+    
+
+    public function getQueryEqualKey($table,$field,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
+       
+        $value = $snapshot->getValue();
+
+        //print_r($value);
+        if(is_array($value)){
+            foreach($value as $key => $value1){
+                return $key;
+            }
         }else{
             return "null";
         }
@@ -112,11 +148,25 @@ class connection{
    
 
     public function insertDataTable($table,$insertNode,$data){
-        //echo "llegue aca insertDataTable $table $insertNode";
-        $this->_firebase->getReference($table.'/'.$insertNode)
-            ->set($data);
-
-        //$this->_firebase->set($table . "/$insertNode", $data);
+        if(empty($insertNode)){
+            try {
+                    //echo "llegue aca insertDataTable $table $insertNode";
+                    $_key=$this->_firebase->getReference($table)
+                        ->push($data);
+                    return $_key;
+                }catch (Exception $e){
+                    return $e->getMessage();
+                }
+        }else{
+            try {
+                //echo "llegue aca insertDataTable $table $insertNode";
+                $_key=$this->_firebase->getReference($table.'/'.$insertNode)
+                    ->set($data);
+                return $_key;
+            }catch (Exception $e){
+                return $e->getMessage();
+            }
+        }
     }
 
     public function updateDataTable($table,$updateNode,$data){
@@ -169,6 +219,12 @@ class connection{
             
             return $e->getMessage();
         }
+    }
+
+    public function getDateTime(){
+
+        $ref = $$this->_firebase->getReference('posts/my-post')
+          ->set('created_at', ['.sv' => 'timestamp']);
     }
 
 }

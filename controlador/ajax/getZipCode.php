@@ -31,6 +31,7 @@
     if(empty($city)){
         echo "Error the zipcode is not asigned, try again - ".$_zipcode;
     }else{
+        
         echo $city." - ".$state." - ".$_zipcode;
     }
     

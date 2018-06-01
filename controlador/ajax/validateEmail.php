@@ -10,7 +10,7 @@
     $_result=$_userController->validateEmail($tableSearch,$emailSearch);
 
     if($_result==true){
-        echo "Error, the email is used for other user";
+        echo "Error, the email already exists";
     }else{
         echo "Continue, email is valid";
     }

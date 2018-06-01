@@ -28,55 +28,60 @@ class orderController{
         return $_orders;
     }
 
-    function insertOrder($idCustomer,$arrayDataOrder){
-
-        $_array=array(
-            "RepZIP"=>$_POST['RepZIP'],
-            "RequestType"=>$_POST['RequestType'],
-            "Rtype"=>$_POST['Rtype'],
-            "Water"=>$_POST['Water'],
-            "Hlevels"=>$_POST['Hlevels'],
-            "ActAmtTime"=>$_POST['ActAmtTime'],
-            "ActTime"=>$_POST['ActTime'],
-            "ContractorID"=>$_POST['ContractorID'],
-        );
+    function insertOrder($arrayDataOrder){
+        $this->_userController=new userController();
+        $this->_orderModel=new orderModel();
+        $_customer=$this->_userController->getCustomer($_SESSION['email']);
+        $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        $_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
+        if(is_null($_lastOrderNumber)){
+            $_lastOrderNumber=1;
+        }else{
+            $_lastOrderNumber++;
+        }
+        //print_r($_customer);
+        print_r($_customerK);
         
-        $Company = array(
+        $Order = array(
             "ActAmtMat" => "",
-            "ActAmtTime" => "",
-            "ActTime" => "",
+            "ActAmtTime" => $arrayDataOrder['ActAmtTime'],
+            "ActTime" => $arrayDataOrder['ActTime'],
             "AfterPICRefID" => "",
             "AmtER" => "",
             "AppEst" => "",
-            "Authorized" => "Yes",
+            "Authorized" => "",
             "BeforePicRefID" => "",
-            "ContractorID" => "CN0001",
-            "CustomerID" => "10",
-            "CutomerFBID" => "ZvZWN9sV05gzqBpn4raxor5X8Pk2",
-            "DateTime" => "2018-05-09-17=>01=>56",
-            "ETA" => "05/09/2018 17=>02",
-            "EstAmtMat" => "300",
-            "EstAmtTime" => "300.0",
-            "EstTime" => "2",
-            "FBID" => "-LC5hTQX5uWFOwMK_dCo",
-            "Hlevels" => "1 Story",
+            "ContractorID" => $arrayDataOrder['ContractorID'],
+            "CustomerID" => $_customer['CustomerID'],
+            "CutomerFBID" => $_customerK,
+            "DateTime" => time('Y-m-d H:i:s'),
+            "ETA" => time('Y-m-d H:i:s'),
+            "EstAmtMat" => "",
+            "EstAmtTime" => "",
+            "EstTime" => "",
+            "FBID" => "",
+            "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
-            "Latitude" => "42.344149235302",
-            "Longitude" => "-71.0652257502079",
-            "OrderNumber" => "112",
+            "Latitude" => "",
+            "Longitude" => "",
+            "OrderNumber" => "$_lastOrderNumber",
             "PaymentType" => "",
-            "RepAddress" => "474 Harrison Ave",
-            "RepCity" => "Boston",
-            "RepState" => "Massachusetts",
-            "RepZIP" => "02118",
-            "RequestType" => "R",
-            "Rtype" => "Flat",
+            "RepAddress" => $_customer['Address'],
+            "RepCity" => $_customer['City'],
+            "RepState" => $_customer['State'],
+            "RepZIP" => $arrayDataOrder['RepZIP'],
+            "RequestType" => $arrayDataOrder['RequestType'],
+            "Rtype" => $arrayDataOrder['Rtype'],
             "SchDate" => "",
             "SchTime" => "",
             "Status" => "G",
             "TransNum" => "",
-            "Water" => "Yes",
+            "Water" => $arrayDataOrder['Water'],
         );
 
+        $result=$this->_orderModel->insertOrder("",$Order);
+        return $result;
     }
+
+
 }
