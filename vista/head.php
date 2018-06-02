@@ -24,8 +24,15 @@ if(!isset($_SESSION)) {
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="css/responsive.css">
 		<link rel="stylesheet" href="vista/css/step_by_step.css">
+		<link rel="stylesheet" href="css/varios.css">
 		
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
+		<script src="https://use.fontawesome.com/f4e64b7c17.js"></script>
+		<style>
+.checked {
+    color: orange;
+}
+</style>
 		
     </head>
     <body>

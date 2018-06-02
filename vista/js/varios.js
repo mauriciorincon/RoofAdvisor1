@@ -1012,3 +1012,29 @@ function loginUser(user,password,url){
             }
         });
 }
+
+function showRatings(comapnyID){
+    
+    alert(comapnyID);
+}
+
+$(document).ready(function () {
+
+    var ratings = {
+        hotel_a: 2.8,
+        hotel_b: 3.3,
+        hotel_c: 1.9,
+        hotel_d: 4.3,
+        hotel_e: 4.74
+      };
+      
+      // total number of stars
+      var starTotal = 5;
+      
+      for (var rating in ratings) {if (window.CP.shouldStopExecution(1)){break;}
+        var starPercentage = ratings[rating] / starTotal * 100;
+        var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
+        document.querySelector("." + rating + " .stars-inner").style.width = starPercentageRounded;
+      }
+      window.CP.exitedLoop(1);
+});

@@ -230,6 +230,16 @@ class connection{
           ->set('created_at', ['.sv' => 'timestamp']);
     }
 
+    public function getCount($table,$field,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
+
+        $value = $snapshot->numChildren();
+        return $value;
+    }
+
 }
 
 ?>

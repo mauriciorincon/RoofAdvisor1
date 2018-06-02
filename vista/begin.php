@@ -231,7 +231,7 @@
 							<button type="button" class="btn btn-success" name="step6time" >9:00 AM</button>
 							<button type="button" class="btn btn-success" name="step6time">10:00 AM</button>
 							<button type="button" class="btn btn-success" name="step6time">11:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">12:00 AM</button>
+							<button type="button" class="btn btn-success" name="step6time">12:00 PM</button>
 							<button type="button" class="btn btn-success" name="step6time">1:00 PM</button>
 							<button type="button" class="btn btn-success" name="step6time">2:00 PM</button>
 							<button type="button" class="btn btn-success" name="step6time">3:00 PM</button>
@@ -248,7 +248,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-4">
             <div class="panel-heading">
-                 <h3 class="panel-title">Are you aware of any leaks or damage to the roof?</h3>
+                 <h3 class="panel-title">Select the professional</h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">

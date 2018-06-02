@@ -16,19 +16,19 @@ class orderController{
 	{		
     }
 
-    function getOrder($field,$value){
+    public function getOrder($field,$value){
         $this->_orderModel=new orderModel();
         $_order=$this->_orderModel->getOrder($field,$value);
         return $_order;
     }
 
-    function getOrders($field,$value){
+    public function getOrders($field,$value){
         $this->_orderModel=new orderModel();
         $_orders=$this->_orderModel->getOrders($field,$value);
         return $_orders;
     }
 
-    function insertOrder($arrayDataOrder){
+    public function insertOrder($arrayDataOrder){
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
@@ -81,6 +81,12 @@ class orderController{
 
         $result=$this->_orderModel->insertOrder("",$Order);
         return $result;
+    }
+
+    public function getCountRating($field,$value){
+        $this->_orderModel=new orderModel();
+        $_count=$this->_orderModel->getCountRating($field,$value);
+        return $_count;
     }
 
 
