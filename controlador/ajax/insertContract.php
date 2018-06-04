@@ -10,7 +10,9 @@ $_lastNameField = $_POST['lastNameCompany'];
 $_phoneContactField = $_POST['phoneContactCompany'];
 $_emailField = $_POST['emailValidation'];
 $_typeCompanyField = $_POST['typeCompany'];
+$_password= $_POST["password"];
 $_arrayDivers = $_POST['arrayDrivers'];
+
 
 $_arrayCompany = array(
     "companyName" => "$_companyNameField",
@@ -19,6 +21,7 @@ $_arrayCompany = array(
     "phoneContactCompany" => "$_phoneContactField",
     "emailValidation" => "$_emailField",
     "typeCompany" => "$_typeCompanyField",
+    "password" => "$_password",
 );
 
 $_array_drivers=array();
@@ -43,6 +46,6 @@ if(strpos($_companyID,"Error")!==false){
 }else{
     $_driverController=new driverController();
     $_driverController->insertDrivers($_companyID,$_array_drivers);
-    echo "Continue, Company was register correctly";
+    echo "Continue, Company was register correctly please check your email, to validate the user";
 }
 ?>

@@ -45,6 +45,27 @@ class connection{
         }
     }
 
+    public function getQueryListEqualValue($table,$searchValue){
+        $_flag=null;
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByValue()
+                        ->getSnapshot();
+        $value = $snapshot->getValue();
+        if(is_array($value)){
+            foreach($value as $key => $value1){
+                if(strcmp($value1,$searchValue)==0){
+                    $_flag=$searchValue;
+                    break;
+                }
+            }
+            return $_flag;
+        }else{
+            return null;
+        }
+    }
+
+    
+
     public function getQueryEqualKey($table,$field,$searchValue){
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
@@ -207,6 +228,16 @@ class connection{
 
         $ref = $$this->_firebase->getReference('posts/my-post')
           ->set('created_at', ['.sv' => 'timestamp']);
+    }
+
+    public function getCount($table,$field,$searchValue){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->equalTo($searchValue)
+                        ->getSnapshot();
+
+        $value = $snapshot->numChildren();
+        return $value;
     }
 
 }

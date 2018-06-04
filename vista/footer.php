@@ -1,3 +1,4 @@
+<div id="loading"></div>
 
  <!-- Message Area-->
 <div class="modal fade" id="myMensaje" role="dialog">
@@ -34,24 +35,23 @@
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
 							<div class="footer-widget">
 								<div class="footer-logo">
-								   <img src="img/logo1.png" alt="" />
+								   <img src="img/logo.png" alt="" />
 								</div>
 								<p>Lorem ipsum dolor sit amet, consetur acing elit, sed do eiusmod tempor</p>
 								<ul class="widget-contact">
 									<li>
 										<i class="fa fa-map-marker"></i>
-										<span>8901 Marmora Raod,
-                                              Glasgow, D04 89GR</span>
+										<span>30 NEWBURY ST,BOSTON, MA.</span>
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (801) 2223 3337
-                                              Telephone : (801) 4256 9658</span>
+										<span>Telephone : (801) 877 529 5995
+                                              Telephone : (801) 877 529 5995</span>
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span>Infor@bootexperts.com
-                                              Web : www.hexapro.com</span>
+										<span>info@roofadvisorz.com
+                                              Web : www.roofadvisorz.com</span>
 									</li>
 								</ul>
 						    </div>
@@ -126,7 +126,7 @@
 			<div class="copyright-area">
 				<div class="container">
 					<div class="copyright-text text-center">
-						<p>Copyright © SHIELD 2017. All rights reserved. Created by <a href="https://devitems.com/">Devitems</a></p>
+						<p>Copyright © roofadvisorz 2018. All rights reserved. Created by <a href="http://www.viaplix.com/">Viaplix</a></p>
 					</div>
 				</div>
 			</div>
@@ -146,99 +146,7 @@
 		<script src="vista/js/varios.js"></script>
 		
 <script type="text/javascript">
-$(document).ready(function () {
 
-var navListItems = $('div.setup-panel div a'),
-    allWells = $('.setup-content'),
-    allNextBtn = $('.nextBtn');
-	allPrevBtn = $('.prevBtn');
-
-allWells.hide();
-
-navListItems.click(function (e) {
-    e.preventDefault();
-    var $target = $($(this).attr('href')),
-        $item = $(this);
-
-	//console.log("entro a clic");
-    if (!$item.hasClass('disabled')) {
-		 console.log("no tiene desabilitado");
-        navListItems.removeClass('btn-success').addClass('btn-default');
-        $item.addClass('btn-success');
-		
-		
-        allWells.hide();
-        $target.show();
-        $target.find('input:eq(0)').focus();
-    }
-});
-
-allNextBtn.click(function () {
-    var curStep = $(this).closest(".setup-content"),
-        curStepBtn = curStep.attr("id"),
-        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-        curInputs = curStep.find("input[type='text'],input[type='url']"),
-        isValid = true;
-
-	$(".form-group").removeClass("has-error");
-	
-    for (var i = 0; i < curInputs.length; i++) {
-        if (!curInputs[i].validity.valid) {
-            isValid = false;
-            $(curInputs[i]).closest(".form-group").addClass("has-error");
-        }
-	}
-	//if (curStepBtn=="step-1"){
-	//	isValid=validateEmail();
-	//}
-
-	if (curStepBtn=="step-2" && isValid==true ){
-		saveContractorData();
-	}
-
-	if (curStepBtn=="step-3" && isValid==true ){
-		//isValid=false;
-		isValid=validateCodeEmail('Company');
-	}
-
-	if(curStepBtn!="step-3"){
-		if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-	}
-});
-
-allPrevBtn.click(function () {
-	
-    var curStep = $(this).closest(".setup-content"),
-        curStepBtn = curStep.attr("id"),
-        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a"),
-		curStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"),
-        curInputs = curStep.find("input[type='text'],input[type='url']"),
-        isValid = true;
-
-	
-	//for (var x in curStepWizard){
-	//	console.log(curStepWizard[x]);
-	//}
-	
-    $(".form-group").removeClass("has-error");
-    /*for (var i = 0; i < curInputs.length; i++) {
-        if (!curInputs[i].validity.valid) {
-            isValid = false;
-            $(curInputs[i]).closest(".form-group").addClass("has-error");
-        }
-    }*/
-	
-
-    if (isValid) {
-	
-		nextStepWizard.removeAttr('disabled').trigger('click');
-		curStepWizard.attr('disabled', 'disabled');
-	
-	}
-});
-
-$('div.setup-panel div a.btn-success').trigger('click');
-});
 
 </script>
 <?php

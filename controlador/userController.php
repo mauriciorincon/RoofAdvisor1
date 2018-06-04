@@ -155,7 +155,7 @@ class userController{
         $hashActivationCode = md5( rand(0,1000) );
         $password = rand(1000,5000);
 
-        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'');
+        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'',$arrayContractor['password']);
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
@@ -363,6 +363,7 @@ class userController{
     public function insertUserDatabase($mail,$number,$name,$url,$password){
         //$password = rand(1000,5000);
         //$password = "pass12345";
+        //echo "password:".$password;
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
@@ -398,6 +399,11 @@ class userController{
     public function getCustomerK($user){
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomerKey($user);  
+    }
+
+    public function getCustomerById($customerId){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomerById($customerId);
     }
 }
 ?>

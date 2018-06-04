@@ -51,6 +51,20 @@ class orderModel extends connection{
             return null;
         }
     }
+
+    public function getRating($field,$value){
+        $result=$this->getQueryEqualM('Rating',$field,$value);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }
+    }
+
+    public function getCountRating($field,$value){
+        $result=$this->getCount('Rating',$field,$value);
+        return $result;
+    }
  
 }
 ?>
