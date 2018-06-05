@@ -656,8 +656,11 @@ $(document).ready(function () {
 
     $(document).ready(function(){
         $('#firstNextBegin').hide();
-        $('#zipCodeBegin').focusout(function(e) {
+        $('#zipCodeBegin').keyup(function(e) {
             
+            if(this.value.length!=5){
+                return;
+            }
             var zipcode=$("input#zipCodeBegin").val();
             if (zipcode!==''){
                 //$('#loading').html('<img src="http://preloaders.net/preloaders/287/Filling%20broken%20ring.gif"> loading...');
@@ -763,6 +766,9 @@ $(document).ready(function () {
             }
         }
 
+        if(curStepBtn=="step-2"  && isValid==true ){
+            
+        }
         if(curStepBtn=="step-3"  && isValid==true ){
             var address=$('#step5Address').val();
             if (address==''){
@@ -770,7 +776,32 @@ $(document).ready(function () {
                 $('#headerTextAnswerOrder').html('Step 3');
                 $('#textAnswerOrder').html('Plese select the address for the service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+                if(RequestType=='E'){
+                    nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
+                    var valStep3=$('input[name=estep3Option]:checked').val();
+                    var valStep5=$('input[name=estep5Option]:checked').val();
+                    var valStep4=$('input[name=estep4Option]:checked').val();
+                    var valStep6=$('input[name=step6date]').val();
+                    var valStep6t=$('button[name=step6time].active').text();
+                    var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
+                    var valStep5long=$('input:hidden[name=step5Logintud]').val();
+                    var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+                    var valStep5Address=$('input:hidden[name=step5Address]').val();
+                    var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                    $('#step8Schedule').html('Defined by the administrator');
+                    $('#step8Time').html('Defined by the administrator');
+                    $('#step8CompanyName').html('Defined by the administrator');
+                    $('#step8Longitude').html(valStep5long);
+                    $('#step8Latitude').html(valStep5lat);
+                    $('#step8Address').html(valStep5Address);
+                    $('#step8ZipCode').html(valStep5ZipCode);
+
+                }
             }
+            
 
         }    
         if(curStepBtn=="step-4"  && isValid==true ){
@@ -798,15 +829,21 @@ $(document).ready(function () {
             var valStep5lat=$('input:hidden[name=step5Latitude]').val();
             var valStep5Address=$('input:hidden[name=step5Address]').val();
             var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
-            $('#step8Schedule').html(valStep6);
-            $('#step8Time').html(valStep6t);
-            $('#step8CompanyName').html(valStep7);
-            $('#step8Longitude').html(valStep5long);
-            $('#step8Latitude').html(valStep5lat);
-            $('#step8Address').html(valStep5Address);
-            $('#step8ZipCode').html(valStep5ZipCode);
-
+            if(valStep7==""){
+                isValid=false;
+                $('#headerTextAnswerOrder').html('Step 4');
+                $('#textAnswerOrder').html('Plese select the contractor for your service');
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                $('#step8Schedule').html(valStep6);
+                $('#step8Time').html(valStep6t);
+                $('#step8CompanyName').html(valStep7);
+                $('#step8Longitude').html(valStep5long);
+                $('#step8Latitude').html(valStep5lat);
+                $('#step8Address').html(valStep5Address);
+                $('#step8ZipCode').html(valStep5ZipCode);
+            }
         }
 
         if (curStepBtn=="step-6" && isValid==true ){
@@ -928,9 +965,16 @@ function insertOrderCustomer(){
     var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
+    var latitute=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+
+    
+    //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,"password":password}, null, "text" )
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,
+                                                "password":password,"Latitute":latitute,"Longitude":longitude,"Address":address}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             

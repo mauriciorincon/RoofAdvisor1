@@ -40,7 +40,7 @@ class orderController{
             $_lastOrderNumber++;
         }
         //print_r($_customer);
-        print_r($_customerK);
+        //print_r($_customerK);
         
         $Order = array(
             "ActAmtMat" => "",
@@ -62,11 +62,11 @@ class orderController{
             "FBID" => "",
             "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
-            "Latitude" => "",
-            "Longitude" => "",
+            "Latitude" => $arrayDataOrder['Latitude'],
+            "Longitude" => $arrayDataOrder['Longitude'],
             "OrderNumber" => "$_lastOrderNumber",
             "PaymentType" => "",
-            "RepAddress" => $_customer['Address'],
+            "RepAddress" => $arrayDataOrder['Address'],
             "RepCity" => $_customer['City'],
             "RepState" => $_customer['State'],
             "RepZIP" => $arrayDataOrder['RepZIP'],
@@ -78,7 +78,7 @@ class orderController{
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
         );
-
+        print_r($Order);
         $result=$this->_orderModel->insertOrder("",$Order);
         return $result;
     }

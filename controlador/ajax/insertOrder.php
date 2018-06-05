@@ -29,6 +29,9 @@ $_array=array(
     "ActAmtTime"=>$_POST['ActAmtTime'],
     "ActTime"=>$_POST['ActTime'],
     "ContractorID"=>$_POST['ContractorID'],
+    "Latitude"=>$_POST['Latitude'],
+    "Longitude"=>$_POST['Longitude'],
+    "Address"=>$_POST['Address'],
 );
 
 
