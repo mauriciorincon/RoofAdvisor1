@@ -1,5 +1,8 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/driverController.php");
+if(!isset($_SESSION)) { 
+    session_start(); 
+} 
+require_once($_SESSION['application_path']."/controlador/driverController.php");
 
 
 $_contractorID = $_POST['contractorID'];

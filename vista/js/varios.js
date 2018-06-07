@@ -117,6 +117,7 @@ function validateEmail(table) {
     var result=true;
      if (textoBusqueda != "") {
          //Equivalente a lo anterior
+            jsShowWindowLoad('');
             $.post( "controlador/ajax/validateEmail.php", { "emailValue" : textoBusqueda,"tableSearch": table}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
@@ -133,6 +134,7 @@ function validateEmail(table) {
                     }
                     
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad();
                 }
             })
             .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -140,7 +142,9 @@ function validateEmail(table) {
                     console.log( "La solicitud a fallado: " +  textStatus);
                     result=false;
                 }
+                jsRemoveWindowLoad();
             });
+            
         return result;    
      }
 };
@@ -178,7 +182,7 @@ function saveContractorData(){
     });
 
     
-    
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
                                                     "phoneContactCompany":phoneContactField,"emailValidation":emailField,"typeCompany":typeCompanyField,
                                                 "password":password,"arrayDrivers":driver}, null, "text" )
@@ -199,6 +203,7 @@ function saveContractorData(){
                     }
                     
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad();
                 }
             })
             .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -206,6 +211,7 @@ function saveContractorData(){
                     console.log( "La solicitud a fallado: " +  textStatus);
                     result=false;
                 }
+                jsRemoveWindowLoad();
             });
 }
 
@@ -215,6 +221,7 @@ function validateCodeEmail(table){
     var codeField = $("input#codeValidateField").val();
     var result1=false;
 
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/validateCode.php", { "emailValidation" : emailField,"codeValidateField": codeField,"table":table}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
@@ -237,6 +244,7 @@ function validateCodeEmail(table){
             }
             
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
             return result1;
         }
     })
@@ -244,8 +252,10 @@ function validateCodeEmail(table){
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result1=false;
+            jsRemoveWindowLoad('');
             return result1;
         }
+        
     });
     
 }
@@ -276,7 +286,7 @@ function updateContractor(){
     var contratorPhoneNumber = $("input#ContPhoneNumed").val();
     var contratorLinceseNumber = $("input#ContLicenseNumed").val();
 
-
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/updateContract.php", { "contractorID" : contractorID,"contratorFirstName": contratorFirstName,
                                                     "contratorLastName":contratorLastName,"contratorPhoneNumber":contratorPhoneNumber,
                                                 "contratorLinceseNumber":contratorLinceseNumber}, null, "text" )
@@ -302,7 +312,7 @@ function updateContractor(){
             }else{
                 
             }
-            
+            jsRemoveWindowLoad('');
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             
         }
@@ -311,6 +321,7 @@ function updateContractor(){
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result1=false;
+            jsRemoveWindowLoad('');
             return result1;
         }
     });
@@ -321,7 +332,7 @@ $(".inactivate-contractor-button").click(function(){
     var contractorID = $(this).parents('tr:first').find('td:eq(0)').text();
 
     if(confirm("Are you sure you want to inactive contractor "+contractorID)){
-
+        jsShowWindowLoad('');
         $.post( "controlador/ajax/updateContractorState.php", { "contractorID" : contractorID,"contratorState": 'Inactive'}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
@@ -345,13 +356,14 @@ $(".inactivate-contractor-button").click(function(){
             }
             
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-            
+            jsRemoveWindowLoad('');
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
                 result1=false;
+                jsRemoveWindowLoad('');
                 return result1;
             }
         });
@@ -374,6 +386,7 @@ function insertDriver(){
     var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
     var contractorState = $("select#ContStatusIn").val();
 
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
     "contractorPhoneNumber":contractorPhoneNumber,"contractorLinceseNumber":contractorLinceseNumber,
     "contractorState":contractorState}, null, "text" )
@@ -398,13 +411,14 @@ function insertDriver(){
             }
             
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-            
+            jsRemoveWindowLoad('');
         }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result1=false;
+            jsRemoveWindowLoad('');
             return result1;
         }
     });
@@ -438,7 +452,7 @@ function updateDataCompany(){
     if( typeof companyAddress3 === 'undefined' || companyAddress3 === null ){
         companyAddress3="";
     }
-
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCompany.php", { "companyID" : companyID,"compamnyName" : compamnyName,"firstCompanyName": firstCompanyName,
     "lastCompanyName":lastCompanyName,"companyAddress1":companyAddress1,"companyAddress2":companyAddress2,
     "companyAddress3":companyAddress3,"companyPhoneNumber":companyPhoneNumber,"companyType":companyType}, null, "text" )
@@ -455,13 +469,14 @@ function updateDataCompany(){
             }
             
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-            
+            jsRemoveWindowLoad('');
         }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result1=false;
+            jsRemoveWindowLoad('');
             return result1;
         }
     });
@@ -599,7 +614,7 @@ $(document).ready(function () {
             }
 
         }
-        
+        jsShowWindowLoad('');
         $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
                                                     "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password}, null, "text" )
@@ -627,22 +642,29 @@ $(document).ready(function () {
                         }
                         
                         console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                        jsRemoveWindowLoad('');
                     }
                 })
                 .fail(function( jqXHR, textStatus, errorThrown ) {
                     if ( console && console.log ) {
                         console.log( "La solicitud a fallado: " +  textStatus);
                         result=false;
+                        jsRemoveWindowLoad('');
                     }
                 });
     }
 
     $(document).ready(function(){
         $('#firstNextBegin').hide();
-        $('#zipCodeBegin').focusout(function(e) {
-          
+        $('#zipCodeBegin').keyup(function(e) {
+            
+            if(this.value.length!=5){
+                return;
+            }
             var zipcode=$("input#zipCodeBegin").val();
             if (zipcode!==''){
+                //$('#loading').html('<img src="http://preloaders.net/preloaders/287/Filling%20broken%20ring.gif"> loading...');
+                jsShowWindowLoad('Verifing ZipCode');
                 $.post( "controlador/ajax/getZipCode.php", { "zipcode" : zipcode}, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
@@ -662,12 +684,16 @@ $(document).ready(function () {
                         
                         console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                     }
+                    //$('#loading').html('');
+                    jsRemoveWindowLoad();
                 })
                 .fail(function( jqXHR, textStatus, errorThrown ) {
                     if ( console && console.log ) {
                         console.log( "La solicitud a fallado: " +  textStatus);
                         result=false;
                     }
+                    //$('#loading').html();
+                    jsRemoveWindowLoad();
                 });
             }                    
         });       
@@ -740,30 +766,91 @@ $(document).ready(function () {
             }
         }
 
+        if(curStepBtn=="step-2"  && isValid==true ){
+            
+        }
         if(curStepBtn=="step-3"  && isValid==true ){
-            getListCompany(); 
+            var address=$('#step5Address').val();
+            if (address==''){
+                isValid=false;
+                $('#headerTextAnswerOrder').html('Step 3');
+                $('#textAnswerOrder').html('Plese select the address for the service');
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+                if(RequestType=='E'){
+                    nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
+                    var valStep3=$('input[name=estep3Option]:checked').val();
+                    var valStep5=$('input[name=estep5Option]:checked').val();
+                    var valStep4=$('input[name=estep4Option]:checked').val();
+                    var valStep6=$('input[name=step6date]').val();
+                    var valStep6t=$('button[name=step6time].active').text();
+                    var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
+                    var valStep5long=$('input:hidden[name=step5Logintud]').val();
+                    var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+                    var valStep5Address=$('input:hidden[name=step5Address]').val();
+                    var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                    $('#step8Schedule').html('Defined by the administrator');
+                    $('#step8Time').html('Defined by the administrator');
+                    $('#step8CompanyName').html('Defined by the administrator');
+                    $('#step8Longitude').html(valStep5long);
+                    $('#step8Latitude').html(valStep5lat);
+                    $('#step8Address').html(valStep5Address);
+                    $('#step8ZipCode').html(valStep5ZipCode);
+
+                }
+            }
+            
+
+        }    
+        if(curStepBtn=="step-4"  && isValid==true ){
+            var fecha=$('input[name=step6date]').val();
+            var hora=$('button[name=step6time].active').text();
+            if(fecha=="" || hora==""){
+                $('#headerTextAnswerOrder').html('Step 4');
+                $('#textAnswerOrder').html('Plese select the date and time for the service');
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+                isValid=false;
+            }else{
+                getListCompany(); 
+            }
+            
         }
 
-        if (curStepBtn=="step-4" && isValid==true ){
+        if (curStepBtn=="step-5" && isValid==true ){
             var valStep3=$('input[name=estep3Option]:checked').val();
             var valStep5=$('input[name=estep5Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
             var valStep6=$('input[name=step6date]').val();
             var valStep6t=$('button[name=step6time].active').text();
             var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
-            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
-            $('#step8Schedule').html(valStep6);
-            $('#step8Time').html(valStep6t);
-            $('#step8CompanyName').html(valStep7);
+            var valStep5long=$('input:hidden[name=step5Logintud]').val();
+            var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+            var valStep5Address=$('input:hidden[name=step5Address]').val();
+            var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+            if(valStep7==""){
+                isValid=false;
+                $('#headerTextAnswerOrder').html('Step 4');
+                $('#textAnswerOrder').html('Plese select the contractor for your service');
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                $('#step8Schedule').html(valStep6);
+                $('#step8Time').html(valStep6t);
+                $('#step8CompanyName').html(valStep7);
+                $('#step8Longitude').html(valStep5long);
+                $('#step8Latitude').html(valStep5lat);
+                $('#step8Address').html(valStep5Address);
+                $('#step8ZipCode').html(valStep5ZipCode);
+            }
         }
 
-        if (curStepBtn=="step-5" && isValid==true ){
+        if (curStepBtn=="step-6" && isValid==true ){
             validateIsLoggedIn();
         }
         
-    
-        
-            if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
         
     });
     
@@ -792,19 +879,23 @@ $(document).ready(function () {
 /////////////////////////////////////////////////////////////////////////////
 
 function getListCompany(){
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $('#step7ListCompany').html(data);
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
+        jsRemoveWindowLoad();
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result=false;
         }
+        jsRemoveWindowLoad();    
     });
+    
 }
 
 
@@ -818,6 +909,7 @@ $(document).ready(function() {
         var userClientOrder=$('#userClientOrder').val();
         var passwordClientOrder=$('#passwordClientOrder').val();
 
+        jsShowWindowLoad('');
         $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : userClientOrder,"passwordClientOrder":passwordClientOrder}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -846,6 +938,7 @@ $(document).ready(function() {
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -853,6 +946,7 @@ $(document).ready(function() {
                 console.log( "La solicitud a fallado: " +  textStatus);
                 result=false;
             }
+            jsRemoveWindowLoad('');
         });
 
         
@@ -871,8 +965,16 @@ function insertOrderCustomer(){
     var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
+    var latitute=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+
+    
+    //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,"password":password}, null, "text" )
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,
+                                                "password":password,"Latitute":latitute,"Longitude":longitude,"Address":address}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -898,17 +1000,20 @@ function insertOrderCustomer(){
                     $('#myModalRespuesta').modal({backdrop: 'static'});
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
         }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result=false;
+            jsRemoveWindowLoad('');
         }
     });
 }
 
 function validateIsLoggedIn(){
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/validateLoggedIn.php", {}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -933,12 +1038,14 @@ function validateIsLoggedIn(){
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
                 result=false;
+                jsRemoveWindowLoad('');
             }
         });
 }
@@ -987,7 +1094,8 @@ function validInputRePassword(){
 }
 
 function loginUser(user,password,url){
-    alert('paso aca');
+    //alert('paso aca');
+    jsShowWindowLoad('');
     $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : user,"passwordClientOrder":password}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -1003,38 +1111,91 @@ function loginUser(user,password,url){
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
                 result=false;
+                jsRemoveWindowLoad('');
             }
         });
 }
 
-function showRatings(comapnyID){
-    
-    alert(comapnyID);
+function showRatings(contractorID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListRating.php", {"id_contractor":contractorID }, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            $('#headerTextAnswerRating').html('Customer Rating');
+            $('#textAnswerRating').html(data);
+            $('#myModalRating').modal({backdrop: 'static'});
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+        }
+        jsRemoveWindowLoad('');
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+        }
+        jsRemoveWindowLoad('');
+    });
+    //alert(contractorID);
 }
 
-$(document).ready(function () {
 
-    var ratings = {
-        hotel_a: 2.8,
-        hotel_b: 3.3,
-        hotel_c: 1.9,
-        hotel_d: 4.3,
-        hotel_e: 4.74
-      };
-      
-      // total number of stars
-      var starTotal = 5;
-      
-      for (var rating in ratings) {if (window.CP.shouldStopExecution(1)){break;}
-        var starPercentage = ratings[rating] / starTotal * 100;
-        var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
-        document.querySelector("." + rating + " .stars-inner").style.width = starPercentageRounded;
-      }
-      window.CP.exitedLoop(1);
-});
+function jsRemoveWindowLoad() {
+    // eliminamos el div que bloquea pantalla
+    $("#WindowLoad").remove();
+ 
+}
+ 
+function jsShowWindowLoad(mensaje) {
+    //eliminamos si existe un div ya bloqueando
+    jsRemoveWindowLoad();
+ 
+    //si no enviamos mensaje se pondra este por defecto
+    if (mensaje === undefined) mensaje = "Procesando la información<br>Espere por favor";
+ 
+    //centrar imagen gif
+    height = 20;//El div del titulo, para que se vea mas arriba (H)
+    var ancho = 0;
+    var alto = 0;
+ 
+    //obtenemos el ancho y alto de la ventana de nuestro navegador, compatible con todos los navegadores
+    if (window.innerWidth == undefined) ancho = window.screen.width;
+    else ancho = window.innerWidth;
+    if (window.innerHeight == undefined) alto = window.screen.height;
+    else alto = window.innerHeight;
+ 
+    //operación necesaria para centrar el div que muestra el mensaje
+    var heightdivsito = alto/2 - parseInt(height)/2;//Se utiliza en el margen superior, para centrar
+ 
+   //imagen que aparece mientras nuestro div es mostrado y da apariencia de cargando
+    imgCentro = "<div style='text-align:center;height:" + alto + "px;'><div  style='color:#000;margin-top:" + heightdivsito + "px; font-size:20px;font-weight:bold'>" + mensaje + "</div><img  src='img/load1.gif'></div>";
+ 
+        //creamos el div que bloquea grande------------------------------------------
+        div = document.createElement("div");
+        div.id = "WindowLoad"
+        div.style.width = ancho + "px";
+        div.style.height = alto + "px";
+        $("body").append(div);
+ 
+        //creamos un input text para que el foco se plasme en este y el usuario no pueda escribir en nada de atras
+        input = document.createElement("input");
+        input.id = "focusInput";
+        input.type = "text"
+ 
+        //asignamos el div que bloquea
+        $("#WindowLoad").append(input);
+ 
+        //asignamos el foco y ocultamos el input text
+        $("#focusInput").focus();
+        $("#focusInput").hide();
+ 
+        //centramos el div del texto
+        $("#WindowLoad").html(imgCentro);
+ 
+}

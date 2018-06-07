@@ -1,3 +1,4 @@
+<div id="loading"></div>
 
  <!-- Message Area-->
 <div class="modal fade" id="myMensaje" role="dialog">

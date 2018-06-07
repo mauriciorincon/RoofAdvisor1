@@ -2,6 +2,10 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
+if(!isset($_SESSION['application_path'])){
+    $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
+    //echo $_SESSION['aplication_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
+}
 if(!isset($_GET['controller']))
 {
     require_once("vista/head.php");

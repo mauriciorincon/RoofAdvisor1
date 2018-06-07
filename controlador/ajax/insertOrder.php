@@ -2,8 +2,8 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/orderController.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
+require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
@@ -29,6 +29,9 @@ $_array=array(
     "ActAmtTime"=>$_POST['ActAmtTime'],
     "ActTime"=>$_POST['ActTime'],
     "ContractorID"=>$_POST['ContractorID'],
+    "Latitude"=>$_POST['Latitude'],
+    "Longitude"=>$_POST['Longitude'],
+    "Address"=>$_POST['Address'],
 );
 
 

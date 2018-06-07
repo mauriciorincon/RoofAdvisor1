@@ -2,8 +2,9 @@
 //require 'vendor/autoload.php';
 //use Kreait\Firebase\Configuration; 
 //use Kreait\Firebase\Firebase;
-include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/autoload.php';
-include $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
+
+include $_SESSION['application_path'].'/vendor/autoload.php';
+include $_SESSION['application_path'].'/vendor/ktamas77/firebase-php/src/firebaseLib.php';
 
 
 

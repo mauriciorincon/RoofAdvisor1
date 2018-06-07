@@ -4,7 +4,7 @@ if(!isset($_SESSION)) {
     session_start(); 
 } 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/others.class.php");
+require_once($_SESSION['application_path']."/modelo/others.class.php");
 
 class othersController{
 

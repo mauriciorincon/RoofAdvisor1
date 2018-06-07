@@ -4,8 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/order.class.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
+require_once($_SESSION['application_path']."/modelo/order.class.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 class orderController{
 
@@ -40,7 +40,7 @@ class orderController{
             $_lastOrderNumber++;
         }
         //print_r($_customer);
-        print_r($_customerK);
+        //print_r($_customerK);
         
         $Order = array(
             "ActAmtMat" => "",
@@ -62,11 +62,11 @@ class orderController{
             "FBID" => "",
             "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
-            "Latitude" => "",
-            "Longitude" => "",
+            "Latitude" => $arrayDataOrder['Latitude'],
+            "Longitude" => $arrayDataOrder['Longitude'],
             "OrderNumber" => "$_lastOrderNumber",
             "PaymentType" => "",
-            "RepAddress" => $_customer['Address'],
+            "RepAddress" => $arrayDataOrder['Address'],
             "RepCity" => $_customer['City'],
             "RepState" => $_customer['State'],
             "RepZIP" => $arrayDataOrder['RepZIP'],
@@ -78,7 +78,7 @@ class orderController{
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
         );
-
+        print_r($Order);
         $result=$this->_orderModel->insertOrder("",$Order);
         return $result;
     }
@@ -89,5 +89,10 @@ class orderController{
         return $_count;
     }
 
+    public function getRatingsContractor($value){
+        $this->_orderModel=new orderModel();
+        $_ratings=$this->_orderModel->getRating("IdContractor",$value);
+        return $_ratings;
+    }
 
 }

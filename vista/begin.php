@@ -11,21 +11,25 @@
             <div class="stepwizard-step col-xs-2"> 
                 <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                 <p><small>What would you like to do?</small></p>
-            </div>
-			<div class="stepwizard-step col-xs-2"> 
+			</div>
+			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <p><small>Address</small></p>
+            </div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
                 <p><small>Time</small></p>
             </div>
 			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
                 <p><small>Professional</small></p>
             </div>
 			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
                 <p><small>Review</small></p>
             </div>
 			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
                 <p><small>Validate user</small></p>
             </div>
         </div>
@@ -214,9 +218,137 @@
             </div>
 
         </div>
-        
-
+		
 		<div class="panel panel-primary setup-contentOrder" id="step-3">
+            <div class="panel-heading">
+                 <h3 class="panel-title">What would you like to do? </h3>
+            </div>
+            <div class="panel-body">
+				<span class="glyphicon glyphicon-info-sign"></span> Select the place for the service
+					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
+					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
+					<input type="hidden" id="step5Address" name="step5Address"/>
+					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
+					<div class="list-group">
+					
+							<input id="pac-input" class="controls" type="text"
+								placeholder="Enter a location">
+							<!--<div id="type-selector" class="controls">
+								<input type="radio" name="type" id="changetype-all" checked="checked">
+								<label for="changetype-all">All</label>
+
+								<input type="radio" name="type" id="changetype-establishment">
+								<label for="changetype-establishment">Establishments</label>
+
+								<input type="radio" name="type" id="changetype-address">
+								<label for="changetype-address">Addresses</label>
+
+								<input type="radio" name="type" id="changetype-geocode">
+								<label for="changetype-geocode">Geocodes</label>
+							</div>-->
+							<div id="map"></div>
+
+							<script>
+							// This example requires the Places library. Include the libraries=places
+							// parameter when you first load the API. For example:
+							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+							function initMap() {
+								var map = new google.maps.Map(document.getElementById('map'), {
+								center: {lat: 27.332617, lng: -81.255690},
+								zoom: 7
+								});
+								var input = /** @type {!HTMLInputElement} */(
+									document.getElementById('pac-input'));
+
+								var types = document.getElementById('type-selector');
+								map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+								map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+								var autocomplete = new google.maps.places.Autocomplete(input);
+								autocomplete.bindTo('bounds', map);
+
+								var infowindow = new google.maps.InfoWindow();
+								var marker = new google.maps.Marker({
+								map: map,
+								anchorPoint: new google.maps.Point(0, -29)
+								});
+
+								autocomplete.addListener('place_changed', function() {
+								infowindow.close();
+								marker.setVisible(false);
+								var place = autocomplete.getPlace();
+								if (!place.geometry) {
+									// User entered the name of a Place that was not suggested and
+									// pressed the Enter key, or the Place Details request failed.
+									window.alert("No details available for input: '" + place.name + "'");
+									return;
+								}
+
+								// If the place has a geometry, then present it on a map.
+								if (place.geometry.viewport) {
+									map.fitBounds(place.geometry.viewport);
+								} else {
+									map.setCenter(place.geometry.location);
+									map.setZoom(17);  // Why 17? Because it looks good.
+								}
+								marker.setIcon(/** @type {google.maps.Icon} */({
+									url: place.icon,
+									size: new google.maps.Size(71, 71),
+									origin: new google.maps.Point(0, 0),
+									anchor: new google.maps.Point(17, 34),
+									scaledSize: new google.maps.Size(35, 35)
+								}));
+								marker.setPosition(place.geometry.location);
+								marker.setVisible(true);
+								$("#step5Logintud").val(place.geometry.location.lng());
+								$("#step5Latitude").val(place.geometry.location.lat());
+								
+								//console.log(place.geometry.location.lat());
+								//console.log(place.geometry.location.lng());
+								var address = '';
+								if (place.address_components) {
+									address = [
+									(place.address_components[0] && place.address_components[0].short_name || ''),
+									(place.address_components[1] && place.address_components[1].short_name || ''),
+									(place.address_components[2] && place.address_components[2].short_name || '')
+									].join(' ');
+									$('#step5Address').val(address);
+									$('#step5ZipCode').val(place.address_components[7].short_name);
+								}
+								
+
+								infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+								infowindow.open(map, marker);
+								});
+
+								// Sets a listener on a radio button to change the filter type on Places
+								// Autocomplete.
+								function setupClickListener(id, types) {
+								var radioButton = document.getElementById(id);
+								radioButton.addEventListener('click', function() {
+									autocomplete.setTypes(types);
+								});
+								}
+
+								setupClickListener('changetype-all', []);
+								setupClickListener('changetype-address', ['address']);
+								setupClickListener('changetype-establishment', ['establishment']);
+								setupClickListener('changetype-geocode', ['geocode']);
+							}
+							</script>
+							
+						<script async defer
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initMap">
+						</script>
+
+						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                		<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+					</div>
+			</div>
+		</div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-4">
             <div class="panel-heading">
                  <h3 class="panel-title">Select a time for service ....</h3>
             </div>
@@ -240,13 +372,15 @@
 						</div>
 					</div>
 				</div>
-                
+				
+				
+
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-4">
+		<div class="panel panel-primary setup-contentOrder" id="step-5">
             <div class="panel-heading">
                  <h3 class="panel-title">Select the professional</h3>
             </div>
@@ -279,7 +413,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-5">
+		<div class="panel panel-primary setup-contentOrder" id="step-6">
             <div class="panel-heading">
                  <h3 class="panel-title">Review Scheduled Repair Order Details</h3>
             </div>
@@ -306,7 +440,18 @@
 						</a>
 				</div>
 
-			
+				<div class="list-group">
+						<a href="#" class="list-group-item ">
+							<span class="glyphicon glyphicon-map-marker"></span> Address of service <span class="badge">1</span>
+							<div class="d-flex w-100 justify-content-between">
+								<span ><b>Address: </b></span><span id="step8Address"></span><br>
+								<span ><b>ZipCode: </b></span><span id="step8ZipCode"></span><br>
+								<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
+								<span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>
+								
+							</div>
+						</a>
+				</div>
 
 				<div class="list-group">
 						<a href="#" class="list-group-item ">
@@ -317,13 +462,15 @@
 							</div>
 						</a>
 				</div>
+				
+				
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-6">
+		<div class="panel panel-primary setup-contentOrder" id="step-7">
             <div class="panel-heading">
                  <h3 class="panel-title">Customer information</h3>
             </div>
@@ -364,7 +511,7 @@
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
 								<div class="d-flex w-100 justify-content-between">
-									<span ><b>If you are not register, please fill the fields below</b></span><br><br>
+									<span ><b>Are you new in RoofAdvisorZ?, fill the fields below</b></span><br><br>
 									
 								</div>
 							</div>
@@ -438,7 +585,7 @@
 <!-- slider-area end -->
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
-	<div class="modal-dialog"> 
+	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
@@ -449,6 +596,24 @@
 				<p >Some text in the modal.</p> 
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalRating" role="dialog" style="height: 300px;">
+	<div class="modal-dialog modal-dialog-centered" role="document"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<h4 class="modal-title" id="headerTextAnswerRating">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerRating"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonrating"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

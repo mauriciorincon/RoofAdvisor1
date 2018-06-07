@@ -4,8 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/user.class.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/sendMail.php");
+require_once($_SESSION['application_path']."/modelo/user.class.php");
+require_once($_SESSION['application_path']."/controlador/sendMail.php");
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -399,6 +399,11 @@ class userController{
     public function getCustomerK($user){
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomerKey($user);  
+    }
+
+    public function getCustomerById($customerId){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomerById($customerId);
     }
 }
 ?>

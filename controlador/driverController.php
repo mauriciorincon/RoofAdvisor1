@@ -4,8 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/driver.class.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
+require_once($_SESSION['application_path']."/modelo/driver.class.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 class driverController{
 

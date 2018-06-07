@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/conection.php");
+require_once($_SESSION['application_path']."/modelo/conection.php");
 
 class userModel extends connection{
 
@@ -84,6 +84,12 @@ class userModel extends connection{
         $result=$this->getQueryEqual('Customers','Email',$user);
         return $result;
     }
+
+    public function getCustomerById($customerID){
+        $result=$this->getQueryEqual('Customers','CustomerID',$customerID);
+        return $result;
+    }
+
     public function getCustomerKey($user){
         $result=$this->getQueryEqualKey('Customers','Email',$user);
         return $result;
