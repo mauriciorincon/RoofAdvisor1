@@ -21,7 +21,7 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label class="control-label ">Customer ID</label>
-                        <input maxlength="100" disabled type="text" class="form-control"  id="customerID" name="customerID" value="<?php echo $_actual_customer['CustomerID'] ?>" />
+                        <input maxlength="100" disabled type="text" class="form-control"  id="customerID" name="customerID" value="<?php if(isset($_actual_customer['CustomerID'])) { echo $_actual_customer['CustomerID']; } ?>" />
                     </div>
 
                     <div class="form-group">
@@ -38,7 +38,7 @@
                     </div> 
                     <div class="form-group">
                         <label class="control-label">Address</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" value="<?php echo $_actual_customer['Address'] ?>"/>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" value="<?php if(isset($_actual_customer['CustomerID'])) {echo $_actual_customer['Address'];} ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">City</label>
@@ -88,7 +88,7 @@
                                     <?php foreach ($_array_customer_to_show as $key => $order) { ?>
                                         <tr>
                                             <td><?php echo $order['OrderNumber']?></td>
-                                            <td><?php echo $order['RepAddress']?></td>
+                                            <td><?php if(isset($order['RepAddress'])){echo $order['RepAddress'];} ?></td>
                                             <td><?php echo $order['RepCity']?></td>
                                             <td><?php echo $order['RepState']?></td>
                                             <td><?php echo $order['RepZIP']?></td>

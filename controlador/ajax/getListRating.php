@@ -1,4 +1,7 @@
 <?php
+	if(!isset($_SESSION)) { 
+		session_start(); 
+	} 
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/controlador/userController.php");
 
@@ -20,7 +23,7 @@
         <span class="glyphicon glyphicon-comment"></span><span name="customerId"><b>'.$_customerName['Fname'].' '.$_customerName['Lname'].': </b></span>
         <span>'.$rating['Comments'].'</span>
 		<div class="d-flex w-100 justify-content-between">
-			<h5 class="mb-1">'.$company['ContNameFirst'].' '.$company['ContNameLast'].'</h5>
+			
             Rating Company: <small>'.$rating['RatingCompany'].'</small>
 			<div class="star-rating">
 				<div class="back-stars">

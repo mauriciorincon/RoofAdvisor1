@@ -3,7 +3,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 }
-require_once($_SESSION['application_path']."/RoofAdvisor/modelo/conection.php");
+require_once($_SESSION['application_path']."/modelo/conection.php");
 
 class orderModel extends connection{
 

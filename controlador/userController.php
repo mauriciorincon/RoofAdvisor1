@@ -54,6 +54,12 @@ class userController{
         require_once("vista/footer.php");
     }
 
+    public function dashboardAdmin(){
+        require_once("vista/head.php");
+        require_once("vista/dashboard_admin.php");
+        require_once("vista/footer.php");
+    }
+
     public function loginCustomer(){
         $this->_user=$_POST['userClient'];
         $this->_pass=$_POST['passwordClient'];
