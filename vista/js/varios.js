@@ -965,7 +965,7 @@ function insertOrderCustomer(){
     var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
-    var latitute=$('input:hidden[name=step5Latitude]').val();
+    var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
 
@@ -974,7 +974,7 @@ function insertOrderCustomer(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,
-                                                "password":password,"Latitute":latitute,"Longitude":longitude,"Address":address}, null, "text" )
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1199,3 +1199,11 @@ function jsShowWindowLoad(mensaje) {
         $("#WindowLoad").html(imgCentro);
  
 }
+
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar1').toggleClass('active');
+    });
+
+});

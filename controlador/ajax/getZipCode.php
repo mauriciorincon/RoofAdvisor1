@@ -1,6 +1,9 @@
 <?php
 
-    require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/othersController.php");
+    if(!isset($_SESSION)) { 
+      session_start(); 
+    } 
+    require_once($_SESSION['application_path']."/controlador/othersController.php");
     $_zipcode=$_POST['zipcode'];
     //Function to retrieve the contents of a webpage and put it into $pgdata
     $pgdata =""; //initialize $pgdata

@@ -4,8 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/order.class.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/userController.php");
+require_once($_SESSION['application_path']."/modelo/order.class.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 class orderController{
 
@@ -39,7 +39,7 @@ class orderController{
         }else{
             $_lastOrderNumber++;
         }
-        //print_r($_customer);
+        //print_r($arrayDataOrder);
         //print_r($_customerK);
         
         $Order = array(
@@ -78,7 +78,7 @@ class orderController{
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
         );
-        print_r($Order);
+       // print_r($Order);
         $result=$this->_orderModel->insertOrder("",$Order);
         return $result;
     }

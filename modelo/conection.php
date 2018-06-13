@@ -1,5 +1,8 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/autoload.php';
+if(!isset($_SESSION)) { 
+    session_start(); 
+} 
+require $_SESSION['application_path'].'/vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -12,7 +15,7 @@ class connection{
 
     function __construct()
 	{		
-        $serviceAccount = ServiceAccount::fromJsonFile($_SERVER['DOCUMENT_ROOT'].'/RoofAdvisor/vendor/pruebabasedatos-eacf6-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/pruebabasedatos-eacf6-firebase.json');
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)

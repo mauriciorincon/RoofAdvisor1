@@ -4,8 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/modelo/user.class.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/RoofAdvisor/controlador/sendMail.php");
+require_once($_SESSION['application_path']."/modelo/user.class.php");
+require_once($_SESSION['application_path']."/controlador/sendMail.php");
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -51,6 +51,12 @@ class userController{
     public function showRegisterCustomer(){
         require_once("vista/head.php");
         require_once("vista/register_customer.php");
+        require_once("vista/footer.php");
+    }
+
+    public function dashboardAdmin(){
+        require_once("vista/head.php");
+        require_once("vista/dashboard_admin.php");
         require_once("vista/footer.php");
     }
 
@@ -119,6 +125,11 @@ class userController{
         //return;
         if(is_array($_result) or gettype($_result)=="object"){
             if($_result->emailVerified==1){
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $_result->displayName;
+                $_SESSION['start'] = time();
+                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                $_SESSION['email'] = $_result->email;
                 $this->dashboardCompany($this->_user);
             }else{
                 Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
