@@ -6,6 +6,7 @@ if(!isset($_SESSION)) {
 
 require_once($_SESSION['application_path']."/modelo/user.class.php");
 require_once($_SESSION['application_path']."/controlador/sendMail.php");
+require_once($_SESSION['application_path']."/controlador/calendarController.php");
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -125,6 +126,11 @@ class userController{
         //return;
         if(is_array($_result) or gettype($_result)=="object"){
             if($_result->emailVerified==1){
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $_result->displayName;
+                $_SESSION['start'] = time();
+                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                $_SESSION['email'] = $_result->email;
                 $this->dashboardCompany($this->_user);
             }else{
                 Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
