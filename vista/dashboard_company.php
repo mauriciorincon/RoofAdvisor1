@@ -101,6 +101,42 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
 
+         <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+                <li>
+                <div class="container">
+                    <div class="row">
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#datetimepicker1').datetimepicker();
+                            });
+                        </script>
+                    </div>
+                </div>
+                </li>
+
+                </ul>
+            </div>
+        </nav>
+
         <div class="table-responsive">          
             <table class="table" id="table_drivers">
                 <thead>
@@ -393,8 +429,9 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
         <div class="modal-body"  id="scheduleCompany">
             <?php   echo '<h2>June 2018</h2>';
                     $oCalendar=new calendar();
-                    echo $oCalendar->draw_controls();
-                    echo $oCalendar->draw_calendar(6,2018);
+                    echo $oCalendar->draw_controls(6,2018);
+                    $_eventsArray=$oCalendar->getEvents(6,2018);
+                    echo $oCalendar->draw_calendar(6,2018,$_eventsArray);
             ?>
         </div>
     </div><!-- /cierro contenedor -->

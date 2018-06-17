@@ -104,6 +104,23 @@ class connection{
         }
     }
 
+    public function getDataByDate($table,$field,$startDate,$finishDate){
+        $snapshot=$this->_firebase->getReference($table)
+                        ->orderByChild($field)
+                        ->startAt($startDate)
+                        ->getSnapshot();
+
+        $value = $snapshot->getValue();
+        
+        
+        if(is_array($value)){
+        
+            return $value;
+        }else{
+            return "null";
+        }
+    }
+
     public function getDataTable($table){
         $snapshot=$this->_firebase->getReference($table)
                             ->getSnapshot();

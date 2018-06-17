@@ -1209,9 +1209,19 @@ $(document).ready(function () {
 });
 
 
-function refreshCalendar(){
-    var month=$('#monthCalendar').val();
-    var year=$('#yearCalendar').val();
+function refreshCalendar(pmonth,pyear){
+    if (pmonth==undefined){
+        var month=$('#monthCalendar').val();
+    }else{
+        var month=pmonth;
+    }
+    if(pyear==undefined){
+        var year=$('#yearCalendar').val();
+    }else{
+        var year=pyear;
+    }
+
+    
 
     jsShowWindowLoad('');
     $.post( "controlador/ajax/getCalendar.php", {"month":month,"year":year }, null, "text" )

@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SESSION)) { 
+    session_start(); 
+} 
+require_once($_SESSION['application_path']."/modelo/others.class.php");
 
 class calendar{
 
@@ -28,20 +32,21 @@ class calendar{
         $select_year_control.= '</select>';
 
         /* "next month" control */
-        $next_month_link = '<a href="?month='.($month != 12 ? $month + 1 : 1).'&year='.($month != 12 ? $year : $year + 1).'" class="control">Next Month >></a>';
+        $next_month_link = '<a href="#" onclick="refreshCalendar('.($month != 12 ? $month + 1 : 1).','.($month != 12 ? $year : $year + 1).')" class="control">Next Month >></a>';
 
         /* "previous month" control */
-        $previous_month_link = '<a href="?month='.($month != 1 ? $month - 1 : 12).'&year='.($month != 1 ? $year : $year - 1).'" class="control"><< 	Previous Month</a>';
+        $previous_month_link = '<a href="#" onclick="refreshCalendar('.($month != 1 ? $month - 1 : 12).','.($month != 1 ? $year : $year - 1).')" class="control"><< 	Previous Month</a>';
 
         /* bringing the controls together */
-        $controls = '<form method="get">'.$select_month_control.$select_year_control.' <input type="submit" name="submit" value="Go" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
+        $controls = '<form method="get">'.$select_month_control.$select_year_control.' <input type="button" name="go" value="Go" onclick="refreshCalendar()" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
 
         return $controls;
     }
 
     /* draws a calendar */
-    public function draw_calendar($month,$year){
+    public function draw_calendar($month,$year,$events = array()){
 
+        $flag=false;
         /* draw table */
         $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 
@@ -72,7 +77,22 @@ class calendar{
                 $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
-                $calendar.= str_repeat('<p> </p>',2);
+                if(strlen($month)==1){
+                    $event_day = $year.'-0'.$month.'-'.$list_day;
+                }else{
+                    $event_day = $year.'-'.$month.'-'.$list_day;
+                }
+                $flag=false;
+
+                foreach($events as $key => $event) {
+                    if(strcmp($event['SchDate'],$event_day)==0){
+                        $calendar.= '<div class="event">Customer:'.$event['CustomerID'].",Time:".$event['SchTime'].'</div>';
+                        $flag=true;
+                    }
+                }
+                if($flag==false) {
+                    $calendar.= str_repeat('<p>&nbsp;</p>',2);
+                }
                 
             $calendar.= '</td>';
             if($running_day == 6):
@@ -103,5 +123,14 @@ class calendar{
         return $calendar;
     }
 
+    public function getEvents($month,$year){
+        $_otherModel=new othersModel();
+        $_result=$_otherModel->getEventsByDate($year."-".$month,$year."-".$month."-30");
+        if (is_array($_result)){
+            return $_result;
+        }else{
+            return null;
+        }
+    }
 }
 ?>
