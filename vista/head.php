@@ -15,6 +15,7 @@ if(!isset($_SESSION)) {
         <!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- all css here -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/owl.carousel.css">

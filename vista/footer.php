@@ -144,7 +144,7 @@
         <script src="js/plugins.js"></script>
 		<script src="js/main.js"></script>
 		<script src="vista/js/varios.js"></script>
-		
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
 

@@ -101,42 +101,30 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
 
-         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
-                </div>
-                <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
-                <li>
-                <div class="container">
-                    <div class="row">
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker();
-                            });
-                        </script>
-                    </div>
-                </div>
-                </li>
+        <form class="form-inline">
+        <div class="form-group mb-2">
+            
+            <input type="text" id="datepicker" class="form-control" placeholder="Select a date">
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <select class="form-control">
+                <option value="0">-Select State-</option>
+                <option value="S">Open</option>
+                <option value="C">Closed</option>
+            </select>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <select class="form-control">
+                <option value="0">-Select Driver-</option>
+                <option value="S">Open</option>
+                <option value="C">Closed</option>
+            </select>
+        </div>
+        <button type="button" class="btn-primary btn-sm" onClick="" >Search</button>
+        
+        </form>
 
-                </ul>
-            </div>
-        </nav>
-
+         
         <div class="table-responsive">          
             <table class="table" id="table_drivers">
                 <thead>

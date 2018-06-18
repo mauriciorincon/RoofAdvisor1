@@ -1240,3 +1240,8 @@ function refreshCalendar(pmonth,pyear){
         jsRemoveWindowLoad('');
     });
 }
+
+$( function() {
+    
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
