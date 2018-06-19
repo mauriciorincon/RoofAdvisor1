@@ -125,6 +125,7 @@ class userController{
 
         //return;
         if(is_array($_result) or gettype($_result)=="object"){
+            //print_r($_result);
             if($_result->emailVerified==1){
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $_result->displayName;
@@ -329,9 +330,9 @@ class userController{
     public function dashboardCompany($_id_company){
         $_userMail=$_id_company;
         $this->_userModel=new userModel();
-
+        //echo "company id".$_id_company;
         $_actual_company=$this->_userModel->getCompany($_userMail);
-
+        //print_r($_actual_company);
         $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
         
         $_array_orders_to_show=array();

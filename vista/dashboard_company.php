@@ -7,10 +7,10 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             <a href="#myModalDrivers" data-toggle="modal" >Drivers</a>
             <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
             <a href="#">Metrics in your Service Area</a>
-            <a href="#">34 Emergency Repairs </a>
-            <a href="#">1 Emergency Repairs Pending</a>
-            <a href="#">3 Assigned</a>
-            <a href="#">1 RepairCrew Available</a>
+            <a href="#">Orders for the week</a>
+            <a href="#">Rechedule Order</a>
+            <a href="#">Repair Crew Offline</a>
+            <a href="#">Repair Crew Avalible</a>
             <a href="#">Complete Your Registration</a>
             
         </div>
@@ -100,7 +100,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
-
+        <br>
         <form class="form-inline">
         <div class="form-group mb-2">
             
@@ -116,8 +116,9 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
         <div class="form-group mx-sm-3 mb-2">
             <select class="form-control">
                 <option value="0">-Select Driver-</option>
-                <option value="S">Open</option>
-                <option value="C">Closed</option>
+                <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
+                    <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
+                <?php } ?>
             </select>
         </div>
         <button type="button" class="btn-primary btn-sm" onClick="" >Search</button>
@@ -129,28 +130,40 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             <table class="table" id="table_drivers">
                 <thead>
                 <tr>
-                    <th>Repair Type</th>
                     <th>Repair ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th>Date</th>
                     <th>Time</th>
+                    <th>Name/Addr/Phone</th>
+                    
+                    <th>Description</th>
+                    <th>Request Type</th>
+                    <th>Status</th>
+
+                    <th>Est Amt</th>
+                    <th>Final Amt</th>
+                    <th>Payment</th>
+                    <th>Contractor</th>
                 </tr>
                 </thead>
                 <tbody>
                     
                     <?php foreach ($_array_orders_to_show as $key => $order) { ?>
                         <tr>
-                            <td><?php echo $order['RequestType']?></td>
                             <td><?php echo $order['OrderNumber']?></td>
+                            <td><?php echo $order['SchDate']?></td>
+                            <td><?php echo $order['SchTime']?></td>
                             <td><?php echo "" ?></td>
-                            <td><?php if(isset($order['RepAddress'])){echo $order['RepAddress'];} ?></td>
-                            <td><?php echo "" ?></td>
+                            
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
+                            <td><?php echo $order['RequestType']?></td>
                             <td><?php echo $order['Status']?></td>                            
-                            <td><?php echo $order['EstAmtTime']?></td>
+
+                            <td><?php echo $order['ETA']?></td>
+                            <td><?php echo $order['EstAmtMat']?></td>
+                            <td><?php echo $order['PaymentType']?></td>
+                            <td><?php echo $order['ContractorID']?></td>
+                           
+                           
                         </tr>
                     <?php } ?>
                 </tbody>

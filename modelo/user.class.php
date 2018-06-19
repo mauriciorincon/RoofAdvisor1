@@ -26,9 +26,9 @@ class userModel extends connection{
         if(is_array($result) or gettype($result)=="object" ){
             return $result;
         }else{
-            return false;
+            return "Error ".$result;
         }
-        return false;
+        return "Error";
     }
 
     public function validateEmail($table,$email){
