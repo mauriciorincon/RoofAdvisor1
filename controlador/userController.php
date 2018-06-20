@@ -7,6 +7,7 @@ if(!isset($_SESSION)) {
 require_once($_SESSION['application_path']."/modelo/user.class.php");
 require_once($_SESSION['application_path']."/controlador/sendMail.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
+require_once($_SESSION['application_path']."/controlador/orderController.php");
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -23,6 +24,7 @@ const DEFAULT_PATH = 'pruebabasedatos-eacf6';*/
 class userController{
 
     private $_userModel=null;
+    private $_orderController=null;
     private $_sendMail=null;
     private $_user="";
     private $_pass="";
@@ -330,15 +332,18 @@ class userController{
     public function dashboardCompany($_id_company){
         $_userMail=$_id_company;
         $this->_userModel=new userModel();
+
         //echo "company id".$_id_company;
         $_actual_company=$this->_userModel->getCompany($_userMail);
         //print_r($_actual_company);
         $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
         
         $_array_orders_to_show=array();
-        
+
+        $_orderController=new orderController();
+        $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
         //print_r($_array_orders);
-        foreach ($_array_contractors_to_show as $key => $contractor) {
+        /*foreach ($_array_contractors_to_show as $key => $contractor) {
             //echo $contractor['ContractorID']."<br>";
             $_array_orders=$this->_userModel->getOrdersDriver($contractor['ContractorID']);
             foreach($_array_orders as $data => $order){
@@ -346,7 +351,7 @@ class userController{
             }
             //print_r($_array_orders);
             
-        }    
+        } */   
         //print_r($_array_orders_to_show);
         
         require_once("vista/head.php");

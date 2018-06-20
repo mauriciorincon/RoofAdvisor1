@@ -80,6 +80,11 @@ class userModel extends connection{
         return $result;
     }
 
+    public function getCompanyByID($companyID){
+        $result=$this->getQueryEqual('Company','CompanyID',$companyID);
+        return $result;
+    }
+
     public function getCustomer($user){
         $result=$this->getQueryEqual('Customers','Email',$user);
         return $result;

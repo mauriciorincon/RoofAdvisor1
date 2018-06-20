@@ -37,23 +37,33 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 // The map, centered at Uluru
                 var map = new google.maps.Map(
                     document.getElementById('map'), {zoom: 11, center: uluru});
+
                 // The marker, positioned at Uluru
                 //var marker = new google.maps.Marker({position: uluru, map: map});
                 var marker="";
-                /*var ref = firebase.app().database().ref("Orders");
-                ref.once('value').then(function (snap) {
-                            datos=snap.val();
-                            for(k in datos){
-                                fila=datos[k];
-                                pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
-                                marker = new google.maps.Marker({position: pos, map: map});
-                            }
+                var marketrs=[];
+                <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
 
-                
-                        
-                        
-                        console.log('snap.val()', snap.val());
-                        });*/
+                var iconBase = iconBase+'/img/img_maps/';
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode( { 'address': '<?php echo $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'] ?>'}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK)
+                {
+                    // do something with the geocoded result
+                    //
+                    
+                    console.log(results);
+
+                    var marker={
+                        lat:parseFloat(results[0].geometry.location.latitude),
+                        lng:parseFloat(results[0].geometry.location.longitude),
+                        icon: iconBase+'company.png'
+                    };
+                    marketrs.push(addMarket(marker,map));
+                }
+                console.log('status:'+status);
+                });
 
                 var ref = firebase.database().ref("Orders");
                 ref.orderByChild("CompanyID").equalTo("<?php echo $_actual_company['CompanyID'] ?>").once("value", function(snapshot) {
@@ -61,14 +71,31 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     datos=snapshot.val();
                             for(k in datos){
                                 fila=datos[k];
-                                pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
-                                marker = new google.maps.Marker({position: pos, map: map});
+                                //pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
+                                //marker = new google.maps.Marker({position: pos, map: map});
+                                var marker={
+                                    lat:parseFloat(fila.Latitude),
+                                    lng:parseFloat(fila.Longitude),
+                                    icon: iconBase+'library_maps.png'
+                                };
+                                marketrs.push(addMarket(marker,map));
+                                console.log(iconBase+'library_maps.png');
                             }
 
                 console.log(snapshot.val());
                 
                 });
+
+                
             }
+
+            function addMarket(data,map){
+                    new google.maps.Marker({
+                        position: new google.maps.LatLng(data.lat,data.lng),
+                        map:map,
+                        icon:'img/img_maps/open_service.png'
+                    });
+                }
         </script>
 
         <script>
@@ -152,7 +179,10 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                             <td><?php echo $order['OrderNumber']?></td>
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
-                            <td><?php echo "" ?></td>
+                            <td><?php  
+                                $_comapny=$this->_userModel->getCompanyByID($order['CompanyID']); 
+                                echo $_comapny['CompanyName'];
+                                ?></td>
                             
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
                             <td><?php echo $order['RequestType']?></td>
