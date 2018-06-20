@@ -58,7 +58,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     var marker={
                         lat:parseFloat(results[0].geometry.location.latitude),
                         lng:parseFloat(results[0].geometry.location.longitude),
-                        icon: iconBase+'company.png'
+                        icon: iconBase+'company.png1'
                     };
                     marketrs.push(addMarket(marker,map));
                 }
