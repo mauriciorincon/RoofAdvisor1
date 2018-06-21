@@ -232,7 +232,7 @@
 					<div class="list-group">
 					
 							<input id="pac-input" class="controls" type="text"
-								placeholder="Enter a location">
+								placeholder="Enter a location" style="margin-left: 20px;margin-top:10px;">
 							<!--<div id="type-selector" class="controls">
 								<input type="radio" name="type" id="changetype-all" checked="checked">
 								<label for="changetype-all">All</label>

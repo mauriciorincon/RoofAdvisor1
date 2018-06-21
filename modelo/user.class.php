@@ -95,6 +95,16 @@ class userModel extends connection{
         return $result;
     }
 
+    public function getContractor($user){
+        $result=$this->getQueryEqual('Contractors','ContEmail',$user);
+        return $result;
+    }
+
+    public function getContractorById($customerID){
+        $result=$this->getQueryEqual('Contractors','ContractorID',$customerID);
+        return $result;
+    }
+
     public function getCustomerKey($user){
         $result=$this->getQueryEqualKey('Customers','Email',$user);
         return $result;
@@ -125,5 +135,6 @@ class userModel extends connection{
         return $this->createUserDatabse($_properties);
 
     }
+
 }
 ?>

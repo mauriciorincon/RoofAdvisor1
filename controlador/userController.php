@@ -99,14 +99,21 @@ class userController{
         if(is_array($_result) or gettype($_result)=="object"){
             //echo " 1 ";
             if($_result->emailVerified==1){
-                //echo " 1 ";
-                $_SESSION['loggedin'] = true;
-                $_SESSION['username'] = $_result->displayName;
-                $_SESSION['start'] = time();
-                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-                $_SESSION['email'] = $_result->email;
+                
+                $_data_customer=$this->_userModel->getCustomer($this->_user);
+                if(!is_null($_data_customer)){
+                    //echo " 1 ";
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_result->displayName;
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                    $_SESSION['email'] = $_result->email;
 
-                return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                    return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                }else{
+                    return "Error, please comunicate with RoofAdvisorZ for help";
+                }
+                
             }else{
                 //echo " 3 ";
                 return "Error, It seems that you have not validated your email, please check your email";
@@ -422,6 +429,11 @@ class userController{
     public function getCustomerById($customerId){
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomerById($customerId);
+    }
+
+    public function getContractorById($contractorID){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getContractorById($contractorID);
     }
 }
 ?>

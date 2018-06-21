@@ -1245,3 +1245,10 @@ $( function() {
     
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
+
+  $(function(){
+    var today = new Date().toISOString().split('T')[0];
+    //document.getElementsByID("step6date")[0].setAttribute('min', today);
+    $("#step6date")[0].setAttribute('min', today);
+  });
+  

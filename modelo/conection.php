@@ -44,7 +44,7 @@ class connection{
             }
             
         }else{
-            return "null";
+            return null;
         }
     }
 

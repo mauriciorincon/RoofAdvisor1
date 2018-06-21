@@ -12,5 +12,5 @@
     $_userController=new userController();
     $_result=$_userController->loginCustomerOrden($email,$password);
 
-    return $_result;
+    echo $_result;
 ?>

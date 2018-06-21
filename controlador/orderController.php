@@ -34,6 +34,7 @@ class orderController{
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
         $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
         $_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
+        $_contractor=$this->_userController->getContractorById($arrayDataOrder['ContractorID']);
         if(is_null($_lastOrderNumber)){
             $_lastOrderNumber=1;
         }else{
@@ -51,6 +52,7 @@ class orderController{
             "AppEst" => "",
             "Authorized" => "",
             "BeforePicRefID" => "",
+            "CompanyID"=>$_contractor['CompanyID'],
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
             "CutomerFBID" => $_customerK,
@@ -72,8 +74,8 @@ class orderController{
             "RepZIP" => $arrayDataOrder['RepZIP'],
             "RequestType" => $arrayDataOrder['RequestType'],
             "Rtype" => $arrayDataOrder['Rtype'],
-            "SchDate" => "",
-            "SchTime" => "",
+            "SchDate" => $arrayDataOrder['ActAmtTime'],
+            "SchTime" => $arrayDataOrder['ActTime'],
             "Status" => "G",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
