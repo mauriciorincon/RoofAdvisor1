@@ -42,29 +42,19 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 //var marker = new google.maps.Marker({position: uluru, map: map});
                 var marker="";
                 var marketrs=[];
+                var infowindow;
                 <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
 
+                
+
                 var iconBase = iconBase+'/img/img_maps/';
+                <?php echo 'var address = "'. $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'].'"';?>
 
                 var geocoder = new google.maps.Geocoder();
-                geocoder.geocode( { 'address': '<?php echo $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'] ?>'}, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK)
-                {
-                    // do something with the geocoded result
-                    //
-                    
-                    console.log(results);
+                var infowindow = new google.maps.InfoWindow();
 
-                    var marker={
-                        lat:parseFloat(results[0].geometry.location.latitude),
-                        lng:parseFloat(results[0].geometry.location.longitude),
-                        icon: iconBase+'company.png1'
-                    };
-                    marketrs.push(addMarket(marker,map));
-                }
-                console.log('status:'+status);
-                });
-
+                geocodeAddress(geocoder,map,address,iconBase);
+                
                 var ref = firebase.database().ref("Orders");
                 ref.orderByChild("CompanyID").equalTo("<?php echo $_actual_company['CompanyID'] ?>").once("value", function(snapshot) {
 
@@ -74,12 +64,13 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                 //pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
                                 //marker = new google.maps.Marker({position: pos, map: map});
                                 var marker={
-                                    lat:parseFloat(fila.Latitude),
-                                    lng:parseFloat(fila.Longitude),
-                                    icon: iconBase+'library_maps.png'
+                                    lat: parseFloat(fila.Latitude),
+                                    lng: parseFloat(fila.Longitude),
+                                    icon: iconBase+'library_maps.png',
+                                    text: fila.SchDate
                                 };
                                 marketrs.push(addMarket(marker,map));
-                                console.log(iconBase+'library_maps.png');
+                                //console.log(iconBase+'library_maps.png');
                             }
 
                 console.log(snapshot.val());
@@ -95,7 +86,25 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                         map:map,
                         icon:'img/img_maps/open_service.png'
                     });
+                    
                 }
+            
+            function geocodeAddress(geocoder, resultsMap,varAddress,path) {
+                var address = varAddress;
+                geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                    
+                    });
+                    //console.log(results);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+                });
+            }
         </script>
 
         <script>
