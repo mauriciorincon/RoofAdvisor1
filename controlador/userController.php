@@ -238,7 +238,7 @@ class userController{
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
-                "CustomerID" =>  "$_lastCustomerID",
+                "CustomerID" =>  $_lastCustomerID,
                 "Email" =>  $arrayCustomer['emailValidation'],
                 "FBID" =>  "",
                 "Fname" =>  $arrayCustomer['firstCustomerName'],

@@ -60,7 +60,7 @@ class driverController{
             $_driver=array(
                 "CompanyID" => "$companyID",
                 "CompanyName" => $_company['CompanyName'],
-                "ContEmail" => $_company['CompanyEmail'],
+                "ContEmail" => $driverInsert['driverEmail'],
                 "ContFBID" => "",
                 "ContLicenseNum" => $driverInsert['driverLicense'],
                 "ContNameFirst" => $driverInsert['driverFirstName'],

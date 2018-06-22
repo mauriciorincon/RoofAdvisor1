@@ -102,7 +102,7 @@ $(document).ready(function () {
 $(document).ready(function() {
     $("#addRowDriver").click(function(){
         var rowCount = $('table#table_drivers tr:last').index() + 2;
-        $("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
+        $("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
         
     });
     $("#table_drivers").on('click','#deleteRowDriver',function(){
@@ -153,7 +153,7 @@ function saveContractorData(){
     var companyNameField = $("input#companyName").val();
     var firstNameField = $("input#firstNameCompany").val();
     var lastNameField = $("input#lastNameCompany").val();
-    var phoneContactField = $("input#phoneContactCompany").val();
+    var phoneContactField = "+1"+$("input#phoneContactCompany").val();
     var emailField = $("input#emailValidation").val();
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
@@ -175,6 +175,9 @@ function saveContractorData(){
         driver.push($(this).val());
     });
     $('input[name^="driverLicense"]').each(function() {
+        driver.push($(this).val());
+    });
+    $('input[name^="driverEmail"]').each(function() {
         driver.push($(this).val());
     });
     $('select[name^="driverStatus"]').each(function() {
@@ -585,7 +588,7 @@ $(document).ready(function () {
         var customerCity = $("input#customerCity").val();
         var customerState = $("input#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
-        var customerPhoneNumber = $("input#customerPhoneNumber").val();
+        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
         var Repassword=$('input:password#inputPasswordConfirm').val();
 
@@ -630,6 +633,18 @@ $(document).ready(function () {
                                 $('#myModalRespuesta').modal({backdrop: 'static'});
                             }
                             //$("#firstNextValidation").show();
+                            if(p_pantalla=="register"){
+                                $('#prevBtnRegisterCustomer').hide();
+                                texto=$("#validatingMessajeCode").html();
+                                $("#validatingMessajeCode").html(texto+"<br> You will redirect to login customer page in 10 seconds");
+                                // Your application has indicated there's an error
+                                window.setTimeout(function(){
+
+                                    // Move to a new location or you can do something else
+                                    window.location.href = "?controller=user&accion=dashboardCustomer";
+
+                                }, 10000);
+                            }
                             result=true;
                         }else{
                             

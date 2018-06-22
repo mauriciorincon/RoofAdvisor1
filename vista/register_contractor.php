@@ -93,6 +93,7 @@
                                 <th>Lastname</th>
                                 <th>Repair Crew Phone</th>
                                 <th>Driver License</th>
+                                <th>Email</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -104,6 +105,7 @@
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name" id="driverLastName[]" name="driverLastName[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License" id="driverLicense[]" name="driverLicense[]" /></td>
+                                <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td>
                                 <td><select class="form-control" id="driverStatus[]" name="driverStatus[]" >
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>

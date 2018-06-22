@@ -155,6 +155,7 @@ class connection{
             ->limitToLast(1)
             ->getSnapshot();
             $value = $snapshot->getValue();
+            //print_r($value);
             if(is_array($value)){
                 foreach($value as $key => $value1){
                     return $value1;

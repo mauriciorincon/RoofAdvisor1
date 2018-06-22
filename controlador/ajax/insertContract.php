@@ -29,14 +29,15 @@ $_arrayCompany = array(
 
 $_array_drivers=array();
 $_elementsCount=count($_arrayDivers);
-$_elementDivisor=$_elementsCount/5;
+$_elementDivisor=$_elementsCount/6;
 for($n=0;$n<$_elementDivisor;$n++){
     $_array=array(
         "driverFirstName"=>$_arrayDivers[$n],
         "driverLastName"=>$_arrayDivers[$n+$_elementDivisor],
-        "driverPhone"=>$_arrayDivers[$n+($_elementDivisor*2)],
+        "driverPhone"=>"+1".$_arrayDivers[$n+($_elementDivisor*2)],
         "driverLicense"=>$_arrayDivers[$n+($_elementDivisor*3)],
-        "driverStatus"=>$_arrayDivers[$n+($_elementDivisor*4)],
+        "driverEmail"=>$_arrayDivers[$n+($_elementDivisor*4)],
+        "driverStatus"=>$_arrayDivers[$n+($_elementDivisor*5)],
     );
     array_push($_array_drivers,$_array);
 }
