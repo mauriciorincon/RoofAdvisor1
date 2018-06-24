@@ -102,7 +102,7 @@ $(document).ready(function () {
 $(document).ready(function() {
     $("#addRowDriver").click(function(){
         var rowCount = $('table#table_drivers tr:last').index() + 2;
-        $("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
+        $("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
         
     });
     $("#table_drivers").on('click','#deleteRowDriver',function(){
@@ -153,7 +153,7 @@ function saveContractorData(){
     var companyNameField = $("input#companyName").val();
     var firstNameField = $("input#firstNameCompany").val();
     var lastNameField = $("input#lastNameCompany").val();
-    var phoneContactField = "+1"+$("input#phoneContactCompany").val();
+    var phoneContactField = $("input#phoneContactCompany").val();
     var emailField = $("input#emailValidation").val();
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
@@ -175,9 +175,6 @@ function saveContractorData(){
         driver.push($(this).val());
     });
     $('input[name^="driverLicense"]').each(function() {
-        driver.push($(this).val());
-    });
-    $('input[name^="driverEmail"]').each(function() {
         driver.push($(this).val());
     });
     $('select[name^="driverStatus"]').each(function() {
@@ -449,26 +446,6 @@ function updateDataCompany(){
     var companyPhoneNumber=$("input#companyPhoneNumber").val();
     var companyType=$("input#companyType").val();
 
-    var PayInfoBillingAddress1=$("input#compamnyPayAddress1").val();
-    var PayInfoBillingAddress2=$("input#compamnyPayAddress2").val();
-    var PayInfoBillingCity=$("input#compamnyPayCity").val();
-    var PayInfoBillingST=$("input#compamnyPayState").val();
-    var PayInfoBillingZip=$("input#compamnyPayZip").val();
-    var PayInfoCCExpMon=$("input#compamnyPayMonth").val();
-    var PayInfoCCExpYr=$("input#compamnyPayYear").val();
-    var PayInfoCCNum=$("input#compamnyPayCCNum").val();
-    var PayInfoCCSecCode=$("input#compamnyPaySecCode").val();
-    var PayInfoName=$("input#compamnyPayName").val();
-    var PrimaryFName=$("input#compamnyPayFName").val();
-    var PrimaryLName=$("input#compamnyPayLName").val();
-
-    var InsLiabilityAgencyName=$("input#compamnyAgencyName").val();
-    var InsLiabilityAgtName=$("input#compamnyAgtName").val();
-    var InsLiabilityAgtNum=$("input#compamnyAgtNum").val();
-    var InsLiabilityPolNum=$("input#compamnyPolNum").val();
-    var Status_Rating=$("input#compamnyStatusRating").val();
-
-
     if( typeof companyAddress2 === 'undefined' || companyAddress2 === null ){
         companyAddress2="";
     }
@@ -478,13 +455,7 @@ function updateDataCompany(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCompany.php", { "companyID" : companyID,"compamnyName" : compamnyName,"firstCompanyName": firstCompanyName,
     "lastCompanyName":lastCompanyName,"companyAddress1":companyAddress1,"companyAddress2":companyAddress2,
-    "companyAddress3":companyAddress3,"companyPhoneNumber":companyPhoneNumber,"companyType":companyType,
-    "PayInfoBillingAddress1":PayInfoBillingAddress1,"PayInfoBillingAddress2":PayInfoBillingAddress2,"PayInfoBillingCity":PayInfoBillingCity,
-    "PayInfoBillingST":PayInfoBillingST,"PayInfoBillingZip":PayInfoBillingZip,"PayInfoCCExpMon":PayInfoCCExpMon,
-    "PayInfoCCExpYr":PayInfoCCExpYr,"PayInfoCCNum":PayInfoCCNum,"PayInfoCCSecCode":PayInfoCCSecCode,"PayInfoName":PayInfoName,
-    "PrimaryFName":PrimaryFName,"PrimaryLName":PrimaryLName,"InsLiabilityAgencyName":InsLiabilityAgencyName,
-    "InsLiabilityAgtName":InsLiabilityAgtName,"InsLiabilityAgtNum":InsLiabilityAgtNum,"InsLiabilityPolNum":InsLiabilityPolNum,
-    "Status_Rating":Status_Rating}, null, "text" )
+    "companyAddress3":companyAddress3,"companyPhoneNumber":companyPhoneNumber,"companyType":companyType}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -614,7 +585,7 @@ $(document).ready(function () {
         var customerCity = $("input#customerCity").val();
         var customerState = $("input#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
-        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
+        var customerPhoneNumber = $("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
         var Repassword=$('input:password#inputPasswordConfirm').val();
 
@@ -659,18 +630,6 @@ $(document).ready(function () {
                                 $('#myModalRespuesta').modal({backdrop: 'static'});
                             }
                             //$("#firstNextValidation").show();
-                            if(p_pantalla=="register"){
-                                $('#prevBtnRegisterCustomer').hide();
-                                texto=$("#validatingMessajeCode").html();
-                                $("#validatingMessajeCode").html(texto+"<br> You will redirect to login customer page in 10 seconds");
-                                // Your application has indicated there's an error
-                                window.setTimeout(function(){
-
-                                    // Move to a new location or you can do something else
-                                    window.location.href = "?controller=user&accion=dashboardCustomer";
-
-                                }, 10000);
-                            }
                             result=true;
                         }else{
                             
@@ -1286,13 +1245,3 @@ $( function() {
     
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
-
-  $(function(){
-      if($("#step6date").val()!=undefined){
-        var today = new Date().toISOString().split('T')[0];
-    //document.getElementsByID("step6date")[0].setAttribute('min', today);
-    $("#step6date")[0].setAttribute('min', today);
-      }
-    
-  });
-  

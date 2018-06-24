@@ -10,7 +10,7 @@ class userModel extends connection{
     }
 
     public function validateCustomer($user,$pass){
-        $result=$this->validateUser($user,$pass);
+        $result=$this->validateUser($user,$pass,'customer');
         if(is_array($result) or gettype($result)=="object" ){
             return $result;
         }else{
@@ -21,7 +21,7 @@ class userModel extends connection{
 
     public function validateCompany($user,$pass){
        
-        $result=$this->validateUser($user,$pass);
+        $result=$this->validateUser($user,$pass,'company');
         
         if(is_array($result) or gettype($result)=="object" ){
             return $result;
@@ -131,8 +131,8 @@ class userModel extends connection{
         return $result;
     }
 
-    public function createUser($_properties){
-        return $this->createUserDatabse($_properties);
+    public function createUser($_properties,$_profile){
+        return $this->createUserDatabse($_properties,$_profile);
 
     }
 

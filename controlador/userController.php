@@ -130,6 +130,7 @@ class userController{
         $this->_user=$_POST['userContractor'];
         $this->_pass=$_POST['passwordContractor'];
         $this->_userModel=new userModel();
+        
         $_result=$this->_userModel->validateCompany($this->_user,$this->_pass);
 
         //return;
@@ -177,7 +178,7 @@ class userController{
         $hashActivationCode = md5( rand(0,1000) );
         $password = rand(1000,5000);
 
-        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'',$arrayContractor['password']);
+        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'',$arrayContractor['password'],'company');
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
@@ -232,7 +233,7 @@ class userController{
         }else{
             $_lastCustomerID+=1;
         }
-        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password']);
+        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password'],'customer');
         if(is_array($_response) or gettype($_response)=="object"){
             $hashActivationCode = md5( rand(0,1000) );
             $Customer = array(
@@ -367,25 +368,48 @@ class userController{
 
     }
     
-    public function updateCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCustomerName,
+    public function updateCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
                                     $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
-                                    $_companyType){
+                                    $_companyType,$_PayInfoBillingAddress1,$_PayInfoBillingAddress2,$_PayInfoBillingCity,
+                                    $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
+                                    $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
+                                    $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
+                                    $_InsLiabilityPolNum,$_Status_Rating){
         
         $this->_userModel=new userModel();                                        
         $this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
         $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_firstCompanyName);
-        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_lastCustomerName);
+        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_lastCompanyName);
         $this->_userModel->updateContractor($_companyID.'/CompanyAdd1',$_companyAddress1);
         $this->_userModel->updateContractor($_companyID.'/CompanyAdd2',$_companyAddress2);
         $this->_userModel->updateContractor($_companyID.'/CompanyAdd3',$_companyAddress3);
         $this->_userModel->updateContractor($_companyID.'/CompanyPhone',$_companyPhoneNumber);
         $this->_userModel->updateContractor($_companyID.'/CompanyType',$_companyType);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingAddress1',$_PayInfoBillingAddress1);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingAddress2',$_PayInfoBillingAddress2);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingCity',$_PayInfoBillingCity);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingST',$_PayInfoBillingST);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingZip',$_PayInfoBillingZip);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoCCExpMon',$_PayInfoCCExpMon);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoCCExpYr',$_PayInfoCCExpYr);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoCCNum',$_PayInfoCCNum);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoCCSecCode',$_PayInfoCCSecCode);
+        $this->_userModel->updateContractor($_companyID.'/PayInfoName',$_PayInfoName);
+        $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_PrimaryFName);
+        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_PrimaryLName);
+        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgencyName',$_InsLiabilityAgencyName);
+        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtName',$_InsLiabilityAgtName);
+        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtNum',$_InsLiabilityAgtNum);
+        $this->_userModel->updateContractor($_companyID.'/InsLiabilityPolNum',$_InsLiabilityPolNum);
+        $this->_userModel->updateContractor($_companyID.'/Status_Rating',$_Status_Rating);
+
+
 
         return "The contractor identify by ".$_companyID." was updated corretly";
 
     }
 
-    public function insertUserDatabase($mail,$number,$name,$url,$password){
+    public function insertUserDatabase($mail,$number,$name,$url,$password,$profile){
         //$password = rand(1000,5000);
         //$password = "pass12345";
         //echo "password:".$password;
@@ -400,7 +424,7 @@ class userController{
         ];
         
         $this->_userModel=new userModel();
-        $_user_created=$this->_userModel->createUser($userProperties);  
+        $_user_created=$this->_userModel->createUser($userProperties,$profile);  
         //echo $_user_created;      
         return $_user_created;
 

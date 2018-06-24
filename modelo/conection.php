@@ -10,21 +10,56 @@ use Kreait\Firebase\ServiceAccount;
 
 class connection{
 
+    //Original database, where data is insert
     private $_firebase=null;
     private $_factory_firebase=null;
 
+    //Only for store company login info
+    private $_firebase_company=null;
+    private $_factory_firebase_company=null;
+
+    //Only for store driver login info
+    private $_firebase_driver=null;
+    private $_factory_firebase_driver=null;
+
     function __construct()
 	{		
-        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/pruebabasedatos-eacf6-firebase.json');
-
+        //$serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/pruebabasedatos-eacf6-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json');
+        
+        //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
+            ->withDatabaseUri('https://roofadvizorz.firebaseio.com')
             ->create();
 
         $this->_firebase = $firebase_tmp->getDatabase();
         $this->_factory_firebase=$firebase_tmp;
         
+    }
+
+    public function companyConnection(){
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-company-firebase.json');
+
+        $firebase_tmp = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://roofadvisorz-company.firebaseio.com')
+            ->create();
+
+        $this->_firebase_company = $firebase_tmp->getDatabase();
+        $this->_factory_firebase_company=$firebase_tmp;
+    }
+
+    public function driverConnection(){
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-company-firebase.json');
+
+        $firebase_tmp = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://roofadvisorz-company.firebaseio.com')
+            ->create();
+
+        $this->_firebase_company = $firebase_tmp->getDatabase();
+        $this->_factory_firebase_company=$firebase_tmp;
     }
 
     public function getConnection(){
@@ -207,9 +242,22 @@ class connection{
 
     
 
-    public function createUserDatabse($_userProperties){
+    public function createUserDatabse($_userProperties,$_profile){
         try {
-            $auth = $this->_factory_firebase->getAuth();
+            if(strcmp($_profile,"customer")==0){
+                $auth = $this->_factory_firebase->getAuth();
+            }else if(strcmp($_profile,"company")==0){
+                if(is_null($this->_factory_firebase_company)){
+                    $this->companyConnection();
+                }
+                $auth = $this->_factory_firebase_company->getAuth();
+            }else if(strcmp($_profile,"driver")==0){
+                if(is_null($this->_factory_firebase_driver)){
+                    $this->driverConnection();
+                }
+                $auth = $this->_factory_firebase_driver->getAuth();
+            }
+            
             $createdUser = $auth->createUser($_userProperties);
             $auth->sendEmailVerification($createdUser->uid);
             return $createdUser;
@@ -226,11 +274,33 @@ class connection{
         }
     }
 
-    public function validateUser($_user,$password){
+    public function validateUser($_user,$password,$_profile){
+        
+        $auth=null;
         try {
-            $auth = $this->_factory_firebase->getAuth();
+            if(strcmp($_profile,"customer")==0){
+                $auth = $this->_factory_firebase->getAuth();
+            }else if(strcmp($_profile,"company")==0){
+                
+                if(is_null($this->_factory_firebase_company)){
+                    $this->companyConnection();
+                }
+                $auth = $this->_factory_firebase_company->getAuth();
+                //$users = $auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
+                //foreach ($users as $user) {
+                //   print_r($user);
+                //}
+            }else if(strcmp($_profile,"driver")==0){
+                if(is_null($this->_factory_firebase_driver)){
+                    $this->driverConnection();
+                }
+                $auth = $this->_factory_firebase_driver->getAuth();
+            }
+            //print_r($auth);
+            
             $user = $auth->verifyPassword($_user, $password);
             //print_r($user);
+            //echo "llego aca 2";
             return $user;
         } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
             
