@@ -22,7 +22,10 @@ class orderModel extends connection{
 
     function getOrders($field,$value){
         $result=$this->getQueryEqualM('Orders',$field,$value);
+        //echo "resultado";
+        //print_r($result);
         if(is_array($result)){
+            
             return $result;
         }else{
             return null;

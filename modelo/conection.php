@@ -26,6 +26,7 @@ class connection{
 	{		
         //$serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/pruebabasedatos-eacf6-firebase.json');
         $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json');
+        echo "roofadvizorz-firebase.json";
         
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
@@ -51,11 +52,11 @@ class connection{
     }
 
     public function driverConnection(){
-        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-company-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-driver-firebase.json');
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvisorz-company.firebaseio.com')
+            ->withDatabaseUri('https://roofadvisorz-driver.firebaseio.com')
             ->create();
 
         $this->_firebase_company = $firebase_tmp->getDatabase();
