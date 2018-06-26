@@ -106,9 +106,9 @@
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License" id="driverLicense[]" name="driverLicense[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td>
-                                <td><select class="form-control" id="driverStatus[]" name="driverStatus[]" >
+                                <td><select class="form-control" id="driverStatus[]" name="driverStatus[]" disabled >
                                         <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                        <option value="Inactive" selected>Inactive</option>
                                         <option value="Terminated">Terminated</option>
                                     </select>
                                 </td>

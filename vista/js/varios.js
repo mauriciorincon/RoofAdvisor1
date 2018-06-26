@@ -35,17 +35,42 @@ $(document).ready(function () {
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
             curInputs = curStep.find("input[type='text'],input[type='url'],input[type='email'],input[type='password']"),
             isValid = true;
-    
+        
+        var cellCount=0;
         $(".form-group").removeClass("has-error");
         
         isValid=validInputPassword()
         isValid=validInputRePassword();
-        for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
+        if (curStepBtn=="step-2"){
+            $("#table_drivers tbody tr").each(function (index) {
+                cellCount=0;
+                $(this).children("td").each(function (index2) {
+                    console.log($(this).find('input').val());
+                    
+                    if($(this).find('input').val()!="" && $(this).find('input').val()!=undefined){
+                        cellCount+=1;
+                    }
+                    
+                });
+                if(cellCount==5 || cellCount==0){
+                    isValid = true;
+                }else{
+                    isValid = false;
+                    for (var i = 0; i < curInputs.length; i++) {
+                        $(curInputs[i]).closest(".form-group").addClass("has-error");
+                    }
+                }
+            });
+        }else{
+            for (var i = 0; i < curInputs.length; i++) {
+                if (!curInputs[i].validity.valid) {
+                    isValid = false;
+                    $(curInputs[i]).closest(".form-group").addClass("has-error");
+                }
             }
         }
+        
+
         
     
         if (curStepBtn=="step-2" && isValid==true ){
@@ -388,11 +413,12 @@ function insertDriver(){
     var contractorPhoneNumber = $("input#ContPhoneNumIn").val();
     var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
     var contractorState = $("select#ContStatusIn").val();
+    var contractorEmail=$("input#ContEmail").val();
 
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
     "contractorPhoneNumber":contractorPhoneNumber,"contractorLinceseNumber":contractorLinceseNumber,
-    "contractorState":contractorState}, null, "text" )
+    "contractorState":contractorState,"contractorEmail":contractorEmail}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -408,7 +434,11 @@ function insertDriver(){
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
                 
-                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                //$('#selectDriverCompany').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
+                $("#selectDriverCompany option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
+                //$('#selectDriverCompany').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
+                
             }else{
                 
             }

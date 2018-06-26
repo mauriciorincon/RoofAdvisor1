@@ -173,7 +173,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             </select>
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control">
+            <select class="form-control" id="selectDriverCompany">
                 <option value="0">-Select Driver-</option>
                 <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
                     <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
@@ -410,8 +410,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-				<h4 class="modal-title" id="headerTextDriversCompany">Modal Header</h4> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextDriversCompany">Driver List</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerDriversCompany"> 
                 <div class="table-responsive">
@@ -423,6 +423,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                 <th>Lastname</th>
                                 <th>Repair Crew Phone</th>
                                 <th>Driver License</th>
+                                <th>Driver Email</th>
                                 <th>Status</th>
                                 <th>Edit</th>
                                 <th>Inactive</th>
@@ -436,6 +437,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                     <td><?php echo $contractor['ContNameLast']?></td>
                                     <td><?php echo $contractor['ContPhoneNum']?></td>
                                     <td><?php echo $contractor['ContLicenseNum']?></td>
+                                    <td><?php if (isset($contractor['driverEmail'])){echo $contractor['driverEmail'];}else{echo '';}?></td>
                                     <td><?php echo $contractor['ContStatus']?></td>
                                     <td>
                                         <a class="btn-info btn-sm" data-toggle="modal"  
@@ -560,6 +562,12 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             <div class="form-group">
                 <label for="ContLicenseNumed">Driver License</label>
                 <input type="text" class="form-control" name="ContLicenseNumIn" id="ContLicenseNumIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the license number of contractor')"
+                oninput="setCustomValidity('')">
+            </div>
+
+            <div class="form-group">
+                <label for="ContLicenseNumed">Driver Email</label>
+                <input type="text" class="form-control" name="ContEmail" id="ContEmail" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
             </div>
             
