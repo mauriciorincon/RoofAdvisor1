@@ -120,7 +120,7 @@ if(!isset($_SESSION)) {
 											</li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
-										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
+										<li><a href="?controller=contact&accion=showinfo">CONTACT1</a></li>
 										<div class="bs-example">
 									
 									</ul>
