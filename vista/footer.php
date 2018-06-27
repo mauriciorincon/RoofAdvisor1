@@ -56,7 +56,7 @@
 										<span> Web : <a href-'http://www.roofadvisorz.com'>www.roofadvisorz.com</span>
 									</li>
 									<p>
-									<a href-'?controller=term_cpnditions&accion=showinfo'>Legal</a>
+									<a href='?controller=terms_conditions&accion=showinfo'>Legal</a>
 									</p>
 								</ul>
 						    </div>
