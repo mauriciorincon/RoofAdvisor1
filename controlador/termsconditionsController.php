@@ -1,6 +1,6 @@
 <?php
 
-class servicesController{
+class termsconditionsController{
 
     function __construct()
 	{		
