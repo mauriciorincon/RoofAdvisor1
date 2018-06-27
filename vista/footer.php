@@ -45,14 +45,19 @@
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (801) 877 529 5995
-                                              Telephone : (801) 877 529 5995</span>
+										<span>Telephone : (801) 877 529 5995</span>
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span>info@roofadvisorz.com
-                                              Web : www.roofadvisorz.com</span>
+										<span><a href="mailto:info@roofadvisorz.com ">info@roofadvisorz.com</a> </span>
 									</li>
+									<li>
+										<i class="fa fa-globe"></i>
+										<span> Web : <a href-'http://www.roofadvisorz.com'>www.roofadvisorz.com</span>
+									</li>
+									<p>
+									<a href-'?controller=term_cpnditions&accion=showinfo'>Legal</a>
+									</p>
 								</ul>
 						    </div>
 						</div>
