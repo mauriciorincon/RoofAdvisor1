@@ -1314,7 +1314,7 @@ function refreshCalendar(pmonth,pyear){
 
 $( function() {
     
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepickerFilterCompanyDashboard" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
   $(function(){
@@ -1326,3 +1326,30 @@ $( function() {
     
   });
   
+
+  function filterDashboard(table){
+    $("#"+table+" tr").each(function(index) {
+        if (index !== 0) {
+
+            var date=$("#datepickerFilterDashboard").val();
+            if(date!==''){
+                $row = $(this);
+            
+                var id = $row.find("td:eq(1)").text();
+
+                if (id.indexOf(date) !== 0) {
+                    $row.hide();
+                }
+                else {
+                    $row.show();
+                }
+            }
+            
+        }
+    });
+  }
+  /*$("#datepickerFilterCompanyDashboard").on("keyup", function() {
+    var value = $(this).val();
+
+    
+});*/
