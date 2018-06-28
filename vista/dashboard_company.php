@@ -86,13 +86,24 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 // Retrieve new orders as they are added to our database
                 ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
-                    addOrderToTable(newOrder,companyID);
+                    if(dataOrder.Status=='A' || dataOrder.CompanyID==companyID){
+                        if(validateExist(dataOrder.OrderNumber)==false){
+                            addOrderToTable(newOrder,companyID);
+                        }
+                    }
                     console.log("Data: " + newOrder);
                     
                 });
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
+                    if(dataOrder.Status=='A' || dataOrder.CompanyID==companyID){
+                        if(validateExist(dataOrder.OrderNumber)==false){
+                            addOrderToTable(newOrder,companyID);
+                        }else{
+
+                        }
+                    }
                     //addOrderToTable(newOrder,companyID);
                     console.log("Data: " + newOrder.OrderNumber);
                     
@@ -128,11 +139,32 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             }
 
             function addOrderToTable(dataOrder,companyID){
-                if(dataOrder.Status=='A' || dataOrder.CompanyID==companyID){
-                    if(validateExist(dataOrder.OrderNumber)==false){
                         $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+'</td><td>'+dataOrder.ContractorID+'</td></tr>');
-                    }
-                }
+            }
+
+            function updateOrderOnTable(dataOrder){
+                var value = dataOrder.OrderNumber;
+                $("#table_orders_company tr").each(function(index) {
+                        if (index !== 0) {
+
+                            $row = $(this);
+
+                            var id = $row.find("td:eq(0)").text();
+
+                            if (id.indexOf(value) === 0) {
+                                $row.find("td:eq(1)").html(dataOrder.SchDate);
+                                $row.find("td:eq(2)").html(dataOrder.SchTime);
+                                $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                                $row.find("td:eq(4)").html(dataOrder.RequestType);
+                                $row.find("td:eq(5)").html(dataOrder.Status);
+                                $row.find("td:eq(6)").html(dataOrder.ETA);
+                                $row.find("td:eq(7)").html(dataOrder.EstAmtMat);
+                                $row.find("td:eq(8)").html(dataOrder.PaymentType);
+                                $row.find("td:eq(9)").html(dataOrder.ContractorID);
+                            }
+                            
+                        }
+                    });
             }
 
             function validateExist(orderID){
