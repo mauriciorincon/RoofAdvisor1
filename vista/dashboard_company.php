@@ -86,8 +86,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 // Retrieve new orders as they are added to our database
                 ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
-                    if(dataOrder.Status=='A' || dataOrder.CompanyID==companyID){
-                        if(validateExist(dataOrder.OrderNumber)==false){
+                    if(newOrder.Status=='A' || newOrder.CompanyID==companyID){
+                        if(validateExist(newOrder.OrderNumber)==false){
                             addOrderToTable(newOrder,companyID);
                         }
                     }
@@ -96,12 +96,12 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 });
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
-                    var newOrder = snapshot.val();
-                    if(dataOrder.Status=='A' || dataOrder.CompanyID==companyID){
-                        if(validateExist(dataOrder.OrderNumber)==false){
-                            addOrderToTable(newOrder,companyID);
+                    var updateOrder = snapshot.val();
+                    if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID){
+                        if(validateExist(updateOrder.OrderNumber)==false){
+                            addOrderToTable(updateOrder,companyID);
                         }else{
-
+                            updateOrderOnTable(updateOrder);
                         }
                     }
                     //addOrderToTable(newOrder,companyID);
@@ -155,12 +155,12 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                 $row.find("td:eq(1)").html(dataOrder.SchDate);
                                 $row.find("td:eq(2)").html(dataOrder.SchTime);
                                 $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-                                $row.find("td:eq(4)").html(dataOrder.RequestType);
-                                $row.find("td:eq(5)").html(dataOrder.Status);
-                                $row.find("td:eq(6)").html(dataOrder.ETA);
-                                $row.find("td:eq(7)").html(dataOrder.EstAmtMat);
-                                $row.find("td:eq(8)").html(dataOrder.PaymentType);
-                                $row.find("td:eq(9)").html(dataOrder.ContractorID);
+                                $row.find("td:eq(5)").html(dataOrder.RequestType);
+                                $row.find("td:eq(6)").html(dataOrder.Status);
+                                $row.find("td:eq(7)").html(dataOrder.ETA);
+                                $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+                                $row.find("td:eq(9)").html(dataOrder.PaymentType);
+                                $row.find("td:eq(10)").html(dataOrder.ContractorID);
                             }
                             
                         }
@@ -169,8 +169,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 
             function validateExist(orderID){
                
-                    var value = $(this).val();
-
+                    var value = orderID;
+                    var flag=false;
                     $("#table_orders_company tr").each(function(index) {
                         if (index !== 0) {
 
@@ -179,14 +179,15 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                             var id = $row.find("td:eq(0)").text();
 
                             if (id.indexOf(value) !== 0) {
-                                
+                                flag=false;
                             }
                             else {
-                                return true;
+                                flag=true;
+                                return;
                             }
                         }
                     });
-                return false;
+                return flag;
 
             }
         </script>
@@ -235,7 +236,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control">
+            <select class="form-control" id="optionStateFilterDashboard">
                 <option value="0">-Select State-</option>
                 <option value="A">Order Open</option>
                 <option value="D">Order Assigned</option>
@@ -249,14 +250,14 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             </select>
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="selectDriverCompany">
+            <select class="form-control" id="selectDriverFilterDashboard">
                 <option value="0">-Select Driver-</option>
                 <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
                     <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
                 <?php } ?>
             </select>
         </div>
-        <button type="button" class="btn-primary btn-sm" onClick="" >Search</button>
+        <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
         
         </form>
 

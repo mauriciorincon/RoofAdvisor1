@@ -348,9 +348,11 @@ class userController{
         
         $_array_orders_to_show=array();
 
+        
         $_orderController=new orderController();
         $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
-        //print_r($_array_orders);
+        
+        //print_r($_array_orders_to_show);
         /*foreach ($_array_contractors_to_show as $key => $contractor) {
             //echo $contractor['ContractorID']."<br>";
             $_array_orders=$this->_userModel->getOrdersDriver($contractor['ContractorID']);
