@@ -31,7 +31,7 @@ class connection{
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvizorz.firebaseio.com')
+            ->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
             ->create();
 
         $this->_firebase = $firebase_tmp->getDatabase();
