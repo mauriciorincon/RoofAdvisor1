@@ -28,6 +28,12 @@ class orderController{
         return $_orders;
     }
 
+    public function getOrdersAll(){
+        $this->_orderModel=new orderModel();
+        $_orders=$this->_orderModel->getOrdersAll();
+        return $_orders;
+    }
+
     public function insertOrder($arrayDataOrder){
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
@@ -103,5 +109,7 @@ class orderController{
         return $_orders;
 
     }
+
+    
 
 }
