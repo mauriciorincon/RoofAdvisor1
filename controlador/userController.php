@@ -57,11 +57,7 @@ class userController{
         require_once("vista/footer.php");
     }
 
-    public function dashboardAdmin(){
-        require_once("vista/head.php");
-        require_once("vista/dashboard_admin.php");
-        require_once("vista/footer.php");
-    }
+    
 
     public function loginCustomer(){
         $this->_user=$_POST['userClient'];
@@ -367,6 +363,21 @@ class userController{
         require_once("vista/head.php");
 		require_once("vista/dashboard_company.php");
 		require_once("vista/footer.php");
+
+    }
+
+    public function dashboardAdmin(){
+
+        $this->_userModel=new userModel();
+
+        $_array_orders_to_show=array();
+        $_orderController=new orderController();
+        $_array_orders_to_show=$_orderController->getOrdersAll();
+        
+        require_once("vista/head.php");
+        require_once("vista/dashboard_admin.php");
+        require_once("vista/footer.php");
+
 
     }
     
