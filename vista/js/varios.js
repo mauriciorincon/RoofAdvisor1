@@ -1377,3 +1377,31 @@ $( function() {
 
     
 });*/
+
+function hideShowDivs(divName){
+    $('#'+divName).collapse('hide');
+}
+
+function getListCompany(tableName){
+    data=$('#'+tableName+' tbody').html();
+    data=data.trim();
+    if (data==""){
+        jsShowWindowLoad('');
+        $.post( "controlador/ajax/getListCompany.php", {}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                $('#'+tableName+' tbody').html(data);
+                console.log( "La solicitud se ha completado correctamente."+jqXHR+textStatus);
+            }
+            jsRemoveWindowLoad('');
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  jqXHR+errorThrown+textStatus);
+                result=false;
+            }
+            jsRemoveWindowLoad('');
+        });
+    }
+    
+}

@@ -20,7 +20,7 @@ class userModel extends connection{
     }
 
     public function validateCompany($user,$pass){
-       
+       //echo "modelo company";
         $result=$this->validateUser($user,$pass,'company');
         
         if(is_array($result) or gettype($result)=="object" ){

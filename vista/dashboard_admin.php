@@ -3,8 +3,8 @@ Welcome to RoofAdvisorz Admin
     <div class="col-md-2">
         <div class="vertical-menu">
             <a href="#" class="active">Actions</a>
-            <a href="#myModalProfile" data-toggle="collapse" data-target="#mapDashBoard1" >Orders</a>
-            <a href="#myModalProfile" data-toggle="collapse" data-target="#companyDashBoard1" >Company</a>
+            <a href="#myModalProfile" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashBoard1')" >Orders</a>
+            <a href="#myModalProfile" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a>
             <a href="#myModalDrivers" data-toggle="modal" >Drivers</a>
             <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
             <a href="#">Metrics in your Service Area</a>
@@ -17,7 +17,7 @@ Welcome to RoofAdvisorz Admin
         </div>
     </div>
     <div class="col-md-10" id="mapDashBoard">
-        <div id="mapDashBoard1" class="collapse">
+        <div id="mapDashBoard1" class="collapse in">
 
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
@@ -315,7 +315,7 @@ Welcome to RoofAdvisorz Admin
 
     <div class="col-md-10" id="companyDashBoard"  >
         <div class="table-responsive collapse" id="companyDashBoard1">          
-            <table class="table" id="table_orders_company">
+            <table class="table" id="table_list_company">
                 <thead>
                 <tr>
                     <th>ComapnyLicNum</th>
@@ -329,7 +329,7 @@ Welcome to RoofAdvisorz Admin
                 </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
         </div>

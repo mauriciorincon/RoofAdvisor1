@@ -276,17 +276,19 @@ class connection{
     }
 
     public function validateUser($_user,$password,$_profile){
-        
+        //echo "<br>conexion validate";
         $auth=null;
         try {
             if(strcmp($_profile,"customer")==0){
                 $auth = $this->_factory_firebase->getAuth();
             }else if(strcmp($_profile,"company")==0){
-                
+                //echo "<br>entro a company";
                 if(is_null($this->_factory_firebase_company)){
                     $this->companyConnection();
                 }
+                //echo "<br>creo objeto company";
                 $auth = $this->_factory_firebase_company->getAuth();
+                //echo "<br>creo objeto autenticacion";
                 //$users = $auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
                 //foreach ($users as $user) {
                 //   print_r($user);
@@ -298,8 +300,10 @@ class connection{
                 $auth = $this->_factory_firebase_driver->getAuth();
             }
             //print_r($auth);
-            
+            //echo "<br>voy a validar usuario";
             $user = $auth->verifyPassword($_user, $password);
+            //echo "<br>valido el usuario";
+
             //print_r($user);
             //echo "llego aca 2";
             return $user;
@@ -314,6 +318,7 @@ class connection{
             
             return $e->getMessage();
         }
+        echo "no paso a ningun error";
     }
 
     public function getDateTime(){
