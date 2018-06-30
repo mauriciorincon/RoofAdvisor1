@@ -44,6 +44,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 var marketrs=[];
                 var infowindow;
                 <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+                
 
                 
 
@@ -57,6 +58,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     geocodeAddress(geocoder,map,address,iconBase);
                 }
                 
+                <?php echo 'var companyID = "'. $_actual_company['CompanyID'].'"';?>
+
                 var ref = firebase.database().ref("Orders");
                 ref.orderByChild("CompanyID").equalTo("<?php echo $_actual_company['CompanyID'] ?>").once("value", function(snapshot) {
 
@@ -83,10 +86,29 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 // Retrieve new orders as they are added to our database
                 ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
-                    addOrderToTable(newOrder);
+                    if(newOrder.Status=='A' || newOrder.CompanyID==companyID){
+                        if(validateExist(newOrder.OrderNumber)==false){
+                            addOrderToTable(newOrder,companyID);
+                        }
+                    }
                     console.log("Data: " + newOrder);
                     
                 });
+                // Retrieve new orders as they are added to our database
+                ref.on("child_changed", function(snapshot, prevChildKey) {
+                    var updateOrder = snapshot.val();
+                    if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID){
+                        if(validateExist(updateOrder.OrderNumber)==false){
+                            addOrderToTable(updateOrder,companyID);
+                        }else{
+                            updateOrderOnTable(updateOrder);
+                        }
+                    }
+                    //addOrderToTable(newOrder,companyID);
+                    console.log("Data: " + newOrder.OrderNumber);
+                    
+                });
+ 
                 
             }
 
@@ -116,9 +138,57 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 });
             }
 
-            function addOrderToTable(dataOrder){
-                $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+'</td><td>'+dataOrder.ContractorID+'</td></tr>');
-                
+            function addOrderToTable(dataOrder,companyID){
+                        $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+'</td><td>'+dataOrder.ContractorID+'</td></tr>');
+            }
+
+            function updateOrderOnTable(dataOrder){
+                var value = dataOrder.OrderNumber;
+                $("#table_orders_company tr").each(function(index) {
+                        if (index !== 0) {
+
+                            $row = $(this);
+
+                            var id = $row.find("td:eq(0)").text();
+
+                            if (id.indexOf(value) === 0) {
+                                $row.find("td:eq(1)").html(dataOrder.SchDate);
+                                $row.find("td:eq(2)").html(dataOrder.SchTime);
+                                $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                                $row.find("td:eq(5)").html(dataOrder.RequestType);
+                                $row.find("td:eq(6)").html(dataOrder.Status);
+                                $row.find("td:eq(7)").html(dataOrder.ETA);
+                                $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+                                $row.find("td:eq(9)").html(dataOrder.PaymentType);
+                                $row.find("td:eq(10)").html(dataOrder.ContractorID);
+                            }
+                            
+                        }
+                    });
+            }
+
+            function validateExist(orderID){
+               
+                    var value = orderID;
+                    var flag=false;
+                    $("#table_orders_company tr").each(function(index) {
+                        if (index !== 0) {
+
+                            $row = $(this);
+
+                            var id = $row.find("td:eq(0)").text();
+
+                            if (id.indexOf(value) !== 0) {
+                                flag=false;
+                            }
+                            else {
+                                flag=true;
+                                return;
+                            }
+                        }
+                    });
+                return flag;
+
             }
         </script>
 
@@ -133,12 +203,12 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             messagingSenderId: "120748340913"
         };*/
         var config = {
-            apiKey: "AIzaSyB_0cZnF-Rr9bGd86hqQxsSc60dpjNrTmk",
-            authDomain: "roofadvizorz.firebaseapp.com",
-            databaseURL: "https://roofadvizorz.firebaseio.com",
-            projectId: "roofadvizorz",
-            storageBucket: "roofadvizorz.appspot.com",
-            messagingSenderId: "712963760698"
+            apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
+            authDomain: "roofadvisorzapp.firebaseapp.com",
+            databaseURL: "https://roofadvisorzapp.firebaseio.com",
+            projectId: "roofadvisorzapp",
+            storageBucket: "roofadvisorzapp.appspot.com",
+            messagingSenderId: "480788526390"
         };
         firebase.initializeApp(config);
         //const dbRef = firebase.database().ref();
@@ -163,24 +233,31 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
         <form class="form-inline">
         <div class="form-group mb-2">
             
-            <input type="text" id="datepicker" class="form-control" placeholder="Select a date">
+            <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control">
+            <select class="form-control" id="optionStateFilterDashboard">
                 <option value="0">-Select State-</option>
-                <option value="S">Open</option>
-                <option value="C">Closed</option>
+                <option value="A">Order Open</option>
+                <option value="D">Order Assigned</option>
+                <option value="E">Contractor Just Arrived</option>
+                <option value="F">Estimate Sent</option>
+                <option value="G">Estimate Approved</option>
+                <option value="H">Work In Progress</option>
+                <option value="I">Work Completed</option>
+                <option value="J">Final Bill</option>
+                <option value="K">Order Completed Paid</option>
             </select>
         </div>
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="selectDriverCompany">
+            <select class="form-control" id="selectDriverFilterDashboard">
                 <option value="0">-Select Driver-</option>
                 <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
                     <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
                 <?php } ?>
             </select>
         </div>
-        <button type="button" class="btn-primary btn-sm" onClick="" >Search</button>
+        <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
         
         </form>
 

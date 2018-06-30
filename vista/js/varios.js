@@ -435,9 +435,9 @@ function insertDriver(){
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
                 
                 $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
-                //$('#selectDriverCompany').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
-                $("#selectDriverCompany option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
-                //$('#selectDriverCompany').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
+                //$('#selectDriverFilterDashboard').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
+                $("#selectDriverFilterDashboard option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
+                //$('#selectDriverFilterDashboard').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
                 
             }else{
                 
@@ -1314,7 +1314,7 @@ function refreshCalendar(pmonth,pyear){
 
 $( function() {
     
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
   $(function(){
@@ -1326,3 +1326,54 @@ $( function() {
     
   });
   
+
+  function filterDashboard(table){
+    $("#"+table+" tr").each(function(index) {
+        if (index !== 0) {
+
+            var date=$("#datepickerFilterDashboard").val();
+            var state=$("#optionStateFilterDashboard").val();
+            var driver=$("#selectDriverFilterDashboard").val();
+            if(date!==''){
+                $row = $(this);
+            
+                var id = $row.find("td:eq(1)").text();
+
+                if (id.indexOf(date) !== 0) {
+                    $row.hide();
+                }else {
+                    $row.show();
+                }
+            }else if(state!=='' && state!=='0'){
+                $row = $(this);
+            
+                var id = $row.find("td:eq(6)").text();
+
+                if (id.indexOf(state) !== 0) {
+                    $row.hide();
+                }else {
+                    $row.show();
+                }
+            }else if(driver!=='' && driver!=='0'){
+                $row = $(this);
+            
+                var id = $row.find("td:eq(10)").text();
+
+                if (id.indexOf(driver) !== 0) {
+                    $row.hide();
+                }else {
+                    $row.show();
+                }
+            }else{
+                $row.show();
+            }
+
+            
+        }
+    });
+  }
+  /*$("#datepickerFilterCompanyDashboard").on("keyup", function() {
+    var value = $(this).val();
+
+    
+});*/

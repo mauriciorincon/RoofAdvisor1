@@ -31,7 +31,7 @@ class connection{
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvizorz.firebaseio.com')
+            ->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
             ->create();
 
         $this->_firebase = $firebase_tmp->getDatabase();
@@ -161,11 +161,11 @@ class connection{
         $snapshot=$this->_firebase->getReference($table)
                             ->getSnapshot();
         $value = $snapshot->getValue();
-        $_array_company=$value;
+        $_array_data=$value;
         //$value = $this->_firebase->get($table."/");
 
         //$_array_company=json_decode($value,true);
-        return $_array_company;
+        return $_array_data;
     }
 
     public function getQueryEqual2($table,$field,$searchValue,$field2,$searchValue2){

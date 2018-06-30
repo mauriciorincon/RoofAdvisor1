@@ -32,6 +32,15 @@ class orderModel extends connection{
         }
     }
 
+    function getOrdersAll(){
+        $result=$this->getDataTable('Orders');
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }
+    }
+
     function insertOrder($id_order,$dataOrder){
         $result=$this->insertDataTable("Orders",$id_order,$dataOrder); 
         return $result;
