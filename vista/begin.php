@@ -2,6 +2,11 @@
 <div class="slider-area">
 	
 <div class="container">
+<div class="form-group" align="justify">
+<p style="padding:25px;">
+Roof AdvisorZ makes it easy for you to get same day emergency roof repair service, or, to schedule a roof contractor. Enter your Zip Code and get same day emergency roofing service or schedule a roof contractor to your house.
+</p>
+</div>
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-2"> 
