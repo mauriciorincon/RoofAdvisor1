@@ -37,7 +37,7 @@
 								<div class="footer-logo">
 								   <img src="img/logo.png" alt="" />
 								</div>
-								<p>Lorem ipsum dolor sit amet, consetur acing elit, sed do eiusmod tempor</p>
+								<p>Roof AdvisorZ  takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
 									<li>
 										<i class="fa fa-map-marker"></i>
@@ -66,13 +66,11 @@
 								<h3 class="widget-title">Custom Feature</h3>
 								<ul class="footer-menu">
 									<li><a href="#">home</a></li>
-									<li><a href="#">service</a></li>
 									<li><a href="#">about us</a></li>
-									<li><a href="#">portfolio</a></li>
-									<li><a href="#">blog</a></li>
+									<li><a href="#">service</a></li>
+									<li><a href="#">download</a></li>
+									<li><a href="#">FAQ</a></li>
 									<li><a href="#">contact us</a></li>
-									<li><a href="#">blog left sidebar</a></li>
-									<li><a href="#">blog right sidebar</a></li>
 								</ul>
 							</div>
 						</div>	

@@ -101,8 +101,8 @@ if(!isset($_SESSION)) {
 									<ul>
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
-										<li><a href="">PORTFOLIO</a></li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
+										<li><a href="?controller=services&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										<div class="bs-example">
@@ -119,9 +119,9 @@ if(!isset($_SESSION)) {
 										<ul>
 											<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a>
 											<li><a href="about.html">ABOUT US</a></li>
-											<li><a href="">PORTFOLIO</a></li>
 											<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
 											<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
+										<li><a href="?controller=services&accion=showinfo">FAQ</a></li>
 											<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										</ul>
 									</nav>
