@@ -482,5 +482,10 @@ class userController{
         $this->_userModel=new userModel();
         return $this->_userModel->getContractorById($contractorID);
     }
+
+    public function getCompanyById($companyID){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCompanyByID($companyID);
+    }
 }
 ?>

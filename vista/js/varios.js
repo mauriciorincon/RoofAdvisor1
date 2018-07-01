@@ -1405,3 +1405,91 @@ function getListCompany(tableName){
     }
     
 }
+
+function getDataCompany(companyID){
+
+    
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataCompany.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                data=jQuery.parseJSON(data);
+                $("input#companyID").val(data.CompanyID);
+                $("input#compamnyName").val(data.CompanyName);
+                $("input#firstCompanyName").val(data.PrimaryFName);
+                $("input#lastCompanyName").val(data.PrimaryLName);
+                $("input#companyEmail").val(data.CompanyEmail);
+                $("input#companyAddress1").val(data.CompanyAdd1);
+                $("input#companyAddress2").val(data.CompanyAdd2);
+                $("input#companyAddress3").val(data.CompanyAdd3);
+                $("input#companyPhoneNumber").val(data.CompanyPhone);
+                $("input#companyType").val(data.CompanyType);
+
+                $("input#compamnyPayAddress1").val(data.PayInfoBillingAddress1);
+                $("input#compamnyPayAddress2").val(data.PayInfoBillingAddress2);
+                $("input#compamnyPayCity").val(data.PayInfoBillingCity);
+                $("input#compamnyPayState").val(data.PayInfoBillingST);
+                $("input#compamnyPayZip").val(data.PayInfoBillingZip);
+                $("input#compamnyPayMonth").val(data.PayInfoCCExpMon);
+                $("input#compamnyPayYear").val(data.PayInfoCCExpYr);
+                $("input#compamnyPayCCNum").val(data.PayInfoCCNum);
+                $("input#compamnyPaySecCode").val(data.PayInfoCCSecCode);
+                $("input#compamnyPayName").val(data.PayInfoName);
+                $("input#compamnyPayFName").val(data.PrimaryFName);
+                $("input#compamnyPayLName").val(data.PrimaryLName);
+
+                $("input#compamnyAgencyName").val(data.InsLiabilityAgencyName);
+                $("input#compamnyAgtName").val(data.InsLiabilityAgtName);
+                $("input#compamnyAgtNum").val(data.InsLiabilityAgtNum);
+                $("input#compamnyPolNum").val(data.InsLiabilityPolNum);
+                $("input#compamnyStatusRating").val(data.Status_Rating);
+                
+                
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function getListDrivers(companyID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListDriver.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#table_drivers_dashboard_admin tbody').html(data);
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+}

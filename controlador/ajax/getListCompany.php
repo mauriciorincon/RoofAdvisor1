@@ -25,8 +25,8 @@ $_string="";
 					"<td>".$company['CompanyStatus']."</td>".
                     '<td>
                     <a class="btn-info btn-sm" data-toggle="modal"  
-                                            href="#myModal2" 
-                                            onClick=""> 
+                                            href="#myModalProfile" 
+                                            onClick="getDataCompany('."'".$company['CompanyID']."'".')"> 
                                             <span class="glyphicon glyphicon-pencil"></span></a>';
                     if(strcmp($company['CompanyStatus'],"Active")==0){
                         $_string.=' <a class="btn-danger btn-sm" data-toggle="modal"  
@@ -41,7 +41,11 @@ $_string="";
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>';
                     }
-  
+                    $_string.=' <a class="btn-warning btn-sm" data-toggle="modal"  
+                        href="#myModalDrivers" 
+                        onClick="getListDrivers('."'".$company['CompanyID']."'".')"> 
+                        <span class="glyphicon glyphicon-object-align-horizontal"></span>
+                        </a>';
                     $_string.='</td>'.
                 "</tr>";
 		
