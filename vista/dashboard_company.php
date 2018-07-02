@@ -74,8 +74,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                     icon: iconBase+'library_maps.png',
                                     text: fila.SchDate
                                 };
-                                marketrs.push(addMarket(marker,map));
-                                //console.log(iconBase+'library_maps.png');
+                                var oMarket=addMarket(marker,map,fila,infowindow);
+                                marketrs.push(oMarket);
                             }
 
                 console.log(snapshot.val());
@@ -88,7 +88,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID){
                         if(validateExist(newOrder.OrderNumber)==false){
-                            addOrderToTable(newOrder,companyID);
+                            addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
                         }
                     }
                     console.log("Data: " + newOrder);
@@ -99,7 +99,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     var updateOrder = snapshot.val();
                     if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID){
                         if(validateExist(updateOrder.OrderNumber)==false){
-                            addOrderToTable(updateOrder,companyID);
+                            addOrderToTable(updateOrder,companyID,map,infowindow,iconBase);
                         }else{
                             updateOrderOnTable(updateOrder);
                         }
@@ -112,13 +112,20 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 
             }
 
-            function addMarket(data,map){
-                    new google.maps.Marker({
+            function addMarket(data,map,fila,infowindow){
+                    var oMarket= new google.maps.Marker({
                         position: new google.maps.LatLng(data.lat,data.lng),
                         map:map,
                         icon:'img/img_maps/open_service.png'
                     });
-                    
+
+                    oMarket.addListener('click', function() {
+                                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+                                                            '</b><br><b>Customer:</b>'+fila.CustomerID+
+                                                            '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+'</p>');
+                                    infowindow.open(map, this);
+                                });
+                    return oMarket;
                 }
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
@@ -128,7 +135,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     resultsMap.setCenter(results[0].geometry.location);
                     var marker = new google.maps.Marker({
                     map: resultsMap,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
+                    label:"C"
                     
                     });
                     //console.log(results);
@@ -138,8 +146,27 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 });
             }
 
-            function addOrderToTable(dataOrder,companyID){
-                        $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+'</td><td>'+dataOrder.ContractorID+'</td></tr>');
+            function bindInfoWindow(marker, html) {
+                google.maps.event.addListener(marker, 'click', function (event) {
+                    infowindow.setContent(html);
+                    infowindow.position = event.latLng;
+                    infowindow.open(map, marker);
+                });
+            }
+
+            function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
+                $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
+                dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
+                dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
+                '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
+                '</td><td>'+dataOrder.ContractorID+'</td></tr>');
+                var marker={
+                                    lat: parseFloat(dataOrder.Latitude),
+                                    lng: parseFloat(dataOrder.Longitude),
+                                    icon: iconBase+'library_maps.png',
+                                    text: dataOrder.SchDate
+                                };
+                                var oMarket=addMarket(marker,map,dataOrder,infowindow);
             }
 
             function updateOrderOnTable(dataOrder){
