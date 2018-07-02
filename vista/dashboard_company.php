@@ -105,7 +105,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                         }
                     }
                     //addOrderToTable(newOrder,companyID);
-                    console.log("Data: " + newOrder.OrderNumber);
+                    console.log("Data: " + updateOrder.OrderNumber);
                     
                 });
  

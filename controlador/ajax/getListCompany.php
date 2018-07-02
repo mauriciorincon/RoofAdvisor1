@@ -14,14 +14,20 @@ $_orderController=new orderController();
 
 $_string="";
     foreach ($_array_company as $key => $company) {
-
+        $_lic_num = isset($company['ComapnyLicNum']) ? $company['ComapnyLicNum'] : '';
+        $_address= isset($company['CompanyAdd1']) ? $company['CompanyAdd1'] : ' ';
+        $_address2 =isset($company['CompanyAdd2']) ? $company['CompanyAdd2'] : ' ';
+        $_address3 =isset($company['CompanyAdd3']) ? $company['CompanyAdd3'] : ' ';
+        $_mail = isset($company['CompanyEmail']) ? $company['CompanyEmail'] : '';
+        $_name = isset($company['CompanyName']) ? $company['CompanyName'] : '';
+        $_phone =isset($company['CompanyPhone']) ? $company['CompanyPhone'] : '';
         $_string.="<tr>".
-                    "<td>".$company['ComapnyLicNum']."</td>".
-                    "<td>".$company['CompanyAdd1']." ".$company['CompanyAdd2']." ".$company['CompanyAdd3']."</td>".
-                    "<td>".$company['CompanyEmail']."</td>".
+                    "<td>".$_lic_num."</td>".
+                    "<td>".$_address.' '.$_address2.' '.$_address3."</td>".
+                    "<td>".$_mail."</td>".
                     "<td>".$company['CompanyID']."</td>".
-					"<td>".$company['CompanyName']."</td>".
-					"<td>".$company['CompanyPhone']."</td>".
+					"<td>".$_name."</td>".
+					"<td>".$_phone."</td>".
 					"<td>".$company['CompanyStatus']."</td>".
                     '<td>
                     <a class="btn-info btn-sm" data-toggle="modal"  

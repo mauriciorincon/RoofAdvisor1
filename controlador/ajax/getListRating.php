@@ -6,8 +6,15 @@
     require_once($_SESSION['application_path']."/controlador/userController.php");
 
     $_orderController=new orderController();
-    $_id_contractor=$_POST['id_contractor'];
-    $_listRating=$_orderController->getRatingsContractor($_id_contractor);
+	$_id_search=$_POST['id_search'];
+	$_type=$_POST['type'];
+	if(strcmp($_type,'company')==0){
+		
+		$_listRating=$_orderController->getRatingsByCompany($_id_search);
+	}else{
+		$_listRating=$_orderController->getRatingsContractor($_id_search);
+	}
+    
 
     $_customerController=new userController();
 

@@ -884,7 +884,7 @@ $(document).ready(function () {
                 $('#myModalRespuesta').modal({backdrop: 'static'});
                 isValid=false;
             }else{
-                getListCompany(); 
+                getListContractor(); 
             }
             
         }
@@ -949,7 +949,7 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
-function getListCompany(){
+function getListContractor(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
@@ -1194,9 +1194,9 @@ function loginUser(user,password,url){
         });
 }
 
-function showRatings(contractorID){
+function showRatings(identifier,type){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListRating.php", {"id_contractor":contractorID }, null, "text" )
+    $.post( "controlador/ajax/getListRating.php", {"id_search":identifier,"type": type}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $('#headerTextAnswerRating').html('Customer Rating');

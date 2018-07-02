@@ -103,6 +103,12 @@ class orderController{
         return $_ratings;
     }
 
+    public function getRatingsByCompany($value){
+        $this->_orderModel=new orderModel();
+        $_ratings=$this->_orderModel->getRating("IdCompany",$value);
+        return $_ratings;
+    }
+
     public function getOrderByCompany($companyID){
         $this->_orderModel=new orderModel();
         $_orders=$this->_orderModel->getOrders('CompanyID',$companyID);

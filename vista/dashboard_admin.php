@@ -5,7 +5,6 @@ Welcome to RoofAdvisorz Admin
             <a href="#" class="active">Actions</a>
             <a href="#myModalProfile" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashBoard1')" >Orders</a>
             <a href="#myModalProfile" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a>
-            <a href="#myModalDrivers" data-toggle="modal" >Drivers</a>
             <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
             <a href="#">Metrics in your Service Area</a>
             <a href="#">Orders for the week</a>
