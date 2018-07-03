@@ -113,10 +113,20 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             }
 
             function addMarket(data,map,fila,infowindow){
+                var image="";
+                    if(fila.Status==='A'){
+                        image="open_service.png";
+                    }else if(fila.Status=='D'){
+                        image="open_service_d.png";
+                    }else if(fila.Status=='E'){
+                        image="open_service_e.png";
+                    }else if(fila.Status=='F'){
+                        image="open_service_f.png";
+                    }
                     var oMarket= new google.maps.Marker({
                         position: new google.maps.LatLng(data.lat,data.lng),
                         map:map,
-                        icon:'img/img_maps/open_service.png'
+                        icon:'img/img_maps/'+image
                     });
 
                     oMarket.addListener('click', function() {
@@ -210,7 +220,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                             }
                             else {
                                 flag=true;
-                                return;
+                                return false;
                             }
                         }
                     });
