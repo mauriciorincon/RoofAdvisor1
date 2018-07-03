@@ -34,6 +34,11 @@ class userController{
     }
     
     public function showLoginContractor(){
+        if(isset($_SESSION['loggedin'])){
+            if($_SESSION['loggedin']==true){
+                $this->dashboardCompany($_SESSION['email']);
+            }
+        }
 		require_once("vista/head.php");
 		require_once("vista/login_contractor.php");
 		require_once("vista/footer.php");
@@ -344,36 +349,30 @@ class userController{
     }
     
     public function dashboardCompany($_id_company){
-        $_userMail=$_id_company;
-        $this->_userModel=new userModel();
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 
-        //echo "company id".$_id_company;
-        $_actual_company=$this->_userModel->getCompany($_userMail);
-        //print_r($_actual_company);
-        $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
-        
-        $_array_orders_to_show=array();
+            $_userMail=$_id_company;
+            $this->_userModel=new userModel();
 
-        
-        $_orderController=new orderController();
-        $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
-        
-        //print_r($_array_orders_to_show);
-        /*foreach ($_array_contractors_to_show as $key => $contractor) {
-            //echo $contractor['ContractorID']."<br>";
-            $_array_orders=$this->_userModel->getOrdersDriver($contractor['ContractorID']);
-            foreach($_array_orders as $data => $order){
-                array_push($_array_orders_to_show,$order);   
-            }
-            //print_r($_array_orders);
+            //echo "company id".$_id_company;
+            $_actual_company=$this->_userModel->getCompany($_userMail);
+            //print_r($_actual_company);
+            $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
             
-        } */   
-        //print_r($_array_orders_to_show);
-        
-        require_once("vista/head.php");
-		require_once("vista/dashboard_company.php");
-		require_once("vista/footer.php");
+            $_array_orders_to_show=array();
 
+            
+            $_orderController=new orderController();
+            $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
+            
+            
+            
+            require_once("vista/head.php");
+            require_once("vista/dashboard_company.php");
+            require_once("vista/footer.php");
+        }else{
+            $this->showLoginContractor();
+        }
     }
 
     public function dashboardAdmin(){

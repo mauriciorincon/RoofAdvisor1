@@ -1,4 +1,11 @@
-Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+<div class="alert alert-success">
+  <strong>Welcome to RoofAdvisorz,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+</div>
+<?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+    <div class="alert alert-danger">
+        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+    </div>
+<?php } ?>
 <div class="row">
     <div class="col-md-2">
         <div class="vertical-menu">
@@ -529,6 +536,11 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 			</div> 
 			<div class="modal-body" id="textAnswerDriversCompany"> 
                 <div class="table-responsive">
+                <?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+                    <div class="alert alert-danger">
+                        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+                    </div>
+                <?php } ?>
                         <table class="table" id="table_drivers_dashboard_company" name="table_drivers_dashboard_company">
                             <thead>
                             <tr>
@@ -652,10 +664,10 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
       </div>
       <div class="modal-body">
 
-        <form role="form" method="post" action="?controlador=precontrato&accion=editaCupo">
+        <form role="form" method="post" action="" id="formInsertContractor">
             <div class="form-group">
                 <label for="ContractorIDed">ContractorID</label>
-                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn"  required readonly>
+                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn" readonly>
             </div>
             <div class="form-group">
                 <label for="ContNameFirsted">First name</label>
@@ -681,15 +693,16 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 
             <div class="form-group">
                 <label for="ContLicenseNumed">Driver Email</label>
-                <input type="text" class="form-control" name="ContEmail" id="ContEmail" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
+                <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
+                <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
             </div>
             
             <div class="form-group">
             <label for="ContStatused">Status</label>
-                    <select class="form-control" id="ContStatusIn" name="ContStatusIn">
+                    <select class="form-control" id="ContStatusIn" name="ContStatusIn" disabled>
                         <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="Inactive" selected>Inactive</option>
                         <option value="Terminated">Terminated</option>
                     </select>
             </div>

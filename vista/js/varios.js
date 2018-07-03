@@ -18,7 +18,7 @@ $(document).ready(function () {
     
         //console.log("entro a clic");
         if (!$item.hasClass('disabled')) {
-             console.log("no tiene desabilitado");
+             //console.log("no tiene desabilitado");
             navListItems.removeClass('btn-success').addClass('btn-default');
             $item.addClass('btn-success');
             
@@ -413,7 +413,27 @@ function insertDriver(){
     var contractorPhoneNumber = $("input#ContPhoneNumIn").val();
     var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
     var contractorState = $("select#ContStatusIn").val();
-    var contractorEmail=$("input#ContEmail").val();
+    var contractorEmail=$("input#emailValidation").val();
+
+    var flag=true;
+    var ListTextBox=$("#formInsertContractor").find("input");
+    for (var i = 0; i < ListTextBox.length; i++) {
+        if (!ListTextBox[i].validity.valid) {
+            flag = false;
+            $(ListTextBox[i]).closest(".form-group").addClass("has-error").removeClass("has-success");
+        }
+    }
+    
+    if(flag==true){
+        validateEmail('Contractors');
+        
+    }
+    if (flag==false){
+        $('#myMensaje div.modal-body').html('Please fill all fields to continue with driver creation');
+        $("#myMensaje").modal("show");
+        //alert('Please fill all fields to continue with driver creation');
+        return;
+    }
 
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
@@ -1334,9 +1354,8 @@ $( function() {
             var date=$("#datepickerFilterDashboard").val();
             var state=$("#optionStateFilterDashboard").val();
             var driver=$("#selectDriverFilterDashboard").val();
+            $row = $(this);
             if(date!==''){
-                $row = $(this);
-            
                 var id = $row.find("td:eq(1)").text();
 
                 if (id.indexOf(date) !== 0) {
@@ -1345,7 +1364,7 @@ $( function() {
                     $row.show();
                 }
             }else if(state!=='' && state!=='0'){
-                $row = $(this);
+                //$row = $(this);
             
                 var id = $row.find("td:eq(6)").text();
 
@@ -1355,8 +1374,7 @@ $( function() {
                     $row.show();
                 }
             }else if(driver!=='' && driver!=='0'){
-                $row = $(this);
-            
+                //$row = $(this);
                 var id = $row.find("td:eq(10)").text();
 
                 if (id.indexOf(driver) !== 0) {
