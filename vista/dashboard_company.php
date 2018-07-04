@@ -551,8 +551,8 @@
                                 <th>Driver License</th>
                                 <th>Driver Email</th>
                                 <th>Status</th>
-                                <th>Edit</th>
-                                <th>Inactive</th>
+                                <th>-Edit-</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -563,7 +563,7 @@
                                     <td><?php echo $contractor['ContNameLast']?></td>
                                     <td><?php echo $contractor['ContPhoneNum']?></td>
                                     <td><?php echo $contractor['ContLicenseNum']?></td>
-                                    <td><?php if (isset($contractor['driverEmail'])){echo $contractor['driverEmail'];}else{echo '';}?></td>
+                                    <td><?php if (isset($contractor['ContEmail'])){echo $contractor['ContEmail'];}else{echo '';}?></td>
                                     <td><?php echo $contractor['ContStatus']?></td>
                                     <td>
                                         <a class="btn-info btn-sm" data-toggle="modal"  
@@ -573,9 +573,15 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
+                                        <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
+                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        <?php } else{ ?>
+                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"  onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

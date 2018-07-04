@@ -97,6 +97,23 @@ class driverController{
         return "The contractor identify by ".$_contractorID." was updated corretly";
     }
 
+    public function disableDriver($_contractorID){
+        $this->_driverModel=new driverModel();
+        $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Inactive');
+
+        
+        return "The contractor identify by ".$_contractorID." was updated corretly";
+    }
+
+    public function enableDriver($_contractorID){
+        $this->_driverModel=new driverModel();
+        $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
+
+        
+        return "The contractor identify by ".$_contractorID." was updated corretly ";
+
+    }
+
 }
 
 

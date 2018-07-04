@@ -36,6 +36,8 @@ class userModel extends connection{
             $result=$this->getQueryEqual('Company','CompanyEmail',$email);
         }else if(strcmp($table,'customer')==0){
             $result=$this->getQueryEqual('Customers','Email',$email);
+        }else if(strcmp($table,'Contractors')==0){
+            $result=$this->getQueryEqual('Contractors','ContEmail',$email);
         }
         //print_r($result);
         if(is_array($result)){
