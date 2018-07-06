@@ -106,11 +106,33 @@ class driverController{
     }
 
     public function enableDriver($_contractorID){
+        $_message="";
+        $_flag=false;
         $this->_driverModel=new driverModel();
-        $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
+        $_actual_driver=$this->_driverModel->getDriverByID($_contractorID);
+
+        $this->_userController=new userController();
+        $_user_created=$this->_userController->insertUserDatabase($_actual_driver['ContEmail'],$_actual_driver['ContPhoneNum'],$_actual_driver['ContNameFirst'].' '.$_actual_driver['ContNameLast'],'',$_contractorID,'driver');
+        if(is_array($_user_created) or is_object($_user_created)){
+            $_message="User driver created correctly.";
+            
+            $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
+            $_flag=true;
+        }else{
+            $_message="Error creating the driver. $_user_created";
+            $_flag=false;
+        }
 
         
-        return "The contractor identify by ".$_contractorID." was updated corretly ";
+        
+
+        if($_flag==false){
+            return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
+        }else{
+            return "The contractor identify by ".$_contractorID." was updated correctly, $_message";
+        }
+        //print_r($_user_created);
+        
 
     }
 

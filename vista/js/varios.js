@@ -455,7 +455,15 @@ function insertDriver(){
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
                 
-                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+
+                                                            '</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+
+                                                            '</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+
+                                                            '</td><td>'+contractorState+
+                                                            '</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick="">'+
+                                                            '<span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" '+
+                                                            'class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" '+
+                                                            'name="inactivate-contractor-button" title="Active Driver" onclick="disableEnableDriver('+
+                                                            consecutivo+','+'Active'+')"><span class="glyphicon glyphicon-ok"></span></a></td></tr>');
                 //$('#selectDriverFilterDashboard').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
                 $("#selectDriverFilterDashboard option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
                 //$('#selectDriverFilterDashboard').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
@@ -1529,7 +1537,7 @@ function disableEnableDriver(id_driver,action){
                         
                         $(this).find('td').eq(6).text(action);
                         //var tdv =$(this).find('td').eq(8);
-                        if(action="Active"){ 
+                        if(action=="Active"){ 
                             $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
                             $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
                             $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");

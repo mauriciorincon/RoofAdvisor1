@@ -59,8 +59,8 @@ class connection{
             ->withDatabaseUri('https://roofadvisorz-driver.firebaseio.com')
             ->create();
 
-        $this->_firebase_company = $firebase_tmp->getDatabase();
-        $this->_factory_firebase_company=$firebase_tmp;
+        $this->_firebase_driver = $firebase_tmp->getDatabase();
+        $this->_factory_firebase_driver=$firebase_tmp;
     }
 
     public function getConnection(){
