@@ -172,11 +172,26 @@
             }
 
             function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
-                $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
+                var t = $('#table_orders_company').DataTable();
+                t.row.add( [
+                        dataOrder.OrderNumber,
+                        dataOrder.SchDate,
+                        dataOrder.SchTime,
+                        dataOrder.Hlevels,
+                        dataOrder.Rtype,
+                        dataOrder.Water,
+                        dataOrder.RequestType,
+                        dataOrder.Status,
+                        dataOrder.ETA,
+                        dataOrder.EstAmtMat,
+                        dataOrder.PaymentType,
+                        dataOrder.ContractorID
+                    ] ).draw( false );
+                /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
                 dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
                 dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
                 '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
-                '</td><td>'+dataOrder.ContractorID+'</td></tr>');
+                '</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
                 var marker={
                                     lat: parseFloat(dataOrder.Latitude),
                                     lng: parseFloat(dataOrder.Longitude),
@@ -274,40 +289,11 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
         <br>
-        <form class="form-inline">
-        <div class="form-group mb-2">
-            
-            <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="optionStateFilterDashboard">
-                <option value="0">-Select State-</option>
-                <option value="A">Order Open</option>
-                <option value="D">Order Assigned</option>
-                <option value="E">Contractor Just Arrived</option>
-                <option value="F">Estimate Sent</option>
-                <option value="G">Estimate Approved</option>
-                <option value="H">Work In Progress</option>
-                <option value="I">Work Completed</option>
-                <option value="J">Final Bill</option>
-                <option value="K">Order Completed Paid</option>
-            </select>
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="selectDriverFilterDashboard">
-                <option value="0">-Select Driver-</option>
-                <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
-                    <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
-                <?php } ?>
-            </select>
-        </div>
-        <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
-        
-        </form>
+       
 
          
-        <div class="table-responsive">          
-            <table class="table" id="table_orders_company">
+        <div class="row">          
+            <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
                 <tr>
                     <th>Repair ID</th>

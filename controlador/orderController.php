@@ -58,7 +58,7 @@ class orderController{
             "AppEst" => "",
             "Authorized" => "",
             "BeforePicRefID" => "",
-            "CompanyID"=>$_contractor['CompanyID'],
+            "CompanyID"=>$arrayDataOrder['CompanyID'],
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
             "CutomerFBID" => $_customerK,
@@ -82,7 +82,7 @@ class orderController{
             "Rtype" => $arrayDataOrder['Rtype'],
             "SchDate" => $arrayDataOrder['ActAmtTime'],
             "SchTime" => $arrayDataOrder['ActTime'],
-            "Status" => "G",
+            "Status" => "A",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
         );

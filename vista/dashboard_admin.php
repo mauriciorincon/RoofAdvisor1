@@ -3,8 +3,8 @@ Welcome to RoofAdvisorz Admin
     <div class="col-md-2">
         <div class="vertical-menu">
             <a href="#" class="active">Actions</a>
-            <a href="#myModalProfile" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashBoard1')" >Orders</a>
-            <a href="#myModalProfile" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a>
+            <a href="#" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashBoard1')" >Orders</a>
+            <a href="#" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a>
             <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
             <a href="#">Metrics in your Service Area</a>
             <a href="#">Orders for the week</a>
@@ -361,7 +361,7 @@ Welcome to RoofAdvisorz Admin
                             <div class="panel-body">
                                 <div class="form-group">
                                     <label class="control-label ">Company ID</label>
-                                    <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="" />
+                                    <input disabled type="text" class="form-control"  id="companyID" name="companyID" value="" />
                                 </div>
 
                                 <div class="form-group">

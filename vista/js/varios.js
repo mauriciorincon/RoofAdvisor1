@@ -1,3 +1,10 @@
+$(document).ready(function() {
+
+    $('#table_orders_customer').DataTable();
+    
+    $('#table_orders_company').DataTable();
+} );
+
 ///////////////////////////////////////////////
 //Register Company
 //////////////////////////////////////////////
@@ -570,7 +577,48 @@ function updateDataCompany(){
     });
 }
 
+function updateDataCustomer(customerID){
 
+    
+    var firstCustomerName = $("input#firstCustomerName").val();
+    var lastCustomerName = $("input#lastCustomerName").val();
+    var emailValidation = $("input#emailValidation").val();
+    var customerAddress = $("input#customerAddress").val();
+    var customerCity = $("input#customerCity").val();
+    var customerState = $("input#customerState").val();
+    var customerZipCode = $("input#customerZipCode").val();
+    var customerPhoneNumber = $("input#customerPhoneNumber").val();
+    
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerID,"firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,
+                                                    "emailValidation":emailValidation,"customerAddress":customerAddress,"customerCity":customerCity,
+                                                    "customerState":customerState,"customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}
+                                                    , null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }else{
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }
+                
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //funtions for customer suscribe
@@ -1062,7 +1110,7 @@ function insertOrderCustomer(){
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
     var ActAmtTime=$("input[name='step6date']").val();
     var ActTime=$("button[name='step6time'].active").text();
-    var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
+    var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
     var latitude=$('input:hidden[name=step5Latitude]').val();
@@ -1073,7 +1121,7 @@ function insertOrderCustomer(){
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
@@ -1407,6 +1455,14 @@ $( function() {
 
 function hideShowDivs(divName){
     $('#'+divName).collapse('hide');
+    $('#'+divName).collapse('hide');
+}
+
+function setActiveItemMenu(item){
+    $(".vertical-menu a").each(function (index) {
+        $(this).removeClass('active');
+    });
+    $(item).addClass('active');
 }
 
 function getListCompany(tableName){

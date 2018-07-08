@@ -431,6 +431,24 @@ class userController{
 
     }
 
+    public function updateCustomer($_customerID,$_arraCustomer){
+
+        
+        $this->_userModel=new userModel();                                        
+        $this->_userModel->updateCustomer($_customerID.'/Address',$_arraCustomer['customerAddress']);
+        $this->_userModel->updateCustomer($_customerID.'/City',$_arraCustomer['customerCity']);
+        $this->_userModel->updateCustomer($_customerID.'/Email',$_arraCustomer['emailValidation']);
+        $this->_userModel->updateCustomer($_customerID.'/Fname',$_arraCustomer['firstCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Lname',$_arraCustomer['lastCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Phone',$_arraCustomer['customerPhoneNumber']);
+        $this->_userModel->updateCustomer($_customerID.'/State',$_arraCustomer['customerState']);
+        $this->_userModel->updateCustomer($_customerID.'/ZIP',$_arraCustomer['customerZipCode']);
+        $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("Y-m-d H:i:s"));
+
+        return "The customer identify by ".$_customerID." was updated corretly";
+
+    }
+
     public function insertUserDatabase($mail,$number,$name,$url,$password,$profile){
         //$password = rand(1000,5000);
         //$password = "pass12345";
