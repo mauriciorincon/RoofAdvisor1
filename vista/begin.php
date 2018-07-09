@@ -586,7 +586,6 @@ Roof AdvisorZ makes it easy for you to get same day emergency roof repair servic
 </div>
 
 
-</div>
 <!-- slider-area end -->
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">

@@ -38,6 +38,7 @@ if(!isset($_SESSION)) {
 		
     </head>
     <body>
+    <div class="cont8">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -45,7 +46,7 @@ if(!isset($_SESSION)) {
         <!-- Add your site or application content here -->
 		<!-- header-area start-->
 		<header>
-			<div class="header-top-area bg-sky">
+			<div class="header-top-area dolph1">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
@@ -57,7 +58,7 @@ if(!isset($_SESSION)) {
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
-							<div class="social-icon text-right">
+							<div id ="socico" class="social-icon text-right">
 								<a href="#"><i class="fa fa-facebook"></i></a>
 								<a href="#"><i class="fa fa-linkedin"></i></a>
 								<a href="#"><i class="fa fa-twitter"></i></a>
@@ -67,37 +68,21 @@ if(!isset($_SESSION)) {
 							</div>
 							
 						</div>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-								<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-									echo $_SESSION['username'];
-								} else{
-									echo "Login In";
-								}?></span>
-								<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-									<li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
-									<li class="divider"></li>
-									<li><a href="?controller=user&accion=logout">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="header-bottom-area">
-				<div class="container">
+                          	<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-2 col-sm-2">
-							<div class="logo">
+							<div id="logoimg" class="logo">
 								<a href="index.php"><img src="img/logo.png" alt="" /></a>
 							</div>
 						</div>
 						<div class="col-lg-9 col-md-10 col-sm-10">
+                                                    <img id="menu-head" src="img/menu-header.png">
 							<div class="main-menu text-right hidden-xs">
-								<nav>
+								<nav id="navtxt">
 									<ul>
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
@@ -108,8 +93,26 @@ if(!isset($_SESSION)) {
 										<div class="bs-example">
 									
 									</ul>
-								</nav>
-								
+					
+                                      			</nav>
+				<ul class="nav navbar-nav navbar-right">
+                                                        <li class="dropdown">
+                                                        <img id="login-img" src="img/login.png">
+                                                                <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
+                                                                <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
+                                                                        echo $_SESSION['username'];
+                                                                } else{
+                                                                        echo "Login In";
+                                                                }?></span>
+                                                                <b class="caret"></b></a>
+                                                                <ul class="dropdown-menu">
+                                                                        <li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
+                                                                        <li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
+                                                                        <li class="divider"></li>
+                                                                        <li><a href="?controller=user&accion=logout">Logout</a></li>
+                                                                </ul>
+                                                        </li>
+                                                </ul>				
 							</div>
 						</div>
 						<div class="mobile-menu-area visible-xs ">

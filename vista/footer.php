@@ -160,5 +160,6 @@
     <?php
         }  
     ?>
-    </body>
+</div>    
+</body>
 </html>
