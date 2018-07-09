@@ -39,5 +39,10 @@ class driverModel extends connection{
     public function getDrivers($table){
         return $this->getDataTable($table);
     }
+
+    public function getDriverByID($contractorID){
+        $result=$this->getQueryEqual('Contractors','ContractorID',$contractorID);
+        return $result;
+    }
 }
 ?>

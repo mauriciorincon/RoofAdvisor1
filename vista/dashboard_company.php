@@ -1,4 +1,11 @@
-Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+<div class="alert alert-success">
+  <strong>Welcome to RoofAdvisorz,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+</div>
+<?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+    <div class="alert alert-danger">
+        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+    </div>
+<?php } ?>
 <div class="row">
     <div class="col-md-2">
         <div class="vertical-menu">
@@ -74,8 +81,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                     icon: iconBase+'library_maps.png',
                                     text: fila.SchDate
                                 };
-                                marketrs.push(addMarket(marker,map));
-                                //console.log(iconBase+'library_maps.png');
+                                var oMarket=addMarket(marker,map,fila,infowindow);
+                                marketrs.push(oMarket);
                             }
 
                 console.log(snapshot.val());
@@ -88,7 +95,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID){
                         if(validateExist(newOrder.OrderNumber)==false){
-                            addOrderToTable(newOrder,companyID);
+                            addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
                         }
                     }
                     console.log("Data: " + newOrder);
@@ -99,26 +106,43 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     var updateOrder = snapshot.val();
                     if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID){
                         if(validateExist(updateOrder.OrderNumber)==false){
-                            addOrderToTable(updateOrder,companyID);
+                            addOrderToTable(updateOrder,companyID,map,infowindow,iconBase);
                         }else{
                             updateOrderOnTable(updateOrder);
                         }
                     }
                     //addOrderToTable(newOrder,companyID);
-                    console.log("Data: " + newOrder.OrderNumber);
+                    console.log("Data: " + updateOrder.OrderNumber);
                     
                 });
  
                 
             }
 
-            function addMarket(data,map){
-                    new google.maps.Marker({
+            function addMarket(data,map,fila,infowindow){
+                var image="";
+                    if(fila.Status==='A'){
+                        image="open_service.png";
+                    }else if(fila.Status=='D'){
+                        image="open_service_d.png";
+                    }else if(fila.Status=='E'){
+                        image="open_service_e.png";
+                    }else if(fila.Status=='F'){
+                        image="open_service_f.png";
+                    }
+                    var oMarket= new google.maps.Marker({
                         position: new google.maps.LatLng(data.lat,data.lng),
                         map:map,
-                        icon:'img/img_maps/open_service.png'
+                        icon:'img/img_maps/'+image
                     });
-                    
+
+                    oMarket.addListener('click', function() {
+                                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+                                                            '</b><br><b>Customer:</b>'+fila.CustomerID+
+                                                            '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+'</p>');
+                                    infowindow.open(map, this);
+                                });
+                    return oMarket;
                 }
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
@@ -128,7 +152,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                     resultsMap.setCenter(results[0].geometry.location);
                     var marker = new google.maps.Marker({
                     map: resultsMap,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
+                    label:"C"
                     
                     });
                     //console.log(results);
@@ -138,8 +163,42 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                 });
             }
 
-            function addOrderToTable(dataOrder,companyID){
-                        $("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+'</td><td>'+dataOrder.ContractorID+'</td></tr>');
+            function bindInfoWindow(marker, html) {
+                google.maps.event.addListener(marker, 'click', function (event) {
+                    infowindow.setContent(html);
+                    infowindow.position = event.latLng;
+                    infowindow.open(map, marker);
+                });
+            }
+
+            function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
+                var t = $('#table_orders_company').DataTable();
+                t.row.add( [
+                        dataOrder.OrderNumber,
+                        dataOrder.SchDate,
+                        dataOrder.SchTime,
+                        dataOrder.Hlevels,
+                        dataOrder.Rtype,
+                        dataOrder.Water,
+                        dataOrder.RequestType,
+                        dataOrder.Status,
+                        dataOrder.ETA,
+                        dataOrder.EstAmtMat,
+                        dataOrder.PaymentType,
+                        dataOrder.ContractorID
+                    ] ).draw( false );
+                /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
+                dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
+                dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
+                '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
+                '</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
+                var marker={
+                                    lat: parseFloat(dataOrder.Latitude),
+                                    lng: parseFloat(dataOrder.Longitude),
+                                    icon: iconBase+'library_maps.png',
+                                    text: dataOrder.SchDate
+                                };
+                                var oMarket=addMarket(marker,map,dataOrder,infowindow);
             }
 
             function updateOrderOnTable(dataOrder){
@@ -183,7 +242,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                             }
                             else {
                                 flag=true;
-                                return;
+                                return false;
                             }
                         }
                     });
@@ -230,40 +289,11 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
         <br>
-        <form class="form-inline">
-        <div class="form-group mb-2">
-            
-            <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="optionStateFilterDashboard">
-                <option value="0">-Select State-</option>
-                <option value="A">Order Open</option>
-                <option value="D">Order Assigned</option>
-                <option value="E">Contractor Just Arrived</option>
-                <option value="F">Estimate Sent</option>
-                <option value="G">Estimate Approved</option>
-                <option value="H">Work In Progress</option>
-                <option value="I">Work Completed</option>
-                <option value="J">Final Bill</option>
-                <option value="K">Order Completed Paid</option>
-            </select>
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="selectDriverFilterDashboard">
-                <option value="0">-Select Driver-</option>
-                <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
-                    <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
-                <?php } ?>
-            </select>
-        </div>
-        <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
-        
-        </form>
+       
 
          
-        <div class="table-responsive">          
-            <table class="table" id="table_orders_company">
+        <div class="row">          
+            <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
                 <tr>
                     <th>Repair ID</th>
@@ -492,6 +522,11 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 			</div> 
 			<div class="modal-body" id="textAnswerDriversCompany"> 
                 <div class="table-responsive">
+                <?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+                    <div class="alert alert-danger">
+                        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+                    </div>
+                <?php } ?>
                         <table class="table" id="table_drivers_dashboard_company" name="table_drivers_dashboard_company">
                             <thead>
                             <tr>
@@ -502,8 +537,8 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                 <th>Driver License</th>
                                 <th>Driver Email</th>
                                 <th>Status</th>
-                                <th>Edit</th>
-                                <th>Inactive</th>
+                                <th>-Edit-</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -514,7 +549,7 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                     <td><?php echo $contractor['ContNameLast']?></td>
                                     <td><?php echo $contractor['ContPhoneNum']?></td>
                                     <td><?php echo $contractor['ContLicenseNum']?></td>
-                                    <td><?php if (isset($contractor['driverEmail'])){echo $contractor['driverEmail'];}else{echo '';}?></td>
+                                    <td><?php if (isset($contractor['ContEmail'])){echo $contractor['ContEmail'];}else{echo '';}?></td>
                                     <td><?php echo $contractor['ContStatus']?></td>
                                     <td>
                                         <a class="btn-info btn-sm" data-toggle="modal"  
@@ -524,9 +559,15 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
+                                        <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
+                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        <?php } else{ ?>
+                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"  onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -615,10 +656,10 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
       </div>
       <div class="modal-body">
 
-        <form role="form" method="post" action="?controlador=precontrato&accion=editaCupo">
+        <form role="form" method="post" action="" id="formInsertContractor">
             <div class="form-group">
                 <label for="ContractorIDed">ContractorID</label>
-                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn"  required readonly>
+                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn" readonly>
             </div>
             <div class="form-group">
                 <label for="ContNameFirsted">First name</label>
@@ -644,15 +685,16 @@ Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual
 
             <div class="form-group">
                 <label for="ContLicenseNumed">Driver Email</label>
-                <input type="text" class="form-control" name="ContEmail" id="ContEmail" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
+                <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
+                <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
             </div>
             
             <div class="form-group">
             <label for="ContStatused">Status</label>
-                    <select class="form-control" id="ContStatusIn" name="ContStatusIn">
+                    <select class="form-control" id="ContStatusIn" name="ContStatusIn" disabled>
                         <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="Inactive" selected>Inactive</option>
                         <option value="Terminated">Terminated</option>
                     </select>
             </div>

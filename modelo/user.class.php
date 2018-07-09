@@ -20,7 +20,7 @@ class userModel extends connection{
     }
 
     public function validateCompany($user,$pass){
-       
+       //echo "modelo company";
         $result=$this->validateUser($user,$pass,'company');
         
         if(is_array($result) or gettype($result)=="object" ){
@@ -36,6 +36,8 @@ class userModel extends connection{
             $result=$this->getQueryEqual('Company','CompanyEmail',$email);
         }else if(strcmp($table,'customer')==0){
             $result=$this->getQueryEqual('Customers','Email',$email);
+        }else if(strcmp($table,'Contractors')==0){
+            $result=$this->getQueryEqual('Contractors','ContEmail',$email);
         }
         //print_r($result);
         if(is_array($result)){
@@ -73,6 +75,10 @@ class userModel extends connection{
 
     public function updateContractor($nodeName,$data){
         $this->updateDataTable("Company",$nodeName,$data); 
+    }
+
+    public function updateCustomer($nodeName,$data){
+        $this->updateDataTable("Customers",$nodeName,$data); 
     }
 
     public function getCompany($user){
@@ -134,6 +140,10 @@ class userModel extends connection{
     public function createUser($_properties,$_profile){
         return $this->createUserDatabse($_properties,$_profile);
 
+    }
+
+    public function getKeyNode($table){
+        return $this->getKey($table);
     }
 
 }

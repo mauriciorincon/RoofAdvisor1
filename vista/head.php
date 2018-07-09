@@ -28,8 +28,11 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="css/varios.css">
 		<link rel="stylesheet" href="vista/css/calendar.css">
 		
+		
+		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://use.fontawesome.com/f4e64b7c17.js"></script>
+		
 		<style>
 .checked {
     color: orange;
