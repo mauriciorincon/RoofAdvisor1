@@ -337,6 +337,17 @@ class connection{
         return $value;
     }
 
+    public function getKey($table){
+        // Create a key for node
+        //echo "entro a generar la key";
+        //$newKey=$this->_firebase->getReference()->push()->getKey(); 
+        $newKey=$this->_firebase->getReference()->push($table)->getKey(); 
+        //var newPostKey = firebase.database().ref().child('posts').push().key;
+
+        //echo "la key fue $newKey";
+        return $newKey;
+    }
+
 }
 
 ?>

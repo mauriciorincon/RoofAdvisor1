@@ -245,14 +245,18 @@ class userController{
             $_lastCustomerID+=1;
         }
         $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password'],'customer');
+        //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
+        //return $hashActivationCode;
+
         if(is_array($_response) or gettype($_response)=="object"){
-            $hashActivationCode = md5( rand(0,1000) );
+            //$hashActivationCode = md5( rand(0,1000) );
+            $hashActivationCode = $this->_userModel->getKeyNode('Customers');
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
                 "CustomerID" =>  $_lastCustomerID,
                 "Email" =>  $arrayCustomer['emailValidation'],
-                "FBID" =>  "",
+                "FBID" =>  $hashActivationCode,
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
                 "Phone" =>  $arrayCustomer['customerPhoneNumber'],
@@ -337,6 +341,7 @@ class userController{
             //print_r($_actual_customer);
             
             $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+            //print_r($_array_customer_to_show);
             
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
@@ -431,18 +436,18 @@ class userController{
 
     }
 
-    public function updateCustomer($_customerID,$_arraCustomer){
+    public function updateCustomer($_customerID,$_arrayCustomer){
 
         
         $this->_userModel=new userModel();                                        
-        $this->_userModel->updateCustomer($_customerID.'/Address',$_arraCustomer['customerAddress']);
-        $this->_userModel->updateCustomer($_customerID.'/City',$_arraCustomer['customerCity']);
-        $this->_userModel->updateCustomer($_customerID.'/Email',$_arraCustomer['emailValidation']);
-        $this->_userModel->updateCustomer($_customerID.'/Fname',$_arraCustomer['firstCustomerName']);
-        $this->_userModel->updateCustomer($_customerID.'/Lname',$_arraCustomer['lastCustomerName']);
-        $this->_userModel->updateCustomer($_customerID.'/Phone',$_arraCustomer['customerPhoneNumber']);
-        $this->_userModel->updateCustomer($_customerID.'/State',$_arraCustomer['customerState']);
-        $this->_userModel->updateCustomer($_customerID.'/ZIP',$_arraCustomer['customerZipCode']);
+        $this->_userModel->updateCustomer($_customerID.'/Address',$_arrayCustomer['customerAddress']);
+        $this->_userModel->updateCustomer($_customerID.'/City',$_arrayCustomer['customerCity']);
+        $this->_userModel->updateCustomer($_customerID.'/Email',$_arrayCustomer['emailValidation']);
+        $this->_userModel->updateCustomer($_customerID.'/Fname',$_arrayCustomer['firstCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Lname',$_arrayCustomer['lastCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Phone',$_arrayCustomer['customerPhoneNumber']);
+        $this->_userModel->updateCustomer($_customerID.'/State',$_arrayCustomer['customerState']);
+        $this->_userModel->updateCustomer($_customerID.'/ZIP',$_arrayCustomer['customerZipCode']);
         $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("Y-m-d H:i:s"));
 
         return "The customer identify by ".$_customerID." was updated corretly";

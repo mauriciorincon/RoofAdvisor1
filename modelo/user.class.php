@@ -142,5 +142,9 @@ class userModel extends connection{
 
     }
 
+    public function getKeyNode($table){
+        return $this->getKey($table);
+    }
+
 }
 ?>

@@ -4,11 +4,10 @@
     <div class="col-md-2">
         <div class="vertical-menu">
             <a href="#" style="background-color: #2765CF" ><span class="glyphicon glyphicon-cog"></span> Actions</a>
-            <a href="#" class="active" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');setActiveItemMenu(this);" >Orders</a>
-            <a href="#" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');setActiveItemMenu(this);">Profile</a>
-            
+            <a href="#" class="active" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Orders</a>
+            <a href="#" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</a>
+            <a href="#" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');setActiveItemMenu(this);">Scheduler</a>
             <a href="#">Estimating Wizard</a>
-            <a href="#">Scheduler</a>
             <a href="#">Metrics in your Service Area</a>
             <a href="#">34 Emergency Repairs </a>
             <a href="#">1 Emergency Repairs Pending</a>
@@ -187,10 +186,21 @@
                     <label class="control-label">Phone number</label>
                     <input type="text" class="form-control" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  value="<?php echo $_actual_customer['Phone'] ?>"/>
                 </div>  
-                <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer(<?php echo $_actual_customer['CustomerID']?>)" >Update Info</button>
+                <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
             </div>
         </form>
                 
+    </div>
+
+    <div class="col-md-10" id="customerCalendar">
+        <div class="collapse" id="scheduleCompany">
+            <?php   echo '<h2>June 2018</h2>';
+                    $oCalendar=new calendar();
+                    echo $oCalendar->draw_controls(6,2018);
+                    $_eventsArray=$oCalendar->getEvents(6,2018);
+                    echo $oCalendar->draw_calendar(6,2018,$_eventsArray);
+            ?>
+        </div>
     </div>
     
 </div>
@@ -252,7 +262,22 @@
 </div><!-- /cierro modal -->
 
 
-
-    				
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 
 
