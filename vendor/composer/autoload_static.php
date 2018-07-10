@@ -22,6 +22,7 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         'S' => 
         array (
             'Superbalist\\Flysystem\\GoogleStorage\\' => 36,
+            'Stripe\\' => 7,
         ),
         'P' => 
         array (
@@ -73,6 +74,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         'Superbalist\\Flysystem\\GoogleStorage\\' => 
         array (
             0 => __DIR__ . '/..' . '/superbalist/flysystem-google-storage/src',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Psr\\SimpleCache\\' => 
         array (

@@ -34,6 +34,11 @@ class userController{
     }
     
     public function showLoginContractor(){
+        if(isset($_SESSION['loggedin'])){
+            if($_SESSION['loggedin']==true){
+                $this->dashboardCompany($_SESSION['email']);
+            }
+        }
 		require_once("vista/head.php");
 		require_once("vista/login_contractor.php");
 		require_once("vista/footer.php");
@@ -104,6 +109,8 @@ class userController{
                     $_SESSION['start'] = time();
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $_result->email;
+                    
+                    
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                 }else{
@@ -126,24 +133,32 @@ class userController{
         $this->_user=$_POST['userContractor'];
         $this->_pass=$_POST['passwordContractor'];
         $this->_userModel=new userModel();
-        
+        //echo "va a llamar a validar company";
         $_result=$this->_userModel->validateCompany($this->_user,$this->_pass);
-
+        //print_r($_result);
         //return;
         if(is_array($_result) or gettype($_result)=="object"){
             //print_r($_result);
             if($_result->emailVerified==1){
-                $_SESSION['loggedin'] = true;
-                $_SESSION['username'] = $_result->displayName;
-                $_SESSION['start'] = time();
-                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-                $_SESSION['email'] = $_result->email;
-                $this->dashboardCompany($this->_user);
+                $_data_company=$this->_userModel->getCompany($this->_user);
+                if(!is_null($_data_company)){
+                    //echo " 1 ";
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_result->displayName;
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                    $_SESSION['email'] = $_result->email;
+                    $this->dashboardCompany($this->_user);
+
+                    return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                }else{
+                    return "Error, please comunicate with RoofAdvisorZ for help";
+                }
             }else{
                 Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
             }
-        }elseif($_result==false){
-            Header("Location: ?aditionalMessage=User or password are wrong, please try again&controller=user&accion=showLoginContractor");
+        }elseif(is_string($_result)){
+            Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginContractor");
         }
 
     }
@@ -216,7 +231,7 @@ class userController{
 
     public function getListCompany(){
         $this->_userModel=new userModel();
-        $_result=$this->_userModel->getListCompany('Contractors');
+        $_result=$this->_userModel->getListCompany('Company');
         return $_result;
 
     }
@@ -230,19 +245,23 @@ class userController{
             $_lastCustomerID+=1;
         }
         $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password'],'customer');
+        //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
+        //return $hashActivationCode;
+
         if(is_array($_response) or gettype($_response)=="object"){
-            $hashActivationCode = md5( rand(0,1000) );
+            //$hashActivationCode = md5( rand(0,1000) );
+            $hashActivationCode = $this->_userModel->getKeyNode('Customers');
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
                 "CustomerID" =>  $_lastCustomerID,
                 "Email" =>  $arrayCustomer['emailValidation'],
-                "FBID" =>  "",
+                "FBID" =>  $hashActivationCode,
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
                 "Phone" =>  $arrayCustomer['customerPhoneNumber'],
                 "State" =>  $arrayCustomer['customerState'],
-                "Timestamp" =>  date("Y-m-d H:i:s"),
+                "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
             );
             $this->_userModel->insertCustomer($hashActivationCode,$Customer);
@@ -322,6 +341,7 @@ class userController{
             //print_r($_actual_customer);
             
             $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+            //print_r($_array_customer_to_show);
             
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
@@ -334,36 +354,30 @@ class userController{
     }
     
     public function dashboardCompany($_id_company){
-        $_userMail=$_id_company;
-        $this->_userModel=new userModel();
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 
-        //echo "company id".$_id_company;
-        $_actual_company=$this->_userModel->getCompany($_userMail);
-        //print_r($_actual_company);
-        $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
-        
-        $_array_orders_to_show=array();
+            $_userMail=$_id_company;
+            $this->_userModel=new userModel();
 
-        
-        $_orderController=new orderController();
-        $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
-        
-        //print_r($_array_orders_to_show);
-        /*foreach ($_array_contractors_to_show as $key => $contractor) {
-            //echo $contractor['ContractorID']."<br>";
-            $_array_orders=$this->_userModel->getOrdersDriver($contractor['ContractorID']);
-            foreach($_array_orders as $data => $order){
-                array_push($_array_orders_to_show,$order);   
-            }
-            //print_r($_array_orders);
+            //echo "company id".$_id_company;
+            $_actual_company=$this->_userModel->getCompany($_userMail);
+            //print_r($_actual_company);
+            $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
             
-        } */   
-        //print_r($_array_orders_to_show);
-        
-        require_once("vista/head.php");
-		require_once("vista/dashboard_company.php");
-		require_once("vista/footer.php");
+            $_array_orders_to_show=array();
 
+            
+            $_orderController=new orderController();
+            $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
+            
+            
+            
+            require_once("vista/head.php");
+            require_once("vista/dashboard_company.php");
+            require_once("vista/footer.php");
+        }else{
+            $this->showLoginContractor();
+        }
     }
 
     public function dashboardAdmin(){
@@ -422,6 +436,24 @@ class userController{
 
     }
 
+    public function updateCustomer($_customerID,$_arrayCustomer){
+
+        
+        $this->_userModel=new userModel();                                        
+        $this->_userModel->updateCustomer($_customerID.'/Address',$_arrayCustomer['customerAddress']);
+        $this->_userModel->updateCustomer($_customerID.'/City',$_arrayCustomer['customerCity']);
+        $this->_userModel->updateCustomer($_customerID.'/Email',$_arrayCustomer['emailValidation']);
+        $this->_userModel->updateCustomer($_customerID.'/Fname',$_arrayCustomer['firstCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Lname',$_arrayCustomer['lastCustomerName']);
+        $this->_userModel->updateCustomer($_customerID.'/Phone',$_arrayCustomer['customerPhoneNumber']);
+        $this->_userModel->updateCustomer($_customerID.'/State',$_arrayCustomer['customerState']);
+        $this->_userModel->updateCustomer($_customerID.'/ZIP',$_arrayCustomer['customerZipCode']);
+        $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("m-d-Y H:i:s"));
+
+        return "The customer identify by ".$_customerID." was updated corretly";
+
+    }
+
     public function insertUserDatabase($mail,$number,$name,$url,$password,$profile){
         //$password = rand(1000,5000);
         //$password = "pass12345";
@@ -471,6 +503,11 @@ class userController{
     public function getContractorById($contractorID){
         $this->_userModel=new userModel();
         return $this->_userModel->getContractorById($contractorID);
+    }
+
+    public function getCompanyById($companyID){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCompanyByID($companyID);
     }
 }
 ?>

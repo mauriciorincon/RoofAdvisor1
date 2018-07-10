@@ -59,8 +59,8 @@ class connection{
             ->withDatabaseUri('https://roofadvisorz-driver.firebaseio.com')
             ->create();
 
-        $this->_firebase_company = $firebase_tmp->getDatabase();
-        $this->_factory_firebase_company=$firebase_tmp;
+        $this->_firebase_driver = $firebase_tmp->getDatabase();
+        $this->_factory_firebase_driver=$firebase_tmp;
     }
 
     public function getConnection(){
@@ -276,17 +276,19 @@ class connection{
     }
 
     public function validateUser($_user,$password,$_profile){
-        
+        //echo "<br>conexion validate";
         $auth=null;
         try {
             if(strcmp($_profile,"customer")==0){
                 $auth = $this->_factory_firebase->getAuth();
             }else if(strcmp($_profile,"company")==0){
-                
+                //echo "<br>entro a company";
                 if(is_null($this->_factory_firebase_company)){
                     $this->companyConnection();
                 }
+                //echo "<br>creo objeto company";
                 $auth = $this->_factory_firebase_company->getAuth();
+                //echo "<br>creo objeto autenticacion";
                 //$users = $auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
                 //foreach ($users as $user) {
                 //   print_r($user);
@@ -298,8 +300,10 @@ class connection{
                 $auth = $this->_factory_firebase_driver->getAuth();
             }
             //print_r($auth);
-            
+            //echo "<br>voy a validar usuario";
             $user = $auth->verifyPassword($_user, $password);
+            //echo "<br>valido el usuario";
+
             //print_r($user);
             //echo "llego aca 2";
             return $user;
@@ -314,6 +318,7 @@ class connection{
             
             return $e->getMessage();
         }
+        echo "no paso a ningun error";
     }
 
     public function getDateTime(){
@@ -330,6 +335,17 @@ class connection{
 
         $value = $snapshot->numChildren();
         return $value;
+    }
+
+    public function getKey($table){
+        // Create a key for node
+        //echo "entro a generar la key";
+        //$newKey=$this->_firebase->getReference()->push()->getKey(); 
+        $newKey=$this->_firebase->getReference()->push($table)->getKey(); 
+        //var newPostKey = firebase.database().ref().child('posts').push().key;
+
+        //echo "la key fue $newKey";
+        return $newKey;
     }
 
 }

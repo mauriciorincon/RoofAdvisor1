@@ -359,7 +359,7 @@ Roof AdvisorZ makes it easy for you to get same day emergency roof repair servic
             </div>
             <div class="panel-body">
 				<div class="form-group">			
-				<span ><b>Plese select the date to service: </b></span><input type="date" id="step6date" name="step6date">
+				<span ><b>Plese select the date to service: </b></span><input type="date" id="step6date" name="step6date" ata-date-format="mm-dd-yyyy">
 				</div>
 					
 				<div class="form-group">
@@ -586,7 +586,6 @@ Roof AdvisorZ makes it easy for you to get same day emergency roof repair servic
 </div>
 
 
-</div>
 <!-- slider-area end -->
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">

@@ -147,7 +147,7 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
 .call-to-action{}
 .email-address span{}
 .email{
-	background: rgb(245, 177, 32) none repeat scroll 0 0;
+	background: rgb(0, 125, 141) none repeat scroll 0 0;
 	color: rgb(255, 255, 255);
 	font-size: 12px;
 	font-weight: 500;
@@ -181,7 +181,9 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
 .logo {
   margin-top:20px;
 }
-.main-menu{}
+.main-menu{
+margin-right:140px;
+}
 .main-menu ul{}
 .main-menu ul li {
   display: inline-block;
@@ -189,7 +191,7 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
   margin:0 5px;
 }
 .main-menu ul li a {
-  color:  rgb(68, 68, 68);
+  color:  #fff;
   display: block;
   font-size: 13px;
   font-weight: 600;
@@ -225,7 +227,7 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
   text-transform: capitalize;
   text-decoration:none;
 }
-.main-menu ul li a i{margin-left:8px;color:rgb(68, 68, 68); font-weight: normal;}
+.main-menu ul li a i{margin-left:8px;color:#fff; font-weight: normal;}
 /*  3. slider-area*/
 .slider-area{}
 .single-slider {
@@ -1222,12 +1224,34 @@ label {
 }
 .required{color:rgb(153, 0, 0);}
 
-
-
-
-
-
-
-
-
+.cont8{
+max-width: 1171px;
+    margin: auto;
+}
+.dolph1{
+background:#005678;
+}
+#menu-head{
+position:absolute;
+z-index:-1;
+right:0px;
+}
+#login-img{
+position: absolute;
+    margin-top: -67px;
+}
+#login-txt{
+margin-top: -101px;
+    right: -123px;
+}
+#navtxt{
+padding-right:50px;
+}
+#socico{
+margin-right:-294px;
+}
+#logoimg{
+    margin-left: 75px;
+    margin-top: 10px;
+}
 

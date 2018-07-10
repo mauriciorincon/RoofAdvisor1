@@ -1,3 +1,10 @@
+$(document).ready(function() {
+
+    $('#table_orders_customer').DataTable();
+    
+    $('#table_orders_company').DataTable();
+} );
+
 ///////////////////////////////////////////////
 //Register Company
 //////////////////////////////////////////////
@@ -18,7 +25,7 @@ $(document).ready(function () {
     
         //console.log("entro a clic");
         if (!$item.hasClass('disabled')) {
-             console.log("no tiene desabilitado");
+             //console.log("no tiene desabilitado");
             navListItems.removeClass('btn-success').addClass('btn-default');
             $item.addClass('btn-success');
             
@@ -299,7 +306,8 @@ $('#table_drivers_dashboard_company tbody').on( 'click', 'tr', function () {
     $('#ContNameLasted').val(tableData[2]);
     $('#ContPhoneNumed').val(tableData[3]);
     $('#ContLicenseNumed').val(tableData[4]);
-    $('#ContStatused').val(tableData[5]);
+    //$('#ContStatused').val(tableData[5]);
+    $('#ContStatused option[value='+tableData[6]+']').attr('selected','selected');
 
     
     //console.log(tableData[0]);
@@ -356,7 +364,7 @@ function updateContractor(){
 }
 
 
-$(".inactivate-contractor-button").click(function(){
+/*$(".inactivate-contractor-button").click(function(){
     var contractorID = $(this).parents('tr:first').find('td:eq(0)').text();
 
     if(confirm("Are you sure you want to inactive contractor "+contractorID)){
@@ -403,7 +411,7 @@ $(".inactivate-contractor-button").click(function(){
     else{
         return false;
     }
-});
+});*/
 
 
 function insertDriver(){
@@ -413,7 +421,27 @@ function insertDriver(){
     var contractorPhoneNumber = $("input#ContPhoneNumIn").val();
     var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
     var contractorState = $("select#ContStatusIn").val();
-    var contractorEmail=$("input#ContEmail").val();
+    var contractorEmail=$("input#emailValidation").val();
+
+    var flag=true;
+    var ListTextBox=$("#formInsertContractor").find("input");
+    for (var i = 0; i < ListTextBox.length; i++) {
+        if (!ListTextBox[i].validity.valid) {
+            flag = false;
+            $(ListTextBox[i]).closest(".form-group").addClass("has-error").removeClass("has-success");
+        }
+    }
+    
+    if(flag==true){
+        flag=validateEmail('Contractors');
+        
+    }
+    if (flag==false){
+        $('#myMensaje div.modal-body').html('Please fill all fields to continue with driver creation');
+        $("#myMensaje").modal("show");
+        //alert('Please fill all fields to continue with driver creation');
+        return;
+    }
 
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
@@ -434,7 +462,15 @@ function insertDriver(){
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
                 
-                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+'</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+'</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+'</td><td>'+contractorState+'</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick=""> <span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button"><span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+
+                                                            '</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+
+                                                            '</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+
+                                                            '</td><td>'+contractorState+
+                                                            '</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick="">'+
+                                                            '<span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" '+
+                                                            'class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" '+
+                                                            'name="inactivate-contractor-button" title="Active Driver" onclick="disableEnableDriver('+
+                                                            consecutivo+','+'Active'+')"><span class="glyphicon glyphicon-ok"></span></a></td></tr>');
                 //$('#selectDriverFilterDashboard').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
                 $("#selectDriverFilterDashboard option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
                 //$('#selectDriverFilterDashboard').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
@@ -541,7 +577,48 @@ function updateDataCompany(){
     });
 }
 
+function updateDataCustomer(customerID){
 
+    
+    var firstCustomerName = $("input#firstCustomerName").val();
+    var lastCustomerName = $("input#lastCustomerName").val();
+    var emailValidation = $("input#emailValidation").val();
+    var customerAddress = $("input#customerAddress").val();
+    var customerCity = $("input#customerCity").val();
+    var customerState = $("input#customerState").val();
+    var customerZipCode = $("input#customerZipCode").val();
+    var customerPhoneNumber = $("input#customerPhoneNumber").val();
+    
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerID,"firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,
+                                                    "emailValidation":emailValidation,"customerAddress":customerAddress,"customerCity":customerCity,
+                                                    "customerState":customerState,"customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}
+                                                    , null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }else{
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }
+                
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //funtions for customer suscribe
@@ -884,7 +961,7 @@ $(document).ready(function () {
                 $('#myModalRespuesta').modal({backdrop: 'static'});
                 isValid=false;
             }else{
-                getListCompany(); 
+                getListContractor(); 
             }
             
         }
@@ -949,7 +1026,7 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
-function getListCompany(){
+function getListContractor(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
@@ -1033,7 +1110,7 @@ function insertOrderCustomer(){
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
     var ActAmtTime=$("input[name='step6date']").val();
     var ActTime=$("button[name='step6time'].active").text();
-    var ContractorID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
+    var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
     var latitude=$('input:hidden[name=step5Latitude]').val();
@@ -1044,7 +1121,7 @@ function insertOrderCustomer(){
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"ContractorID":ContractorID,"email":email,
+                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
@@ -1194,9 +1271,9 @@ function loginUser(user,password,url){
         });
 }
 
-function showRatings(contractorID){
+function showRatings(identifier,type){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListRating.php", {"id_contractor":contractorID }, null, "text" )
+    $.post( "controlador/ajax/getListRating.php", {"id_search":identifier,"type": type}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $('#headerTextAnswerRating').html('Customer Rating');
@@ -1314,7 +1391,7 @@ function refreshCalendar(pmonth,pyear){
 
 $( function() {
     
-    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
   } );
 
   $(function(){
@@ -1334,9 +1411,8 @@ $( function() {
             var date=$("#datepickerFilterDashboard").val();
             var state=$("#optionStateFilterDashboard").val();
             var driver=$("#selectDriverFilterDashboard").val();
+            $row = $(this);
             if(date!==''){
-                $row = $(this);
-            
                 var id = $row.find("td:eq(1)").text();
 
                 if (id.indexOf(date) !== 0) {
@@ -1345,7 +1421,7 @@ $( function() {
                     $row.show();
                 }
             }else if(state!=='' && state!=='0'){
-                $row = $(this);
+                //$row = $(this);
             
                 var id = $row.find("td:eq(6)").text();
 
@@ -1355,8 +1431,7 @@ $( function() {
                     $row.show();
                 }
             }else if(driver!=='' && driver!=='0'){
-                $row = $(this);
-            
+                //$row = $(this);
                 var id = $row.find("td:eq(10)").text();
 
                 if (id.indexOf(driver) !== 0) {
@@ -1377,3 +1452,211 @@ $( function() {
 
     
 });*/
+
+function hideShowDivs(divName){
+    $('#'+divName).collapse('hide');
+    $('#'+divName).collapse('hide');
+}
+
+function setActiveItemMenu(item){
+    $(".vertical-menu a").each(function (index) {
+        $(this).removeClass('active');
+    });
+    $(item).addClass('active');
+}
+
+function getListCompany(tableName){
+    data=$('#'+tableName+' tbody').html();
+    data=data.trim();
+    if (data==""){
+        jsShowWindowLoad('');
+        $.post( "controlador/ajax/getListCompany.php", {}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                $('#'+tableName+' tbody').html(data);
+                console.log( "La solicitud se ha completado correctamente."+jqXHR+textStatus);
+            }
+            jsRemoveWindowLoad('');
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  jqXHR+errorThrown+textStatus);
+                result=false;
+            }
+            jsRemoveWindowLoad('');
+        });
+    }
+    
+}
+
+function getDataCompany(companyID){
+
+    
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataCompany.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                data=jQuery.parseJSON(data);
+                $("input#companyID").val(data.CompanyID);
+                $("input#compamnyName").val(data.CompanyName);
+                $("input#firstCompanyName").val(data.PrimaryFName);
+                $("input#lastCompanyName").val(data.PrimaryLName);
+                $("input#companyEmail").val(data.CompanyEmail);
+                $("input#companyAddress1").val(data.CompanyAdd1);
+                $("input#companyAddress2").val(data.CompanyAdd2);
+                $("input#companyAddress3").val(data.CompanyAdd3);
+                $("input#companyPhoneNumber").val(data.CompanyPhone);
+                $("input#companyType").val(data.CompanyType);
+
+                $("input#compamnyPayAddress1").val(data.PayInfoBillingAddress1);
+                $("input#compamnyPayAddress2").val(data.PayInfoBillingAddress2);
+                $("input#compamnyPayCity").val(data.PayInfoBillingCity);
+                $("input#compamnyPayState").val(data.PayInfoBillingST);
+                $("input#compamnyPayZip").val(data.PayInfoBillingZip);
+                $("input#compamnyPayMonth").val(data.PayInfoCCExpMon);
+                $("input#compamnyPayYear").val(data.PayInfoCCExpYr);
+                $("input#compamnyPayCCNum").val(data.PayInfoCCNum);
+                $("input#compamnyPaySecCode").val(data.PayInfoCCSecCode);
+                $("input#compamnyPayName").val(data.PayInfoName);
+                $("input#compamnyPayFName").val(data.PrimaryFName);
+                $("input#compamnyPayLName").val(data.PrimaryLName);
+
+                $("input#compamnyAgencyName").val(data.InsLiabilityAgencyName);
+                $("input#compamnyAgtName").val(data.InsLiabilityAgtName);
+                $("input#compamnyAgtNum").val(data.InsLiabilityAgtNum);
+                $("input#compamnyPolNum").val(data.InsLiabilityPolNum);
+                $("input#compamnyStatusRating").val(data.Status_Rating);
+                
+                
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function getListDrivers(companyID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListDriver.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#table_drivers_dashboard_admin tbody').html(data);
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+}
+
+function disableEnableDriver(id_driver,action){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/enable_disable_driver.php", { "contractorID" : id_driver,"action":action}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+
+                $('#table_drivers_dashboard_company tr').each(function(){ 
+                    if($(this).find('td').eq(0).text()==id_driver){
+                        
+                        $(this).find('td').eq(6).text(action);
+                        //var tdv =$(this).find('td').eq(8);
+                        if(action=="Active"){ 
+                            $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
+                        }else{
+                            $(this).find('td').eq(8).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
+                            $(this).find('td').eq(8).find('a').removeClass('btn-danger').addClass('btn-success');
+                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
+                        }
+                        
+                        //$(tdv).find('span').addClass('glyphicon glyphicon-trash').removeClass('glyphicon glyphicon-ok');
+                        //$(tdv).find('a').addClass('glyphicon btn-danger').removeClass('btn-success');
+                        return false;
+                    }
+                 })
+
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+
+}
+
+function showEventCalendar(orderId){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#headerTextAnswerOrder').html('Order Detail');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});

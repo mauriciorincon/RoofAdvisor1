@@ -136,22 +136,29 @@
 		</footer>
 		<!-- footer-area end -->
 		<!-- all js here -->
-        <script src="js/vendor/jquery-1.12.0.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/jquery.counterup.min.js"></script>
-		<script src="js/jquery.scrollUp.min.js"></script>
-		<script src="js/jquery.meanmenu.js"></script>
+		<script src="vista/js/jquery-3.3.1.js"></script>
+				
+				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+				<script src="js/bootstrap.min.js"></script>
+				<script src="js/owl.carousel.min.js"></script>
+				<script src="js/jquery.counterup.min.js"></script>
+				<script src="js/jquery.scrollUp.min.js"></script>
+				<script src="js/jquery.meanmenu.js"></script>
+				
+		
 		<script src="js/waypoints.min.js"></script>
 		<script src="js/wow.min.js"></script>
         <script src="js/plugins.js"></script>
 		<script src="js/main.js"></script>
-		<script src="vista/js/varios.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<script type="text/javascript">
+		
+		
+		<script src="vista/js/jquery.dataTables.min.js"></script>
+		<script src="vista/js/dataTables.bootstrap.min.js"></script>
+					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
+				
+				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
-
-</script>
+<script src="vista/js/varios.js"></script>
 <?php
         if(isset($_GET['aditionalMessage'])){?>
             <script type="text/javascript">
@@ -160,5 +167,6 @@
     <?php
         }  
     ?>
-    </body>
+</div>    
+</body>
 </html>
