@@ -1,48 +1,46 @@
-
-
 <div id="wrapper">
 
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-		<li class="sidebar-brand">
-			<a href="#">
-				Actions
-			</a>
-		</li>
-		<li>
-		<a href="#" class="active" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);" >Orders</a>
-		</li>
-		<li>
-		<a href="#" data-toggle="collapse" data-target="#mapDashBoardOrder1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);" >New Order</a>
-		</li>
-		<li>
-		<a href="#" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Profile</a>
-		</li>
-		<li>
-		<a href="#" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Scheduler</a>
-		</li>
-		<li>
-		<a href="#">Estimating Wizard</a>
-		</li>
-		<li>
-		<a href="#">Order Metrics</a>
-		</li>
-		<li>
-		<a href="#"><span class="badge" id="totalOrdersCustomer">0</span> Total Order Repairs </a>
-		</li>
-		<li>
-		<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Emergency Repairs </a>
-		</li>
-		<li>
-		<a href="#"><span class="badge" id="totalScheduleRepair">0</span> Schedule Repairs </a>
-		</li>
-		<li>
-		<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Repairs Pending</a>
-		</li>
-	</ul>
-</div>
-<!-- /#sidebar-wrapper -->
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand">
+				<a href="#">
+					Actions
+				</a>
+			</li>
+			<li>
+			<a href="#" class="active" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);" >Orders</a>
+			</li>
+			<li>
+			<a href="#" data-toggle="collapse" data-target="#mapDashBoardOrder1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);" >New Order</a>
+			</li>
+			<li>
+			<a href="#" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Profile</a>
+			</li>
+			<li>
+			<a href="#" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Scheduler</a>
+			</li>
+			<li>
+			<a href="#">Estimating Wizard</a>
+			</li>
+			<li>
+			<a href="#">Order Metrics</a>
+			</li>
+			<li>
+			<a href="#"><span class="badge" id="totalOrdersCustomer">0</span> Total Order Repairs </a>
+			</li>
+			<li>
+			<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Emergency Repairs </a>
+			</li>
+			<li>
+			<a href="#"><span class="badge" id="totalScheduleRepair">0</span> Schedule Repairs </a>
+			</li>
+			<li>
+			<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Repairs Pending</a>
+			</li>
+		</ul>
+	</div>
+	<!-- /#sidebar-wrapper -->
 
 
 <!-- Page Content -->
@@ -122,9 +120,9 @@
 										total_emergengy_orders++;
 									}
 								}
-						$("div.vertical-menu #totalOrdersCustomer").html(total_orders);
-						$("div.vertical-menu #totalEmergencyRepair").html(total_emergengy_orders);
-						$("div.vertical-menu #totalScheduleRepair").html(total_schedule_orders);
+						$("#totalOrdersCustomer").html(total_orders);
+						$("#totalEmergencyRepair").html(total_emergengy_orders);
+						$("#totalScheduleRepair").html(total_schedule_orders);
 						
 					console.log(snapshot.val());
 					
@@ -880,14 +878,11 @@
 		
 	</div>
 	
-
-
-		
 <!-- /#page-content-wrapper -->
 
 </div>
 
-
+</div>
 
 <!-- formulario Modal Actualizar datos-->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

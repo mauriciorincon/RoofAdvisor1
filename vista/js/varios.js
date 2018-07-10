@@ -1391,7 +1391,7 @@ function refreshCalendar(pmonth,pyear){
 
 $( function() {
     
-    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
   } );
 
   $(function(){

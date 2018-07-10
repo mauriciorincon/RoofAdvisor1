@@ -354,7 +354,7 @@
             </div>
             <div class="panel-body">
 				<div class="form-group">			
-				<span ><b>Plese select the date to service: </b></span><input type="date" id="step6date" name="step6date">
+				<span ><b>Plese select the date to service: </b></span><input type="date" id="step6date" name="step6date" ata-date-format="mm-dd-yyyy">
 				</div>
 					
 				<div class="form-group">

@@ -261,7 +261,7 @@ class userController{
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
                 "Phone" =>  $arrayCustomer['customerPhoneNumber'],
                 "State" =>  $arrayCustomer['customerState'],
-                "Timestamp" =>  date("Y-m-d H:i:s"),
+                "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
             );
             $this->_userModel->insertCustomer($hashActivationCode,$Customer);
@@ -448,7 +448,7 @@ class userController{
         $this->_userModel->updateCustomer($_customerID.'/Phone',$_arrayCustomer['customerPhoneNumber']);
         $this->_userModel->updateCustomer($_customerID.'/State',$_arrayCustomer['customerState']);
         $this->_userModel->updateCustomer($_customerID.'/ZIP',$_arrayCustomer['customerZipCode']);
-        $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("Y-m-d H:i:s"));
+        $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("m-d-Y H:i:s"));
 
         return "The customer identify by ".$_customerID." was updated corretly";
 

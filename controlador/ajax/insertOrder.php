@@ -20,13 +20,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
     }
     
 }
+$_date=substr($_POST['ActAmtTime'],8,2)."-".substr($_POST['ActAmtTime'],5,2)."-".substr($_POST['ActAmtTime'],0,4);
+
 $_array=array(
     "RepZIP"=>$_POST['RepZIP'],
     "RequestType"=>$_POST['RequestType'],
     "Rtype"=>$_POST['Rtype'],
     "Water"=>$_POST['Water'],
     "Hlevels"=>$_POST['Hlevels'],
-    "ActAmtTime"=>$_POST['ActAmtTime'],
+    "ActAmtTime"=>$_date,
     "ActTime"=>$_POST['ActTime'],
     "ContractorID"=>'',
     "CompanyID"=>$_POST['CompanyID'],
