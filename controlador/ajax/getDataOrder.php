@@ -11,7 +11,7 @@ $_result=$_orderController->getOrder('OrderNumber',$_orderID);
 
 
 $_string='<div>
-            <table>
+            <table class="table table-bordered">
                 <tr><td>Order ID</td><td>'.$_result['OrderNumber'].'</td></tr>
                 <tr><td>Company</td><td>'.$_result['CompanyID'].'</td></tr>
                 <tr><td>Contractor</td><td>'.$_result['ContractorID'].'</td></tr>

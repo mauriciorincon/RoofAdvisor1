@@ -1391,7 +1391,7 @@ function refreshCalendar(pmonth,pyear){
 
 $( function() {
     
-    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
   } );
 
   $(function(){
@@ -1655,3 +1655,8 @@ function showEventCalendar(orderId){
         }
     });
 }
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
