@@ -52,7 +52,7 @@ $(document).ready(function () {
             $("#table_drivers tbody tr").each(function (index) {
                 cellCount=0;
                 $(this).children("td").each(function (index2) {
-                    console.log($(this).find('input').val());
+                    //console.log($(this).find('input').val());
                     
                     if($(this).find('input').val()!="" && $(this).find('input').val()!=undefined){
                         cellCount+=1;
@@ -84,14 +84,14 @@ $(document).ready(function () {
             saveContractorData();
         }
     
-        if (curStepBtn=="step-3" && isValid==true ){
+        /*if (curStepBtn=="step-3" && isValid==true ){
             //isValid=false;
             isValid=validateCodeEmail('Company');
-        }
+        }*/
     
-        if(curStepBtn!="step-3"){
+        /*if(curStepBtn!="step-3"){
             if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-        }
+        }*/
     });
     
     allPrevBtn.click(function () {
@@ -228,7 +228,15 @@ function saveContractorData(){
                     if(n==-1){
                         $("#step3ContractorResponse").addClass("has-success").removeClass('has-error');
                         //$("#firstNextValidation").show();
-                        $("#step3ContractorResponse").html(data);
+                        //$("#step3ContractorResponse").html(data);
+                        $("#step3ContractorResponse").html(data+"<br> You will redirect to login company page in 10 seconds");
+                                // Your application has indicated there's an error
+                                window.setTimeout(function(){
+
+                                    // Move to a new location or you can do something else
+                                    window.location.href = "?controller=user&accion=showLoginContractor";
+
+                                }, 10000);
                         result=true;
                     }else{
                         $("#step3ContractorResponse").addClass("has-error").removeClass('has-success');
@@ -585,8 +593,10 @@ function updateDataCustomer(customerID){
     var emailValidation = $("input#emailValidation").val();
     var customerAddress = $("input#customerAddress").val();
     var customerCity = $("input#customerCity").val();
-    var customerState = $("input#customerState").val();
+    var customerState = $("select#customerState").val();
+
     var customerZipCode = $("input#customerZipCode").val();
+    
     var customerPhoneNumber = $("input#customerPhoneNumber").val();
     
     jsShowWindowLoad('');
@@ -719,7 +729,7 @@ $(document).ready(function () {
         var emailValidation = $("input#emailValidation").val();
         var customerAddress = $("input#customerAddress").val();
         var customerCity = $("input#customerCity").val();
-        var customerState = $("input#customerState").val();
+        var customerState = $("select#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
         var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
@@ -1390,8 +1400,9 @@ function refreshCalendar(pmonth,pyear){
 }
 
 $( function() {
-    
-    $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
+    if($("#datepickerFilterDashboard").val()!=undefined){
+        $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
+    }
   } );
 
   $(function(){

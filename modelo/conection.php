@@ -191,6 +191,8 @@ class connection{
             ->limitToLast(1)
             ->getSnapshot();
             $value = $snapshot->getValue();
+
+            
             //print_r($value);
             if(is_array($value)){
                 foreach($value as $key => $value1){
@@ -207,12 +209,14 @@ class connection{
 
    
 
-    public function insertDataTable($table,$insertNode,$data){
-        if(empty($insertNode)){
+    public function insertDataTable($table,$insertNode,$data,$key){
+        
+        if($key==true){
             try {
                     //echo "llegue aca insertDataTable $table $insertNode";
                     $_key=$this->_firebase->getReference($table)
                         ->push($data);
+                    $this->updateDataTable($table.'/'.$_key->getKey(),$insertNode,$_key->getKey());
                     return $_key;
                 }catch (Exception $e){
                     return $e->getMessage();
@@ -341,7 +345,9 @@ class connection{
         // Create a key for node
         //echo "entro a generar la key";
         //$newKey=$this->_firebase->getReference()->push()->getKey(); 
-        $newKey=$this->_firebase->getReference()->push($table)->getKey(); 
+        $newKey=$this->_firebase->getReference()->push($table)->getKey();
+        //$snapshot=$this->_firebase->getReference($table); 
+        //$newKey=$snapshot->push()->getKey(); 
         //var newPostKey = firebase.database().ref().child('posts').push().key;
 
         //echo "la key fue $newKey";

@@ -57,6 +57,8 @@ class userController{
     }
 
     public function showRegisterCustomer(){
+        $this->_userModel=new userModel();
+        $_array_state=$this->_userModel->getNode('Parameters/state');
         require_once("vista/head.php");
         require_once("vista/register_customer.php");
         require_once("vista/footer.php");
@@ -250,13 +252,14 @@ class userController{
 
         if(is_array($_response) or gettype($_response)=="object"){
             //$hashActivationCode = md5( rand(0,1000) );
-            $hashActivationCode = $this->_userModel->getKeyNode('Customers');
+            //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
+            $hashActivationCode = 'FBID';
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
                 "CustomerID" =>  $_lastCustomerID,
                 "Email" =>  $arrayCustomer['emailValidation'],
-                "FBID" =>  $hashActivationCode,
+                "FBID" =>  '',
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
                 "Phone" =>  $arrayCustomer['customerPhoneNumber'],
@@ -342,6 +345,8 @@ class userController{
             
             $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
             //print_r($_array_customer_to_show);
+            $this->_userModel=new userModel();
+            $_array_state=$this->_userModel->getNode('Parameters/state');
             
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");

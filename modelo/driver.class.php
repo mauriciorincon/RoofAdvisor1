@@ -20,7 +20,7 @@ class driverModel extends connection{
     }
 
     function insertDriver($id_driver,$dataDriver){
-        $this->insertDataTable("Contractors",$id_driver,$dataDriver); 
+        $this->insertDataTable("Contractors",$id_driver,$dataDriver,false); 
     }
 
     public function getLastNodeDriver($table,$field){
