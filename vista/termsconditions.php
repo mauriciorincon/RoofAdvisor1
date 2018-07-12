@@ -56,23 +56,41 @@
 
 					<!--From Here-->
 
-					<p>Terms and Conditions: Last Updated May 15, 2018</p>
+<h4>Terms and Conditions: Last Updated May 15, 2018</h3>
+
+<div>
+<ul>
+<li><a href="#">1. INTRODUCTION TO ROOFADVISORZ</a></li>
+<li><a href="#">2. THE SERVICES</a></li>
+<li><a href="#">3. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</a></li>
+<li><a href="#">4. PAYMENTS</a></li>
+<li><a href="#">5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</a></li>
+<li><a href="#">6. SMS MESSAGING</a></li>
+<li><a href="#">7. DISPUTE RESOLUTION ASSISTANCE</a></li>
+<li><a href="#">8. CALL RECORDING</a></li>
+<li><a href="#">9. USER GENERATED CONTENT</a></li>
+<li><a href="#">10. SERVICE PROFESSIONAL PRE SCREENING PROCEDURES AND DISCLAIMERS</a></li>
+<li><a href="#">11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING. </a></li>
+<li><a href="#">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFADVISORZ.COM</a></li>
+<li><a href="#">13. LINKS TO THIRD PARTY SITES</a></li>
+<li><a href="#">14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</a></li>
+<li><a href="#">15. INDEMNIFICATION</a></li>
+<li><a href="#">16. ARBITRATION AND GOVERNING LAW </a></li>
+<li><a href="#">17. NOTICE OF RIGHTS </a></li>
+<li><a href="#">18. GENERAL PROVISIONS</a></li>
+</ul>
+</div>
+
+
+
+
 
 <p>This Website and the services of RoofAdvisorZ and RoofAdvisorZPro (collectively the "Services") are offered to you, conditioned on your acceptance without modification, of the following terms, conditions, and notices contained in this agreement (the "Terms and Conditions"). Your use of this Website or submission of service requests via telephone constitutes your agreement to all such terms, conditions, and notices in effect at such time. These Terms and Conditions apply to any Services or properties such as websites or apps owned and operated by Viaplix, LLC (including but not limited to RoofAdvisorZ.com, RAZ mobile customer application, RAZ PRO service professional mobile application, the Customer Dashboard website and app, the service professional Dashboard website and app, etc) and collectively referred to herein as "RoofAdvisorZ," on which a link to these Terms & Conditions appears. If you have any questions regarding these Terms & Conditions, you may contact us at www.RoofAdvisorZ.com. We may amend these Terms & Conditions at any time by posting a revised version of these Terms and Conditions. These Terms & Conditions were last updated on February 23th, 2018.</p>
-
-
-
 <h5>1. INTRODUCTION TO ROOFADVISORZ</h5>
-
 <p>Upon registration, you may choose your own password or RoofAdvisorZ will assign you a password to access the Services through the RoofAdvisorZ website or mobile apps.</p>
 
-
-
 <h5>2. THE SERVICES</h5>
-
-<p>RoofAdvisorZ is committed to making your total RoofAdvisorZ experience a positive one. There are several ways you can find service professionals through RoofAdvisorZ (collectively, "Service Professionals"). Our Emergency Repair Service allows you to request on demand same day service emergency roof repair via our mobile applications and our web application. Our Schedule Service Repair is our service where you request a service professional for a specific future scheduled day, and where you choose the service professional or where the service professional accepts the scheduled time you requested. You will be able to view all Service Professional’s ratings and reviews.	
-
-</p>
+<p>RoofAdvisorZ is committed to making your total RoofAdvisorZ experience a positive one. There are several ways you can find service professionals through RoofAdvisorZ (collectively, "Service Professionals"). Our Emergency Repair Service allows you to request on demand same day service emergency roof repair via our mobile applications and our web application. Our Schedule Service Repair is our service where you request a service professional for a specific future scheduled day, and where you choose the service professional or where the service professional accepts the scheduled time you requested. You will be able to view all Service Professional’s ratings and reviews.	</p>
 
 <ol type="1">
 
@@ -96,19 +114,19 @@
 
 
 
-<h5>2. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</h5>
+<h5>3. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</h5>
 
 <p>You acknowledge and agree that your use of RoofAdvisorZ is for your personal use and not for advertising purposes. You may not use RoofAdvisorZ to recreate or compete with RoofAdvisorZ, to solicit or harass Service Professionals, or for any other purpose not contemplated herein. You acknowledge that a violation of the foregoing could result in significant damages, and you agree that you are liable to RoofAdvisorZ for any such damages, and will indemnify RoofAdvisorZ in the event of any claims against RoofAdvisorZ based on or arising from your violation of the foregoing. We reserve the right to revoke your access to any RoofAdvisorZ Services, products or properties at any time. All information about Service Professionals is confidential and for your personal use only. If it is determined or suspected by RoofAdvisorZ in its sole discretion that you are misusing or attempting to misuse or circumvent the RoofAdvisorZ services or system, or are using or attempting to use them for any inappropriate or non-personal purposes, including but not limited to activities such as hacking, scraping content, infiltrating, fraud, advertising, jamming or spamming, RoofAdvisorZ reserves the right, in its sole discretion, to immediately terminate your access without notice and to initiate without notice appropriate legal actions or proceedings to seek appropriate remedies and/or damages, including but not limited to lost revenue, repairs, legal fees, costs and expenses, and to seek injunctions or other equitable remedies.	
 
 </p>
 
-<h5>3. PAYMENTS</h5>
+<h5>4. PAYMENTS</h5>
 
 <p>We may allow you to pay for goods or services provided by Service Professionals, through the RoofAdvisorZ website, apps, or services. Should you have any dispute with the goods or services provided by the Service Professional(s) you select, as set forth in in Section 2, #7, you must contact the Service Professional and resolve such dispute with the Service Professional. However, if the dispute is regarding the amount of money that you paid for the services by the Service Professional (including that you were not charged the amount you agreed to in your agreement with the Service Professional) please advise us immediately. If we have not heard from you with documented proof of any issues provided within ten (10) days after the payment has been made for the Service Professional services, the purchase of the services is final and you will not be entitled to a refund, except as may expressly be limited by Federal, state or local law.</p>
 
 
 
-<h5>4. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</h5>
+<h5>5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</h5>
 
 <p>
 
@@ -124,7 +142,7 @@ TO KNOWINGLY INPUT FALSE INFORMATION, INCLUDING BUT NOT LIMITED TO NAME, PHONE N
 
 
 
-<h5>5. SMS MESSAGING</h5>
+<h5>6. SMS MESSAGING</h5>
 
 <p>
 
@@ -134,7 +152,7 @@ By submitting a service request, you agree that RoofAdvisorZ and the Service Pro
 
 
 
-<h5>6. DISPUTE RESOLUTION ASSISTANCE</h5>
+<h5>7. DISPUTE RESOLUTION ASSISTANCE</h5>
 
 <p>
 
@@ -146,7 +164,7 @@ While we cannot guarantee the work performed by a listed Service Professional, a
 
 
 
-<h5>7. CALL RECORDING</h5>
+<h5>8. CALL RECORDING</h5>
 
 <p>You acknowledge and agree that RoofAdvisorZ may monitor and/or record any telephone calls between you and RoofAdvisorZ.
 
@@ -154,7 +172,7 @@ While we cannot guarantee the work performed by a listed Service Professional, a
 
 
 
-<h5>8. USER GENERATED CONTENT</h5>
+<h5>9. USER GENERATED CONTENT</h5>
 
 <p>
 
@@ -352,7 +370,7 @@ ABS will provide Angie's List with only a pass or fail designation. Angie's List
 
 </ol>
 
-<h5>12.RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFADVISORZ.COM</h5>
+<h5>12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFADVISORZ.COM</h5>
 
 <p>All Ratings and Reviews of a Service Professional displayed to you reflect the opinions of other consumers, and do not reflect or represent the opinions or representations of RoofAdvisorZ. RoofAdvisorZ disclaims any and all representations or warranties with regard to the Ratings and Reviews. RoofAdvisorZ does not assume responsibility or liability for any Review or for any claims, damages, or losses resulting from any use of the Site or the materials contained therein.</p>
 
@@ -364,7 +382,7 @@ RoofAdvisorZ provides certain content relating to home improvement, repair, main
 
 </p>
 
-<h5>14.LINKS TO THIRD PARTY SITES</h5>
+<h5>13. LINKS TO THIRD PARTY SITES</h5>
 
 <p>
 
@@ -372,7 +390,7 @@ The links in the RoofAdvisorZ or apps will let you leave RoofAdvisorZ's Web site
 
 </p>
 
-<h5>15.THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</h5>
+<h5>14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</h5>
 
 <p>
 
@@ -388,7 +406,7 @@ Permission to use documents (such as press releases, datasheets, content, inform
 
 </p>
 
-<h5>16.INDEMNIFICATION</h5>
+<h5>15. INDEMNIFICATION</h5>
 
 <p>
 
@@ -398,7 +416,7 @@ YOU AGREE TO INDEMNIFY ROOFADVISORZ, AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS,
 
 
 
-<h5>17. ARBITRATION AND GOVERNING LAW </h5>
+<h5>16. ARBITRATION AND GOVERNING LAW </h5>
 
 <ol type="a">
 
@@ -406,7 +424,7 @@ YOU AGREE TO INDEMNIFY ROOFADVISORZ, AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS,
 
 </ol>
 
-<h5>18. NOTICE OF RIGHTS </h5>
+<h5>17. NOTICE OF RIGHTS </h5>
 
 <ol type="a">
 
@@ -426,7 +444,7 @@ YOU AGREE TO INDEMNIFY ROOFADVISORZ, AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS,
 
 
 
-<h5>19. GENERAL PROVISIONS </h5>
+<h5>18. GENERAL PROVISIONS </h5>
 
 <p>
 
