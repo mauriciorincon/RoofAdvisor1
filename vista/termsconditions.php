@@ -484,7 +484,7 @@ You acknowledge and agree that the RoofAdvisorZ Services are provided to you on 
 
 </p>
 
-<p align="left">© 2016-2018 Viaplix, LLC. All rights reserved.</p>
+<p align="right">© 2016-2018 Viaplix, LLC. All rights reserved.</p>
 
 						
 
