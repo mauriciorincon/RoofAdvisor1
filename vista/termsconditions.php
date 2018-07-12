@@ -142,7 +142,7 @@
 
 </ul>
 
-
+</ol>
 
 <h4>3. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</h4>
 
@@ -483,6 +483,8 @@ You acknowledge and agree that the RoofAdvisorZ Services are provided to you on 
 
 
 </p>
+
+<p align="left">© 2016-2018 Viaplix, LLC. All rights reserved.</p>
 
 						
 
