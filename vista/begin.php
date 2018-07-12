@@ -4,32 +4,32 @@
 <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
-            <div class="stepwizard-step col-xs-2"> 
-                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+            <div class="stepwizard-step col-xs-2" > 
+                <a href="#step-1"  type="button" class="btn btn-success btn-circle">1</a>
                 <p><small>Zip Code</small></p>
             </div>
             <div class="stepwizard-step col-xs-2"> 
-                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                 <p><small>What would you like to do?</small></p>
 			</div>
-			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+			<div class="stepwizard-step col-xs-2"> 
+                <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                 <p><small>Address</small></p>
             </div>
-			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+			<div class="stepwizard-step col-xs-2"> 
+                <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
                 <p><small>Time</small></p>
             </div>
 			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
                 <p><small>Professional</small></p>
             </div>
-			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
                 <p><small>Review</small></p>
             </div>
-			<div class="stepwizard-step col-xs-2"> 
-                <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
                 <p><small>Validate user</small></p>
             </div>
         </div>
@@ -67,7 +67,7 @@
 					<div class="form-group">
 			
 						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="typeServiceOrder" id="exampleRadios1" value="S" checked>
+							<input class="form-check-input" type="radio" name="typeServiceOrder" onchange="showHideSteps('schedule')" id="exampleRadios1" value="S" checked>
 						</div>
 						<div class="col-md-11"> 
 							<label class="form-check-label" for="exampleRadios1">Repair existing roof leak (scheduled a week in advance) - S</label>
@@ -76,7 +76,7 @@
 
 					<div class="form-group">
 						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="typeServiceOrder" id="exampleRadios2" value="E">
+							<input class="form-check-input" type="radio" name="typeServiceOrder" onchange="showHideSteps('emergency')" id="exampleRadios2" value="E">
 						</div>
 						<div class="col-md-11">
 							<label class="form-check-label" for="exampleRadios2">
@@ -324,7 +324,7 @@
 
 								// Sets a listener on a radio button to change the filter type on Places
 								// Autocomplete.
-								function setupClickListener(id, types) {
+								/*function setupClickListener(id, types) {
 								var radioButton = document.getElementById(id);
 								radioButton.addEventListener('click', function() {
 									autocomplete.setTypes(types);
@@ -334,7 +334,7 @@
 								setupClickListener('changetype-all', []);
 								setupClickListener('changetype-address', ['address']);
 								setupClickListener('changetype-establishment', ['establishment']);
-								setupClickListener('changetype-geocode', ['geocode']);
+								setupClickListener('changetype-geocode', ['geocode']);*/
 							}
 							</script>
 							

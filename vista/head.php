@@ -33,6 +33,7 @@ if(!isset($_SESSION)) {
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://use.fontawesome.com/f4e64b7c17.js"></script>
+		<script src="https://checkout.stripe.com/checkout.js"></script>
 		
 		<style>
 .checked {

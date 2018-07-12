@@ -1660,3 +1660,18 @@ $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });
+
+function showHideSteps(typeService){
+    if(typeService=='schedule'){
+        step4=$('.stepwizard-step:eq(3)');
+        step5=$('.stepwizard-step:eq(4)');
+        
+        step4.show();
+        step5.show();
+    }else if(typeService=='emergency'){
+        step4=$('.stepwizard-step:eq(3)');
+        step5=$('.stepwizard-step:eq(4)');
+        step4.hide();
+        step5.hide();
+    }
+}
