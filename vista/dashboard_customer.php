@@ -216,7 +216,7 @@
 								<td><?php echo $order['SchTime']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
 												href="" 
-												onClick="<?php echo "cancelOrder('".$order['OrderNumber']."','{Status:C}')"; ?>" > 
+												onClick="<?php echo "cancelOrder('".$order['OrderNumber']."','{\"Status\":\"C\"}')"; ?>" > 
 												<span class="glyphicon glyphicon-trash"></span>
 											</a>
 									<a class="btn-success btn-sm" data-toggle="modal"  
