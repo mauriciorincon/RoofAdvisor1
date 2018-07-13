@@ -214,11 +214,22 @@
 								<td><?php echo $order['Status']?></td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
-								<td><a class="btn-info btn-sm" data-toggle="modal"  
-												href="#myModal2" 
-												onClick=""> 
-												<span class="glyphicon glyphicon-pencil"></span>
+								<td><a class="btn-danger btn-sm" data-toggle="modal"  
+												href="" 
+												onClick="<?php echo "cancelOrder('".$order['OrderNumber']."','{Status:C}')"; ?>" > 
+												<span class="glyphicon glyphicon-trash"></span>
 											</a>
+									<a class="btn-success btn-sm" data-toggle="modal"  
+												href="#" 
+												onClick="" > 
+												<span class="glyphicon glyphicon-usd"></span>
+											</a>
+											<a class="btn-warning btn-sm" data-toggle="modal"  
+												href="#" 
+												onClick=""> 
+												<span class="glyphicon glyphicon-calendar"></span>
+											</a>
+											
 								</td>
 							</tr>
 						<?php } ?>

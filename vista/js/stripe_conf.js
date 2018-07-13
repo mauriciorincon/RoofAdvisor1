@@ -19,7 +19,14 @@ var handler = StripeCheckout.configure({
 
         http.onreadystatechange = function() {
             if(http.readyState == 4 && http.status == 200) {
-                alert(http.responseText);
+                var objStripe=jQuery.parseJSON(http.responseText);
+                if(objStripe.message=='Payment complete.'){
+                    insertOrderCustomer(objStripe.id);
+                }else{
+
+                }
+                
+                //alert(http.responseText);
             }
         }
         http.send("param="+params);

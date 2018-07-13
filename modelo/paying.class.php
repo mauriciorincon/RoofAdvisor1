@@ -28,12 +28,12 @@ class paying_stripe{
             if(is_object($_charge)){
                 $this->_last_charge=$_charge;
                 
-                return "The charge has been made correctly. $ ".$amount;
+                return true;
             }else{
-                return "Error, making the payment";
+                return false;
             }
         }else{
-            return "Error, making the payment";
+            return false;
         }
         
 

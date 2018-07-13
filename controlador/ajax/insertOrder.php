@@ -35,6 +35,7 @@ $_array=array(
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],
+    "id_stripe"=>$_POST['stripeCharge'],
 );
 
 

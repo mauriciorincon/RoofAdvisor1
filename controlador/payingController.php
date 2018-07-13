@@ -32,12 +32,27 @@ class payingController{
         //echo "Token:".$token;
 
         $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
-        echo $_result;
+        
 
+        if($_result==true){
+            $_objCharge=$this->_payingModel->getCharge();
         
-        $_objCharge=$this->_payingModel->getCharge();
+            $array_data=$this->getPayingStatus($_objCharge->id);
+            
+            $a=array(
+                "id"=>$_objCharge->id,
+                "message"=>$array_data->seller_message,
+            );
+            
+            
+            echo json_encode($a);
+            //echo $array_data->seller_message;
+
+
+        }else{
+            echo "Error, the charge dotn't do.";
+        }
         
-        $this->getPayingStatus($_objCharge->id);
         
     }
 
@@ -59,10 +74,19 @@ class payingController{
 
     public function showPayingWindow1(){
         echo '
+        
 
-        <button id="customButton">Purchase</button>
+        <button id="customButton" class="btn">Pay your service</button>
 
         <script src="vista/js/stripe_conf.js"></script>';
+
+        /*echo '
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+
+        <button id="customButton" class="btn">Pay your service</button>
+
+        <script src="js/stripe_conf.js"></script>';*/
+
         $this->_payingModel=new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         
@@ -77,7 +101,7 @@ class payingController{
             }
             $_result=$this->_payingModel->getPayinStatus($chargeID);
             if(is_array($_result) or is_object($_result)){
-                print_r($_result->outcome);
+                return $_result->outcome;
             }
             
             // Use Stripe's library to make requests...

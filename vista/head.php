@@ -25,7 +25,7 @@ if(!isset($_SESSION)) {
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="css/responsive.css">
 		<link rel="stylesheet" href="vista/css/step_by_step.css">
-		<link rel="stylesheet" href="css/varios.css">
+		<link rel="stylesheet" href="vista/css/varios.css">
 		<link rel="stylesheet" href="vista/css/calendar.css">
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
 		

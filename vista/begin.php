@@ -1,10 +1,10 @@
 <!-- slider-area start -->
-<div class="slider-area">
+
 	
 <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
-            <div class="stepwizard-step col-xs-2" > 
+            <div class="stepwizard-step col-xs-1" > 
                 <a href="#step-1"  type="button" class="btn btn-success btn-circle">1</a>
                 <p><small>Zip Code</small></p>
             </div>
@@ -31,6 +31,10 @@
 			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
                 <p><small>Validate user</small></p>
+			</div>
+			<div class="stepwizard-step col-xs-1"> 
+                <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
+                <p><small>Paying</small></p>
             </div>
         </div>
     </div>
@@ -470,7 +474,38 @@
             </div>
         </div>
 
+<div class="panel panel-primary setup-contentOrder" id="step-8">
+            <div class="panel-heading">
+                 <h3 class="panel-title">Payin the service</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label text-center h1"><big>To finish the order please, clic on <b>Pay your service</b> button to make the charge to your card </big></label>
+					<?php
+					if(!isset($_SESSION)) { 
+						session_start(); 
+					} 
+					require_once($_SESSION['application_path']."/controlador/payingController.php");
+					
+				
+					$_objPay=new payingController();
+					echo "<center>";
+					$_objPay->showPayingWindow1();
+					echo "</center>";
+					?>
+					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
+                </div>
+				
+				<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+				
+               
+                
+                
+            </div>
+		</div>
+		
 		<div class="panel panel-primary setup-contentOrder" id="step-7">
+			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading">
                  <h3 class="panel-title">Customer information</h3>
             </div>
@@ -505,6 +540,7 @@
 							</div>
 						</div>
 						<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
 					</div>
 					<div class="col-sm-6">
 						<div class="list-group">
@@ -516,55 +552,55 @@
 								</div>
 							</div>
 							
-								<div class="list-group-item " id="step6RegisterCustomerOrder">
-									<div class="form-group">
-										<label class="control-label">First Name</label>
-										<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
-										</div> 
-									<div class="form-group">
-										<label class="control-label">Last Name</label>
-										<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-									</div>  
-									<div class="form-group">
-										<label class="control-label ">Email</label>
-										<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-										<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
-									</div>
-									<div class="form-group">
-										<label class="control-label ">Password</label>
-										<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-										<div class="help-block">Minimum of 6 characters</div>
-										<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-									</div>
-									<div class="form-group">
-										<label class="control-label ">Confirm Password</label>
-										<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-										<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-									</div>
-
-									
-									<div class="form-group">
-										<label class="control-label">Address</label>
-										<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-									</div>
-									<div class="form-group">
-										<label class="control-label">City</label>
-										<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
+							<div class="list-group-item " id="step6RegisterCustomerOrder">
+								<div class="form-group">
+									<label class="control-label">First Name</label>
+									<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
 									</div> 
-									<div class="form-group">
-										<label class="control-label">State</label>
-										<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
-									</div>
-									<div class="form-group">
-										<label class="control-label">Zip code</label>
-										<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-									</div> 
-									<div class="form-group">
-										<label class="control-label">Phone number</label>
-										<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-									</div>  
-									<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer" onclick="saveCustomerData('Order')">Register</button><br><br>
+								<div class="form-group">
+									<label class="control-label">Last Name</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+								</div>  
+								<div class="form-group">
+									<label class="control-label ">Email</label>
+									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
+									<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
 								</div>
+								<div class="form-group">
+									<label class="control-label ">Password</label>
+									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+									<div class="help-block">Minimum of 6 characters</div>
+									<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+								</div>
+								<div class="form-group">
+									<label class="control-label ">Confirm Password</label>
+									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+									<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+								</div>
+
+								
+								<div class="form-group">
+									<label class="control-label">Address</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">City</label>
+									<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
+								</div> 
+								<div class="form-group">
+									<label class="control-label">State</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
+								</div>
+								<div class="form-group">
+									<label class="control-label">Zip code</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+								</div> 
+								<div class="form-group">
+									<label class="control-label">Phone number</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+								</div>  
+								<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer" onclick="saveCustomerData('Order')">Register</button><br><br>
+							</div>
 							
 						</div>
 						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
@@ -577,11 +613,13 @@
 
 		</div>
 
+		
+		
     </form>
 </div>
 
 
-</div>
+
 <!-- slider-area end -->
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
