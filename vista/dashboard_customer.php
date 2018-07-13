@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<div class="container">
-
-
-=======
->>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 <div id="wrapper">
 
 	<!-- Sidebar -->
@@ -34,8 +28,6 @@
 			</li>
 			<li>
 			<a href="#"><span class="badge" id="totalOrdersCustomer">0</span> Total Order Repairs </a>
-			</li>
-			<li>
 			<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Emergency Repairs </a>
 			</li>
 			<li>
