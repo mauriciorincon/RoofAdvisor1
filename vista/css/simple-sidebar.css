@@ -4,7 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
 
+<<<<<<< HEAD
  body {
+=======
+body {
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
   overflow-x: hidden;
 }
 
@@ -25,10 +29,17 @@
   position: fixed;
   left: 250px;
   width: 0;
+<<<<<<< HEAD
   height: 80%;
   margin-left: -250px;
   overflow-y: auto;
   background: rgb(99, 138, 109);
+=======
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -70,13 +81,21 @@
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
+<<<<<<< HEAD
   color: #ffffff;
+=======
+  color: #999999;
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 }
 
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #fff;
+<<<<<<< HEAD
   background: rgb(97, 134, 108);
+=======
+  background: rgba(255, 255, 255, 0.2);
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 }
 
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
@@ -90,14 +109,22 @@
 }
 
 .sidebar-nav>.sidebar-brand a {
+<<<<<<< HEAD
   color: #ffffff;
   background-color: #2f7221;
+=======
+  color: #999999;
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 }
 
 .sidebar-nav>.sidebar-brand a:hover {
   color: #fff;
+<<<<<<< HEAD
   /*background: none;*/
   background-color: #2f7221;
+=======
+  background: none;
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 }
 
 @media(min-width:768px) {

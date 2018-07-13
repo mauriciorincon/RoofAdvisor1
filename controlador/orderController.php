@@ -62,8 +62,8 @@ class orderController{
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
             "CutomerFBID" => $_customerK,
-            "DateTime" => time('Y-m-d H:i:s'),
-            "ETA" => time('Y-m-d H:i:s'),
+            "DateTime" => date('m-d-Y H:i:s'),
+            "ETA" => date('m-d-Y H:i:s'),
             "EstAmtMat" => "",
             "EstAmtTime" => "",
             "EstTime" => "",
@@ -85,9 +85,10 @@ class orderController{
             "Status" => "A",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
+            "StripeID"=>$arrayDataOrder['id_stripe'],
         );
        // print_r($Order);
-        $result=$this->_orderModel->insertOrder("",$Order);
+        $result=$this->_orderModel->insertOrder("FBID",$Order);
         return $result;
     }
 

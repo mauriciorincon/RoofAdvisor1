@@ -31,6 +31,7 @@ $_array_drivers=array();
 $_elementsCount=count($_arrayDivers);
 $_elementDivisor=$_elementsCount/6;
 for($n=0;$n<$_elementDivisor;$n++){
+    if(!empty($_arrayDivers[$n]) and !empty($_arrayDivers[$n+$_elementDivisor])){
     $_array=array(
         "driverFirstName"=>$_arrayDivers[$n],
         "driverLastName"=>$_arrayDivers[$n+$_elementDivisor],
@@ -40,6 +41,7 @@ for($n=0;$n<$_elementDivisor;$n++){
         "driverStatus"=>$_arrayDivers[$n+($_elementDivisor*5)],
     );
     array_push($_array_drivers,$_array);
+    }
 }
 //print_r($_arrayDivers);
 
@@ -48,8 +50,10 @@ $_companyID=$_userController->insertContractor($_arrayCompany);
 if(strpos($_companyID,"Error")!==false){
     echo "Error register company,try again ".$_companyID;
 }else{
-    $_driverController=new driverController();
-    $_driverController->insertDrivers($_companyID,$_array_drivers);
+    if(count($_array_drivers)>0){
+        $_driverController=new driverController();
+        $_driverController->insertDrivers($_companyID,$_array_drivers);
+    }
     echo "Continue, Company was register correctly please check your email, to validate the user";
 }
 ?>

@@ -25,14 +25,20 @@ if(!isset($_SESSION)) {
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="css/responsive.css">
 		<link rel="stylesheet" href="vista/css/step_by_step.css">
-		<link rel="stylesheet" href="css/varios.css">
+		<link rel="stylesheet" href="vista/css/varios.css">
 		<link rel="stylesheet" href="vista/css/calendar.css">
+<<<<<<< HEAD
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css">
 		<!--<link rel="stylesheet" href="vista/css/menu_slide.css"> -->
+=======
+		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
+		
+>>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6
 		
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://use.fontawesome.com/f4e64b7c17.js"></script>
+		<script src="https://checkout.stripe.com/checkout.js"></script>
 		
 		<style>
 .checked {

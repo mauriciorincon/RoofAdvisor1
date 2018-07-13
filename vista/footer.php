@@ -136,6 +136,7 @@
 		<script src="vista/js/jquery-3.3.1.js"></script>
 				
 				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+				
 				<script src="js/bootstrap.min.js"></script>
 				<script src="js/owl.carousel.min.js"></script>
 				<script src="js/jquery.counterup.min.js"></script>
@@ -156,6 +157,7 @@
 				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
 <script src="vista/js/varios.js"></script>
+
 <?php
         if(isset($_GET['aditionalMessage'])){?>
             <script type="text/javascript">

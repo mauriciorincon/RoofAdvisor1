@@ -137,7 +137,7 @@
 						<a href="#" class="list-group-item ">
 							<span class="glyphicon glyphicon-info-sign"></span> Answer 
 							<div class="d-flex w-100 justify-content-between">
-								<span id="step3ContractorResponse">Hola</span><br>
+								<span id="step3ContractorResponse"></span><br>
 								<label class="control-label text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
 							</div>
 						</a>
