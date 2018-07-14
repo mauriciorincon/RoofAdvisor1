@@ -5,7 +5,7 @@ var handler = StripeCheckout.configure({
     locale: 'auto',
     token: function(token) {
         var http = new XMLHttpRequest();
-        var url = "http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying";
+        var url = "?controller=paying&accion=setPaying";
         var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email });
         //var params = "stripeToken="+token.id+"&"+"stripeEmail="+token.email;
         

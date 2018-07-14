@@ -1700,9 +1700,6 @@ function showEventCalendar(orderId){
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
-<<<<<<< HEAD
-});
-=======
 });
 
 function showHideSteps(typeService){
@@ -1725,31 +1722,36 @@ function showHideSteps(typeService){
 }
 
 function cancelOrder(orderID,arrayChanges){
-    jsShowWindowLoad('');
-    $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
-    .done(function( data, textStatus, jqXHR ) {
-        if ( console && console.log ) {
-            var n = data.indexOf("Error");
-            if(n==-1){
-                $('#headerTextAnswerOrder').html('Order Detail');
-                $('#myMensaje div.modal-body').html(data);
-                $(document).ready(function(){$("#myMensaje").modal("show"); });
-            }else{
-                $('#myMensaje div.modal-body').html(data);
-                $(document).ready(function(){$("#myMensaje").modal("show"); });
+    if(confirm("Are you sure you want to cancel the order?")){
+        
+    
+        jsShowWindowLoad('');
+        $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $('#headerTextAnswerOrder').html('Order Detail');
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }else{
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
             }
-            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-            jsRemoveWindowLoad('');
-        }
-    })
-    .fail(function( jqXHR, textStatus, errorThrown ) {
-        if ( console && console.log ) {
-            console.log( "La solicitud a fallado: " +  textStatus);
-            result1=false;
-            jsRemoveWindowLoad('');
-            return result1;
-        }
-    });
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+    }else{
+        return false;
+    }
 
 }
->>>>>>> 30e7350c8c2c4baa5624ffa7d109aa065c7918d6

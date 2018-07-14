@@ -332,10 +332,13 @@ class userController{
     }
 
     public function dashboardCustomer($_id_customer=""){
+       
+        
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
             if(empty($_id_customer)){
                 $_id_customer=$_SESSION['email'];
             }
+            
             $_userMail=$_id_customer;
             $this->_userModel=new userModel();
 
