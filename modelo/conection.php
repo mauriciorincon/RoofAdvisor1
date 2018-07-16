@@ -234,13 +234,18 @@ class connection{
     }
 
     public function updateDataTable($table,$updateNode,$data){
-        //echo $table."/$updateNode".$data;
-        $updates = [
-            $table.'/'.$updateNode => $data,
-        ];
+        try{
+            $updates = [
+                $table.'/'.$updateNode => $data,
+            ];
+            
+            $this->_firebase->getReference() // this is the root reference
+               ->update($updates);
+            return true;
+        }catch (Exception $e){
+                return "Error, ".$e->getMessage();
+        }
         
-        $this->_firebase->getReference() // this is the root reference
-           ->update($updates);
 
         //$this->_firebase->set($table . "/$updateNode", $data);
     }

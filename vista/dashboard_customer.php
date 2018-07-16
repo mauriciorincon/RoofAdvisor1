@@ -92,6 +92,9 @@
 
 					var iconBase = iconBase+'/img/img_maps/';
 
+
+					<?php echo 'var customerID = "'. $_actual_customer['CustomerID'].'"';?>
+
 					var ref = firebase.database().ref("Orders");
 					ref.orderByChild("CustomerID").equalTo(<?php echo $_actual_customer['CustomerID'] ?>).once("value", function(snapshot) {
 
@@ -125,6 +128,32 @@
 					console.log(snapshot.val());
 					
 					});
+
+					// Retrieve new orders as they are added to our database
+					ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
+						var newOrder = snapshot.val();
+						if(newOrder.CustomerID==customerID){
+							if(validateExist(newOrder.OrderNumber)==false){
+								addOrderToTable(newOrder,customerID,map,infowindow,iconBase);
+							}
+						}
+						console.log("Data: " + newOrder);
+						
+					});
+					// Retrieve orders that are update in database
+					ref.on("child_changed", function(snapshot, prevChildKey) {
+						var updateOrder = snapshot.val();
+						if(updateOrder.CustomerID==customerID){
+							if(validateExist(updateOrder.OrderNumber)==false){
+								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+							}else{
+								updateOrderOnTable(updateOrder);
+							}
+						}
+						//addOrderToTable(newOrder,companyID);
+						console.log("Data: " + updateOrder.OrderNumber);
+						
+					});
 				}
 
 				function addMarket(data,map,fila,infowindow){
@@ -137,6 +166,8 @@
 						image="open_service_e.png";
 					}else if(fila.Status=='F'){
 						image="open_service_f.png";
+					}else{
+						image="if_sign-error_299045.png";
 					}
 					var oMarket= new google.maps.Marker({
 						position: new google.maps.LatLng(data.lat,data.lng),
@@ -151,6 +182,84 @@
 									infowindow.open(map, this);
 								});
 					return oMarket;
+				}
+
+				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
+					var t = $('#table_orders_customer').DataTable();
+
+					t.row.add( [
+							dataOrder.OrderNumber,
+							dataOrder.RequestType,
+							dataOrder.RepAddress,
+							dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+							dataOrder.Status,
+							dataOrder.SchDate,
+							dataOrder.SchTime,
+							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="cancelOrder("'+
+							dataOrder.FBID+
+							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
+							'<a class="btn-success btn-sm" data-toggle="modal" href="#myPayment" onClick="showChargePayment("'+
+							dataOrder.StripeID+'"><span class="glyphicon glyphicon-usd"></span></a>'+
+							'<a class="btn-warning btn-sm" data-toggle="modal" href="#myScheduleChange" onClick=""><span class="glyphicon glyphicon-calendar"></span></a>'
+						] ).draw( false );
+					/*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
+					dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
+					dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
+					'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
+					'</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
+					var marker={
+										lat: parseFloat(dataOrder.Latitude),
+										lng: parseFloat(dataOrder.Longitude),
+										icon: iconBase+'library_maps.png',
+										text: dataOrder.SchDate
+									};
+									var oMarket=addMarket(marker,map,dataOrder,infowindow);
+				}
+
+				function updateOrderOnTable(dataOrder){
+					var value = dataOrder.OrderNumber;
+					$("#table_orders_customer tr").each(function(index) {
+							if (index !== 0) {
+
+								$row = $(this);
+
+								var id = $row.find("td:eq(0)").text();
+
+								if (id.indexOf(value) === 0) {
+									$row.find("td:eq(1)").html(dataOrder.RequestType);
+									$row.find("td:eq(2)").html(dataOrder.RepAddress);
+									$row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+									$row.find("td:eq(4)").html(dataOrder.Status);
+									$row.find("td:eq(5)").html(dataOrder.SchDate);
+									$row.find("td:eq(6)").html(dataOrder.SchTime);
+								}
+								
+							}
+						});
+				}
+
+				function validateExist(orderID){
+				
+						var value = orderID;
+						var flag=false;
+						$("#table_orders_customer tr").each(function(index) {
+							if (index !== 0) {
+
+								$row = $(this);
+
+								var id = $row.find("td:eq(0)").text();
+
+								if (id.indexOf(value) !== 0) {
+									flag=false;
+								}
+								else {
+									flag=true;
+									return false;
+								}
+							}
+						});
+					return flag;
+
 				}
 			</script>
 
@@ -188,6 +297,7 @@
 				<table class="table table-striped table-bordered" id="table_orders_customer">
 					<thead>
 					<tr>
+						
 						<th>Repair Type</th>
 						<th>Repair ID</th>
 						
@@ -203,27 +313,31 @@
 					<tbody>
 						<?php foreach ($_array_customer_to_show as $key => $order) { ?>
 							<tr>
-								<td><?php echo $order['RequestType']?></td>
 								<td><?php echo $order['OrderNumber']?></td>
-								
+								<td><?php echo $order['RequestType']?></td>
 								<td><?php if(isset($order['RepAddress'])){echo $order['RepAddress'];} ?></td>
-								
 								<td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
 								<td><?php echo $order['Status']?></td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
-												href="" 
-												onClick="<?php echo "cancelOrder('".$order['OrderNumber']."','{Status,C}')"; ?>" > 
-												<span class="glyphicon glyphicon-trash"></span>
-											</a>
+										href="" 
+										onClick="<?php echo "cancelOrder('".$order['FBID']."','Status,C')"; ?>" > 
+										<span class="glyphicon glyphicon-trash"></span>
+									</a>
 									<a class="btn-success btn-sm" data-toggle="modal"  
-												href="#" 
-												onClick="" > 
-												<span class="glyphicon glyphicon-usd"></span>
-											</a>
+										href="#myPayment" 
+										onClick="<?php 
+												if(isset($order['StripeID'])){
+													echo "showChargePayment('".$order['StripeID']."')";
+												}else{
+													echo "showChargePayment('"."')";
+												}
+												 ?>" > 
+										<span class="glyphicon glyphicon-usd"></span>
+									</a>
 											<a class="btn-warning btn-sm" data-toggle="modal"  
-												href="#" 
+												href="#myScheduleChange" 
 												onClick=""> 
 												<span class="glyphicon glyphicon-calendar"></span>
 											</a>
@@ -977,5 +1091,61 @@
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myPayment" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextPayment">Playment Info</h4> 
+			</div> 
+			<div class="modal-body" id="textPayment"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonPayment"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myScheduleChange" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerScheduleChange">Change Schedule Order ID: </h4> 
+			</div> 
+			<div class="modal-body" id="textSchedule"> 
+				<input type="hidden" value="" id="orderIDChangeSchedule" />
+				<table>
+					<tr><td>New Date</td><td><input type="text" id="newDateSchedule" name="newDateSchedule" class="datepicker"></td></tr>
+					<tr><td>New Time</td><td>
+						<select id="newTimeSchedule">
+							<option value="9:00 am">9:00 am</option>
+							<option value="10:00 am">10:00 am</option>
+							<option value="11:00 am">11:00 am</option>
+							<option value="12:00 pm">12:00 pm</option>
+							<option value="1:00 pm">1:00 pm</option>
+							<option value="2:00 pm">2:00 pm</option>
+							<option value="3:00 pm">3:00 pm</option>
+							<option value="4:00 pm">4:00 pm</option>
+							<option value="5:00 pm">5:00 pm</option>
+						</select>
+					</td></tr>
+				</table>
+			</div> 
+			<div class="modal-footer" id="buttonSchedule"> 
+				<button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
+				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
 
 </div>

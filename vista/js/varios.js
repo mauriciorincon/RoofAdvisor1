@@ -1429,20 +1429,13 @@ function refreshCalendar(pmonth,pyear){
     });
 }
 
+//Date picker order
 $( function() {
-    if($("#datepickerFilterDashboard").val()!=undefined){
-        $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
-    }
+    
+        $( ".datepicker" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 7  });
+    
   } );
 
-  $(function(){
-      if($("#step6date").val()!=undefined){
-        var today = new Date().toISOString().split('T')[0];
-    //document.getElementsByID("step6date")[0].setAttribute('min', today);
-    $("#step6date")[0].setAttribute('min', today);
-      }
-    
-  });
   
 
   function filterDashboard(table){
@@ -1754,4 +1747,39 @@ function cancelOrder(orderID,arrayChanges){
         return false;
     }
 
+}
+
+function showChargePayment(chargeID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getChargeData.php", { "chargeID" : chargeID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#headerTextPayment').html('Payment Detail');
+                $('#myPayment div.modal-body').html(data);
+                $(document).ready(function(){$("#myPayment").modal("show"); });
+            }else{
+                $('#headerTextPayment').html('Error Detail Payment');
+                $('#myPayment div.modal-body').html(data);
+                $(document).ready(function(){$("#myPayment").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function changeSchedule(){
+    var dateSchedule=$('#newDateSchedule').val();
+    var timeSchedule=$('#newTimeSchedule').val();
+    
 }
