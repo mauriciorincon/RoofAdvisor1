@@ -401,16 +401,16 @@
 		<div class="collapse container" id="scheduleCompany">
             <?php   $_year=date("Y");
                     $_month=date("m");
-                    echo '<h2>June '.$_year.'</h2>';
+                    echo "<h2>$_month $_year </h2>";
                     
                     $oCalendar=new calendar();
                     echo $oCalendar->draw_controls($_month,$_year);
-                    if(strlen($month)==1){
+                    if(strlen($_month)==1){
                         $_eventsArray=$oCalendar->getEvents("0".$_month,$_year);
                     }else{
                         $_eventsArray=$oCalendar->getEvents($_month,$_year);
                     }
-                    
+                    print_r($_eventsArray);
                     echo $oCalendar->draw_calendar($_month,$_year,$_eventsArray);
 
             ?>

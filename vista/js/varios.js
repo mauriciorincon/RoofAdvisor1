@@ -1670,7 +1670,20 @@ function showEventCalendar(orderId){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#headerTextAnswerOrder').html('Order Detail');
-                $('#myMensaje div.modal-body').html(data);
+                string='<div>'+
+                    '<table class="table table-bordered">'+
+                    '<tr><td>Order ID</td><td>'+data.OrderNumber+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+data.CompanyID+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+data.ContractorID+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+data.CustomerID+'</td></tr>'+
+                    '<tr><td>Schedule Date</td><td>'+data.SchDate+'</td></tr>'+
+                    '<tr><td>Schedule Time</td><td>'+data.SchTime+'</td></tr>'+
+                    '<tr><td>Status</td><td>'+data.Status+'</td></tr>'+
+                    '<tr><td>Description</td><td>'+data.Hlevels+', '+data.Rtype+', '+data.Water+'</td></tr>'+
+                '</table>'+
+            '</div>';
+
+                $('#myMensaje div.modal-body').html(string);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }else{
                 $('#myMensaje div.modal-body').html(data);
@@ -1787,7 +1800,31 @@ function changeSchedule(){
 
 }
 
-function getOrderData(orderID){
+function getOrderScheduleDateTime(orderId){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('input#newDateSchedule').val(data.SchDate);
+                $('select#newTimeSchedule').val(data.SchTime);
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
     
 }
 

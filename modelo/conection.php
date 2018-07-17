@@ -28,6 +28,7 @@ class connection{
         $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json');
         //echo "roofadvizorz-firebase.json";
         
+        //->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
@@ -140,20 +141,24 @@ class connection{
         }
     }
 
-    public function getDataByDate($table,$field,$startDate,$finishDate){
+    public function getDataByDate($table,$field,$startYear,$startMonth,$finishYear,$finishMonth){
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
-                        ->startAt($startDate)
+                        ->startAt($startMonth)
                         ->getSnapshot();
 
         $value = $snapshot->getValue();
         
-        
+        $_array_tmp=array();
         if(is_array($value)){
-        
-            return $value;
+            foreach($value as $key => $value1){
+                if(substr_compare( $value1['SchDate'], $startYear, -strlen( $startYear ) ) === 0){
+                    array_push($_array_tmp,$value1);
+                }
+            }
+            return $_array_tmp;
         }else{
-            return "null";
+            return null;
         }
     }
 
