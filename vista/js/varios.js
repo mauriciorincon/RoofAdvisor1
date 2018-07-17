@@ -1714,7 +1714,7 @@ function showHideSteps(typeService){
     }
 }
 
-function cancelOrder(orderID,arrayChanges){
+function updateOrder(orderID,arrayChanges){
     if(confirm("Are you sure you want to cancel the order?")){
         
     
@@ -1779,7 +1779,15 @@ function showChargePayment(chargeID){
 }
 
 function changeSchedule(){
-    var dateSchedule=$('#newDateSchedule').val();
-    var timeSchedule=$('#newTimeSchedule').val();
+    var orderID=$('input#orderIDChangeSchedule').val();
+    var dateSchedule=$('input#newDateSchedule').val();
+    var timeSchedule=$('input#newTimeSchedule').val();
+    
+    updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+
+}
+
+function getOrderData(orderID){
     
 }
+

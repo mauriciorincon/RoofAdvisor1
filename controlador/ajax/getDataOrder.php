@@ -9,6 +9,8 @@ $_orderID =$_POST["orderId"];
 $_orderController=new orderController();
 $_result=$_orderController->getOrder('OrderNumber',$_orderID);
 
+echo json_encode($array);
+
 
 $_string='<div>
             <table class="table table-bordered">
@@ -22,7 +24,6 @@ $_string='<div>
                 <tr><td>Description</td><td>'.$_result['Hlevels'].", ".$_result['Rtype'].", ".$_result['Water'].'</td></tr>
             </table>
         </div>';
-
 echo $_string;
 //print_r($_result);
 ?>

@@ -195,7 +195,7 @@
 							dataOrder.Status,
 							dataOrder.SchDate,
 							dataOrder.SchTime,
-							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="cancelOrder("'+
+							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
 							dataOrder.FBID+
 							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
 							'<a class="btn-success btn-sm" data-toggle="modal" href="#myPayment" onClick="showChargePayment("'+
@@ -322,7 +322,7 @@
 								<td><?php echo $order['SchTime']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
 										href="" 
-										onClick="<?php echo "cancelOrder('".$order['FBID']."','Status,C')"; ?>" > 
+										onClick="<?php echo "updateOrder('".$order['FBID']."','Status,C')"; ?>" > 
 										<span class="glyphicon glyphicon-trash"></span>
 									</a>
 									<a class="btn-success btn-sm" data-toggle="modal"  
@@ -1138,7 +1138,7 @@
 				</table>
 			</div> 
 			<div class="modal-footer" id="buttonSchedule"> 
-				<button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
+				<button type="button" class="btn-primary btn-sm" onClick="changeSchedule()" >Update Info</button>
 				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
 				
 			</div> 
