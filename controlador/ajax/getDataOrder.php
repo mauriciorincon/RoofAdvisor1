@@ -9,7 +9,7 @@ $_orderID =$_POST["orderId"];
 $_orderController=new orderController();
 $_result=$_orderController->getOrder('OrderNumber',$_orderID);
 
-echo json_encode($array);
+echo json_encode($_result);
 
 
 /*$_string='<div>

@@ -243,7 +243,7 @@ class connection{
             $updates = [
                 $table.'/'.$updateNode => $data,
             ];
-            
+            //print_r($updates);
             $this->_firebase->getReference() // this is the root reference
                ->update($updates);
             return true;

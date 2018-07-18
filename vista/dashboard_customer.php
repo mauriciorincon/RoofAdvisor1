@@ -1,3 +1,5 @@
+
+
 <div id="wrapper">
 
 	<!-- Sidebar -->
@@ -45,6 +47,8 @@
 <div id="page-content-wrapper">
 	<div class="container-fluid">
 		
+	
+
 		<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Show Actions</a>
 
 		<!-- Dashboard Orders -->
@@ -200,8 +204,10 @@
 							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
 							'<a class="btn-success btn-sm" data-toggle="modal" href="#myPayment" onClick="showChargePayment("'+
 							dataOrder.StripeID+'"><span class="glyphicon glyphicon-usd"></span></a>'+
-							'<a class="btn-warning btn-sm" data-toggle="modal" href="#myScheduleChange" onClick=""><span class="glyphicon glyphicon-calendar"></span></a>'
+							'<a class="btn-warning btn-sm" data-toggle="modal" href="#myScheduleChange" onClick="getOrderScheduleDateTime("'+
+							dataOrder.OrderNumber+'"><span class="glyphicon glyphicon-calendar"></span></a>'
 						] ).draw( false );
+						
 					/*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
 					dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
 					dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
@@ -322,7 +328,7 @@
 								<td><?php echo $order['SchTime']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
 										href="" 
-										onClick="<?php echo "updateOrder('".$order['FBID']."','Status,C')"; ?>" > 
+										onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
 										<span class="glyphicon glyphicon-trash"></span>
 									</a>
 									<a class="btn-success btn-sm" data-toggle="modal"  
@@ -338,7 +344,7 @@
 									</a>
 											<a class="btn-warning btn-sm" data-toggle="modal"  
 												href="#myScheduleChange" 
-												onClick=""> 
+												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
 											</a>
 											

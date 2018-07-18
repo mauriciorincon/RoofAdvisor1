@@ -1728,9 +1728,6 @@ function showHideSteps(typeService){
 }
 
 function updateOrder(orderID,arrayChanges){
-    if(confirm("Are you sure you want to cancel the order?")){
-        
-    
         jsShowWindowLoad('');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
@@ -1756,9 +1753,7 @@ function updateOrder(orderID,arrayChanges){
                 return result1;
             }
         });
-    }else{
-        return false;
-    }
+    
 
 }
 
@@ -1794,9 +1789,25 @@ function showChargePayment(chargeID){
 function changeSchedule(){
     var orderID=$('input#orderIDChangeSchedule').val();
     var dateSchedule=$('input#newDateSchedule').val();
-    var timeSchedule=$('input#newTimeSchedule').val();
+    var timeSchedule=$('select#newTimeSchedule').val();
     
-    updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+    if(confirm("are you sure you want to change the date of the service?")){
+        $('#myScheduleChange').modal('hide');
+        updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+        
+    }else{
+        return false;
+    }
+
+}
+
+function cancelService(orderID,state){
+
+    if(confirm("are you sure you want to cancel the service?")){
+        updateOrder(orderID,state);
+    }else{
+        return false;
+    }
 
 }
 
@@ -1807,8 +1818,19 @@ function getOrderScheduleDateTime(orderId){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('input#newDateSchedule').val(data.SchDate);
-                $('select#newTimeSchedule').val(data.SchTime);
+                order=jQuery.parseJSON(data);
+                $('input#orderIDChangeSchedule').val(order.FBID);
+                $('input#newDateSchedule').val(order.SchDate);
+                $("select#newTimeSchedule > option").each(function() {
+                  
+                    if(this.value==order.SchTime){
+                        $(this).attr('selected','selected');
+                    }
+                });
+
+                //$('select#newTimeSchedule option[value='+order.SchTime+']').attr('selected','selected');
+                //$('#newTimeSchedule option[value='+order.SchTime+']').attr('selected','selected');
+                
             }else{
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
