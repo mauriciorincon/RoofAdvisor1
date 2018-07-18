@@ -1429,20 +1429,13 @@ function refreshCalendar(pmonth,pyear){
     });
 }
 
+//Date picker order
 $( function() {
-    if($("#datepickerFilterDashboard").val()!=undefined){
-        $( "#datepickerFilterDashboard" ).datepicker({ dateFormat: 'mm-dd-yy' });
-    }
+    
+        $( ".datepicker" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 7  });
+    
   } );
 
-  $(function(){
-      if($("#step6date").val()!=undefined){
-        var today = new Date().toISOString().split('T')[0];
-    //document.getElementsByID("step6date")[0].setAttribute('min', today);
-    $("#step6date")[0].setAttribute('min', today);
-      }
-    
-  });
   
 
   function filterDashboard(table){
@@ -1677,7 +1670,20 @@ function showEventCalendar(orderId){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#headerTextAnswerOrder').html('Order Detail');
-                $('#myMensaje div.modal-body').html(data);
+                string='<div>'+
+                    '<table class="table table-bordered">'+
+                    '<tr><td>Order ID</td><td>'+data.OrderNumber+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+data.CompanyID+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+data.ContractorID+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+data.CustomerID+'</td></tr>'+
+                    '<tr><td>Schedule Date</td><td>'+data.SchDate+'</td></tr>'+
+                    '<tr><td>Schedule Time</td><td>'+data.SchTime+'</td></tr>'+
+                    '<tr><td>Status</td><td>'+data.Status+'</td></tr>'+
+                    '<tr><td>Description</td><td>'+data.Hlevels+', '+data.Rtype+', '+data.Water+'</td></tr>'+
+                '</table>'+
+            '</div>';
+
+                $('#myMensaje div.modal-body').html(string);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }else{
                 $('#myMensaje div.modal-body').html(data);
@@ -1721,10 +1727,7 @@ function showHideSteps(typeService){
     }
 }
 
-function cancelOrder(orderID,arrayChanges){
-    if(confirm("Are you sure you want to cancel the order?")){
-        
-    
+function updateOrder(orderID,arrayChanges){
         jsShowWindowLoad('');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
@@ -1750,8 +1753,100 @@ function cancelOrder(orderID,arrayChanges){
                 return result1;
             }
         });
+    
+
+}
+
+function showChargePayment(chargeID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getChargeData.php", { "chargeID" : chargeID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#headerTextPayment').html('Payment Detail');
+                $('#myPayment div.modal-body').html(data);
+                $(document).ready(function(){$("#myPayment").modal("show"); });
+            }else{
+                $('#headerTextPayment').html('Error Detail Payment');
+                $('#myPayment div.modal-body').html(data);
+                $(document).ready(function(){$("#myPayment").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function changeSchedule(){
+    var orderID=$('input#orderIDChangeSchedule').val();
+    var dateSchedule=$('input#newDateSchedule').val();
+    var timeSchedule=$('select#newTimeSchedule').val();
+    
+    if(confirm("are you sure you want to change the date of the service?")){
+        $('#myScheduleChange').modal('hide');
+        updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+        
     }else{
         return false;
     }
 
 }
+
+function cancelService(orderID,state){
+
+    if(confirm("are you sure you want to cancel the service?")){
+        updateOrder(orderID,state);
+    }else{
+        return false;
+    }
+
+}
+
+function getOrderScheduleDateTime(orderId){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                order=jQuery.parseJSON(data);
+                $('input#orderIDChangeSchedule').val(order.FBID);
+                $('input#newDateSchedule').val(order.SchDate);
+                $("select#newTimeSchedule > option").each(function() {
+                  
+                    if(this.value==order.SchTime){
+                        $(this).attr('selected','selected');
+                    }
+                });
+
+                //$('select#newTimeSchedule option[value='+order.SchTime+']').attr('selected','selected');
+                //$('#newTimeSchedule option[value='+order.SchTime+']').attr('selected','selected');
+                
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+    
+}
+

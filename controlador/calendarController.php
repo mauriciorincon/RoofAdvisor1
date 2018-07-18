@@ -78,9 +78,9 @@ class calendar{
 
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
                 if(strlen($month)==1){
-                    $event_day = $year.'-0'.$month.'-'.$list_day;
+                    $event_day = '0'.$month.'-'.$list_day.'-'.$year;
                 }else{
-                    $event_day = $year.'-'.$month.'-'.$list_day;
+                    $event_day = $month.'-'.$list_day.'-'.$year;
                 }
                 $flag=false;
 
@@ -125,7 +125,7 @@ class calendar{
 
     public function getEvents($month,$year){
         $_otherModel=new othersModel();
-        $_result=$_otherModel->getEventsByDate($year."-".$month,$year."-".$month."-30");
+        $_result=$_otherModel->getEventsByDate($year,$month,$year,$month);
         if (is_array($_result)){
             return $_result;
         }else{

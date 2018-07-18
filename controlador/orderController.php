@@ -119,9 +119,16 @@ class orderController{
 
     public function updateOrder($orderID,$arrayFields){
         $this->_orderModel=new orderModel();
+        
 
-        for($n=0;$n<=count($arrayFields);$n+=2){
-            $this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+        for($n=0;$n<count($arrayFields);$n+=2){
+
+            $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+        }
+        if(is_bool($_result)){
+            return "The order was update correctly";
+        }else{
+            return $_result;
         }
         
     }

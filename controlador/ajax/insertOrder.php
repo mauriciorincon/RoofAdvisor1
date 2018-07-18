@@ -21,7 +21,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
     }
     
 }
-$_date=substr($_POST['ActAmtTime'],8,2)."-".substr($_POST['ActAmtTime'],5,2)."-".substr($_POST['ActAmtTime'],0,4);
+$_date=$_POST['ActAmtTime'];
 
 $_array=array(
     "RepZIP"=>$_POST['RepZIP'],

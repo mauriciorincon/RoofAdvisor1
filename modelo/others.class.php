@@ -15,9 +15,9 @@ class othersModel extends connection{
         return $_result;
     }
 
-    public function getEventsByDate($startDate,$finishDate){
-        echo "date=".$startDate;
-        $_result=$this->getDataByDate("Orders","SchDate",$startDate,$finishDate);
+    public function getEventsByDate($startYear,$startMonth,$finishYear,$finishMonth){
+        
+        $_result=$this->getDataByDate("Orders","SchDate",$startYear,$startMonth,$finishYear,$finishMonth);
         return $_result;
     }
 }
