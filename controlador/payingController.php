@@ -14,6 +14,7 @@ class payingController{
     }
 
     public function setPaying(){
+        $amount = 1000;
         if(is_null($this->_payingModel)){
             $this->_payingModel=new paying_stripe();
         }
@@ -21,12 +22,13 @@ class payingController{
             $obj = json_decode($_POST["param"], false);
             $token  = $obj->stripeToken;
             $email  = $obj->stripeEmail;
+            $amount = $obj->totalAmount;
         }else{
             $token  = $_POST['stripeToken'];
             $email  = $_POST['stripeEmail'];
         }
         
-        $amount = 1500;
+        
         $currency='usd';
 
         //echo "Token:".$token;
@@ -73,11 +75,30 @@ class payingController{
     }
 
     public function showPayingWindow1(){
-        echo '
+        $this->_payingModel=new paying_stripe();
+        $_key=$this->_payingModel->getPublishKey();
         
-
+        //////////////////////////////////////////////////////////////////////////
+        //Test
+        /*echo '<script src="js/jquery-3.3.1.js"></script>';
+        echo '<script src="https://checkout.stripe.com/checkout.js"></script>';
+        echo '
         <button id="customButton" class="btn">Pay your service</button>
+        <script>
+            var amount_value=75000;
+            var public_key=\''.$_key.'\'
+        </script>
+        <script src="js/stripe_conf.js"></script>';*/
 
+        /////////////////////////////////////////////////////////////////
+        //working
+        ////////////////////////////////////////////////////////////////
+        echo '
+        <button id="customButton" class="btn">Pay your service</button>
+        <script>
+            var amount_value=75000;
+            var public_key=\''.$_key.'\'
+        </script>
         <script src="vista/js/stripe_conf.js"></script>';
 
         /*echo '
@@ -87,8 +108,7 @@ class payingController{
 
         <script src="js/stripe_conf.js"></script>';*/
 
-        $this->_payingModel=new paying_stripe();
-        $_key=$this->_payingModel->getPublishKey();
+        
         
 
         

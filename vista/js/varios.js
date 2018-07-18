@@ -1207,6 +1207,9 @@ function validateIsLoggedIn(){
 
                         nextStepWizard.removeAttr('disabled').trigger('click');
                         curStepWizard.attr('disabled', 'disabled');
+                        if(typeof handler !== undefined){
+                            handler.open();
+                        }
                     }else{
                         $('#textAnswerOrder').html(data+'');
                         $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
