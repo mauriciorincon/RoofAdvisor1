@@ -17,7 +17,8 @@
 			<div class="container">
 				<div class="section-heading text-center">
 				<h4>RoofAdvisorZ Privacy Policy</h4>
-
+				</div>
+				<div>
 <p>Your Privacy Rights - Last Updated: May 7, 2018</p>
 
 <p>
