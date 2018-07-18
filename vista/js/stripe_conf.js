@@ -1,12 +1,12 @@
 var handler = StripeCheckout.configure({
-    
-    key: 'pk_test_iubKDaao3vNKYYrr45bJPUOl',
+    key: public_key,
+    //key: 'pk_test_iubKDaao3vNKYYrr45bJPUOl',
     image: 'img/logo.png',
     locale: 'auto',
     token: function(token) {
         var http = new XMLHttpRequest();
         var url = "?controller=paying&accion=setPaying";
-        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email });
+        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value});
         //var params = "stripeToken="+token.id+"&"+"stripeEmail="+token.email;
         
         http.open("POST", url, true);
@@ -31,20 +31,7 @@ var handler = StripeCheckout.configure({
         }
         http.send("param="+params);
 
-        /*$.post( "controlador/ajax/getDataOrder.php", { "stripeToken" : token.id,"stripeEmail":token.email}, null, "text" )
-        .done(function( data, textStatus, jqXHR ) {
-        if ( console && console.log ) {
-            console.log(data);
-            }
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                result1=false;
-                jsRemoveWindowLoad('');
-                return result1;
-            }
-        });*/
+        
       
     }
   });
@@ -54,7 +41,7 @@ var handler = StripeCheckout.configure({
     handler.open({
       name: 'RoofAdvisorz',
       description: 'pay your service',
-      amount: 2000
+      amount: amount_value
     });
     e.preventDefault();
   });
