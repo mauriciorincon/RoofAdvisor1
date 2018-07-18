@@ -28,6 +28,7 @@ class connection{
         $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json');
         //echo "roofadvizorz-firebase.json";
         
+        //->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
@@ -140,20 +141,24 @@ class connection{
         }
     }
 
-    public function getDataByDate($table,$field,$startDate,$finishDate){
+    public function getDataByDate($table,$field,$startYear,$startMonth,$finishYear,$finishMonth){
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
-                        ->startAt($startDate)
+                        ->startAt($startMonth)
                         ->getSnapshot();
 
         $value = $snapshot->getValue();
         
-        
+        $_array_tmp=array();
         if(is_array($value)){
-        
-            return $value;
+            foreach($value as $key => $value1){
+                if(substr_compare( $value1['SchDate'], $startYear, -strlen( $startYear ) ) === 0){
+                    array_push($_array_tmp,$value1);
+                }
+            }
+            return $_array_tmp;
         }else{
-            return "null";
+            return null;
         }
     }
 
@@ -191,6 +196,8 @@ class connection{
             ->limitToLast(1)
             ->getSnapshot();
             $value = $snapshot->getValue();
+
+            
             //print_r($value);
             if(is_array($value)){
                 foreach($value as $key => $value1){
@@ -207,12 +214,14 @@ class connection{
 
    
 
-    public function insertDataTable($table,$insertNode,$data){
-        if(empty($insertNode)){
+    public function insertDataTable($table,$insertNode,$data,$key){
+        
+        if($key==true){
             try {
                     //echo "llegue aca insertDataTable $table $insertNode";
                     $_key=$this->_firebase->getReference($table)
                         ->push($data);
+                    $this->updateDataTable($table.'/'.$_key->getKey(),$insertNode,$_key->getKey());
                     return $_key;
                 }catch (Exception $e){
                     return $e->getMessage();
@@ -230,13 +239,18 @@ class connection{
     }
 
     public function updateDataTable($table,$updateNode,$data){
-        //echo $table."/$updateNode".$data;
-        $updates = [
-            $table.'/'.$updateNode => $data,
-        ];
+        try{
+            $updates = [
+                $table.'/'.$updateNode => $data,
+            ];
+            //print_r($updates);
+            $this->_firebase->getReference() // this is the root reference
+               ->update($updates);
+            return true;
+        }catch (Exception $e){
+                return "Error, ".$e->getMessage();
+        }
         
-        $this->_firebase->getReference() // this is the root reference
-           ->update($updates);
 
         //$this->_firebase->set($table . "/$updateNode", $data);
     }
@@ -341,7 +355,9 @@ class connection{
         // Create a key for node
         //echo "entro a generar la key";
         //$newKey=$this->_firebase->getReference()->push()->getKey(); 
-        $newKey=$this->_firebase->getReference()->push($table)->getKey(); 
+        $newKey=$this->_firebase->getReference()->push($table)->getKey();
+        //$snapshot=$this->_firebase->getReference($table); 
+        //$newKey=$snapshot->push()->getKey(); 
         //var newPostKey = firebase.database().ref().child('posts').push().key;
 
         //echo "la key fue $newKey";

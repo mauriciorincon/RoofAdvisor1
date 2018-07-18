@@ -42,7 +42,7 @@ class orderModel extends connection{
     }
 
     function insertOrder($id_order,$dataOrder){
-        $result=$this->insertDataTable("Orders",$id_order,$dataOrder); 
+        $result=$this->insertDataTable("Orders",$id_order,$dataOrder,true); 
         return $result;
     }
 
@@ -56,7 +56,7 @@ class orderModel extends connection{
     }
 
     public function updateOrder($nodeName,$data){
-        $this->updateDataTable("Orders",$nodeName,$data); 
+        return $this->updateDataTable("Orders",$nodeName,$data); 
     }
 
     public function getLastOrderNumber($table,$field){

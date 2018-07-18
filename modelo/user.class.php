@@ -66,11 +66,11 @@ class userModel extends connection{
     }
 
     public function insertContractor($id_contracto,$dataContrator){
-        $this->insertDataTable("Company",$id_contracto,$dataContrator); 
+        $this->insertDataTable("Company",$id_contracto,$dataContrator,false); 
     }
 
     public function insertCustomer($id_customer,$dataCustomer){
-        $this->insertDataTable("Customers",$id_customer,$dataCustomer); 
+        $this->insertDataTable("Customers",$id_customer,$dataCustomer,true); 
     }
 
     public function updateContractor($nodeName,$data){
@@ -146,5 +146,9 @@ class userModel extends connection{
         return $this->getKey($table);
     }
 
+    public function getNode($table){
+        $result=$this->getDataTable($table);
+        return $result;
+    }
 }
 ?>

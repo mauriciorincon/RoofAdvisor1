@@ -2,6 +2,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
+echo "llego aca";
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
@@ -20,7 +21,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
     }
     
 }
-$_date=substr($_POST['ActAmtTime'],8,2)."-".substr($_POST['ActAmtTime'],5,2)."-".substr($_POST['ActAmtTime'],0,4);
+$_date=$_POST['ActAmtTime'];
 
 $_array=array(
     "RepZIP"=>$_POST['RepZIP'],
@@ -35,6 +36,7 @@ $_array=array(
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],
+    "id_stripe"=>$_POST['stripeCharge'],
 );
 
 

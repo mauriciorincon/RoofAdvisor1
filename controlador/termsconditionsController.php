@@ -12,7 +12,7 @@ class termsconditionsController{
 		require_once("vista/footer.php");
     }
 
-    public function showinfo(){
+    public function privacyinfo(){
 		require_once("vista/head.php");
 		require_once("vista/privacy.php");
 		require_once("vista/footer.php");
