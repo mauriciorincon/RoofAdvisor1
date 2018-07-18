@@ -95,7 +95,10 @@ class connection{
    
 
     public function insertDataTable($table,$insertNode,$data){
-        $this->_firebase->set($table . "/$insertNode", $data);
+        $postRef = $this->_firebase->getReference($table)->push($data);
+        $postKey = $postRef->getKey(); // The key looks like this: -KVquJHezVLf-lSye6Qg
+
+        //$this->_firebase->set($table . "/$insertNode", $data);
     }
 
     public function updateDataTable($table,$updateNode,$data){

@@ -28,8 +28,6 @@
 			</li>
 			<li>
 			<a href="#"><span class="badge" id="totalOrdersCustomer">0</span> Total Order Repairs </a>
-			</li>
-			<li>
 			<a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Emergency Repairs </a>
 			</li>
 			<li>
@@ -214,11 +212,22 @@
 								<td><?php echo $order['Status']?></td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
-								<td><a class="btn-info btn-sm" data-toggle="modal"  
-												href="#myModal2" 
-												onClick=""> 
-												<span class="glyphicon glyphicon-pencil"></span>
+								<td><a class="btn-danger btn-sm" data-toggle="modal"  
+												href="" 
+												onClick="<?php echo "cancelOrder('".$order['OrderNumber']."','{Status,C}')"; ?>" > 
+												<span class="glyphicon glyphicon-trash"></span>
 											</a>
+									<a class="btn-success btn-sm" data-toggle="modal"  
+												href="#" 
+												onClick="" > 
+												<span class="glyphicon glyphicon-usd"></span>
+											</a>
+											<a class="btn-warning btn-sm" data-toggle="modal"  
+												href="#" 
+												onClick=""> 
+												<span class="glyphicon glyphicon-calendar"></span>
+											</a>
+											
 								</td>
 							</tr>
 						<?php } ?>
@@ -251,8 +260,16 @@
                     <input type="text" class="form-control" required="required" placeholder="Enter city" id="customerCity" name="customerCity" value="<?php echo $_actual_customer['City'] ?>"/>
                 </div> 
                 <div class="form-group">
-                    <label class="control-label">State</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter state" id="customerState" name="customerState" value="<?php echo $_actual_customer['State'] ?>"/>
+					<label class="control-label">State</label>
+					<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state" value="<?php echo $_actual_customer['State'] ?>">
+                            <?php foreach ($_array_state as $key => $value1) { 
+								if(strcmp($_actual_customer['State'],$value1)==0){?>
+									<option value="<?php echo $value1 ?>" selected="selected"><?php echo $value1 ?></option>
+								<?php }else{ ?>
+									<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+								<?php } ?>
+                            <?php } ?>
+						</select>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Zip code</label>
@@ -618,8 +635,9 @@
 
 											// Sets a listener on a radio button to change the filter type on Places
 											// Autocomplete.
-											function setupClickListener(id, types) {
+											/*function setupClickListener(id, types) {
 											var radioButton = document.getElementById(id);
+											
 											radioButton.addEventListener('click', function() {
 												autocomplete.setTypes(types);
 											});
@@ -628,7 +646,7 @@
 											setupClickListener('changetype-all', []);
 											setupClickListener('changetype-address', ['address']);
 											setupClickListener('changetype-establishment', ['establishment']);
-											setupClickListener('changetype-geocode', ['geocode']);
+											setupClickListener('changetype-geocode', ['geocode']);*/
 										}
 										</script>
 										
@@ -874,6 +892,8 @@
 				</form>
 			</div>
 
+			</div>
+			
 		</div>
 		
 	</div>
@@ -958,4 +978,4 @@
 	</div>
 </div>
 
-
+</div>

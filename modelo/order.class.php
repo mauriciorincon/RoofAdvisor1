@@ -42,7 +42,7 @@ class orderModel extends connection{
     }
 
     function insertOrder($id_order,$dataOrder){
-        $result=$this->insertDataTable("Orders",$id_order,$dataOrder); 
+        $result=$this->insertDataTable("Orders",$id_order,$dataOrder,true); 
         return $result;
     }
 

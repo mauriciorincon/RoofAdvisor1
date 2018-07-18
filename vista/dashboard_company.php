@@ -425,8 +425,13 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
                                 </div>
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label class="control-label">Billing Address 2</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+=======
+                                    <label class="control-label">Billing Address (Con't)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+>>>>>>> 299c41f913cf7d67e501f865b380e880099fb665
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">City</label>
@@ -442,6 +447,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Credit Card Expiration Month (MM)</label>
+<<<<<<< HEAD
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
                                 </div>
                                 <div class="form-group">
@@ -450,6 +456,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">PayInfoCredit Card Number</label>
+=======
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Credit Card Expiration Year (YYYY)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Credit Card Number</label>
+>>>>>>> 299c41f913cf7d67e501f865b380e880099fb665
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
                                 </div>
                                 <div class="form-group">

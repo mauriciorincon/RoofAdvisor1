@@ -85,9 +85,10 @@ class orderController{
             "Status" => "A",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
+            "StripeID"=>$arrayDataOrder['id_stripe'],
         );
        // print_r($Order);
-        $result=$this->_orderModel->insertOrder("",$Order);
+        $result=$this->_orderModel->insertOrder("FBID",$Order);
         return $result;
     }
 
@@ -114,6 +115,15 @@ class orderController{
         $_orders=$this->_orderModel->getOrders('CompanyID',$companyID);
         return $_orders;
 
+    }
+
+    public function updateOrder($orderID,$arrayFields){
+        $this->_orderModel=new orderModel();
+
+        for($n=0;$n<=count($arrayFields);$n+=2){
+            $this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+        }
+        
     }
 
     

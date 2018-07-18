@@ -2,6 +2,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
+echo "llego aca";
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
@@ -35,6 +36,7 @@ $_array=array(
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],
+    "id_stripe"=>$_POST['stripeCharge'],
 );
 
 

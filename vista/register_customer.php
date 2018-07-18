@@ -57,7 +57,13 @@
                     </div> 
                     <div class="form-group">
                         <label class="control-label">State</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter state" id="customerState" name="customerState" />
+                        <select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+                            <?php foreach ($_array_state as $key => $value1) { ?>
+                                <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                            <?php } ?>
+                        </select>
+                         
+                        
                     </div>
                     <div class="form-group">
                         <label class="control-label">Zip code</label>
