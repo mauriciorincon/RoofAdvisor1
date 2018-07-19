@@ -876,10 +876,21 @@ $(".btn-group > .btn").click(function(){
     $(this).addClass("active");
 });*/
 
+//Select one of the company from order
 $('#step7ListCompany').on('click', 'a', function(){
     $("#step7ListCompany a").removeClass("active");
     $(this).addClass("active");
 });
+
+//Select one of the company from order
+$('#step2OtypeService').on('click', 'a', function(){
+    $("#step2OtypeService a").removeClass("active");
+    $(this).addClass("active");
+    var type=$(this).find('input:hidden').val();
+    showHideSteps(type);
+   
+});
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -945,7 +956,7 @@ $(document).ready(function () {
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
                 var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
-                if(RequestType=='E'){
+                if(RequestType=='emergency'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
@@ -1133,7 +1144,7 @@ $(document).ready(function() {
 
 function insertOrderCustomer(idStripeCharge){
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+    var RequestType=$("input:hidden[name='typeServiceOrder']:checked").val();
     var Rtype=$("input:radio[name='estep3Option']:checked").val();
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
@@ -1146,7 +1157,11 @@ function insertOrderCustomer(idStripeCharge){
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
 
-    
+    if(RequestType=='emergency'){
+        RequestType='E'
+    }else{
+        RequestType='S'
+    }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
@@ -1200,7 +1215,7 @@ function validateIsLoggedIn(){
 
                 if(n==-1){
                     var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
-                    if(RequestType=='E'){
+                    if(RequestType=='emergency'){
                         $('#userLoguedIn').val(true);
                         nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                         curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
