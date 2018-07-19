@@ -5,7 +5,14 @@ var handler = StripeCheckout.configure({
     locale: 'auto',
     token: function(token) {
         var http = new XMLHttpRequest();
+        //////////////////////////////////////////////////////
+        //Production
         var url = "?controller=paying&accion=setPaying";
+        /////////////////////////////////////////////////////
+        //test 
+        //var url = "http://localhost/RoofAdvisor/index.php?controller=paying&accion=setPaying";
+
+
         var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value});
         //var params = "stripeToken="+token.id+"&"+"stripeEmail="+token.email;
         
@@ -19,12 +26,19 @@ var handler = StripeCheckout.configure({
 
         http.onreadystatechange = function() {
             if(http.readyState == 4 && http.status == 200) {
-                var objStripe=jQuery.parseJSON(http.responseText);
-                if(objStripe.message=='Payment complete.'){
-                    insertOrderCustomer(objStripe.id);
-                }else{
-
+                try {
+                    var objStripe=jQuery.parseJSON(http.responseText);
+                    if(objStripe.message=='Payment complete.'){
+                        insertOrderCustomer(objStripe.id);
+                        
+                    }else{
+                        console.log(http.responseText);
+                    }
+                } catch (error) {
+                    console.log(http.responseText);
                 }
+                
+                
                 
                 //alert(http.responseText);
             }

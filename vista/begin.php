@@ -64,17 +64,17 @@
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> What would you like to do?		
+					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Type of service</strong></font>
 				</div>
-
-					<a href="#" class="list-group-item " name="linkCompany">
-					
+				<div class="list-group" id="step2OtypeService">
+					<a href="#" class="list-group-item active" name="linkCompany">
+						<input type="hidden" value="schedule" name="typeServiceOrder">
 						<table>
 							<tr>
-								<td>
+								<td style="padding: 12px 12px 12px 12px;">
 									<button class=" btn-primary   btn-lg" type="button">Schedule Repair</button>
 								</td>
-								<td>
+								<td style="padding: 12px 12px 12px 12px;">
 								A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.
 								</td>
 							</tr>
@@ -86,13 +86,13 @@
 						</div>
 					</a>
 					<a href="#" class="list-group-item " name="linkCompany">
-					
+					<input type="hidden" value="emergency" name="typeServiceOrder">
 						<table>
 							<tr>
-								<td>
+								<td style="padding: 12px 12px 12px 12px;">
 									<button class=" btn-primary   btn-lg" type="button">Emergency Repair</button>
 								</td>
-								<td>
+								<td style="padding: 12px 12px 12px 12px;">
 								An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. 
 								</td>
 							</tr>
@@ -103,6 +103,8 @@
 							
 						</div>
 					</a>
+				</div>
+					
 
 					
 								
@@ -110,7 +112,7 @@
 					
 				
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> Best select the type of roofing material on your property		
+					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Best select the type of roofing material on your property</strong></font>		
 				</div>
 				<div class="list-group-item ">
 					<div class="form-group">
@@ -179,12 +181,25 @@
 						</div>
 						
 					</div>	
+					<div class="form-group">
+						<div class ="col-md-5">
+						</div>
+						<div class ="col-md-1">
+								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
+						</div>
+						<div class="col-md-6">
+								<label class="form-check-label" for="estep3Option5">
+								Do not Know
+								</label>
+						</div>
+						
+					</div>	
 					<label>&nbsp;</label>
 
 				</div>
                 
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> Are you aware of any leaks or damage to the roof?		
+					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
 				</div>
 
 				<div class="list-group-item ">
@@ -203,7 +218,7 @@
 				</div>
 
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> How many stories is your home?		
+					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
 				<div class="list-group-item ">
@@ -369,7 +384,7 @@
             </div>
             <div class="panel-body">
 				<div class="form-group">			
-				<span ><b>Plese select the date to service: </b></span><input type="text" id="step6date" name="step6date" class="datepicker">
+				<span ><b>Please select the date and time of service. </b></span><input type="text" id="step6date" name="step6date" class="datepicker">Schedule repair service are schedule a week in advance
 				</div>
 					
 				<div class="form-group">
@@ -397,7 +412,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-5">
             <div class="panel-heading">
-                 <h3 class="panel-title">Select the professional</h3>
+                 <h3 class="panel-title"><font size="10"><strong>Select the professional</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">
@@ -406,7 +421,7 @@
 								These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers. 
 								</label>
 								<label class="control-label" for="exampleRadios5">
-								You can select one or the first available will respond to your request?
+								You can select one or the first available will respond to your work order?
 								</label>
 							
 							
@@ -468,7 +483,7 @@
 						</a>
 				</div>
 
-				<div class="list-group">
+				<!--<div class="list-group">
 						<a href="#" class="list-group-item ">
 							<span class="glyphicon glyphicon-info-sign"></span> Rate 
 							<div class="d-flex w-100 justify-content-between">
@@ -476,7 +491,7 @@
 								
 							</div>
 						</a>
-				</div>
+				</div>-->
 				
 				
                 
@@ -656,7 +671,7 @@
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<button type="button" class="close" data-dismiss="modal">&times;</button> 
 				<h4 class="modal-title" id="headerTextAnswerRating">Modal Header</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerRating"> 
