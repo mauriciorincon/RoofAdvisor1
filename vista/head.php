@@ -84,7 +84,7 @@ if(!isset($_SESSION)) {
 								<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-									<li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
+									<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 									<li class="divider"></li>
 									<li><a href="?controller=user&accion=logout">Logout</a></li>
 								</ul>
@@ -120,8 +120,8 @@ if(!isset($_SESSION)) {
 										</li>
 										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 												<ul>
-													<li><a href="?controller=user&accion=showLoginClient">Customer</a></li>
-													<li><a href="?controller=user&accion=showLoginContractor">Contractor</a></li>
+													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
+													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 												</ul>
 											</li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
@@ -147,8 +147,8 @@ if(!isset($_SESSION)) {
 											</li>
 											<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 												<ul>
-													<li><a href="?controller=user&accion=showLoginClient">Customer</a></li>
-													<li><a href="?controller=user&accion=showLoginContractor">Contractor</a></li>
+													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
+													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 												</ul>
 											</li>
 											<li><a href="about.html">ABOUT US</a></li>

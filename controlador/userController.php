@@ -34,17 +34,19 @@ class userController{
     }
     
     public function showLoginContractor(){
-        if(isset($_SESSION['loggedin'])){
+        
+        /*if(isset($_SESSION['loggedin'])){
             if($_SESSION['loggedin']==true){
                 $this->dashboardCompany($_SESSION['email']);
             }
-        }
+        }*/
 		require_once("vista/head.php");
 		require_once("vista/login_contractor.php");
 		require_once("vista/footer.php");
     }
 
     public function showLoginClient(){
+        
 		require_once("vista/head.php");
 		require_once("vista/login_client.php");
 		require_once("vista/footer.php");
@@ -75,11 +77,13 @@ class userController{
         
         if(is_array($_result) or gettype($_result)=="object"){
             if($_result->emailVerified==1){
+                $this->cleanVariables();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $_result->displayName;
                 $_SESSION['start'] = time();
                 $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                 $_SESSION['email'] = $_result->email;
+                $_SESSION['profile'] = 'customer';
                 $this->dashboardCustomer($this->_user);
             }else{
                 Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
@@ -105,13 +109,13 @@ class userController{
                 
                 $_data_customer=$this->_userModel->getCustomer($this->_user);
                 if(!is_null($_data_customer)){
-                    //echo " 1 ";
+                    $this->cleanVariables();
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $_result->displayName;
                     $_SESSION['start'] = time();
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $_result->email;
-                    
+                    $_SESSION['profile'] = 'customer';
                     
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
@@ -144,12 +148,13 @@ class userController{
             if($_result->emailVerified==1){
                 $_data_company=$this->_userModel->getCompany($this->_user);
                 if(!is_null($_data_company)){
-                    //echo " 1 ";
+                    $this->cleanVariables();
                     $_SESSION['loggedin'] = true;
                     $_SESSION['username'] = $_result->displayName;
                     $_SESSION['start'] = time();
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $_result->email;
+                    $_SESSION['profile'] = 'company';
                     $this->dashboardCompany($this->_user);
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
@@ -334,7 +339,7 @@ class userController{
     public function dashboardCustomer($_id_customer=""){
        
         
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['profile']) && $_SESSION['profile'] == 'customer'){
             if(empty($_id_customer)){
                 $_id_customer=$_SESSION['email'];
             }
@@ -343,6 +348,7 @@ class userController{
             $this->_userModel=new userModel();
 
             $_actual_customer=$this->_userModel->getCustomer($_userMail);
+            $_SESSION['username']=$_actual_customer['Fname'].' '.$_actual_customer['Lname'];
             //echo "hola".$_userMail;
             //print_r($_actual_customer);
             
@@ -361,9 +367,12 @@ class userController{
         }
     }
     
-    public function dashboardCompany($_id_company){
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    public function dashboardCompany($_id_company=""){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['profile']) && $_SESSION['profile'] == 'company'){
 
+            if(empty($_id_company)){
+                $_id_company=$_SESSION['email'];
+            }
             $_userMail=$_id_company;
             $this->_userModel=new userModel();
 
@@ -484,14 +493,19 @@ class userController{
     }
 
     public function logout(){
+        $this->cleanVariables();
+        header('Location: index.php');
+
+    }
+
+    public function cleanVariables(){
         unset ($_SESSION['loggedin']);
         unset ($_SESSION['username']);
         unset ($_SESSION['start']);
         unset ($_SESSION['expire']);
         unset ($_SESSION['email']);
+        unset ($_SESSION['profile']);
         session_destroy();
-        header('Location: index.php');
-
     }
 
     public function getCustomer($user){
