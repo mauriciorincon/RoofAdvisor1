@@ -894,7 +894,7 @@ $('#step2OtypeService').on('click', 'a', function(){
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//funtions for registar an order
+//funtions for register an order
 //
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -955,7 +955,7 @@ $(document).ready(function () {
                 $('#textAnswerOrder').html('Plese select the address for the service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
-                var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+                var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                 if(RequestType=='emergency'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').val();
@@ -1144,7 +1144,7 @@ $(document).ready(function() {
 
 function insertOrderCustomer(idStripeCharge){
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("input:hidden[name='typeServiceOrder']:checked").val();
+    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$("input:radio[name='estep3Option']:checked").val();
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
@@ -1214,7 +1214,7 @@ function validateIsLoggedIn(){
                 
 
                 if(n==-1){
-                    var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+                    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                     if(RequestType=='emergency'){
                         $('#userLoguedIn').val(true);
                         nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");

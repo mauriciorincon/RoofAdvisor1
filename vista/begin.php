@@ -67,7 +67,7 @@
 					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Type of service</strong></font>
 				</div>
 				<div class="list-group" id="step2OtypeService">
-					<a href="#" class="list-group-item active" name="linkCompany">
+					<a href="#" class="list-group-item active" name="linkServiceType">
 						<input type="hidden" value="schedule" name="typeServiceOrder">
 						<table>
 							<tr>
@@ -85,7 +85,7 @@
 							
 						</div>
 					</a>
-					<a href="#" class="list-group-item " name="linkCompany">
+					<a href="#" class="list-group-item " name="linkServiceType">
 					<input type="hidden" value="emergency" name="typeServiceOrder">
 						<table>
 							<tr>
@@ -129,30 +129,30 @@
 					</div>
 
 					<div class="form-group">
-					<div class ="col-md-5">
+						<div class ="col-md-5">
 						</div>
 						<div class ="col-md-1">
 								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
-							</div>
-							<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
 								<label class="form-check-label" for="estep3Option2">
 								Asphalt
 								</label>
-							</div>
+						</div>
 						
 					</div>
 
 					<div class="form-group">
-					<div class ="col-md-5">
+						<div class ="col-md-5">
 						</div>
 						<div class ="col-md-1">
 								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
-							</div>
-							<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
 								<label class="form-check-label" for="estep3Option3">
 								Wood Shake/Composite
 								</label>
-							</div>
+						</div>
 						
 					</div>
 					<div class="form-group">

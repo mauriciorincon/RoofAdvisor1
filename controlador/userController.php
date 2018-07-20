@@ -505,7 +505,7 @@ class userController{
         unset ($_SESSION['expire']);
         unset ($_SESSION['email']);
         unset ($_SESSION['profile']);
-        session_destroy();
+        //session_destroy();
     }
 
     public function getCustomer($user){
