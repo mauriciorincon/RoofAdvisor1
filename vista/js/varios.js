@@ -1223,7 +1223,11 @@ function validateIsLoggedIn(){
                         nextStepWizard.removeAttr('disabled').trigger('click');
                         curStepWizard.attr('disabled', 'disabled');
                         if(typeof handler !== undefined){
-                            handler.open();
+                            handler.open({
+                                name: 'RoofAdvisorz',
+                                description: 'pay your service',
+                                amount: amount_value
+                              });
                         }
                     }else{
                         $('#textAnswerOrder').html(data+'');
@@ -1688,16 +1692,17 @@ function showEventCalendar(orderId){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#headerTextAnswerOrder').html('Order Detail');
+                order=jQuery.parseJSON(data);
                 string='<div>'+
                     '<table class="table table-bordered">'+
-                    '<tr><td>Order ID</td><td>'+data.OrderNumber+'</td></tr>'+
-                    '<tr><td>Company</td><td>'+data.CompanyID+'</td></tr>'+
-                    '<tr><td>Contractor</td><td>'+data.ContractorID+'</td></tr>'+
-                    '<tr><td>Customer</td><td>'+data.CustomerID+'</td></tr>'+
-                    '<tr><td>Schedule Date</td><td>'+data.SchDate+'</td></tr>'+
-                    '<tr><td>Schedule Time</td><td>'+data.SchTime+'</td></tr>'+
-                    '<tr><td>Status</td><td>'+data.Status+'</td></tr>'+
-                    '<tr><td>Description</td><td>'+data.Hlevels+', '+data.Rtype+', '+data.Water+'</td></tr>'+
+                    '<tr><td>Order ID</td><td>'+order.OrderNumber+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+order.CompanyID+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+order.ContractorID+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+order.CustomerID+'</td></tr>'+
+                    '<tr><td>Schedule Date</td><td>'+order.SchDate+'</td></tr>'+
+                    '<tr><td>Schedule Time</td><td>'+order.SchTime+'</td></tr>'+
+                    '<tr><td>Status</td><td>'+order.Status+'</td></tr>'+
+                    '<tr><td>Description</td><td>'+order.Hlevels+', '+order.Rtype+', '+order.Water+'</td></tr>'+
                 '</table>'+
             '</div>';
 
@@ -1743,6 +1748,11 @@ function showHideSteps(typeService){
         step5.hide();
         step8.show();
     }
+}
+
+function setFirstStep(){
+    $firstStep=$('div.setup-panel div a[href="#step1"]').parent().children("a");
+    $firstStep.trigger('click');
 }
 
 function updateOrder(orderID,arrayChanges){

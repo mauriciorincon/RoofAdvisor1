@@ -1,6 +1,4 @@
-<!-- slider-area start -->
 
-	
 <div class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
@@ -263,28 +261,24 @@
 					
 							<input id="pac-input" class="controls" type="text"
 								placeholder="Enter a location" style="margin-left: 20px;margin-top:10px;">
-							<!--<div id="type-selector" class="controls">
-								<input type="radio" name="type" id="changetype-all" checked="checked">
-								<label for="changetype-all">All</label>
-
-								<input type="radio" name="type" id="changetype-establishment">
-								<label for="changetype-establishment">Establishments</label>
-
-								<input type="radio" name="type" id="changetype-address">
-								<label for="changetype-address">Addresses</label>
-
-								<input type="radio" name="type" id="changetype-geocode">
-								<label for="changetype-geocode">Geocodes</label>
-							</div>-->
-							<div id="map"></div>
+                            
+                                <style>
+						/* Set the size of the div element that contains the map */
+						#map1 {
+							height: 400px;  /* The height is 400 pixels */
+							width: 100%;  /* The width is the width of the web page */
+						}
+                        </style>
+                        
+							<div id="map1"></div>
 
 							<script>
 							// This example requires the Places library. Include the libraries=places
 							// parameter when you first load the API. For example:
 							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-							function initMap() {
-								var map = new google.maps.Map(document.getElementById('map'), {
+							function initMap1() {
+								var map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
 								zoom: 7
 								});
@@ -369,7 +363,7 @@
 							</script>
 							
 						<script async defer
-							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initMap">
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initialization">
 						</script>
 
 						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
@@ -642,45 +636,5 @@
 		
 		
     </form>
-</div>
-
-
-
-<!-- slider-area end -->
-
-<div class="modal fade" id="myModalRespuesta" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
-
-<div class="modal fade" id="myModalRating" role="dialog" style="height: 300px;">
-	<div class="modal-dialog modal-dialog-centered" role="document"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button> 
-				<h4 class="modal-title" id="headerTextAnswerRating">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerRating"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonrating"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
 </div>
 
