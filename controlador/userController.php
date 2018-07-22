@@ -386,6 +386,11 @@ class userController{
             
             $_orderController=new orderController();
             $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
+
+            $_array_orders_without_comapny=$_orderController->getOrderByCompany("");
+            foreach($_array_orders_without_comapny as $key => $order){
+                array_push($_array_orders_to_show,$order);
+            }
             
             
             

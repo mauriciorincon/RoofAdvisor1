@@ -169,6 +169,8 @@
 							dataOrder.Status,
 							dataOrder.SchDate,
 							dataOrder.SchTime,
+							dataOrder.CompanyID,
+							dataOrder.ContractorID,
 							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
 							dataOrder.FBID+
 							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
@@ -208,6 +210,8 @@
 									$row.find("td:eq(4)").html(dataOrder.Status);
 									$row.find("td:eq(5)").html(dataOrder.SchDate);
 									$row.find("td:eq(6)").html(dataOrder.SchTime);
+									$row.find("td:eq(7)").html(dataOrder.CompanyID);
+									$row.find("td:eq(8)").html(dataOrder.ContractorID);
 								}
 								
 							}
@@ -273,16 +277,15 @@
 				<table class="table table-striped table-bordered" id="table_orders_customer">
 					<thead>
 					<tr>
-						
-						<th>Repair Type</th>
 						<th>Repair ID</th>
-						
+						<th>Repair Type</th>
 						<th>Address</th>
-						
 						<th>Description</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
+						<th>Company</th>
+						<th>Driver</th>
 						<th>Actions</th>
 					</tr>
 					</thead>
@@ -290,12 +293,64 @@
 						<?php foreach ($_array_customer_to_show as $key => $order) { ?>
 							<tr>
 								<td><?php echo $order['OrderNumber']?></td>
-								<td><?php echo $order['RequestType']?></td>
+								<td><?php 
+										switch ($order['RequestType']) {
+											case "E":
+												echo "Emergency";
+												break;
+											case "S":
+												echo "Schedule";
+												break;
+											default:
+												echo "Undefined";
+												break;
+										}
+									?>
+								</td>
 								<td><?php if(isset($order['RepAddress'])){echo $order['RepAddress'];} ?></td>
 								<td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
-								<td><?php echo $order['Status']?></td> 
+								<td><?php 
+										switch ($order['Status']) {
+											case "A":
+												echo "Order Open";
+												break;
+											case "D":
+												echo "Order Assigned";
+												break;
+											case "E":
+												echo "Contractor Just Arrived";
+												break;
+											case "F":
+												echo "Estimate Sent";
+												break;
+											case "G":
+												echo "Estimate Approved";
+												break;
+											case "H":
+												echo "Work In Progress";
+												break;
+											case "I":
+												echo "Work Completed";
+												break;
+											case "J":
+												echo "Final Bill";
+												break;
+											case "K":
+												echo "Order Completed Paid";
+												break;
+											case "C":
+												echo "Cancel work";
+												break;
+											default:
+												echo "Undefined";
+												break;
+										}
+									?>
+								</td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
+								<td><?php if(isset($order['CompanyID'])){echo $order['CompanyID'];}else{echo '';}?></td>
+								<td><?php echo $order['ContractorID']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
 										href="" 
 										onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 

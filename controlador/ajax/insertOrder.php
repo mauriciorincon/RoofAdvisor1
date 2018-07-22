@@ -22,6 +22,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
     
 }
 $_date=$_POST['ActAmtTime'];
+$_companyID="";
+if(isset($_POST['CompanyID'])){
+    $_companyID=$_POST['CompanyID'];
+}
 
 $_array=array(
     "RepZIP"=>$_POST['RepZIP'],
@@ -32,7 +36,7 @@ $_array=array(
     "ActAmtTime"=>$_date,
     "ActTime"=>$_POST['ActTime'],
     "ContractorID"=>'',
-    "CompanyID"=>$_POST['CompanyID'],
+    "CompanyID"=>$_companyID,
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],

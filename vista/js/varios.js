@@ -1163,6 +1163,9 @@ function insertOrderCustomer(idStripeCharge){
         RequestType='S'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+    if(CompanyID==undefined){
+        CompanyID="";
+    }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
@@ -1751,8 +1754,11 @@ function showHideSteps(typeService){
 }
 
 function setFirstStep(){
-    $firstStep=$('div.setup-panel div a[href="#step1"]').parent().children("a");
-    $firstStep.trigger('click');
+    $firstStep=$('div.setup-panel div a[href="#step-1"]').parent().children("a");
+    $nextStepWizard = $('div.setup-panelCustomer div a[href="#step-1"]').parent().prev().children("a"),
+    $nextStepWizard.removeAttr('disabled').trigger('click');
+
+    //$firstStep.trigger('click');
 }
 
 function updateOrder(orderID,arrayChanges){

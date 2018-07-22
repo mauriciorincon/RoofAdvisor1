@@ -319,18 +319,79 @@
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
                             <td><?php  
-                                $_comapny=$this->_userModel->getCompanyByID($order['CompanyID']); 
-                                echo $_comapny['CompanyName'];
+                                echo $order['RepAddress'].' / ';
                                 ?></td>
                             
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
-                            <td><?php echo $order['RequestType']?></td>
-                            <td><?php echo $order['Status']?></td>                            
+                            <td><?php 
+                                    switch ($order['RequestType']) {
+                                        case "E":
+                                            echo "Emergency";
+                                            break;
+                                        case "S":
+                                            echo "Schedule";
+                                            break;
+                                        default:
+                                            echo "Undefined";
+                                            break;
+                                    }
+                                ?>
+                            </td>
+                            <td><?php 
+                                switch ($order['Status']) {
+                                    case "A":
+                                        echo "Order Open";
+                                        break;
+                                    case "D":
+                                        echo "Order Assigned";
+                                        break;
+                                    case "E":
+                                        echo "Contractor Just Arrived";
+                                        break;
+                                    case "F":
+                                        echo "Estimate Sent";
+                                        break;
+                                    case "G":
+                                        echo "Estimate Approved";
+                                        break;
+                                    case "H":
+                                        echo "Work In Progress";
+                                        break;
+                                    case "I":
+                                        echo "Work Completed";
+                                        break;
+                                    case "J":
+                                        echo "Final Bill";
+                                        break;
+                                    case "K":
+                                        echo "Order Completed Paid";
+                                        break;
+                                    case "C":
+                                        echo "Cancel work";
+                                        break;
+                                    default:
+                                        echo "Undefined";
+                                        break;
+                                }
+                                ?>
+                            </td>                            
 
                             <td><?php echo $order['ETA']?></td>
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
-                            <td><?php echo $order['ContractorID']?></td>
+                            <td><?php 
+                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ ?>
+                                        <a class="btn-primary btn-sm" data-toggle="modal"  
+												href="#myModalGetWork" 
+												onClick=""> 
+												<span class="glyphicon glyphicon-check"></span>Take work
+											</a>
+                                   <?php }else{
+                                        echo $order['ContractorID'];
+                                    } 
+                                    
+                                ?>
+                            </td>
                            
                            
                         </tr>
@@ -577,7 +638,8 @@
                         <a class="btn btn-outline-primary" data-toggle="modal"  
                                             href="#myModalInsertContractor" 
                                             onClick="emptyTextNewDriver()"> 
-                                            <span class="glyphicon glyphicon-file">New Contractor</span>
+                                            <span class="glyphicon glyphicon-file"></span>
+                                            New Driver
                         </a>
                         
                 </div>
@@ -724,6 +786,21 @@
                     $_eventsArray=$oCalendar->getEvents(6,2018);
                     echo $oCalendar->draw_calendar(6,2018,$_eventsArray);
             ?>
+        </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->
+
+<!-- formulario Insertar contractor datos-->
+<div class="modal" id="myModalGetWork" role="dialog" style="height: 1000px;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Get work</h4>
+      </div>
+        <div class="modal-body"  id="myModalGetWorkBody">
+            
         </div>
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
