@@ -173,6 +173,9 @@
 
             function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
                 var t = $('#table_orders_company').DataTable();
+                var requestType=getRequestType(dataOrder.RequestType);
+                var state=getState(dataOrder.Status);
+                
                 t.row.add( [
                         dataOrder.OrderNumber,
                         dataOrder.SchDate,
@@ -180,8 +183,8 @@
                         dataOrder.Hlevels,
                         dataOrder.Rtype,
                         dataOrder.Water,
-                        dataOrder.RequestType,
-                        dataOrder.Status,
+                        requestType,
+                        state,
                         dataOrder.ETA,
                         dataOrder.EstAmtMat,
                         dataOrder.PaymentType,
@@ -211,11 +214,13 @@
                             var id = $row.find("td:eq(0)").text();
 
                             if (id.indexOf(value) === 0) {
+                                var requestType=getRequestType(dataOrder.RequestType);
+                                var state=getState(dataOrder.Status);
                                 $row.find("td:eq(1)").html(dataOrder.SchDate);
                                 $row.find("td:eq(2)").html(dataOrder.SchTime);
                                 $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-                                $row.find("td:eq(5)").html(dataOrder.RequestType);
-                                $row.find("td:eq(6)").html(dataOrder.Status);
+                                $row.find("td:eq(5)").html(requestType);
+                                $row.find("td:eq(6)").html(state);
                                 $row.find("td:eq(7)").html(dataOrder.ETA);
                                 $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                                 $row.find("td:eq(9)").html(dataOrder.PaymentType);
@@ -248,6 +253,60 @@
                     });
                 return flag;
 
+            }
+
+            function getRequestType(requestType){
+                var RequestType="";
+                switch (requestType) {
+                    case "E":
+                        RequestType = "Emergency";
+                        break;
+                    case "S":
+                        RequestType = "Schedule";
+                        break;
+                    default:
+                        RequestType = "No value found";
+                }
+                return RequestType;
+            }
+
+            function getState(state){
+                var orderState="";
+                switch (state) {
+                    case "A":
+                        orderState = "Order Open";
+                        break;
+                    case "D":
+                        orderState = "Order Assigned";
+                        break;
+                    case "E":
+                        orderState = "Contractor Just Arrived";
+                        break;
+                    case "F":
+                        orderState = "Estimate Sent";
+                        break;
+                    case "G":
+                        orderState = "Estimate Approved";
+                        break;
+                    case "H":
+                        orderState = "Work In Progress";
+                        break;
+                    case "I":
+                        orderState = "Work Completed";
+                        break;
+                    case "J":
+                        orderState = "Final Bill";
+                        break;
+                    case "K":
+                        orderState = "Order Completed Paid";
+                        break;
+                    case "C":
+                        orderState = "Cancel work";
+                        break;
+                    default:
+                        orderState = "Undefined";
+                }
+                return orderState;
             }
         </script>
 
@@ -383,7 +442,7 @@
                                     if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ ?>
                                         <a class="btn-primary btn-sm" data-toggle="modal"  
 												href="#myModalGetWork" 
-												onClick=""> 
+												onClick="setOrderId('<?php echo $order['FBID']?>')"> 
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
                                    <?php }else{
@@ -792,16 +851,65 @@
 </div><!-- /cierro modal -->
 
 <!-- formulario Insertar contractor datos-->
-<div class="modal" id="myModalGetWork" role="dialog" style="height: 1000px;">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal" id="myModalGetWork" role="dialog" >
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Get work</h4>
+        <h4 class="modal-title">Take work</h4>
       </div>
         <div class="modal-body"  id="myModalGetWorkBody">
-            
+            <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
+            <input type="hidden" value="" id="orderIDWork" />
+            <div class="form-group">
+                <label for="dateWork">Date for the work</label>
+                <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
+            </div>
+            <div class="form-group">
+                <label for="timeWork">Time for the work</label>
+                <select name="timeWork" id="timeWork" class="form-control" required>
+                    <option value="9:00 am">9:00 am</option>
+                    <option value="10:00 am">10:00 am</option>
+                    <option value="11:00 am">11:00 am</option>
+                    <option value="12:00 pm">12:00 pm</option>
+                    <option value="1:00 pm">1:00 pm</option>
+                    <option value="2:00 pm">2:00 pm</option>
+                    <option value="3:00 pm">3:00 pm</option>
+                    <option value="4:00 pm">4:00 pm</option>
+                    <option value="5:00 pm">5:00 pm</option>
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="driverWork">Driver for the work</label>
+                <select name="driverWork" id="driverWork" class="form-control" required>
+                    <?php foreach ($_array_contractors_to_show as $key => $contractor) {?>
+                        <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <button type="button" class="btn-primary btn-sm" onClick="takeWork()" >Save</button>
+            <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

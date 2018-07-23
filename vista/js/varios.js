@@ -1456,10 +1456,13 @@ function refreshCalendar(pmonth,pyear){
 
 //Date picker order
 $( function() {
-    
         $( ".datepicker" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 7  });
-    
   } );
+
+//Date picker order
+$( function() {
+    $( ".datepickers" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 1  });
+} );
 
   
 
@@ -1884,3 +1887,40 @@ function getOrderScheduleDateTime(orderId){
     
 }
 
+function setOrderId(orderID){
+    $('#orderIDWork').val(orderID);
+}
+function takeWork(){
+    var orderID=$('input:hidden#orderIDWork').val();
+    var companyID=$('input:hidden#companyIDWork').val();
+    var dateWork=$('input#dateWork').val()
+    var timeWork=$('select#timeWork').val()
+    var driverID=$('select#driverWork').val()
+
+    var message="";
+
+    if(orderID=="" || orderID==undefined){
+        message+="Plese select the order<br>";
+    }
+    if(companyID=="" || companyID==undefined){
+        message+="Plese select the company<br>";
+    }
+    if(dateWork=="" || dateWork==undefined){
+        message+="Plese select the date for the work<br>";
+    }
+    if(timeWork=="" || timeWork==undefined){
+        message+="Plese select the time for the work<br>";
+    }
+    if(driverID=="" || driverID==undefined){
+        message+="Plese select the driver<br>";
+    }
+    if (message!=""){
+        $('#myMensaje > #headerMessage').html('Error validating');
+        $('#myMensaje div.modal-body').html('You have to fill some fields:<br>'+message);
+        $("#myMensaje").modal("show");
+        return;
+    }
+    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+    updateOrder(orderID,arrayChanges)
+    $("#myModalGetWork").modal("hide");
+}
