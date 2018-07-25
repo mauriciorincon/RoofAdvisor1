@@ -19,6 +19,7 @@ class payingController{
             $this->_payingModel=new paying_stripe();
         }
         if(isset($_POST['param'])){
+            print_r($_POST["param"]);
             $obj = json_decode($_POST["param"], false);
             $token  = $obj->stripeToken;
             $email  = $obj->stripeEmail;
