@@ -35,9 +35,9 @@
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
 							<div class="footer-widget">
 								<div class="footer-logo">
-								   <img src="img/logo.png" alt="" />
+								   <img src="img/logo-white.png" alt="" />
 								</div>
-								<p>Roof AdvisorZ  takes the stress out of finding, selecting, and paying for a roofing contractor</p>
+								<p>Roof AdvisorZ takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
 									<li>
 										<i class="fa fa-map-marker"></i>

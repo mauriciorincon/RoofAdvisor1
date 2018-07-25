@@ -618,15 +618,6 @@
     </form>
 </div>
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 299c41f913cf7d67e501f865b380e880099fb665
-=======
-
->>>>>>> 9807759c06247c158bc815e90c034f07bd80901a
 <!-- slider-area end -->
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">

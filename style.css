@@ -590,7 +590,7 @@ border:3px solid #fff;
 }
 .border-top{border-top:1px solid rgb(241, 241,241)}
 /* 10.footer-area */
-.footer-bg{background: rgb(43, 43, 43)}
+.footer-bg{background: rgb(33, 33, 33)}
 .footer-widget{}
 .footer-logo {
 }
@@ -1224,10 +1224,10 @@ label {
 }
 .required{color:rgb(153, 0, 0);}
 
-.cont8{
-max-width: 1171px;
-    margin: auto;
-}
+#.cont8{
+#max-width: 1171px;
+#    margin: auto;
+#}
 .dolph1{
 background:#005678;
 }
