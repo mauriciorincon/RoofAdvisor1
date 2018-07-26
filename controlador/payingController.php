@@ -19,7 +19,7 @@ class payingController{
             $this->_payingModel=new paying_stripe();
         }
         if(isset($_POST['param'])){
-            $obj = json_validate($_POST['param']);
+            $obj = $this->json_validate($_POST['param']);
             if(is_string($obj)){
                 echo "Error, ".$obj;
             }else{
