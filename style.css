@@ -1254,4 +1254,74 @@ margin-right:-294px;
     margin-left: 75px;
     margin-top: 10px;
 }
+#appdl2{
+}
+#appdl3{
+height:400px;
+background-color:#22bddf;
+color:#fff;
+z-index: 900;
+position: relative;
+}
 
+#appdiv1{
+padding-right: 52%;
+text-align:right;
+padding-top:43px;
+}
+#appdl3-tx1{
+font-family: 'Poppins';
+    font-size: 49px;
+    display: inline-block;
+    position: relative;
+    z-index: 700;
+}
+#appdiv2{
+position: relative;
+    bottom:172px;
+    margin-left: 550px;
+    z-index: 100;
+}
+#appdl3-tx2{
+font-size: 144px;
+}
+#appand1{
+    width: 30%;
+    position: relative;
+    bottom: 149px;
+    margin-left: 159px;
+    z-index: 100
+}
+#appand2{
+    width: 26%;
+    position: relative;
+    bottom: 151px;
+    margin-left: 165px;
+    z-index: 100
+}
+#appphone1{
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -10px;
+}
+#aphtxt1{
+font-size:5em;
+display:block;
+padding-left:364px;
+color:#fa511a;
+font-family:'poppins';
+}
+#aphtxt1, strong{
+font-weight:500;
+}
+@media (max-width:1200px){
+#appdiv2{
+margin-left:450px !important;
+}
+}
+@media (max-width:970px){
+#appdiv2{
+margin-left:400px !important;
+}
+}

@@ -29,7 +29,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/calendar.css">
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
-		
+                <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
 		
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
