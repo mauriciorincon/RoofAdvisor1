@@ -19,42 +19,50 @@ class payingController{
             $this->_payingModel=new paying_stripe();
         }
         if(isset($_POST['param'])){
+            $obj = json_validate($_POST['param']);
+            if(is_string($obj)){
+                echo "Error, ".$obj;
+            }else{
+                $token  = $obj->stripeToken;
+                $email  = $obj->stripeEmail;
+                $amount = $obj->totalAmount;
+                $currency='usd';
+
+                $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
+                if($_result==true){
+                    $_objCharge=$this->_payingModel->getCharge();
+                    $array_data=$this->getPayingStatus($_objCharge->id);
+                    $a=array(
+                        "id"=>$_objCharge->id,
+                        "message"=>$array_data->seller_message,
+                    );
+                    echo json_encode($a);
+                    //echo $array_data->seller_message;
+                }else{
+                    echo "Error, the charge dotn't do.";
+                }
+            }
+            print_r($_POST["param"]);
             $obj = json_decode($_POST["param"], false);
-            $token  = $obj->stripeToken;
-            $email  = $obj->stripeEmail;
-            $amount = $obj->totalAmount;
+            
         }else{
             $token  = $_POST['stripeToken'];
             $email  = $_POST['stripeEmail'];
+
+            $currency='usd';
+            $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
+            if($_result==true){
+                $_objCharge=$this->_payingModel->getCharge();
+                $array_data=$this->getPayingStatus($_objCharge->id);
+                $a=array(
+                    "id"=>$_objCharge->id,
+                    "message"=>$array_data->seller_message,
+                );
+                echo json_encode($a);
+            }else{
+                echo "Error, the charge dotn't do.";
+            }
         }
-        
-        
-        $currency='usd';
-
-        //echo "Token:".$token;
-
-        $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
-        
-
-        if($_result==true){
-            $_objCharge=$this->_payingModel->getCharge();
-        
-            $array_data=$this->getPayingStatus($_objCharge->id);
-            
-            $a=array(
-                "id"=>$_objCharge->id,
-                "message"=>$array_data->seller_message,
-            );
-            
-            
-            echo json_encode($a);
-            //echo $array_data->seller_message;
-
-
-        }else{
-            echo "Error, the charge dotn't do.";
-        }
-        
         
     }
 
@@ -199,6 +207,57 @@ class payingController{
             // Something else happened, completely unrelated to Stripe
             return $e;
           }
+    }
+
+    function json_validate($string)
+    {
+        // decode the JSON data
+        $result = json_decode($string);
+
+        // switch and check possible JSON errors
+        switch (json_last_error()) {
+            case JSON_ERROR_NONE:
+                $error = ''; // JSON is valid // No error has occurred
+                break;
+            case JSON_ERROR_DEPTH:
+                $error = 'The maximum stack depth has been exceeded.';
+                break;
+            case JSON_ERROR_STATE_MISMATCH:
+                $error = 'Invalid or malformed JSON.';
+                break;
+            case JSON_ERROR_CTRL_CHAR:
+                $error = 'Control character error, possibly incorrectly encoded.';
+                break;
+            case JSON_ERROR_SYNTAX:
+                $error = 'Syntax error, malformed JSON.';
+                break;
+            // PHP >= 5.3.3
+            case JSON_ERROR_UTF8:
+                $error = 'Malformed UTF-8 characters, possibly incorrectly encoded.';
+                break;
+            // PHP >= 5.5.0
+            case JSON_ERROR_RECURSION:
+                $error = 'One or more recursive references in the value to be encoded.';
+                break;
+            // PHP >= 5.5.0
+            case JSON_ERROR_INF_OR_NAN:
+                $error = 'One or more NAN or INF values in the value to be encoded.';
+                break;
+            case JSON_ERROR_UNSUPPORTED_TYPE:
+                $error = 'A value of a type that cannot be encoded was given.';
+                break;
+            default:
+                $error = 'Unknown JSON error occured.';
+                break;
+        }
+
+        if ($error !== '') {
+            // throw the Exception or exit // or whatever :)
+            exit($error);
+        }
+
+        // everything is OK
+        return $result;
     }
 }
 ?>

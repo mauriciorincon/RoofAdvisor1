@@ -2,6 +2,7 @@
     "require": {
         "ktamas77/firebase-php": "dev-master",
         "kreait/firebase-php": "^4.0",
-        "stripe/stripe-php": "^6.10"
+        "stripe/stripe-php": "^6.10",
+        "tecnickcom/tcpdf": "^6.2"
     }
 }

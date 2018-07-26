@@ -876,14 +876,25 @@ $(".btn-group > .btn").click(function(){
     $(this).addClass("active");
 });*/
 
+//Select one of the company from order
 $('#step7ListCompany').on('click', 'a', function(){
     $("#step7ListCompany a").removeClass("active");
     $(this).addClass("active");
 });
 
+//Select one of the company from order
+$('#step2OtypeService').on('click', 'a', function(){
+    $("#step2OtypeService a").removeClass("active");
+    $(this).addClass("active");
+    var type=$(this).find('input:hidden').val();
+    showHideSteps(type);
+   
+});
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
-//funtions for registar an order
+//funtions for register an order
 //
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -944,8 +955,8 @@ $(document).ready(function () {
                 $('#textAnswerOrder').html('Plese select the address for the service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
-                var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
-                if(RequestType=='E'){
+                var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                if(RequestType=='emergency'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
@@ -1133,7 +1144,7 @@ $(document).ready(function() {
 
 function insertOrderCustomer(idStripeCharge){
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
+    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$("input:radio[name='estep3Option']:checked").val();
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
@@ -1146,8 +1157,15 @@ function insertOrderCustomer(idStripeCharge){
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
 
-    
+    if(RequestType=='emergency'){
+        RequestType='E'
+    }else{
+        RequestType='S'
+    }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+    if(CompanyID==undefined){
+        CompanyID="";
+    }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
@@ -1199,8 +1217,8 @@ function validateIsLoggedIn(){
                 
 
                 if(n==-1){
-                    var RequestType=$("input:radio[name='typeServiceOrder']:checked").val();
-                    if(RequestType=='E'){
+                    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                    if(RequestType=='emergency'){
                         $('#userLoguedIn').val(true);
                         nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                         curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
@@ -1208,7 +1226,11 @@ function validateIsLoggedIn(){
                         nextStepWizard.removeAttr('disabled').trigger('click');
                         curStepWizard.attr('disabled', 'disabled');
                         if(typeof handler !== undefined){
-                            handler.open();
+                            handler.open({
+                                name: 'RoofAdvisorz',
+                                description: 'pay your service',
+                                amount: amount_value
+                              });
                         }
                     }else{
                         $('#textAnswerOrder').html(data+'');
@@ -1434,10 +1456,13 @@ function refreshCalendar(pmonth,pyear){
 
 //Date picker order
 $( function() {
-    
         $( ".datepicker" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 7  });
-    
   } );
+
+//Date picker order
+$( function() {
+    $( ".datepickers" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 1  });
+} );
 
   
 
@@ -1673,16 +1698,17 @@ function showEventCalendar(orderId){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#headerTextAnswerOrder').html('Order Detail');
+                order=jQuery.parseJSON(data);
                 string='<div>'+
                     '<table class="table table-bordered">'+
-                    '<tr><td>Order ID</td><td>'+data.OrderNumber+'</td></tr>'+
-                    '<tr><td>Company</td><td>'+data.CompanyID+'</td></tr>'+
-                    '<tr><td>Contractor</td><td>'+data.ContractorID+'</td></tr>'+
-                    '<tr><td>Customer</td><td>'+data.CustomerID+'</td></tr>'+
-                    '<tr><td>Schedule Date</td><td>'+data.SchDate+'</td></tr>'+
-                    '<tr><td>Schedule Time</td><td>'+data.SchTime+'</td></tr>'+
-                    '<tr><td>Status</td><td>'+data.Status+'</td></tr>'+
-                    '<tr><td>Description</td><td>'+data.Hlevels+', '+data.Rtype+', '+data.Water+'</td></tr>'+
+                    '<tr><td>Order ID</td><td>'+order.OrderNumber+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+order.CompanyID+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+order.ContractorID+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+order.CustomerID+'</td></tr>'+
+                    '<tr><td>Schedule Date</td><td>'+order.SchDate+'</td></tr>'+
+                    '<tr><td>Schedule Time</td><td>'+order.SchTime+'</td></tr>'+
+                    '<tr><td>Status</td><td>'+order.Status+'</td></tr>'+
+                    '<tr><td>Description</td><td>'+order.Hlevels+', '+order.Rtype+', '+order.Water+'</td></tr>'+
                 '</table>'+
             '</div>';
 
@@ -1728,6 +1754,14 @@ function showHideSteps(typeService){
         step5.hide();
         step8.show();
     }
+}
+
+function setFirstStep(){
+    $firstStep=$('div.setup-panel div a[href="#step-1"]').parent().children("a");
+    $nextStepWizard = $('div.setup-panelCustomer div a[href="#step-1"]').parent().prev().children("a"),
+    $nextStepWizard.removeAttr('disabled').trigger('click');
+
+    //$firstStep.trigger('click');
 }
 
 function updateOrder(orderID,arrayChanges){
@@ -1853,3 +1887,40 @@ function getOrderScheduleDateTime(orderId){
     
 }
 
+function setOrderId(orderID){
+    $('#orderIDWork').val(orderID);
+}
+function takeWork(){
+    var orderID=$('input:hidden#orderIDWork').val();
+    var companyID=$('input:hidden#companyIDWork').val();
+    var dateWork=$('input#dateWork').val()
+    var timeWork=$('select#timeWork').val()
+    var driverID=$('select#driverWork').val()
+
+    var message="";
+
+    if(orderID=="" || orderID==undefined){
+        message+="Plese select the order<br>";
+    }
+    if(companyID=="" || companyID==undefined){
+        message+="Plese select the company<br>";
+    }
+    if(dateWork=="" || dateWork==undefined){
+        message+="Plese select the date for the work<br>";
+    }
+    if(timeWork=="" || timeWork==undefined){
+        message+="Plese select the time for the work<br>";
+    }
+    if(driverID=="" || driverID==undefined){
+        message+="Plese select the driver<br>";
+    }
+    if (message!=""){
+        $('#myMensaje > #headerMessage').html('Error validating');
+        $('#myMensaje div.modal-body').html('You have to fill some fields:<br>'+message);
+        $("#myMensaje").modal("show");
+        return;
+    }
+    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+    updateOrder(orderID,arrayChanges)
+    $("#myModalGetWork").modal("hide");
+}
