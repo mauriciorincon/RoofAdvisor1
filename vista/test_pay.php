@@ -20,5 +20,10 @@
     //$_result=$_oCalendar->getEvents('07','2018');
     //print_r($_result);
 
+    
 
 ?>
+<form action="http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying" method="post">
+    Parametros;<input type="text" id="param" name="param" value='{ "stripeToken" : "xxxxiiiissss","stripeEmail":"mauricio.rincon@gmail.com","totalAmount":"50" }'/>
+    <input type="submit" value="enviar pago" />
+</form>

@@ -21,7 +21,7 @@ class payingController{
         if(isset($_POST['param'])){
             $obj = $this->json_validate($_POST['param']);
             if(is_string($obj)){
-                echo "Error, ".$obj."<br>".$_POST['param'];
+                echo "Error, ".$obj."<br> string is:".$_POST['param'];
             }else{
                 $token  = $obj->stripeToken;
                 $email  = $obj->stripeEmail;
@@ -39,10 +39,10 @@ class payingController{
                     echo json_encode($a);
                     //echo $array_data->seller_message;
                 }else{
-                    echo "Error, the charge dotn't do.";
+                    echo "Error, the charge don't do.".$this->_payingModel->getError();;
                 }
             }
-            print_r($_POST["param"]);
+            //print_r($_POST["param"]);
             $obj = json_decode($_POST["param"], false);
             
         }else{
@@ -253,7 +253,7 @@ class payingController{
 
         if ($error !== '') {
             // throw the Exception or exit // or whatever :)
-            exit($error);
+            return $error;
         }
 
         // everything is OK

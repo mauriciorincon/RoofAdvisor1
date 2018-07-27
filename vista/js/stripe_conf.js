@@ -10,7 +10,7 @@ var handler = StripeCheckout.configure({
         var url = "?controller=paying&accion=setPaying";
         /////////////////////////////////////////////////////
         //test 
-        //var url = "http://localhost/RoofAdvisor/index.php?controller=paying&accion=setPaying";
+        //var url = "http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying";
 
 
         var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value});
