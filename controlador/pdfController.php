@@ -12,6 +12,7 @@ class pdfController{
     }
 
     function paymentConfirmation1($_orderID){
+        
         $pdf = new TCPDF();                 // create TCPDF object with default constructor args
         $pdf->AddPage();                    // pretty self-explanatory
 
