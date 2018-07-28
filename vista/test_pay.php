@@ -7,9 +7,9 @@
     //require_once($_SESSION['application_path']."/controlador/userController.php");
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
-    $_objPay=new payingController();
+    //$_objPay=new payingController();
 
-    $_objPay->showPayingWindow1();
+    //$_objPay->showPayingWindow1();
 
     //$_userModel=new userModel();
     //$_lastCustomerID=$_userModel->getLastNodeCustomer("Customers","CustomerID");
@@ -20,7 +20,11 @@
     //$_result=$_oCalendar->getEvents('07','2018');
     //print_r($_result);
 
-    
+    require_once($_SESSION['application_path']."/controlador/pdfController.php");
+
+    $_objPDF=new pdfController();
+    $_objPDF->paymentConfirmation1(1);
+
 
 ?>
 <form action="http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying" method="post">
