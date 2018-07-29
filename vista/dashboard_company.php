@@ -368,6 +368,8 @@
                     <th>Final Amt</th>
                     <th>Payment</th>
                     <th>Contractor</th>
+                    <th>Actions</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -451,6 +453,13 @@
                                     
                                 ?>
                             </td>
+                            <td>
+                                        <a class="btn-success btn-sm" data-toggle="modal"  
+                                            href="#myModalInvoice" 
+                                            onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
+                                            <span class="glyphicon glyphicon-list-alt"></span>
+                                        </a>
+                                    </td>
                            
                            
                         </tr>
@@ -689,6 +698,7 @@
                                             </a>
                                         <?php } ?>
                                     </td>
+                                    
                                 </tr>
                             <?php } ?>
                             </tbody>
@@ -906,6 +916,27 @@
 			</div> 
 			<div class="modal-body" id="textMessage"> 
 				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalInvoice" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="headerMessage">Invoice Order <span id="orderIDWorkText"></span></h4> 
+			</div> 
+			<div class="modal-body" id="textMessageInvoice"> 
+                <input type="hidden" value="" id="orderIDWork" />
+                <p>Here you can generate Invoce for customer</p> 
+                <span id="messageInvoice"></span>
+                
 			</div> 
 			<div class="modal-footer" id="buttonMessage"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 

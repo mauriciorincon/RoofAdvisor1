@@ -23,7 +23,7 @@
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
 
     $_objPDF=new pdfController();
-    $_objPDF->paymentConfirmation1(1);
+    $_objPDF->paymentConfirmation1(226);
 
 
 ?>

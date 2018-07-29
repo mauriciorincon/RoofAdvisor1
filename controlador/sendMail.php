@@ -3,6 +3,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
+require_once $_SESSION['application_path']."/vendor/autoload.php";
 
 class emailController{
     function __construct()
@@ -28,6 +29,10 @@ class emailController{
                      
                     $headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
                     mail($to, $subject, $message, $headers); // Send our email
+
+    }
+
+    public function sendMail2(){
 
     }
 }

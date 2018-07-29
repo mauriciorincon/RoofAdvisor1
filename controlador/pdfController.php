@@ -4,6 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 require $_SESSION['application_path'].'/vendor/autoload.php';
+require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 class pdfController{
     
@@ -12,7 +14,35 @@ class pdfController{
     }
 
     function paymentConfirmation1($_orderID){
+
+        $_orderController=new orderController();
+        $_order=$_orderController->getOrder("OrderNumber",$_orderID);
+
+        if(is_null($_order)){
+            echo "The order number no exists";
+            return;
+        }
+
+        $_companyCustomerController=new userController();
+        $_company=$_companyCustomerController->getCompanyById($_order['CompanyID']);
+
+        if(is_null($_company)){
+            echo "The company no exists";
+            return;
+        }
+
+        $_customer=$_companyCustomerController->getCustomerById($_order['CustomerID']);
+        if(is_null($_customer)){
+            echo "The customer no exists";
+            return;
+        }
+
         
+        /*print_r($_order);
+        print_r($_company);
+        print_r($_customer);
+        return;*/
+
         $pdf = new TCPDF();                 // create TCPDF object with default constructor args
         $pdf->AddPage();                    // pretty self-explanatory
 
@@ -26,11 +56,9 @@ class pdfController{
         $_hmtl='
         <table>
             <tr>
-                <td>RoofAdvisorz no-reply@roofadvisorz.com </td>
+                <td colspan="2">RoofAdvisorz no-reply@roofadvisorz.com </td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td>Email Message to homeowner after they submit payment</td>
+                <td colspan="2">Email Message to homeowner after they submit payment</td>
             </tr>
             <tr>
                 <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,50,40).'</td>
@@ -49,16 +77,16 @@ class pdfController{
         <br>
         <table border=".5">
             <tr>
-                <td>Service Pro ID:</td><td></td><td>SP Name:</td><td></td><td>Customer Rating:</td><td></td>
+                <td>Service Pro ID:</td><td>'.$_order['CompanyID'].'</td><td>SP Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
             <tr>
-                <td>License:</td><td></td><td>SP Phone:</td><td></td><td></td><td></td>
+                <td>License:</td><td>'.$_company['ComapnyLicNum'].'</td><td>SP Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
             </tr>
             <tr>
-                <td>Service Date:</td><td></td><td>SP Address:</td><td></td><td></td><td></td>
+                <td>Service Date:</td><td>'.$_order['SchDate'].'</td><td>SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
             </tr>
             <tr>
-                <td>Service Repair Address</td><td colspan="2"></td><td></td><td></td><td></td>
+                <td>Service Repair Address</td><td colspan="2">'.$_order['RepAddress'].'</td><td></td><td></td><td></td>
             </tr>
         </table>
         <br>
@@ -133,7 +161,8 @@ class pdfController{
 
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output('hello_world.pdf'); 
+        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf','F'); 
+        return true;
     }
 }
 ?>

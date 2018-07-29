@@ -1889,6 +1889,7 @@ function getOrderScheduleDateTime(orderId){
 
 function setOrderId(orderID){
     $('#orderIDWork').val(orderID);
+    $('#orderIDWorkText').html(orderID);
 }
 function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
@@ -1923,4 +1924,62 @@ function takeWork(){
     arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
     updateOrder(orderID,arrayChanges)
     $("#myModalGetWork").modal("hide");
+}
+
+function vefifyInvoice(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/validateInvoice.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                
+                $('span#messageInvoice').html(data);
+                
+                
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function generateInvoice(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/generateInvoice.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                vefifyInvoice(orderID);
+            }else{
+                $('#myModalInvoice').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+
+
 }

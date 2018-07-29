@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-echo "llego aca";
+
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
