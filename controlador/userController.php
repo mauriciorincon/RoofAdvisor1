@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 
 
 require_once($_SESSION['application_path']."/modelo/user.class.php");
-require_once($_SESSION['application_path']."/controlador/sendMail.php");
+require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 

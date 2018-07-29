@@ -69,6 +69,7 @@ class connection{
     }
 
     public function getQueryEqual($table,$field,$searchValue){
+        //exit("tabble:".$table." field:".$field." value:".$searchValue);
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
                         ->equalTo($searchValue)
