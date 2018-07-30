@@ -25,9 +25,10 @@
 
     
 
-    //$_objPDF=new pdfController();
-    //$_objPDF->paymentConfirmation1(226);
+    $_objPDF=new pdfController();
+    $_objPDF->paymentConfirmation2("227");
 
+    /* Send Mail
     $_objMail=new emailController();
 
 
@@ -36,7 +37,7 @@
         echo $_objMail->getMessageError();
     }else{
         echo $_result;
-    }
+    }*/
 
 
 
