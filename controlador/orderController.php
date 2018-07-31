@@ -56,7 +56,7 @@ class orderController{
             "AfterPICRefID" => "",
             "AmtER" => "",
             "AppEst" => "",
-            "Authorized" => "",
+            "Authorized" => $arrayDataOrder['Authorized'],
             "BeforePicRefID" => "",
             "CompanyID"=>$arrayDataOrder['CompanyID'],
             "ContractorID" => $arrayDataOrder['ContractorID'],

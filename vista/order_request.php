@@ -62,9 +62,28 @@
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Type of service</strong></font>
+				<font size="5">&#9312;</font><font size="5"><strong>  Type of service</strong></font>
 				</div>
 				<div class="list-group" id="step2OtypeService">
+				<a href="#" class="list-group-item " name="linkServiceType">
+					<input type="hidden" value="emergency" name="typeServiceOrder">
+						<table>
+							<tr>
+								<td style="padding: 12px 12px 12px 12px;">
+									<button class=" btn-primary   btn-lg" type="button">Emergency Repair</button>
+								</td>
+								<td style="padding: 12px 12px 12px 12px;">
+								An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. 
+								</td>
+							</tr>
+						</table>
+						<div class="d-flex w-100 justify-content-between">
+						
+						<span></span>
+							
+						</div>
+					</a>
+
 					<a href="#" class="list-group-item active" name="linkServiceType">
 						<input type="hidden" value="schedule" name="typeServiceOrder">
 						<table>
@@ -83,15 +102,16 @@
 							
 						</div>
 					</a>
-					<a href="#" class="list-group-item " name="linkServiceType">
-					<input type="hidden" value="emergency" name="typeServiceOrder">
+
+					<a href="#" class="list-group-item" name="linkServiceType">
+						<input type="hidden" value="RoofReport" name="typeServiceOrder">
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Emergency Repair</button>
+									<button class=" btn-primary   btn-lg" type="button">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. 
+								Content for the Order Roof Report: “Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.
 								</td>
 							</tr>
 						</table>
@@ -101,6 +121,7 @@
 							
 						</div>
 					</a>
+					
 				</div>
 					
 
@@ -110,7 +131,7 @@
 					
 				
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Best select the type of roofing material on your property</strong></font>		
+				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property</strong></font>		
 				</div>
 				<div class="list-group-item ">
 					<div class="form-group">
@@ -197,26 +218,26 @@
 				</div>
                 
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
+					<font size="5">&#9314;</font> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
 				</div>
 
 				<div class="list-group-item ">
 					<div class="form-group">
 						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="water" checked></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked></div>
 						<div class="col-md-6"><label class="form-check-label" for="estep4Option1">Yes</label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value=""></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value="No"></div>
 						<div class="col-md-6"><label class="form-check-label" for="estep4Option2">No</label></div>
 					</div>
 					<label>&nbsp;</label>
 				</div>
 
 				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>How many stories is your home?</strong></font>
+				<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
 				<div class="list-group-item ">
@@ -240,6 +261,24 @@
 					<label>&nbsp;</label>
 				</div>
 
+				<div class="list-group-item ">
+					<font size="5">&#9316;</font> <font size="5"><strong>Are you the owner or authorized to make property changes?</strong></font>		
+				</div>
+
+				<div class="list-group-item ">
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option1">Yes</label></div>
+					</div>
+
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option2" value="No"></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option2">No</label></div>
+					</div>
+					<label>&nbsp;</label>
+				</div>
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
@@ -252,7 +291,7 @@
                  <h1 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h1>
             </div>
             <div class="panel-body">
-				<span class="glyphicon glyphicon-info-sign"></span> Select the place for the service
+				<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Select the place for the service</strong></font>	
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
@@ -606,11 +645,17 @@
 								<div class="form-group">
 									<label class="control-label">City</label>
 									<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
-								</div> 
+								</div>
 								<div class="form-group">
 									<label class="control-label">State</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter state" id="customerState" name="customerState" />
+									<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+										
+										<?php foreach ($_array_state as $key => $value1) { ?>
+											<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+										<?php } ?>
+									</select>
 								</div>
+								
 								<div class="form-group">
 									<label class="control-label">Zip code</label>
 									<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
@@ -638,3 +683,20 @@
     </form>
 </div>
 
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

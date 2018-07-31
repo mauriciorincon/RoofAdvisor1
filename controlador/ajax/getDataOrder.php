@@ -3,11 +3,33 @@ if(!isset($_SESSION)) {
     session_start(); 
 } 
 require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 $_orderID =$_POST["orderId"];
 
 $_orderController=new orderController();
 $_result=$_orderController->getOrder('OrderNumber',$_orderID);
+
+if(is_null($_result)){
+    "Error, no order were found.";
+}else{
+    $_companyCustomerContractorController=new userController();
+    $_company=$_companyCustomerContractorController->getCompanyById($_result['CompanyID']);
+
+    if(!is_null($_company)){
+        $_result=array_merge($_result,$_company);
+    }
+
+    $_customer=$_companyCustomerContractorController->getCustomerById($_result['CustomerID']);
+    if(!is_null($_customer)){
+        $_result=array_merge($_result,$_customer);
+    }
+    $_contractor=$_companyCustomerContractorController->getContractorById($_result['ContractorID']);
+    if(!is_null($_contractor)){
+        $_result=array_merge($_result,$_contractor);
+    }
+    
+}
 
 echo json_encode($_result);
 

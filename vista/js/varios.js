@@ -776,8 +776,8 @@ $(document).ready(function () {
                             if(p_pantalla=="Order"){
                                 $('#headerTextAnswerOrder').html('Mail Verification');
                                 $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click next step');
-                                dataString="'"+emailValidation+"','"+password+"',''";
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="registerAndValidateUser('+dataString+')">Next Step</button><br><br>');
+                                dataString="'"+emailValidation+"','"+password+"','step8'";
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static'});
                             }
                             //$("#firstNextValidation").show();
@@ -785,13 +785,12 @@ $(document).ready(function () {
                                 $('#prevBtnRegisterCustomer').hide();
                                 texto=$("#validatingMessajeCode").html();
                                 $("#validatingMessajeCode").html(texto+"<br> You will redirect to login customer page in 10 seconds");
+                                window.location.href = "?controller=user&accion=dashboardCustomer";
                                 // Your application has indicated there's an error
-                                window.setTimeout(function(){
-
+                                /*window.setTimeout(function(){
                                     // Move to a new location or you can do something else
                                     window.location.href = "?controller=user&accion=dashboardCustomer";
-
-                                }, 10000);
+                                }, 10000);*/
                             }
                             result=true;
                         }else{
@@ -962,6 +961,7 @@ $(document).ready(function () {
                     var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
                     var valStep4=$('input[name=estep4Option]:checked').val();
+                    var valStep5Auto=$('input[name=estep6Option]:checked').val();
                     var valStep6=$('input[name=step6date]').val();
                     var valStep6t=$('button[name=step6time].active').text();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
@@ -969,7 +969,7 @@ $(document).ready(function () {
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
                     var valStep5Address=$('input:hidden[name=step5Address]').val();
                     var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
                     $('#step8Schedule').html('Defined by the administrator');
                     $('#step8Time').html('Defined by the administrator');
                     $('#step8CompanyName').html('Defined by the administrator');
@@ -1000,6 +1000,7 @@ $(document).ready(function () {
         if (curStepBtn=="step-5" && isValid==true ){
             var valStep3=$('input[name=estep3Option]:checked').val();
             var valStep5=$('input[name=estep5Option]:checked').val();
+            var valStep5Auto=$('input[name=estep6Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
             var valStep6=$('input[name=step6date]').val();
             var valStep6t=$('button[name=step6time].active').text();
@@ -1010,6 +1011,19 @@ $(document).ready(function () {
             var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
             
             if(valStep7==""){
+                valStep7="Define by administrator";
+            }
+            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
+            $('#step8Schedule').html(valStep6);
+            $('#step8Time').html(valStep6t);
+            $('#step8CompanyName').html(valStep7);
+            $('#step8Longitude').html(valStep5long);
+            $('#step8Latitude').html(valStep5lat);
+            $('#step8Address').html(valStep5Address);
+            $('#step8ZipCode').html(valStep5ZipCode);
+
+            
+            /*if(valStep7==""){
                 isValid=false;
                 $('#headerTextAnswerOrder').html('Step 4');
                 $('#textAnswerOrder').html('Plese select the contractor for your service');
@@ -1023,7 +1037,7 @@ $(document).ready(function () {
                 $('#step8Latitude').html(valStep5lat);
                 $('#step8Address').html(valStep5Address);
                 $('#step8ZipCode').html(valStep5ZipCode);
-            }
+            }*/
         }
 
         if (curStepBtn=="step-6" && isValid==true ){
@@ -1157,6 +1171,7 @@ function insertOrderCustomer(idStripeCharge){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var Authorized=$("input:radio[name='estep6Option']:checked").val();
 
     if(RequestType=='emergency'){
         RequestType='E'
@@ -1170,7 +1185,8 @@ function insertOrderCustomer(idStripeCharge){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
-                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge}, null, "text" )
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
+                                                "Authorized":Authorized}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1334,7 +1350,12 @@ function loginUser(user,password,url){
                 
                 if(n==-1){
                     
-                    //window.location.href = "";
+                    if(url=="step8"){
+                        validateIsLoggedIn();
+                    }else{
+                        window.location.href = "";
+                    }
+                    
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                     jsRemoveWindowLoad('');
                     return true;
@@ -1727,9 +1748,9 @@ function showEventCalendar(orderId){
                 string='<div>'+
                     '<table class="table table-bordered">'+
                     '<tr><td>Order ID</td><td>'+order.OrderNumber+'</td></tr>'+
-                    '<tr><td>Company</td><td>'+order.CompanyID+'</td></tr>'+
-                    '<tr><td>Contractor</td><td>'+order.ContractorID+'</td></tr>'+
-                    '<tr><td>Customer</td><td>'+order.CustomerID+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+order.CompanyName+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+order.ContNameFirst+' '+order.ContNameLast+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+order.Fname+' '+order.Lname+'</td></tr>'+
                     '<tr><td>Schedule Date</td><td>'+order.SchDate+'</td></tr>'+
                     '<tr><td>Schedule Time</td><td>'+order.SchTime+'</td></tr>'+
                     '<tr><td>Status</td><td>'+order.Status+'</td></tr>'+
@@ -2034,11 +2055,4 @@ function sendInvoiceEmail(orderID){
             return result1;
         }
     });
-}
-
-function registerAndValidateUser(user,password,url){
-    if (loginUser(user,password,url)==true){
-        validateIsLoggedIn();
-    }
-
 }
