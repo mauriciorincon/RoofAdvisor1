@@ -775,8 +775,9 @@ $(document).ready(function () {
                         if(n==-1){
                             if(p_pantalla=="Order"){
                                 $('#headerTextAnswerOrder').html('Mail Verification');
-                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click finish button');
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click next step');
+                                dataString="'"+emailValidation+"','"+password+"',''";
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="registerAndValidateUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static'});
                             }
                             //$("#firstNextValidation").show();
@@ -796,7 +797,7 @@ $(document).ready(function () {
                         }else{
                             
                             $('#textAnswerOrder').html(data);
-                            $('#headerTextAnswerOrder').html('Error');
+                            $('#headerTextAnswerOrder').html('Error register customer');
                             $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                             $('#lastFinishButtonOrder').hide();
                             $('#myModalRespuesta').modal({backdrop: 'static'});
@@ -1245,7 +1246,7 @@ function validateIsLoggedIn(){
                     
                 }else{
                     $('#textAnswerOrder').html('You are not logged in, please log in or register');
-                    $('#headerTextAnswerOrder').html('Error');
+                    $('#headerTextAnswerOrder').html('User validation');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
@@ -1308,30 +1309,54 @@ function validInputRePassword(){
 
 function loginUser(user,password,url){
     //alert('paso aca');
+    
+    var flag=true;
+    if(user==undefined || user==""){
+        flag=false;
+    }
+    if(password==undefined || password==""){
+        flag=false;
+    }
+    if (flag==false){
+        $('#textAnswerOrder').html("Please give the User and Password");
+        $('#headerTextAnswerOrder').html('Error login user');
+        $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>Please give the User and Password</strong></div>');
+        $('#lastFinishButtonOrder').hide();
+        $('#myModalRespuesta').modal({backdrop: 'static'});
+        return false;
+    }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : user,"passwordClientOrder":password}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
+            
             if ( console && console.log ) {
                 var n = data.indexOf("Error");
                 
                 if(n==-1){
-                    window.location.href = "";
+                    
+                    //window.location.href = "";
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                    return true;
                 }else{
                     $('#textAnswerOrder').html(data);
-                    $('#headerTextAnswerOrder').html('Error');
+                    $('#headerTextAnswerOrder').html('Error login user');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                    return  false;
                 }
-                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                jsRemoveWindowLoad('');
+                
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
-                result=false;
+                
                 jsRemoveWindowLoad('');
+                return false;
             }
         });
 }
@@ -2009,4 +2034,11 @@ function sendInvoiceEmail(orderID){
             return result1;
         }
     });
+}
+
+function registerAndValidateUser(user,password,url){
+    if (loginUser(user,password,url)==true){
+        validateIsLoggedIn();
+    }
+
 }
