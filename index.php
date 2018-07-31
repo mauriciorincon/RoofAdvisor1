@@ -8,6 +8,9 @@ if(!isset($_SESSION['application_path'])){
 }
 if(!isset($_GET['controller']))
 {
+    require_once($_SESSION['application_path']."/modelo/user.class.php");
+    $_userModel=new userModel();
+    $_array_state=$_userModel->getNode('Parameters/state');
     require_once("vista/head.php");
     require_once("vista/begin.php");
     require_once("vista/footer.php");

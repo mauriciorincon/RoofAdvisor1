@@ -775,8 +775,9 @@ $(document).ready(function () {
                         if(n==-1){
                             if(p_pantalla=="Order"){
                                 $('#headerTextAnswerOrder').html('Mail Verification');
-                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click finish button');
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click next step');
+                                dataString="'"+emailValidation+"','"+password+"','step8'";
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static'});
                             }
                             //$("#firstNextValidation").show();
@@ -784,19 +785,18 @@ $(document).ready(function () {
                                 $('#prevBtnRegisterCustomer').hide();
                                 texto=$("#validatingMessajeCode").html();
                                 $("#validatingMessajeCode").html(texto+"<br> You will redirect to login customer page in 10 seconds");
+                                window.location.href = "?controller=user&accion=dashboardCustomer";
                                 // Your application has indicated there's an error
-                                window.setTimeout(function(){
-
+                                /*window.setTimeout(function(){
                                     // Move to a new location or you can do something else
                                     window.location.href = "?controller=user&accion=dashboardCustomer";
-
-                                }, 10000);
+                                }, 10000);*/
                             }
                             result=true;
                         }else{
                             
                             $('#textAnswerOrder').html(data);
-                            $('#headerTextAnswerOrder').html('Error');
+                            $('#headerTextAnswerOrder').html('Error register customer');
                             $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                             $('#lastFinishButtonOrder').hide();
                             $('#myModalRespuesta').modal({backdrop: 'static'});
@@ -961,6 +961,7 @@ $(document).ready(function () {
                     var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
                     var valStep4=$('input[name=estep4Option]:checked').val();
+                    var valStep5Auto=$('input[name=estep6Option]:checked').val();
                     var valStep6=$('input[name=step6date]').val();
                     var valStep6t=$('button[name=step6time].active').text();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
@@ -968,7 +969,7 @@ $(document).ready(function () {
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
                     var valStep5Address=$('input:hidden[name=step5Address]').val();
                     var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
                     $('#step8Schedule').html('Defined by the administrator');
                     $('#step8Time').html('Defined by the administrator');
                     $('#step8CompanyName').html('Defined by the administrator');
@@ -999,6 +1000,7 @@ $(document).ready(function () {
         if (curStepBtn=="step-5" && isValid==true ){
             var valStep3=$('input[name=estep3Option]:checked').val();
             var valStep5=$('input[name=estep5Option]:checked').val();
+            var valStep5Auto=$('input[name=estep6Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
             var valStep6=$('input[name=step6date]').val();
             var valStep6t=$('button[name=step6time].active').text();
@@ -1009,6 +1011,19 @@ $(document).ready(function () {
             var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
             
             if(valStep7==""){
+                valStep7="Define by administrator";
+            }
+            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
+            $('#step8Schedule').html(valStep6);
+            $('#step8Time').html(valStep6t);
+            $('#step8CompanyName').html(valStep7);
+            $('#step8Longitude').html(valStep5long);
+            $('#step8Latitude').html(valStep5lat);
+            $('#step8Address').html(valStep5Address);
+            $('#step8ZipCode').html(valStep5ZipCode);
+
+            
+            /*if(valStep7==""){
                 isValid=false;
                 $('#headerTextAnswerOrder').html('Step 4');
                 $('#textAnswerOrder').html('Plese select the contractor for your service');
@@ -1022,7 +1037,7 @@ $(document).ready(function () {
                 $('#step8Latitude').html(valStep5lat);
                 $('#step8Address').html(valStep5Address);
                 $('#step8ZipCode').html(valStep5ZipCode);
-            }
+            }*/
         }
 
         if (curStepBtn=="step-6" && isValid==true ){
@@ -1156,6 +1171,7 @@ function insertOrderCustomer(idStripeCharge){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var Authorized=$("input:radio[name='estep6Option']:checked").val();
 
     if(RequestType=='emergency'){
         RequestType='E'
@@ -1169,7 +1185,8 @@ function insertOrderCustomer(idStripeCharge){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
-                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge}, null, "text" )
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
+                                                "Authorized":Authorized}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1245,7 +1262,7 @@ function validateIsLoggedIn(){
                     
                 }else{
                     $('#textAnswerOrder').html('You are not logged in, please log in or register');
-                    $('#headerTextAnswerOrder').html('Error');
+                    $('#headerTextAnswerOrder').html('User validation');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
@@ -1308,30 +1325,59 @@ function validInputRePassword(){
 
 function loginUser(user,password,url){
     //alert('paso aca');
+    
+    var flag=true;
+    if(user==undefined || user==""){
+        flag=false;
+    }
+    if(password==undefined || password==""){
+        flag=false;
+    }
+    if (flag==false){
+        $('#textAnswerOrder').html("Please give the User and Password");
+        $('#headerTextAnswerOrder').html('Error login user');
+        $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>Please give the User and Password</strong></div>');
+        $('#lastFinishButtonOrder').hide();
+        $('#myModalRespuesta').modal({backdrop: 'static'});
+        return false;
+    }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : user,"passwordClientOrder":password}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
+            
             if ( console && console.log ) {
                 var n = data.indexOf("Error");
                 
                 if(n==-1){
-                    window.location.href = "";
+                    
+                    if(url=="step8"){
+                        validateIsLoggedIn();
+                    }else{
+                        window.location.href = "";
+                    }
+                    
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                    return true;
                 }else{
                     $('#textAnswerOrder').html(data);
-                    $('#headerTextAnswerOrder').html('Error');
+                    $('#headerTextAnswerOrder').html('Error login user');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                    return  false;
                 }
-                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                jsRemoveWindowLoad('');
+                
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
-                result=false;
+                
                 jsRemoveWindowLoad('');
+                return false;
             }
         });
 }
@@ -1702,9 +1748,9 @@ function showEventCalendar(orderId){
                 string='<div>'+
                     '<table class="table table-bordered">'+
                     '<tr><td>Order ID</td><td>'+order.OrderNumber+'</td></tr>'+
-                    '<tr><td>Company</td><td>'+order.CompanyID+'</td></tr>'+
-                    '<tr><td>Contractor</td><td>'+order.ContractorID+'</td></tr>'+
-                    '<tr><td>Customer</td><td>'+order.CustomerID+'</td></tr>'+
+                    '<tr><td>Company</td><td>'+order.CompanyName+'</td></tr>'+
+                    '<tr><td>Contractor</td><td>'+order.ContNameFirst+' '+order.ContNameLast+'</td></tr>'+
+                    '<tr><td>Customer</td><td>'+order.Fname+' '+order.Lname+'</td></tr>'+
                     '<tr><td>Schedule Date</td><td>'+order.SchDate+'</td></tr>'+
                     '<tr><td>Schedule Time</td><td>'+order.SchTime+'</td></tr>'+
                     '<tr><td>Status</td><td>'+order.Status+'</td></tr>'+
@@ -1889,6 +1935,7 @@ function getOrderScheduleDateTime(orderId){
 
 function setOrderId(orderID){
     $('#orderIDWork').val(orderID);
+    $('#orderIDWorkText').html(orderID);
 }
 function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
@@ -1923,4 +1970,89 @@ function takeWork(){
     arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
     updateOrder(orderID,arrayChanges)
     $("#myModalGetWork").modal("hide");
+}
+
+function vefifyInvoice(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/validateInvoice.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                
+                $('span#messageInvoice').html(data);
+                
+                
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function generateInvoice(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/generateInvoice.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                vefifyInvoice(orderID);
+            }else{
+                $('#myModalInvoice').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function sendInvoiceEmail(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/sendInvoiceMail.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myModalInvoice').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }else{
+                $('#myModalInvoice').modal('hide');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
 }

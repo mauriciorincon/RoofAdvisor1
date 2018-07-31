@@ -104,184 +104,21 @@
 						</div>
 					</a>
 				</div>
+<script>
+				function initialization(){
 					
+					initMap1();
+				}
+</script>
+<!-- Dashboard New Order -->
 
-					
-								
-				
-					
-				
-				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Best select the type of roofing material on your property</strong></font>		
-				</div>
-				<div class="list-group-item ">
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
-						</div>
-						<div class="col-md-6"> 
-							<label class="form-check-label" for="estep3Option1">
-								Flat, Single Ply
-							</label>
-						</div>
-					</div>
+			<?php 
 
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option2">
-								Asphalt
-								</label>
-						</div>
-						
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option3">
-								Wood Shake/Composite
-								</label>
-						</div>
-						
-					</div>
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
-						</div>
-						<div class="col-md-6">
-							<label class="form-check-label" for="estep3Option4">
-							Metal
-							</label>
-						</div>
-							
-					</div>
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option5">
-								Tile
-								</label>
-						</div>
-						
-					</div>	
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option5">
-								Do not Know
-								</label>
-						</div>
-						
-					</div>	
-					<label>&nbsp;</label>
-
-				</div>
-                
-				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
-				</div>
-
-				<div class="list-group-item ">
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="water" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option1">Yes</label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value=""></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option2">No</label></div>
-					</div>
-					<label>&nbsp;</label>
-				</div>
-
-				<div class="list-group-item ">
-					<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>How many stories is your home?</strong></font>
-				</div>
-
-				<div class="list-group-item ">
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="One" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="Two"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="Three or More"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
-					</div>
-					<label>&nbsp;</label>
-				</div>
+				include('vista/order_request.php');
+				//echo $order_request
+			?>
 
 
-                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
-            </div>
-
-        </div>
-		
-		<div class="panel panel-primary setup-contentOrder" id="step-3">
-            <div class="panel-heading">
-                 <h1 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h1>
-            </div>
-            <div class="panel-body">
-				<span class="glyphicon glyphicon-info-sign"></span> Select the place for the service
-					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
-					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
-					<input type="hidden" id="step5Address" name="step5Address"/>
-					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
-					<div class="list-group">
-					
-							<input id="pac-input" class="controls" type="text"
-								placeholder="Enter a location" style="margin-left: 20px;margin-top:10px;">
-							<!--<div id="type-selector" class="controls">
-								<input type="radio" name="type" id="changetype-all" checked="checked">
-								<label for="changetype-all">All</label>
-
-								<input type="radio" name="type" id="changetype-establishment">
-								<label for="changetype-establishment">Establishments</label>
-
-								<input type="radio" name="type" id="changetype-address">
-								<label for="changetype-address">Addresses</label>
-
-								<input type="radio" name="type" id="changetype-geocode">
-								<label for="changetype-geocode">Geocodes</label>
-							</div>-->
-							<div id="map"></div>
-
-							<script>
-							// This example requires the Places library. Include the libraries=places
-							// parameter when you first load the API. For example:
-							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 							function initMap() {
 								var map = new google.maps.Map(document.getElementById('map'), {
@@ -645,25 +482,11 @@
 </div>
 </div>
 
+
+
 <!-- slider-area end -->
 
-<div class="modal fade" id="myModalRespuesta" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myModalRating" role="dialog" style="height: 300px;">
 	<div class="modal-dialog modal-dialog-centered" role="document"> 

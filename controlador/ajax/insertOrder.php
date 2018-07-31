@@ -2,7 +2,7 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-echo "llego aca";
+
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
@@ -33,14 +33,15 @@ $_array=array(
     "Rtype"=>$_POST['Rtype'],
     "Water"=>$_POST['Water'],
     "Hlevels"=>$_POST['Hlevels'],
-    "ActAmtTime"=>$_date,
-    "ActTime"=>$_POST['ActTime'],
+    "ActAmtTime"=>"",
+    "ActTime"=>"",
     "ContractorID"=>'',
     "CompanyID"=>$_companyID,
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],
     "id_stripe"=>$_POST['stripeCharge'],
+    "Authorized"=>$_POST['Authorized'],
 );
 
 
