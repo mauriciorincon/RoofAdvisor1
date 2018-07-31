@@ -195,7 +195,6 @@ margin-right:140px;
   display: block;
   font-size: 13px;
   font-weight: 600;
-  padding:42px 15px 40px;
   text-decoration:none;
   text-transform:uppercase;
 }
@@ -698,7 +697,7 @@ border:3px solid #fff;
 .blog-post ul li .post-text{
   margin-left: 110px;
 }
-.blog-post ul li .blog-text{margin-left: 110px;} 
+.blog-post ul li .blog-text{margin-left: 118px;} 
 .blog-post ul li .post-text h4, .blog-post ul li .blog-text h4 {
   margin-bottom: 5px;
 }
@@ -1228,6 +1227,28 @@ label {
 #max-width: 1171px;
 #    margin: auto;
 #}
+#appwiz{
+padding-bottom: 26px;
+    padding-top: 30px;
+}
+#srvapp1{
+padding-bottom:i150px;
+height:620px;
+}
+#srvapps1{
+padding-top:35px;
+}
+#srvmapp1{
+    position: absolute;
+    margin-left: 647px;
+    width:471px;
+    padding-top:114px;
+}
+#srvappph1{
+font-size: 21px;
+font-weight: 400;
+width:600px;
+}
 .dolph1{
 background:#005678;
 }
@@ -1238,14 +1259,15 @@ right:0px;
 }
 #login-img{
 position: absolute;
-    margin-top: -67px;
+margin-top: -30px;
 }
 #login-txt{
-margin-top: -101px;
+margin-top: -36px;
     right: -123px;
 }
 #navtxt{
 padding-right:50px;
+padding-top:32px;
 }
 #socico{
 margin-right:-294px;
@@ -1255,6 +1277,7 @@ margin-right:-294px;
     margin-top: 10px;
 }
 #appdl2{
+padding-top:50px;
 }
 #appdl3{
 height:400px;
@@ -1314,6 +1337,67 @@ font-family:'poppins';
 }
 #aphtxt1, strong{
 font-weight:500;
+}
+#aphtxt2{
+font-size: 23px;
+color: #fa511a;
+font-family: 'poppins';
+font-weight:500;
+}
+#cmapp1{
+display:block;
+background-color:#fa511a;
+color:#fff;
+height:400px;
+}
+#cmapp2{
+width: 621px;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 55px;
+    padding-left: 70px;
+}
+#cmapp3{
+position: absolute;
+    margin: -128px;
+    margin-left: 700px;
+    width: 357px;
+}
+#cmappimg1{
+margin-left:-46px;
+}
+#cmappimg2{
+margin-left:435px;
+}
+#PhoneBegin{
+width: 585px;
+    margin-top: 60px;
+    height: 45px;
+}
+#srvappsrch1{
+position:relative;
+z-index:300;
+}
+
+#srvappsrch2{
+z-index: 400;
+    position: relative;
+    margin: -46px;
+    margin-left: 593px;
+    width: 122px;
+}
+#srvbtnsrch{
+color: #fff;
+    font-size: 18px;
+    display: block;
+    margin-top: -34px;
+    margin-left: 37px;
+    font-weight: 500;
+}
+#appfrm1{
+    height: 540px;
+    margin-top: 10px;
+    background-image: url(img/roof.jpg);
 }
 @media (max-width:1200px){
 #appdiv2{

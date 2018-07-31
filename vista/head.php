@@ -33,7 +33,7 @@ if(!isset($_SESSION)) {
 		
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
-		<script src="https://use.fontawesome.com/f4e64b7c17.js"></script>
+		<script src="js/fontawesome.min.js"></script>
 		<script src="https://checkout.stripe.com/checkout.js"></script>
 		
 		<style>
@@ -74,26 +74,6 @@ if(!isset($_SESSION)) {
 							</div>
 							
 						</div>
-<<<<<<< HEAD
-=======
-						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-								<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-									echo $_SESSION['username'];
-								} else{
-									echo "Login In";
-								}?></span>
-								<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-									<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
-									<li class="divider"></li>
-									<li><a href="?controller=user&accion=logout">Logout</a></li>
-								</ul>
-							</li>
-						</ul>
->>>>>>> 000bc0425ab027e715fd413cc8350eb2e75e89a2
 					</div>
 				</div>
 			</div>
@@ -112,8 +92,6 @@ if(!isset($_SESSION)) {
 									<ul>
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
-<<<<<<< HEAD
-=======
 										<li><a href="">PORTFOLIO</a></li>
 										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
 											<ul>
@@ -122,13 +100,12 @@ if(!isset($_SESSION)) {
 												<li><a href="">blog details</a></li>
 											</ul>
 										</li>
-										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
+									<!--	<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
 													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 												</ul>
-											</li>
->>>>>>> 000bc0425ab027e715fd413cc8350eb2e75e89a2
+											</li>-->
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
 										<li><a href="?controller=services&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
