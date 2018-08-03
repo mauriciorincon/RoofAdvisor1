@@ -1162,7 +1162,8 @@ $(document).ready(function() {
 
 function insertOrderCustomer(idStripeCharge){
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$("input:radio[name='estep3Option']:checked").val();
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
@@ -1239,7 +1240,8 @@ function validateIsLoggedIn(){
                 
 
                 if(n==-1){
-                    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                    //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                     if(RequestType=='emergency' || RequestType=='roofreport'){
                         $('#userLoguedIn').val(true);
                         nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");

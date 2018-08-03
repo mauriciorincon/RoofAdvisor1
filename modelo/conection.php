@@ -365,6 +365,10 @@ class connection{
         return $newKey;
     }
 
+    public function getValue(){
+        
+    }
+
 }
 
 ?>
