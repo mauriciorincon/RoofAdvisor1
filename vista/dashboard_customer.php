@@ -128,6 +128,16 @@
 						console.log("Data: " + updateOrder.OrderNumber);
 						
 					});
+
+					// Remove orders that are deleted from database
+					ref.on("child_removed", function(snapshot) {
+                    var deletedOrder = snapshot.val();
+                        if(validateExist(deletedOrder.OrderNumber)==true){
+                            removeOrderOnTable(deletedOrder);
+                        }
+                    console.log("Data: " + deletedOrder.OrderNumber);
+                    
+                	});
 				}
 
 				function addMarket(data,map,fila,infowindow){
@@ -224,6 +234,17 @@
 							}
 						});
 				}
+
+				function removeOrderOnTable(dataOrder){
+					var value = dataOrder.OrderNumber;
+					var t = $('#table_orders_company').DataTable();
+					t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} )
+					.remove()
+					.draw();
+            	}
+
 
 				function validateExist(orderID){
 				
