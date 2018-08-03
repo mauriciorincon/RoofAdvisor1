@@ -160,15 +160,18 @@
 
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
-
+					var requestType=getRequestType(dataOrder.RequestType);
+                	var status=getStatus(dataOrder.Status);
 					t.row.add( [
 							dataOrder.OrderNumber,
-							dataOrder.RequestType,
+							requestType,
 							dataOrder.RepAddress,
 							dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
-							dataOrder.Status,
+							status,
 							dataOrder.SchDate,
 							dataOrder.SchTime,
+							dataOrder.ETA,
+							dataOrder.EstAmtMat,
 							dataOrder.CompanyID,
 							dataOrder.ContractorID,
 							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
@@ -204,12 +207,16 @@
 								var id = $row.find("td:eq(0)").text();
 
 								if (id.indexOf(value) === 0) {
-									$row.find("td:eq(1)").html(dataOrder.RequestType);
+									var requestType=getRequestType(dataOrder.RequestType);
+                                	var status=getStatus(dataOrder.Status);
+									$row.find("td:eq(1)").html(requestType);
 									$row.find("td:eq(2)").html(dataOrder.RepAddress);
 									$row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-									$row.find("td:eq(4)").html(dataOrder.Status);
+									$row.find("td:eq(4)").html(status);
 									$row.find("td:eq(5)").html(dataOrder.SchDate);
 									$row.find("td:eq(6)").html(dataOrder.SchTime);
+									$row.find("td:eq(5)").html(dataOrder.ETA);
+									$row.find("td:eq(6)").html(dataOrder.EstAmtMat);
 									$row.find("td:eq(7)").html(dataOrder.CompanyID);
 									$row.find("td:eq(8)").html(dataOrder.ContractorID);
 								}
@@ -241,6 +248,63 @@
 					return flag;
 
 				}
+
+			function getRequestType(requestType){
+                var RequestType="";
+                switch (requestType) {
+                    case "E":
+                        RequestType = "Emergency";
+                        break;
+                    case "S":
+                        RequestType = "Schedule";
+                        break;
+                    case "R":
+                        RequestType = "RoofReport";
+                        break;
+                    default:
+                        RequestType = "No value found";
+                }
+                return RequestType;
+            }
+
+            function getStatus(status){
+                var orderStatus="";
+                switch (status) {
+                    case "A":
+						orderStatus = "Order Open";
+                        break;
+                    case "D":
+						orderStatus = "Order Assigned";
+                        break;
+                    case "E":
+						orderStatus = "Contractor Just Arrived";
+                        break;
+                    case "F":
+						orderStatus = "Estimate Sent";
+                        break;
+                    case "G":
+						orderStatus = "Estimate Approved";
+                        break;
+                    case "H":
+						orderStatus = "Work In Progress";
+                        break;
+                    case "I":
+						orderStatus = "Work Completed";
+                        break;
+                    case "J":
+						orderStatus = "Final Bill";
+                        break;
+                    case "K":
+						orderStatus = "Order Completed Paid";
+                        break;
+                    case "C":
+						orderStatus = "Cancel work";
+                        break;
+                    default:
+						orderStatus = "Undefined";
+                }
+                return orderStatus;
+            }
 			</script>
 
 			<script>
@@ -277,13 +341,15 @@
 				<table class="table table-striped table-bordered" id="table_orders_customer">
 					<thead>
 					<tr>
-						<th>Repair ID</th>
-						<th>Repair Type</th>
+						<th>Order ID</th>
+						<th>Order Type</th>
 						<th>Address</th>
 						<th>Description</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
+						<th>Est Amt</th>
+                    	<th>Final Amt</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
@@ -301,6 +367,10 @@
 											case "S":
 												echo "Schedule";
 												break;
+											case "R":
+												echo "RoofReport";
+												break;
+	
 											default:
 												echo "Undefined";
 												break;
@@ -349,6 +419,8 @@
 								</td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
+								<td><?php echo $order['ETA']?></td>                            
+								<td><?php echo $order['EstAmtMat']?></td>
 								<td><?php if(isset($order['CompanyID'])){echo $order['CompanyID'];}else{echo '';}?></td>
 								<td><?php echo $order['ContractorID']?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
