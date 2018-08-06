@@ -1,5 +1,5 @@
 
-<div class="container">
+<div id="appwiz" class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
@@ -36,8 +36,9 @@
             </div>
         </div>
     </div>
-    
+    <div id="appfrm1">
     <form role="form">
+     <div>
         <div class="panel panel-primary setup-contentOrder" id="step-1">
             <div class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
@@ -55,7 +56,7 @@
                 
             </div>
         </div>
-        
+        </div>
         <div class="panel panel-primary setup-contentOrder" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h3>
@@ -682,7 +683,7 @@
 		
     </form>
 </div>
-
+</div>
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -700,3 +701,51 @@
 		</div> 
 	</div>
 </div>
+<div id='srvapp1' class="container">
+<div id='srvapps'>
+<div id='srvmapp1'>
+<img src='img/roof-build.jpg'>
+</div>
+<span style="font-size:34px;"> <strong>SCHEDULE A PHONE CALL</strong> </span>
+</br></br>
+<p id='srvappph1'>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+</p>
+</div>
+<form role='form'>
+ <div id='srvappsrch1'>
+   <input maxlength="100" type="text" required="required" class="form-control input-md" placeholder="Enter your phone number" id="PhoneBegin" name="PhoneBegin">
+</div>
+<div id='srvappsrch2'>
+<img src='img/searchbtn.png'>
+<span id='srvbtnsrch'>SEARCH</span>
+</div>
+</form>
+</div>
+<div id='cmapp1' class="container">
+ <div id='cmapp3'>
+  <img src='img/worker1.png'>
+ </div>
+ <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</span></br><img id='cmappimg2' src='img/bquote.png'>
+ </div>
+</div>
+<div id='appdl1' class="container">
+ <div id='appdl2'>
+  <span id='aphtxt1'><strong>Get Our App</strong></span>
+  <p id='aphtxt2' align="center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+  <img id="appphone1" src="img/app.jpg">
+ </div>
+
+ <div id='appdl3'>
+  <div id='appdiv1'>
+   <span id='appdl3-tx1'>Download</br>for</span>
+  </div>
+  <div id='appdiv2'>
+   <span id='appdl3-tx2'><strong>FREE!</strong></span>
+  </div>
+  <img id='appand1' src='img/PlayStore.png'>
+  <img id='appand2' src='img/AppleStore.png'>
+  </div>
+</div>
+
