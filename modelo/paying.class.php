@@ -3,17 +3,20 @@ if(!isset($_SESSION)) {
     session_start(); 
 } 
 
+require_once($_SESSION['application_path']."/modelo/conection.php");
 require $_SESSION['application_path'].'/vendor/autoload.php';
+
 
 //require 'path-to-Stripe.php';
 
-class paying_stripe{
+class paying_stripe  extends connection{
     var $stripe;
     var $_last_charge;
     var $_error_message;
 
     function __construct()
 	{
+        parent::__construct();
         $this->stripe = array(
             "secret_key"      => "sk_test_I4map4XuV7w5Dn5Ss8HGRDtn",
             "publishable_key" => "pk_test_iubKDaao3vNKYYrr45bJPUOl"
@@ -129,6 +132,11 @@ class paying_stripe{
             array('api_key' => $this->stripe['secret_key'])
         );
         return $_status;
+    }
+
+    public function getNode($node){
+        $result=$this->getDataTable($node);
+        return $result;
     }
 
 }

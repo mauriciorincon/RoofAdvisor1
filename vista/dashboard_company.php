@@ -174,7 +174,7 @@
             function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
                 var t = $('#table_orders_company').DataTable();
                 var requestType=getRequestType(dataOrder.RequestType);
-                var state=getState(dataOrder.Status);
+                var status=getStatus(dataOrder.Status);
                 
                 t.row.add( [
                         dataOrder.OrderNumber,
@@ -184,7 +184,7 @@
                         dataOrder.Rtype,
                         dataOrder.Water,
                         requestType,
-                        state,
+                        status,
                         dataOrder.ETA,
                         dataOrder.EstAmtMat,
                         dataOrder.PaymentType,
@@ -215,12 +215,12 @@
 
                             if (id.indexOf(value) === 0) {
                                 var requestType=getRequestType(dataOrder.RequestType);
-                                var state=getState(dataOrder.Status);
+                                var status=getStatus(dataOrder.Status);
                                 $row.find("td:eq(1)").html(dataOrder.SchDate);
                                 $row.find("td:eq(2)").html(dataOrder.SchTime);
                                 $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
                                 $row.find("td:eq(5)").html(requestType);
-                                $row.find("td:eq(6)").html(state);
+                                $row.find("td:eq(6)").html(status);
                                 $row.find("td:eq(7)").html(dataOrder.ETA);
                                 $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                                 $row.find("td:eq(9)").html(dataOrder.PaymentType);
@@ -264,49 +264,52 @@
                     case "S":
                         RequestType = "Schedule";
                         break;
+                    case "R":
+                        RequestType = "RoofReport";
+                        break;
                     default:
                         RequestType = "No value found";
                 }
                 return RequestType;
             }
 
-            function getState(state){
-                var orderState="";
-                switch (state) {
+            function getStatus(status){
+                var orderStatus="";
+                switch (status) {
                     case "A":
-                        orderState = "Order Open";
+                        orderStatus = "Order Open";
                         break;
                     case "D":
-                        orderState = "Order Assigned";
+                        orderStatus = "Order Assigned";
                         break;
                     case "E":
-                        orderState = "Contractor Just Arrived";
+                        orderStatus = "Contractor Just Arrived";
                         break;
                     case "F":
-                        orderState = "Estimate Sent";
+                        orderStatus = "Estimate Sent";
                         break;
                     case "G":
-                        orderState = "Estimate Approved";
+                        orderStatus = "Estimate Approved";
                         break;
                     case "H":
-                        orderState = "Work In Progress";
+                        orderStatus = "Work In Progress";
                         break;
                     case "I":
-                        orderState = "Work Completed";
+                        orderStatus = "Work Completed";
                         break;
                     case "J":
-                        orderState = "Final Bill";
+                        orderStatus = "Final Bill";
                         break;
                     case "K":
-                        orderState = "Order Completed Paid";
+                        orderStatus = "Order Completed Paid";
                         break;
                     case "C":
-                        orderState = "Cancel work";
+                        orderStatus = "Cancel work";
                         break;
                     default:
-                        orderState = "Undefined";
+                        orderStatus = "Undefined";
                 }
-                return orderState;
+                return orderStatus;
             }
         </script>
 
@@ -355,13 +358,13 @@
             <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
                 <tr>
-                    <th>Repair ID</th>
+                    <th>Order ID</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Name/Addr/Phone</th>
                     
                     <th>Description</th>
-                    <th>Request Type</th>
+                    <th>Order Type</th>
                     <th>Status</th>
 
                     <th>Est Amt</th>
@@ -392,6 +395,10 @@
                                         case "S":
                                             echo "Schedule";
                                             break;
+                                        case "R":
+                                            echo "RoofReport";
+                                            break;
+
                                         default:
                                             echo "Undefined";
                                             break;

@@ -14,7 +14,7 @@ class payingController{
     }
 
     public function setPaying(){
-        $amount = 1000;
+        $amount = 0;
         if(is_null($this->_payingModel)){
             $this->_payingModel=new paying_stripe();
         }
@@ -101,10 +101,11 @@ class payingController{
         /////////////////////////////////////////////////////////////////
         //working
         ////////////////////////////////////////////////////////////////
+        $_amount=$this->getEmergencyValue();
         echo '
         <button id="customButton" class="btn">Pay your service</button>
         <script>
-            var amount_value=75000;
+            var amount_value='.$_amount.';
             var public_key=\''.$_key.'\'
         </script>
         <script src="vista/js/stripe_conf.js"></script>';
@@ -258,6 +259,19 @@ class payingController{
 
         // everything is OK
         return $result;
+    }
+
+    function getEmergencyValue(){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel=new paying_stripe();
+        }
+        $_emergency_value=$this->_payingModel->getNode('Parameters/AmountER');
+        if(is_null($_emergency_value) or $_emergency_value=="" ){
+            $_emergency_value=0;
+        }else{
+            $_emergency_value=$_emergency_value*100;
+        }
+        return $_emergency_value;
     }
 }
 ?>

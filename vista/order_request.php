@@ -85,12 +85,12 @@
 						</div>
 					</a>
 
-					<a href="#" class="list-group-item active" name="linkServiceType">
+					<a href="#" class="list-group-item" name="linkServiceType">
 						<input type="hidden" value="schedule" name="typeServiceOrder">
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Schedule Repair</button>
+									<button class=" btn-success   btn-lg" type="button">Schedule Repair</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
 								A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.
@@ -105,14 +105,14 @@
 					</a>
 
 					<a href="#" class="list-group-item" name="linkServiceType">
-						<input type="hidden" value="RoofReport" name="typeServiceOrder">
+						<input type="hidden" value="roofreport" name="typeServiceOrder">
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
 									<button class=" btn-primary   btn-lg" type="button">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								Content for the Order Roof Report: “Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.
+								Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.
 								</td>
 							</tr>
 						</table>

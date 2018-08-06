@@ -888,7 +888,9 @@ $('#step2OtypeService').on('click', 'a', function(){
     $(this).addClass("active");
     var type=$(this).find('input:hidden').val();
     showHideSteps(type);
-   
+    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+   $(this).find('button').removeClass("btn-primary").addClass("btn-success");
+   return false;
 });
 
 
@@ -955,8 +957,9 @@ $(document).ready(function () {
                 $('#textAnswerOrder').html('Plese select the address for the service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
-                var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-                if(RequestType=='emergency'){
+                //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                if(RequestType=='emergency' || RequestType=='roofreport'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
@@ -970,9 +973,9 @@ $(document).ready(function () {
                     var valStep5Address=$('input:hidden[name=step5Address]').val();
                     var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
                     $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
-                    $('#step8Schedule').html('Defined by the administrator');
-                    $('#step8Time').html('Defined by the administrator');
-                    $('#step8CompanyName').html('Defined by the administrator');
+                    $('#step8Schedule').html('Pending');
+                    $('#step8Time').html('Pending');
+                    $('#step8CompanyName').html('Pending');
                     $('#step8Longitude').html(valStep5long);
                     $('#step8Latitude').html(valStep5lat);
                     $('#step8Address').html(valStep5Address);
@@ -1011,7 +1014,7 @@ $(document).ready(function () {
             var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
             
             if(valStep7==""){
-                valStep7="Define by administrator";
+                valStep7="Pending";
             }
             $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
             $('#step8Schedule').html(valStep6);
@@ -1159,12 +1162,13 @@ $(document).ready(function() {
 
 function insertOrderCustomer(idStripeCharge){
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$("input:radio[name='estep3Option']:checked").val();
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
-    var ActAmtTime=$("input[name='step6date']").val();
-    var ActTime=$("button[name='step6time'].active").text();
+    var SchDate=$("input[name='step6date']").val();
+    var SchTime=$("button[name='step6time'].active").text();
     var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
@@ -1175,8 +1179,10 @@ function insertOrderCustomer(idStripeCharge){
 
     if(RequestType=='emergency'){
         RequestType='E'
-    }else{
+    }else if(RequestType=='schedule'){
         RequestType='S'
+    }else if(RequestType=='roofreport'){
+        RequestType='R'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     if(CompanyID==undefined){
@@ -1184,7 +1190,7 @@ function insertOrderCustomer(idStripeCharge){
     }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
-                                                "ActAmtTime":ActAmtTime,"ActTime":ActTime,"CompanyID":CompanyID,"email":email,
+                                                "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
                                                 "Authorized":Authorized}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
@@ -1234,8 +1240,9 @@ function validateIsLoggedIn(){
                 
 
                 if(n==-1){
-                    var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-                    if(RequestType=='emergency'){
+                    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                    //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                    if(RequestType=='emergency' || RequestType=='roofreport'){
                         $('#userLoguedIn').val(true);
                         nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                         curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
@@ -1792,7 +1799,7 @@ function showHideSteps(typeService){
         step4.show();
         step5.show();
         step8.hide();
-    }else if(typeService=='emergency'){
+    }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(3)');
         step5=$('.stepwizard-step:eq(4)');
         step8=$('.stepwizard-step:eq(7)');
