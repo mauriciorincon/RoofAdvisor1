@@ -21,10 +21,16 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
     }
     
 }
-$_date=$_POST['ActAmtTime'];
+//$_date=$_POST['ActAmtTime'];
 $_companyID="";
 if(isset($_POST['CompanyID'])){
     $_companyID=$_POST['CompanyID'];
+}
+
+if(isset($_POST['stripeCharge'])){
+    $_stripe_chargue=$_POST['stripeCharge'];
+}else{
+    $_stripe_chargue="";
 }
 
 $_array=array(
@@ -40,7 +46,7 @@ $_array=array(
     "Latitude"=>$_POST['Latitude'],
     "Longitude"=>$_POST['Longitude'],
     "Address"=>$_POST['Address'],
-    "id_stripe"=>$_POST['stripeCharge'],
+    "id_stripe"=>$_stripe_chargue,
     "Authorized"=>$_POST['Authorized'],
 );
 

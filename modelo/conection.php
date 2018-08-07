@@ -164,9 +164,11 @@ class connection{
     }
 
     public function getDataTable($table){
+        
         $snapshot=$this->_firebase->getReference($table)
                             ->getSnapshot();
         $value = $snapshot->getValue();
+    
         $_array_data=$value;
         //$value = $this->_firebase->get($table."/");
 

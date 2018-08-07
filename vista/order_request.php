@@ -62,7 +62,7 @@
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
-				<font size="5">&#9312;</font><font size="5"><strong>  Type of service</strong></font>
+				<font size="5">&#9312;</font><font size="5"><strong>What type of service?</strong></font>
 				</div>
 				<div class="list-group" id="step2OtypeService">
 				<a href="#" class="list-group-item " name="linkServiceType">
@@ -131,7 +131,7 @@
 					
 				
 				<div class="list-group-item ">
-				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property</strong></font>		
+				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
 				</div>
 				<div class="list-group-item ">
 					<div class="form-group">
@@ -243,19 +243,19 @@
 				<div class="list-group-item ">
 					<div class="form-group">
 						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="One" checked></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked></div>
 						<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="Two"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="2 story"></div>
 						<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="Three or More"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="3 or more"></div>
 						<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
 					</div>
 					<label>&nbsp;</label>
@@ -451,10 +451,10 @@
 				<div class="form-group">
 				
 								<label class="control-label" for="exampleRadios5">
-								These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers. 
+								<b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> 
 								</label>
 								<label class="control-label" for="exampleRadios5">
-								You can select one or the first available will respond to your work order?
+								<b>You can select one or the first available will respond to your work order?</b>
 								</label>
 							
 							

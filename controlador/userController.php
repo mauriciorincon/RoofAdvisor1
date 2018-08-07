@@ -358,6 +358,9 @@ class userController{
             //print_r($_actual_customer);
             
             $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+
+            
+
             //print_r($_array_customer_to_show);
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');

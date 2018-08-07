@@ -39,7 +39,8 @@ class orderController{
         $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
         $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
-        $_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
+        //$_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
+        $_lastOrderNumber=$this->_orderModel->getLasOrderNumberParameter('Parameters/LastOrderID');
         $_contractor=$this->_userController->getContractorById($arrayDataOrder['ContractorID']);
         if(is_null($_lastOrderNumber)){
             $_lastOrderNumber=1;
@@ -89,6 +90,11 @@ class orderController{
         );
        // print_r($Order);
         $result=$this->_orderModel->insertOrder("FBID",$Order);
+        if(strpos($_result,'Error')>-1){
+            
+        }else{
+            $this->updateOrderLastId($_lastOrderNumber);
+        }
         return $result;
     }
 
@@ -131,6 +137,10 @@ class orderController{
             return $_result;
         }
         
+    }
+
+    public function updateOrderLastId($orderId){
+        $this->_orderModel->updateOrderLastId($orderId);
     }
 
     

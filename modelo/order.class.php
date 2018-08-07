@@ -68,6 +68,11 @@ class orderModel extends connection{
         }
     }
 
+    public function getLasOrderNumberParameter($node){
+            $result=$this->getDataTable($node);
+            return $result;
+    }
+
     public function getRating($field,$value){
         $result=$this->getQueryEqualM('Rating',$field,$value);
         if(is_array($result)){
@@ -80,6 +85,10 @@ class orderModel extends connection{
     public function getCountRating($field,$value){
         $result=$this->getCount('Rating',$field,$value);
         return $result;
+    }
+
+    public function updateOrderLastId($orderID){
+        $this->updateDataTable("Parameters","LastOrderID",$orderID);
     }
  
 }

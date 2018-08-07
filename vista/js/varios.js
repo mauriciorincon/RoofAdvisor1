@@ -1799,6 +1799,7 @@ function showHideSteps(typeService){
         step4.show();
         step5.show();
         step8.hide();
+        $('#step-6 h3').html('Review Scheduled Repair Order Details');
     }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(3)');
         step5=$('.stepwizard-step:eq(4)');
@@ -1806,6 +1807,12 @@ function showHideSteps(typeService){
         step4.hide();
         step5.hide();
         step8.show();
+        if(typeService=='emergency'){
+            $('#step-6 h3').html('Review Emergency Repair Order Details');
+        }else{
+            $('#step-6 h3').html('Review Roof Report Order Details');
+        }
+        
     }
 }
 

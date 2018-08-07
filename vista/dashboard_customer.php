@@ -171,7 +171,9 @@
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
 					var requestType=getRequestType(dataOrder.RequestType);
-                	var status=getStatus(dataOrder.Status);
+					var status=getStatus(dataOrder.Status);
+					companyName=getCompanyName(dataOrder.CompanyID);
+					contractorName=gerContractorName(dataOrder.ContractorID);
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -182,8 +184,8 @@
 							dataOrder.SchTime,
 							dataOrder.ETA,
 							dataOrder.EstAmtMat,
-							dataOrder.CompanyID,
-							dataOrder.ContractorID,
+							companyName,
+							contractorName,
 							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
 							dataOrder.FBID+
 							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
@@ -215,7 +217,7 @@
 								$row = $(this);
 
 								var id = $row.find("td:eq(0)").text();
-
+								
 								if (id.indexOf(value) === 0) {
 									var requestType=getRequestType(dataOrder.RequestType);
                                 	var status=getStatus(dataOrder.Status);
@@ -225,10 +227,12 @@
 									$row.find("td:eq(4)").html(status);
 									$row.find("td:eq(5)").html(dataOrder.SchDate);
 									$row.find("td:eq(6)").html(dataOrder.SchTime);
-									$row.find("td:eq(5)").html(dataOrder.ETA);
-									$row.find("td:eq(6)").html(dataOrder.EstAmtMat);
-									$row.find("td:eq(7)").html(dataOrder.CompanyID);
-									$row.find("td:eq(8)").html(dataOrder.ContractorID);
+									$row.find("td:eq(7)").html(dataOrder.ETA);
+									$row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+									companyName=getCompanyName(dataOrder.CompanyID);
+									$row.find("td:eq(9)").html(companyName);
+									contractorName=gerContractorName(dataOrder.ContractorID);
+									$row.find("td:eq(10)").html(contractorName);
 								}
 								
 							}
@@ -325,7 +329,28 @@
 						orderStatus = "Undefined";
                 }
                 return orderStatus;
-            }
+			}
+			
+			function getCompanyName(companyID){
+				var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
+					ref.on('value', function(snapshot) {
+						return snapshot.val();
+					});
+
+			}
+			function gerContractorName(contractorID){
+				var firstName="";
+				var lastName="";
+				var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameFirst");
+					ref.on('value', function(snapshot) {
+						firstName=snapshot.val();
+					});
+				var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameLast");
+					ref.on('value', function(snapshot) {
+						lastName=snapshot.val();
+					});
+				return firstName+' '+lastName;
+			}
 			</script>
 
 			<script>
@@ -442,8 +467,31 @@
 								<td><?php echo $order['SchTime']?></td>
 								<td><?php echo $order['ETA']?></td>                            
 								<td><?php echo $order['EstAmtMat']?></td>
-								<td><?php if(isset($order['CompanyID'])){echo $order['CompanyID'];}else{echo '';}?></td>
-								<td><?php echo $order['ContractorID']?></td>
+								<td><?php if(isset($order['CompanyID'])){
+											if(!isset($this->_userModel)){
+												$this->_userModel=new userModel();
+											}
+											$_company_name=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyName');
+											echo $_company_name;
+										}else{
+										echo '';
+
+										
+									}?></td>
+								<td><?php if(isset($order['ContractorID'])){
+											if(!empty($order['ContractorID'])){
+												if(!isset($this->_userModel)){
+													$this->_userModel=new userModel();
+												}
+												$_driver_first=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+												$_driver_last=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+												echo $_driver_first.' '.$_driver_last;
+											}else{
+												echo "";
+											}
+											echo "";
+										}
+									?></td>
 								<td><a class="btn-danger btn-sm" data-toggle="modal"  
 										href="" 
 										onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
