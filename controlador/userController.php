@@ -136,37 +136,42 @@ class userController{
     }
 
     public function loginContractor(){
-        $this->_user=$_POST['userContractor'];
-        $this->_pass=$_POST['passwordContractor'];
-        $this->_userModel=new userModel();
-        //echo "va a llamar a validar company";
-        $_result=$this->_userModel->validateCompany($this->_user,$this->_pass);
-        //print_r($_result);
-        //return;
-        if(is_array($_result) or gettype($_result)=="object"){
+        if(!isset($_POST['userContractor']) or !isset($_POST['passwordContractor'])){
+            $this->showLoginContractor();
+        }else{
+            $this->_user=$_POST['userContractor'];
+            $this->_pass=$_POST['passwordContractor'];
+            $this->_userModel=new userModel();
+            //echo "va a llamar a validar company";
+            $_result=$this->_userModel->validateCompany($this->_user,$this->_pass);
             //print_r($_result);
-            if($_result->emailVerified==1){
-                $_data_company=$this->_userModel->getCompany($this->_user);
-                if(!is_null($_data_company)){
-                    $this->cleanVariables();
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['username'] = $_result->displayName;
-                    $_SESSION['start'] = time();
-                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-                    $_SESSION['email'] = $_result->email;
-                    $_SESSION['profile'] = 'company';
-                    $this->dashboardCompany($this->_user);
+            //return;
+            if(is_array($_result) or gettype($_result)=="object"){
+                //print_r($_result);
+                if($_result->emailVerified==1){
+                    $_data_company=$this->_userModel->getCompany($this->_user);
+                    if(!is_null($_data_company)){
+                        $this->cleanVariables();
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['username'] = $_result->displayName;
+                        $_SESSION['start'] = time();
+                        $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                        $_SESSION['email'] = $_result->email;
+                        $_SESSION['profile'] = 'company';
+                        $this->dashboardCompany($this->_user);
 
-                    return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                        return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
+                    }else{
+                        return "Error, please comunicate with RoofAdvisorZ for help";
+                    }
                 }else{
-                    return "Error, please comunicate with RoofAdvisorZ for help";
+                    Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
                 }
-            }else{
-                Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
+            }elseif(is_string($_result)){
+                Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginContractor");
             }
-        }elseif(is_string($_result)){
-            Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginContractor");
         }
+        
 
     }
 
@@ -353,6 +358,9 @@ class userController{
             //print_r($_actual_customer);
             
             $_array_customer_to_show=$this->_userModel->getOrdersCustomer($_actual_customer['CustomerID']);
+
+            
+
             //print_r($_array_customer_to_show);
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');

@@ -93,7 +93,7 @@
                 // Retrieve new orders as they are added to our database
                 ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
-                    if(newOrder.Status=='A' || newOrder.CompanyID==companyID){
+                    if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
                         if(validateExist(newOrder.OrderNumber)==false){
                             addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
                         }
@@ -104,15 +104,25 @@
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
                     var updateOrder = snapshot.val();
-                    if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID){
+                    //if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
                         if(validateExist(updateOrder.OrderNumber)==false){
                             addOrderToTable(updateOrder,companyID,map,infowindow,iconBase);
                         }else{
                             updateOrderOnTable(updateOrder);
                         }
-                    }
+                    //}
                     //addOrderToTable(newOrder,companyID);
                     console.log("Data: " + updateOrder.OrderNumber);
+                    
+                });
+
+                // Remove orders that are deleted from database
+                ref.on("child_removed", function(snapshot) {
+                    var deletedOrder = snapshot.val();
+                        if(validateExist(deletedOrder.OrderNumber)==true){
+                            removeOrderOnTable(deletedOrder);
+                        }
+                    console.log("Data: " + deletedOrder.OrderNumber);
                     
                 });
  
@@ -229,6 +239,16 @@
                             
                         }
                     });
+            }
+
+            function removeOrderOnTable(dataOrder){
+                var value = dataOrder.OrderNumber;
+                var t = $('#table_orders_company').DataTable();
+                t.rows( function ( idx, data, node ) {
+                    return data[0] === value;
+                } )
+                .remove()
+                .draw();
             }
 
             function validateExist(orderID){

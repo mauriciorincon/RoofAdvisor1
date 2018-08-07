@@ -6,7 +6,8 @@
     require_once($_SESSION['application_path']."/controlador/payingController.php");
     require_once($_SESSION['application_path']."/controlador/emailController.php");
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
-
+    require_once($_SESSION['application_path']."/controlador/orderController.php");
+    require_once($_SESSION['application_path']."/modelo/order.class.php");
     //require_once($_SESSION['application_path']."/controlador/userController.php");
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
@@ -25,8 +26,12 @@
 
     
 
-    $_objPDF=new pdfController();
-    $_objPDF->paymentConfirmation2("227");
+    //$_objPDF=new pdfController();
+    //$_objPDF->paymentConfirmation2("227");
+    echo "hola";
+    $_orderModel=new orderModel();
+    $_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
+    echo "Order id: ".$_lastOrderNumber;
 
     /* Send Mail
     $_objMail=new emailController();
