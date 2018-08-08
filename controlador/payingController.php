@@ -273,5 +273,18 @@ class payingController{
         }
         return $_emergency_value;
     }
+
+    function getRoofReport(){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel=new paying_stripe();
+        }
+        $_emergency_value=$this->_payingModel->getNode('Parameters/AmountER');
+        if(is_null($_emergency_value) or $_emergency_value=="" ){
+            $_emergency_value=0;
+        }else{
+            $_emergency_value=$_emergency_value*100;
+        }
+        return $_emergency_value;
+    }
 }
 ?>

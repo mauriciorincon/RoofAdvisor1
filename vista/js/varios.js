@@ -1188,6 +1188,7 @@ function insertOrderCustomer(idStripeCharge){
     if(CompanyID==undefined){
         CompanyID="";
     }
+    SchTime=changerHourFormat(SchTime);
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
@@ -2069,4 +2070,16 @@ function sendInvoiceEmail(orderID){
             return result1;
         }
     });
+}
+
+function changerHourFormat(hour){
+    var n = hour.indexOf("PM");
+    if(n!=-1){
+        firstPart = hour.substring(0, 1);
+        firstPart = Number(firstPart)+12;
+        hour=firstPart+":00";
+    }else{
+        hour.replace("AM","");
+    }
+    return hour;
 }

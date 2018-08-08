@@ -19,5 +19,12 @@ class othersController{
         $_result=$this->_othersModel->validateZipCode($_zipCode);
         return $_result;
     }
+
+    public function setInvoicePath($firebaseOrderID,$orderId,$transNum,$pathInvoice){
+        $this->_othersModel=new othersModel();
+        $_result=$this->_othersModel->setInvoicePath($firebaseOrderID,$orderId,$transNum,$pathInvoice);
+        return $_result;
+
+    }
 }
 ?>

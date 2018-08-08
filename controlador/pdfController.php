@@ -6,6 +6,7 @@ if(!isset($_SESSION)) {
 require $_SESSION['application_path'].'/vendor/autoload.php';
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
+require_once($_SESSION['application_path']."/controlador/othersController.php");
 
 class pdfController{
     
@@ -158,10 +159,15 @@ class pdfController{
         ';
         
         $pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
-
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf','F'); 
+
+        $_result=$this->registerPathInvoice($_orderID,$_order['FBID']);
+        $_updateFields="InvoiceNum,";
+        $_arrayFields=explode(",",$_updateFields);
+        $_result=$_orderController->updateOrder($_orderID,$arrayFields)
+        
         return true;
     }
 
@@ -319,7 +325,20 @@ class pdfController{
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_v2_'.$_orderID.'.pdf','F'); 
+        $_result=$this->registerPathInvoice($_orderID,$_order['FBID']);
         return true;
+    }
+
+    public function registerPathInvoice($_orderID,$firebaseOrderID){
+        $_path=$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf';
+        $_otherController=new othersController();
+        $_result=$_otherController->setInvoicePath($firebaseOrderID,$_orderID,1,$_path);
+        if($_result==true){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
 ?>

@@ -186,19 +186,27 @@
                 var requestType=getRequestType(dataOrder.RequestType);
                 var status=getStatus(dataOrder.Status);
                 
+                var dataCustomer="";
+                if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
+                    dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
+									'href="#myModalGetWork" '+
+									'onClick="setOrderId("'+dataOrder.FBID+')"> '+
+									'<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                }else{
+                    dataCustomer=dataOrder.ContractorID;
+                }
                 t.row.add( [
                         dataOrder.OrderNumber,
                         dataOrder.SchDate,
                         dataOrder.SchTime,
-                        dataOrder.Hlevels,
-                        dataOrder.Rtype,
-                        dataOrder.Water,
+                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                        "",
                         requestType,
                         status,
                         dataOrder.ETA,
                         dataOrder.EstAmtMat,
                         dataOrder.PaymentType,
-                        dataOrder.ContractorID
+                        dataCustomer,
                     ] ).draw( false );
                 /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
                 dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
@@ -226,6 +234,15 @@
                             if (id.indexOf(value) === 0) {
                                 var requestType=getRequestType(dataOrder.RequestType);
                                 var status=getStatus(dataOrder.Status);
+                                var dataCustomer="";
+                                if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
+                                    dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                                                    'href="#myModalGetWork" '+
+                                                    'onClick="setOrderId("'+dataOrder.FBID+')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                }else{
+                                    dataCustomer=dataOrder.ContractorID;
+                                }
                                 $row.find("td:eq(1)").html(dataOrder.SchDate);
                                 $row.find("td:eq(2)").html(dataOrder.SchTime);
                                 $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
@@ -234,7 +251,7 @@
                                 $row.find("td:eq(7)").html(dataOrder.ETA);
                                 $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                                 $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                                $row.find("td:eq(10)").html(dataOrder.ContractorID);
+                                $row.find("td:eq(10)").html(dataCustomer);
                             }
                             
                         }
