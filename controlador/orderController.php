@@ -49,11 +49,16 @@ class orderController{
         }
         //print_r($arrayDataOrder);
         //print_r($_customerK);
+        if(!empty($arrayDataOrder['SchDate'])){
+            $_scheduleDate=str_replace("-","/",$arrayDataOrder['SchDate']);
+        }else{
+            $_scheduleDate="";
+        }
         
         $Order = array(
             "ActAmtMat" => "",
-            "ActAmtTime" => $arrayDataOrder['ActAmtTime'],
-            "ActTime" => $arrayDataOrder['ActTime'],
+            "ActAmtTime" => "",
+            "ActTime" => "",
             "AfterPICRefID" => "",
             "AmtER" => "",
             "AppEst" => "",
@@ -63,7 +68,7 @@ class orderController{
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
             "CutomerFBID" => $_customerK,
-            "DateTime" => date('m-d-Y H:i:s'),
+            "DateTime" => date('m/d/Y H:i:s'),
             "ETA" => "",
             "EstAmtMat" => "",
             "EstAmtTime" => "",
@@ -81,7 +86,7 @@ class orderController{
             "RepZIP" => $arrayDataOrder['RepZIP'],
             "RequestType" => $arrayDataOrder['RequestType'],
             "Rtype" => $arrayDataOrder['Rtype'],
-            "SchDate" => $arrayDataOrder['SchDate'],
+            "SchDate" => $_scheduleDate,
             "SchTime" => $arrayDataOrder['SchTime'],
             "Status" => "A",
             "TransNum" => "",

@@ -172,8 +172,8 @@
 					var t = $('#table_orders_customer').DataTable();
 					var requestType=getRequestType(dataOrder.RequestType);
 					var status=getStatus(dataOrder.Status);
-					companyName=getCompanyName(dataOrder.CompanyID);
-					contractorName=gerContractorName(dataOrder.ContractorID);
+					var companyName=getCompanyName(dataOrder.CompanyID);
+					var contractorName=gerContractorName(dataOrder.ContractorID);
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -220,7 +220,9 @@
 								
 								if (id.indexOf(value) === 0) {
 									var requestType=getRequestType(dataOrder.RequestType);
-                                	var status=getStatus(dataOrder.Status);
+									var status=getStatus(dataOrder.Status);
+									var companyName="Undefined";
+									var contractorName="Undefined";
 									$row.find("td:eq(1)").html(requestType);
 									$row.find("td:eq(2)").html(dataOrder.RepAddress);
 									$row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);

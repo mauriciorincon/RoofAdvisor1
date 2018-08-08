@@ -20,5 +20,11 @@ class othersModel extends connection{
         $_result=$this->getDataByDate("Orders","SchDate",$startYear,$startMonth,$finishYear,$finishMonth);
         return $_result;
     }
+
+    public function setInvoicePath($firebaseOrderID,$orderId,$transNum,$pathInvoice){
+        $result = $this->updateDataTable("Invoice/".$firebaseOrderID,$orderId."_".$transNum,$pathInvoice);
+        return $result;
+
+    }
 }
 ?>
