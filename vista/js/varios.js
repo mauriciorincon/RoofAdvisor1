@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    /*$('#table_orders_customer').DataTable({
+        rowCallback: function(row, data, index){
+            if(data[4]=='Estimate Sent'){
+              $(row).find('td:eq(7)').css('color', 'red');
+          }
+        }
+      }
+    );*/
+
+
     $('#table_orders_customer').DataTable();
     
     $('#table_orders_company').DataTable();
@@ -2082,4 +2092,124 @@ function changerHourFormat(hour){
         hour.replace("AM","");
     }
     return hour;
+}
+
+function getEstimateAmount(orderId){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                
+                order=jQuery.parseJSON(data);
+                $('#myEstimateAmount  #orderID').val(order.FBID);
+                $('#myEstimateAmount  #estimatedAmountOrderID').val(order.OrderNumber);
+                $('#myEstimateAmount  #estimatedAmountMaterials').val(order.EstAmtMat);
+                $('#myEstimateAmount  #estimatedAmountTime').val(order.EstAmtTime);
+                $('#myEstimateAmount  #estimatedTime').val(order.EstTime);
+                
+                //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function acceptEstimateAmount(){
+    var orderID=$('#myEstimateAmount  #orderID').val();
+    var status='G';
+    
+    if(confirm("are you sure you want to accept the Estimate Amount?")){
+        $('#myEstimateAmount').modal('hide');
+        updateOrder(orderID,"Status,"+status);
+        
+    }else{
+        return false;
+    }
+}
+
+function refuseEstimateAmount(){
+    var orderID=$('#myEstimateAmount  #orderID').val();
+    var status='E';
+    
+    if(confirm("are you sure you want to refuse the Estimate Amount?")){
+        $('#myEstimateAmount').modal('hide');
+        updateOrder(orderID,"Status,"+status);
+        
+    }else{
+        return false;
+    }
+}
+
+function getFinalAmount(orderId){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                
+                order=jQuery.parseJSON(data);
+                $('#myFinalAmount  #orderIDFinal').val(order.FBID);
+                $('#myFinalAmount  #finalAmountOrderID').val(order.OrderNumber);
+                $('#myFinalAmount  #finalAmountMaterials').val(order.EstAmtMat);
+                $('#myFinalAmount  #finalAmountTime').val(order.EstAmtTime);
+                $('#myFinalAmount  #finalime').val(order.EstTime);
+                
+                //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function acceptFinalAmount(){
+    var orderID=$('#myFinalAmount  #orderIDFinal').val();
+    var status='K';
+    
+    if(confirm("are you sure you want to accept the Final Amount?")){
+        $('#myFinalAmount').modal('hide');
+        updateOrder(orderID,"Status,"+status);
+        
+    }else{
+        return false;
+    }
+}
+
+function refuseEstimateAmount(){
+    var orderID=$('#myFinalAmount  #orderIDFinal').val();
+    var status='I';
+    
+    if(confirm("are you sure you want to refuse the Final Amount?")){
+        $('#myFinalAmount').modal('hide');
+        updateOrder(orderID,"Status,"+status);
+        
+    }else{
+        return false;
+    }
 }
