@@ -166,7 +166,7 @@ class pdfController{
         $_result=$this->registerPathInvoice($_orderID,$_order['FBID']);
         $_updateFields="InvoiceNum,";
         $_arrayFields=explode(",",$_updateFields);
-        $_result=$_orderController->updateOrder($_orderID,$arrayFields)
+        $_result=$_orderController->updateOrder($_orderID,$arrayFields);
         
         return true;
     }

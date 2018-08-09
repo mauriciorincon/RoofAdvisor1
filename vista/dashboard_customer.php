@@ -174,6 +174,31 @@
 					var status=getStatus(dataOrder.Status);
 					var companyName=getCompanyName(dataOrder.CompanyID);
 					var contractorName=gerContractorName(dataOrder.ContractorID);
+					var estimateAmount='';
+					var finalAmount='';
+					var valorTotal=0;
+					if(dataOrder.Status=="F"){
+						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+											'href="#myEstimateAmount" '+
+											'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+					}else{
+						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
+					}
+					if(dataOrder.Status=="J"){
+						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+											'href="#myFinalAmount" '+
+											'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+					}else{
+						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+					}
+					
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -182,8 +207,8 @@
 							status,
 							dataOrder.SchDate,
 							dataOrder.SchTime,
-							dataOrder.ETA,
-							dataOrder.EstAmtMat,
+							estimateAmount,
+							finalAmount,
 							companyName,
 							contractorName,
 							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
@@ -223,14 +248,39 @@
 									var status=getStatus(dataOrder.Status);
 									var companyName="Undefined";
 									var contractorName="Undefined";
+									var estimateAmount='';
+									var finalAmount='';
+									var valorTotal=0;
+									if(dataOrder.Status=="F"){
+										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+															'href="#myEstimateAmount" '+
+															'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+														'</a>';
+									}else{
+										estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+										
+									}
+									if(dataOrder.Status=="J"){
+										valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+										finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+															'href="#myFinalAmount" '+
+															'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+														'</a>';
+									}else{
+										finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+									}
+					
 									$row.find("td:eq(1)").html(requestType);
 									$row.find("td:eq(2)").html(dataOrder.RepAddress);
 									$row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
 									$row.find("td:eq(4)").html(status);
 									$row.find("td:eq(5)").html(dataOrder.SchDate);
 									$row.find("td:eq(6)").html(dataOrder.SchTime);
-									$row.find("td:eq(7)").html(dataOrder.ETA);
-									$row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+									$row.find("td:eq(7)").html(estimateAmount);
+									$row.find("td:eq(8)").html(finalAmount);
 									companyName=getCompanyName(dataOrder.CompanyID);
 									$row.find("td:eq(9)").html(companyName);
 									contractorName=gerContractorName(dataOrder.ContractorID);
@@ -396,8 +446,8 @@
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
-						<th>Est Amt</th>
-                    	<th>Final Amt</th>
+						<th>Estimate Amount</th>
+                    	<th>Final Amount</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
@@ -467,8 +517,35 @@
 								</td> 
 								<td><?php echo $order['SchDate']?></td>                            
 								<td><?php echo $order['SchTime']?></td>
-								<td><?php echo $order['ETA']?></td>                            
-								<td><?php echo $order['EstAmtMat']?></td>
+								<td><?php 
+										if($order['Status']=='F'){
+									?>
+											<a class="btn-warning btn-sm" data-toggle="modal"  
+												href="#myEstimateAmount" 
+												onClick="getEstimateAmount('<?php echo $order['OrderNumber']?>')"> 
+												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo intval($order['EstAmtMat'])+intval($order['EstAmtTime']); ?> 
+											</a>
+									<?php
+										}else{
+											echo intval($order['EstAmtMat'])+intval($order['EstAmtTime']);
+										}
+										
+									?>
+								</td>                            
+								<td><?php 
+										if($order['Status']=='J'){											
+									?>
+										<a class="btn-success btn-sm" data-toggle="modal"  
+												href="#myFinalAmount" 
+												onClick="getFinalAmount('<?php echo $order['OrderNumber']?>')"> 
+												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo intval($order['ActAmtMat'])+intval($order['ActAmtTime']); ?> 
+											</a>
+									<?php
+										}else{
+											echo intval($order['ActAmtMat'])+intval($order['ActAmtTime']);
+										}
+									?>
+								</td>
 								<td><?php if(isset($order['CompanyID'])){
 											if(!isset($this->_userModel)){
 												$this->_userModel=new userModel();
@@ -725,6 +802,58 @@
 			<div class="modal-footer" id="buttonSchedule"> 
 				<button type="button" class="btn-primary btn-sm" onClick="changeSchedule()" >Update Info</button>
 				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myEstimateAmount" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Estimate Amount</h4> 
+			</div> 
+			<div class="modal-body" id="textSchedule"> 
+				<input type="hidden" value="" id="orderID" />
+				<table>
+					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
+					<tr><td>Estimate Amount Materials</td><td><input type="text" value="" id="estimatedAmountMaterials" readonly></td></tr>
+					<tr><td>Estimate Amount Time</td><td><input type="text" value="" id="estimatedAmountTime" readonly></td></tr>
+					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
+				</table>
+			</div> 
+			<div class="modal-footer" id="buttonEstimateAmount"> 
+				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Refuse</button>
+				
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myFinalAmount" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Final Amount</h4> 
+			</div> 
+			<div class="modal-body" id="textSchedule"> 
+				<input type="hidden" value="" id="orderIDFinal" />
+				<table>
+					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
+					<tr><td>Final Amount Materials</td><td><input type="text" value="" id="finalAmountMaterials" readonly></td></tr>
+					<tr><td>Final Amount Time</td><td><input type="text" value="" id="finalAmountTime" readonly></td></tr>
+					<tr><td>Final Time</td><td><input type="text" value="" id="finalime" readonly></td></tr>
+				</table>
+			</div> 
+			<div class="modal-footer" id="buttonEstimateAmount"> 
+				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Refuse</button>
 				
 			</div> 
 		</div> 

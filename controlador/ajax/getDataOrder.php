@@ -9,7 +9,7 @@ $_orderID =$_POST["orderId"];
 
 $_orderController=new orderController();
 $_result=$_orderController->getOrder('OrderNumber',$_orderID);
-
+$_result1= array();
 if(is_null($_result)){
     "Error, no order were found.";
 }else{
@@ -17,17 +17,18 @@ if(is_null($_result)){
     $_company=$_companyCustomerContractorController->getCompanyById($_result['CompanyID']);
 
     if(!is_null($_company)){
-        $_result=array_merge($_result,$_company);
+        $_result1=array_merge($_result1,$_company);
     }
 
     $_customer=$_companyCustomerContractorController->getCustomerById($_result['CustomerID']);
     if(!is_null($_customer)){
-        $_result=array_merge($_result,$_customer);
+        $_result1=array_merge($_result1,$_customer);
     }
     $_contractor=$_companyCustomerContractorController->getContractorById($_result['ContractorID']);
     if(!is_null($_contractor)){
-        $_result=array_merge($_result,$_contractor);
+        $_result1=array_merge($_result1,$_contractor);
     }
+    $_result=array_merge($_result1,$_result);
     
 }
 
