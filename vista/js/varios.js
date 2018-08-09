@@ -2193,8 +2193,8 @@ function acceptFinalAmount(){
     var status='K';
     
     if(confirm("are you sure you want to accept the Final Amount?")){
-        $('#myFinalAmount').modal('hide');
-        updateOrder(orderID,"Status,"+status);
+        $('#myPaymentType').modal('show');
+        //updateOrder(orderID,"Status,"+status);
         
     }else{
         return false;
@@ -2212,4 +2212,40 @@ function refuseEstimateAmount(){
     }else{
         return false;
     }
+}
+
+function selectPaymentType(){
+    var orderID=$('#myFinalAmount  #orderIDFinal').val();
+    var status='K';
+    var paymentType=$('#myPaymentType  #selectPaymnetType').val();
+    
+
+    if(paymentType=="cash" ||paymentType=="check"){
+        $('#myPaymentType').modal('hide');
+        $('#myFinalAmount').modal('hide');
+        updateOrder(orderID,"Status,"+status+",PaymentType,"+paymentType);
+    }else if(paymentType=="online"){
+        var materialsValue=$('#myFinalAmount  #finalAmountMaterials').val();
+        var timeValue=$('#myFinalAmount  #finalAmountTime').val();
+        var total = parseInt(materialsValue) +parseInt(timeValue);
+        var amount_value=total;
+        action_type="pay_invoice_service";
+        if(typeof handler !== undefined){
+            handler.open({
+                name: 'RoofAdvisorz',
+                description: 'pay your service',
+                amount: amount_value
+              });
+        }
+    }
+}
+
+function payOnlineInvoce(stripeID){
+    var orderID=$('#myFinalAmount  #orderIDFinal').val();
+    var status='K';
+    
+    $('#myPaymentType').modal('hide');
+    $('#myFinalAmount').modal('hide');
+    updateOrder(orderID,"Status,"+status+",PaymentType,Online");
+
 }

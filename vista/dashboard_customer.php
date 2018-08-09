@@ -860,7 +860,35 @@
 	</div>
 </div>
 
-
+<div class="modal fade" id="myPaymentType" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">How do you prefer to pay</h4> 
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDPaymentType" />
+				<div class="form-group">
+					<label for="ContStatused">Payment Type</label>
+					<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
+						<option value="cash">Cash</option>
+						<option value="check">Check</option>
+						<option value="online">Online</option>
+					</select>
+				</div>
+				
+			</div> 
+			<div class="modal-footer" id="buttonPaymentType"> 
+				<button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				
+				
+			</div> 
+		</div> 
+	</div>
+</div>
 
 
 
