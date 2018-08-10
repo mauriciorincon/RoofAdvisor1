@@ -181,7 +181,7 @@
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
-											'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -192,7 +192,7 @@
 						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
-											'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -255,7 +255,7 @@
 										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 															'href="#myEstimateAmount" '+
-															'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+															'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 														'</a>';
 									}else{
@@ -266,7 +266,7 @@
 										valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
 										finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 															'href="#myFinalAmount" '+
-															'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+															'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 														'</a>';
 									}else{
@@ -606,27 +606,27 @@
 		<div class="collapse container" id="customerDashProfile1">
                 <div class="form-group">
                     <label class="control-label">First Name</label>
-                    <input  type="text" class="form-control" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" value="<?php echo $_actual_customer['Fname'] ?>" />
+                    <input  type="text" class="form-control" required="required" placeholder="Enter First Name" id="firstCustomerNameProfile" name="firstCustomerNameProfile" value="<?php echo $_actual_customer['Fname'] ?>" />
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  value="<?php echo $_actual_customer['Lname'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter Last Name" id="lastCustomerNameProfile" name="lastCustomerNameProfile"  value="<?php echo $_actual_customer['Lname'] ?>"/>
                 </div>  
                 <div class="form-group">
                     <label class="control-label ">Email</label>
-                    <input type="text" class="form-control" required="required" readonly  placeholder="Enter Email" id="emailValidation" name="emailValidation" value="<?php echo $_actual_customer['Email'] ?>"/>
+                    <input type="text" class="form-control" required="required" readonly  placeholder="Enter Email" id="emailValidationProfile" name="emailValidationProfile" value="<?php echo $_actual_customer['Email'] ?>"/>
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Address</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" value="<?php echo $_actual_customer['Address'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter address" id="customerAddressProfile" name="customerAddressProfile" value="<?php echo $_actual_customer['Address'] ?>"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">City</label>
-                    <input type="text" class="form-control" required="required" placeholder="Enter city" id="customerCity" name="customerCity" value="<?php echo $_actual_customer['City'] ?>"/>
+                    <input type="text" class="form-control" required="required" placeholder="Enter city" id="customerCityProfile" name="customerCityProfile" value="<?php echo $_actual_customer['City'] ?>"/>
                 </div> 
                 <div class="form-group">
 					<label class="control-label">State</label>
-					<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state" value="<?php echo $_actual_customer['State'] ?>">
+					<select id="customerStateProfile" name="customerStateProfile" required="required" class="form-control" placeholder="Select state" value="<?php echo $_actual_customer['State'] ?>">
                             <?php foreach ($_array_state as $key => $value1) { 
 								if(strcmp($_actual_customer['State'],$value1)==0){?>
 									<option value="<?php echo $value1 ?>" selected="selected"><?php echo $value1 ?></option>
@@ -638,11 +638,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Zip code</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode"  value="<?php echo $_actual_customer['ZIP'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter zip code" id="customerZipCodeProfile" name="customerZipCodeProfile"  value="<?php echo $_actual_customer['ZIP'] ?>"/>
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Phone number</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  value="<?php echo $_actual_customer['Phone'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter phone number" id="customerPhoneNumberProfile" name="customerPhoneNumberProfile"  value="<?php echo $_actual_customer['Phone'] ?>"/>
                 </div>  
                 <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
             </div>
@@ -816,7 +816,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Estimate Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textSchedule"> 
+			<div class="modal-body" id="textEstimateAmount"> 
 				<input type="hidden" value="" id="orderID" />
 				<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
