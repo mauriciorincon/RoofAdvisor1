@@ -29,7 +29,11 @@ var handler = StripeCheckout.configure({
                 try {
                     var objStripe=jQuery.parseJSON(http.responseText);
                     if(objStripe.message=='Payment complete.'){
-                        insertOrderCustomer(objStripe.id);
+                        if(action_type=="pay_emergency_service"){
+                            insertOrderCustomer(objStripe.id);
+                        }else if(action_type=="pay_invoice_service"){
+                            payOnlineInvoce(objStripe.id);
+                        }
                         
                     }else{
                         console.log(http.responseText);

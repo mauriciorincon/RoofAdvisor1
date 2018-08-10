@@ -106,7 +106,8 @@ class payingController{
         <button id="customButton" class="btn">Pay your service</button>
         <script>
             var amount_value='.$_amount.';
-            var public_key=\''.$_key.'\'
+            var public_key=\''.$_key.'\';
+            var action_type=\'pay_emergency_service\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';
 
