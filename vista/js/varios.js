@@ -2104,6 +2104,7 @@ function getEstimateAmount(orderId){
                 $('#myEstimateAmount  #estimatedAmountMaterials').val(order.EstAmtMat);
                 $('#myEstimateAmount  #estimatedAmountTime').val(order.EstAmtTime);
                 $('#myEstimateAmount  #estimatedTime').val(order.EstTime);
+                $('#myEstimateAmount  #totalEstimatedAmount').val(parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime));
                 
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
             }else{

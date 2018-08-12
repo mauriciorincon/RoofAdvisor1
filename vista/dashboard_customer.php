@@ -820,9 +820,11 @@
 				<input type="hidden" value="" id="orderID" />
 				<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
+					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
 					<tr><td>Estimate Amount Materials</td><td><input type="text" value="" id="estimatedAmountMaterials" readonly></td></tr>
 					<tr><td>Estimate Amount Time</td><td><input type="text" value="" id="estimatedAmountTime" readonly></td></tr>
-					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
+					<tr><td><b>Total Amount</b></td><td><input type="text" value="" id="totalEstimatedAmount" readonly></td></tr>
+					
 				</table>
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
