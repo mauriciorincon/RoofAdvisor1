@@ -69,27 +69,31 @@ class userController{
     
 
     public function loginCustomer(){
-        $this->_user=$_POST['userClient'];
-        $this->_pass=$_POST['passwordClient'];
+        if(!isset($_POST['userClient']) or !isset($_POST['passwordClient'])){
+            $this->showLoginClient();
+        }else{
+            $this->_user=$_POST['userClient'];
+            $this->_pass=$_POST['passwordClient'];
 
-        $this->_userModel=new userModel();
-        $_result=$this->_userModel->validateCustomer($this->_user,$this->_pass);
-        
-        if(is_array($_result) or gettype($_result)=="object"){
-            if($_result->emailVerified==1){
-                $this->cleanVariables();
-                $_SESSION['loggedin'] = true;
-                $_SESSION['username'] = $_result->displayName;
-                $_SESSION['start'] = time();
-                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-                $_SESSION['email'] = $_result->email;
-                $_SESSION['profile'] = 'customer';
-                $this->dashboardCustomer($this->_user);
-            }else{
-                Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
+            $this->_userModel=new userModel();
+            $_result=$this->_userModel->validateCustomer($this->_user,$this->_pass);
+            
+            if(is_array($_result) or gettype($_result)=="object"){
+                if($_result->emailVerified==1){
+                    $this->cleanVariables();
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_result->displayName;
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                    $_SESSION['email'] = $_result->email;
+                    $_SESSION['profile'] = 'customer';
+                    $this->dashboardCustomer($this->_user);
+                }else{
+                    Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
+                }
+            }elseif(is_string($_result)){
+                Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginClient");
             }
-        }elseif(is_string($_result)){
-            Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginClient");
         }
     }
 

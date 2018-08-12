@@ -600,18 +600,14 @@ function updateDataCompany(){
 }
 
 function updateDataCustomer(customerID){
-
-    
-    var firstCustomerName = $("input#firstCustomerName").val();
-    var lastCustomerName = $("input#lastCustomerName").val();
-    var emailValidation = $("input#emailValidation").val();
+    var firstCustomerName = $("input#firstCustomerNameProfile").val();
+    var lastCustomerName = $("input#lastCustomerNameProfile").val();
+    var emailValidation = $("input#emailValidationProfile").val();
     var customerAddress = $("input#customerAddress").val();
-    var customerCity = $("input#customerCity").val();
-    var customerState = $("select#customerState").val();
-
-    var customerZipCode = $("input#customerZipCode").val();
-    
-    var customerPhoneNumber = $("input#customerPhoneNumber").val();
+    var customerCity = $("input#customerCityProfile").val();
+    var customerState = $("select#customerStateProfile").val();
+    var customerZipCode = $("input#customerZipCodeProfile").val();
+    var customerPhoneNumber = $("input#customerPhoneNumberProfile").val();
     
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerID,"firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,
@@ -2132,13 +2128,13 @@ function acceptEstimateAmount(){
     var orderID=$('#myEstimateAmount  #orderID').val();
     var status='G';
     
-    if(confirm("are you sure you want to accept the Estimate Amount?")){
+    //if(confirm("are you sure you want to accept the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
         updateOrder(orderID,"Status,"+status);
         
-    }else{
-        return false;
-    }
+    //}else{
+    //    return false;
+    //}
 }
 
 function refuseEstimateAmount(){
@@ -2201,7 +2197,7 @@ function acceptFinalAmount(){
     }
 }
 
-function refuseEstimateAmount(){
+function refuseFinalAmount(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='I';
     
