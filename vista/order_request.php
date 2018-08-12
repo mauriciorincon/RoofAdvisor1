@@ -38,9 +38,9 @@
     </div>
     <div id="appfrm1">
     <form role="form">
-     <div>
+     <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
-            <div class="panel-heading">
+            <div id="zip-panel-heading" class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
             </div>
             <div class="panel-body">
@@ -703,13 +703,19 @@
 </div>
 <div id='srvapp1' class="container">
 <div id='srvapps'>
-<div id='srvmapp1'>
+<!--<div id='srvmapp1'>
 <img src='img/roof-build.jpg'>
-</div>
-<span style="font-size:34px;"> <strong>SCHEDULE A PHONE CALL</strong> </span>
+</div>-->
+<span style="font-size:34px;"> <strong>Emergency Roof Repair? Schedule an Appointment? Need a Roof Report?</strong> </span>
 </br></br>
 <p id='srvappph1'>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+This same day, on-demand service for hiring a prescreened service professional to fix a leaky roof before the damage is done.  The same day service you receive and approve the electronic estimate prior to start of work, receive before and after pictures of the repair, GPS tracking, and online payment when the work is complete. RoofAdvisorZ is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofAdvisorZ, you answer 5 questions and a prescreened, local service professional will confirm they are on the way.  That easy!
+</br>
+</br>
+Not an emergency roof repair and want to schedule a repair or estimate? No problem, just answer 5 questions, and a prescreened service professional will confirm the scheduled appointment.
+</br>
+</br>
+Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample.
 </p>
 </div>
 <form role='form'>

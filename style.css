@@ -1247,7 +1247,6 @@ padding-top:35px;
 #srvappph1{
 font-size: 21px;
 font-weight: 400;
-width:600px;
 }
 .dolph1{
 background:#005678;
@@ -1256,6 +1255,7 @@ background:#005678;
 position:absolute;
 z-index:-1;
 right:0px;
+height:95px;
 }
 #login-img{
 position: absolute;
@@ -1399,6 +1399,41 @@ color: #fff;
     margin-top: 10px;
     background-image: url(img/roof.jpg);
 }
+#step1contain{
+    padding-top: 140px;
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+#step-1{
+color:#fff;
+border-radius:13px;
+border-color:#fff;
+background-color: #fa511a4f;
+}
+#zip-panel-heading{
+background-color:#005678;
+border-radius: 13px 13px 0px 0px;
+border-color:#fff;
+}
+.panel-heading{
+border-radius: 13px 13px 0px 0px;
+}
+.panel-body{
+    position:relative;
+    z-index:10000;
+    background-color: #007d8df0;
+    border-radius: 0px 0px 13px 13px;
+}
+.panel{
+position: relative;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1000;
+    background:#fff0;
+    border-radius:13px;
+}
 @media (max-width:1200px){
 #appdiv2{
 margin-left:450px !important;
@@ -1409,3 +1444,4 @@ margin-left:450px !important;
 margin-left:400px !important;
 }
 }
+
