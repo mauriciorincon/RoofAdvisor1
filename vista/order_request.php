@@ -11,6 +11,10 @@
                 <p><small>Create a Work Order</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-2"> 
+                <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled">2.1</a>
+                <p><small>Create a Work Order</small></p>
+			</div>
+			<div class="stepwizard-step col-xs-2"> 
                 <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                 <p><small>Enter Address</small></p>
             </div>
@@ -130,90 +134,249 @@
 				
 					
 				
-				<div class="list-group-item ">
+				<!--<div class="list-group-item ">
 				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
 				</div>
 				<div class="list-group-item ">
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
-						</div>
-						<div class="col-md-6"> 
-							<label class="form-check-label" for="estep3Option1">
-								Flat, Single Ply
-							</label>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option2">
-								Asphalt
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
+							</div>
+							<div class="col-md-6"> 
+								<label class="form-check-label" for="estep3Option1">
+									Flat, Single Ply
 								</label>
+							</div>
 						</div>
-						
-					</div>
 
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option3">
-								Wood Shake/Composite
-								</label>
-						</div>
-						
-					</div>
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
-						</div>
-						<div class="col-md-6">
-							<label class="form-check-label" for="estep3Option4">
-							Metal
-							</label>
-						</div>
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option2">
+									Asphalt
+									</label>
+							</div>
 							
+						</div>
+
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option3">
+									Wood Shake/Composite
+									</label>
+							</div>
+						
+						</div>
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
+							</div>
+							<div class="col-md-6">
+								<label class="form-check-label" for="estep3Option4">
+								Metal
+								</label>
+							</div>
+								
+						</div>
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option5">
+									Tile
+									</label>
+							</div>
+							
+						</div>	
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option5">
+									Do not Know
+									</label>
+							</div>
+						</div>	
+						<label>&nbsp;</label>
+
+				</div>
+                
+				<div class="list-group-item ">
+					<font size="5">&#9314;</font> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
+				</div>
+
+				<div class="list-group-item ">
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep4Option1">Yes</label></div>
 					</div>
+
 					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option5">
-								Tile
-								</label>
-						</div>
-						
-					</div>	
-					<div class="form-group">
-						<div class ="col-md-5">
-						</div>
-						<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
-						</div>
-						<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option5">
-								Do not Know
-								</label>
-						</div>
-						
-					</div>	
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value="No"></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep4Option2">No</label></div>
+					</div>
 					<label>&nbsp;</label>
+				</div>
+
+				<div class="list-group-item ">
+				<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
+				</div>
+
+				<div class="list-group-item ">
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
+					</div>
+
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="2 story"></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
+					</div>
+
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="3 or more"></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
+					</div>
+					<label>&nbsp;</label>
+				</div>
+
+				<div class="list-group-item ">
+					<font size="5">&#9316;</font> <font size="5"><strong>Are you the owner or authorized to make property changes?</strong></font>		
+				</div>
+
+				<div class="list-group-item ">
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option1">Yes</label></div>
+					</div>
+
+					<div class="form-group">
+						<div class ="col-md-5"></div>
+						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option2" value="No"></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option2">No</label></div>
+					</div>
+					<label>&nbsp;</label>
+				</div>-->
+
+                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+            </div>
+
+		</div>
+
+		<div class="panel panel-primary setup-contentOrder" id="step-10">
+			<div class="panel-heading">
+                 <h3 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h3>
+			</div>
+			<div class="panel-body">
+			<div class="list-group-item ">
+				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
+				</div>
+				<div class="list-group-item ">
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
+							</div>
+							<div class="col-md-6"> 
+								<label class="form-check-label" for="estep3Option1">
+									Flat, Single Ply
+								</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option2">
+									Asphalt
+									</label>
+							</div>
+							
+						</div>
+
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option3">
+									Wood Shake/Composite
+									</label>
+							</div>
+						
+						</div>
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
+							</div>
+							<div class="col-md-6">
+								<label class="form-check-label" for="estep3Option4">
+								Metal
+								</label>
+							</div>
+								
+						</div>
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option5">
+									Tile
+									</label>
+							</div>
+							
+						</div>	
+						<div class="form-group">
+							<div class ="col-md-5">
+							</div>
+							<div class ="col-md-1">
+									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
+							</div>
+							<div class="col-md-6">
+									<label class="form-check-label" for="estep3Option5">
+									Do not Know
+									</label>
+							</div>
+						</div>	
+						<label>&nbsp;</label>
 
 				</div>
                 
@@ -282,9 +445,9 @@
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
-            </div>
+			</div>
+		</div>
 
-        </div>
 		
 		<div class="panel panel-primary setup-contentOrder" id="step-3">
             <div class="panel-heading">
