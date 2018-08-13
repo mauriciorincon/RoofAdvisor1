@@ -36,7 +36,7 @@
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
-                <p><small>Paying</small></p>
+                <p><small>Complete Order</small></p>
             </div>
         </div>
     </div>

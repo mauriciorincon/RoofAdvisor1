@@ -200,7 +200,12 @@
 					}else{
 						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
 					}
-					
+					if(companyName==null || companyName==undefined){
+						companyName="Not asigned";
+					}
+					if(contractorName==null || contractorName==undefined){
+						contractorName="Not asigned";
+					}
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
