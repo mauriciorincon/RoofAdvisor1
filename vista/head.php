@@ -73,9 +73,7 @@ if(!isset($_SESSION)) {
 								<a href="#"><i class="fa fa-tumblr"></i></a>	
 							</div>
 							
-						</div>
-<<<<<<< HEAD
-=======
+							</div>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
@@ -93,10 +91,9 @@ if(!isset($_SESSION)) {
 								</ul>
 							</li>
 						</ul>
->>>>>>> b4daf05133c89d397414622abe2c8cf9dc0dcd89
 					</div>
-				</div>
-			</div>
+				</div>					
+						</div>
 			<div class="header-bottom-area">
                           	<div class="container">
 					<div class="row">
@@ -113,7 +110,7 @@ if(!isset($_SESSION)) {
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
 										<li><a href="">PORTFOLIO</a></li>
-<<<<<<< HEAD
+										
 										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
 											<ul>
 												<li><a href="">Blog left Sidebar</a></li>
@@ -205,3 +202,5 @@ if(!isset($_SESSION)) {
             </div>
         </header>
 		<!-- header-area end-->	
+
+										
