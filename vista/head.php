@@ -4,7 +4,6 @@ if(!isset($_SESSION)) {
         session_start(); 
 } 
 ?>
-
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
@@ -109,42 +108,20 @@ if(!isset($_SESSION)) {
 									<ul>
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
-										<li><a href="">PORTFOLIO</a></li>
-										
-										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
-											<ul>
-												<li><a href="">Blog left Sidebar</a></li>
-												<li><a href="">Blog right Sidebar</a></li>
-												<li><a href="">blog details</a></li>
-											</ul>
-										</li>
-									<!--	<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
-=======
-										
-										<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
->>>>>>> b4daf05133c89d397414622abe2c8cf9dc0dcd89
-												<ul>
-													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
-												</ul>
-											</li>-->
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-										<li><a href="?controller=services&accion=showinfo">FAQ</a></li>
+										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
-										<div class="bs-example">
-									
 									</ul>
-					
-                                      			</nav>
-				<ul class="nav navbar-nav navbar-right">
-                                                        <li class="dropdown">
-                                                        <img id="login-img" src="img/login.png">
-                                                                <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-                                                                <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-                                                                        echo $_SESSION['username'];
-                                                                } else{
-                                                                        echo "Login In";
+					  			</nav>
+							<ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <img id="login-img" src="img/login.png">
+                                    <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
+                                    <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
+                                        echo $_SESSION['username'];
+                                                } else{
+                                                echo "Login In";
                                                                 }?></span>
                                                                 <b class="caret"></b></a>
                                                                 <ul class="dropdown-menu">
@@ -162,36 +139,19 @@ if(!isset($_SESSION)) {
 								<div class="mobile-menu">
 									<nav id="mobile-menu">
 										<ul>
-											<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-												<ul>
-													<li><a href="index-2.html">Home 2</a></li>
-													<li><a href="index-3.html">Home 3</a></li>
-												</ul>
-											</li>
-											<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
-=======
+										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
+										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
+										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
+										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
+										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
+										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
+										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
 											<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
->>>>>>> b4daf05133c89d397414622abe2c8cf9dc0dcd89
 												<ul>
 													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
 													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 												</ul>
-											</li>
->>>>>>> 000bc0425ab027e715fd413cc8350eb2e75e89a2
-											<li><a href="about.html">ABOUT US</a></li>
-<<<<<<< HEAD
-											<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-											<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
-										<li><a href="?controller=services&accion=showinfo">FAQ</a></li>
-=======
-											<li><a href="">PORTFOLIO</a></li>
-											<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-											<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
->>>>>>> b4daf05133c89d397414622abe2c8cf9dc0dcd89
-											<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
+										</li>
 										</ul>
 									</nav>
 								</div>
