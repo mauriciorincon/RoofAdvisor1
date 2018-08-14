@@ -28,7 +28,7 @@
 							<div class="service-icon">
 								<i class="fa fa-sun-o"></i>
 							</div>
-							<h3>Plumbing Services</h3>
+							<h3>Emergency Repair</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 							<div class="service-icon">
 								<i class="fa fa-book"></i>
 							</div>
-							<h3>Roof repair </h3>
+							<h3>schedule Rapair </h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 						</div>
 					</div>
@@ -46,64 +46,11 @@
 							<div class="service-icon">
 								<i class="fa fa-ticket"></i>
 							</div>
-							<h3>Quality Roof Materials</h3>
+							<h3>Order roof Report</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center">
-							<div class="service-icon">
-								<i class="fa fa-suitcase"></i>
-							</div>
-							<h3>Doors & Windows</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center">
-							<div class="service-icon">
-								<i class="fa fa-building-o"></i>
-							</div>
-							<h3>Electrician Services </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center ">
-							<div class="service-icon">
-								<i class="fa fa-anchor"></i>
-							</div>
-                            <h3>Tiling & Painting </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center ">
-							<div class="service-icon">
-								<i class="fa fa-tree"></i>
-							</div>
-                            <h3>Wood Flooring </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center ">
-							<div class="service-icon">
-								<i class="fa fa-tachometer"></i>
-							</div>
-                            <h3>Maintenance Services</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-4 hidden-sm custom-width mb-20">
-						<div class="single-service text-center ">
-							<div class="service-icon">
-								<i class="fa fa-compress"></i>
-							</div>
-                            <h3>Central Heating </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
