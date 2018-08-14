@@ -70,7 +70,7 @@
 					<?php echo 'var customerID = "'. $_actual_customer['CustomerID'].'"';?>
 
 					var ref = firebase.database().ref("Orders");
-					ref.orderByChild("CustomerID").equalTo(<?php echo $_actual_customer['CustomerID'] ?>).once("value", function(snapshot) {
+					ref.orderByChild("CustomerID").equalTo(customerID).once("value", function(snapshot) {
 
 						datos=snapshot.val();
 								for(k in datos){
@@ -150,6 +150,8 @@
 						image="open_service_e.png";
 					}else if(fila.Status=='F'){
 						image="open_service_f.png";
+					}else if(fila.Status=='G'){
+						image="open_service_g.png";
 					}else{
 						image="if_sign-error_299045.png";
 					}
@@ -198,7 +200,12 @@
 					}else{
 						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
 					}
-					
+					if(companyName==null || companyName==undefined){
+						companyName="Not asigned";
+					}
+					if(contractorName==null || contractorName==undefined){
+						contractorName="Not asigned";
+					}
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -818,12 +825,68 @@
 			</div> 
 			<div class="modal-body" id="textEstimateAmount"> 
 				<input type="hidden" value="" id="orderID" />
-				<table>
+				<!-- <table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
+					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
 					<tr><td>Estimate Amount Materials</td><td><input type="text" value="" id="estimatedAmountMaterials" readonly></td></tr>
 					<tr><td>Estimate Amount Time</td><td><input type="text" value="" id="estimatedAmountTime" readonly></td></tr>
-					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
-				</table>
+					<tr><td><b>Total Amount</b></td><td><input type="text" value="" id="totalEstimatedAmount" readonly></td></tr>
+					
+				</table>--> 
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="estimatedAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Estimate Amount Materials</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Estimate Amount Time</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
@@ -844,12 +907,65 @@
 			</div> 
 			<div class="modal-body" id="textSchedule"> 
 				<input type="hidden" value="" id="orderIDFinal" />
-				<table>
+				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
 					<tr><td>Final Amount Materials</td><td><input type="text" value="" id="finalAmountMaterials" readonly></td></tr>
 					<tr><td>Final Amount Time</td><td><input type="text" value="" id="finalAmountTime" readonly></td></tr>
 					<tr><td>Final Time</td><td><input type="text" value="" id="finalime" readonly></td></tr>
-				</table>
+				</table>-->
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="totalAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Final Amount Materials</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Final Amount Time</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
@@ -871,12 +987,23 @@
 			<div class="modal-body" id="PaymentType"> 
 				<input type="hidden" value="" id="orderIDPaymentType" />
 				<div class="form-group">
-					<label for="ContStatused">Payment Type</label>
-					<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
+				<label for="ContStatused">Payment Type</label>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="cash" checked>Cash</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="online">Online</label>
+					</div>
+
+					
+					<!--<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
 						<option value="cash">Cash</option>
 						<option value="check">Check</option>
 						<option value="online">Online</option>
-					</select>
+					</select>-->
 				</div>
 				
 			</div> 
