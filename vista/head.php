@@ -109,7 +109,7 @@ if(!isset($_SESSION)) {
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-										<li><a href="?controller=faq1&accion=showinfo">FAQ</a></li>
+										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 									</ul>
@@ -142,7 +142,7 @@ if(!isset($_SESSION)) {
 										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-										<li><a href="?controller=faq1&accion=showinfo">FAQ</a></li>
+										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>

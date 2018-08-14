@@ -1,6 +1,6 @@
 <?php
 
-class faq1Controller{
+class faqController{
 
     function __construct()
 	{		
@@ -8,7 +8,7 @@ class faq1Controller{
     
     public function showinfo(){
 		require_once("vista/head.php");
-		require_once("vista/faq1.php");
+		require_once("vista/faq.php");
 		require_once("vista/footer.php");
     }
     
