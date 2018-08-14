@@ -56,7 +56,7 @@
 							<div class="counter-icon">
 								<i class="fa fa-trophy"></i>
 							</div>
-							<h4 class="counter">20</h4>
+							<h4 class="counter">2000</h4>
 							<p>Project Done</p>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 							<div class="counter-icon">
 								<i class="fa fa-coffee"></i>
 							</div>
-							<h4 class="counter">20</h4>
+							<h4 class="counter">1960</h4>
 							<p>Happy Clients</p>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 							<div class="counter-icon">
 								<i class="fa fa-suitcase"></i>
 							</div>
-							<h4 class="counter">20</h4>
+							<h4 class="counter">2280</h4>
 							<p>Exprience </p>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 							<div class="counter-icon">
 								<i class="fa fa-users"></i>
 							</div>
-							<h4 class="counter">20</h4>
+							<h4 class="counter">45</h4>
 							<p>Business Partners</p>
 						</div>
 					</div>

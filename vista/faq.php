@@ -6,7 +6,7 @@
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
 					  <li><a href="#">home</a></li>
-					  <li class="active">service</li>
+					  <li class="active">FAQ</li>
 					</ol>
 				</div>
 			</div>
