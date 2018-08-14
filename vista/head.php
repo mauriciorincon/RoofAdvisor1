@@ -79,14 +79,14 @@ if(!isset($_SESSION)) {
 								<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
 									echo $_SESSION['username'];
 								} else{
-									echo "Login In";
+									echo "Log In";
 								}?></span>
 								<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
 									<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
 									<li class="divider"></li>
-									<li><a href="?controller=user&accion=logout">Logout</a></li>
+									<li><a href="?controller=user&accion=logout">Log Out</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -111,14 +111,8 @@ if(!isset($_SESSION)) {
 										
 										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
 										<li><a href="">PORTFOLIO</a></li>
-										<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
-											<ul>
-												<li><a href="">Blog left Sidebar</a></li>
-												<li><a href="">Blog right Sidebar</a></li>
-												<li><a href="">blog details</a></li>
-											</ul>
-										</li>
-										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
+										
+										<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
 													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
@@ -126,7 +120,7 @@ if(!isset($_SESSION)) {
 											</li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
-										<li><a href="?controller=contact&accion=showinfo">CONTACT1</a></li>
+										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										<div class="bs-example">
 									
 									</ul>
@@ -140,12 +134,7 @@ if(!isset($_SESSION)) {
 									<nav id="mobile-menu">
 										<ul>
 											<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a>
-												<ul>
-													<li><a href="index-2.html">Home 2</a></li>
-													<li><a href="index-3.html">Home 3</a></li>
-												</ul>
-											</li>
-											<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
+											<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
 													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
@@ -153,16 +142,9 @@ if(!isset($_SESSION)) {
 											</li>
 											<li><a href="about.html">ABOUT US</a></li>
 											<li><a href="">PORTFOLIO</a></li>
-											<li><a href="">BLOG <i class="fa fa-angle-down"></i></a>
-												<ul>
-													<li><a href="#">Blog left Sidebar</a></li>
-													<li><a href="#">Blog right Sidebar</a></li>
-													<li><a href="#">blog details</a></li>
-												</ul>
-											</li>
 											<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
 											<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
-											<li><a href="?controller=contact&accion=showinfo">CONTACT1</a></li>
+											<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 										</ul>
 									</nav>
 								</div>
