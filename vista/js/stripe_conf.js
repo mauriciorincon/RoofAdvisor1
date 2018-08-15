@@ -19,6 +19,7 @@ var handler = StripeCheckout.configure({
         http.open("POST", url, true);
 
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        jsShowWindowLoad('');
 
         //http.setRequestHeader("Content-type", "application/json; charset=utf-8");
         //http.setRequestHeader("Content-length", params.length);
@@ -43,7 +44,7 @@ var handler = StripeCheckout.configure({
                 }
                 
                 
-                
+                jsRemoveWindowLoad('');   
                 //alert(http.responseText);
             }
         }
