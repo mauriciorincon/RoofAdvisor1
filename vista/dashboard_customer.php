@@ -70,7 +70,7 @@
 					<?php echo 'var customerID = "'. $_actual_customer['CustomerID'].'"';?>
 
 					var ref = firebase.database().ref("Orders");
-					ref.orderByChild("CustomerID").equalTo(<?php echo $_actual_customer['CustomerID'] ?>).once("value", function(snapshot) {
+					ref.orderByChild("CustomerID").equalTo(customerID).once("value", function(snapshot) {
 
 						datos=snapshot.val();
 								for(k in datos){
@@ -150,6 +150,8 @@
 						image="open_service_e.png";
 					}else if(fila.Status=='F'){
 						image="open_service_f.png";
+					}else if(fila.Status=='G'){
+						image="open_service_g.png";
 					}else{
 						image="if_sign-error_299045.png";
 					}
@@ -181,7 +183,7 @@
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
-											'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -192,13 +194,18 @@
 						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
-											'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
 						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
 					}
-					
+					if(companyName==null || companyName==undefined){
+						companyName="Not asigned";
+					}
+					if(contractorName==null || contractorName==undefined){
+						contractorName="Not asigned";
+					}
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -255,7 +262,7 @@
 										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 															'href="#myEstimateAmount" '+
-															'onClick="getEstimateAmount("'+dataOrder.OrderNumber+'")"> '+
+															'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 														'</a>';
 									}else{
@@ -266,7 +273,7 @@
 										valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
 										finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 															'href="#myFinalAmount" '+
-															'onClick="getFinalAmount("'+dataOrder.OrderNumber+'")"> '+
+															'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 														'</a>';
 									}else{
@@ -606,27 +613,27 @@
 		<div class="collapse container" id="customerDashProfile1">
                 <div class="form-group">
                     <label class="control-label">First Name</label>
-                    <input  type="text" class="form-control" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" value="<?php echo $_actual_customer['Fname'] ?>" />
+                    <input  type="text" class="form-control" required="required" placeholder="Enter First Name" id="firstCustomerNameProfile" name="firstCustomerNameProfile" value="<?php echo $_actual_customer['Fname'] ?>" />
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  value="<?php echo $_actual_customer['Lname'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter Last Name" id="lastCustomerNameProfile" name="lastCustomerNameProfile"  value="<?php echo $_actual_customer['Lname'] ?>"/>
                 </div>  
                 <div class="form-group">
                     <label class="control-label ">Email</label>
-                    <input type="text" class="form-control" required="required" readonly  placeholder="Enter Email" id="emailValidation" name="emailValidation" value="<?php echo $_actual_customer['Email'] ?>"/>
+                    <input type="text" class="form-control" required="required" readonly  placeholder="Enter Email" id="emailValidationProfile" name="emailValidationProfile" value="<?php echo $_actual_customer['Email'] ?>"/>
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Address</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" value="<?php echo $_actual_customer['Address'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter address" id="customerAddressProfile" name="customerAddressProfile" value="<?php echo $_actual_customer['Address'] ?>"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">City</label>
-                    <input type="text" class="form-control" required="required" placeholder="Enter city" id="customerCity" name="customerCity" value="<?php echo $_actual_customer['City'] ?>"/>
+                    <input type="text" class="form-control" required="required" placeholder="Enter city" id="customerCityProfile" name="customerCityProfile" value="<?php echo $_actual_customer['City'] ?>"/>
                 </div> 
                 <div class="form-group">
 					<label class="control-label">State</label>
-					<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state" value="<?php echo $_actual_customer['State'] ?>">
+					<select id="customerStateProfile" name="customerStateProfile" required="required" class="form-control" placeholder="Select state" value="<?php echo $_actual_customer['State'] ?>">
                             <?php foreach ($_array_state as $key => $value1) { 
 								if(strcmp($_actual_customer['State'],$value1)==0){?>
 									<option value="<?php echo $value1 ?>" selected="selected"><?php echo $value1 ?></option>
@@ -638,11 +645,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Zip code</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode"  value="<?php echo $_actual_customer['ZIP'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter zip code" id="customerZipCodeProfile" name="customerZipCodeProfile"  value="<?php echo $_actual_customer['ZIP'] ?>"/>
                 </div> 
                 <div class="form-group">
                     <label class="control-label">Phone number</label>
-                    <input type="text" class="form-control" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  value="<?php echo $_actual_customer['Phone'] ?>"/>
+                    <input type="text" class="form-control" required="required"  placeholder="Enter phone number" id="customerPhoneNumberProfile" name="customerPhoneNumberProfile"  value="<?php echo $_actual_customer['Phone'] ?>"/>
                 </div>  
                 <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
             </div>
@@ -816,14 +823,70 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Estimate Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textSchedule"> 
+			<div class="modal-body" id="textEstimateAmount"> 
 				<input type="hidden" value="" id="orderID" />
-				<table>
+				<!-- <table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
+					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
 					<tr><td>Estimate Amount Materials</td><td><input type="text" value="" id="estimatedAmountMaterials" readonly></td></tr>
 					<tr><td>Estimate Amount Time</td><td><input type="text" value="" id="estimatedAmountTime" readonly></td></tr>
-					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
-				</table>
+					<tr><td><b>Total Amount</b></td><td><input type="text" value="" id="totalEstimatedAmount" readonly></td></tr>
+					
+				</table>--> 
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="estimatedAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Estimate Amount Materials</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Estimate Amount Time</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
@@ -844,12 +907,65 @@
 			</div> 
 			<div class="modal-body" id="textSchedule"> 
 				<input type="hidden" value="" id="orderIDFinal" />
-				<table>
+				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
 					<tr><td>Final Amount Materials</td><td><input type="text" value="" id="finalAmountMaterials" readonly></td></tr>
 					<tr><td>Final Amount Time</td><td><input type="text" value="" id="finalAmountTime" readonly></td></tr>
 					<tr><td>Final Time</td><td><input type="text" value="" id="finalime" readonly></td></tr>
-				</table>
+				</table>-->
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="totalAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Final Amount Materials</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Final Amount Time</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
@@ -871,12 +987,23 @@
 			<div class="modal-body" id="PaymentType"> 
 				<input type="hidden" value="" id="orderIDPaymentType" />
 				<div class="form-group">
-					<label for="ContStatused">Payment Type</label>
-					<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
+				<label for="ContStatused">Payment Type</label>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="cash" checked>Cash</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="online">Online</label>
+					</div>
+
+					
+					<!--<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
 						<option value="cash">Cash</option>
 						<option value="check">Check</option>
 						<option value="online">Online</option>
-					</select>
+					</select>-->
 				</div>
 				
 			</div> 

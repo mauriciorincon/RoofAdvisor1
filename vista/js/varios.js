@@ -13,9 +13,13 @@ $(document).ready(function() {
     $('#table_orders_customer').DataTable();
     
     $('#table_orders_company').DataTable();
-    step8=$('.stepwizard-step:eq(7)');
+    step8=$('.stepwizard-step:eq(8)');
     if(step8!=undefined){
         step8.hide();
+    }
+    step10=$('.stepwizard-step:eq(2)');
+    if(step10!=undefined){
+        step10.hide();
     }
 } );
 
@@ -600,18 +604,14 @@ function updateDataCompany(){
 }
 
 function updateDataCustomer(customerID){
-
-    
-    var firstCustomerName = $("input#firstCustomerName").val();
-    var lastCustomerName = $("input#lastCustomerName").val();
-    var emailValidation = $("input#emailValidation").val();
+    var firstCustomerName = $("input#firstCustomerNameProfile").val();
+    var lastCustomerName = $("input#lastCustomerNameProfile").val();
+    var emailValidation = $("input#emailValidationProfile").val();
     var customerAddress = $("input#customerAddress").val();
-    var customerCity = $("input#customerCity").val();
-    var customerState = $("select#customerState").val();
-
-    var customerZipCode = $("input#customerZipCode").val();
-    
-    var customerPhoneNumber = $("input#customerPhoneNumber").val();
+    var customerCity = $("input#customerCityProfile").val();
+    var customerState = $("select#customerStateProfile").val();
+    var customerZipCode = $("input#customerZipCodeProfile").val();
+    var customerPhoneNumber = $("input#customerPhoneNumberProfile").val();
     
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerID,"firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,
@@ -957,7 +957,7 @@ $(document).ready(function () {
         }
 
         if(curStepBtn=="step-2"  && isValid==true ){
-            
+            //nextStepWizard = $('div.setup-panelOrder div a[href="#step-10"]').parent().next().children("a");
         }
         if(curStepBtn=="step-3"  && isValid==true ){
             var address=$('#step5Address').val();
@@ -1077,6 +1077,10 @@ $(document).ready(function () {
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
     
+            //if(curStepBtn=="step-10"  && isValid==true ){
+            //    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+            //}
+
         $(".form-group").removeClass("has-error");
         
         if (isValid) {
@@ -1803,18 +1807,18 @@ $("#menu-toggle").click(function(e) {
 
 function showHideSteps(typeService){
     if(typeService=='schedule'){
-        step4=$('.stepwizard-step:eq(3)');
-        step5=$('.stepwizard-step:eq(4)');
-        step8=$('.stepwizard-step:eq(7)');
+        step4=$('.stepwizard-step:eq(4)');
+        step5=$('.stepwizard-step:eq(5)');
+        step8=$('.stepwizard-step:eq(8)');
 
         step4.show();
         step5.show();
         step8.hide();
         $('#step-6 h3').html('Review Scheduled Repair Order Details');
     }else if(typeService=='emergency' || typeService=='roofreport'){
-        step4=$('.stepwizard-step:eq(3)');
-        step5=$('.stepwizard-step:eq(4)');
-        step8=$('.stepwizard-step:eq(7)');
+        step4=$('.stepwizard-step:eq(4)');
+        step5=$('.stepwizard-step:eq(5)');
+        step8=$('.stepwizard-step:eq(8)');
         step4.hide();
         step5.hide();
         step8.show();
@@ -2104,11 +2108,31 @@ function getEstimateAmount(orderId){
                 
                 order=jQuery.parseJSON(data);
                 $('#myEstimateAmount  #orderID').val(order.FBID);
-                $('#myEstimateAmount  #estimatedAmountOrderID').val(order.OrderNumber);
+                /*$('#myEstimateAmount  #estimatedAmountOrderID').val(order.OrderNumber);
                 $('#myEstimateAmount  #estimatedAmountMaterials').val(order.EstAmtMat);
                 $('#myEstimateAmount  #estimatedAmountTime').val(order.EstAmtTime);
                 $('#myEstimateAmount  #estimatedTime').val(order.EstTime);
-                
+                $('#myEstimateAmount  #totalEstimatedAmount').val(parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime));*/
+                 
+                //$row=$("#estimatedAmountTable>tbody>tr:first");
+                $row=$('#estimatedAmountTable tr').eq(1);
+                $row.find("td:eq(1)").html('$'+order.EstAmtMat+'.00');
+                $row.find("td:eq(3)").html('$'+order.EstAmtMat+'.00');
+
+                $row=$('#estimatedAmountTable tr').eq(2);
+                valorHour=order.EstAmtTime/order.EstTime;
+                $row.find("td:eq(1)").html('$'+valorHour+'.00');
+                $row.find("td:eq(2)").html(order.EstTime);
+                $row.find("td:eq(3)").html('$'+order.EstAmtTime+'.00');
+
+                $row=$('#estimatedAmountTable tr').eq(3);
+                $total=parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime);
+                $row.find("td:eq(3)").html('$'+$total+'.00');
+
+                $row=$('#estimatedAmountTable tr').eq(4);
+                $total=parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime);
+                $row.find("td:eq(3)").html('$'+$total+'.00');
+
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
             }else{
                 $('#myMensaje div.modal-body').html(data);
@@ -2132,13 +2156,13 @@ function acceptEstimateAmount(){
     var orderID=$('#myEstimateAmount  #orderID').val();
     var status='G';
     
-    if(confirm("are you sure you want to accept the Estimate Amount?")){
+    //if(confirm("are you sure you want to accept the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
         updateOrder(orderID,"Status,"+status);
         
-    }else{
-        return false;
-    }
+    //}else{
+    //    return false;
+    //}
 }
 
 function refuseEstimateAmount(){
@@ -2164,10 +2188,28 @@ function getFinalAmount(orderId){
                 
                 order=jQuery.parseJSON(data);
                 $('#myFinalAmount  #orderIDFinal').val(order.FBID);
-                $('#myFinalAmount  #finalAmountOrderID').val(order.OrderNumber);
-                $('#myFinalAmount  #finalAmountMaterials').val(order.EstAmtMat);
-                $('#myFinalAmount  #finalAmountTime').val(order.EstAmtTime);
-                $('#myFinalAmount  #finalime').val(order.EstTime);
+                /*$('#myFinalAmount  #finalAmountOrderID').val(order.OrderNumber);
+                $('#myFinalAmount  #finalAmountMaterials').val(order.ActAmtMat);
+                $('#myFinalAmount  #finalAmountTime').val(order.ActAmtTime);
+                $('#myFinalAmount  #finalime').val(order.ActTime);*/
+
+                $row=$('#totalAmountTable tr').eq(1);
+                $row.find("td:eq(1)").html('$'+order.ActAmtMat+'.00');
+                $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
+
+                $row=$('#totalAmountTable tr').eq(2);
+                valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                $row.find("td:eq(1)").html('$'+valorHour);
+                $row.find("td:eq(2)").html(order.ActTime);
+                $row.find("td:eq(3)").html('$'+order.ActAmtTime+'.00');
+
+                $row=$('#totalAmountTable tr').eq(3);
+                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $row.find("td:eq(3)").html('$'+$total+'.00');
+
+                $row=$('#totalAmountTable tr').eq(4);
+                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $row.find("td:eq(3)").html('$'+$total+'.00');
                 
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
             }else{
@@ -2201,7 +2243,7 @@ function acceptFinalAmount(){
     }
 }
 
-function refuseEstimateAmount(){
+function refuseFinalAmount(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='I';
     
@@ -2217,18 +2259,19 @@ function refuseEstimateAmount(){
 function selectPaymentType(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='K';
-    var paymentType=$('#myPaymentType  #selectPaymnetType').val();
-    
+    //var paymentType=$('#myPaymentType  #selectPaymnetType').val();
+    var paymentType=$("input:radio[name='selectPaymnetType']:checked").val();    
 
     if(paymentType=="cash" ||paymentType=="check"){
         $('#myPaymentType').modal('hide');
         $('#myFinalAmount').modal('hide');
         updateOrder(orderID,"Status,"+status+",PaymentType,"+paymentType);
     }else if(paymentType=="online"){
-        var materialsValue=$('#myFinalAmount  #finalAmountMaterials').val();
-        var timeValue=$('#myFinalAmount  #finalAmountTime').val();
-        var total = parseInt(materialsValue) +parseInt(timeValue);
-        var amount_value=total;
+        row=$('#totalAmountTable tr').eq(4);
+        totalValue=row.find("td:eq(3)").html();
+        totalValue=totalValue.replace("$", "");
+        totalValue=totalValue.replace(".00", "");
+        amount_value=totalValue*100;
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
