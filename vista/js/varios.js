@@ -21,6 +21,11 @@ $(document).ready(function() {
     if(step10!=undefined){
         step10.hide();
     }
+    $("body").keypress(function(e) {
+        if (e.which == 13 && !$(e.target).is("textarea")) {
+          return false;
+        }
+      });
 } );
 
 ///////////////////////////////////////////////

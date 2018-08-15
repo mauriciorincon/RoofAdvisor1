@@ -74,10 +74,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Emergency Repair</button>
+									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Emergency Repair</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. 
+								<h4>An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. </h4>
 								</td>
 							</tr>
 						</table>
@@ -93,10 +93,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-success   btn-lg" type="button">Schedule Repair</button>
+									<button class=" btn-success   btn-lg" type="button" style="width:160px">Schedule Repair</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.
+								<h4>A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.</h4>
 								</td>
 							</tr>
 						</table>
@@ -112,10 +112,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Order Roof Report</button>
+									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.
+								<h4>Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
 								</td>
 							</tr>
 						</table>
@@ -306,7 +306,7 @@
 							</div>
 							<div class="col-md-6"> 
 								<label class="form-check-label" for="estep3Option1">
-									Flat, Single Ply
+									<h4><strong>Flat, Single Ply</strong></h4>
 								</label>
 							</div>
 						</div>
@@ -319,7 +319,7 @@
 							</div>
 							<div class="col-md-6">
 									<label class="form-check-label" for="estep3Option2">
-									Asphalt
+									<h4><strong>Asphalt</strong></h4>
 									</label>
 							</div>
 							
@@ -333,7 +333,7 @@
 							</div>
 							<div class="col-md-6">
 									<label class="form-check-label" for="estep3Option3">
-									Wood Shake/Composite
+									<h4><strong>Wood Shake/Composite</strong></h4>
 									</label>
 							</div>
 						
@@ -346,7 +346,7 @@
 							</div>
 							<div class="col-md-6">
 								<label class="form-check-label" for="estep3Option4">
-								Metal
+								<h4><strong>Metal</strong></h4>
 								</label>
 							</div>
 								
@@ -359,7 +359,7 @@
 							</div>
 							<div class="col-md-6">
 									<label class="form-check-label" for="estep3Option5">
-									Tile
+									<h4><strong>Tile</strong></h4>
 									</label>
 							</div>
 							
@@ -372,7 +372,7 @@
 							</div>
 							<div class="col-md-6">
 									<label class="form-check-label" for="estep3Option5">
-									Do not Know
+									<h4><strong>Do not Know</strong></h4>
 									</label>
 							</div>
 						</div>	
@@ -388,13 +388,13 @@
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option1">Yes</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep4Option1"><h4><strong>Yes</strong></h4></label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option2">No</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep4Option2"><h4><strong>No</strong></h4></label></div>
 					</div>
 					<label>&nbsp;</label>
 				</div>
@@ -407,19 +407,19 @@
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option1"><h4><strong>One</strong></h4></label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="2 story"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option2"><h4><strong>Two</strong></h4></label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="3 or more"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep5Option3"><h4><strong>Three or More</strong></h4></label></div>
 					</div>
 					<label>&nbsp;</label>
 				</div>
@@ -432,13 +432,13 @@
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option1">Yes</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option1"><h4><strong>Yes</strong></h4></label></div>
 					</div>
 
 					<div class="form-group">
 						<div class ="col-md-5"></div>
 						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option2">No</label></div>
+						<div class="col-md-6"><label class="form-check-label" for="estep6Option2"><h4><strong>No</strong></h4></label></div>
 					</div>
 					<label>&nbsp;</label>
 				</div>
@@ -480,6 +480,25 @@
 							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 							function initMap1() {
+								////Get lat and long from zipcode
+								geocoder = new google.maps.Geocoder();
+
+								//var address = $('#zipCodeBegin').val();
+								var address = '02201';
+								geocoder.geocode( { 'address': address}, function(results, status) {
+								if (status == 'OK') {
+									map.setCenter(results[0].geometry.location);
+									var marker = new google.maps.Marker({
+										map: map,
+										position: results[0].geometry.location
+									});
+								} else {
+									alert('Geocode was not successful for the following reason: ' + status);
+								}
+								});
+
+								/////////////////////////////////////
+
 								var map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
 								zoom: 7
