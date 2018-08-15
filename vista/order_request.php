@@ -471,7 +471,8 @@
 							width: 100%;  /* The width is the width of the web page */
 						}
                         </style>
-                        
+						
+							
 							<div id="map1"></div>
 
 							<script>
@@ -479,30 +480,23 @@
 							// parameter when you first load the API. For example:
 							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+							var map = null;
+
 							function initMap1() {
-								////Get lat and long from zipcode
-								geocoder = new google.maps.Geocoder();
+								
 
-								//var address = $('#zipCodeBegin').val();
-								var address = '02201';
-								geocoder.geocode( { 'address': address}, function(results, status) {
-								if (status == 'OK') {
-									map.setCenter(results[0].geometry.location);
-									var marker = new google.maps.Marker({
-										map: map,
-										position: results[0].geometry.location
-									});
-								} else {
-									alert('Geocode was not successful for the following reason: ' + status);
-								}
-								});
-
-								/////////////////////////////////////
-
-								var map = new google.maps.Map(document.getElementById('map1'), {
+								map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
 								zoom: 7
 								});
+
+								////Get lat and long from zipcode
+								
+
+								
+								setLocation(map,"")
+								/////////////////////////////////////
+
 								var input = /** @type {!HTMLInputElement} */(
 									document.getElementById('pac-input'));
 
@@ -520,51 +514,51 @@
 								});
 
 								autocomplete.addListener('place_changed', function() {
-								infowindow.close();
-								marker.setVisible(false);
-								var place = autocomplete.getPlace();
-								if (!place.geometry) {
+									infowindow.close();
+									marker.setVisible(false);
+									var place = autocomplete.getPlace();
+									if (!place.geometry) {
 									// User entered the name of a Place that was not suggested and
 									// pressed the Enter key, or the Place Details request failed.
 									window.alert("No details available for input: '" + place.name + "'");
 									return;
-								}
+									}
 
-								// If the place has a geometry, then present it on a map.
-								if (place.geometry.viewport) {
-									map.fitBounds(place.geometry.viewport);
-								} else {
-									map.setCenter(place.geometry.location);
-									map.setZoom(17);  // Why 17? Because it looks good.
-								}
-								marker.setIcon(/** @type {google.maps.Icon} */({
-									url: place.icon,
-									size: new google.maps.Size(71, 71),
-									origin: new google.maps.Point(0, 0),
-									anchor: new google.maps.Point(17, 34),
-									scaledSize: new google.maps.Size(35, 35)
-								}));
-								marker.setPosition(place.geometry.location);
-								marker.setVisible(true);
-								$("#step5Logintud").val(place.geometry.location.lng());
-								$("#step5Latitude").val(place.geometry.location.lat());
-								
-								//console.log(place.geometry.location.lat());
-								//console.log(place.geometry.location.lng());
-								var address = '';
-								if (place.address_components) {
-									address = [
-									(place.address_components[0] && place.address_components[0].short_name || ''),
-									(place.address_components[1] && place.address_components[1].short_name || ''),
-									(place.address_components[2] && place.address_components[2].short_name || '')
-									].join(' ');
-									$('#step5Address').val(address);
-									$('#step5ZipCode').val(place.address_components[7].short_name);
-								}
-								
+									// If the place has a geometry, then present it on a map.
+									if (place.geometry.viewport) {
+										map.fitBounds(place.geometry.viewport);
+									} else {
+										map.setCenter(place.geometry.location);
+										map.setZoom(17);  // Why 17? Because it looks good.
+									}
+									marker.setIcon(/** @type {google.maps.Icon} */({
+										url: place.icon,
+										size: new google.maps.Size(71, 71),
+										origin: new google.maps.Point(0, 0),
+										anchor: new google.maps.Point(17, 34),
+										scaledSize: new google.maps.Size(35, 35)
+									}));
+									marker.setPosition(place.geometry.location);
+									marker.setVisible(true);
+									$("#step5Logintud").val(place.geometry.location.lng());
+									$("#step5Latitude").val(place.geometry.location.lat());
+									
+									//console.log(place.geometry.location.lat());
+									//console.log(place.geometry.location.lng());
+									var address = '';
+									if (place.address_components) {
+										address = [
+										(place.address_components[0] && place.address_components[0].short_name || ''),
+										(place.address_components[1] && place.address_components[1].short_name || ''),
+										(place.address_components[2] && place.address_components[2].short_name || '')
+										].join(' ');
+										$('#step5Address').val(address);
+										$('#step5ZipCode').val(place.address_components[7].short_name);
+									}
+									
 
-								infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-								infowindow.open(map, marker);
+									infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+									infowindow.open(map, marker);
 								});
 
 								// Sets a listener on a radio button to change the filter type on Places
@@ -581,6 +575,33 @@
 								setupClickListener('changetype-establishment', ['establishment']);
 								setupClickListener('changetype-geocode', ['geocode']);*/
 							}
+
+							function setLocation(map,zipcode){
+								//var address = $('#zipCodeBegin').val();
+								var address=zipcode;
+								if(address==undefined || address==""){
+									address = '02201';
+								} 
+								console.log("zipcode: "+address);
+								geocoder = new google.maps.Geocoder();
+								
+								geocoder.geocode( { 'address': address}, function(results, status) {
+								if (status == 'OK') {
+									map.setCenter(results[0].geometry.location);
+									var marker = new google.maps.Marker({
+										map: map,
+										position: results[0].geometry.location
+									});
+								} else {
+									alert('Geocode was not successful for the following reason: ' + status);
+								}
+								});
+							}
+
+							function clearMarkers(map) {
+        						map.clearOverlays();
+      						}
+
 							</script>
 							
 						<script async defer
@@ -599,7 +620,7 @@
             </div>
             <div class="panel-body">
 				<div class="form-group">			
-				<span ><b>Please select the date and time of service. </b></span><input type="text" id="step6date" name="step6date" class="datepicker">Schedule repair service are schedule a week in advance
+				<span ><h4><b>Please select the date and time of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker"><h4><b>Schedule repair service are schedule a week in advance</b></h4>
 				</div>
 					
 				<div class="form-group">
@@ -632,12 +653,12 @@
             <div class="panel-body">
 				<div class="form-group">
 				
-								<label class="control-label" for="exampleRadios5">
-								<b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> 
-								</label>
-								<label class="control-label" for="exampleRadios5">
-								<b>You can select one or the first available will respond to your work order?</b>
-								</label>
+								<!--<label class="control-label" for="exampleRadios5">-->
+								<span ><h4><b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> </h4></span>
+								<!--</label>-->
+								<!--<label class="control-label" for="exampleRadios5">-->
+								<h4><b>You can select one or the first available will respond to your work order?</b></h4>
+								<!--</label>-->
 							
 							
 				</div>

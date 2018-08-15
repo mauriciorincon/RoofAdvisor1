@@ -851,8 +851,10 @@ $(document).ready(function () {
                             $('#answerZipCode').html(data);
                             if (data.indexOf("Sorry")==-1){
                                 $('#firstNextBegin').show();
+                                setLocation(map,zipcode);
                             }else{
                                 $('#firstNextBegin').hide(); 
+                                setLocation(map,zipcode);
                             }
                         }else{
                             $('#answerZipCode').html(data);
@@ -897,7 +899,7 @@ $('#step7ListCompany').on('click', 'a', function(){
     $(this).addClass("active");
 });
 
-//Select one of the company from order
+//Select type order
 $('#step2OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active");
     $(this).addClass("active");
@@ -905,10 +907,63 @@ $('#step2OtypeService').on('click', 'a', function(){
     showHideSteps(type);
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
    $(this).find('button').removeClass("btn-primary").addClass("btn-success");
+   getValueService();
+   showHideElementByService();
    return false;
 });
 
 
+function getValueService(){
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    var fieldValue="";
+    if(RequestType=='emergency' || RequestType=='roofreport'){
+        switch(RequestType){
+            case "emergency":
+                fieldValue="AmountER";
+                break;
+            case "roofreport":
+                fieldValue="AmountReport";
+                break;
+        }
+        jsShowWindowLoad('');
+            $.post( "controlador/ajax/getParameter.php", { "table" : "Parameters","field":fieldValue}, null, "text" )
+            .done(function( data, textStatus, jqXHR ) {
+                if ( console && console.log ) {
+                    var n = data.indexOf("Error");
+                    if(n==-1){
+                        amount_value=data*100;
+                    }else{
+                        amount_value=0;
+                    }
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                }
+            })
+            .fail(function( jqXHR, textStatus, errorThrown ) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud a fallado: " +  textStatus);
+                    result1=false;
+                    jsRemoveWindowLoad('');
+                    return result1;
+                }
+            });
+    }
+
+}
+
+function showHideElementByService(){
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    switch(RequestType){
+        case "roofreport":
+            $('#step8CompanyName').parents('div').eq(1).hide()
+            break;
+        default:
+            $('#step8CompanyName').parents('div').eq(1).show()
+            break;
+    }
+    
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //funtions for register an order

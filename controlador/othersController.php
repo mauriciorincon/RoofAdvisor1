@@ -26,5 +26,11 @@ class othersController{
         return $_result;
 
     }
+
+    public function getParameterValue($table){
+        $this->_othersModel=new othersModel();
+        $_result=$this->_othersModel->getParameterValue($table);
+        return $_result;
+    }
 }
 ?>

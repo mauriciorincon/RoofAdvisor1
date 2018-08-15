@@ -383,7 +383,17 @@
                         break;
                     case "C":
 						orderStatus = "Cancel work";
-                        break;
+						break;
+					case "P":
+						orderStatus = "Report In Progress";
+						break;
+					case "R":
+						orderStatus = "Report In Progress";
+						break;
+					case "S":
+						orderStatus = "Report Complete";
+						break;
+
                     default:
 						orderStatus = "Undefined";
                 }
@@ -515,6 +525,15 @@
 												break;
 											case "C":
 												echo "Cancel work";
+												break;
+											case "P":
+												echo "Report In Progress";
+												break;
+											case "R":
+												echo "Report In Progress";
+												break;
+											case "S":
+												echo "Report Complete";
 												break;
 											default:
 												echo "Undefined";
