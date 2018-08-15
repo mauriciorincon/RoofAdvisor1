@@ -73,23 +73,7 @@ if(!isset($_SESSION)) {
 							</div>
 							
 							</div>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-								<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-									echo $_SESSION['username'];
-								} else{
-									echo "Log In";
-								}?></span>
-								<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-									<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
-									<li class="divider"></li>
-									<li><a href="?controller=user&accion=logout">Log Out</a></li>
-								</ul>
-							</li>
-						</ul>
+						
 					</div>
 				</div>					
 						</div>
@@ -128,7 +112,7 @@ if(!isset($_SESSION)) {
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
                                                                         <li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
                                                                         <li class="divider"></li>
-                                                                        <li><a href="?controller=user&accion=logout">Logout</a></li>
+                                                                        <li><a href="?controller=user&accion=logout">Log Out</a></li>
                                                                 </ul>
                                                         </li>
                                                 </ul>				
@@ -145,7 +129,7 @@ if(!isset($_SESSION)) {
 										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
-										<li class="active"><a href="#">Login <i class="fa fa-angle-down"></i></a>
+										<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
 											<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
 												<ul>
 													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
