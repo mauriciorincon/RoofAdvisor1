@@ -26,5 +26,10 @@ class othersModel extends connection{
         return $result;
 
     }
+
+    public function getParameterValue($table){
+        $result = $this->getDataTable($table);
+        return $result;
+    }
 }
 ?>

@@ -54,7 +54,19 @@ class orderController{
         }else{
             $_scheduleDate="";
         }
-        
+        $_firstStatus="";
+        switch($arrayDataOrder['RequestType']){
+            case "E":
+                $_firstStatus="A";
+                break;
+            case "S":
+                $_firstStatus="A";
+                break;
+            case "R":
+                $_firstStatus="P";
+                break;
+
+        }
         $Order = array(
             "ActAmtMat" => "",
             "ActAmtTime" => "",
@@ -88,7 +100,7 @@ class orderController{
             "Rtype" => $arrayDataOrder['Rtype'],
             "SchDate" => $_scheduleDate,
             "SchTime" => $arrayDataOrder['SchTime'],
-            "Status" => "A",
+            "Status" => "$_firstStatus",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
             "StripeID"=>$arrayDataOrder['id_stripe'],
