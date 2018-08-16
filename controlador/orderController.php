@@ -6,6 +6,8 @@ if(!isset($_SESSION)) {
 
 require_once($_SESSION['application_path']."/modelo/order.class.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
+require_once($_SESSION['application_path']."/controlador/pdfController.php");
+
 
 class orderController{
 
@@ -35,6 +37,7 @@ class orderController{
     }
 
     public function insertOrder($arrayDataOrder){
+        $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
@@ -106,13 +109,20 @@ class orderController{
             "StripeID"=>$arrayDataOrder['id_stripe'],
         );
        // print_r($Order);
-        $result=$this->_orderModel->insertOrder("FBID",$Order);
+        $_result=$this->_orderModel->insertOrder("FBID",$Order);
+        
+        
         if(strpos($_result,'Error')>-1){
-            
+            return null;
         }else{
             $this->updateOrderLastId($_lastOrderNumber);
+            if(strcmp($arrayDataOrder['RequestType'],"E")==0 or strcmp($arrayDataOrder['RequestType'],"R")==0){
+                $_objPDF=new pdfController();
+                $Order['FBID']=$_result->getKey();
+                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value']);
+            }
         }
-        return $result;
+        return $_result." - ".$_result_invoice;
     }
 
     public function getCountRating($field,$value){

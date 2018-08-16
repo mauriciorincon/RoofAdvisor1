@@ -1234,7 +1234,7 @@ $(document).ready(function() {
     
 } );
 
-function insertOrderCustomer(idStripeCharge){
+function insertOrderCustomer(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -1263,11 +1263,14 @@ function insertOrderCustomer(idStripeCharge){
         CompanyID="";
     }
     SchTime=changerHourFormat(SchTime);
+    if(amountValue==undefined){
+        amountValue=0;
+    }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1275,6 +1278,7 @@ function insertOrderCustomer(idStripeCharge){
             
 
             if(n==-1){
+                    
                     window.location.href = "index.php?controller=user&accion=dashboardCustomer";
                     /*$('#textAnswerOrder').html(data+'');
                     $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+email+','+password+',datos)">Continue to Customer Area</button><br><br>');
@@ -2090,9 +2094,9 @@ function vefifyInvoice(orderID){
     });
 }
 
-function generateInvoice(orderID){
+function generateInvoice(orderID,amountValue){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/generateInvoice.php", { "orderID" : orderID}, null, "text" )
+    $.post( "controlador/ajax/generateInvoice.php", { "orderID" : orderID,"amount":amountValue}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");

@@ -32,5 +32,12 @@ class othersController{
         $_result=$this->_othersModel->getParameterValue($table);
         return $_result;
     }
+
+    public function updateParameterValue($table,$field,$value){
+        $this->_othersModel=new othersModel();
+        $_result=$this->_othersModel->updateParameterValue($table,$field,$value);
+        return $_result;
+
+    }
 }
 ?>
