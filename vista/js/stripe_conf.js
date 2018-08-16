@@ -31,8 +31,10 @@ var handler = StripeCheckout.configure({
                     var objStripe=jQuery.parseJSON(http.responseText);
                     if(objStripe.message=='Payment complete.'){
                         if(action_type=="pay_emergency_service"){
-                            insertOrderCustomer(objStripe.id);
+                            jsRemoveWindowLoad('');
+                            insertOrderCustomer(objStripe.id,(amount_value/100));
                         }else if(action_type=="pay_invoice_service"){
+                            jsRemoveWindowLoad('');
                             payOnlineInvoce(objStripe.id);
                         }
                         
@@ -44,7 +46,7 @@ var handler = StripeCheckout.configure({
                 }
                 
                 
-                jsRemoveWindowLoad('');   
+                   
                 //alert(http.responseText);
             }
         }

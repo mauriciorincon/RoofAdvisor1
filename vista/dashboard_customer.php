@@ -38,8 +38,10 @@
 
 			<script>
 				function initialization(){
+					
 					initMap();
 					initMap1();
+					
 				}
 				// Initialize and add the map
 				function initMap() {

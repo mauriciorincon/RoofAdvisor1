@@ -10,22 +10,33 @@ require_once($_SESSION['application_path']."/controlador/othersController.php");
 
 class pdfController{
     
+    private $_orderController=null;
+    private $_otherController=null;
+
     function __construct(){
         
     }
 
-    function paymentConfirmation1($_orderID){
-
-        $_orderController=new orderController();
-        $_order=$_orderController->getOrder("OrderNumber",$_orderID);
+    function paymentConfirmation1($_orderID,$object_order,$_amount=0){
+        
+        $_invoice_number="";
+        $_consecutive_invoice=0;
+        $this->_otherController=new othersController();
+        $this->_orderController=new orderController();
+        if(isset($object_order)){
+            $_order=$object_order;
+        }else{
+            $_order=$this->_orderController->getOrder("OrderNumber",$_orderID);
+        }
+        
 
         if(is_null($_order)){
-            echo "The order number no exists";
+            echo "The order number no exists [$_orderID]";
             return;
         }
 
         $_companyCustomerController=new userController();
-        $_company=$_companyCustomerController->getCompanyById($_order['CompanyID']);
+        $_company=$_companyCustomerController->getCompanyById("CO000003");
 
         if(is_null($_company)){
             echo "The company no exists";
@@ -38,6 +49,26 @@ class pdfController{
             return;
         }
 
+        $_consecutive_invoice=$this->_otherController->getParameterValue("Parameters/InvoiceNum");
+        
+        if(is_null($_consecutive_invoice) or $_consecutive_invoice==""){
+            $_invoice_number=$_orderID."_10000";
+        }else{
+            $_invoice_number=$_orderID."_".$_consecutive_invoice;
+        }
+
+        
+        $_title_bill="undefined";
+        switch($_order['RequestType']){
+            case "E":
+                $_title_bill="Emergency Roof Service";
+                break;
+            case "R":
+                $_title_bill="Order Roof Report Service";
+                break;
+        }
+
+        $_date_invoice=date('m-d-Y');
         
         /*print_r($_order);
         print_r($_company);
@@ -94,25 +125,25 @@ class pdfController{
         <br>
         <table bgcolor="#dcdfe5">
             <tr>
-                <td><b>Invoice</b></td><td>8690940_A</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
+                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
             </tr>
             <tr>
                 <td><b>Summary</b></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
-                <td colspan="2">Emergency Roof Service</td><td></td><td></td><td></td><td align="rigth">$75,00</td>
+                <td colspan="2">'.$_title_bill.'</td><td></td><td></td><td></td><td align="rigth">$'.$_amount.',00</td>
             </tr>
             <tr>
-                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$75,00</b></td>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_amount.',00</b></td>
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
-                <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">18/01/18</td>
+                <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_invoice.'</td>
             </tr>
             <tr>
-                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$75,00</td>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_amount.',00</td>
             </tr>
             <tr>
                 <td>***Approved***</td><td></td><td></td><td></td><td></td><td align="rigth">XXXXXXXXXXXX5020</td>
@@ -161,19 +192,18 @@ class pdfController{
         $pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf','F'); 
+        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
 
-        $_result=$this->registerPathInvoice($_orderID,$_order['FBID']);
-        $_updateFields="InvoiceNum,";
-        $_arrayFields=explode(",",$_updateFields);
-        $_result=$_orderController->updateOrder($_orderID,$arrayFields);
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID']);
+        
+        $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
         
         return true;
     }
 
     function paymentConfirmation2($_orderID){
-        $_orderController=new orderController();
-        $_order=$_orderController->getOrder("OrderNumber",$_orderID);
+        $this->_orderController=new orderController();
+        $_order=$this->_orderController->getOrder("OrderNumber",$_orderID);
 
         if(is_null($_order)){
             echo "The order number no exists";
@@ -331,8 +361,23 @@ class pdfController{
 
     public function registerPathInvoice($_orderID,$firebaseOrderID){
         $_path=$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf';
-        $_otherController=new othersController();
-        $_result=$_otherController->setInvoicePath($firebaseOrderID,$_orderID,1,$_path);
+        if(is_null($this->_otherController)){
+            $this->_otherController=new othersController();
+        }
+
+        $_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
+        $this->_otherController=new othersController();
+        $_result=$this->_otherController->setInvoicePath($firebaseOrderID,$_orderID,"",$_invoice_data);
+        if(is_null($this->_orderController)){
+            $this->_orderController=new orderController();
+        }
+        $_updateFields="InvoiceNum,$_path";
+        $_arrayFields=explode(",",$_updateFields);
+        //$_result=$this->_orderController->updateOrder($_orderID,$_arrayFields);
+
+        //$_path.="InvoiceNum,".$_path;
+        //$_arrayFields=explode(",",$_path);
+        $_result_order=$this->_orderController->updateOrder($firebaseOrderID,$_arrayFields);
         if($_result==true){
             return true;
         }else{

@@ -26,12 +26,13 @@
 
     
 
-    //$_objPDF=new pdfController();
-    //$_objPDF->paymentConfirmation2("227");
+    $_objPDF=new pdfController();
+    $_objPDF->paymentConfirmation1("313",null,100);
+    
     echo "hola";
-    $_orderModel=new orderModel();
-    $_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
-    echo "Order id: ".$_lastOrderNumber;
+    //$_orderModel=new orderModel();
+    //$_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
+    //echo "Order id: ".$_lastOrderNumber;
 
     /* Send Mail
     $_objMail=new emailController();
