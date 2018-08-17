@@ -842,7 +842,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Estimate Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
 			</div> 
 			<div class="modal-body" id="textEstimateAmount"> 
 				<input type="hidden" value="" id="orderID" />
@@ -859,7 +859,7 @@
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Order summary</strong></h3>
+								<h3 class="panel-title"><strong>Order Summary</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -911,7 +911,7 @@
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
-				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Refuse</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Decline</button>
 				
 			</div> 
 		</div> 
@@ -990,7 +990,7 @@
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
-				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Refuse</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
 				
 			</div> 
 		</div> 

@@ -738,11 +738,11 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-8">
             <div class="panel-heading">
-                 <h3 class="panel-title">Payin the service</h3>
+                 <h3 class="panel-title">Payment Processing/h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label text-center h1"><big>To finish the order please, clic on <b>Pay your service</b> button to make the charge to your card </big></label>
+                    <label class="control-label text-center h1"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
 					<?php
 					if(!isset($_SESSION)) { 
 						session_start(); 

@@ -112,9 +112,9 @@ $(document).ready(function () {
             isValid=validateCodeEmail('Company');
         }*/
     
-        /*if(curStepBtn!="step-3"){
+        if(curStepBtn=="step-1"){
             if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-        }*/
+        }
     });
     
     allPrevBtn.click(function () {
