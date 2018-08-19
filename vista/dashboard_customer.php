@@ -615,11 +615,17 @@
 												 ?>" > 
 										<span class="glyphicon glyphicon-usd"></span>
 									</a>
-											<a class="btn-warning btn-sm" data-toggle="modal"  
+									<a class="btn-primary btn-sm" data-toggle="modal"  
 												href="#myScheduleChange" 
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
-											</a>
+									</a>
+									<a class="btn-warning btn-sm" data-toggle="modal"  
+												href="#myScheduleChange" 
+												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
+												<span class="glyphicon glyphicon-star"></span>
+									</a>
+
 											
 								</td>
 							</tr>
