@@ -620,13 +620,24 @@
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
 									</a>
-									<a class="btn-warning btn-sm" data-toggle="modal"  
-												href="#myRatingScore" 
-												onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
-												<span class="glyphicon glyphicon-star"></span>
-									</a>
-
-											
+									<?php if(strcmp($order['Status'],"S")==0){ ?>
+										<a class="btn-warning btn-sm" data-toggle="modal"  
+													href="#myRatingScore" 
+													onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
+													<span class="glyphicon glyphicon-star"></span>
+										</a>
+									<?php }else{ ?>
+										<a class="btn-default btn-sm" data-toggle="modal"  
+													href="" 
+													onClick="alert('Order must be complete to make rating')" > 
+													<span class="glyphicon glyphicon-star-empty"></span>
+										</a>
+									<?php } ?>
+										<a class="btn-info btn-sm" data-toggle="modal"  
+													href="#myInvoiceInfo" 
+													onClick="" > 
+													<span class="glyphicon glyphicon-list-alt"></span>
+										</a>
 								</td>
 							</tr>
 						<?php } ?>
@@ -1117,5 +1128,21 @@
 	</div>
 </div>
 
-
+<div class="modal fade" id="myInvoiceInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerInvoiceInfo">Invoices Info</h4> 
+			</div> 
+			<div class="modal-body" id="textInvoice"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonInvoice"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 

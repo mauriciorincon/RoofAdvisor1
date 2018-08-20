@@ -2458,7 +2458,7 @@ function setOrderSelected(oderId,FBID){
                     $(".votable").unbind('mouseenter mouseleave');
                     $(".votable > i").unbind('mouseenter mouseleave');
                     $(".voted").unbind('mouseenter mouseleave');
-                    $("#buttonRating").addClass('hide');
+                    $("#buttonRating").hide();
 
                 }else{
                     $("input:radio[name='ratingYesNo'][value='No']").attr('checked','checked');
@@ -2468,7 +2468,7 @@ function setOrderSelected(oderId,FBID){
 
                     $('.voted > i').removeClass('fa-star icon-c').addClass('fa-star-o');
                     $('.voted1 > i').removeClass('fa-star icon-d').addClass('fa-star-o');
-                    $("#buttonRating").removeClass('hide').addClass('show');
+                    $("#buttonRating").show();
                 }
                 
                 console.log(data);
