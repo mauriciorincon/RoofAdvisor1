@@ -2356,3 +2356,172 @@ function payOnlineInvoce(stripeID){
     updateOrder(orderID,"Status,"+status+",PaymentType,Online");
 
 }
+
+//For start rating
+$('.voted').hover(
+    function() {
+        $('.voted').addClass('hide');
+        $('.votable').removeClass('hide');
+    }
+);
+
+$('.votable').on('mouseleave',function(){
+    $('.voted').removeClass('hide');
+    $('.votable').addClass('hide');
+});
+
+$('.votable > i').hover(
+    function() {
+        $(this).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-c');
+        $(this).nextAll().removeClass('fa-star icon-c').addClass('fa-star-o');
+    },
+    function() {
+        $(this).prevAll().addBack().removeClass('fa-star icon-c').addClass('fa-star-o');
+    }
+);
+
+$('.votable > i').click(function(e) {
+    var vote_type = $(this).attr('data-vote-type');
+    var el = $('.voted > i[data-vote-type="' + vote_type + '"]');
+    //alert(vote_type);
+    $('#ratingCompany').html("Rating: "+vote_type);
+    
+    $(el).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-c');
+    $(el).nextAll().removeClass('fa-star icon-c').addClass('fa-star-o');
+});
+
+//For start rating
+$('.voted1').hover(
+    function() {
+        
+        $('.voted1').addClass('hide');
+        $('.votable1').removeClass('hide');
+    }
+);
+
+$('.votable1').on('mouseleave',function(){
+    $('.voted1').removeClass('hide');
+    $('.votable1').addClass('hide');
+});
+
+$('.votable1 > i').hover(
+    function() {
+        $(this).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-d');
+        $(this).nextAll().removeClass('fa-star icon-d').addClass('fa-star-o');
+    },
+    function() {
+        $(this).prevAll().addBack().removeClass('fa-star icon-d').addClass('fa-star-o');
+    }
+);
+
+$('.votable1 > i').click(function(e) {
+    var vote_type = $(this).attr('data-vote-type');
+    var el = $('.voted1 > i[data-vote-type="' + vote_type + '"]');
+    //alert(vote_type);
+    $('#ratingProfessional').html("Rating: "+vote_type);
+
+    $(el).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-d');
+    $(el).nextAll().removeClass('fa-star icon-d').addClass('fa-star-o');
+});
+
+function setOrderSelected(oderId,FBID){
+    $("input#orderIDRating").val(oderId);
+    $("input#orderFBID").val(FBID);
+    $("span#orderRatingId").html(oderId);
+
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getRatingData.php", { "orderID" : FBID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                data=jQuery.parseJSON(data);
+                var keys=Object.keys(data);
+                if(keys!=null && keys.length>0){
+                    $("input:radio[name='ratingYesNo'][value="+data[keys[0]].Recommended+"]").attr('checked','checked');
+                    $('input#ratingObservation').val(data[keys[0]].Comments);
+                    $("label#ratingCompany").html("Rating: "+data[keys[0]].RatingCompany);
+                    $("label#ratingProfessional").html("Rating: "+data[keys[0]].RatingContractor);
+
+                    var el = $('.voted > i[data-vote-type="' + parseInt(data[keys[0]].RatingCompany) + '"]');
+                    $(el).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-c');
+                    $(el).nextAll().removeClass('fa-star icon-c').addClass('fa-star-o');
+
+                    var el = $('.voted1 > i[data-vote-type="' + parseInt(data[keys[0]].RatingContractor) + '"]');
+                    $(el).prevAll().addBack().removeClass('fa-star-o').addClass('fa-star icon-d');
+                    $(el).nextAll().removeClass('fa-star icon-d').addClass('fa-star-o');
+
+                    $(".votable1").unbind('mouseenter mouseleave');
+                    $(".votable1 > i").unbind('mouseenter mouseleave');
+                    $(".voted1").unbind('mouseenter mouseleave');
+
+                    $(".votable").unbind('mouseenter mouseleave');
+                    $(".votable > i").unbind('mouseenter mouseleave');
+                    $(".voted").unbind('mouseenter mouseleave');
+                    $("#buttonRating").addClass('hide');
+
+                }else{
+                    $("input:radio[name='ratingYesNo'][value='No']").attr('checked','checked');
+                    $('input#ratingObservation').val("");
+                    $("label#ratingCompany").html("Rating: 0");
+                    $("label#ratingProfessional").html("Rating: 0");
+
+                    $('.voted > i').removeClass('fa-star icon-c').addClass('fa-star-o');
+                    $('.voted1 > i').removeClass('fa-star icon-d').addClass('fa-star-o');
+                    $("#buttonRating").removeClass('hide').addClass('show');
+                }
+                
+                console.log(data);
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function insertOrderRating(){
+    var orderID=$("input#orderFBID").val();
+    var Recommended=$("input:radio[name='ratingYesNo']:checked").val();
+    var ratingCompany=$("label#ratingCompany").html();
+    var ratingProfessional=$("label#ratingProfessional").html();
+    var observation=$('input#ratingObservation').val();
+
+    ratingCompany = ratingCompany.replace("Rating: ","")+".0";
+    ratingProfessional = ratingProfessional.replace("Rating: ","")+".0";
+
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/insertRating.php", { "orderID" : orderID,"Recommended":Recommended,"RatingCompany":ratingCompany,
+                                                    "RatingContractor":ratingProfessional,"Observation":observation}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                console.log(data);
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}

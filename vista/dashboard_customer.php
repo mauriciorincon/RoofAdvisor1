@@ -621,8 +621,8 @@
 												<span class="glyphicon glyphicon-calendar"></span>
 									</a>
 									<a class="btn-warning btn-sm" data-toggle="modal"  
-												href="#myScheduleChange" 
-												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
+												href="#myRatingScore" 
+												onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
 												<span class="glyphicon glyphicon-star"></span>
 									</a>
 
@@ -1036,6 +1036,79 @@
 			</div> 
 			<div class="modal-footer" id="buttonPaymentType"> 
 				<button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				
+				
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myRatingScore" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDRating" />
+				<input type="hidden" value="" id="orderFBID" />
+				<div class="form-group">
+					<label for="ratingQuestion">Would you like to recommend the service company?</label>
+					<div class="radio">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="Yes" >Yes</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="No">No</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service company?</label>
+					<div class="votable hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<div class="voted">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<i><label id="ratingCompany">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service professional?</label>
+					<div class="votable1 hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<div class="voted1">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<i><label id="ratingProfessional">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">What else would you like others to know?</label>
+					<input type="text" class="form-control" id="ratingObservation" placeholder="What else would you like others to know?"/>
+				</div>
+			<div class="modal-footer" id="buttonPaymentType"> 
+				<button type="button" class="btn-primary btn-sm" id="buttonRating" onClick="insertOrderRating()" >Rating</button>
 				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
 				
 				

@@ -192,3 +192,15 @@
       width: 950px; /* New width for large modal */
     }
 }
+
+
+.icon-c {
+    color: #23f187;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #2473f2;
+}
+.icon-d {
+    color: #ede62f;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #2473f2;
+}
