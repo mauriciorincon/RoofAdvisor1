@@ -365,7 +365,13 @@ class pdfController{
             $this->_otherController=new othersController();
         }
 
-        $_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
+
+        $_invoice_data = [$_orderID=>[
+            'path' => $_path,
+            'user-invoice_num' => $_orderID,
+            'user-orderFBID' => $firebaseOrderID,
+        ]];
+        //$_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
         $this->_otherController=new othersController();
         $_result=$this->_otherController->setInvoicePath($firebaseOrderID,$_orderID,"",$_invoice_data);
         if(is_null($this->_orderController)){

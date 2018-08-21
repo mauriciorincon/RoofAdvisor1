@@ -20,6 +20,7 @@ class orderController{
 
     public function getOrder($field,$value){
         $this->_orderModel=new orderModel();
+        
         $_order=$this->_orderModel->getOrder($field,$value);
         return $_order;
     }
@@ -33,6 +34,12 @@ class orderController{
     public function getOrdersAll(){
         $this->_orderModel=new orderModel();
         $_orders=$this->_orderModel->getOrdersAll();
+        return $_orders;
+    }
+
+    public function getOrderByID($orderID){
+        $this->_orderModel=new orderModel();
+        $_orders=$this->_orderModel->getOrderByID($orderID);
         return $_orders;
     }
 
