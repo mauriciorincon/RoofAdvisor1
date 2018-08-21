@@ -82,7 +82,7 @@ if(!isset($_SESSION)) {
 					<div class="row">
 						<div class="col-lg-3 col-md-2 col-sm-2">
 							<div id="logoimg" class="logo">
-								<a href="index.php"><img src="img/logo.png" alt="" /></a>
+								<a href="index.php"><img id="logo-site" src="img/logo.png" alt="" /></a>
 							</div>
 						</div>
 						<div class="col-lg-9 col-md-10 col-sm-10">
@@ -90,17 +90,17 @@ if(!isset($_SESSION)) {
 							<div class="main-menu text-right hidden-xs">
 								<nav id="navtxt">
 									<ul>
-										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
-										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
-										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
-										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
+										<li class="active"><a href="index.php">HOME&nbsp;&nbsp;</a></li>
+										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US&nbsp;&nbsp;</a></li>
+										<li><a href="?controller=services&accion=showinfo">SERVICE&nbsp;&nbsp;</a></li>
+										<li><a href="?controller=faq&accion=showinfo">FAQ&nbsp;&nbsp;</a></li>
+										<li><a href="?controller=download&accion=showinfo">DOWNLOAD&nbsp;&nbsp;</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 									</ul>
 					  			</nav>
 							<ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <img id="login-img" src="img/login.png">
+                                    <!--<img id="login-img" src="img/login.png">-->
                                     <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
                                     <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
                                         echo $_SESSION['username'];
@@ -108,7 +108,7 @@ if(!isset($_SESSION)) {
                                                 echo "Login In";
                                                                 }?></span>
                                                                 <b class="caret"></b></a>
-                                                                <ul class="dropdown-menu">
+                                                                <ul id="logindrop" class="dropdown-menu">
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
                                                                         <li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
                                                                         <li class="divider"></li>

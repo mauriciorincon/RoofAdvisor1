@@ -918,10 +918,11 @@ This same day, on-demand service for hiring a prescreened service professional t
 Not an emergency roof repair and want to schedule a repair or estimate? No problem, just answer 5 questions, and a prescreened service professional will confirm the scheduled appointment.
 </br>
 </br>
-Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample.
+Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample:
 </p>
+<img  id="howitworks" src="img/howitworks.png">
 </div>
-<form role='form'>
+<!--<form role='form'>
  <div id='srvappsrch1'>
    <input maxlength="100" type="text" required="required" class="form-control input-md" placeholder="Enter your phone number" id="PhoneBegin" name="PhoneBegin">
 </div>
@@ -929,7 +930,7 @@ Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 3
 <img src='img/searchbtn.png'>
 <span id='srvbtnsrch'>SEARCH</span>
 </div>
-</form>
+</form>-->
 </div>
 <div id='cmapp1' class="container">
  <div id='cmapp3'>

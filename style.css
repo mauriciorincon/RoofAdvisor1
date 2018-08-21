@@ -193,12 +193,13 @@ margin-right:140px;
 .main-menu ul li a {
   color:  #fff;
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration:none;
   text-transform:uppercase;
+  letter-spacing: 1px;
 }
- .main-menu ul li:hover > a{color:rgb(243, 188, 22);}
+ .main-menu ul li:hover > a{color:rgb(0, 86, 120);}
  /*sub -menu */
  .main-menu ul li ul {
   background: #fff none repeat scroll 0 0;
@@ -1229,7 +1230,7 @@ label {
 #}
 #appwiz{
 padding-bottom: 26px;
-    padding-top: 30px;
+    padding-top: 5px;
 }
 #srvapp1{
 padding-bottom:i150px;
@@ -1255,19 +1256,27 @@ background:#005678;
 position:absolute;
 z-index:-1;
 right:0px;
-height:95px;
+height:110px;
 }
 #login-img{
-position: absolute;
-margin-top: -30px;
+    position: absolute;
+    margin-top: -40px;
+    right: -126px;
+    width: 240px;
+    max-width:200% !important;
 }
 #login-txt{
-margin-top: -36px;
-    right: -123px;
+margin-top: -55px;
+     right: -87px;
+ font-size:13px;
+background-color: #fa511a;
+    border-radius: 10px;
+    z-index:1000;
+    margin-bottom:20px;
 }
 #navtxt{
-padding-right:50px;
-padding-top:32px;
+padding-right:22%;
+padding-top:40px;
 }
 #socico{
 margin-right:-294px;
@@ -1286,7 +1295,9 @@ color:#fff;
 z-index: 900;
 position: relative;
 }
-
+#logo-site{
+width:293px;
+}
 #appdiv1{
 padding-right: 52%;
 text-align:right;
@@ -1307,6 +1318,7 @@ position: relative;
 }
 #appdl3-tx2{
 font-size: 144px;
+padding-left: 212px;
 }
 #appand1{
     width: 30%;
@@ -1349,6 +1361,7 @@ display:block;
 background-color:#fa511a;
 color:#fff;
 height:400px;
+margin-top: 375px;
 }
 #cmapp2{
 width: 621px;
@@ -1434,6 +1447,19 @@ position: relative;
     background:#fff0;
     border-radius:13px;
 }
+@media (min-width:1700px){
+.main-menu ul li a{
+letter-spacing:3px !important;
+font-size:17px !important;
+}
+}
+@media (min-width:1290px){
+#navtxt{
+padding-right:17% !important;
+padding-top:43px !important;
+padding-bottom:20px !important;
+}
+}
 @media (max-width:1200px){
 #appdiv2{
 margin-left:450px !important;
@@ -1443,5 +1469,17 @@ margin-left:450px !important;
 #appdiv2{
 margin-left:400px !important;
 }
+.nav>li>a:focus, .nav>li>a:hover{
+background-color: #eee0;
 }
-
+#logindrop{
+margin-right: -125px !important;
+    z-index: 10;
+    margin-top: -5px;
+    border-radius: 7px;
+    border-top: 3px solid #dd6741;
+}
+#howitworks{
+    width: 100%;
+    margin-top: 20px;
+}
