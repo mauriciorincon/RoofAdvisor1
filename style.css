@@ -1480,6 +1480,6 @@ margin-right: -125px !important;
     border-top: 3px solid #dd6741;
 }
 #howitworks{
-    width: 100%;
+    width: 100% !important;
     margin-top: 20px;
 }
