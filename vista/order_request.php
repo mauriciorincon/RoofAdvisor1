@@ -299,85 +299,28 @@
 				</div>
 				<div class="list-group-item ">
 						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
-							</div>
-							<div class="col-md-6"> 
-								<label class="form-check-label" for="estep3Option1">
-									<h4><strong>Flat, Single Ply</strong></h4>
-								</label>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option2">
-									<h4><strong>Asphalt</strong></h4>
-									</label>
-							</div>
-							
-						</div>
-
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option3">
-									<h4><strong>Wood Shake/Composite</strong></h4>
-									</label>
-							</div>
 						
-						</div>
-						<div class="form-group">
-							<div class ="col-md-5">
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked><h4><strong>Flat, Single Ply</strong></h4></label>
 							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option2" value="Asphalt"><h4><strong>Asphalt</strong></h4></label>
 							</div>
-							<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option4">
-								<h4><strong>Metal</strong></h4>
-								</label>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite"><h4><strong>Wood Shake/Composite</strong></h4></label>
 							</div>
-								
-						</div>
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option5">
-									<h4><strong>Tile</strong></h4>
-									</label>
-							</div>
-							
-						</div>	
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option5">
-									<h4><strong>Do not Know</strong></h4>
-									</label>
-							</div>
-						</div>	
-						<label>&nbsp;</label>
 
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option4" value="Metal"><h4><strong>Metal</strong></h4></label>
+							</div>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option5" value="Tile"><h4><strong>Tile</strong></h4></label>
+							</div>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option6" value="Do not know"><h4><strong>Do not Know</strong></h4></label>
+							</div>							
+						</div>
+						<label>&nbsp;</label>
 				</div>
                 
 				<div class="list-group-item ">
@@ -386,41 +329,37 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option1"><h4><strong>Yes</strong></h4></label></div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
+						</div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option2" value="No"><h4><strong>No</strong></h4></label>
+						</div>
 					</div>
 
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option2"><h4><strong>No</strong></h4></label></div>
-					</div>
 					<label>&nbsp;</label>
 				</div>
 
 				<div class="list-group-item ">
-				<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
+					<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option1"><h4><strong>One</strong></h4></label></div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked><h4><strong>One</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option2" value="2 story"><h4><strong>Two</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option3" value="3 or more"><h4><strong>Three</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option4" value="3 or more"><h4><strong>More</strong></h4></label>
+						</div>
 					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="2 story"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option2"><h4><strong>Two</strong></h4></label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="3 or more"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option3"><h4><strong>Three or More</strong></h4></label></div>
-					</div>
+					
 					<label>&nbsp;</label>
 				</div>
 
@@ -430,15 +369,12 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option1"><h4><strong>Yes</strong></h4></label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option2"><h4><strong>No</strong></h4></label></div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
+						</div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option2" value="No"><h4><strong>No</strong></h4></label>
+						</div>
 					</div>
 					<label>&nbsp;</label>
 				</div>

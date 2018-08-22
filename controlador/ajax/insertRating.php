@@ -21,7 +21,7 @@ if (is_null($_id_rating)){
     echo "Error, an error ocurred traing to save rating, try again";
 }else{
     if(strpos($_id_rating,'Error')>-1){
-        return   $_id_rating;  
+        echo   $_id_rating;  
     }else{
         echo "Continue, Rating was register correctly";
     }
