@@ -423,7 +423,7 @@
 
 								map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
-								zoom: 7
+								zoom: 12
 								});
 
 								////Get lat and long from zipcode
@@ -730,15 +730,15 @@
 										<label>Password<span class="required">*</span></label>
 										<input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
 									</div>
-									<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br>
+									<button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
 									<label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 									<a href="#">Forgot password?</a>
 									
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
-						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
 					</div>
 					<div class="col-sm-6">
 						<div class="list-group">
@@ -803,7 +803,7 @@
 									<label class="control-label">Phone number</label>
 									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
 								</div>  
-								<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
 							</div>
 							
 						</div>

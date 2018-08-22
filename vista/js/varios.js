@@ -1148,6 +1148,13 @@ $(document).ready(function () {
 
         $(".form-group").removeClass("has-error");
         
+        if (curStepBtn=="step-6"){
+            var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+            if(RequestType=='emergency' || RequestType=='roofreport'){
+                nextStepWizard = $('div.setup-panelOrder div a[href="#step-4"]').parent().prev().children("a");
+            }
+        }
+
         if (isValid) {
         
             nextStepWizard.removeAttr('disabled').trigger('click');

@@ -120,10 +120,11 @@
 					ref.on("child_changed", function(snapshot, prevChildKey) {
 						var updateOrder = snapshot.val();
 						if(updateOrder.CustomerID==customerID){
-							if(validateExist(updateOrder.OrderNumber)==false){
+							row=validateExist(updateOrder.OrderNumber);
+							if(row==-1){
 								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
 							}else{
-								updateOrderOnTable(updateOrder);
+								updateOrderOnTable(updateOrder,row);
 							}
 						}
 						//addOrderToTable(newOrder,companyID);
@@ -243,107 +244,125 @@
 									var oMarket=addMarket(marker,map,dataOrder,infowindow);
 				}
 
-				function updateOrderOnTable(dataOrder){
+				function updateOrderOnTable(dataOrder,numberRow){
 					var value = dataOrder.OrderNumber;
-					$("#table_orders_customer tr").each(function(index) {
-							if (index !== 0) {
-
-								$row = $(this);
-
-								var id = $row.find("td:eq(0)").text();
-								
-								if (id.indexOf(value) === 0) {
-									var requestType=getRequestType(dataOrder.RequestType);
-									var status=getStatus(dataOrder.Status);
-									var companyName="Undefined";
-									var contractorName="Undefined";
-									var estimateAmount='';
-									var finalAmount='';
-									var valorTotal=0;
-									var actions="";
-
-									if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
-										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
-												'href="" '+
-												'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
-												'<span class="glyphicon glyphicon-trash"></span> '+
-											'</a>';
-									}else{
-										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
-												'href="" '+
-												'onClick="alert(\'Order can\'t be cancel\')">'+
-												'<span class="glyphicon glyphicon-trash"></span> '+
-											'</a>';
-									}
-									actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
-												'href="#myPayment" '+
-												'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
-												'<span class="glyphicon glyphicon-usd"></span> '+
-											'</a>';
-									actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
-												'href="#myScheduleChange" '+
-												'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
-												'<span class="glyphicon glyphicon-calendar"></span> '+
-											'</a>';
-									if(dataOrder.Status=="S" || dataOrder.Status=="K"){
-										actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
-													'href="#myRatingScore" '+
-													'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
-													'<span class="glyphicon glyphicon-star"></span>'+
-												'</a>';
-									}else{
-										actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
-													'href="" '+
-													'onClick="alert(\'Order must be complete to make rating\')">'+ 
-													'<span class="glyphicon glyphicon-star-empty"></span>'+
-												'</a>';
-									}
-									actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
-												'href="#myInvoiceInfo" '+
-												'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
-												'<span class="glyphicon glyphicon-list-alt"></span>'+
-											'</a>';
-											
-
-									if(dataOrder.Status=="F"){
-										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
-										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
-															'href="#myEstimateAmount" '+
-															'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
-															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
-														'</a>';
-									}else{
-										estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
-										
-									}
-									if(dataOrder.Status=="J"){
-										valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
-										finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
-															'href="#myFinalAmount" '+
-															'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
-															'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
-														'</a>';
-									}else{
-										finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
-									}
+					var t = $('#table_orders_customer').DataTable();
 					
-									$row.find("td:eq(1)").html(requestType);
-									$row.find("td:eq(2)").html(dataOrder.RepAddress);
-									$row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-									$row.find("td:eq(4)").html(status);
-									$row.find("td:eq(5)").html(dataOrder.SchDate);
-									$row.find("td:eq(6)").html(dataOrder.SchTime);
-									$row.find("td:eq(7)").html(estimateAmount);
-									$row.find("td:eq(8)").html(finalAmount);
-									companyName=getCompanyName(dataOrder.CompanyID);
-									$row.find("td:eq(9)").html(companyName);
-									contractorName=gerContractorName(dataOrder.ContractorID);
-									$row.find("td:eq(10)").html(contractorName);
-									$row.find("td:eq(11)").html(actions);
-								}
-								
-							}
+					var $row = t.row(numberRow);
+
+					
+
+					
+					var requestType=getRequestType(dataOrder.RequestType);
+					var status=getStatus(dataOrder.Status);
+					var companyName="Undefined";
+					var contractorName="Undefined";
+					var estimateAmount='';
+					var finalAmount='';
+					var valorTotal=0;
+					var actions="";
+
+					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+								'href="" '+
+								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+								'<span class="glyphicon glyphicon-trash"></span> '+
+							'</a>';
+					}else{
+						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+								'href="" '+
+								'onClick="alert(\'Order can\'t be cancel\')">'+
+								'<span class="glyphicon glyphicon-trash"></span> '+
+							'</a>';
+					}
+					actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
+								'href="#myPayment" '+
+								'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
+								'<span class="glyphicon glyphicon-usd"></span> '+
+							'</a>';
+					actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+								'href="#myScheduleChange" '+
+								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+								'<span class="glyphicon glyphicon-calendar"></span> '+
+							'</a>';
+					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
+						actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+									'href="#myRatingScore" '+
+									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
+									'<span class="glyphicon glyphicon-star"></span>'+
+								'</a>';
+					}else{
+						actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+									'href="" '+
+									'onClick="alert(\'Order must be complete to make rating\')">'+ 
+									'<span class="glyphicon glyphicon-star-empty"></span>'+
+								'</a>';
+					}
+					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+								'href="#myInvoiceInfo" '+
+								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
+								'<span class="glyphicon glyphicon-list-alt"></span>'+
+							'</a>';
+							
+
+					if(dataOrder.Status=="F"){
+						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+											'href="#myEstimateAmount" '+
+											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+					}else{
+						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
+					}
+					if(dataOrder.Status=="J"){
+						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+											'href="#myFinalAmount" '+
+											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+					}else{
+						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+					}
+					$row.cell($row, 1).data(requestType).draw();
+					$row.cell($row, 2).data(dataOrder.RepAddress).draw();
+					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw();
+					$row.cell($row, 4).data(status).draw();
+					$row.cell($row, 5).data(dataOrder.SchDate).draw();
+					$row.cell($row, 6).data(dataOrder.SchTime).draw();
+					$row.cell($row, 7).data(estimateAmount).draw();
+					$row.cell($row, 8).data(finalAmount).draw();
+					var companyName="";
+					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
+					ref.on('value', function(snapshot) {
+						companyName=snapshot.val();
+						console.log(companyName);
+						$row.cell($row, 9).data(companyName).draw();
+					});
+					//$row.cell($row, 9).data(getCompanyName(dataOrder.CompanyID)).draw();
+
+					var firstName="";
+					var lastName="";
+					var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameFirst");
+						ref.on('value', function(snapshot) {
+							firstName=snapshot.val();
 						});
+					var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameLast");
+						ref.on('value', function(snapshot) {
+							lastName=snapshot.val();
+						});
+					contractorName=firstName+' '+lastName;
+					
+					$row.cell($row, 10).data(contractorName).draw();
+					$row.cell($row, 11).data(actions).draw();
+
+					
+					
+					
+					
+							
 				}
 
 				function removeOrderOnTable(dataOrder){
@@ -361,9 +380,11 @@
 				
 						var value = orderID;
 						var flag=false;
+						var count=-1;
 						$("#table_orders_customer tr").each(function(index) {
+							
 							if (index !== 0) {
-
+								count++;
 								$row = $(this);
 
 								var id = $row.find("td:eq(0)").text();
@@ -377,7 +398,8 @@
 								}
 							}
 						});
-					return flag;
+
+					return count;
 
 				}
 
@@ -453,7 +475,6 @@
 					ref.on('value', function(snapshot) {
 						return snapshot.val();
 					});
-
 			}
 			function gerContractorName(contractorID){
 				var firstName="";
