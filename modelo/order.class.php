@@ -102,6 +102,15 @@ class orderModel extends connection{
     public function updateOrderLastId($orderID){
         $this->updateDataTable("Parameters","LastOrderID",$orderID);
     }
+
+    public function getOrderInvoices($orderID){
+        $result=$this->getDataTable('Invoice/'.$orderID);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }  
+    }
  
 }
 ?>

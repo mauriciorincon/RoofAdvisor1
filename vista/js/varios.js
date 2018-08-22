@@ -906,9 +906,14 @@ $('#step2OtypeService').on('click', 'a', function(){
     var type=$(this).find('input:hidden').val();
     showHideSteps(type);
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
-   $(this).find('button').removeClass("btn-primary").addClass("btn-success");
-   getValueService();
-   showHideElementByService();
+    $(this).find('button').removeClass("btn-primary").addClass("btn-success");
+    getValueService();
+    showHideElementByService();
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+    curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+    nextStepWizard.removeAttr('disabled').trigger('click');
+    curStepWizard.attr('disabled', 'disabled');
+
    return false;
 });
 
@@ -2298,13 +2303,11 @@ function acceptFinalAmount(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='K';
     
-    if(confirm("are you sure you want to accept the Final Amount?")){
+    
         $('#myPaymentType').modal('show');
         //updateOrder(orderID,"Status,"+status);
         
-    }else{
-        return false;
-    }
+    
 }
 
 function refuseFinalAmount(){
@@ -2507,8 +2510,44 @@ function insertOrderRating(){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
+                $('#myRatingScore').modal('hide');
+                
+                $('#headerTextAnswerOrder').html('Rating response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
                 console.log(data);
             }else{
+                $('#headerTextAnswerOrder').html('Rating response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function getInvoices(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myInvoiceInfo #invoiceInfo tbody').html(data);
+                
+                
+                console.log(data);
+            }else{
+                $('#headerTextAnswerOrder').html('Invoice response');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }

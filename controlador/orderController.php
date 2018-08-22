@@ -126,7 +126,7 @@ class orderController{
             if(strcmp($arrayDataOrder['RequestType'],"E")==0 or strcmp($arrayDataOrder['RequestType'],"R")==0){
                 $_objPDF=new pdfController();
                 $Order['FBID']=$_result->getKey();
-                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value']);
+                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe']);
             }
         }
         return $_result." - ".$_result_invoice;
@@ -174,9 +174,15 @@ class orderController{
     }
 
     public function updateOrderLastId($orderId){
+        $this->_orderModel=new orderModel();
         $this->_orderModel->updateOrderLastId($orderId);
     }
 
+    public function getOrderInvoices($orderID){
+        $this->_orderModel=new orderModel();
+        return $this->_orderModel->getOrderInvoices($orderID);
+
+    } 
     
 
 }

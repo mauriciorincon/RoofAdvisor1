@@ -260,6 +260,51 @@
 									var estimateAmount='';
 									var finalAmount='';
 									var valorTotal=0;
+									var actions="";
+
+									if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+												'href="" '+
+												'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+												'<span class="glyphicon glyphicon-trash"></span> '+
+											'</a>';
+									}else{
+										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+												'href="" '+
+												'onClick="alert(\'Order can\'t be cancel\')">'+
+												'<span class="glyphicon glyphicon-trash"></span> '+
+											'</a>';
+									}
+									actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
+												'href="#myPayment" '+
+												'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
+												'<span class="glyphicon glyphicon-usd"></span> '+
+											'</a>';
+									actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+												'href="#myScheduleChange" '+
+												'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+												'<span class="glyphicon glyphicon-calendar"></span> '+
+											'</a>';
+									if(dataOrder.Status=="S" || dataOrder.Status=="K"){
+										actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+													'href="#myRatingScore" '+
+													'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
+													'<span class="glyphicon glyphicon-star"></span>'+
+												'</a>';
+									}else{
+										actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+													'href="" '+
+													'onClick="alert(\'Order must be complete to make rating\')">'+ 
+													'<span class="glyphicon glyphicon-star-empty"></span>'+
+												'</a>';
+									}
+									actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+												'href="#myInvoiceInfo" '+
+												'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
+												'<span class="glyphicon glyphicon-list-alt"></span>'+
+											'</a>';
+											
+
 									if(dataOrder.Status=="F"){
 										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
@@ -294,6 +339,7 @@
 									$row.find("td:eq(9)").html(companyName);
 									contractorName=gerContractorName(dataOrder.ContractorID);
 									$row.find("td:eq(10)").html(contractorName);
+									$row.find("td:eq(11)").html(actions);
 								}
 								
 							}
@@ -599,11 +645,21 @@
 											echo "";
 										}
 									?></td>
-								<td><a class="btn-danger btn-sm" data-toggle="modal"  
-										href="" 
-										onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
-										<span class="glyphicon glyphicon-trash"></span>
-									</a>
+								<td>
+									<?php if(strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0 or strcmp($order['Status'],"P")==0){?>
+
+										<a class="btn-danger btn-sm" data-toggle="modal"  
+											href="" 
+											onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									<?php }else{ ?>
+										<a class="btn-default btn-sm" data-toggle="modal"  
+											href="" 
+											onClick="alert('Order can\'t be cancel')" > 
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									<?php } ?>
 									<a class="btn-success btn-sm" data-toggle="modal"  
 										href="#myPayment" 
 										onClick="<?php 
@@ -637,7 +693,7 @@
 
 										<a class="btn-info btn-sm" data-toggle="modal"  
 													href="#myInvoiceInfo" 
-													onClick="" > 
+													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
 								</td>
@@ -1138,7 +1194,22 @@
 				<h4 class="modal-title" id="headerMyInvoice">Invoice Info</h4> 
 			</div> 
 			<div class="modal-body" id="textMyInvoice"> 
-				<p >Some text in the modal.</p> 
+				<div class="table-responsive">
+					<table class="table table-condensed" id="invoiceInfo">
+						<thead>
+							<tr>
+								<td><strong>Invoice Numbre</strong></td>
+								<td class="text-center"><strong>Price</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>View</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
 			</div> 
 			<div class="modal-footer" id="buttonPayment"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
