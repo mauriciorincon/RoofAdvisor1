@@ -6,6 +6,8 @@ if(!isset($_SESSION)) {
 
 require_once($_SESSION['application_path']."/modelo/order.class.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
+require_once($_SESSION['application_path']."/controlador/pdfController.php");
+
 
 class orderController{
 
@@ -18,6 +20,7 @@ class orderController{
 
     public function getOrder($field,$value){
         $this->_orderModel=new orderModel();
+        
         $_order=$this->_orderModel->getOrder($field,$value);
         return $_order;
     }
@@ -34,7 +37,14 @@ class orderController{
         return $_orders;
     }
 
+    public function getOrderByID($orderID){
+        $this->_orderModel=new orderModel();
+        $_orders=$this->_orderModel->getOrderByID($orderID);
+        return $_orders;
+    }
+
     public function insertOrder($arrayDataOrder){
+        $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
@@ -54,7 +64,19 @@ class orderController{
         }else{
             $_scheduleDate="";
         }
-        
+        $_firstStatus="";
+        switch($arrayDataOrder['RequestType']){
+            case "E":
+                $_firstStatus="A";
+                break;
+            case "S":
+                $_firstStatus="A";
+                break;
+            case "R":
+                $_firstStatus="P";
+                break;
+
+        }
         $Order = array(
             "ActAmtMat" => "",
             "ActAmtTime" => "",
@@ -88,19 +110,26 @@ class orderController{
             "Rtype" => $arrayDataOrder['Rtype'],
             "SchDate" => $_scheduleDate,
             "SchTime" => $arrayDataOrder['SchTime'],
-            "Status" => "A",
+            "Status" => "$_firstStatus",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
             "StripeID"=>$arrayDataOrder['id_stripe'],
         );
        // print_r($Order);
-        $result=$this->_orderModel->insertOrder("FBID",$Order);
+        $_result=$this->_orderModel->insertOrder("FBID",$Order);
+        
+        
         if(strpos($_result,'Error')>-1){
-            
+            return null;
         }else{
             $this->updateOrderLastId($_lastOrderNumber);
+            if(strcmp($arrayDataOrder['RequestType'],"E")==0 or strcmp($arrayDataOrder['RequestType'],"R")==0){
+                $_objPDF=new pdfController();
+                $Order['FBID']=$_result->getKey();
+                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe']);
+            }
         }
-        return $result;
+        return $_result." - ".$_result_invoice;
     }
 
     public function getCountRating($field,$value){
@@ -145,9 +174,15 @@ class orderController{
     }
 
     public function updateOrderLastId($orderId){
+        $this->_orderModel=new orderModel();
         $this->_orderModel->updateOrderLastId($orderId);
     }
 
+    public function getOrderInvoices($orderID){
+        $this->_orderModel=new orderModel();
+        return $this->_orderModel->getOrderInvoices($orderID);
+
+    } 
     
 
 }

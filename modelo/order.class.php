@@ -12,7 +12,10 @@ class orderModel extends connection{
     }
 
     function getOrder($field,$value){
+        //echo "realizo la consulta:".$field." ".$value;
+        //exit();
         $result=$this->getQueryEqual('Orders',$field,$value);
+        
         if(is_array($result)){
             return $result;
         }else{
@@ -39,6 +42,15 @@ class orderModel extends connection{
         }else{
             return null;
         }
+    }
+
+    function getOrderByID($orderID){
+        $result=$this->getDataTable('Orders/'.$orderID);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }   
     }
 
     function insertOrder($id_order,$dataOrder){
@@ -89,6 +101,15 @@ class orderModel extends connection{
 
     public function updateOrderLastId($orderID){
         $this->updateDataTable("Parameters","LastOrderID",$orderID);
+    }
+
+    public function getOrderInvoices($orderID){
+        $result=$this->getDataTable('Invoice/'.$orderID);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }  
     }
  
 }

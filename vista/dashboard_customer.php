@@ -38,8 +38,10 @@
 
 			<script>
 				function initialization(){
+					
 					initMap();
 					initMap1();
+					
 				}
 				// Initialize and add the map
 				function initMap() {
@@ -258,6 +260,51 @@
 									var estimateAmount='';
 									var finalAmount='';
 									var valorTotal=0;
+									var actions="";
+
+									if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+												'href="" '+
+												'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+												'<span class="glyphicon glyphicon-trash"></span> '+
+											'</a>';
+									}else{
+										actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+												'href="" '+
+												'onClick="alert(\'Order can\'t be cancel\')">'+
+												'<span class="glyphicon glyphicon-trash"></span> '+
+											'</a>';
+									}
+									actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
+												'href="#myPayment" '+
+												'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
+												'<span class="glyphicon glyphicon-usd"></span> '+
+											'</a>';
+									actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+												'href="#myScheduleChange" '+
+												'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+												'<span class="glyphicon glyphicon-calendar"></span> '+
+											'</a>';
+									if(dataOrder.Status=="S" || dataOrder.Status=="K"){
+										actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+													'href="#myRatingScore" '+
+													'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
+													'<span class="glyphicon glyphicon-star"></span>'+
+												'</a>';
+									}else{
+										actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+													'href="" '+
+													'onClick="alert(\'Order must be complete to make rating\')">'+ 
+													'<span class="glyphicon glyphicon-star-empty"></span>'+
+												'</a>';
+									}
+									actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+												'href="#myInvoiceInfo" '+
+												'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
+												'<span class="glyphicon glyphicon-list-alt"></span>'+
+											'</a>';
+											
+
 									if(dataOrder.Status=="F"){
 										valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 										estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
@@ -292,6 +339,7 @@
 									$row.find("td:eq(9)").html(companyName);
 									contractorName=gerContractorName(dataOrder.ContractorID);
 									$row.find("td:eq(10)").html(contractorName);
+									$row.find("td:eq(11)").html(actions);
 								}
 								
 							}
@@ -383,7 +431,17 @@
                         break;
                     case "C":
 						orderStatus = "Cancel work";
-                        break;
+						break;
+					case "P":
+						orderStatus = "Report In Progress";
+						break;
+					case "R":
+						orderStatus = "Report In Progress";
+						break;
+					case "S":
+						orderStatus = "Report Complete";
+						break;
+
                     default:
 						orderStatus = "Undefined";
                 }
@@ -516,6 +574,15 @@
 											case "C":
 												echo "Cancel work";
 												break;
+											case "P":
+												echo "Report In Progress";
+												break;
+											case "R":
+												echo "Report In Progress";
+												break;
+											case "S":
+												echo "Report Complete";
+												break;
 											default:
 												echo "Undefined";
 												break;
@@ -578,11 +645,21 @@
 											echo "";
 										}
 									?></td>
-								<td><a class="btn-danger btn-sm" data-toggle="modal"  
-										href="" 
-										onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
-										<span class="glyphicon glyphicon-trash"></span>
-									</a>
+								<td>
+									<?php if(strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0 or strcmp($order['Status'],"P")==0){?>
+
+										<a class="btn-danger btn-sm" data-toggle="modal"  
+											href="" 
+											onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									<?php }else{ ?>
+										<a class="btn-default btn-sm" data-toggle="modal"  
+											href="" 
+											onClick="alert('Order can\'t be cancel')" > 
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									<?php } ?>
 									<a class="btn-success btn-sm" data-toggle="modal"  
 										href="#myPayment" 
 										onClick="<?php 
@@ -594,12 +671,31 @@
 												 ?>" > 
 										<span class="glyphicon glyphicon-usd"></span>
 									</a>
-											<a class="btn-warning btn-sm" data-toggle="modal"  
+									<a class="btn-primary btn-sm" data-toggle="modal"  
 												href="#myScheduleChange" 
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
-											</a>
-											
+									</a>
+									<?php if(strcmp($order['Status'],"S")==0 or strcmp($order['Status'],"K")==0){ ?>
+										<a class="btn-warning btn-sm" data-toggle="modal"  
+													href="#myRatingScore" 
+													onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
+													<span class="glyphicon glyphicon-star"></span>
+										</a>
+									<?php }else{ ?>
+										<a class="btn-default btn-sm" data-toggle="modal"  
+													href="" 
+													onClick="alert('Order must be complete to make rating')" > 
+													<span class="glyphicon glyphicon-star-empty"></span>
+										</a>
+									<?php } ?>
+								
+
+										<a class="btn-info btn-sm" data-toggle="modal"  
+													href="#myInvoiceInfo" 
+													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
+													<span class="glyphicon glyphicon-list-alt"></span>
+										</a>
 								</td>
 							</tr>
 						<?php } ?>
@@ -821,7 +917,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Estimate Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
 			</div> 
 			<div class="modal-body" id="textEstimateAmount"> 
 				<input type="hidden" value="" id="orderID" />
@@ -838,7 +934,7 @@
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Order summary</strong></h3>
+								<h3 class="panel-title"><strong>Order Summary</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -890,7 +986,7 @@
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
-				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Refuse</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Decline</button>
 				
 			</div> 
 		</div> 
@@ -969,7 +1065,7 @@
 			</div> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
-				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Refuse</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
 				
 			</div> 
 		</div> 
@@ -1017,5 +1113,107 @@
 	</div>
 </div>
 
+<div class="modal fade" id="myRatingScore" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDRating" />
+				<input type="hidden" value="" id="orderFBID" />
+				<div class="form-group">
+					<label for="ratingQuestion">Would you like to recommend the service company?</label>
+					<div class="radio">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="Yes" >Yes</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="No">No</label>
+					</div>
+				</div>
 
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service company?</label>
+					<div class="votable hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<div class="voted">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<i><label id="ratingCompany">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service professional?</label>
+					<div class="votable1 hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<div class="voted1">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<i><label id="ratingProfessional">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">What else would you like others to know?</label>
+					<input type="text" class="form-control" id="ratingObservation" placeholder="What else would you like others to know?"/>
+				</div>
+				<div class="modal-footer" id="buttonPaymentType"> 
+					<button type="button" class="btn-primary btn-sm" id="buttonRating" onClick="insertOrderRating()" >Rating</button>
+					<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				</div> 
+			</div>
+		</div> 
+	</div>
+</div>
 
+<div class="modal fade" id="myInvoiceInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyInvoice">Invoice Info</h4> 
+			</div> 
+			<div class="modal-body" id="textMyInvoice"> 
+				<div class="table-responsive">
+					<table class="table table-condensed" id="invoiceInfo">
+						<thead>
+							<tr>
+								<td><strong>Invoice Numbre</strong></td>
+								<td class="text-center"><strong>Price</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>View</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div> 
+			<div class="modal-footer" id="buttonPayment"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

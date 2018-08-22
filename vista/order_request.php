@@ -75,10 +75,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Emergency Repair</button>
+									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Emergency Repair</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. 
+								<h4>An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. </h4>
 								</td>
 							</tr>
 						</table>
@@ -94,10 +94,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-success   btn-lg" type="button">Schedule Repair</button>
+									<button class=" btn-success   btn-lg" type="button" style="width:160px">Schedule Repair</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.
+								<h4>A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.</h4>
 								</td>
 							</tr>
 						</table>
@@ -113,10 +113,10 @@
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button">Order Roof Report</button>
+									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.
+								<h4>Get a detailed roof report for $29 w ithin 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
 								</td>
 							</tr>
 						</table>
@@ -300,85 +300,28 @@
 				</div>
 				<div class="list-group-item ">
 						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
-							</div>
-							<div class="col-md-6"> 
-								<label class="form-check-label" for="estep3Option1">
-									Flat, Single Ply
-								</label>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option2" value="Asphalt">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option2">
-									Asphalt
-									</label>
-							</div>
-							
-						</div>
-
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option3">
-									Wood Shake/Composite
-									</label>
-							</div>
 						
-						</div>
-						<div class="form-group">
-							<div class ="col-md-5">
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked><h4><strong>Flat, Single Ply</strong></h4></label>
 							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option4" value="Metal">
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option2" value="Asphalt"><h4><strong>Asphalt</strong></h4></label>
 							</div>
-							<div class="col-md-6">
-								<label class="form-check-label" for="estep3Option4">
-								Metal
-								</label>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite"><h4><strong>Wood Shake/Composite</strong></h4></label>
 							</div>
-								
-						</div>
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Tile">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option5">
-									Tile
-									</label>
-							</div>
-							
-						</div>	
-						<div class="form-group">
-							<div class ="col-md-5">
-							</div>
-							<div class ="col-md-1">
-									<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option5" value="Do not know">
-							</div>
-							<div class="col-md-6">
-									<label class="form-check-label" for="estep3Option5">
-									Do not Know
-									</label>
-							</div>
-						</div>	
-						<label>&nbsp;</label>
 
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option4" value="Metal"><h4><strong>Metal</strong></h4></label>
+							</div>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option5" value="Tile"><h4><strong>Tile</strong></h4></label>
+							</div>
+							<div class ="col-md-4">
+								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option6" value="Do not know"><h4><strong>Do not Know</strong></h4></label>
+							</div>							
+						</div>
+						<label>&nbsp;</label>
 				</div>
                 
 				<div class="list-group-item ">
@@ -387,41 +330,37 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option1">Yes</label></div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
+						</div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option2" value="No"><h4><strong>No</strong></h4></label>
+						</div>
 					</div>
 
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep4Option" id="estep4Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep4Option2">No</label></div>
-					</div>
 					<label>&nbsp;</label>
 				</div>
 
 				<div class="list-group-item ">
-				<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
+					<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option1">One</label></div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked><h4><strong>One</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option2" value="2 story"><h4><strong>Two</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option3" value="3 or more"><h4><strong>Three</strong></h4></label>
+						</div>
+						<div class ="col-md-3">
+							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option4" value="3 or more"><h4><strong>More</strong></h4></label>
+						</div>
 					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option2" value="2 story"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option2">Two</label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep5Option" id="estep5Option3" value="3 or more"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep5Option3">Three or More</label></div>
-					</div>
+					
 					<label>&nbsp;</label>
 				</div>
 
@@ -431,15 +370,12 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option1">Yes</label></div>
-					</div>
-
-					<div class="form-group">
-						<div class ="col-md-5"></div>
-						<div class ="col-md-1"><input class="form-check-input" type="radio" name="estep6Option" id="estep6Option2" value="No"></div>
-						<div class="col-md-6"><label class="form-check-label" for="estep6Option2">No</label></div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
+						</div>
+						<div class ="col-md-6">
+							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option2" value="No"><h4><strong>No</strong></h4></label>
+						</div>
 					</div>
 					<label>&nbsp;</label>
 				</div>
@@ -472,7 +408,8 @@
 							width: 100%;  /* The width is the width of the web page */
 						}
                         </style>
-                        
+						
+							
 							<div id="map1"></div>
 
 							<script>
@@ -480,11 +417,23 @@
 							// parameter when you first load the API. For example:
 							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+							var map = null;
+
 							function initMap1() {
-								var map = new google.maps.Map(document.getElementById('map1'), {
+								
+
+								map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
 								zoom: 7
 								});
+
+								////Get lat and long from zipcode
+								
+
+								
+								setLocation(map,"")
+								/////////////////////////////////////
+
 								var input = /** @type {!HTMLInputElement} */(
 									document.getElementById('pac-input'));
 
@@ -502,51 +451,51 @@
 								});
 
 								autocomplete.addListener('place_changed', function() {
-								infowindow.close();
-								marker.setVisible(false);
-								var place = autocomplete.getPlace();
-								if (!place.geometry) {
+									infowindow.close();
+									marker.setVisible(false);
+									var place = autocomplete.getPlace();
+									if (!place.geometry) {
 									// User entered the name of a Place that was not suggested and
 									// pressed the Enter key, or the Place Details request failed.
 									window.alert("No details available for input: '" + place.name + "'");
 									return;
-								}
+									}
 
-								// If the place has a geometry, then present it on a map.
-								if (place.geometry.viewport) {
-									map.fitBounds(place.geometry.viewport);
-								} else {
-									map.setCenter(place.geometry.location);
-									map.setZoom(17);  // Why 17? Because it looks good.
-								}
-								marker.setIcon(/** @type {google.maps.Icon} */({
-									url: place.icon,
-									size: new google.maps.Size(71, 71),
-									origin: new google.maps.Point(0, 0),
-									anchor: new google.maps.Point(17, 34),
-									scaledSize: new google.maps.Size(35, 35)
-								}));
-								marker.setPosition(place.geometry.location);
-								marker.setVisible(true);
-								$("#step5Logintud").val(place.geometry.location.lng());
-								$("#step5Latitude").val(place.geometry.location.lat());
-								
-								//console.log(place.geometry.location.lat());
-								//console.log(place.geometry.location.lng());
-								var address = '';
-								if (place.address_components) {
-									address = [
-									(place.address_components[0] && place.address_components[0].short_name || ''),
-									(place.address_components[1] && place.address_components[1].short_name || ''),
-									(place.address_components[2] && place.address_components[2].short_name || '')
-									].join(' ');
-									$('#step5Address').val(address);
-									$('#step5ZipCode').val(place.address_components[7].short_name);
-								}
-								
+									// If the place has a geometry, then present it on a map.
+									if (place.geometry.viewport) {
+										map.fitBounds(place.geometry.viewport);
+									} else {
+										map.setCenter(place.geometry.location);
+										map.setZoom(17);  // Why 17? Because it looks good.
+									}
+									marker.setIcon(/** @type {google.maps.Icon} */({
+										url: place.icon,
+										size: new google.maps.Size(71, 71),
+										origin: new google.maps.Point(0, 0),
+										anchor: new google.maps.Point(17, 34),
+										scaledSize: new google.maps.Size(35, 35)
+									}));
+									marker.setPosition(place.geometry.location);
+									marker.setVisible(true);
+									$("#step5Logintud").val(place.geometry.location.lng());
+									$("#step5Latitude").val(place.geometry.location.lat());
+									
+									//console.log(place.geometry.location.lat());
+									//console.log(place.geometry.location.lng());
+									var address = '';
+									if (place.address_components) {
+										address = [
+										(place.address_components[0] && place.address_components[0].short_name || ''),
+										(place.address_components[1] && place.address_components[1].short_name || ''),
+										(place.address_components[2] && place.address_components[2].short_name || '')
+										].join(' ');
+										$('#step5Address').val(address);
+										$('#step5ZipCode').val(place.address_components[7].short_name);
+									}
+									
 
-								infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-								infowindow.open(map, marker);
+									infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+									infowindow.open(map, marker);
 								});
 
 								// Sets a listener on a radio button to change the filter type on Places
@@ -563,6 +512,33 @@
 								setupClickListener('changetype-establishment', ['establishment']);
 								setupClickListener('changetype-geocode', ['geocode']);*/
 							}
+
+							function setLocation(map,zipcode){
+								//var address = $('#zipCodeBegin').val();
+								var address=zipcode;
+								if(address==undefined || address==""){
+									address = '02201';
+								} 
+								console.log("zipcode: "+address);
+								geocoder = new google.maps.Geocoder();
+								
+								geocoder.geocode( { 'address': address}, function(results, status) {
+								if (status == 'OK') {
+									map.setCenter(results[0].geometry.location);
+									var marker = new google.maps.Marker({
+										map: map,
+										position: results[0].geometry.location
+									});
+								} else {
+									alert('Geocode was not successful for the following reason: ' + status);
+								}
+								});
+							}
+
+							function clearMarkers(map) {
+        						map.clearOverlays();
+      						}
+
 							</script>
 							
 						<script async defer
@@ -581,7 +557,7 @@
             </div>
             <div class="panel-body">
 				<div class="form-group">			
-				<span ><b>Please select the date and time of service. </b></span><input type="text" id="step6date" name="step6date" class="datepicker">Schedule repair service are schedule a week in advance
+				<span ><h4><b>Please select the date and time of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker"><h4><b>Schedule repair service are schedule a week in advance</b></h4>
 				</div>
 					
 				<div class="form-group">
@@ -614,12 +590,12 @@
             <div class="panel-body">
 				<div class="form-group">
 				
-								<label class="control-label" for="exampleRadios5">
-								<b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> 
-								</label>
-								<label class="control-label" for="exampleRadios5">
-								<b>You can select one or the first available will respond to your work order?</b>
-								</label>
+								<!--<label class="control-label" for="exampleRadios5">-->
+								<span ><h4><b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> </h4></span>
+								<!--</label>-->
+								<!--<label class="control-label" for="exampleRadios5">-->
+								<h4><b>You can select one or the first available will respond to your work order?</b></h4>
+								<!--</label>-->
 							
 							
 				</div>
@@ -699,11 +675,11 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-8">
             <div class="panel-heading">
-                 <h3 class="panel-title">Payin the service</h3>
+                 <h3 class="panel-title">Payment Processing/h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label text-center h1"><big>To finish the order please, clic on <b>Pay your service</b> button to make the charge to your card </big></label>
+                    <label class="control-label text-center h1"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
 					<?php
 					if(!isset($_SESSION)) { 
 						session_start(); 

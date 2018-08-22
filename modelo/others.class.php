@@ -22,9 +22,19 @@ class othersModel extends connection{
     }
 
     public function setInvoicePath($firebaseOrderID,$orderId,$transNum,$pathInvoice){
-        $result = $this->updateDataTable("Invoice/".$firebaseOrderID,$orderId."_".$transNum,$pathInvoice);
+        $result = $this->updateDataTable("Invoice/".$firebaseOrderID,$orderId.$transNum,$pathInvoice);
         return $result;
 
+    }
+
+    public function getParameterValue($table){
+        $result = $this->getDataTable($table);
+        return $result;
+    }
+
+    public function updateParameterValue($table,$field,$value){
+        $this->updateDataTable($table,$field,$value);
+        return true;
     }
 }
 ?>

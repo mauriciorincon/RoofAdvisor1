@@ -32,6 +32,11 @@ if(isset($_POST['stripeCharge'])){
 }else{
     $_stripe_chargue="";
 }
+if(isset($_POST['amount_value'])){
+    $_amount_value=$_POST['amount_value'];
+}else{
+    $_amount_value=0;
+}
 
 $_array=array(
     "RepZIP"=>$_POST['RepZIP'],
@@ -48,6 +53,7 @@ $_array=array(
     "Address"=>$_POST['Address'],
     "id_stripe"=>$_stripe_chargue,
     "Authorized"=>$_POST['Authorized'],
+    "amount_value"=>$_amount_value,
 );
 
 
