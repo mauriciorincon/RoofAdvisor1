@@ -105,7 +105,7 @@ if(!isset($_SESSION)) {
                                     <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
                                         echo $_SESSION['username'];
                                                 } else{
-                                                echo "Login In";
+                                                echo "Log In";
                                                                 }?></span>
                                                                 <b class="caret"></b></a>
                                                                 <ul class="dropdown-menu">
