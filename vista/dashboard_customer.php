@@ -127,6 +127,11 @@
 							}else{
 								updateOrderOnTable(updateOrder,row);
 							}
+						}else{
+							row=validateExist(updateOrder.OrderNumber);
+							if(row>-1){
+								removeOrderOnTable(updateOrder);
+							}
 						}
 						//addOrderToTable(newOrder,companyID);
 						console.log("Data: " + updateOrder.OrderNumber);
@@ -179,11 +184,10 @@
 					var t = $('#table_orders_customer').DataTable();
 					var requestType=getRequestType(dataOrder.RequestType);
 					var status=getStatus(dataOrder.Status);
-					var companyName=getCompanyName(dataOrder.CompanyID);
-					var contractorName=gerContractorName(dataOrder.ContractorID);
 					var estimateAmount='';
 					var finalAmount='';
 					var valorTotal=0;
+					var actions="";
 					if(dataOrder.Status=="F"){
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
@@ -205,12 +209,47 @@
 					}else{
 						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
 					}
-					if(companyName==null || companyName==undefined){
-						companyName="Not asigned";
+					
+					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+								'href="" '+
+								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+								'<span class="glyphicon glyphicon-trash"></span> '+
+							'</a>';
+					}else{
+						actions='<a class="btn-default btn-sm" data-toggle="modal" '+  
+									'href="" '+
+									'onClick="alert(\'Order cant be cancel\')">'+
+									'<span class="glyphicon glyphicon-trash"></span> '+
+								'</a>';
 					}
-					if(contractorName==null || contractorName==undefined){
-						contractorName="Not asigned";
+					actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+								'href="#myScheduleChange" '+
+								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+								'<span class="glyphicon glyphicon-calendar"></span> '+
+							'</a>';
+					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
+						actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+									'href="#myRatingScore" '+
+									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
+									'<span class="glyphicon glyphicon-star"></span>'+
+								'</a>';
+					}else{
+						actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+									'href="" '+
+									'onClick="alert(\'Order must be complete to make rating\')">'+ 
+									'<span class="glyphicon glyphicon-star-empty"></span>'+
+								'</a>';
 					}
+					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+								'href="#myInvoiceInfo" '+
+								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
+								'<span class="glyphicon glyphicon-list-alt"></span>'+
+							'</a>';
+					estimateAmount = estimateAmount ? estimateAmount : 0;
+					finalAmount = finalAmount ? finalAmount : 0;
+					getCompanyName(dataOrder.CompanyID,dataOrder.OrderNumber);
+					getContractorName(dataOrder.ContractorID,dataOrder.OrderNumber)
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
@@ -221,14 +260,9 @@
 							dataOrder.SchTime,
 							estimateAmount,
 							finalAmount,
-							companyName,
-							contractorName,
-							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
-							dataOrder.FBID+
-							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
-							
-							'<a class="btn-warning btn-sm" data-toggle="modal" href="#myScheduleChange" onClick="getOrderScheduleDateTime("'+
-							dataOrder.OrderNumber+'"><span class="glyphicon glyphicon-calendar"></span></a>'
+							'',
+							'',
+							actions
 						] ).draw( false );
 						
 					/*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
@@ -341,7 +375,7 @@
 					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
 					ref.on('value', function(snapshot) {
 						companyName=snapshot.val();
-						console.log(companyName);
+						//console.log(companyName);
 						$row.cell($row, 9).data(companyName).draw();
 					});
 					//$row.cell($row, 9).data(getCompanyName(dataOrder.CompanyID)).draw();
@@ -369,7 +403,7 @@
 
 				function removeOrderOnTable(dataOrder){
 					var value = dataOrder.OrderNumber;
-					var t = $('#table_orders_company').DataTable();
+					var t = $('#table_orders_customer').DataTable();
 					t.rows( function ( idx, data, node ) {
 						return data[0] === value;
 					} )
@@ -401,6 +435,9 @@
 							}
 						});
 
+					if(flag==false){
+						count=-1;
+					}
 					return count;
 
 				}
@@ -472,24 +509,41 @@
                 return orderStatus;
 			}
 			
-			function getCompanyName(companyID){
-				var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
-					ref.on('value', function(snapshot) {
-						return snapshot.val();
+			function getCompanyName(companyID,orderID){
+				
+					var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
+					ref.once('value').then(function(snapshot) {
+						//companyName=snapshot.val();
+						$("#table_orders_customer tr:last").find("td:eq(9)").text(snapshot.val());
+						//console.log(companyName);
+
+						//updateOrderInfo(orderID,9,companyName);
+					}, function(error) {
+						// The callback failed.
+						console.error(error);
 					});
+			
+				
 			}
-			function gerContractorName(contractorID){
+			function getContractorName(contractorID,orderID){
 				var firstName="";
 				var lastName="";
-				var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameFirst");
-					ref.on('value', function(snapshot) {
-						firstName=snapshot.val();
-					});
-				var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameLast");
-					ref.on('value', function(snapshot) {
-						lastName=snapshot.val();
-					});
-				return firstName+' '+lastName;
+				var ref = firebase.database().ref("Contractors/"+contractorID);
+					ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							$("#table_orders_customer tr:last").find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+							//updateOrderInfo(orderID,10,data.ContNameFirst+' '+data.ContNameLast);
+						});
+				ref=null;
+					
+			}
+
+			function updateOrderInfo(orderID,fieldNumber,value){
+				row=validateExist(orderID);
+				var t = $('#table_orders_customer').DataTable();	
+				var $row = t.row(row);
+				$row.cell($row, fieldNumber).data(value).draw();
+
 			}
 			</script>
 
