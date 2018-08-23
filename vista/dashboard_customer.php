@@ -109,7 +109,8 @@
 					ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
 						var newOrder = snapshot.val();
 						if(newOrder.CustomerID==customerID){
-							if(validateExist(newOrder.OrderNumber)==false){
+							row=validateExist(newOrder.OrderNumber)
+							if(row==-1){
 								addOrderToTable(newOrder,customerID,map,infowindow,iconBase);
 							}
 						}
@@ -134,8 +135,9 @@
 
 					// Remove orders that are deleted from database
 					ref.on("child_removed", function(snapshot) {
-                    var deletedOrder = snapshot.val();
-                        if(validateExist(deletedOrder.OrderNumber)==true){
+					var deletedOrder = snapshot.val();
+						row=validateExist(deletedOrder.OrderNumber);
+                        if(row>-1){
                             removeOrderOnTable(deletedOrder);
                         }
                     console.log("Data: " + deletedOrder.OrderNumber);
@@ -224,8 +226,7 @@
 							'<a class="btn-danger btn-sm" data-toggle="modal"  href="" onClick="updateOrder("'+
 							dataOrder.FBID+
 							'","Status,C")" > <span class="glyphicon glyphicon-trash"></span></a>'+
-							'<a class="btn-success btn-sm" data-toggle="modal" href="#myPayment" onClick="showChargePayment("'+
-							dataOrder.StripeID+'"><span class="glyphicon glyphicon-usd"></span></a>'+
+							
 							'<a class="btn-warning btn-sm" data-toggle="modal" href="#myScheduleChange" onClick="getOrderScheduleDateTime("'+
 							dataOrder.OrderNumber+'"><span class="glyphicon glyphicon-calendar"></span></a>'
 						] ).draw( false );
@@ -269,17 +270,17 @@
 								'<span class="glyphicon glyphicon-trash"></span> '+
 							'</a>';
 					}else{
-						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
-								'href="" '+
-								'onClick="alert(\'Order can\'t be cancel\')">'+
-								'<span class="glyphicon glyphicon-trash"></span> '+
-							'</a>';
+						actions='<a class="btn-default btn-sm" data-toggle="modal" '+  
+									'href="" '+
+									'onClick="alert(\'Order cant be cancel\')">'+
+									'<span class="glyphicon glyphicon-trash"></span> '+
+								'</a>';
 					}
-					actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
+					/*actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
 								'href="#myPayment" '+
 								'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
 								'<span class="glyphicon glyphicon-usd"></span> '+
-							'</a>';
+							'</a>';*/
 					actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
 								'href="#myScheduleChange" '+
 								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
@@ -332,7 +333,9 @@
 					$row.cell($row, 4).data(status).draw();
 					$row.cell($row, 5).data(dataOrder.SchDate).draw();
 					$row.cell($row, 6).data(dataOrder.SchTime).draw();
+					estimateAmount = estimateAmount ? estimateAmount : 0;
 					$row.cell($row, 7).data(estimateAmount).draw();
+					finalAmount = finalAmount ? finalAmount : 0;
 					$row.cell($row, 8).data(finalAmount).draw();
 					var companyName="";
 					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
@@ -345,17 +348,16 @@
 
 					var firstName="";
 					var lastName="";
-					var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameFirst");
+					//Contractors/CN0008/ContNameFirst
+					//var path="Contractors/"+dataOrder.ContractorID+"/ContNameFirst";
+					var path="Contractors/"+dataOrder.ContractorID;
+					var ref = firebase.database().ref(path);
 						ref.on('value', function(snapshot) {
-							firstName=snapshot.val();
+							data=snapshot.val();
+							$row.cell($row, 10).data(data.ContNameFirst+' '+data.ContNameLast).draw();
 						});
-					var ref = firebase.database().ref("Contractors/"+contractorID+"/ContNameLast");
-						ref.on('value', function(snapshot) {
-							lastName=snapshot.val();
-						});
-					contractorName=firstName+' '+lastName;
 					
-					$row.cell($row, 10).data(contractorName).draw();
+					//$row.cell($row, 10).data(contractorName).draw();
 					$row.cell($row, 11).data(actions).draw();
 
 					
@@ -681,17 +683,11 @@
 											<span class="glyphicon glyphicon-trash"></span>
 										</a>
 									<?php } ?>
-									<a class="btn-success btn-sm" data-toggle="modal"  
+									<!--<a class="btn-success btn-sm" data-toggle="modal"  
 										href="#myPayment" 
-										onClick="<?php 
-												if(isset($order['StripeID'])){
-													echo "showChargePayment('".$order['StripeID']."')";
-												}else{
-													echo "showChargePayment('"."')";
-												}
-												 ?>" > 
+										onClick="" > 
 										<span class="glyphicon glyphicon-usd"></span>
-									</a>
+									</a>-->
 									<a class="btn-primary btn-sm" data-toggle="modal"  
 												href="#myScheduleChange" 
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
