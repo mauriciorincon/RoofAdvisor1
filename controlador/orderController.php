@@ -158,12 +158,26 @@ class orderController{
     }
 
     public function updateOrder($orderID,$arrayFields){
+        $stripeID="";
+        $amount="";
+
         $this->_orderModel=new orderModel();
         
 
         for($n=0;$n<count($arrayFields);$n+=2){
 
             $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+            if(strcmp($arrayFields[$n],"StripeID")==0){
+                $stripeID=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"amount")==0){
+                $amount=$arrayFields[$n+1];
+            }
+
+        }
+        if(!empty($stripeID)){
+            $_objPDF=new pdfController();
+            $_result_invoice=$_objPDF->paymentConfirmation2($orderID,null,$amount,$stripeID);
         }
         if(is_bool($_result)){
             return "The order was update correctly";

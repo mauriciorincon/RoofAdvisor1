@@ -201,9 +201,25 @@ class pdfController{
         return true;
     }
 
-    function paymentConfirmation2($_orderID){
+    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id=""){
+        $_invoice_number="";
+        $_consecutive_invoice=0;
+        $this->_otherController=new othersController();
         $this->_orderController=new orderController();
-        $_order=$this->_orderController->getOrder("OrderNumber",$_orderID);
+        if(isset($object_order)){
+            $_order=$object_order;
+        }else{
+            $_order=$this->_orderController->getOrder("FBID",$_orderID);
+        }
+        
+
+        if(is_null($_orderID)){
+            echo "The order number no exists [$_orderID]";
+            return;
+        }
+
+        $this->_orderController=new orderController();
+        $_order=$this->_orderController->getOrder("FBID",$_orderID);
 
         if(is_null($_order)){
             echo "The order number no exists";
@@ -223,7 +239,14 @@ class pdfController{
             echo "The customer no exists";
             return;
         }
-
+        $_orderID=$_order['OrderNumber'];
+        $_consecutive_invoice=$this->_otherController->getParameterValue("Parameters/InvoiceNum");
+        
+        if(is_null($_consecutive_invoice) or $_consecutive_invoice==""){
+            $_invoice_number=$_orderID."_10000";
+        }else{
+            $_invoice_number=$_orderID."_".$_consecutive_invoice;
+        }
         
         /*print_r($_order);
         print_r($_company);
@@ -350,12 +373,15 @@ class pdfController{
         </table>
         ';
         
-        //$pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
-
+        $pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_v2_'.$_orderID.'.pdf','F'); 
-        $_result=$this->registerPathInvoice($_orderID,$_order['FBID']);
+        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
+
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
+        
+        $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+        
         return true;
     }
 

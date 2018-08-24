@@ -190,6 +190,7 @@
 					var actions="";
 					if(dataOrder.Status=="F"){
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
@@ -197,6 +198,8 @@
 										'</a>';
 					}else{
 						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						estimateAmount = estimateAmount ? estimateAmount : '$0';
+					
 						
 					}
 					if(dataOrder.Status=="J"){
@@ -208,6 +211,7 @@
 										'</a>';
 					}else{
 						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 					
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
@@ -247,14 +251,14 @@
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
 							'</a>';
 					if(dataOrder.RequestType=='E'){
-						dateValue=$row.cell($row, 5).data(dataOrder.ETA.substring(0,10)).draw();
-						timeValue=$row.cell($row, 6).data(dataOrder.ETA.substring(11,20)).draw();
+						dateValue=dataOrder.ETA.substring(0,10);
+						timeValue=dataOrder.ETA.substring(11,20);
 					}else{
-						dateValue=$row.cell($row, 5).data(dataOrder.SchDate).draw();	
-						timeValue=$row.cell($row, 6).data(dataOrder.SchTime).draw();
+						dateValue=dataOrder.SchDate;	
+						timeValue=dataOrder.SchTime;
 					}
-					estimateAmount = estimateAmount ? estimateAmount : 0;
-					finalAmount = finalAmount ? finalAmount : 0;
+					estimateAmount = estimateAmount ? estimateAmount : '$0';
+					finalAmount = finalAmount ? finalAmount : '$0';
 					getCompanyName(dataOrder.CompanyID,dataOrder.OrderNumber);
 					getContractorName(dataOrder.ContractorID,dataOrder.OrderNumber)
 					t.row.add( [
@@ -270,7 +274,7 @@
 							'',
 							'',
 							actions
-						] ).draw( false );
+						] ).draw( );
 						
 					/*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
 					dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
@@ -287,14 +291,17 @@
 				}
 
 				function updateOrderOnTable(dataOrder,numberRow){
-					var value = dataOrder.OrderNumber;
+					var orderID = dataOrder.OrderNumber;
+					//var t = $('#table_orders_customer').DataTable();
+					
+					var value = orderID;
 					var t = $('#table_orders_customer').DataTable();
-					
-					var $row = t.row(numberRow);
+					var row=t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} ).indexes();
 
-					
+					var $row = t.row(row);
 
-					
 					var requestType=getRequestType(dataOrder.RequestType);
 					var status=getStatus(dataOrder.Status);
 					var companyName="Undefined";
@@ -303,7 +310,6 @@
 					var finalAmount='';
 					var valorTotal=0;
 					var actions="";
-
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
 						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
 								'href="" '+
@@ -352,22 +358,76 @@
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
+
 						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
-						
+						estimateAmount = estimateAmount ? estimateAmount : '$0';
 					}
 					if(dataOrder.Status=="J"){
 						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
-						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+						finalAmount=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						finalAmount = finalAmount ? finalAmount : '$0';
 					}
+
+					/*$("#table_orders_customer tr").each(function(index) {
+							
+							if (index !== 0) {
+								$row = $(this);
+								var id = $row.find("td:eq(0)").text();
+								if (id.indexOf(orderID) !== 0) {
+									
+								}
+								else {
+									$row.find("td:eq(1)").text(requestType);
+									$row.find("td:eq(2)").text(dataOrder.RepAddress);
+									$row.find("td:eq(3)").text(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+									$row.find("td:eq(4)").text(status);
+									if(dataOrder.RequestType=='E'){
+										$row.find("td:eq(5)").text(dataOrder.ETA.substring(0,10));
+										$row.find("td:eq(6)").text(dataOrder.ETA.substring(11,20));
+									}else{
+										$row.find("td:eq(5)").text(dataOrder.SchDate);	
+										$row.find("td:eq(6)").text(dataOrder.SchTime);
+									}
+									estimateAmount = estimateAmount ? estimateAmount : '$0';
+									$row.find("td:eq(7)").text(estimateAmount);
+									finalAmount = finalAmount ? finalAmount : '$0';
+									$row.find("td:eq(8)").text(finalAmount);
+									var companyName="";
+									var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
+									ref.on('value', function(snapshot) {
+										companyName=snapshot.val();
+										//console.log(companyName);
+										$row.find("td:eq(9)").text(companyName);
+									});
+									
+									var firstName="";
+									var lastName="";
+									//Contractors/CN0008/ContNameFirst
+									//var path="Contractors/"+dataOrder.ContractorID+"/ContNameFirst";
+									var path="Contractors/"+dataOrder.ContractorID;
+									var ref = firebase.database().ref(path);
+										ref.on('value', function(snapshot) {
+											data=snapshot.val();
+											$row.find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+										});
+									
+									$row.find("td:eq(11)").text(actions);
+									return false;
+								}
+							}
+						});*/
+
+					
+					
 					$row.cell($row, 1).data(requestType).draw();
 					$row.cell($row, 2).data(dataOrder.RepAddress).draw();
 					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw();
@@ -379,9 +439,9 @@
 						$row.cell($row, 5).data(dataOrder.SchDate).draw();	
 						$row.cell($row, 6).data(dataOrder.SchTime).draw();
 					}
-					estimateAmount = estimateAmount ? estimateAmount : 0;
+					estimateAmount = estimateAmount ? estimateAmount : '$0';
 					$row.cell($row, 7).data(estimateAmount).draw();
-					finalAmount = finalAmount ? finalAmount : 0;
+					finalAmount = finalAmount ? finalAmount : '$0';
 					$row.cell($row, 8).data(finalAmount).draw();
 					var companyName="";
 					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
@@ -426,6 +486,14 @@
 
 				function validateExist(orderID){
 				
+					/*var value = orderID;
+					var t = $('#table_orders_customer').DataTable();
+					var row=t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} ).indexes();
+					alert(row);*/
+					
+
 						var value = orderID;
 						var flag=false;
 						var count=-1;
@@ -528,11 +596,23 @@
 				
 					var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
 					ref.once('value').then(function(snapshot) {
-						//companyName=snapshot.val();
-						$("#table_orders_customer tr:last").find("td:eq(9)").text(snapshot.val());
-						//console.log(companyName);
-
-						//updateOrderInfo(orderID,9,companyName);
+						value=snapshot.val();
+						//$("#table_orders_customer tr:last").find("td:eq(9)").text(snapshot.val());
+						
+						$("#table_orders_customer tr").each(function(index) {
+							
+							if (index !== 0) {
+								$row = $(this);
+								var id = $row.find("td:eq(0)").text();
+								if (id.indexOf(orderID) !== 0) {
+									
+								}
+								else {
+									$row.find("td:eq(9)").text(value);
+									return false;
+								}
+							}
+						});
 					}, function(error) {
 						// The callback failed.
 						console.error(error);
@@ -546,8 +626,23 @@
 				var ref = firebase.database().ref("Contractors/"+contractorID);
 					ref.once('value').then(function(snapshot) {
 							data=snapshot.val();
-							$("#table_orders_customer tr:last").find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
-							//updateOrderInfo(orderID,10,data.ContNameFirst+' '+data.ContNameLast);
+							//$("#table_orders_customer tr:last").find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+
+							$("#table_orders_customer tr").each(function(index) {
+							
+								if (index !== 0) {
+									$row = $(this);
+									var id = $row.find("td:eq(0)").text();
+									if (id.indexOf(orderID) !== 0) {
+										
+									}
+									else {
+										$row.find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+										return false;
+									}
+								}
+							});
+
 						});
 				ref=null;
 					
@@ -604,7 +699,7 @@
 						<th>Date</th>
 						<th>Time</th>
 						<th>Estimate Amount</th>
-                    	<th>&nbsp;&nbsp;Final Amount&nbsp;&nbsp;</th>
+                    	<th>Total Final Amount</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
@@ -702,32 +797,32 @@
 										
 									?>
 								</td>
-								<td><?php 
+								<td align="right"><?php 
 										if($order['Status']=='F'){
 									?>
 											<a class="btn-warning btn-sm" data-toggle="modal"  
 												href="#myEstimateAmount" 
 												onClick="getEstimateAmount('<?php echo $order['OrderNumber']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo intval($order['EstAmtMat'])+intval($order['EstAmtTime']); ?> 
+												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
-											echo intval($order['EstAmtMat'])+intval($order['EstAmtTime']);
+											echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime']));
 										}
 										
 									?>
 								</td>                            
-								<td><?php 
+								<td align="right"><?php 
 										if($order['Status']=='J'){											
 									?>
 										<a class="btn-success btn-sm" data-toggle="modal"  
 												href="#myFinalAmount" 
 												onClick="getFinalAmount('<?php echo $order['OrderNumber']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo intval($order['ActAmtMat'])+intval($order['ActAmtTime']); ?> 
+												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
-											echo intval($order['ActAmtMat'])+intval($order['ActAmtTime']);
+											echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime']));
 										}
 									?>
 								</td>
@@ -950,7 +1045,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+				<h4 class="modal-title" id="headerTextAnswerOrder">Order Update</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerOrder"> 
 				<p >Some text in the modal.</p> 
@@ -1104,7 +1199,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Comfirm Final Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Confirm Final Amount</h4> 
 			</div> 
 			<div class="modal-body" id="textSchedule"> 
 				<input type="hidden" value="" id="orderIDFinal" />

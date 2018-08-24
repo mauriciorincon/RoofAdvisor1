@@ -10,7 +10,14 @@ $(document).ready(function() {
     );*/
 
 
-    $('#table_orders_customer').DataTable();
+    //$('#table_orders_customer').DataTable();
+    
+    var table = $('#table_orders_customer').DataTable({
+        "columnDefs": [
+          { className: "text-right", "targets": [7,8] },
+        ]
+      });
+    
     
     $('#table_orders_company').DataTable();
     step8=$('.stepwizard-step:eq(8)');
@@ -700,7 +707,7 @@ $(document).ready(function () {
         if(password!=Repassword){
             $('input:password#inputPassword').addClass("has-error").removeClass("has-success");;
             $('input:password#inputPasswordConfirm').addClass("has-error").removeClass("has-success");;
-            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+            $('#answerRePasswordValidateStep6').html('The confirmation password are different');
             isValid = false;
         }
 
@@ -1407,7 +1414,7 @@ function validInputRePassword(){
         flag=true;
         if(Repassword!=password){
             $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
-            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+            $('#answerRePasswordValidateStep6').html('The confirmation password are different');
             flag=false;
         }else{
             $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
@@ -2245,7 +2252,7 @@ function refuseEstimateAmount(){
     var orderID=$('#myEstimateAmount  #orderID').val();
     var status='E';
     
-    if(confirm("are you sure you want to refuse the Estimate Amount?")){
+    if(confirm("are you sure you want to decline the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
         updateOrder(orderID,"Status,"+status);
         
@@ -2321,7 +2328,7 @@ function refuseFinalAmount(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='I';
     
-    if(confirm("are you sure you want to refuse the Final Amount?")){
+    if(confirm("are you sure you want to decline the Final Amount?")){
         $('#myFinalAmount').modal('hide');
         updateOrder(orderID,"Status,"+status);
         
@@ -2357,13 +2364,13 @@ function selectPaymentType(){
     }
 }
 
-function payOnlineInvoce(stripeID){
+function payOnlineInvoce(stripeID,amount){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='K';
     
     $('#myPaymentType').modal('hide');
     $('#myFinalAmount').modal('hide');
-    updateOrder(orderID,"Status,"+status+",PaymentType,Online");
+    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID,"amount,"+amount);
 
 }
 
