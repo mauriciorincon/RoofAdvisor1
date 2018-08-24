@@ -165,7 +165,7 @@ class orderController{
         
 
         for($n=0;$n<count($arrayFields);$n+=2){
-
+           
             $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
             if(strcmp($arrayFields[$n],"StripeID")==0){
                 $stripeID=$arrayFields[$n+1];

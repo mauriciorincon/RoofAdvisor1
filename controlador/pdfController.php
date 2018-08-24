@@ -7,6 +7,7 @@ require $_SESSION['application_path'].'/vendor/autoload.php';
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
+require_once($_SESSION['application_path']."/controlador/payingController.php");
 
 class pdfController{
     
@@ -21,6 +22,9 @@ class pdfController{
         
         $_invoice_number="";
         $_consecutive_invoice=0;
+        $_card_data="";
+        $_exp_date="";
+        $_order_type="";
         $this->_otherController=new othersController();
         $this->_orderController=new orderController();
         if(isset($object_order)){
@@ -36,7 +40,7 @@ class pdfController{
         }
 
         $_companyCustomerController=new userController();
-        $_company=$_companyCustomerController->getCompanyById("CO000003");
+        $_company=$_companyCustomerController->getCompanyById("CO000000");
 
         if(is_null($_company)){
             echo "The company no exists";
@@ -62,18 +66,31 @@ class pdfController{
         switch($_order['RequestType']){
             case "E":
                 $_title_bill="Emergency Roof Service";
+                $_order_type= "Emergency Service";
                 break;
             case "R":
                 $_title_bill="Order Roof Report Service";
+                $_order_type= "RoofReport Service";
+                break;
+            case "S":
+                $_order_type= "Schedule Service";
+                $_title_bill="";
+            default:
+                $_order_type= "Undefined";
+                $_title_bill="";
                 break;
         }
 
         $_date_invoice=date('m-d-Y');
         
-        /*print_r($_order);
-        print_r($_company);
-        print_r($_customer);
-        return;*/
+        if(!empty($_stripe_id)){
+            $_payingController = new payingController();
+            $_result=$_payingController->getPayingData($_stripe_id);
+            $_card_data=$_result->source->last4;
+            $_exp_date=$_result->source->exp_month." / ".$_result->source->exp_year;
+        }
+       
+       
 
         $pdf = new TCPDF();                 // create TCPDF object with default constructor args
         $pdf->AddPage();                    // pretty self-explanatory
@@ -85,40 +102,46 @@ class pdfController{
         
         $pdf->SetFont('times','',10);
 
+        if(!isset($_order['SchDate']) or is_null($_order['SchDate']) or $_order['SchDate']==""){
+            $_date_value=date('m-d-y');
+        }else{
+            $_date_value=$_order['SchDate'];
+        }
+
         $_hmtl='
         <table>
             <tr>
                 <td colspan="2">RoofAdvisorz no-reply@roofadvisorz.com </td>
                 <td></td>
-                <td colspan="2">Email Message to homeowner after they submit payment</td>
+                <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,50,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
             </tr>
             <tr>
-                <td colspan="5">Thank you! Here\'s your invoice for the emergency repair service. </td>
+                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
-                <td colspan="5">Please review the information below.  Remember to return to RoofAdvisorZ.com to rate your service professional after the project is completed. </td>
+                <td colspan="5">Please remember to return to RoofAdvisorZ.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
             </tr>
         </table>
         <br>
         <br>
         <table border=".5">
             <tr>
-                <td>Service Pro ID:</td><td>'.$_order['CompanyID'].'</td><td>SP Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
+                <td align="rigth">CO ID:</td><td>'.$_company['ComapnyLicNum'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
             <tr>
-                <td>License:</td><td>'.$_company['ComapnyLicNum'].'</td><td>SP Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
+                <td align="rigth">CO License:</td><td>'.$_company['ComapnyLicNum'].'</td><td align="rigth">CO Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
             </tr>
             <tr>
-                <td>Service Date:</td><td>'.$_order['SchDate'].'</td><td>SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
+                <td align="rigth">Service Date:</td><td>'.$_date_value.'</td><td align="rigth">SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
             </tr>
             <tr>
-                <td>Service Repair Address</td><td colspan="2">'.$_order['RepAddress'].'</td><td></td><td></td><td></td>
+                <td align="rigth">Service Repair Address:</td><td colspan="2">'.$_order['RepAddress'].'</td><td></td><td></td><td></td>
             </tr>
         </table>
         <br>
@@ -146,10 +169,10 @@ class pdfController{
                 <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_amount.',00</td>
             </tr>
             <tr>
-                <td>***Approved***</td><td></td><td></td><td></td><td></td><td align="rigth">XXXXXXXXXXXX5020</td>
+                <td>***Approved***</td><td></td><td></td><td></td><td colspan="2" align="rigth">XXXXXXXXXXXX'.$_card_data.'</td>
             </tr>
             <tr>
-                <td></td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">jul-19</td>
+                <td></td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">'.$_exp_date.'</td>
             </tr>
             <tr>
                 <td colspan="6" align="center">Thank You for using RoofAdvisorZ</td>
@@ -159,13 +182,13 @@ class pdfController{
         <br>
         <table>
             <tr>
-                <td>http://www.roofadvisorz.com/idx/invoice1.html?verify=0f3c991b4507ade9d74828a1e6d9ec61c8e367sa</td>
+                <td>http://www.roofadvisorz.com/</td>
             </tr>
             <tr>
-                <td>Use the link above to return to rate the service professional.</td>
+                <td>Use the link above to return to RoofAdvisorZ to review your order status and rate the service professional. </td>
             </tr>
             <tr>
-                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice.</td>
+                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice. </td>
             </tr>
             <tr>
                 <td></td>
@@ -189,7 +212,7 @@ class pdfController{
         </table>
         ';
         
-        $pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
+        $pdf->Image($_SESSION['application_path']."/img/logo.png",30,180,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
@@ -204,6 +227,9 @@ class pdfController{
     function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id=""){
         $_invoice_number="";
         $_consecutive_invoice=0;
+        $_card_data="";
+        $_exp_date="";
+        $_order_type="";
         $this->_otherController=new othersController();
         $this->_orderController=new orderController();
         if(isset($object_order)){
@@ -213,16 +239,8 @@ class pdfController{
         }
         
 
-        if(is_null($_orderID)){
-            echo "The order number no exists [$_orderID]";
-            return;
-        }
-
-        $this->_orderController=new orderController();
-        $_order=$this->_orderController->getOrder("FBID",$_orderID);
-
         if(is_null($_order)){
-            echo "The order number no exists";
+            echo "The order number no exists [$_orderID]";
             return;
         }
 
@@ -239,19 +257,46 @@ class pdfController{
             echo "The customer no exists";
             return;
         }
-        $_orderID=$_order['OrderNumber'];
+
         $_consecutive_invoice=$this->_otherController->getParameterValue("Parameters/InvoiceNum");
         
+        $_orderID=$_order['OrderNumber'];
         if(is_null($_consecutive_invoice) or $_consecutive_invoice==""){
             $_invoice_number=$_orderID."_10000";
         }else{
             $_invoice_number=$_orderID."_".$_consecutive_invoice;
         }
+
         
-        /*print_r($_order);
-        print_r($_company);
-        print_r($_customer);
-        return;*/
+        $_title_bill="undefined";
+        switch($_order['RequestType']){
+            case "E":
+                $_title_bill="Emergency Roof Service";
+                $_order_type= "Emergency Service";
+                break;
+            case "R":
+                $_title_bill="Order Roof Report Service";
+                $_order_type= "RoofReport Service";
+                break;
+            case "S":
+                $_order_type= "Schedule Service";
+                $_title_bill="";
+            default:
+                $_order_type= "Undefined";
+                $_title_bill="";
+                break;
+        }
+
+        $_date_invoice=date('m-d-Y');
+        
+        if(!empty($_stripe_id)){
+            $_payingController = new payingController();
+            $_result=$_payingController->getPayingData($_stripe_id);
+            $_card_data=$_result->source->last4;
+            $_exp_date=$_result->source->exp_month." / ".$_result->source->exp_year;
+        }
+       
+       
 
         $pdf = new TCPDF();                 // create TCPDF object with default constructor args
         $pdf->AddPage();                    // pretty self-explanatory
@@ -263,73 +308,82 @@ class pdfController{
         
         $pdf->SetFont('times','',10);
 
+        if(!isset($_order['SchDate']) or is_null($_order['SchDate']) or $_order['SchDate']==""){
+            $_date_value=date('m-d-y');
+        }else{
+            $_date_value=$_order['SchDate'];
+        }
+        
+        $_hour_value=intval($_order['ActAmtTime'])/intval($_order['ActTime']);
+        $_total_invoice=intval($_order['ActAmtTime'])+intval($_order['ActAmtMat']);
+
         $_hmtl='
         <table>
             <tr>
                 <td colspan="2">RoofAdvisors no-reply@roofadvisorz.com\</td>
                 <td></td>
-                <td colspan="2">Email Message to homeowner after they submit payment</td>
+                <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="2">To: JDOE@yahoo.com</td>
+                <td colspan="2">To: '.$_company['CompanyEmail'].'</td>
                 <td></td>
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,50,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
             </tr>
             <tr>
-                <td colspan="5">Thank you!	Here\'s your invoice for the emergency repair for time and materials by '.$_company['CompanyName'].' professional. </td>
+                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
-                <td colspan="5">Please review the information below.  Remember to return to RoofAdvisorZ.com to rate your service professional. </td>
+                <td colspan="5">Please remember to return to RoofAdvisorZ.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
             </tr>
         </table>
         <br>
         <br>
         <table border=".5">
             <tr>
-                <td>Service Pro ID:</td><td>'.$_order['CompanyID'].'</td><td>SP Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
+                <td align="rigth">CO ID:</td><td>'.$_order['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
             <tr>
-                <td>License:</td><td>'.$_company['ComapnyLicNum'].'</td><td>SP Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
+                <td align="rigth">CO License:</td><td>'.$_company['ComapnyLicNum'].'</td><td align="rigth">CO Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
             </tr>
             <tr>
-                <td>Service Date:</td><td>'.$_order['SchDate'].'</td><td>SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
+                <td align="rigth">Service Date:</td><td>'.$_order['SchDate'].'</td><td align="rigth">SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
             </tr>
             <tr>
-                <td>Service Repair Address</td><td colspan="2">'.$_order['RepAddress'].'</td><td></td><td></td><td></td>
+                <td align="rigth">Service Repair Address:</td><td colspan="2">'.$_order['RepAddress'].'</td><td></td><td></td><td></td>
             </tr>
         </table>
         <br>
         <br>
         <table bgcolor="#dcdfe5">
             <tr>
-                <td><b>Invoice</b></td><td>8690940_02</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
+                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
             </tr>
             <tr>
                 <td><b>Summary</b></td><td></td><td></td><td>Hour</td><td>Rate</td><td></td>
             </tr>
             <tr>
-                <td>Time</td><td></td><td></td><td>3 hrs</td><td> $150,00</td><td align="rigth"> $450,00</td>
+                <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].',00</td>
             </tr>
             <tr>
-                <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $250,00</td>
+                <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].',00</td>
             </tr>
             <tr>
-                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$700,00</b></td>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.',00</b></td>
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
-                <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">18/01/18</td>
+                <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_value.'</td>
             </tr>
             <tr>
-                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$700,00</td>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.',00</td>
             </tr>
             
             <tr>
@@ -343,13 +397,13 @@ class pdfController{
         <br>
         <table>
             <tr>
-                <td>http://www.roofadvisorz.com/idx/invoice1.html?verify=0f3c991b4507ade9d74828a1e6d9ec61c8e367sa</td>
+                <td>http://www.roofadvisorz.com/</td>
             </tr>
             <tr>
-                <td>Use the link above to return to rate the service professional.</td>
+                <td>Use the link above to return to RoofAdvisorZ to review your order status and rate the service professional. </td>
             </tr>
             <tr>
-                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice.</td>
+                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice. </td>
             </tr>
             <tr>
                 <td></td>
@@ -373,7 +427,7 @@ class pdfController{
         </table>
         ';
         
-        $pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
+        //$pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 

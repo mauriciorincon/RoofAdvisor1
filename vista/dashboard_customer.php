@@ -215,37 +215,37 @@
 					}
 					
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
-						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
 								'href="" '+
 								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
 								'<span class="glyphicon glyphicon-trash"></span> '+
 							'</a>';
 					}else{
-						actions='<a class="btn-default btn-sm" data-toggle="modal" '+  
+						actions='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
 									'href="" '+
 									'onClick="alert(\'Order cant be cancel\')">'+
 									'<span class="glyphicon glyphicon-trash"></span> '+
 								'</a>';
 					}
-					actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+					actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
 								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
 					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
-						actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+						actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
 									'href="#myRatingScore" '+
 									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
 									'<span class="glyphicon glyphicon-star"></span>'+
 								'</a>';
 					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
 									'href="" '+
 									'onClick="alert(\'Order must be complete to make rating\')">'+ 
 									'<span class="glyphicon glyphicon-star-empty"></span>'+
 								'</a>';
 					}
-					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+					actions+='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '+
 								'href="" '+
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
@@ -311,13 +311,13 @@
 					var valorTotal=0;
 					var actions="";
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
-						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
+						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
 								'href="" '+
 								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
 								'<span class="glyphicon glyphicon-trash"></span> '+
 							'</a>';
 					}else{
-						actions='<a class="btn-default btn-sm" data-toggle="modal" '+  
+						actions='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service"  '+  
 									'href="" '+
 									'onClick="alert(\'Order cant be cancel\')">'+
 									'<span class="glyphicon glyphicon-trash"></span> '+
@@ -328,25 +328,25 @@
 								'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
 								'<span class="glyphicon glyphicon-usd"></span> '+
 							'</a>';*/
-					actions+='<a class="btn-primary btn-sm" data-toggle="modal" '+
+					actions+='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
 								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
 					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
-						actions+='<a class="btn-warning btn-sm" data-toggle="modal" '+
+						actions+='<a class="btn-warning btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Rating Service" '+
 									'href="#myRatingScore" '+
 									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
 									'<span class="glyphicon glyphicon-star"></span>'+
 								'</a>';
 					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal" '+
+						actions+='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Rating Service"  '+
 									'href="" '+
 									'onClick="alert(\'Order must be complete to make rating\')">'+ 
 									'<span class="glyphicon glyphicon-star-empty"></span>'+
 								'</a>';
 					}
-					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
+					actions+='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '+
 								'href="" '+
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
@@ -355,7 +355,7 @@
 
 					if(dataOrder.Status=="F"){
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
-						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
@@ -854,13 +854,13 @@
 								<td>
 									<?php if(strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0 or strcmp($order['Status'],"P")==0){?>
 
-										<a class="btn-danger btn-sm" data-toggle="modal"  
+										<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service" 
 											href="" 
 											onClick="<?php echo "cancelService('".$order['FBID']."','Status,Z')"; ?>" > 
 											<span class="glyphicon glyphicon-trash"></span>
 										</a>
 									<?php }else{ ?>
-										<a class="btn-default btn-sm" data-toggle="modal"  
+										<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"   title="Cancel service" 
 											href="" 
 											onClick="alert('Order can\'t be cancel')" > 
 											<span class="glyphicon glyphicon-trash"></span>
@@ -871,19 +871,19 @@
 										onClick="" > 
 										<span class="glyphicon glyphicon-usd"></span>
 									</a>-->
-									<a class="btn-primary btn-sm" data-toggle="modal"  
+									<a class="btn-primary btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
 												href="#myScheduleChange" 
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
 									</a>
 									<?php if(strcmp($order['Status'],"S")==0 or strcmp($order['Status'],"K")==0){ ?>
-										<a class="btn-warning btn-sm" data-toggle="modal"  
+										<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating service"  
 													href="#myRatingScore" 
 													onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-star"></span>
 										</a>
 									<?php }else{ ?>
-										<a class="btn-default btn-sm" data-toggle="modal"  
+										<a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Rating service"  
 													href="" 
 													onClick="alert('Order must be complete to make rating')" > 
 													<span class="glyphicon glyphicon-star-empty"></span>
@@ -891,8 +891,8 @@
 									<?php } ?>
 								
 
-										<a class="btn-info btn-sm" data-toggle="modal"  
-													href="" 
+										<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
+													href="#" 
 													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
@@ -1069,7 +1069,7 @@
 				<p >Some text in the modal.</p> 
 			</div> 
 			<div class="modal-footer" id="buttonPayment"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<button type="button" class="btn btn-default" id="buttonCancelPaymentInfo" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>
@@ -1410,7 +1410,11 @@
 						</tbody>
 					</table>
 				</div>
-			</div> 
+				<div id="detailStripe">
+
+				</div>
+			</div>
+
 			<div class="modal-footer" id="buttonPayment"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 

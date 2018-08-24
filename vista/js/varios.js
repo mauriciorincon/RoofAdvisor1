@@ -8,7 +8,7 @@ $(document).ready(function() {
         }
       }
     );*/
-
+    $('[data-toggle1="tooltip"]').tooltip(); 
 
     //$('#table_orders_customer').DataTable();
     
@@ -1959,9 +1959,11 @@ function showChargePayment(chargeID){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#headerTextPayment').html('Payment Detail');
-                $('#myPayment div.modal-body').html(data);
-                $(document).ready(function(){$("#myPayment").modal("show"); });
+                //$('#headerTextPayment').html('Payment Detail');
+                //$('#myPayment div.modal-body').html(data);
+                //$(document).ready(function(){$("#myPayment").modal("show"); });
+                $('#detailStripe').html(data);
+                
             }else{
                 $('#headerTextPayment').html('Error Detail Payment');
                 $('#myPayment div.modal-body').html(data);
@@ -2370,7 +2372,7 @@ function payOnlineInvoce(stripeID,amount){
     
     $('#myPaymentType').modal('hide');
     $('#myFinalAmount').modal('hide');
-    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID,"amount,"+amount);
+    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount);
 
 }
 
@@ -2557,10 +2559,10 @@ function getInvoices(orderID){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#myInvoiceInfo #invoiceInfo tbody').html(data);
-                $( "#myInvoiceInfo" ).dialog('open');
-                //$(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
-                
-                console.log(data);
+                //$( "#myInvoiceInfo" ).dialog('open');
+                $(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
+                $('#detailStripe').html("");
+                //console.log(data);
             }else{
                 $('#headerTextAnswerOrder').html('Invoice response');
                 $('#myMensaje div.modal-body').html(data);
@@ -2580,7 +2582,7 @@ function getInvoices(orderID){
     });
 }
 
-$( "#myInvoiceInfo" ).dialog({
+/*$( "#myInvoiceInfo" ).dialog({
     autoOpen: false,
     modal: true,
     buttons: {
@@ -2588,4 +2590,4 @@ $( "#myInvoiceInfo" ).dialog({
             $(this).dialog('close');
         }
     }
-});
+});*/
