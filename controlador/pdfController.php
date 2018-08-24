@@ -360,14 +360,25 @@ class pdfController{
     }
 
     public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id){
-        $_path=$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf';
+        $_path='/invoice/invoice_'.$_orderID.'.pdf';
+        $_path2="";
         if(is_null($this->_otherController)){
             $this->_otherController=new othersController();
         }
 
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2.$_path;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path;
+        }
 
         $_invoice_data = [
-            'path' => $_path,
+            'path' => $_path2.$_path,
             'user_invoice_num' => $_orderID,
             'user_orderFBID' => $firebaseOrderID,
             'invoice_value' => $_invioce_value,
@@ -380,7 +391,10 @@ class pdfController{
         if(is_null($this->_orderController)){
             $this->_orderController=new orderController();
         }
-        $_updateFields="InvoiceNum,$_path";
+        
+        
+        
+        $_updateFields="InvoiceNum,$_path1";
         $_arrayFields=explode(",",$_updateFields);
         //$_result=$this->_orderController->updateOrder($_orderID,$_arrayFields);
 

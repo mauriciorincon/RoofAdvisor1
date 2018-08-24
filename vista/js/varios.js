@@ -2550,7 +2550,8 @@ function getInvoices(orderID){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#myInvoiceInfo #invoiceInfo tbody').html(data);
-                
+                $( "#myInvoiceInfo" ).dialog('open');
+                //$(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
                 
                 console.log(data);
             }else{
@@ -2571,3 +2572,13 @@ function getInvoices(orderID){
         }
     });
 }
+
+$( "#myInvoiceInfo" ).dialog({
+    autoOpen: false,
+    modal: true,
+    buttons: {
+        Cancel: function() {
+            $(this).dialog('close');
+        }
+    }
+});

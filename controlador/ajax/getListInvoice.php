@@ -23,12 +23,12 @@ if(is_null($_result)){
                     <td><a class="btn-success btn-sm" data-toggle="modal"  
                             href="" 
                             onClick="showChargePayment(\''.$invoice['stripe_id'].'\')"> 
-                            <span class="glyphicon glyphicon-usd">'.'Info'.'</span>
+                            <span class="glyphicon glyphicon-usd">'.'Details'.'</span>
                         </a>
                     </td>
                     <td><a class="btn-primary btn-sm" data-toggle="modal"  
                             href="'.$invoice['path'].'" 
-                            onClick=""> 
+                            onClick="" target="_blank"> 
                             <span class="glyphicon glyphicon-save">Download</span>
                         </a>
                     </td>

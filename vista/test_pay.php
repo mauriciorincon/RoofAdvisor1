@@ -2,6 +2,10 @@
     if(!isset($_SESSION)) { 
         session_start(); 
     } 
+    echo "http://" . $_SERVER['HTTP_HOST']."<br>";
+    echo $_SERVER['REQUEST_URI'];
+    
+
     //require_once($_SESSION['application_path']."/controlador/calendarController.php");
     require_once($_SESSION['application_path']."/controlador/payingController.php");
     require_once($_SESSION['application_path']."/controlador/emailController.php");
@@ -25,11 +29,11 @@
     //print_r($_result);
 
     
-
-    $_objPDF=new pdfController();
-    $_objPDF->paymentConfirmation1("313",null,100);
     
-    echo "hola";
+    //$_objPDF=new pdfController();
+    //$_objPDF->paymentConfirmation1("313",null,100);
+    
+    
     //$_orderModel=new orderModel();
     //$_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
     //echo "Order id: ".$_lastOrderNumber;

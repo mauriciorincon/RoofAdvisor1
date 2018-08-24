@@ -213,7 +213,7 @@
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
 						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
 								'href="" '+
-								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
 								'<span class="glyphicon glyphicon-trash"></span> '+
 							'</a>';
 					}else{
@@ -242,10 +242,17 @@
 								'</a>';
 					}
 					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
-								'href="#myInvoiceInfo" '+
+								'href="" '+
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
 							'</a>';
+					if(dataOrder.RequestType=='E'){
+						dateValue=$row.cell($row, 5).data(dataOrder.ETA.substring(0,10)).draw();
+						timeValue=$row.cell($row, 6).data(dataOrder.ETA.substring(11,20)).draw();
+					}else{
+						dateValue=$row.cell($row, 5).data(dataOrder.SchDate).draw();	
+						timeValue=$row.cell($row, 6).data(dataOrder.SchTime).draw();
+					}
 					estimateAmount = estimateAmount ? estimateAmount : 0;
 					finalAmount = finalAmount ? finalAmount : 0;
 					getCompanyName(dataOrder.CompanyID,dataOrder.OrderNumber);
@@ -300,7 +307,7 @@
 					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
 						actions='<a class="btn-danger btn-sm" data-toggle="modal" '+  
 								'href="" '+
-								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,C\')">'+
+								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
 								'<span class="glyphicon glyphicon-trash"></span> '+
 							'</a>';
 					}else{
@@ -334,7 +341,7 @@
 								'</a>';
 					}
 					actions+='<a class="btn-info btn-sm" data-toggle="modal" '+
-								'href="#myInvoiceInfo" '+
+								'href="" '+
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
 							'</a>';
@@ -365,8 +372,13 @@
 					$row.cell($row, 2).data(dataOrder.RepAddress).draw();
 					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw();
 					$row.cell($row, 4).data(status).draw();
-					$row.cell($row, 5).data(dataOrder.SchDate).draw();
-					$row.cell($row, 6).data(dataOrder.SchTime).draw();
+					if(dataOrder.RequestType=='E'){
+						$row.cell($row, 5).data(dataOrder.ETA.substring(0,10)).draw();
+						$row.cell($row, 6).data(dataOrder.ETA.substring(11,20)).draw();
+					}else{
+						$row.cell($row, 5).data(dataOrder.SchDate).draw();	
+						$row.cell($row, 6).data(dataOrder.SchTime).draw();
+					}
 					estimateAmount = estimateAmount ? estimateAmount : 0;
 					$row.cell($row, 7).data(estimateAmount).draw();
 					finalAmount = finalAmount ? finalAmount : 0;
@@ -465,7 +477,10 @@
                 switch (status) {
                     case "A":
 						orderStatus = "Order Open";
-                        break;
+						break;
+					case "C":
+						orderStatus = "Acepted Order";
+						break;
                     case "D":
 						orderStatus = "Order Assigned";
                         break;
@@ -490,7 +505,7 @@
                     case "K":
 						orderStatus = "Order Completed Paid";
                         break;
-                    case "C":
+                    case "Z":
 						orderStatus = "Cancel work";
 						break;
 					case "P":
@@ -589,7 +604,7 @@
 						<th>Date</th>
 						<th>Time</th>
 						<th>Estimate Amount</th>
-                    	<th>Final Amount</th>
+                    	<th>&nbsp;&nbsp;Final Amount&nbsp;&nbsp;</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
@@ -624,6 +639,9 @@
 											case "A":
 												echo "Order Open";
 												break;
+											case "C":
+												echo "Acepted Order";
+												break;
 											case "D":
 												echo "Order Assigned";
 												break;
@@ -648,7 +666,7 @@
 											case "K":
 												echo "Order Completed Paid";
 												break;
-											case "C":
+											case "Z":
 												echo "Cancel work";
 												break;
 											case "P":
@@ -666,8 +684,24 @@
 										}
 									?>
 								</td> 
-								<td><?php echo $order['SchDate']?></td>                            
-								<td><?php echo $order['SchTime']?></td>
+								<td><?php 
+										if(strcmp($order['RequestType'],"E")==0){
+											echo substr($order['ETA'],0,10);
+										}else{
+											echo $order['SchDate'];
+										}
+										
+									?>
+								</td>                            
+								<td><?php 
+										if(strcmp($order['RequestType'],"E")==0){
+											echo substr($order['ETA'],11,8);
+										}else{
+											echo $order['SchTime'];
+										}
+										
+									?>
+								</td>
 								<td><?php 
 										if($order['Status']=='F'){
 									?>
@@ -727,7 +761,7 @@
 
 										<a class="btn-danger btn-sm" data-toggle="modal"  
 											href="" 
-											onClick="<?php echo "cancelService('".$order['FBID']."','Status,C')"; ?>" > 
+											onClick="<?php echo "cancelService('".$order['FBID']."','Status,Z')"; ?>" > 
 											<span class="glyphicon glyphicon-trash"></span>
 										</a>
 									<?php }else{ ?>
@@ -763,7 +797,7 @@
 								
 
 										<a class="btn-info btn-sm" data-toggle="modal"  
-													href="#myInvoiceInfo" 
+													href="" 
 													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
