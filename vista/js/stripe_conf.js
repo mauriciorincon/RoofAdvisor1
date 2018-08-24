@@ -35,7 +35,7 @@ var handler = StripeCheckout.configure({
                             insertOrderCustomer(objStripe.id,(amount_value/100));
                         }else if(action_type=="pay_invoice_service"){
                             jsRemoveWindowLoad('');
-                            payOnlineInvoce(objStripe.id);
+                            payOnlineInvoce(objStripe.id,(amount_value/100));
                         }
                         
                     }else{
