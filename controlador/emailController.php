@@ -68,6 +68,124 @@ class emailController{
         }
     }
 
+    public function sendMailSMTP(){
+        /*$mail = new PHPMailer;
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true;
+        $mail->Host = "smtp.viaplix.com"; // A RELLENAR. Aquí pondremos el SMTP a utilizar. Por ej. mail.midominio.com
+        $mail->Username = "donotreply@viaplix.com"; // A RELLENAR. Email de la cuenta de correo. ej.info@midominio.com La cuenta de correo debe ser creada previamente. 
+        $mail->Password = "xulqnxkamkpsadgr"; // A RELLENAR. Aqui pondremos la contraseña de la cuenta de correo
+        $mail->Port = 587; // Puerto de conexión al servidor de envio. 
+        $mail->From = "donotreply@viaplix.com"; // A RELLENARDesde donde enviamos (Para mostrar). Puede ser el mismo que el email creado previamente.
+        $mail->FromName = "RoofAdvizor"; //A RELLENAR Nombre a mostrar del remitente. 
+        $mail->AddAddress("mauricio.rincon@gmail.com"); // Esta es la dirección a donde enviamos 
+        $mail->IsHTML(true); // El correo se envía como HTML 
+        $mail->Subject = "Titulo"; // Este es el titulo del email. 
+        $body = "Hola mundo. Esta es la primer línea"; 
+        $body .= "Aquí continuamos el mensaje"; 
+        $mail->Body = $body; // Mensaje a enviar. 
+        if(!$mail->send()){
+            $this->_message_error="Mailer Error: " . $mail->ErrorInfo;
+            return false;
+        }else{
+            return "Message has been sent successfully";
+            
+        }*/
+
+        /*$email_user = "donotreply@viaplix.com";
+        $email_password = "p6ssw0rd25";
+        $the_subject = "Phpmailer prueba by Evilnapsis.com";
+        $address_to = "mauricio.rincon@gmail.com";
+        $from_name = "Evilnapsis";
+        $phpmailer = new PHPMailer();
+        // ---------- datos de la cuenta de Gmail -------------------------------
+        $phpmailer->Username = $email_user;
+        $phpmailer->Password = $email_password; 
+        //-----------------------------------------------------------------------
+        // $phpmailer->SMTPDebug = 1;
+        $phpmailer->SMTPSecure = 'ssl';
+        $phpmailer->Host = "smtp.viaplix.com"; // GMail
+        $phpmailer->Port = 587;
+        $phpmailer->IsSMTP(); // use SMTP
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->setFrom($phpmailer->Username,$from_name);
+        $phpmailer->AddAddress($address_to); // recipients email
+        $phpmailer->Subject = $the_subject;	
+        $phpmailer->Body .="<h1 style='color:#3498db;'>Hola Mundo!</h1>";
+        $phpmailer->Body .= "<p>Mensaje personalizado</p>";
+        $phpmailer->Body .= "<p>Fecha y Hora: ".date("d-m-Y h:i:s")."</p>";
+        $phpmailer->IsHTML(true);
+        if(!$phpmailer->send()){
+            $this->_message_error="<br>Mailer Error: " . $phpmailer->ErrorInfo.'<br>';
+            return false;
+        }else{
+            return "<br>Message has been sent successfully<br>";
+            
+        }*/
+
+        $email_user = "mauricio.rincon@gmail.com";
+        $email_password = "xulqnxkamkpsadgr*";
+        $the_subject = "Phpmailer prueba by Evilnapsis.com";
+        $address_to = "hrinconb@cajaviviendapopular.gov.co";
+        $from_name = "Evilnapsis";
+        $phpmailer = new PHPMailer();
+        // ---------- datos de la cuenta de Gmail -------------------------------
+        $phpmailer->Username = $email_user;
+        $phpmailer->Password = $email_password; 
+        //-----------------------------------------------------------------------
+        // $phpmailer->SMTPDebug = 1;
+        $phpmailer->SMTPSecure = 'ssl';
+        $phpmailer->Host = "smtp.gmail.com"; // GMail
+        $phpmailer->Port = 465;
+        $phpmailer->IsSMTP(); // use SMTP
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->setFrom($phpmailer->Username,$from_name);
+        $phpmailer->AddAddress($address_to); // recipients email
+        $phpmailer->Subject = $the_subject;	
+        $phpmailer->Body .="<h1 style='color:#3498db;'>Hola Mundo!</h1>";
+        $phpmailer->Body .= "<p>Mensaje personalizado</p>";
+        $phpmailer->Body .= "<p>Fecha y Hora: ".date("d-m-Y h:i:s")."</p>";
+        $phpmailer->IsHTML(true);
+        if(!$phpmailer->send()){
+            $this->_message_error="<br>Mailer Error: " . $phpmailer->ErrorInfo.'<br>';
+            return false;
+        }else{
+            return "<br>Message has been sent successfully<br>";
+            
+        }
+
+        /*$email_user = "hrinconb@cajaviviendapopular.gov.co";
+        $email_password = "CVP1234*";
+        $the_subject = "Phpmailer prueba by Evilnapsis.com";
+        $address_to = "mauricio.rincon@gmail.com";
+        $from_name = "Evilnapsis";
+        $phpmailer = new PHPMailer();
+        // ---------- datos de la cuenta de Gmail -------------------------------
+        $phpmailer->Username = $email_user;
+        $phpmailer->Password = $email_password; 
+        //-----------------------------------------------------------------------
+        // $phpmailer->SMTPDebug = 1;
+        $phpmailer->SMTPSecure = 'ssl';
+        $phpmailer->Host = "smtp.gmail.com"; // GMail
+        $phpmailer->Port = 465;
+        $phpmailer->IsSMTP(); // use SMTP
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->setFrom($phpmailer->Username,$from_name);
+        $phpmailer->AddAddress($address_to); // recipients email
+        $phpmailer->Subject = $the_subject;	
+        $phpmailer->Body .="<h1 style='color:#3498db;'>Hola Mundo!</h1>";
+        $phpmailer->Body .= "<p>Mensaje personalizado</p>";
+        $phpmailer->Body .= "<p>Fecha y Hora: ".date("d-m-Y h:i:s")."</p>";
+        $phpmailer->IsHTML(true);
+        if(!$phpmailer->send()){
+            $this->_message_error="<br>Mailer Error: " . $phpmailer->ErrorInfo.'<br>';
+            return false;
+        }else{
+            return "<br>Message has been sent successfully<br>";
+            
+        }*/
+        
+    }
     public function getMessageError(){
         return $this->_message_error;
     }
