@@ -3,7 +3,7 @@
         session_start(); 
     } 
     echo "http://" . $_SERVER['HTTP_HOST']."<br>";
-    echo $_SERVER['REQUEST_URI'];
+    echo $_SERVER['REQUEST_URI']."<br><br>";
     
 
     //require_once($_SESSION['application_path']."/controlador/calendarController.php");

@@ -227,11 +227,19 @@
 									'<span class="glyphicon glyphicon-trash"></span> '+
 								'</a>';
 					}
-					actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
+					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P"){
+						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
 								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
+					}else{
+						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
+								'href="" '+
+								'onClick="alert(\'the schedule can not be readjusted\')">'+
+								'<span class="glyphicon glyphicon-calendar"></span> '+
+							'</a>';
+					}
 					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
 						actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
 									'href="#myRatingScore" '+
@@ -328,11 +336,20 @@
 								'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
 								'<span class="glyphicon glyphicon-usd"></span> '+
 							'</a>';*/
-					actions+='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Change Schedule" '+
+					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P"){
+						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
 								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
+					}else{
+						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
+								'href="" '+
+								'onClick="alert(\'The schedule can not be readjusted\')">'+
+								'<span class="glyphicon glyphicon-calendar"></span> '+
+							'</a>';
+					}
+					
 					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
 						actions+='<a class="btn-warning btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Rating Service" '+
 									'href="#myRatingScore" '+
@@ -871,11 +888,20 @@
 										onClick="" > 
 										<span class="glyphicon glyphicon-usd"></span>
 									</a>-->
+									
+								<?php if(strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"C")==0 or strcmp($order['Status'],"P")==0){?>
 									<a class="btn-primary btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
 												href="#myScheduleChange" 
 												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
 									</a>
+								<?php }else{ ?>
+									<a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
+												href="" 
+												onClick="alert('The schedule can not be readjusted')"> 
+												<span class="glyphicon glyphicon-calendar"></span>
+									</a>
+								<?php } ?>
 									<?php if(strcmp($order['Status'],"S")==0 or strcmp($order['Status'],"K")==0){ ?>
 										<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating service"  
 													href="#myRatingScore" 

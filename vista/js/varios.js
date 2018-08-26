@@ -1607,12 +1607,12 @@ function refreshCalendar(pmonth,pyear){
 
 //Date picker order
 $( function() {
-        $( ".datepicker" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 7  });
+        $( ".datepicker" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 7  });
   } );
 
 //Date picker order
 $( function() {
-    $( ".datepickers" ).datepicker({ dateFormat: 'mm-dd-yy', minDate: 1  });
+    $( ".datepickers" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 1  });
 } );
 
   

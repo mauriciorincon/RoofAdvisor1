@@ -92,7 +92,7 @@ class emailController{
             
         }*/
 
-        /*$email_user = "donotreply@viaplix.com";
+        $email_user = "donotreply@viaplix.com";
         $email_password = "p6ssw0rd25";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = "mauricio.rincon@gmail.com";
@@ -102,12 +102,17 @@ class emailController{
         $phpmailer->Username = $email_user;
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
-        // $phpmailer->SMTPDebug = 1;
-        $phpmailer->SMTPSecure = 'ssl';
+        $phpmailer->SMTPDebug = 1;
+        
+        $phpmailer->SMTPSecure = 'TLS';
         $phpmailer->Host = "smtp.viaplix.com"; // GMail
         $phpmailer->Port = 587;
         $phpmailer->IsSMTP(); // use SMTP
         $phpmailer->SMTPAuth = true;
+
+        $phpmailer->SMTPSecure = false;
+        $phpmailer->SMTPAutoTLS = false;
+        
         $phpmailer->setFrom($phpmailer->Username,$from_name);
         $phpmailer->AddAddress($address_to); // recipients email
         $phpmailer->Subject = $the_subject;	
@@ -121,9 +126,9 @@ class emailController{
         }else{
             return "<br>Message has been sent successfully<br>";
             
-        }*/
+        }
 
-        $email_user = "mauricio.rincon@gmail.com";
+        /*$email_user = "mauricio.rincon@gmail.com";
         $email_password = "xulqnxkamkpsadgr*";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = "hrinconb@cajaviviendapopular.gov.co";
