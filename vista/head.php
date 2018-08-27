@@ -28,7 +28,13 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/calendar.css">
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
+<<<<<<< HEAD
                 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
+=======
+		<link rel="stylesheet" href="vista/css/mdtimepicker.css" >
+
+		
+>>>>>>> e243dd407afbb64ac2c9f4546ff25aef7caf574f
 		
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>

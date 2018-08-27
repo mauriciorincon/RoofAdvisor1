@@ -1447,6 +1447,11 @@ position: relative;
     background:#fff0;
     border-radius:13px;
 }
+#hworks{
+    width:100%;
+    margin-top: 20px;
+}
+
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
@@ -1478,8 +1483,4 @@ margin-right: -125px !important;
     margin-top: -5px;
     border-radius: 7px;
     border-top: 3px solid #dd6741;
-}
-#howitworks{
-    width: 100% !important;
-    margin-top: 20px;
 }

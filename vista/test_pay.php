@@ -3,7 +3,7 @@
         session_start(); 
     } 
     echo "http://" . $_SERVER['HTTP_HOST']."<br>";
-    echo $_SERVER['REQUEST_URI'];
+    echo $_SERVER['REQUEST_URI']."<br><br>";
     
 
     //require_once($_SESSION['application_path']."/controlador/calendarController.php");
@@ -12,6 +12,7 @@
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/modelo/order.class.php");
+
     //require_once($_SESSION['application_path']."/controlador/userController.php");
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
@@ -38,16 +39,16 @@
     //$_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
     //echo "Order id: ".$_lastOrderNumber;
 
-    /* Send Mail
+    //Send Mail
     $_objMail=new emailController();
 
 
-    $_result=$_objMail->sendMail2("mauricio.rincon@gmail.com","<p>Hello, this is the <b>invoice</b></p>",$_SESSION['application_path'].'/invoice/invoice_227.pdf');
+    $_result=$_objMail->sendMailSMTP();
     if(is_bool($_result)){
         echo $_objMail->getMessageError();
     }else{
         echo $_result;
-    }*/
+    }
 
 
 

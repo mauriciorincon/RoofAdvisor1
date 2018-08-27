@@ -856,7 +856,7 @@ Not an emergency roof repair and want to schedule a repair or estimate? No probl
 </br>
 Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample:
 </p>
-<img  id="howitworks" src="img/howitworks.png">
+<img  id="hworks" src="img/howitworks.png">
 </div>
 <!--<form role='form'>
  <div id='srvappsrch1'>

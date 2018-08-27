@@ -157,7 +157,11 @@
 		<script src="vista/js/jquery.dataTables.min.js"></script>
 		<script src="vista/js/dataTables.bootstrap.min.js"></script>
 		
+		<script src="vista/js/mdtimepicker.js"></script>
+		
+		
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
+
 				
 				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
