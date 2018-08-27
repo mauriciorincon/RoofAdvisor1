@@ -103,16 +103,14 @@ class emailController{
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
         $phpmailer->SMTPDebug = 1;
-        
-        $phpmailer->SMTPSecure = 'TLS';
+        $phpmailer->SMTPSecure = 'tls';
         $phpmailer->Host = "smtp.viaplix.com"; // GMail
         $phpmailer->Port = 587;
         $phpmailer->IsSMTP(); // use SMTP
         $phpmailer->SMTPAuth = true;
-
         $phpmailer->SMTPSecure = false;
         $phpmailer->SMTPAutoTLS = false;
-        
+
         $phpmailer->setFrom($phpmailer->Username,$from_name);
         $phpmailer->AddAddress($address_to); // recipients email
         $phpmailer->Subject = $the_subject;	

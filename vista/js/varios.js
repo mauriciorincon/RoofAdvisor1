@@ -33,6 +33,9 @@ $(document).ready(function() {
           return false;
         }
       });
+
+      $('.timepicker').mdtimepicker();
+
 } );
 
 ///////////////////////////////////////////////
@@ -1986,11 +1989,18 @@ function showChargePayment(chargeID){
 function changeSchedule(){
     var orderID=$('input#orderIDChangeSchedule').val();
     var dateSchedule=$('input#newDateSchedule').val();
-    var timeSchedule=$('select#newTimeSchedule').val();
+    var requestType=$('input#orderTypeService').val();
+    //var timeSchedule=$('input#newTimeSchedule').val();
+    var timeSchedule=$('input#newTimeSchedule').attr("data-time");
     
     if(confirm("are you sure you want to change the date of the service?")){
         $('#myScheduleChange').modal('hide');
-        updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+        if(requestType=="E"){
+            updateOrder(orderID,"ETA,"+dateSchedule+' '+timeSchedule);
+        }else{
+            updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+        }
+        
         
     }else{
         return false;
@@ -2017,6 +2027,7 @@ function getOrderScheduleDateTime(orderId){
             if(n==-1){
                 order=jQuery.parseJSON(data);
                 $('input#orderIDChangeSchedule').val(order.FBID);
+                $('input#orderTypeService').val(order.RequestType);
                 $('input#newDateSchedule').val(order.SchDate);
                 $("select#newTimeSchedule > option").each(function() {
                   

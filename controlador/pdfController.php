@@ -224,7 +224,7 @@ class pdfController{
         return true;
     }
 
-    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id=""){
+    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
         $_invoice_number="";
         $_consecutive_invoice=0;
         $_card_data="";
@@ -432,14 +432,17 @@ class pdfController{
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
 
-        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
+        if($_amount==0){
+            $_amount=$_total_invoice;
+        }
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,$_paymentType);
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
         
         return true;
     }
 
-    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id){
+    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="online"){
         $_path='/invoice/invoice_'.$_orderID.'.pdf';
         $_path2="";
         if(is_null($this->_otherController)){
@@ -464,6 +467,7 @@ class pdfController{
             'invoice_value' => $_invioce_value,
             'invoice_date' => date('m-d-Y'),
             'stripe_id'=>$_stripe_id,
+            'payment_type'=>$_paymentType,
         ];
         //$_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
         $this->_otherController=new othersController();

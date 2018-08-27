@@ -1111,21 +1111,13 @@
 			</div> 
 			<div class="modal-body" id="textSchedule"> 
 				<input type="hidden" value="" id="orderIDChangeSchedule" />
+				<input type="hidden" value="" id="orderTypeService" />
 				<table>
 					<tr><td>New Date</td><td><input type="text" id="newDateSchedule" name="newDateSchedule" class="datepicker"></td></tr>
 					<tr><td>New Time</td><td>
-						<select id="newTimeSchedule">
-							<option value="9:00 am">9:00 am</option>
-							<option value="10:00 am">10:00 am</option>
-							<option value="11:00 am">11:00 am</option>
-							<option value="12:00 pm">12:00 pm</option>
-							<option value="1:00 pm">1:00 pm</option>
-							<option value="2:00 pm">2:00 pm</option>
-							<option value="3:00 pm">3:00 pm</option>
-							<option value="4:00 pm">4:00 pm</option>
-							<option value="5:00 pm">5:00 pm</option>
-						</select>
+						<input type="text" id="newTimeSchedule" class="timepicker" />
 					</td></tr>
+					
 				</table>
 			</div> 
 			<div class="modal-footer" id="buttonSchedule"> 
@@ -1427,6 +1419,7 @@
 								<td><strong>Invoice Numbre</strong></td>
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Payment Type</strong></td>
 								<td class="text-center"><strong>Stripe ID</strong></td>
 								<td class="text-center"><strong>View</strong></td>
 							</tr>
