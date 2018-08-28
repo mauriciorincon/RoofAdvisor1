@@ -8,6 +8,8 @@ require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
 require_once($_SESSION['application_path']."/controlador/payingController.php");
+require_once($_SESSION['application_path']."/controlador/emailController.php");
+
 
 class pdfController{
     
@@ -148,7 +150,7 @@ class pdfController{
         <br>
         <table bgcolor="#dcdfe5">
             <tr>
-                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
+                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
             </tr>
             <tr>
                 <td><b>Summary</b></td><td></td><td></td><td></td><td></td><td></td>
@@ -173,6 +175,9 @@ class pdfController{
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">'.$_exp_date.'</td>
+            </tr>
+            <tr>
+                <td>Payment Type</td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">Online</td>
             </tr>
             <tr>
                 <td colspan="6" align="center">Thank You for using RoofAdvisorZ</td>
@@ -220,6 +225,10 @@ class pdfController{
         $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+
+        $_mailController = new emailController();
+
+        $_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
         
         return true;
     }
@@ -344,7 +353,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table border=".5">
+        <table border=".5" width="100%" style="table-layout : fixed">
             <tr>
                 <td align="rigth">CO ID:</td><td>'.$_order['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
@@ -362,7 +371,7 @@ class pdfController{
         <br>
         <table bgcolor="#dcdfe5">
             <tr>
-                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">8690940</td>
+                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
             </tr>
             <tr>
                 <td><b>Summary</b></td><td></td><td></td><td>Hour</td><td>Rate</td><td></td>
@@ -387,7 +396,7 @@ class pdfController{
             </tr>
             
             <tr>
-                <td></td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">jul-19</td>
+                <td>Payment Type</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_paymentType.'</td>
             </tr>
             <tr>
                 <td colspan="6" align="center">Thank You for using RoofAdvisorZ</td>
@@ -438,6 +447,10 @@ class pdfController{
         $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,$_paymentType);
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+
+        $_mailController = new emailController();
+
+        $_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
         
         return true;
     }

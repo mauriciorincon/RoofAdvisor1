@@ -74,6 +74,9 @@ class orderController{
                 break;
             case "R":
                 $_firstStatus="P";
+                $arrayDataOrder['CompanyID']="CO000000";
+                $arrayDataOrder['ContractorID']="";
+
                 break;
 
         }

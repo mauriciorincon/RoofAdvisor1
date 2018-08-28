@@ -214,7 +214,7 @@
 						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 					
-					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F") && dataOrder.RequestType!="R"){
 						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
 								'href="" '+
 								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
@@ -318,7 +318,7 @@
 					var finalAmount='';
 					var valorTotal=0;
 					var actions="";
-					if(dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F" || dataOrder.Status=="P"){
+					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F") && dataOrder.RequestType!="R"){
 						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
 								'href="" '+
 								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
@@ -869,7 +869,7 @@
 										}
 									?></td>
 								<td>
-									<?php if(strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0 or strcmp($order['Status'],"P")==0){?>
+									<?php if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0) and strcmp($order['RequestType'],"R")!=0){?>
 
 										<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service" 
 											href="" 
