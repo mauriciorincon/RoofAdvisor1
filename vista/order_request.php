@@ -870,10 +870,10 @@ Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 3
 </div>
 <div id='cmapp1' class="container">
  <div id='cmapp3'>
-  <img src='img/worker1.png'>
+  <img src='img/florida-house.png'>
  </div>
  <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</span></br><img id='cmappimg2' src='img/bquote.png'>
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. with a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='cmappimg2' src='img/bquote.png'>
  </div>
 </div>
 <div id='appdl1' class="container">
