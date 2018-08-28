@@ -36,6 +36,24 @@ $(document).ready(function() {
 
       $('.timepicker').mdtimepicker();
 
+      $('.timepicker').mdtimepicker().on('timechanged', function(e){
+          console.log(e.value);
+          console.log(e.time);
+          time=e.time.substring(0,2);
+          minutes=e.time.substring(3,2);
+          if(parseInt(time)>17){
+            alert('The time can not be longer than 5 in the afternoon');
+            $('#newTimeSchedule').val('');
+          }else if(parseInt(time)==17 && parseInt(minutes)==0){
+            alert('The time can not be longer than 5 in the afternoon');
+            $('#newTimeSchedule').val('');
+          }else if(parseInt(time)<7){
+            alert('The time can not be less than 7 o\'clock in the morning');
+            $('#newTimeSchedule').val(''); 
+          }
+        });
+        
+
 } );
 
 ///////////////////////////////////////////////
@@ -1993,18 +2011,25 @@ function changeSchedule(){
     //var timeSchedule=$('input#newTimeSchedule').val();
     var timeSchedule=$('input#newTimeSchedule').attr("data-time");
     
-    if(confirm("are you sure you want to change the date of the service?")){
-        $('#myScheduleChange').modal('hide');
-        if(requestType=="E"){
-            updateOrder(orderID,"ETA,"+dateSchedule+' '+timeSchedule);
-        }else{
-            updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
-        }
-        
-        
-    }else{
+    if(dateSchedule=="" || timeSchedule==""){
+        alert("Please fill the date and time");
         return false;
+    }else{
+        if(confirm("are you sure you want to change the date of the service?")){
+            $('#myScheduleChange').modal('hide');
+            if(requestType=="E"){
+                updateOrder(orderID,"ETA,"+dateSchedule+' '+timeSchedule);
+            }else{
+                updateOrder(orderID,"SchDate,"+dateSchedule+",SchTime,"+timeSchedule);
+            }
+            
+            
+        }else{
+            return false;
+        }
     }
+
+    
 
 }
 

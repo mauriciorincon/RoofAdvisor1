@@ -68,7 +68,7 @@ class emailController{
         }
     }
 
-    public function sendMailSMTP(){
+    public function sendMailSMTP($toAddress,$subject,$body,$attachmentPath){
         /*$mail = new PHPMailer;
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
@@ -95,14 +95,14 @@ class emailController{
         $email_user = "donotreply@viaplix.com";
         $email_password = "p6ssw0rd25";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
-        $address_to = "mauricio.rincon@gmail.com";
-        $from_name = "Evilnapsis";
+        $address_to = $toAddress;
+        $from_name = "RoozAdvisorZ";
         $phpmailer = new PHPMailer();
         // ---------- datos de la cuenta de Gmail -------------------------------
         $phpmailer->Username = $email_user;
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
-        $phpmailer->SMTPDebug = 1;
+        //$phpmailer->SMTPDebug = 2;
         $phpmailer->SMTPSecure = 'tls';
         $phpmailer->Host = "smtp.viaplix.com"; // GMail
         $phpmailer->Port = 587;
@@ -113,11 +113,12 @@ class emailController{
 
         $phpmailer->setFrom($phpmailer->Username,$from_name);
         $phpmailer->AddAddress($address_to); // recipients email
-        $phpmailer->Subject = $the_subject;	
-        $phpmailer->Body .="<h1 style='color:#3498db;'>Hola Mundo!</h1>";
-        $phpmailer->Body .= "<p>Mensaje personalizado</p>";
-        $phpmailer->Body .= "<p>Fecha y Hora: ".date("d-m-Y h:i:s")."</p>";
+        $phpmailer->Subject = $subject;	
+        $phpmailer->Body =$body;
         $phpmailer->IsHTML(true);
+        if(!empty($attachmentPath)){
+            $phpmailer->AddAttachment($attachmentPath);
+        }
         if(!$phpmailer->send()){
             $this->_message_error="<br>Mailer Error: " . $phpmailer->ErrorInfo.'<br>';
             return false;
