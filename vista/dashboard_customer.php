@@ -43,6 +43,9 @@
 					initMap1();
 					
 				}
+				var marketrs=[];
+				var map;
+				var infowindow;
 				// Initialize and add the map
 				function initMap() {
 					// The location of Uluru
@@ -58,10 +61,10 @@
 					var total_emergengy_orders=0;
 					
 					var marker="";
-					var marketrs=[];
-					var infowindow;
+					
+					
 
-					var infowindow = new google.maps.InfoWindow();
+					infowindow = new google.maps.InfoWindow();
 
 					<?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
 					
@@ -147,7 +150,10 @@
                         }
                     console.log("Data: " + deletedOrder.OrderNumber);
                     
-                	});
+					});
+					//for (mark in marketrs) {  
+ 				 	//	console.log(mark);
+					//}	
 				}
 
 				function addMarket(data,map,fila,infowindow){
@@ -982,19 +988,28 @@
             <?php   $_year=date("Y");
                     $_month=date("m");
                     echo "<h2>$_month $_year </h2>";
-                    
+                    $_eventsArray=array();
                     $oCalendar=new calendar();
                     echo $oCalendar->draw_controls($_month,$_year);
                     if(strlen($_month)==1){
-                        $_eventsArray=$oCalendar->getEvents("0".$_month,$_year);
-                    }else{
-                        $_eventsArray=$oCalendar->getEvents($_month,$_year);
-                    }
+						$_eventsArrayAux=$oCalendar->getEvents("0".$_month,$_year);
+					}else{
+						$_eventsArrayAux=$oCalendar->getEvents($_month,$_year);
+					}
+					
+						foreach($_eventsArrayAux as $key => $orderData){
+							if(strcmp( $orderData['CustomerID'], $_actual_customer['CustomerID']) == 0){
+								array_push($_eventsArray,$order);
+							}
+						}
+					
                     //print_r($_eventsArray);
                     echo $oCalendar->draw_calendar($_month,$_year,$_eventsArray);
 
             ?>
 		</div>
+
+
 
 		<!-- Dashboard New Order -->
         <div class="collapse" id="mapDashBoardOrder1">
@@ -1071,7 +1086,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerTextAnswerOrder">Order Update</h4> 
+				<h4 class="modal-title" id="headerTextAnswerOrder">Order Updated</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerOrder"> 
 				<p >Some text in the modal.</p> 

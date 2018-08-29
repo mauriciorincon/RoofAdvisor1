@@ -329,7 +329,7 @@ class pdfController{
         $_hmtl='
         <table>
             <tr>
-                <td colspan="2">RoofAdvisors no-reply@roofadvisorz.com\</td>
+                <td colspan="2">RoofAdvisorz no-reply@roofadvisorz.com\</td>
                 <td></td>
                 <td colspan="2"></td>
             </tr>
@@ -353,7 +353,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table border=".5" width="100%" style="table-layout : fixed">
+        <table  style="width: 700px;border: 1px solid black;">
             <tr>
                 <td align="rigth">CO ID:</td><td>'.$_order['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
@@ -369,7 +369,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table bgcolor="#dcdfe5">
+        <table bgcolor="#dcdfe5" style="width: 700px">
             <tr>
                 <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
             </tr>

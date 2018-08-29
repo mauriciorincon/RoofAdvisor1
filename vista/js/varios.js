@@ -1594,13 +1594,13 @@ $(document).ready(function () {
 });
 
 
-function refreshCalendar(pmonth,pyear){
-    if (pmonth==undefined){
+function refreshCalendar(pmonth,pyear,customerID){
+    if (pmonth==undefined || pmonth==""){
         var month=$('#monthCalendar').val();
     }else{
         var month=pmonth;
     }
-    if(pyear==undefined){
+    if(pyear==undefined || pyear==""){
         var year=$('#yearCalendar').val();
     }else{
         var year=pyear;
@@ -1609,7 +1609,7 @@ function refreshCalendar(pmonth,pyear){
     
 
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getCalendar.php", {"month":month,"year":year }, null, "text" )
+    $.post( "controlador/ajax/getCalendar.php", {"month":month,"year":year,"customerID":customerID }, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             $('#scheduleCompany').html(data);

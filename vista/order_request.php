@@ -555,25 +555,21 @@
                  <h3 class="panel-title"><font size="10"><strong>Select a time for service ....</strong></font></h3>
             </div>
             <div class="panel-body">
-				<div class="form-group">			
-				<span ><h4><b>Please select the date and time of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker"><h4><b>Schedule repair service are schedule a week in advance</b></h4>
-				</div>
-					
-				<div class="form-group">
-					<div class="container:'body'">
-						<div class="btn-group" role="group" arial-label="Basic example">
-							<button type="button" class="btn btn-success" name="step6time" >9:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">10:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">11:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">12:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">1:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">2:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">3:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">4:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">5:00 PM</button>
-						</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<span ><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
-				</div>
+					<div class="col-sm-6">
+						<span ><h4><b>Please select the time of service. </b></h4></span>
+						<input type="text" id="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
+					</div>
+					<div class="col-sm-12">
+						<br>
+						<center><h4><b>Schedule repair service are schedule a week in advance</b></h4></center>
+					</div>
+	
+				</div> 
+				
 				
 				
 
