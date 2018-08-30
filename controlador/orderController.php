@@ -187,7 +187,12 @@ class orderController{
             $_result_invoice=$_objPDF->paymentConfirmation2($orderID,null,$amount,$stripeID,$paymentType);
         }
         if(is_bool($_result)){
-            return "The order was update correctly";
+            if(!empty($paymentType)){
+                return "Thank you for your payment. An invoice has been sent to your email. Please remenber to rate your contractor and service.";
+            }else{
+                return "The order was update correctly";
+            }
+            
         }else{
             return $_result;
         }

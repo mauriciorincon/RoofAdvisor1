@@ -96,7 +96,7 @@ class emailController{
         $email_password = "p6ssw0rd25";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = $toAddress;
-        $from_name = "RoozAdvisorZ";
+        $from_name = "RoofAdvisorZ";
         $phpmailer = new PHPMailer();
         // ---------- datos de la cuenta de Gmail -------------------------------
         $phpmailer->Username = $email_user;

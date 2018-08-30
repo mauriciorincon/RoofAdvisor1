@@ -11,10 +11,13 @@ class calendar{
     }
 
     /*draws calendar controls*/
-    public function draw_controls($month,$year){
+    public function draw_controls($month,$year,$customerID=""){
         /* date settings */
         //$month = (int) ($_GET['month'] ? $_GET['month'] : date('m'));
         //$year = (int)  ($_GET['year'] ? $_GET['year'] : date('Y'));
+
+        $month=intval($month);
+        $year=intval($year);
 
         /* select month control */
         $select_month_control = '<select name="monthCalendar" id="monthCalendar">';
@@ -38,7 +41,7 @@ class calendar{
         $previous_month_link = '<a href="#" onclick="refreshCalendar('.($month != 1 ? $month - 1 : 12).','.($month != 1 ? $year : $year - 1).')" class="control"><< 	Previous Month</a>';
 
         /* bringing the controls together */
-        $controls = '<form method="get">'.$select_month_control.$select_year_control.' <input type="button" name="go" value="Go" onclick="refreshCalendar()" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
+        $controls = '<form method="get">'.$select_month_control.$select_year_control.' <input type="button" name="go" value="Go" onclick="refreshCalendar(\''.$customerID.'\')" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
 
         return $controls;
     }
@@ -77,14 +80,18 @@ class calendar{
                 $calendar.= '<div class="day-number">'.$list_day.'</div>';
 
                 /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
+                if(strlen($list_day)==1){
+                    $list_day = '0'.$list_day;
+                }
                 if(strlen($month)==1){
-                    $event_day = '0'.$month.'-'.$list_day.'-'.$year;
+                    $event_day = '0'.$month.'/'.$list_day.'/'.$year;
                 }else{
-                    $event_day = $month.'-'.$list_day.'-'.$year;
+                    $event_day = $month.'/'.$list_day.'/'.$year;
                 }
                 $flag=false;
 
                 foreach($events as $key => $event) {
+                    //echo $event_day;
                     if(strcmp($event['SchDate'],$event_day)==0){
                         $calendar.= '<div class="event"><a onclick="showEventCalendar('.$event['OrderNumber'].')">Order Id: '.$event['OrderNumber'].'<br>'.'Customer: '.$event['CustomerID'].',Time: '.$event['SchTime'].'</a></div>';
                         $flag=true;

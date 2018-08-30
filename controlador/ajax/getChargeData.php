@@ -11,20 +11,17 @@
     if(!empty($_chargeID)){
         $_result=$_objPay->getPayingData($_chargeID);
     
+        //print_r($_result);
         $_string='<div>
             <table class="table table-bordered">
-                <tr><td>Charge ID</td><td>'.$_result->id.'</td></tr>
-                <tr><td>Object</td><td>'.$_result->object.'</td></tr>
-                <tr><td>Amount</td><td>'.$_result->amount.'</td></tr>
-                <tr><td>Paid</td><td>'.$_result->paid.'</td></tr>
-                <tr><td>Email</td><td>'.$_result->receipt_email.'</td></tr>
-                <tr><td>Id card</td><td>'.$_result->source->id.'</td></tr>
-                <tr><td>Card</td><td>'.$_result->source->object.'</td></tr>
-                <tr><td>Brand</td><td>'.$_result->source->brand.'</td></tr>
-                <tr><td>Brand</td><td>'.$_result->source->exp_month.'</td></tr>
-                <tr><td>Brand</td><td>'.$_result->source->exp_year.'</td></tr>
-                <tr><td>Last4</td><td>'.$_result->source->last4.'</td></tr>
-                <tr><td>Last4</td><td>'.$_result->status.'</td></tr>
+                <tr><td>Trans ID</td><td>'.$_result->id.'</td></tr>
+                <tr><td>Amount</td><td>'.(($_result->amount)/100).'</td></tr>
+                <tr><td>Email</td><td>'.$_result->source->name.'</td></tr>
+                <tr><td>Card Type</td><td>'.$_result->source->brand.'</td></tr>
+                <tr><td>Month</td><td>'.$_result->source->exp_month.'</td></tr>
+                <tr><td>Year</td><td>'.$_result->source->exp_year.'</td></tr>
+                <tr><td>Last 4</td><td>'.$_result->source->last4.'</td></tr>
+                <tr><td>Status</td><td>'.$_result->status.'</td></tr>
 
             </table>
         </div>';
