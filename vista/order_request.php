@@ -869,7 +869,7 @@ Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 3
   <img src='img/florida-house.png'>
  </div>
  <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. with a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='cmappimg2' src='img/bquote.png'>
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='cmappimg2' src='img/bquote.png'>
  </div>
 </div>
 <div id='appdl1' class="container">
