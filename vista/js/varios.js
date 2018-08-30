@@ -1091,7 +1091,7 @@ $(document).ready(function () {
         }    
         if(curStepBtn=="step-4"  && isValid==true ){
             var fecha=$('input[name=step6date]').val();
-            var hora=$('input[name=step6time]').text();
+            var hora=$('input[name=step6time]').val();
             if(fecha=="" || hora==""){
                 $('#headerTextAnswerOrder').html('Step 4');
                 $('#textAnswerOrder').html('Plese select the date and time for the service');
