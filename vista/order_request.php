@@ -562,7 +562,7 @@
 					</div>
 					<div class="col-sm-6">
 						<span ><h4><b>Please select the time of service. </b></h4></span>
-						<input type="text" id="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
+						<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
 					</div>
 					<div class="col-sm-12">
 						<br>
