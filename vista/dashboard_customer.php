@@ -8,7 +8,7 @@
 		</div>
 		<div class="btn-group">
     		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				Order Metrics <span class="caret"></span></button>
+				Resources <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
     			</ul>
