@@ -8,6 +8,8 @@ require_once($_SESSION['application_path']."/modelo/user.class.php");
 require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -368,7 +370,9 @@ class userController{
             //print_r($_array_customer_to_show);
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');
-            
+
+            $_menu_item=$this->getItemMenu();
+            $_divs_info=$this->fillInformationMenu();
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
             require_once("vista/footer.php");
@@ -548,5 +552,47 @@ class userController{
         $this->_userModel=new userModel();
         return $this->_userModel->getCompanyByID($companyID);
     }
+
+    public function fillInformationMenu(){
+        $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_html="";
+
+       
+        foreach($_array as $key => $item){
+            $_head_box='<div class="modal fade" id="'.$item.'" role="dialog">
+            <div class="modal-dialog modal-dialog-centered"> 
+            <!-- Modal content--> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>';
+                    
+            $_foot_box='<div class="modal-footer" id="buttonPayment"> 
+                            <button type="button" class="btn btn-default" id="buttonCancel'.$item.'" data-dismiss="modal">Close</button> 
+                        </div> 
+                    </div> 
+                </div>
+            </div>';
+            $_output_html.=$_head_box.'<h4 class="modal-title" id="headerTextPayment">'.constant("customerFAQ::$item").'</h4> 
+                    </div> 
+                    <div class="modal-body" id="textPayment"> 
+                        <p >'.call_user_func( array( "customerFAQ", $item ) ).'</p> 
+                    </div>'.$_foot_box;
+            
+        }
+        return $_output_html;
+    }
+
+    public function getItemMenu(){
+        $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_menu="";
+        foreach($_array as $key => $item){
+            $_output_menu.='<li><a href="#'.$item.'" data-toggle="modal">'.constant("customerFAQ::$item").'</a></li>';
+        }
+        
+        return $_output_menu;
+    }
+    
 }
 ?>

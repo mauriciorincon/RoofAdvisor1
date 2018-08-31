@@ -1069,7 +1069,7 @@ $(document).ready(function () {
                     var valStep4=$('input[name=estep4Option]:checked').val();
                     var valStep5Auto=$('input[name=estep6Option]:checked').val();
                     var valStep6=$('input[name=step6date]').val();
-                    var valStep6t=$('button[name=step6time].active').text();
+                    var valStep6t=$('input[name=step6time]').val();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
                     var valStep5long=$('input:hidden[name=step5Logintud]').val();
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
@@ -1109,7 +1109,7 @@ $(document).ready(function () {
             var valStep5Auto=$('input[name=estep6Option]:checked').val();
             var valStep4=$('input[name=estep4Option]:checked').val();
             var valStep6=$('input[name=step6date]').val();
-            var valStep6t=$('button[name=step6time].active').text();
+            var valStep6t=$('input[name=step6time]').val();
             var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
             var valStep5long=$('input:hidden[name=step5Logintud]').val();
             var valStep5lat=$('input:hidden[name=step5Latitude]').val();
@@ -1282,7 +1282,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
     var SchDate=$("input[name='step6date']").val();
-    var SchTime=$("button[name='step6time'].active").text();
+    var SchTime=$('input[name=step6time]').val();
     var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
