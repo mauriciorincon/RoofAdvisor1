@@ -7,7 +7,7 @@
     Author URI: http://bootexperts.com
     Version: 1.0
 
------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
     
     CSS INDEX
     ===================
@@ -1370,10 +1370,10 @@ width: 621px;
     padding-left: 70px;
 }
 #cmapp3{
-position: absolute;
-    margin: -58px;
-    margin-left: 651px;
-    width: 50%;
+    position: absolute;
+    margin: 10.4%;
+    margin-left: 44%;
+    width: 40%;
 }
 #cmappimg1{
 margin-left:-46px;
@@ -1423,16 +1423,18 @@ color: #fff;
 color:#fff;
 border-radius:13px;
 border-color:#fff;
-background-color: #fa511a4f;
+background-color: rgba(0, 0, 0, 0.6);
 margin-top:210px;
 }
 #zip-panel-heading{
-background-color:#005678;
+background-color:#fa511a;
 border-radius: 13px 13px 0px 0px;
-border-color:#000;
+border-color:#fff;
 }
 .panel-heading{
 border-radius: 13px 13px 0px 0px;
+background-color:#fa511a !important;
+border-color:#fff !important;
 }
 .panel-body{
     position:relative;
@@ -1446,7 +1448,7 @@ position: relative;
     margin-left: auto;
     margin-right: auto;
     z-index: 1000;
-    background:rgba(250, 81, 26, 0.88);
+    background:rgba(0, 0, 0, 0.6);
     border-radius:13px;
     border:2px solid #fff;
 }
@@ -1454,11 +1456,15 @@ position: relative;
     width:100%;
     margin-top: 20px;
 }
-
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
 font-size:17px !important;
+}
+.cmapp3{
+margin:1.8% !important;
+margin-left:44.2% !important;
+width:40% !important;
 }
 }
 @media (min-width:1290px){
