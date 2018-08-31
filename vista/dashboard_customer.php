@@ -10,10 +10,7 @@
     		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 				Order Metrics <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
-      				<li><a href="#"><span class="badge" id="totalOrdersCustomer">0</span> Total Order Repairs</a></li>
-					  <li><a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Emergency Repairs</a></li>
-					  <li><a href="#"><span class="badge" id="totalScheduleRepair">0</span> Schedule Repairs</a></li>
-					  <li><a href="#"><span class="badge" id="totalEmergencyRepair">0</span> Repairs Pending</a></li>
+					<?php echo $_menu_item; ?>
     			</ul>
   		</div>
 		
@@ -100,9 +97,9 @@
 										total_emergengy_orders++;
 									}
 								}
-						$("#totalOrdersCustomer").html(total_orders);
-						$("#totalEmergencyRepair").html(total_emergengy_orders);
-						$("#totalScheduleRepair").html(total_schedule_orders);
+						//$("#totalOrdersCustomer").html(total_orders);
+						//$("#totalEmergencyRepair").html(total_emergengy_orders);
+						//$("#totalScheduleRepair").html(total_schedule_orders);
 						
 					console.log(snapshot.val());
 					
@@ -1455,3 +1452,5 @@
 		</div> 
 	</div>
 </div>
+
+<?php echo $_divs_info; ?>

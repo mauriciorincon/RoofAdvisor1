@@ -12,6 +12,8 @@
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/modelo/order.class.php");
+    require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+
 
     //require_once($_SESSION['application_path']."/controlador/userController.php");
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
@@ -40,15 +42,29 @@
     //echo "Order id: ".$_lastOrderNumber;
 
     //Send Mail
-    $_objMail=new emailController();
+    //$_objMail=new emailController();
 
 
-    $_result=$_objMail->sendMailSMTP();
-    if(is_bool($_result)){
-        echo $_objMail->getMessageError();
-    }else{
-        echo $_result;
-    }
+    //$_result=$_objMail->sendMailSMTP();
+    //if(is_bool($_result)){
+    //   echo $_objMail->getMessageError();
+    //}else{
+    //    echo $_result;
+    //}
+    $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_html="";
+        foreach($_array as $key => $item){
+            echo $item;
+            $_output_html.=call_user_func( array( "customerFAQ", $item ) );
+        }
+        echo $_output_html."<br><br>";
+        
+
+        echo $_information::number_1;
+        echo $_information::number_2;
+        echo $_information::number_3;
+        echo $_information::number_4;
 
 
 
