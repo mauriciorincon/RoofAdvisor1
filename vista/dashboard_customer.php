@@ -41,14 +41,14 @@
 					
 				}
 				var marketrs=[];
-				var map;
+				var mapObject;
 				var infowindow;
 				// Initialize and add the map
 				function initMap() {
 					// The location of Uluru
 					var uluru = {lat: 25.745693, lng: -80.375028};
 					// The map, centered at Uluru
-					var map = new google.maps.Map(
+					mapObject = new google.maps.Map(
 						document.getElementById('map'), {zoom: 11, center: uluru});
 					// The marker, positioned at Uluru
 					//var marker = new google.maps.Marker({position: uluru, map: map});
@@ -84,7 +84,7 @@
 										icon: iconBase+'library_maps.png',
 										text: fila.SchDate
 									};
-									var oMarket=addMarket(marker,map,fila,infowindow);
+									var oMarket=addMarket(marker,fila,infowindow);
 									marketrs.push(oMarket);
 
 									
@@ -120,6 +120,7 @@
 					// Retrieve orders that are update in database
 					ref.on("child_changed", function(snapshot, prevChildKey) {
 						var updateOrder = snapshot.val();
+						
 						if(updateOrder.CustomerID==customerID){
 							row=validateExist(updateOrder.OrderNumber);
 							if(row==-1){
@@ -133,6 +134,18 @@
 								removeOrderOnTable(updateOrder);
 							}
 						}
+						
+							removeMarket(updateOrder.OrderNumber);
+							var marker={
+										lat: parseFloat(updateOrder.Latitude),
+										lng: parseFloat(updateOrder.Longitude),
+										icon: iconBase+'library_maps.png',
+										text: updateOrder.SchDate
+									};
+									var oMarket=addMarket(marker,updateOrder,infowindow);
+									marketrs.push(oMarket);
+						
+
 						//addOrderToTable(newOrder,companyID);
 						console.log("Data: " + updateOrder.OrderNumber);
 						
@@ -153,7 +166,7 @@
 					//}	
 				}
 
-				function addMarket(data,map,fila,infowindow){
+				function addMarket(data,fila,infowindow){
 					var image="";
 					if(fila.Status==='A'){
 						image="open_service.png";
@@ -170,19 +183,32 @@
 					}
 					var oMarket= new google.maps.Marker({
 						position: new google.maps.LatLng(data.lat,data.lng),
-						map:map,
-						icon:'img/img_maps/'+image
+						map:mapObject,
+						icon:'img/img_maps/'+image,
+						id:fila.OrderNumber
 					});
 
 					oMarket.addListener('click', function() {
 									infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
-															'</b><br><b>Customer:</b>'+fila.CustomerID+
+															'</b><br><b>Status:</b>'+getStatus(fila.Status)+
 															'<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+'</p>');
 									infowindow.open(map, this);
 								});
 					return oMarket;
 				}
 
+				function updateMarket(){
+
+				}
+				function removeMarket(idOrder){
+					marketrs.map(function(marker) {
+						if(marker.id==idOrder){
+							marker.setVisible(false);
+							marketrs.splice( marketrs.indexOf(marker), 1 );
+						}
+					})
+					
+				}
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
 					var requestType=getRequestType(dataOrder.RequestType);
