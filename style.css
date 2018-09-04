@@ -1245,7 +1245,7 @@ padding-top:35px;
     width:471px;
     padding-top:114px;
 }
-#srvappph1{
+.srvappph1{
 font-size: 21px;
 font-weight: 400;
 }
@@ -1342,7 +1342,7 @@ display: block;
 #aphtxt1{
 font-size:5em;
 display:block;
-margin-left:38%;
+margin-left:33%;
 color:#fa511a;
 font-family:'poppins';
 }
@@ -1360,7 +1360,7 @@ display:block;
 background-color:#fa511a;
 color:#fff;
 height:400px;
-margin-top: 375px;
+margin-top: 600px;
 }
 #cmapp2{
 width: 621px;
@@ -1371,8 +1371,8 @@ width: 621px;
 }
 #cmapp3{
     position: absolute;
-    margin: 10.4%;
-    margin-left: 44%;
+    margin: 1.4%;
+    margin-left: 44.1%;
     width: 40%;
 }
 #cmappimg1{
@@ -1409,7 +1409,7 @@ color: #fff;
 #appfrm1{
     height: 800px;
     margin-top: 10px;
-    background-image: url(img/roof.home.wiz.bg.jpg);
+    background-image: url(img/roof.home.wiz.bg.png);
     background-repeat: no-repeat;
     background-size: 1900px 100%;
 }
@@ -1442,6 +1442,16 @@ border-color:#fff !important;
     border-radius: 0px 0px 13px 13px;
     color:#fff;
 }
+#welcome-txt{
+    position: absolute;
+    z-index: 400;
+    color: #fff;
+    font-size: 60px;
+    margin-top: 85px;
+    margin-left: 271px;
+text-shadow:4px 4px 8px #151515c7;
+text-align:center;
+}
 .panel{
 position: relative;
     width: 96%;
@@ -1456,15 +1466,42 @@ position: relative;
     width:100%;
     margin-top: 20px;
 }
+#rhlist{
+list-style-type: circle;
+    font-size: 24px;
+    margin-left: 110px;
+}
+#easyli{
+    background: url(img/easy.png) no-repeat left top;
+    padding: 18px 0px 12px 62px;
+    list-style: none;
+    margin: 0;
+}
+#calendarli{
+background: url(img/calendar.png) no-repeat left top;
+    padding: 1px 0px 0px 64px;
+    list-style: none;
+    margin: 0;
+}
+#reportli{
+background: url(img/reports.png) no-repeat left top;
+    padding: 14px 0px 3px 63px;
+    list-style: none;
+    margin: 0;
+}
+
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
 font-size:17px !important;
 }
-.cmapp3{
-margin:1.8% !important;
-margin-left:44.2% !important;
-width:40% !important;
+#cmapp3{
+margin:-4.4% !important;
+margin-left:31.2% !important;
+width:53% !important;
+}
+#aphtxt1{
+margin-left:40% !important;
 }
 }
 @media (min-width:1290px){
