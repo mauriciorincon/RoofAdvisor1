@@ -1069,7 +1069,7 @@ $(document).ready(function () {
                     var valStep4=$('input[name=estep4Option]:checked').val();
                     var valStep5Auto=$('input[name=estep6Option]:checked').val();
                     var valStep6=$('input[name=step6date]').val();
-                    var valStep6t=$('button[name=step6time].active').text();
+                    var valStep6t=$('input[name=step6time]').val();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
                     var valStep5long=$('input:hidden[name=step5Logintud]').val();
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
@@ -1091,7 +1091,7 @@ $(document).ready(function () {
         }    
         if(curStepBtn=="step-4"  && isValid==true ){
             var fecha=$('input[name=step6date]').val();
-            var hora=$('button[name=step6time].active').text();
+            var hora=$('input[name=step6time]').val();
             if(fecha=="" || hora==""){
                 $('#headerTextAnswerOrder').html('Step 4');
                 $('#textAnswerOrder').html('Plese select the date and time for the service');
@@ -1104,12 +1104,18 @@ $(document).ready(function () {
         }
 
         if (curStepBtn=="step-5" && isValid==true ){
-            var valStep3=$('input[name=estep3Option]:checked').val();
-            var valStep5=$('input[name=estep5Option]:checked').val();
-            var valStep5Auto=$('input[name=estep6Option]:checked').val();
-            var valStep4=$('input[name=estep4Option]:checked').val();
+            //var valStep3=$('input[name=estep3Option]:checked').val();
+            //var valStep5=$('input[name=estep5Option]:checked').val();
+            //var valStep5Auto=$('input[name=estep6Option]:checked').val();
+            //var valStep4=$('input[name=estep4Option]:checked').val();
+
+            var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+            var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+            var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+            var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+
             var valStep6=$('input[name=step6date]').val();
-            var valStep6t=$('button[name=step6time].active').text();
+            var valStep6t=$('input[name=step6time]').val();
             var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
             var valStep5long=$('input:hidden[name=step5Logintud]').val();
             var valStep5lat=$('input:hidden[name=step5Latitude]').val();
@@ -1119,7 +1125,7 @@ $(document).ready(function () {
             if(valStep7==""){
                 valStep7="Pending";
             }
-            $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
+            $('#step8RepairDescription').html(valStep3+', '+valStep5+', Leaks:'+valStep4+', Autorization:'+valStep5Auto);
             $('#step8Schedule').html(valStep6);
             $('#step8Time').html(valStep6t);
             $('#step8CompanyName').html(valStep7);
@@ -1282,7 +1288,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var Water=$("input:radio[name='estep4Option']:checked").val();
     var Hlevels=$("input:radio[name='estep5Option']:checked").val();
     var SchDate=$("input[name='step6date']").val();
-    var SchTime=$("button[name='step6time'].active").text();
+    var SchTime=$('input[name=step6time]').val();
     var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
     var email=$('input#emailValidation').val();
     var password=$('input#inputPassword').val();
@@ -1376,14 +1382,17 @@ function validateIsLoggedIn(){
                               });
                         }
                     }else{
-                        $('#textAnswerOrder').html(data+'');
+                        jsRemoveWindowLoad('');
+                        insertOrderCustomer();
+                        
+                        /*$('#textAnswerOrder').html(data+'');
                         $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
 
                         $('#headerTextAnswerOrder').html('Success');
                   
                         $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
                         $('#lastFinishButtonOrder').show();
-                        $('#myModalRespuesta').modal({backdrop: 'static'});
+                        $('#myModalRespuesta').modal({backdrop: 'static'});*/
                     }
                     
                 }else{
