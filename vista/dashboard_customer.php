@@ -41,6 +41,7 @@
 					
 				}
 				var marketrs=[];
+				var contractorMarker=[];
 				var mapObject;
 				var infowindow;
 				// Initialize and add the map
@@ -97,11 +98,9 @@
 										total_emergengy_orders++;
 									}
 								}
-						//$("#totalOrdersCustomer").html(total_orders);
-						//$("#totalEmergencyRepair").html(total_emergengy_orders);
-						//$("#totalScheduleRepair").html(total_schedule_orders);
 						
-					console.log(snapshot.val());
+						
+					//console.log(snapshot.val());
 					
 					});
 
@@ -127,6 +126,9 @@
 								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
 							}else{
 								updateOrderOnTable(updateOrder,row);
+							}
+							if(updateOrder.ContractorID!=""){
+								addListeneContractor(updateOrder.ContractorID);
 							}
 						}else{
 							row=validateExist(updateOrder.OrderNumber);
@@ -161,9 +163,41 @@
                     console.log("Data: " + deletedOrder.OrderNumber);
                     
 					});
-					//for (mark in marketrs) {  
- 				 	//	console.log(mark);
-					//}	
+					
+					
+				}
+
+				function addListeneContractor(id_contractor){
+					var refContractor = firebase.database().ref("/Contractors/"+id_contractor);
+					refContractor.on("child_changed", function(snapshot, prevChildKey) {
+						var updateContractor = snapshot.val();
+
+						var marker={
+							lat: parseFloat(updateContractor.CurrentLocation.latitude),
+							lng: parseFloat(updateContractor.CurrentLocation.longitude),
+							icon: iconBase+'library_maps.png'
+						};
+						var oMarket=addMarketContractor(marker,updateContractor);
+						contractorMarker.push(oMarket);
+
+					});
+				}
+
+				function addMarketContractor(data,fila){
+					var image="contractor.png";
+					var oMarket= new google.maps.Marker({
+						position: new google.maps.LatLng(data.lat,data.lng),
+						map:mapObject,
+						icon:'img/img_maps/'+image,
+						id:fila.OrderNumber
+					});
+
+					oMarket.addListener('click', function() {
+									infowindow.setContent('<p><b>Name:</b>'+fila.ContNameFirst+' '+fila.ContNameLast+'<br><b>Tel:</b>'+fila.ContPhoneNum+
+															'<br><b>Status:</b>'+fila.ContWorkStatus+'</p>');
+									infowindow.open(map, this);
+								});
+					return oMarket;
 				}
 
 				function addMarket(data,fila,infowindow){
@@ -178,6 +212,22 @@
 						image="open_service_f.png";
 					}else if(fila.Status=='G'){
 						image="open_service_g.png";
+					}else if(fila.Status=='H'){
+						image="open_service_h.png";
+					}else if(fila.Status=='I'){
+						image="open_service_i.png";
+					}else if(fila.Status=='J'){
+						image="open_service_j.png";
+					}else if(fila.Status=='K'){
+						image="open_service_k.png";
+					}else if(fila.Status=='C'){
+						image="open_service_c.png";
+					}else if(fila.Status=='P'){
+						image="open_service_p.png";
+					}else if(fila.Status=='R'){
+						image="open_service_r.png";
+					}else if(fila.Status=='S'){
+						image="open_service_s.png";
 					}else{
 						image="if_sign-error_299045.png";
 					}
