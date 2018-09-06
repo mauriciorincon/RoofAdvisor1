@@ -44,29 +44,22 @@
 				var contractorMarker=[];
 				var mapObject;
 				var infowindow;
-				// Initialize and add the map
+				var orderOpenContractor=[];
+				<?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+				
 				function initMap() {
-					// The location of Uluru
+					
 					var uluru = {lat: 25.745693, lng: -80.375028};
-					// The map, centered at Uluru
+					
 					mapObject = new google.maps.Map(
-						document.getElementById('map'), {zoom: 11, center: uluru});
-					// The marker, positioned at Uluru
-					//var marker = new google.maps.Marker({position: uluru, map: map});
+					document.getElementById('map'), {zoom: 11, center: uluru});
+					
 					var marker="";
 					var total_orders=0;
 					var total_schedule_orders=0;
 					var total_emergengy_orders=0;
 					
-					var marker="";
-					
-					
-
 					infowindow = new google.maps.InfoWindow();
-
-					<?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
-					
-
 					var iconBase = iconBase+'/img/img_maps/';
 
 
@@ -88,15 +81,31 @@
 									var oMarket=addMarket(marker,fila,infowindow);
 									marketrs.push(oMarket);
 
+									if(fila.Status=='D'){
+										if(fila.ContractorID!="" || fila.ContractorID!=undefined){
+											orderOpenContractor.push(fila.ContractorID);
+											var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
+											refContractor.once("value", function(snapshot) {
+												var updateContractor = snapshot.val();
+												var marker={
+													lat: parseFloat(updateContractor.CurrentLocation.latitude),
+													lng: parseFloat(updateContractor.CurrentLocation.longitude),
+													icon: iconBase+'library_maps.png'
+												};
+												var oMarket=addMarketContractor(marker,updateContractor);
+												contractorMarker.push(oMarket);
+											});
+										}
+									}
 									
 									
-									total_orders++;
+									/*total_orders++;
 									if(fila.RequestType=='S'){
 										total_schedule_orders++;
 									}
 									if(fila.RequestType=='E'){
 										total_emergengy_orders++;
-									}
+									}*/
 								}
 						
 						
@@ -104,6 +113,7 @@
 					
 					});
 
+					addListeneContractor();	
 					// Retrieve new orders as they are added to our database
 					ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
 						var newOrder = snapshot.val();
@@ -127,9 +137,33 @@
 							}else{
 								updateOrderOnTable(updateOrder,row);
 							}
-							if(updateOrder.ContractorID!=""){
-								addListeneContractor(updateOrder.ContractorID);
+							removeMarket(updateOrder.OrderNumber);
+							var marker={
+								lat: parseFloat(updateOrder.Latitude),
+								lng: parseFloat(updateOrder.Longitude),
+								icon: iconBase+'library_maps.png',
+								text: updateOrder.SchDate
+							};
+							var oMarket=addMarket(marker,updateOrder,infowindow);
+							marketrs.push(oMarket);
+						
+							if(updateOrder.Status=='D'){
+								if(updateOrder.ContractorID!="" || updateOrder.ContractorID!=undefined){
+									orderOpenContractor.push(fila.ContractorID);
+									var refContractor = firebase.database().ref("/Contractors/"+updateOrder.ContractorID);
+									refContractor.once("value", function(snapshot) {
+										var updateContractor = snapshot.val();
+										var marker={
+											lat: parseFloat(updateContractor.CurrentLocation.latitude),
+											lng: parseFloat(updateContractor.CurrentLocation.longitude),
+											icon: iconBase+'library_maps.png'
+										};
+										var oMarket=addMarketContractor(marker,updateContractor);
+										contractorMarker.push(oMarket);
+									});
+								}
 							}
+
 						}else{
 							row=validateExist(updateOrder.OrderNumber);
 							if(row>-1){
@@ -137,17 +171,7 @@
 							}
 						}
 						
-							removeMarket(updateOrder.OrderNumber);
-							var marker={
-										lat: parseFloat(updateOrder.Latitude),
-										lng: parseFloat(updateOrder.Longitude),
-										icon: iconBase+'library_maps.png',
-										text: updateOrder.SchDate
-									};
-									var oMarket=addMarket(marker,updateOrder,infowindow);
-									marketrs.push(oMarket);
 						
-
 						//addOrderToTable(newOrder,companyID);
 						console.log("Data: " + updateOrder.OrderNumber);
 						
@@ -167,18 +191,22 @@
 					
 				}
 
-				function addListeneContractor(id_contractor){
-					var refContractor = firebase.database().ref("/Contractors/"+id_contractor);
+				function addListeneContractor(){
+					var refContractor = firebase.database().ref("/Contractors");
 					refContractor.on("child_changed", function(snapshot, prevChildKey) {
 						var updateContractor = snapshot.val();
-
-						var marker={
-							lat: parseFloat(updateContractor.CurrentLocation.latitude),
-							lng: parseFloat(updateContractor.CurrentLocation.longitude),
-							icon: iconBase+'library_maps.png'
-						};
-						var oMarket=addMarketContractor(marker,updateContractor);
-						contractorMarker.push(oMarket);
+						var a = orderOpenContractor.indexOf(updateContractor.ContractorID);
+						
+						if (a>=0){
+							var marker={
+								lat: parseFloat(updateContractor.CurrentLocation.latitude),
+								lng: parseFloat(updateContractor.CurrentLocation.longitude),
+								icon: iconBase+'library_maps.png'
+							};
+							removeMerketContractor(updateContractor.ContractorID);
+							var oMarket=addMarketContractor(marker,updateContractor);
+							contractorMarker.push(oMarket);
+						}
 
 					});
 				}
@@ -189,7 +217,7 @@
 						position: new google.maps.LatLng(data.lat,data.lng),
 						map:mapObject,
 						icon:'img/img_maps/'+image,
-						id:fila.OrderNumber
+						id:fila.ContractorID
 					});
 
 					oMarket.addListener('click', function() {
@@ -258,6 +286,15 @@
 						}
 					})
 					
+				}
+
+				function removeMerketContractor(idContractor){
+					contractorMarker.map(function(marker) {
+						if(marker.id==idContractor){
+							marker.setVisible(false);
+							contractorMarker.splice( marketrs.indexOf(marker), 1 );
+						}
+					})
 				}
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
