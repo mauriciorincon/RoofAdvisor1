@@ -149,10 +149,13 @@
 						
 							if(updateOrder.Status=='D'){
 								if(updateOrder.ContractorID!="" || updateOrder.ContractorID!=undefined){
-									orderOpenContractor.push(fila.ContractorID);
+									if (orderOpenContractor.indexOf(updateOrder.ContractorID)==-1){
+										orderOpenContractor.push(fila.ContractorID);
+									}
 									var refContractor = firebase.database().ref("/Contractors/"+updateOrder.ContractorID);
 									refContractor.once("value", function(snapshot) {
 										var updateContractor = snapshot.val();
+										removeMarketContractor(updateContractor.ContractorID);
 										var marker={
 											lat: parseFloat(updateContractor.CurrentLocation.latitude),
 											lng: parseFloat(updateContractor.CurrentLocation.longitude),
@@ -162,6 +165,8 @@
 										contractorMarker.push(oMarket);
 									});
 								}
+							}else{
+								removeMarketContractor(updateOrder.ContractorID);
 							}
 
 						}else{
@@ -198,12 +203,14 @@
 						var a = orderOpenContractor.indexOf(updateContractor.ContractorID);
 						
 						if (a>=0){
+							removeMarketContractor(updateContractor.ContractorID);
+
 							var marker={
 								lat: parseFloat(updateContractor.CurrentLocation.latitude),
 								lng: parseFloat(updateContractor.CurrentLocation.longitude),
 								icon: iconBase+'library_maps.png'
 							};
-							removeMerketContractor(updateContractor.ContractorID);
+							
 							var oMarket=addMarketContractor(marker,updateContractor);
 							contractorMarker.push(oMarket);
 						}
@@ -275,9 +282,7 @@
 					return oMarket;
 				}
 
-				function updateMarket(){
-
-				}
+				
 				function removeMarket(idOrder){
 					marketrs.map(function(marker) {
 						if(marker.id==idOrder){
@@ -288,13 +293,19 @@
 					
 				}
 
-				function removeMerketContractor(idContractor){
-					contractorMarker.map(function(marker) {
-						if(marker.id==idContractor){
+				function removeMarketContractor(idContractor){
+					for(var i = contractorMarker.length - 1; i >= 0; i--) {
+						if(contractorMarker[i].id === idContractor) {
+							contractorMarker[i].setVisible(false);
+							contractorMarker.splice(i, 1);
+						}
+					}
+					/*contractorMarker.map(function(marker) {
+						if(marker.id===idContractor){
 							marker.setVisible(false);
 							contractorMarker.splice( marketrs.indexOf(marker), 1 );
 						}
-					})
+					})*/
 				}
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
@@ -577,12 +588,20 @@
 					finalAmount = finalAmount ? finalAmount : '$0';
 					$row.cell($row, 8).data(finalAmount).draw();
 					var companyName="";
-					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
+					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID);
+					ref.on('value', function(snapshot) {
+						company=snapshot.val();
+						//console.log(companyName);
+						companyData= '<a href="#" data-toggle1="tooltip"  title="Tel number: '+company.CompanyPhone+'  Mail:'+company.CompanyEmail+'">'+company.CompanyName+'</a>';
+						$row.cell($row, 9).data(companyData).draw();
+					});
+					/*var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
 					ref.on('value', function(snapshot) {
 						companyName=snapshot.val();
 						//console.log(companyName);
+						companyName= '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_comapny_mail.'">'.companyName.'</a>';
 						$row.cell($row, 9).data(companyName).draw();
-					});
+					});*/
 					//$row.cell($row, 9).data(getCompanyName(dataOrder.CompanyID)).draw();
 
 					var firstName="";
@@ -599,7 +618,7 @@
 					//$row.cell($row, 10).data(contractorName).draw();
 					$row.cell($row, 11).data(actions).draw();
 
-					
+					$('[data-toggle1="tooltip"]').tooltip(); 
 					
 					
 					
@@ -964,7 +983,9 @@
 												$this->_userModel=new userModel();
 											}
 											$_company_name=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyName');
-											echo $_company_name;
+											$_company_phone=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyPhone');
+											$_comapny_mail=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyEmail');
+											echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_comapny_mail.'">'.$_company_name.'</a>';
 										}else{
 										echo '';
 
@@ -977,7 +998,10 @@
 												}
 												$_driver_first=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
 												$_driver_last=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-												echo $_driver_first.' '.$_driver_last;
+												$_driver_phone=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContPhoneNum');
+												$_driver_mail=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContEmail');
+												echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_driver_phone.'  Mail:'.$_driver_mail.'">'.$$_driver_first.' '.$_driver_last.'</a>';
+												
 											}else{
 												echo "";
 											}
