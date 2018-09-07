@@ -1000,7 +1000,7 @@
 												$_driver_last=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
 												$_driver_phone=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContPhoneNum');
 												$_driver_mail=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContEmail');
-												echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_driver_phone.'  Mail:'.$_driver_mail.'">'.$$_driver_first.' '.$_driver_last.'</a>';
+												echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_driver_phone.'  Mail:'.$_driver_mail.'">'.$_driver_first.' '.$_driver_last.'</a>';
 												
 											}else{
 												echo "";
