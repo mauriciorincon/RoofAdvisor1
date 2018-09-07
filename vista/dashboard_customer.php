@@ -44,29 +44,22 @@
 				var contractorMarker=[];
 				var mapObject;
 				var infowindow;
-				// Initialize and add the map
+				var orderOpenContractor=[];
+				<?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+				
 				function initMap() {
-					// The location of Uluru
+					
 					var uluru = {lat: 25.745693, lng: -80.375028};
-					// The map, centered at Uluru
+					
 					mapObject = new google.maps.Map(
-						document.getElementById('map'), {zoom: 11, center: uluru});
-					// The marker, positioned at Uluru
-					//var marker = new google.maps.Marker({position: uluru, map: map});
+					document.getElementById('map'), {zoom: 11, center: uluru});
+					
 					var marker="";
 					var total_orders=0;
 					var total_schedule_orders=0;
 					var total_emergengy_orders=0;
 					
-					var marker="";
-					
-					
-
 					infowindow = new google.maps.InfoWindow();
-
-					<?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
-					
-
 					var iconBase = iconBase+'/img/img_maps/';
 
 
@@ -88,15 +81,31 @@
 									var oMarket=addMarket(marker,fila,infowindow);
 									marketrs.push(oMarket);
 
+									if(fila.Status=='D'){
+										if(fila.ContractorID!="" || fila.ContractorID!=undefined){
+											orderOpenContractor.push(fila.ContractorID);
+											var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
+											refContractor.once("value", function(snapshot) {
+												var updateContractor = snapshot.val();
+												var marker={
+													lat: parseFloat(updateContractor.CurrentLocation.latitude),
+													lng: parseFloat(updateContractor.CurrentLocation.longitude),
+													icon: iconBase+'library_maps.png'
+												};
+												var oMarket=addMarketContractor(marker,updateContractor);
+												contractorMarker.push(oMarket);
+											});
+										}
+									}
 									
 									
-									total_orders++;
+									/*total_orders++;
 									if(fila.RequestType=='S'){
 										total_schedule_orders++;
 									}
 									if(fila.RequestType=='E'){
 										total_emergengy_orders++;
-									}
+									}*/
 								}
 						
 						
@@ -104,6 +113,7 @@
 					
 					});
 
+					addListeneContractor();	
 					// Retrieve new orders as they are added to our database
 					ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
 						var newOrder = snapshot.val();
@@ -127,9 +137,38 @@
 							}else{
 								updateOrderOnTable(updateOrder,row);
 							}
-							if(updateOrder.ContractorID!=""){
-								addListeneContractor(updateOrder.ContractorID);
+							removeMarket(updateOrder.OrderNumber);
+							var marker={
+								lat: parseFloat(updateOrder.Latitude),
+								lng: parseFloat(updateOrder.Longitude),
+								icon: iconBase+'library_maps.png',
+								text: updateOrder.SchDate
+							};
+							var oMarket=addMarket(marker,updateOrder,infowindow);
+							marketrs.push(oMarket);
+						
+							if(updateOrder.Status=='D'){
+								if(updateOrder.ContractorID!="" || updateOrder.ContractorID!=undefined){
+									if (orderOpenContractor.indexOf(updateOrder.ContractorID)==-1){
+										orderOpenContractor.push(fila.ContractorID);
+									}
+									var refContractor = firebase.database().ref("/Contractors/"+updateOrder.ContractorID);
+									refContractor.once("value", function(snapshot) {
+										var updateContractor = snapshot.val();
+										removeMarketContractor(updateContractor.ContractorID);
+										var marker={
+											lat: parseFloat(updateContractor.CurrentLocation.latitude),
+											lng: parseFloat(updateContractor.CurrentLocation.longitude),
+											icon: iconBase+'library_maps.png'
+										};
+										var oMarket=addMarketContractor(marker,updateContractor);
+										contractorMarker.push(oMarket);
+									});
+								}
+							}else{
+								removeMarketContractor(updateOrder.ContractorID);
 							}
+
 						}else{
 							row=validateExist(updateOrder.OrderNumber);
 							if(row>-1){
@@ -137,17 +176,7 @@
 							}
 						}
 						
-							removeMarket(updateOrder.OrderNumber);
-							var marker={
-										lat: parseFloat(updateOrder.Latitude),
-										lng: parseFloat(updateOrder.Longitude),
-										icon: iconBase+'library_maps.png',
-										text: updateOrder.SchDate
-									};
-									var oMarket=addMarket(marker,updateOrder,infowindow);
-									marketrs.push(oMarket);
 						
-
 						//addOrderToTable(newOrder,companyID);
 						console.log("Data: " + updateOrder.OrderNumber);
 						
@@ -167,18 +196,24 @@
 					
 				}
 
-				function addListeneContractor(id_contractor){
-					var refContractor = firebase.database().ref("/Contractors/"+id_contractor);
+				function addListeneContractor(){
+					var refContractor = firebase.database().ref("/Contractors");
 					refContractor.on("child_changed", function(snapshot, prevChildKey) {
 						var updateContractor = snapshot.val();
+						var a = orderOpenContractor.indexOf(updateContractor.ContractorID);
+						
+						if (a>=0){
+							removeMarketContractor(updateContractor.ContractorID);
 
-						var marker={
-							lat: parseFloat(updateContractor.CurrentLocation.latitude),
-							lng: parseFloat(updateContractor.CurrentLocation.longitude),
-							icon: iconBase+'library_maps.png'
-						};
-						var oMarket=addMarketContractor(marker,updateContractor);
-						contractorMarker.push(oMarket);
+							var marker={
+								lat: parseFloat(updateContractor.CurrentLocation.latitude),
+								lng: parseFloat(updateContractor.CurrentLocation.longitude),
+								icon: iconBase+'library_maps.png'
+							};
+							
+							var oMarket=addMarketContractor(marker,updateContractor);
+							contractorMarker.push(oMarket);
+						}
 
 					});
 				}
@@ -189,7 +224,7 @@
 						position: new google.maps.LatLng(data.lat,data.lng),
 						map:mapObject,
 						icon:'img/img_maps/'+image,
-						id:fila.OrderNumber
+						id:fila.ContractorID
 					});
 
 					oMarket.addListener('click', function() {
@@ -247,9 +282,7 @@
 					return oMarket;
 				}
 
-				function updateMarket(){
-
-				}
+				
 				function removeMarket(idOrder){
 					marketrs.map(function(marker) {
 						if(marker.id==idOrder){
@@ -258,6 +291,21 @@
 						}
 					})
 					
+				}
+
+				function removeMarketContractor(idContractor){
+					for(var i = contractorMarker.length - 1; i >= 0; i--) {
+						if(contractorMarker[i].id === idContractor) {
+							contractorMarker[i].setVisible(false);
+							contractorMarker.splice(i, 1);
+						}
+					}
+					/*contractorMarker.map(function(marker) {
+						if(marker.id===idContractor){
+							marker.setVisible(false);
+							contractorMarker.splice( marketrs.indexOf(marker), 1 );
+						}
+					})*/
 				}
 				function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
 					var t = $('#table_orders_customer').DataTable();
@@ -540,12 +588,20 @@
 					finalAmount = finalAmount ? finalAmount : '$0';
 					$row.cell($row, 8).data(finalAmount).draw();
 					var companyName="";
-					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
+					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID);
+					ref.on('value', function(snapshot) {
+						company=snapshot.val();
+						//console.log(companyName);
+						companyData= '<a href="#" data-toggle1="tooltip"  title="Tel number: '+company.CompanyPhone+'  Mail:'+company.CompanyEmail+'">'+company.CompanyName+'</a>';
+						$row.cell($row, 9).data(companyData).draw();
+					});
+					/*var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
 					ref.on('value', function(snapshot) {
 						companyName=snapshot.val();
 						//console.log(companyName);
+						companyName= '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_comapny_mail.'">'.companyName.'</a>';
 						$row.cell($row, 9).data(companyName).draw();
-					});
+					});*/
 					//$row.cell($row, 9).data(getCompanyName(dataOrder.CompanyID)).draw();
 
 					var firstName="";
@@ -562,7 +618,7 @@
 					//$row.cell($row, 10).data(contractorName).draw();
 					$row.cell($row, 11).data(actions).draw();
 
-					
+					$('[data-toggle1="tooltip"]').tooltip(); 
 					
 					
 					
@@ -927,7 +983,9 @@
 												$this->_userModel=new userModel();
 											}
 											$_company_name=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyName');
-											echo $_company_name;
+											$_company_phone=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyPhone');
+											$_comapny_mail=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyEmail');
+											echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_comapny_mail.'">'.$_company_name.'</a>';
 										}else{
 										echo '';
 
@@ -940,7 +998,10 @@
 												}
 												$_driver_first=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
 												$_driver_last=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-												echo $_driver_first.' '.$_driver_last;
+												$_driver_phone=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContPhoneNum');
+												$_driver_mail=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContEmail');
+												echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_driver_phone.'  Mail:'.$_driver_mail.'">'.$_driver_first.' '.$_driver_last.'</a>';
+												
 											}else{
 												echo "";
 											}

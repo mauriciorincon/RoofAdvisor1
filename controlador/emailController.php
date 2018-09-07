@@ -68,7 +68,7 @@ class emailController{
         }
     }
 
-    public function sendMailSMTP($toAddress,$subject,$body,$attachmentPath){
+    public function sendMailSMTP($toAddress,$subject,$body,$attachmentPath,$putLogo=""){
         /*$mail = new PHPMailer;
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
