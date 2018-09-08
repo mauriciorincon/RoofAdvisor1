@@ -2,12 +2,19 @@
     if(!isset($_SESSION)) { 
         session_start(); 
     } 
+    echo "http://" . $_SERVER['HTTP_HOST']."<br>";
+    echo $_SERVER['REQUEST_URI']."<br><br>";
+    
+
     //require_once($_SESSION['application_path']."/controlador/calendarController.php");
     require_once($_SESSION['application_path']."/controlador/payingController.php");
     require_once($_SESSION['application_path']."/controlador/emailController.php");
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/modelo/order.class.php");
+    require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+
+
     //require_once($_SESSION['application_path']."/controlador/userController.php");
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
@@ -25,25 +32,39 @@
     //print_r($_result);
 
     
-
-    $_objPDF=new pdfController();
-    $_objPDF->paymentConfirmation1("313",null,100);
     
-    echo "hola";
+    //$_objPDF=new pdfController();
+    //$_objPDF->paymentConfirmation1("313",null,100);
+    
+    
     //$_orderModel=new orderModel();
     //$_lastOrderNumber=$_orderModel->getLasOrderNumberParameter("Parameters/LastOrderID");
     //echo "Order id: ".$_lastOrderNumber;
 
-    /* Send Mail
-    $_objMail=new emailController();
+    //Send Mail
+    //$_objMail=new emailController();
 
 
-    $_result=$_objMail->sendMail2("mauricio.rincon@gmail.com","<p>Hello, this is the <b>invoice</b></p>",$_SESSION['application_path'].'/invoice/invoice_227.pdf');
-    if(is_bool($_result)){
-        echo $_objMail->getMessageError();
-    }else{
-        echo $_result;
-    }*/
+    //$_result=$_objMail->sendMailSMTP();
+    //if(is_bool($_result)){
+    //   echo $_objMail->getMessageError();
+    //}else{
+    //    echo $_result;
+    //}
+    $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_html="";
+        foreach($_array as $key => $item){
+            echo $item;
+            $_output_html.=call_user_func( array( "customerFAQ", $item ) );
+        }
+        echo $_output_html."<br><br>";
+        
+
+        echo $_information::number_1;
+        echo $_information::number_2;
+        echo $_information::number_3;
+        echo $_information::number_4;
 
 
 

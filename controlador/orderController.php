@@ -74,6 +74,9 @@ class orderController{
                 break;
             case "R":
                 $_firstStatus="P";
+                $arrayDataOrder['CompanyID']="CO000000";
+                $arrayDataOrder['ContractorID']="";
+
                 break;
 
         }
@@ -158,15 +161,38 @@ class orderController{
     }
 
     public function updateOrder($orderID,$arrayFields){
+        $stripeID="";
+        $amount="";
+        $paymentType="";
+
         $this->_orderModel=new orderModel();
         
 
         for($n=0;$n<count($arrayFields);$n+=2){
-
+           
             $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+            if(strcmp($arrayFields[$n],"StripeID")==0){
+                $stripeID=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"amount")==0){
+                $amount=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"PaymentType")==0){
+                $paymentType=$arrayFields[$n+1];
+            }
+
+        }
+        if(!empty($paymentType)){
+            $_objPDF=new pdfController();
+            $_result_invoice=$_objPDF->paymentConfirmation2($orderID,null,$amount,$stripeID,$paymentType);
         }
         if(is_bool($_result)){
-            return "The order was update correctly";
+            if(!empty($paymentType)){
+                return "Thank you for your payment. An invoice has been sent to your email. Please remenber to rate your contractor and service.";
+            }else{
+                return "The order was update correctly";
+            }
+            
         }else{
             return $_result;
         }

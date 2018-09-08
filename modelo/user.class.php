@@ -70,7 +70,7 @@ class userModel extends connection{
     }
 
     public function insertCustomer($id_customer,$dataCustomer){
-        $this->insertDataTable("Customers",$id_customer,$dataCustomer,true); 
+        return $this->insertDataTable("Customers",$id_customer,$dataCustomer,true); 
     }
 
     public function updateContractor($nodeName,$data){
@@ -116,8 +116,13 @@ class userModel extends connection{
         return $result;
     }
 
-    public function getListCompany($table){
-        $result=$this->getDataTable($table);
+    public function getListCompany($table,$field,$searchValue){
+        if(empty($field)){
+            $result=$this->getDataTable($table);    
+        }else{
+            $result=$this->getQueryEqualM($table,$field,$searchValue);
+        }
+        
         return $result;
     }
 

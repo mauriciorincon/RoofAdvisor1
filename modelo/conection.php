@@ -143,6 +143,7 @@ class connection{
     }
 
     public function getDataByDate($table,$field,$startYear,$startMonth,$finishYear,$finishMonth){
+        echo $startYear."-".$startMonth;
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
                         ->startAt($startMonth)
@@ -153,10 +154,13 @@ class connection{
         $_array_tmp=array();
         if(is_array($value)){
             foreach($value as $key => $value1){
-                if(substr_compare( $value1['SchDate'], $startYear, -strlen( $startYear ) ) === 0){
-                    array_push($_array_tmp,$value1);
+                if(strlen($value1['SchDate'])>strlen( $startYear )){
+                    if(substr_compare( $value1['SchDate'], $startYear, -strlen( $startYear ) ) === 0){
+                        array_push($_array_tmp,$value1);
+                    }
                 }
             }
+            //print_r($_array_tmp);
             return $_array_tmp;
         }else{
             return null;
@@ -277,7 +281,7 @@ class connection{
             }
             
             $createdUser = $auth->createUser($_userProperties);
-            $auth->sendEmailVerification($createdUser->uid);
+            //$auth->sendEmailVerification($createdUser->uid);
             return $createdUser;
         } catch (Kreait\Firebase\Exception\Auth\EmailExists $e) {
             return $e->getMessage();

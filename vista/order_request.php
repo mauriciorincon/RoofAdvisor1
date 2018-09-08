@@ -301,25 +301,25 @@
 				<div class="list-group-item ">
 						<div class="form-group">
 						
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked><h4><strong>Flat, Single Ply</strong></h4></label>
-							</div>
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option2" value="Asphalt"><h4><strong>Asphalt</strong></h4></label>
-							</div>
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite"><h4><strong>Wood Shake/Composite</strong></h4></label>
-							</div>
-
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option4" value="Metal"><h4><strong>Metal</strong></h4></label>
-							</div>
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option5" value="Tile"><h4><strong>Tile</strong></h4></label>
-							</div>
-							<div class ="col-md-4">
-								<label class="radio-inline"><input type="radio" name="estep3Option" id="estep3Option6" value="Do not know"><h4><strong>Do not Know</strong></h4></label>
-							</div>							
+							<style>
+								.segmented-control > label::after {
+									background-color: #319DD4;
+								}
+							</style>
+							<div class="segmented-control" style="width: 100%; color: #319DD4">
+								<input type="radio" name="estep3Option" data-value="Flat, Single Ply" id="sc-1-1-1" checked>
+								<input type="radio" name="estep3Option" data-value="Asphalt" id="sc-1-1-2">
+								<input type="radio" name="estep3Option" data-value="Wood Shake/Composite" id="sc-1-1-3" >
+								<input type="radio" name="estep3Option" data-value="Metal" id="sc-1-1-4">
+								<input type="radio" name="estep3Option" data-value="Tile" id="sc-1-1-5">
+								<input type="radio" name="estep3Option" data-value="Do not know" id="sc-1-1-6">
+								<label for="sc-1-1-1" data-value="Flat, Single Ply">Flat, Single Ply</label>
+								<label for="sc-1-1-2" data-value="Asphalt">Asphalt</label>
+								<label for="sc-1-1-3" data-value="Wood Shake/Composite">Wood Shake/Composite</label>
+								<label for="sc-1-1-4" data-value="Metal">Metal</label>
+								<label for="sc-1-1-5" data-value="Tile">Tile</label>
+								<label for="sc-1-1-6" data-value="Do not know">Do not know</label>
+							</div>					
 						</div>
 						<label>&nbsp;</label>
 				</div>
@@ -330,12 +330,15 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-6">
-							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
-						</div>
-						<div class ="col-md-6">
-							<label class="radio-inline"><input type="radio" name="estep4Option" id="estep4Option2" value="No"><h4><strong>No</strong></h4></label>
-						</div>
+							<div class="segmented-control" style="width: 100%; color: #319DD4">
+								<input type="radio" name="estep4Option" data-value="Yes" id="estep4Option1" checked>
+								<input type="radio" name="estep4Option" data-value="No" id="estep4Option2">
+								
+								<label for="estep4Option1" data-value="Yes">Yes</label>
+								<label for="estep4Option2" data-value="No">No</label>
+								
+							</div>
+
 					</div>
 
 					<label>&nbsp;</label>
@@ -347,18 +350,19 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-3">
-							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option1" value="1 story" checked><h4><strong>One</strong></h4></label>
-						</div>
-						<div class ="col-md-3">
-							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option2" value="2 story"><h4><strong>Two</strong></h4></label>
-						</div>
-						<div class ="col-md-3">
-							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option3" value="3 or more"><h4><strong>Three</strong></h4></label>
-						</div>
-						<div class ="col-md-3">
-							<label class="radio-inline"><input type="radio" name="estep5Option" id="estep5Option4" value="3 or more"><h4><strong>More</strong></h4></label>
-						</div>
+							<div class="segmented-control" style="width: 100%; color: #319DD4">
+								<input type="radio" name="estep5Option" data-value="1 story" id="estep5Option1" checked>
+								<input type="radio" name="estep5Option" data-value="2 story" id="estep5Option2">
+								<input type="radio" name="estep5Option" data-value="3 or more" id="estep5Option3" >
+								<input type="radio" name="estep5Option" data-value="3 or more" id="estep5Option4">
+								
+								<label for="estep5Option1" data-value="1 story">One</label>
+								<label for="estep5Option2" data-value="2 story">Two</label>
+								<label for="estep5Option3" data-value="3 or more">Three</label>
+								<label for="estep5Option4" data-value="3 or more">More</label>
+								
+							</div>
+						
 					</div>
 					
 					<label>&nbsp;</label>
@@ -370,12 +374,15 @@
 
 				<div class="list-group-item ">
 					<div class="form-group">
-						<div class ="col-md-6">
-							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option1" value="Yes" checked><h4><strong>Yes</strong></h4></label>
-						</div>
-						<div class ="col-md-6">
-							<label class="radio-inline"><input type="radio" name="estep6Option" id="estep6Option2" value="No"><h4><strong>No</strong></h4></label>
-						</div>
+							<div class="segmented-control" style="width: 100%; color: #319DD4">
+								<input type="radio" name="estep6Option" data-value="Yes" id="estep6Option1" checked>
+								<input type="radio" name="estep6Option" data-value="No" id="estep6Option2">
+								
+								<label for="estep6Option1" data-value="Yes">Yes</label>
+								<label for="estep6Option2" data-value="No">No</label>
+								
+							</div>
+						
 					</div>
 					<label>&nbsp;</label>
 				</div>
@@ -384,7 +391,6 @@
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
 			</div>
 		</div>
-
 		
 		<div class="panel panel-primary setup-contentOrder" id="step-3">
             <div class="panel-heading">
@@ -424,13 +430,11 @@
 
 								map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
-								zoom: 7
+								zoom: 12
 								});
 
 								////Get lat and long from zipcode
-								
-
-								
+							
 								setLocation(map,"")
 								/////////////////////////////////////
 
@@ -556,29 +560,21 @@
                  <h3 class="panel-title"><font size="10"><strong>Select a time for service ....</strong></font></h3>
             </div>
             <div class="panel-body">
-				<div class="form-group">			
-				<span ><h4><b>Please select the date and time of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker"><h4><b>Schedule repair service are schedule a week in advance</b></h4>
-				</div>
-					
-				<div class="form-group">
-					<div class="container:'body'">
-						<div class="btn-group" role="group" arial-label="Basic example">
-							<button type="button" class="btn btn-success" name="step6time" >9:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">10:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">11:00 AM</button>
-							<button type="button" class="btn btn-success" name="step6time">12:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">1:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">2:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">3:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">4:00 PM</button>
-							<button type="button" class="btn btn-success" name="step6time">5:00 PM</button>
-						</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<span ><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
-				</div>
-				
-				
-
-                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+					<div class="col-sm-6">
+						<span ><h4><b>Please select the time of service. </b></h4></span>
+						<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
+					</div>
+					<div class="col-sm-12">
+						<br>
+						<center><h4><b>Schedule repair service are schedule a week in advance</b></h4></center>
+					</div>
+	
+				</div> 
+              <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
         </div>
@@ -600,17 +596,10 @@
 							
 				</div>
 
-
-
-				<div class="list-group" id="step7ListCompany">
+				<div class="list-group1" id="step7ListCompany">
 					
 				</div>
-
-
-
-				
-
-                
+         
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
@@ -618,7 +607,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-6">
             <div class="panel-heading">
-                 <h3 class="panel-title">Review Scheduled Repair Order Details</h3>
+                 <h3 class="panel-title"><font size="10"><strong>Review Scheduled Repair Order Details</strong></font></h3>
             </div>
             <div class="panel-body">
 				
@@ -665,8 +654,6 @@
 							</div>
 						</a>
 				</div>-->
-				
-				
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
@@ -675,23 +662,48 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-8">
             <div class="panel-heading">
-                 <h3 class="panel-title">Payment Processing/h3>
+                 <h3 class="panel-title">Payment Processing</h3>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label text-center h1"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
-					<?php
-					if(!isset($_SESSION)) { 
-						session_start(); 
-					} 
-					require_once($_SESSION['application_path']."/controlador/payingController.php");
+                <div class="form-group">		
+						<div class ="col-md-6">
+							<div class="list-group">
+								<a href="#" class="list-group-item ">
+									<span class="glyphicon glyphicon-info-sign"></span>Emergency Service 
+									<div class="d-flex w-100 justify-content-between">
+									<b>Emergency Repair Service Charge of $75 is the initial cost to secure the same day service response from a qualified, pre-screened service professional. If the service professional is unable to provide service within 24 hours from the time you submit payment, we will refund the emergency repair charge.</b>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class ="col-md-6">
+							<div class="list-group">
+								<a href="#" class="list-group-item ">
+									<span class="glyphicon glyphicon-info-sign"></span>Roof Report 
+									<div class="d-flex w-100 justify-content-between">
+									<b>Ordering a Roof Report cost $29. We create detailed aerial roof measurements and diagrams that are sent to you via email and can be viewed in our web site. If we cannot create a roof report for you due to obstructions or roof complexity, we will refund your money.</b>
+									</div>
+								</a>
+							</div>
+							
+						</div>
+					<div class ="col-md-12">
+						<label class="control-label text-center h1"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
+						<?php
+							if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							echo "<center>";
+							$_objPay->showPayingWindow1();
+							echo "</center>";
+						?>
+					</div>	
+                    
 					
-				
-					$_objPay=new payingController();
-					echo "<center>";
-					$_objPay->showPayingWindow1();
-					echo "</center>";
-					?>
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
                 </div>
 				
@@ -706,7 +718,7 @@
 		<div class="panel panel-primary setup-contentOrder" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading">
-                 <h3 class="panel-title">Customer information</h3>
+                 <h3 class="panel-title"><font size="10"><strong>Customer information</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
@@ -731,15 +743,15 @@
 										<label>Password<span class="required">*</span></label>
 										<input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
 									</div>
-									<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br>
+									<button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
 									<label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 									<a href="#">Forgot password?</a>
 									
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
-						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
 					</div>
 					<div class="col-sm-6">
 						<div class="list-group">
@@ -804,7 +816,7 @@
 									<label class="control-label">Phone number</label>
 									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
 								</div>  
-								<button class=" btn-primary nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
 							</div>
 							
 						</div>

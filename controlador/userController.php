@@ -8,6 +8,8 @@ require_once($_SESSION['application_path']."/modelo/user.class.php");
 require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+
 
 //include 'vendor/autoload.php';
 //include 'vendor/vendor/ktamas77/firebase-php/src/firebaseLib.php';
@@ -235,7 +237,7 @@ class userController{
                     "PayInfoName" => "",
                     "PrimaryFName" => $arrayContractor['firstNameCompany'],
                     "PrimaryLName" => $arrayContractor['lastNameCompany'],
-                    "Status_Rating" => ""
+                    "Status_Rating" => "5.0"
             );
             $this->_userModel->insertContractor($_newCompanyId,$Company);
             return $_newCompanyId;
@@ -245,11 +247,10 @@ class userController{
         
     }
 
-    public function getListCompany(){
+    public function getListCompany($field="",$value=""){
         $this->_userModel=new userModel();
-        $_result=$this->_userModel->getListCompany('Company');
+        $_result=$this->_userModel->getListCompany('Company',$field,$value);
         return $_result;
-
     }
 
     public function insertCustomer($arrayCustomer){
@@ -265,7 +266,7 @@ class userController{
         //return $hashActivationCode;
 
         if(is_array($_response) or gettype($_response)=="object"){
-            //$hashActivationCode = md5( rand(0,1000) );
+            
             //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
             $hashActivationCode = 'FBID';
             $Customer = array(
@@ -281,9 +282,17 @@ class userController{
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
             );
-            $this->_userModel->insertCustomer($hashActivationCode,$Customer);
+            $_response=$this->_userModel->insertCustomer($hashActivationCode,$Customer);
+            $hashActivationCode = md5( rand(0,1000) );
+            $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode);
+            
             $this->_sendMail=new emailController();
-            $this->_sendMail->sendMail($arrayCustomer['emailValidation'],$hashActivationCode);
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            if($_mail_response==false){
+                return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+            }else{
+                //return "OK ".$_response."<br>".$_mail_response;
+            }
         }else{
             return "Error".$_response;
         } 
@@ -368,7 +377,9 @@ class userController{
             //print_r($_array_customer_to_show);
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');
-            
+
+            $_menu_item=$this->getItemMenu();
+            $_divs_info=$this->fillInformationMenu();
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
             require_once("vista/footer.php");
@@ -547,6 +558,63 @@ class userController{
     public function getCompanyById($companyID){
         $this->_userModel=new userModel();
         return $this->_userModel->getCompanyByID($companyID);
+    }
+
+    public function fillInformationMenu(){
+        $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_html="";
+
+       
+        foreach($_array as $key => $item){
+            $_head_box='<div class="modal fade" id="'.$item.'" role="dialog">
+            <div class="modal-dialog modal-dialog-centered"> 
+            <!-- Modal content--> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>';
+                    
+            $_foot_box='<div class="modal-footer" id="buttonPayment"> 
+                            <button type="button" class="btn btn-default" id="buttonCancel'.$item.'" data-dismiss="modal">Close</button> 
+                        </div> 
+                    </div> 
+                </div>
+            </div>';
+            $_output_html.=$_head_box.'<h4 class="modal-title" id="headerTextPayment">'.constant("customerFAQ::$item").'</h4> 
+                    </div> 
+                    <div class="modal-body" id="textPayment"> 
+                        <p >'.call_user_func( array( "customerFAQ", $item ) ).'</p> 
+                    </div>'.$_foot_box;
+            
+        }
+        return $_output_html;
+    }
+
+    public function getItemMenu(){
+        $_information=new customerFAQ();
+        $_array=$_information->getArrayOptions();
+        $_output_menu="";
+        foreach($_array as $key => $item){
+            $_output_menu.='<li><a href="#'.$item.'" data-toggle="modal">'.constant("customerFAQ::$item").'</a></li>';
+        }
+        
+        return $_output_menu;
+    }
+    
+    public function welcomeMail($_customerArray,$_validation_code){
+        $_message='
+        <table>
+            <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2"><a target="_blank" href="http://www.roofadvisorz.com/vc/validateCode.php?t=c&verify='.$_validation_code.'">http://www.roofadvisorz.com/vc/validateCode.php?t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2">Is your verification link not working? You can copy and paste this verification code as well.</td></tr>
+            <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
+            <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
+            <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
+            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+        </table>
+        ';
+        return $_message;
     }
 }
 ?>
