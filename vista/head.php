@@ -29,10 +29,14 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
                 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
+<<<<<<< HEAD
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css" >
 		<link rel="stylesheet" href="vista/css/segmented-controls.css" >
 		<link rel="stylesheet" href="vista/css/segmented-controls.scss" >
 
+=======
+		
+>>>>>>> b7e266243336cc15c7323abd16a6cd4b70bd73ec
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="js/fontawesome.min.js"></script>

@@ -50,12 +50,17 @@
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div id="zip-panel-heading" class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
 =======
             <div class="panel-heading">
                  <h3 class="panel-title"><font size="10"><strong>ZIP CODE</strong></font></h3>
 >>>>>>> f4719fbc17f756757f3028b754f53cc6546fdd99
+=======
+            <div id="zip-panel-heading" class="panel-heading">
+                 <h3 class="panel-title">ZIP CODE</h3>
+>>>>>>> b7e266243336cc15c7323abd16a6cd4b70bd73ec
             </div>
             <div class="panel-body">
                 <div class="form-group">
@@ -349,7 +354,6 @@
 								
 							</div>
 
-						
 					</div>
 
 					<label>&nbsp;</label>
@@ -373,7 +377,6 @@
 								<label for="estep5Option4" data-value="3 or more">More</label>
 								
 							</div>
-
 						
 					</div>
 					
@@ -403,7 +406,6 @@
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
 			</div>
 		</div>
-
 		
 		<div class="panel panel-primary setup-contentOrder" id="step-3">
             <div class="panel-heading">
@@ -447,9 +449,7 @@
 								});
 
 								////Get lat and long from zipcode
-								
-
-								
+							
 								setLocation(map,"")
 								/////////////////////////////////////
 
@@ -589,11 +589,7 @@
 					</div>
 	
 				</div> 
-				
-				
-				
-
-                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
+              <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
         </div>
@@ -615,17 +611,10 @@
 							
 				</div>
 
-
-
 				<div class="list-group1" id="step7ListCompany">
 					
 				</div>
-
-
-
-				
-
-                
+         
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
             </div>
@@ -680,8 +669,6 @@
 							</div>
 						</a>
 				</div>-->
-				
-				
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
