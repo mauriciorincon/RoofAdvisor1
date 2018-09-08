@@ -281,7 +281,7 @@ class connection{
             }
             
             $createdUser = $auth->createUser($_userProperties);
-            $auth->sendEmailVerification($createdUser->uid);
+            //$auth->sendEmailVerification($createdUser->uid);
             return $createdUser;
         } catch (Kreait\Firebase\Exception\Auth\EmailExists $e) {
             return $e->getMessage();

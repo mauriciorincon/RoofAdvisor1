@@ -204,3 +204,10 @@
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #2473f2;
 }
+
+.list-group1{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}

@@ -49,8 +49,13 @@
     <form role="form">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
+<<<<<<< HEAD
             <div id="zip-panel-heading" class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
+=======
+            <div class="panel-heading">
+                 <h3 class="panel-title"><font size="10"><strong>ZIP CODE</strong></font></h3>
+>>>>>>> f4719fbc17f756757f3028b754f53cc6546fdd99
             </div>
             <div class="panel-body">
                 <div class="form-group">
@@ -612,7 +617,7 @@
 
 
 
-				<div class="list-group" id="step7ListCompany">
+				<div class="list-group1" id="step7ListCompany">
 					
 				</div>
 
@@ -628,7 +633,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-6">
             <div class="panel-heading">
-                 <h3 class="panel-title">Review Scheduled Repair Order Details</h3>
+                 <h3 class="panel-title"><font size="10"><strong>Review Scheduled Repair Order Details</strong></font></h3>
             </div>
             <div class="panel-body">
 				
@@ -694,7 +699,7 @@
 								<a href="#" class="list-group-item ">
 									<span class="glyphicon glyphicon-info-sign"></span>Emergency Service 
 									<div class="d-flex w-100 justify-content-between">
-									Emergency Repair Service Charge of $75 is the initial cost to secure the same day service response from a qualified, pre-screened service professional. If the service professional is unable to provide service within 24 hours from the time you submit payment, we will refund the emergency repair charge.
+									<b>Emergency Repair Service Charge of $75 is the initial cost to secure the same day service response from a qualified, pre-screened service professional. If the service professional is unable to provide service within 24 hours from the time you submit payment, we will refund the emergency repair charge.</b>
 									</div>
 								</a>
 							</div>
@@ -704,7 +709,7 @@
 								<a href="#" class="list-group-item ">
 									<span class="glyphicon glyphicon-info-sign"></span>Roof Report 
 									<div class="d-flex w-100 justify-content-between">
-									Ordering a Roof Report cost $29. We create detailed aerial roof measurements and diagrams that are sent to you via email and can be viewed in our web site. If we cannot create a roof report for you due to obstructions or roof complexity, we will refund your money.
+									<b>Ordering a Roof Report cost $29. We create detailed aerial roof measurements and diagrams that are sent to you via email and can be viewed in our web site. If we cannot create a roof report for you due to obstructions or roof complexity, we will refund your money.</b>
 									</div>
 								</a>
 							</div>
@@ -741,7 +746,7 @@
 		<div class="panel panel-primary setup-contentOrder" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading">
-                 <h3 class="panel-title">Customer information</h3>
+                 <h3 class="panel-title"><font size="10"><strong>Customer information</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
