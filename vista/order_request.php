@@ -41,11 +41,26 @@
         </div>
     </div>
     <div id="appfrm1">
+    <div id="welcome-txt">
+    <span>
+    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong>service!
+    </span>
+    </div>
     <form role="form">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
+<<<<<<< HEAD
+<<<<<<< HEAD
             <div id="zip-panel-heading" class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
+=======
+            <div class="panel-heading">
+                 <h3 class="panel-title"><font size="10"><strong>ZIP CODE</strong></font></h3>
+>>>>>>> f4719fbc17f756757f3028b754f53cc6546fdd99
+=======
+            <div id="zip-panel-heading" class="panel-heading">
+                 <h3 class="panel-title">ZIP CODE</h3>
+>>>>>>> b7e266243336cc15c7323abd16a6cd4b70bd73ec
             </div>
             <div class="panel-body">
                 <div class="form-group">
@@ -859,17 +874,28 @@
 </div>-->
 <span style="font-size:34px;"> <strong>Emergency Roof Repair? Schedule an Appointment? Need a Roof Report?</strong> </span>
 </br></br>
-<p id='srvappph1'>
-This same day, on-demand service for hiring a prescreened service professional to fix a leaky roof before the damage is done.  The same day service you receive and approve the electronic estimate prior to start of work, receive before and after pictures of the repair, GPS tracking, and online payment when the work is complete. RoofAdvisorZ is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofAdvisorZ, you answer 5 questions and a prescreened, local service professional will confirm they are on the way.  That easy!
-</br>
-</br>
-Not an emergency roof repair and want to schedule a repair or estimate? No problem, just answer 5 questions, and a prescreened service professional will confirm the scheduled appointment.
-</br>
-</br>
-Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 30 mins. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample.
+<p class='srvappph1'>
+This is a same day, on-demand service for hiring prescreened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
 </p>
+<ul id="rhlist">
+  <li>Track the contractor’s arrival to your home via GPS tracking</li>
+  <li>Receive and approve the electronic estimate prior to start of work</li>
+  <li>Get before and after pictures of the repair</li>
+  <li>Easy, secure online payment when the work is complete and invoice sent to your email</li>
+</ul>
+</br>
+<ul class='srvappph1'>
+<li id="easyli">RoofAdvisorZ is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home. It’s that easy!</li>
+</br>
+<li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a prescreened service professional will confirm your order for an appointment. </li>
+</br>
+<li id="reportli">Need a roof report? RoofAdvisorZ provide a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. See sample</li>
+</br>
+</ul>
+</br>
+<img  id="hworks" src="img/howitworks.png">
 </div>
-<form role='form'>
+<!--<form role='form'>
  <div id='srvappsrch1'>
    <input maxlength="100" type="text" required="required" class="form-control input-md" placeholder="Enter your phone number" id="PhoneBegin" name="PhoneBegin">
 </div>
@@ -877,21 +903,21 @@ Need a roof report? RoofAdvisorz provide a detailed roof report for $29 within 3
 <img src='img/searchbtn.png'>
 <span id='srvbtnsrch'>SEARCH</span>
 </div>
-</form>
+</form>-->
 </div>
 <div id='cmapp1' class="container">
  <div id='cmapp3'>
-  <img src='img/worker1.png'>
+  <img src='img/florida-house.png'>
  </div>
  <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</span></br><img id='cmappimg2' src='img/bquote.png'>
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='cmappimg2' src='img/bquote.png'>
  </div>
 </div>
 <div id='appdl1' class="container">
  <div id='appdl2'>
   <span id='aphtxt1'><strong>Get Our App</strong></span>
-  <p id='aphtxt2' align="center">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
-  <img id="appphone1" src="img/app.jpg">
+  <p id='aphtxt2' align="center">Customers and service professionals stay connected together with our app. Send pictures, receive estimates, see the work status in progress and online secure payment.</p>
+  <img id="appphone1" src="img/mobile-new.png">
  </div>
 
  <div id='appdl3'>
