@@ -4,11 +4,17 @@
 	} 
 	require_once($_SESSION['application_path']."/controlador/userController.php");
 	require_once($_SESSION['application_path']."/controlador/orderController.php");
+	require_once($_SESSION['application_path']."/controlador/ratingController.php");
 
     $_contractorController=new userController();
-    $_array_company=$_contractorController->getListCompany();
+    $_array_company=$_contractorController->getListCompany("CompanyStatus","Active");
 
 	$_orderController=new orderController();
+	$_ratingController=new ratingController();
+
+	uasort($_array_company, function($a, $b) {
+		return strcmp($b['CompanyRating'], $a['CompanyRating']);
+	});
 
 	//print_r($_array_company);
     $_string="";
@@ -24,9 +30,11 @@
 			$_id_company="'".$company['CompanyID']."','company'";
 			$_porcent=intval($_count_rating)*9;
 
+			$_countReview=$_ratingController->getCountRating("IdCompany",$company['CompanyID']);
+
 			if($_count_rating>0){
 			$_string.='<a href="#" class="list-group-item " name="linkCompany">
-				<span class="glyphicon glyphicon-wrench"></span><input type="hidden" value="'.$company['CompanyID'].'" name="idContractor"> <span name="companyName">'.$_company_name.'</span><span class="badge badge-primary" style="background:green;" onclick="showRatings('.$_id_company.',)">'.$_count_rating.'</span>
+				<span class="glyphicon glyphicon-wrench"></span><input type="hidden" value="'.$company['CompanyID'].'" name="idContractor"> <span name="companyName">'.$_company_name.'</span><span class="badge badge-primary" style="background:black;" onclick="showRatings('.$_id_company.',)">'.' Reviews :  '.$_countReview.'   Rating : '.$_count_rating.'</span>
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1">'.$_company_first_name.' '.$_company_last_name.'</h5>
 					Rating: <small>'.$company['CompanyRating'].'</small>
