@@ -16,14 +16,14 @@
 		<div class="service-area pt-80 pb-60">
 			<div class="container">
 				<div class="section-heading text-center">
-				<h4>RoofAdvisorZ Privacy Policy</h4>
+				<h4>RoofServiceNow Privacy Policy</h4>
 				</div>
 				<div>
 <p>Your Privacy Rights - Last Updated: May 7, 2018</p>
 
 <p>
 
-RoofAdvisorZ respects the privacy of our users and has developed this Privacy Policy to demonstrate its commitment to protecting your privacy. This Privacy Policy is intended to describe for you, as an individual who is a user of www.RoofAdvisorZ.com (and all websites and URL's controlled or operated by Viaplix, LLC. which link to this policy, unless otherwise specified) or our services, or otherwise provide us with information through various means the information we collect, how that information may be used, with whom it may be shared, and your choices about such uses and disclosures.
+RoofServiceNow respects the privacy of our users and has developed this Privacy Policy to demonstrate its commitment to protecting your privacy. This Privacy Policy is intended to describe for you, as an individual who is a user of www.RoofServiceNow.com (and all websites and URL's controlled or operated by Viaplix, LLC. which link to this policy, unless otherwise specified) or our services, or otherwise provide us with information through various means the information we collect, how that information may be used, with whom it may be shared, and your choices about such uses and disclosures.
 
 </p>
 
@@ -143,7 +143,7 @@ Personal information. We do not share your personal information with others exce
 
 <li>
 
-<b>Service Professionals.</b> We match your information and service request against our list of Service Professionals. When you submit a service request through our website, you consent to our providing your personal information and request to the Service Professionals we match with your request. Sharing this information with Service Professionals allows them to contact you using the e-mail address or other contact information you provided. In addition, we have other approved contractual partners that fulfill service requests, or that utilize their own Service Professionals to supplement our network, and we share your information with them in order to attempt to provide the services requested. If using our services pursuant to a membership with one of our partners, RoofAdvisorZ may share your service request activity information with such partner.</li>
+<b>Service Professionals.</b> We match your information and service request against our list of Service Professionals. When you submit a service request through our website, you consent to our providing your personal information and request to the Service Professionals we match with your request. Sharing this information with Service Professionals allows them to contact you using the e-mail address or other contact information you provided. In addition, we have other approved contractual partners that fulfill service requests, or that utilize their own Service Professionals to supplement our network, and we share your information with them in order to attempt to provide the services requested. If using our services pursuant to a membership with one of our partners, RoofServiceNow may share your service request activity information with such partner.</li>
 
 <li>
 
@@ -181,13 +181,13 @@ Aggregated and non-personal information. We may share aggregated and non-persona
 
 <p>If you have an online consumer account with us, you have the ability to review and update your personal information online by logging into your account. You can also review and update your personal information by contacting us. More information about how to contact us is provided below.</p>
 
-<p>You can also choose to have your account disabled by contacting customerservice@RoofAdvisorZ.com. After you deactivate your account, you will not be able to sign in to our website or access any of your personal information. However, you can open a new account at any time. If you deactivate your account, we may still retain certain information associated with your account for analytical purposes and recordkeeping integrity, as well as to prevent fraud, collect any fees owed, enforce our terms and conditions, take actions we deem necessary to protect the integrity of our web site or our users, or take other actions otherwise permitted by law. In addition, if certain information has already been provided to third parties as described in this Privacy Policy, retention of that information will be subject to those third parties' policies.</p>
+<p>You can also choose to have your account disabled by contacting customerservice@RoofServiceNow.com. After you deactivate your account, you will not be able to sign in to our website or access any of your personal information. However, you can open a new account at any time. If you deactivate your account, we may still retain certain information associated with your account for analytical purposes and recordkeeping integrity, as well as to prevent fraud, collect any fees owed, enforce our terms and conditions, take actions we deem necessary to protect the integrity of our web site or our users, or take other actions otherwise permitted by law. In addition, if certain information has already been provided to third parties as described in this Privacy Policy, retention of that information will be subject to those third parties' policies.</p>
 
 <p>Your choices about collection and use of your information
 
 At any time a consumer user can choose to no longer receive commercial or promotional emails or newsletters from us by accessing your user account and opting out. You also will be given the opportunity, in any commercial e-mail that we send to you, to opt out of receiving such messages in the future. It may take up to 10 days for us to process an opt-out request. We may send you other types of transactional and relationship e-mail communications, such as service announcements, administrative notices, and surveys, without offering you the opportunity to opt out of receiving them.
 
-If you prefer not to have us share your postal mailing information with these selected providers of goods and services that may be of interest to you, you can notify us at any time by emailing us at optoutdirectmail@RoofAdvisorZ.com.</p>
+If you prefer not to have us share your postal mailing information with these selected providers of goods and services that may be of interest to you, you can notify us at any time by emailing us at optoutdirectmail@RoofServiceNow.com.</p>
 
 <p>Blogs, bulletin boards, reviews and chat rooms </p>
 
@@ -207,13 +207,13 @@ If you prefer not to have us share your postal mailing information with these se
 
 <p>Changes to this Privacy Policy</p>
 
-<p>We will occasionally update this Privacy Policy to reflect changes in our practices and services. When we post changes to this Privacy Policy, we will revise the "last updated" date at the top of this Privacy Policy. If we make any material changes in the way we collect, use, and/or share your personal information, we will notify you by posting the updated policy on our website, with a link denoting that the policy has been updated. We recommend that you check our website from time to time to inform yourself of any changes in this Privacy Policy or any of our other policies. To see the prior version of the RoofAdvisorZ Privacy Policy you may send a written request to Legal Department, RoofAdvisorZ, LLC., 30 Newbury St., Boston, MA 02291</p>
+<p>We will occasionally update this Privacy Policy to reflect changes in our practices and services. When we post changes to this Privacy Policy, we will revise the "last updated" date at the top of this Privacy Policy. If we make any material changes in the way we collect, use, and/or share your personal information, we will notify you by posting the updated policy on our website, with a link denoting that the policy has been updated. We recommend that you check our website from time to time to inform yourself of any changes in this Privacy Policy or any of our other policies. To see the prior version of the RoofServiceNow Privacy Policy you may send a written request to Legal Department, RoofServiceNow, LLC., 30 Newbury St., Boston, MA 02291</p>
 
 <p>How to contact us </p>
 
 <p>If you have any questions about this Privacy Policy or our information-handling practices, or if you would like to request information about our disclosure of personal information to third parties for their direct marketing purposes, please contact us by e-mail.</p>
 
-<a href="mailto: customerservice@RoofAdvisorZ.com">customerservice@RoofAdvisorZ.com</a> or <a href="mailto: privacyofficer@RoofAdvisorZ.com">privacyofficer@RoofAdvisorZ.com</a>
+<a href="mailto: customerservice@RoofServiceNow.com">customerservice@RoofServiceNow.com</a> or <a href="mailto: privacyofficer@RoofServiceNow.com">privacyofficer@RoofServiceNow.com</a>
 
 
 
@@ -251,7 +251,7 @@ If you are a resident of California, in addition to the rights set forth above, 
 
 	<li>if the nature of the third party's business cannot be determined from their name, examples of the products or services marketed.</li>
 
-<p>We may provide this information in a standardized format that is not specific to you. The designated email address for these requests is <a href="mailto:SB27Request@RoofAdvisorZ.com">SB27Request@RoofAdvisorZ.com.</a></p>
+<p>We may provide this information in a standardized format that is not specific to you. The designated email address for these requests is <a href="mailto:SB27Request@RoofServiceNow.com">SB27Request@RoofServiceNow.com.</a></p>
 
 <h5>Linked information:</h5>
 

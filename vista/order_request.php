@@ -52,7 +52,7 @@
             <div id="zip-panel-heading" class="panel-heading">
                  <h3 class="panel-title">ZIP CODE</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body pbody-white">
                 <div class="form-group">
                     <label class="control-label text-center h1"><big>ZIP CODE</big></label>
                     <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
@@ -763,7 +763,7 @@
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
 								<div class="d-flex w-100 justify-content-between">
-									<span ><b>Are you new in RoofAdvisorZ?, fill the fields below</b></span><br><br>
+									<span ><b>Are you new in RoofServiceNow?, fill the fields below</b></span><br><br>
 									
 								</div>
 							</div>
@@ -875,11 +875,11 @@ This is a same day, on-demand service for hiring prescreened service professiona
 </ul>
 </br>
 <ul class='srvappph1'>
-<li id="easyli">RoofAdvisorZ is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home. It’s that easy!</li>
+<li id="easyli">RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home. It’s that easy!</li>
 </br>
 <li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a prescreened service professional will confirm your order for an appointment. </li>
 </br>
-<li id="reportli">Need a roof report? RoofAdvisorZ provide a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. See sample</li>
+<li id="reportli">Need a roof report? RoofServiceNow can provide a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. See sample</li>
 </br>
 </ul>
 </br>

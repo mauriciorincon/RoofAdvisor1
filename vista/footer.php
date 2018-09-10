@@ -37,7 +37,7 @@
 								<div class="footer-logo">
 								   <img src="img/logo-white.png" alt="" />
 								</div>
-								<p>Roof AdvisorZ takes the stress out of finding, selecting, and paying for a roofing contractor</p>
+								<p>Roof Service Now takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
 									<li>
 										<i class="fa fa-map-marker"></i>
@@ -49,11 +49,11 @@
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span><a href="mailto:info@roofadvisorz.com">info@roofadvisorz.com</a> </span>
+										<span><a href="mailto:info@roofservicenow.com">info@roofservicenow.com</a> </span>
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span> Web : <a href='http://www.roofadvisorz.com'>www.roofadvisorz.com</span>
+										<span> Web : <a href='http://www.roofservicenow.com'>www.roofservicenow.com</span>
 									</li>
 									<p>
 									<a href='?controller=termsconditions&accion=showinfo'>Legal</a> | 
@@ -130,7 +130,7 @@
 			<div class="copyright-area">
 				<div class="container">
 					<div class="copyright-text text-center">
-						<p>Copyright © roofadvisorz 2018. All rights reserved. Created by <a href="http://www.viaplix.com/">Viaplix</a></p>
+						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.viaplix.com/">Viaplix</a></p>
 					</div>
 				</div>
 			</div>

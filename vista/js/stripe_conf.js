@@ -60,7 +60,7 @@ var handler = StripeCheckout.configure({
   document.getElementById('customButton').addEventListener('click', function(e) {
     // Open Checkout with further options:
     handler.open({
-      name: 'RoofAdvisorz',
+      name: 'RoofServicenow',
       description: 'pay your service',
       amount: amount_value
     });

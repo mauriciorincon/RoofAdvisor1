@@ -1440,7 +1440,7 @@ border-color:#fff !important;
     position:relative;
     z-index:10000;
     border-radius: 0px 0px 13px 13px;
-    color:#fff;
+    color:rgb(250, 81, 26);
 }
 #welcome-txt{
     position: absolute;
@@ -1490,6 +1490,19 @@ background: url(img/reports.png) no-repeat left top;
     margin: 0;
 }
 
+.nav>li>a:focus, .nav>li>a:hover{
+background-color: #eee0;
+}
+#logindrop{
+margin-right: -101px !important;
+    z-index: 10;
+    margin-top: -18px;
+    border-radius: 7px;
+    border-top: 3px solid #dd6741;
+}
+.pbody-white{
+color:#fff !important;
+}
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
@@ -1520,13 +1533,4 @@ margin-left:450px !important;
 #appdiv2{
 margin-left:400px !important;
 }
-.nav>li>a:focus, .nav>li>a:hover{
-background-color: #eee0;
-}
-#logindrop{
-margin-right: -125px !important;
-    z-index: 10;
-    margin-top: -5px;
-    border-radius: 7px;
-    border-top: 3px solid #dd6741;
 }

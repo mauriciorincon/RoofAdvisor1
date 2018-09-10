@@ -42,8 +42,8 @@ class emailController{
     public function sendMail2($email,$body,$attach){
         $mail = new PHPMailer;
         //$mail = new PHPMailer;
-        $mail->From = "sell@roofadvisorz.com";
-        $mail->FromName = "Roof Advisorz";
+        $mail->From = "sell@roofservicenow.com";
+        $mail->FromName = "Roof Service Now";
 
         $mail->addAddress($email, "Recipient Name");
 
@@ -55,7 +55,7 @@ class emailController{
 
         $mail->isHTML(true);
 
-        $mail->Subject = "RoofAdvisorz Invoice";
+        $mail->Subject = "Roof Service Now Invoice";
         $mail->Body = $body;
         $mail->AltBody = "This is the plain text version of the email content";
         
@@ -75,7 +75,7 @@ class emailController{
         $email_password = "p6ssw0rd25";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = $toAddress;
-        $from_name = "RoofAdvisorZ";
+        $from_name = "RoofServiceNow";
         $phpmailer = new PHPMailer();
         // ---------- datos de la cuenta de Gmail -------------------------------
         $phpmailer->Username = $email_user;
