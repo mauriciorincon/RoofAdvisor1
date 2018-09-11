@@ -414,7 +414,7 @@ class connection{
         echo "no paso a ningun error";
     }
 
-    public function changeUserPassword($_userId,$_password,$_profile){
+    public function changeUserPass($_userId,$_password,$_profile){
         $auth=null;
         try {
             if(strcmp($_profile,"customer")==0){

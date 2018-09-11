@@ -1064,10 +1064,15 @@ $(document).ready(function () {
                 var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                 if(RequestType=='emergency' || RequestType=='roofreport'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
-                    var valStep3=$('input[name=estep3Option]:checked').val();
+                    var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+                    var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+                    var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+                    var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+
+                    /*var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
                     var valStep4=$('input[name=estep4Option]:checked').val();
-                    var valStep5Auto=$('input[name=estep6Option]:checked').val();
+                    var valStep5Auto=$('input[name=estep6Option]:checked').val();*/
                     var valStep6=$('input[name=step6date]').val();
                     var valStep6t=$('input[name=step6time]').val();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
@@ -1312,7 +1317,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     if(amountValue==undefined){
         amountValue=0;
     }
-    jsShowWindowLoad('');
+    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
@@ -1396,9 +1401,9 @@ function validateIsLoggedIn(){
                     }
                     
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in, please log in or register');
+                    $('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
                     $('#headerTextAnswerOrder').html('User validation');
-                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
@@ -1953,7 +1958,7 @@ function setFirstStep(){
 }
 
 function updateOrder(orderID,arrayChanges){
-        jsShowWindowLoad('');
+        jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -2654,20 +2659,17 @@ function resetPassword(){
         return;
     }
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID}, null, "text" )
+    $.post( "controlador/ajax/resetPassword.php", { "userType" : userType,"userMail" : userMail}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#myInvoiceInfo #invoiceInfo tbody').html(data);
-                //$( "#myInvoiceInfo" ).dialog('open');
-                $(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
-                $('#detailStripe').html("");
-                //console.log(data);
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
             }else{
-                $('#headerTextAnswerOrder').html('Invoice response');
-                $('#myMensaje div.modal-body').html(data);
-                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             jsRemoveWindowLoad('');

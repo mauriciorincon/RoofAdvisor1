@@ -194,9 +194,7 @@ class userController{
 
     }
 
-    public function registerContractor(){
 
-    }
 
     public function validateEmail($table,$email){
         $this->_userModel=new userModel();
@@ -318,7 +316,7 @@ class userController{
     }
 
 
-
+    
     public function validateCode($user,$code,$table){
         if(strcmp($table,'Company')==0){
             $this->_userModel=new userModel();
@@ -698,7 +696,7 @@ class userController{
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
             <tr><td colspan="2">Click the link below to reset your password:</td><tr>
-            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
@@ -766,22 +764,35 @@ class userController{
     }
 
     public function resetPassword($table,$user){
+        $message="";
         $this->_userModel=new userModel();
         $hashPassword = md5( rand(0,1000) );
-        $_result=$this->_userModel->changeUserPassword($user,$hashPassword,$table);
-        
+        $_result=$this->_userModel->changeUserPassword($user['uid'],$hashPassword,$table);
+        //$_user_data=validateCustomerByID($user['uid']);
         if(is_array($_result) or gettype($_result)=="object" ){
+            $message="Password changed \n";
             $properties = [
                 'disabled' => true,
                 'photoURL' => $hashPassword
             ];
-            $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
-
-
+            $_result_update=$this->_userModel->updateUserCustomer($user['uid'],$properties,$table);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                $message.="User updated \n";
+            }else{
+                $message.=$_result_update;
+            }
+            $_mail_body=$this->resetMail($user,$hashPassword,$_result);            
+            $this->_sendMail=new emailController();
+            $_mail_response=$this->_sendMail->sendMailSMTP($user['Email'],"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $message.= $_mail_response;
+            if(strpos($message,"Error")>-1){
+            }else{
+                $message.="\n Please check your mail to get instruccions to recover your password.";
+            }
+        }else{
+            $message+="Error, an error ocurred changuing password";
         }
-
-       
-           
+        return $message;
     }
     
 }

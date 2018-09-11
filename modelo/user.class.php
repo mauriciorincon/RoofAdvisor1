@@ -15,7 +15,7 @@ class userModel extends connection{
     }
 
     public function changeUserPassword($_userId,$_password,$_profile){
-        return changeUserPassword($_userId,$_password,$_profile);
+        return $this->changeUserPass($_userId,$_password,$_profile);
     }
     public function validateCustomer($user,$pass){
         $result=$this->validateUser($user,$pass,'customer');
