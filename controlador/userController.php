@@ -693,7 +693,7 @@ class userController{
         }
         $_message='
         <table>
-            <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td>Dear '.$_customerArray['Fname'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
             <tr><td colspan="2">Click the link below to reset your password:</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
