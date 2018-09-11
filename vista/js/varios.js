@@ -2683,6 +2683,85 @@ function resetPassword(){
             return result1;
         }
     });
-    
+}
 
+function chengePaswword(table,id_user,temporal_password){
+    password=$('input#newpassword').val();
+    password1=$('input#retypepassword').val();
+
+    //alert(table+id_user+temporal_password);
+    message="";
+    if(table=="" || table==undefined){
+        message+="Plese selete type user \n";
+    }
+    if(id_user=="" || id_user==undefined){
+        message+="Plese select user \n";
+    }
+    if(temporal_password=="" || temporal_password==undefined){
+        message+="Plese select temporal password \n";
+    }
+
+    if(password=="" || password==undefined){
+        message+="Plese type the password \n";
+    }
+    if(password1=="" || password1==undefined){
+        message+="Plese confirm the password \n";
+    }
+    if(password.length<6){
+        message+="the password must be at least 6 characters \n";
+    }
+    if(password1.length<6){
+        message+="the password must be at least 6 characters \n";
+    }
+    if(password!=password1){
+        message+="The password and the confirmation are different, please review \n";
+    }
+    if(message!=""){
+        alert(message);
+        return;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/changePassword.php", { "userType" : table,"userId" : id_user,"tempPass":temporal_password,"newPass":password}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                other='<br><h3>Redirecting to RoofServiceNow.com after <span id="countdown">10</span> seconds</h3>';
+                
+                $('#myMensaje1 div.modal-body').html(data+other);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+                countdown();
+            }else{
+                
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+var seconds = 10;
+var direction = "http://localhost/RoofAdvisor1/";
+
+function countdown() {
+    seconds = seconds - 1;
+    if (seconds < 0) {
+        // Chnage your redirection link here
+        window.location = direction;
+    } else {
+        // Update remaining seconds
+        document.getElementById("countdown").innerHTML = seconds;
+        // Count down using javascript
+        window.setTimeout("countdown()", 1000);
+    }
 }

@@ -81,6 +81,12 @@ class userController{
         require_once("vista/recover_password.php");
         require_once("vista/footer.php");
     }
+
+    public function changePasswordS(){
+        require_once("vista/head.php");
+        require_once("vista/resetPassword.php");
+        require_once("vista/footer.php");
+    }
     
 
     public function loginCustomer(){
@@ -696,7 +702,7 @@ class userController{
             <tr><td>Dear '.$_customerArray['Fname'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
             <tr><td colspan="2">Click the link below to reset your password:</td><tr>
-            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/resetPassword.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
@@ -790,7 +796,29 @@ class userController{
                 $message.="\n Please check your mail to get instruccions to recover your password.";
             }
         }else{
-            $message+="Error, an error ocurred changuing password";
+            $message.="Error, an error occurred when changing the password";
+        }
+        return $message;
+    }
+
+    public function changePassword($table,$userId,$newPassword){
+        $message="";
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->changeUserPassword($userId,$newPassword,$table);
+        if(is_array($_result) or gettype($_result)=="object" ){
+            $message="Password changed \n";
+            $properties = [
+                'disabled' => false,
+                'photoURL' => ''
+            ];
+            $_result_update=$this->_userModel->updateUserCustomer($userId,$properties,$table);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                $message.="User updated \n";
+            }else{
+                $message.=$_result_update;
+            }
+        }else{
+            $message.="Error, an error occurred when changing the password";
         }
         return $message;
     }
