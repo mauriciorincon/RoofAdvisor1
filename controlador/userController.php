@@ -224,6 +224,8 @@ class userController{
         $password = rand(1000,5000);
 
         $_responseU=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],$hashActivationCode,$arrayContractor['password'],'company');
+        print_r($_responseU);
+        exit();
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
@@ -254,11 +256,11 @@ class userController{
                     "PrimaryFName" => $arrayContractor['firstNameCompany'],
                     "PrimaryLName" => $arrayContractor['lastNameCompany'],
                     "Status_Rating" => "5.0",
-                    "uid" => $_responseU->uid,
+                    "uid" => "hola",
             );
             $this->_userModel->insertContractor($_newCompanyId,$Company);
             $_mail_body=$this->welcomeMailCompany($arrayContractor,$hashActivationCode,$_responseU);
-
+echo "mail".$_mail_body;
             $this->_sendMail=new emailController();
             $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
             if($_mail_response==false){
@@ -660,14 +662,8 @@ class userController{
         $_message='
         <table>
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
-<<<<<<< HEAD
-            <tr><td colspan="2">Thank you for registering at roofservicenow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
-            <tr><td colspan="2"><a target="_blank" href="http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'">http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'</td></tr>
-            <tr><td colspan="2">Is your verification link not working? You can copy and paste this verification code as well.</td></tr>
-=======
             <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
->>>>>>> 8f3014fe86ae53e9cc5881100432478dce734154
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>

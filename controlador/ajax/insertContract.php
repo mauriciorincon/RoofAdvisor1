@@ -48,7 +48,7 @@ for($n=0;$n<$_elementDivisor;$n++){
 $_userController=new userController();
 $_companyID=$_userController->insertContractor($_arrayCompany);
 if(strpos($_companyID,"Error")!==false){
-    echo "Error register company,try again ".$_companyID;
+    echo "Error register company,try again ".$_companyID."";
 }else{
     if(count($_array_drivers)>0){
         $_driverController=new driverController();

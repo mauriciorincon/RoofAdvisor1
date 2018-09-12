@@ -277,22 +277,16 @@ function saveContractorData(){
                     //$("#answerEmailValidate").html(data);
                     var n = data.indexOf("Error");
                     if(n==-1){
-                        $("#step3ContractorResponse").addClass("has-success").removeClass('has-error');
-                        //$("#firstNextValidation").show();
-                        //$("#step3ContractorResponse").html(data);
-                        $("#step3ContractorResponse").html(data+"<br> You will redirect to login company page in 10 seconds");
-                                // Your application has indicated there's an error
-                                window.setTimeout(function(){
+                        //other='<br><h3>Redirecting to RoofServiceNow login page after <span id="countdown">10</span> seconds</h3>';
+                        
+                        $('#myRegisterMessage div.modal-body').html(data);
+                        $(document).ready(function(){$("#myRegisterMessage").modal("show"); });
+                        //countdown();
 
-                                    // Move to a new location or you can do something else
-                                    window.location.href = "?controller=user&accion=showLoginContractor";
-
-                                }, 10000);
-                        result=true;
+                        
                     }else{
-                        $("#step3ContractorResponse").addClass("has-error").removeClass('has-success');
-                        //$("#firstNextValidation").hide();
-                        $("#step3ContractorResponse").html(data);
+                        $('#myRegisterMessage div.modal-body').html(data);
+                        $(document).ready(function(){$("#myRegisterMessage").modal("show"); });
                         result=false;
                     }
                     
