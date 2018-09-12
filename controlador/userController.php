@@ -32,7 +32,8 @@ class userController{
     private $_pass="";
 
     function __construct()
-	{		
+	{	
+        //echo "fue construido objeto customerController";	
     }
     
     public function showLoginContractor(){
@@ -209,11 +210,9 @@ class userController{
     }
 
     public function insertContractor($arrayContractor){
-        
-
         $this->_userModel=new userModel();
         $_lastCompanyID=$this->_userModel->getLastNodeCompany("Company","CompanyID");
-        //echo "last node company:".$_lastCompanyID;
+        
         if (is_null($_lastCompanyID)){
             $_newCompanyId="CO000001";
         }else{
@@ -224,7 +223,7 @@ class userController{
         $hashActivationCode = md5( rand(0,1000) );
         $password = rand(1000,5000);
 
-        $_response=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],'',$arrayContractor['password'],'company');
+        $_responseU=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],$hashActivationCode,$arrayContractor['password'],'company');
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
@@ -254,9 +253,19 @@ class userController{
                     "PayInfoName" => "",
                     "PrimaryFName" => $arrayContractor['firstNameCompany'],
                     "PrimaryLName" => $arrayContractor['lastNameCompany'],
-                    "Status_Rating" => "5.0"
+                    "Status_Rating" => "5.0",
+                    "uid" => $_responseU->uid,
             );
             $this->_userModel->insertContractor($_newCompanyId,$Company);
+            $_mail_body=$this->welcomeMailCompany($arrayContractor,$hashActivationCode,$_responseU);
+
+            $this->_sendMail=new emailController();
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            if($_mail_response==false){
+                return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+            }else{
+                //return "OK ".$_response."<br>".$_mail_response;
+            }
             return $_newCompanyId;
         }else{
             return "Error".$_response;
@@ -272,17 +281,15 @@ class userController{
 
     public function insertCustomer($arrayCustomer){
         $this->_userModel=new userModel();
-        $_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
+        $_lastCustomerID=$this->_userModel->getLasCustomerNumberParameter("Parameters/LastCustomerID");
+        //$_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
         if (is_null($_lastCustomerID)){
             $_lastCustomerID=1;
         }else{
-            $_lastCustomerID+=1;
+            $_lastCustomerID++;
         }
         $hashActivationCode = md5( rand(0,1000) );
         $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');
-        
-    
-       
 
         if(is_array($_responseU) or gettype($_responseU)=="object"){
             
@@ -291,7 +298,7 @@ class userController{
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
-                "CustomerID" =>  $_lastCustomerID,
+                "CustomerID" =>  "$_lastCustomerID",
                 "Email" =>  $arrayCustomer['emailValidation'],
                 "FBID" =>  '',
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
@@ -306,6 +313,8 @@ class userController{
             
             $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
             
+            $this->updateCustomerLastId($_lastCustomerID);
+
             $this->_sendMail=new emailController();
             $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
             if($_mail_response==false){
@@ -355,31 +364,7 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        /*$_message='<div class="container">
-                        <div class="notice notice-success">
-                            <strong>Notice</strong> The code is correct, your user was validated correctly
-                        </div>
-                        <div class="notice notice-danger">
-                            <strong>Notice</strong> notice-danger
-                        </div>
-                        <div class="notice notice-info">
-                            <strong>Notice</strong> notice-info
-                        </div>
-                        <div class="notice notice-warning">
-                            <strong>Notice</strong> notice-warning
-                        </div>
-                        <div class="notice notice-lg">
-                            <strong>Big notice</strong> notice-lg
-                        </div>
-                        <div class="notice notice-sm">
-                            <strong>Small notice</strong> notice-sm
-                        </div>
-                    </div>';*/
-
-                        
-
-                        $_message=$this->messageValidateUser('Your account was validated correctrly. Now you can use Roof Service Now!','notice-success');
-
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
                         return $_message;
                     }else{
                         $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
@@ -685,6 +670,30 @@ class userController{
         ';
         return $_message;
     }
+    public function welcomeMailCompany($_companyArray,$_validation_code,$_userData){
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'];
+        }
+        $_message='
+        <table>
+            <tr><td>Dear '.$_companyArray['CompanyName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=co&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
+            <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
+            <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
+            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+        </table>
+        ';
+        return $_message;
+    }
 
     public function resetMail($_customerArray,$_validation_code,$_userData){
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
@@ -726,7 +735,7 @@ class userController{
 
         return '<!-- Redirection Counter -->
         <script type="text/javascript">
-          var count = 20; // Timer
+          var count = 5; // Timer
           var redirect = "'.$_path1.'"; // Target URL
         
           function countDown() {
@@ -746,7 +755,7 @@ class userController{
         
             <div class="animated fast fadeInUp">
               <div class="icon"></div>
-              <h1>Thank you for register in Roof Service Now</h1>
+              <h1>Thank you for register in RoofServiceNow</h1>
             </div>
         
             <div class="notice animated fadeInUp '.$icon_message.'">
@@ -760,7 +769,7 @@ class userController{
                   countDown();
                 </script>
               </p>
-              <p class="copyright">&copy; Roof Service Now.com</p>
+              <p class="copyright">&copy; RoofServiceNow.com</p>
             </div>
         
           </div>
@@ -802,6 +811,17 @@ class userController{
     }
 
     public function changePassword($table,$userId,$newPassword){
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'];
+        }
+
         $message="";
         $this->_userModel=new userModel();
         $_result=$this->_userModel->changeUserPassword($userId,$newPassword,$table);
@@ -814,6 +834,7 @@ class userController{
             $_result_update=$this->_userModel->updateUserCustomer($userId,$properties,$table);
             if(is_array($_result) or gettype($_result)=="object" ){
                 $message.="User updated \n";
+                $message=$_path1;
             }else{
                 $message.=$_result_update;
             }
@@ -821,6 +842,11 @@ class userController{
             $message.="Error, an error occurred when changing the password";
         }
         return $message;
+    }
+
+    public function updateCustomerLastId($customerId){
+        $this->_userModel=new userModel();
+        $this->_userModel->updateCustomerLastId("$customerId");
     }
     
 }

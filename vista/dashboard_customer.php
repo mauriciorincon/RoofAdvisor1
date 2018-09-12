@@ -1149,7 +1149,7 @@
         <div class="collapse" id="mapDashBoardOrder1">
 			<?php 
 
-				include('vista/order_request.php');
+				include_once('vista/order_request.php');
 				//echo $order_request
 			?>
 		</div>

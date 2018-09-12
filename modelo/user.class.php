@@ -83,6 +83,11 @@ class userModel extends connection{
         }
     }
 
+    public function getLasCustomerNumberParameter($node){
+        $result=$this->getDataTable($node);
+        return $result;
+    }
+
     public function insertContractor($id_contracto,$dataContrator){
         $this->insertDataTable("Company",$id_contracto,$dataContrator,false); 
     }
@@ -173,6 +178,10 @@ class userModel extends connection{
     public function getNode($table){
         $result=$this->getDataTable($table);
         return $result;
+    }
+
+    public function updateCustomerLastId($customerID){
+        $this->updateDataTable("Parameters","LastCustomerID",$customerID);
     }
 }
 ?>

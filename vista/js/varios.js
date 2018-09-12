@@ -2726,9 +2726,9 @@ function chengePaswword(table,id_user,temporal_password){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                other='<br><h3>Redirecting to RoofServiceNow.com after <span id="countdown">10</span> seconds</h3>';
-                
-                $('#myMensaje1 div.modal-body').html(data+other);
+                other='<br><h3>Redirecting to RoofServiceNow login page after <span id="countdown">10</span> seconds</h3>';
+                direction=data;
+                $('#myMensaje1 div.modal-body').html(other);
                 $(document).ready(function(){$("#myMensaje1").modal("show"); });
                 countdown();
             }else{

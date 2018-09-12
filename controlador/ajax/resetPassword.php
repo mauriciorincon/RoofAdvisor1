@@ -11,9 +11,9 @@ $_userController=new userController();
 
 $_customer_info=$_userController->getCustomer($_userMail);
 if(is_null($_customer_info)){
-    echo "Error. User is not register¡";
+    $result="Error. User is not register¡";
 }else{
     $result=$_userController->resetPassword($_userType,$_customer_info);
 }
-    echo $result;
+echo $result;
 ?>

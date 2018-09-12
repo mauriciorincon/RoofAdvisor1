@@ -15,7 +15,8 @@
     require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 
 
-    //require_once($_SESSION['application_path']."/controlador/userController.php");
+    require_once($_SESSION['application_path']."/controlador/userController.php");
+    echo $_SESSION['application_path']."declare user controller";
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
     //$_objPay=new payingController();
