@@ -1,5 +1,5 @@
 <div class="alert alert-success">
-  <strong>Welcome to RoofAdvisorz,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+  <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
 </div>
 <?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
     <div class="alert alert-danger">

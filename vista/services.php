@@ -17,9 +17,9 @@
 			<div class="container">
 				<div class="section-heading text-center">
 					<h2>Our Services </h2>
-					<p>RoofAdvisorZ is the only on demand emergency roof repair services.</p>
+					<p>RoofServiceNow is the only on demand emergency roof repair services.</p>
 					<p>
-					This same day, on-demand service for hiring a prescreened service professional to fix a leaky roof before the demand is done.  From fixing leaky pipes to repairing your heating system on a cold winter day, together with hundreds of other urgent projects, RoofAdvisorZ same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofAdvisorZ is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofAdvisorZ, you answer 5 questions about the repair through the RoofAdvisorZ app or website; and a prescreened, local service professional will confirm they are on the way.
+					This same day, on-demand service for hiring a prescreened service professional to fix a leaky roof before the demand is done.  From fixing leaky pipes to repairing your heating system on a cold winter day, together with hundreds of other urgent projects, RoofServiceNow same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofServiceNow, you answer 5 questions about the repair through the RoofServiceNow app or website; and a prescreened, local service professional will confirm they are on the way.
 					</p>
 				</div>
 				<div class="row">

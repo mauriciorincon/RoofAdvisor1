@@ -1,4 +1,4 @@
-Welcome to RoofAdvisorz, <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
+Welcome to Roof Service Now, <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
 <div class="row">
     <div class="col-md-2">
         <div class="vertical-menu">

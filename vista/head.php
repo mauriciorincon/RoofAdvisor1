@@ -8,7 +8,7 @@ if(!isset($_SESSION)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>RoofAdviorZ</title>
+        <title>RoofServiceNow</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -31,6 +31,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/segmented-controls.css">
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
+                <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
 		
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
@@ -59,8 +60,8 @@ if(!isset($_SESSION)) {
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
 								<div class="email-address">
-									<span class="email"><i class="fa fa-envelope"></i>Email: suppot@roofadvisorz.com</span>
-									<span class="phone"><i class="fa fa-phone"></i>Phone: (+123) 123 321 345</span>
+									<span class="email"><i class="fa fa-envelope"></i>Email: support@roofservicenow.com</span>
+									<span class="phone"><i class="fa fa-phone"></i>Phone: +1 (877) 529 5995</span>
 								</div>
 							</div>
 						</div>

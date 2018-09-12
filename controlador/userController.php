@@ -146,7 +146,7 @@ class userController{
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                 }else{
-                    return "Error, please comunicate with RoofAdvisorZ for help";
+                    return "Error, please comunicate with RoofServiceNow for help";
                 }
                 
             }else{
@@ -188,7 +188,7 @@ class userController{
 
                         return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                     }else{
-                        return "Error, please comunicate with RoofAdvisorZ for help";
+                        return "Error, please comunicate with RoofServiceNow for help";
                     }
                 }else{
                     Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
@@ -660,8 +660,14 @@ class userController{
         $_message='
         <table>
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+<<<<<<< HEAD
+            <tr><td colspan="2">Thank you for registering at roofservicenow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2"><a target="_blank" href="http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'">http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2">Is your verification link not working? You can copy and paste this verification code as well.</td></tr>
+=======
             <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+>>>>>>> 8f3014fe86ae53e9cc5881100432478dce734154
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>

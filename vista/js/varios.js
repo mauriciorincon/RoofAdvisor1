@@ -1381,7 +1381,7 @@ function validateIsLoggedIn(){
                         curStepWizard.attr('disabled', 'disabled');
                         if(typeof handler !== undefined){
                             handler.open({
-                                name: 'RoofAdvisorz',
+                                name: 'RoofServicenow',
                                 description: 'pay your service',
                                 amount: amount_value
                               });
@@ -2408,7 +2408,7 @@ function selectPaymentType(){
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
-                name: 'RoofAdvisorz',
+                name: 'RoofServicenow',
                 description: 'pay your service',
                 amount: amount_value
               });

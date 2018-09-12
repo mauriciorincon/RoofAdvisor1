@@ -17,7 +17,7 @@
 			<div class="container">
 				<div class="section-heading text-center">
 					<h2>Download </h2>
-					<p>	Get RoofAdvisorZ on your phone or tablet is free, easy, and fun.</p>
+					<p>	Get RoofServiceNow on your phone or tablet is free, easy, and fun.</p>
 				</div>
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 custom-width mb-20">

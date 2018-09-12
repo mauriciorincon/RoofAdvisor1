@@ -26,12 +26,12 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="about-text">
-							<h3>WELCOME TO RoofAdvisorZ </h3>
-							<p>RoofAdvisorZ provides homeowners via mobile app and online services the ability to order on demand emergency roof repair services. RoofAdvisorZ also provides homeowners the ability to book appointments, receive estimates, receive pictures, tracking via GPS, and electronic payments via mobile app and online with local, prescreened service professionals.</p>
+							<h3>WELCOME TO RoofServiceNow </h3>
+							<p>RoofServiceNow provides homeowners via mobile app and online services the ability to order on demand emergency roof repair services. RoofServiceNow also provides homeowners the ability to book appointments, receive estimates, receive pictures, tracking via GPS, and electronic payments via mobile app and online with local, prescreened service professionals.</p>
 
 							<h3>Here’s How It Works</h3>
 							<ul>
-								<li>Visit RoofAdvisorZ.com or download the RoofAdvisorZ app on IOS or Android and answer 5 questions</li>
+								<li>Visit RoofServiceNow.com or download the RoofServiceNow app on IOS or Android and answer 5 questions</li>
 								<li>A local, prescreened and customer-rated service professional will take your order and connect with you to repair your leaky roof.</li>
 								<li>You will be able to track your service professional as he/she arrives at your residence, see when they start and complete work, review before and after pictures, approve all estimates prior to work, and easily pay on line.</li>
 							</ul>
@@ -98,19 +98,19 @@
 				<div class="testimonial-active">
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>RoofAdvisorZPro is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
+							<p>RoofServicePro is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>•	RoofAdvisorZPro provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided, daily, weekly, and monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
+							<p>•	RoofServicePro provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided, daily, weekly, and monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>RepairCrews have their own RoofAdvisorZPro driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
+							<p>RepairCrews have their own RoofServicePro driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
 						</div>
 						
 					</div>

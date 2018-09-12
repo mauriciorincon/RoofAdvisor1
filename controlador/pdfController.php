@@ -113,7 +113,7 @@ class pdfController{
         $_hmtl='
         <table>
             <tr>
-                <td colspan="2">RoofAdvisorz no-reply@roofadvisorz.com </td>
+                <td colspan="2">RoofServicenow no-reply@roofservicenow.com </td>
                 <td></td>
                 <td colspan="2"></td>
             </tr>
@@ -127,7 +127,7 @@ class pdfController{
                 <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
-                <td colspan="5">Please remember to return to RoofAdvisorZ.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
+                <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
             </tr>
         </table>
         <br>
@@ -180,20 +180,20 @@ class pdfController{
                 <td>Payment Type</td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">Online</td>
             </tr>
             <tr>
-                <td colspan="6" align="center">Thank You for using RoofAdvisorZ</td>
+                <td colspan="6" align="center">Thank You for using RoofServiceNow</td>
             </tr>
         </table>
         <br>
         <br>
         <table>
             <tr>
-                <td>http://www.roofadvisorz.com/</td>
+                <td>http://www.roofservicenow.com/</td>
             </tr>
             <tr>
-                <td>Use the link above to return to RoofAdvisorZ to review your order status and rate the service professional. </td>
+                <td>Use the link above to return to RoofServiceNow to review your order status and rate the service professional. </td>
             </tr>
             <tr>
-                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice. </td>
+                <td>Is your  link not working? You can log in to RoofServiceNow.com and review the invoice. </td>
             </tr>
             <tr>
                 <td></td>
@@ -329,7 +329,7 @@ class pdfController{
         $_hmtl='
         <table>
             <tr>
-                <td colspan="2">RoofAdvisorz no-reply@roofadvisorz.com\</td>
+                <td colspan="2">RoofServicenow no-reply@roofservicenow.com\</td>
                 <td></td>
                 <td colspan="2"></td>
             </tr>
@@ -348,7 +348,7 @@ class pdfController{
                 <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
-                <td colspan="5">Please remember to return to RoofAdvisorZ.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
+                <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
             </tr>
         </table>
         <br>
@@ -399,20 +399,20 @@ class pdfController{
                 <td>Payment Type</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_paymentType.'</td>
             </tr>
             <tr>
-                <td colspan="6" align="center">Thank You for using RoofAdvisorZ</td>
+                <td colspan="6" align="center">Thank You for using RoofServiceNow</td>
             </tr>
         </table>
         <br>
         <br>
         <table>
             <tr>
-                <td>http://www.roofadvisorz.com/</td>
+                <td>http://www.roofservicenow.com/</td>
             </tr>
             <tr>
-                <td>Use the link above to return to RoofAdvisorZ to review your order status and rate the service professional. </td>
+                <td>Use the link above to return to RoofServiceNow to review your order status and rate the service professional. </td>
             </tr>
             <tr>
-                <td>Is your  link not working? You can log in to RoofAdvisorZ.com and review the invoice. </td>
+                <td>Is your  link not working? You can log in to RoofServiceNow.com and review the invoice. </td>
             </tr>
             <tr>
                 <td></td>

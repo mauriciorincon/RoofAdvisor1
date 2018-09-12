@@ -8,7 +8,7 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
-                            <h1>Welcome to RoofAdvisorZ</h1>
+                            <h1>Welcome to RoofServiceNow</h1>
                             <h3>Your Roof Professionals</h3>
                             <h5>Company Area</h5>
 						</div>
