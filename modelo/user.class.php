@@ -89,7 +89,7 @@ class userModel extends connection{
     }
 
     public function insertContractor($id_contracto,$dataContrator){
-        $this->insertDataTable("Company",$id_contracto,$dataContrator,false); 
+        return $this->insertDataTable("Company",$id_contracto,$dataContrator,false); 
     }
 
     public function insertCustomer($id_customer,$dataCustomer){

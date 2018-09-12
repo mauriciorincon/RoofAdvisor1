@@ -46,7 +46,7 @@ for($n=0;$n<$_elementDivisor;$n++){
 //print_r($_arrayDivers);
 
 $_userController=new userController();
-$_companyID=$_userController->insertContractor($_arrayCompany);
+$_companyID=$_userController->insertCompany($_arrayCompany);
 if(strpos($_companyID,"Error")!==false){
     echo "Error register company,try again ".$_companyID."";
 }else{

@@ -209,7 +209,7 @@ class userController{
         return $_result;
     }
 
-    public function insertContractor($arrayContractor){
+    public function insertCompany($arrayContractor){
         $this->_userModel=new userModel();
         $_lastCompanyID=$this->_userModel->getLastNodeCompany("Company","CompanyID");
         
@@ -224,7 +224,7 @@ class userController{
         $password = rand(1000,5000);
 
         $_responseU=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],$hashActivationCode,$arrayContractor['password'],'company');
-        print_r($_responseU);
+        return "llego aca";
         exit();
         if(is_array($_response) or gettype($_response)=="object"){
             $Company = array(
@@ -258,7 +258,7 @@ class userController{
                     "Status_Rating" => "5.0",
                     "uid" => "hola",
             );
-            $this->_userModel->insertContractor($_newCompanyId,$Company);
+            $_result=$this->_userModel->insertContractor($_newCompanyId,$Company);
             $_mail_body=$this->welcomeMailCompany($arrayContractor,$hashActivationCode,$_responseU);
 echo "mail".$_mail_body;
             $this->_sendMail=new emailController();
