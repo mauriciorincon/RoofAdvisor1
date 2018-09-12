@@ -1064,10 +1064,15 @@ $(document).ready(function () {
                 var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                 if(RequestType=='emergency' || RequestType=='roofreport'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
-                    var valStep3=$('input[name=estep3Option]:checked').val();
+                    var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+                    var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+                    var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+                    var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+
+                    /*var valStep3=$('input[name=estep3Option]:checked').val();
                     var valStep5=$('input[name=estep5Option]:checked').val();
                     var valStep4=$('input[name=estep4Option]:checked').val();
-                    var valStep5Auto=$('input[name=estep6Option]:checked').val();
+                    var valStep5Auto=$('input[name=estep6Option]:checked').val();*/
                     var valStep6=$('input[name=step6date]').val();
                     var valStep6t=$('input[name=step6time]').val();
                     var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
@@ -1312,7 +1317,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     if(amountValue==undefined){
         amountValue=0;
     }
-    jsShowWindowLoad('');
+    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
@@ -1396,9 +1401,9 @@ function validateIsLoggedIn(){
                     }
                     
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in, please log in or register');
+                    $('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
                     $('#headerTextAnswerOrder').html('User validation');
-                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in, please log in or register'+'</strong></div>');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
@@ -1953,7 +1958,7 @@ function setFirstStep(){
 }
 
 function updateOrder(orderID,arrayChanges){
-        jsShowWindowLoad('');
+        jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -2636,3 +2641,127 @@ function getInvoices(orderID){
         }
     }
 });*/
+
+function resetPassword(){
+    userType=$('input:hidden#typeUser').val();
+    userMail=$('input:text#emailReset').val();
+
+    message = "";
+    if(userType==undefined || userType==""){
+        message='Please select user type \n';
+        
+    }
+    if(userMail==undefined || userMail==""){
+        message+='Please type user mail \n';
+    }
+    if(message!=""){
+        alert(message);
+        return;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/resetPassword.php", { "userType" : userType,"userMail" : userMail}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+            }else{
+                
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function chengePaswword(table,id_user,temporal_password){
+    password=$('input#newpassword').val();
+    password1=$('input#retypepassword').val();
+
+    //alert(table+id_user+temporal_password);
+    message="";
+    if(table=="" || table==undefined){
+        message+="Plese selete type user \n";
+    }
+    if(id_user=="" || id_user==undefined){
+        message+="Plese select user \n";
+    }
+    if(temporal_password=="" || temporal_password==undefined){
+        message+="Plese select temporal password \n";
+    }
+
+    if(password=="" || password==undefined){
+        message+="Plese type the password \n";
+    }
+    if(password1=="" || password1==undefined){
+        message+="Plese confirm the password \n";
+    }
+    if(password.length<6){
+        message+="the password must be at least 6 characters \n";
+    }
+    if(password1.length<6){
+        message+="the password must be at least 6 characters \n";
+    }
+    if(password!=password1){
+        message+="The password and the confirmation are different, please review \n";
+    }
+    if(message!=""){
+        alert(message);
+        return;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/changePassword.php", { "userType" : table,"userId" : id_user,"tempPass":temporal_password,"newPass":password}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                other='<br><h3>Redirecting to RoofServiceNow.com after <span id="countdown">10</span> seconds</h3>';
+                
+                $('#myMensaje1 div.modal-body').html(data+other);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+                countdown();
+            }else{
+                
+                $('#myMensaje1 div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje1").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+var seconds = 10;
+var direction = "http://localhost/RoofAdvisor1/";
+
+function countdown() {
+    seconds = seconds - 1;
+    if (seconds < 0) {
+        // Chnage your redirection link here
+        window.location = direction;
+    } else {
+        // Update remaining seconds
+        document.getElementById("countdown").innerHTML = seconds;
+        // Count down using javascript
+        window.setTimeout("countdown()", 1000);
+    }
+}

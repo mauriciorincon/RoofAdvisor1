@@ -342,6 +342,110 @@ class connection{
         echo "no paso a ningun error";
     }
 
+    public function validateUserByID($_userId,$_profile){
+        $auth=null;
+        try {
+            if(strcmp($_profile,"customer")==0){
+                $auth = $this->_factory_firebase->getAuth();
+            }else if(strcmp($_profile,"company")==0){
+        
+                if(is_null($this->_factory_firebase_company)){
+                    $this->companyConnection();
+                }
+        
+                $auth = $this->_factory_firebase_company->getAuth();
+        
+            }else if(strcmp($_profile,"driver")==0){
+                if(is_null($this->_factory_firebase_driver)){
+                    $this->driverConnection();
+                }
+                $auth = $this->_factory_firebase_driver->getAuth();
+            }
+            $user = $auth->getUser($_userId);
+            return $user;
+        } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
+            
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\EmailNotFound $e){
+            return $e->getMessage();
+        }catch (Exception $e){
+            
+            return $e->getMessage();
+        }
+        echo "no paso a ningun error";
+    }
+
+
+    public function updateUser($_userId,$_userProperties,$_profile){
+        $auth=null;
+        try {
+            if(strcmp($_profile,"customer")==0){
+                $auth = $this->_factory_firebase->getAuth();
+            }else if(strcmp($_profile,"company")==0){
+        
+                if(is_null($this->_factory_firebase_company)){
+                    $this->companyConnection();
+                }
+        
+                $auth = $this->_factory_firebase_company->getAuth();
+        
+            }else if(strcmp($_profile,"driver")==0){
+                if(is_null($this->_factory_firebase_driver)){
+                    $this->driverConnection();
+                }
+                $auth = $this->_factory_firebase_driver->getAuth();
+            }
+           
+            $updatedUser = $auth->updateUser($_userId, $_userProperties);
+            return $updatedUser;
+        } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
+            
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\EmailNotFound $e){
+            return $e->getMessage();
+        }catch (Exception $e){
+            
+            return $e->getMessage();
+        }
+        echo "no paso a ningun error";
+    }
+
+    public function changeUserPass($_userId,$_password,$_profile){
+        $auth=null;
+        try {
+            if(strcmp($_profile,"customer")==0){
+                $auth = $this->_factory_firebase->getAuth();
+            }else if(strcmp($_profile,"company")==0){
+                if(is_null($this->_factory_firebase_company)){
+                    $this->companyConnection();
+                }
+                $auth = $this->_factory_firebase_company->getAuth();
+            }else if(strcmp($_profile,"driver")==0){
+                if(is_null($this->_factory_firebase_driver)){
+                    $this->driverConnection();
+                }
+                $auth = $this->_factory_firebase_driver->getAuth();
+            }
+           
+            $updatedUser = $auth->changeUserPassword($_userId, $_password);
+            return $updatedUser;
+        } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
+            
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\InvalidArgumentException $e ){
+            return $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\EmailNotFound $e){
+            return $e->getMessage();
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+        echo "no paso a ningun error";
+    }
+
     public function getDateTime(){
 
         $ref = $$this->_firebase->getReference('posts/my-post')

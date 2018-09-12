@@ -22,7 +22,7 @@
 									<input type="password" placeholder="" required="true" id="passwordClient" name="passwordClient"/>
 								
                                 <button type="submit">Login</button><br><br>
-                                <a href="#">Forgot password?</a>
+                                <a href="?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
 							</form>
 						</div>
 					</div>

@@ -9,8 +9,26 @@ class userModel extends connection{
         parent::__construct();
     }
 
+    public function updateUserCustomer($userId,$userProperties,$profile){
+        $result=$this->updateUser($userId,$userProperties,$profile);
+        return $result;
+    }
+
+    public function changeUserPassword($_userId,$_password,$_profile){
+        return $this->changeUserPass($_userId,$_password,$_profile);
+    }
     public function validateCustomer($user,$pass){
         $result=$this->validateUser($user,$pass,'customer');
+        if(is_array($result) or gettype($result)=="object" ){
+            return $result;
+        }else{
+            return "Error ".$result;
+        }
+        return "Error";
+    }
+
+    public function validateCustomerByID($userId){
+        $result=$this->validateUserByID($userId,'customer');
         if(is_array($result) or gettype($result)=="object" ){
             return $result;
         }else{
@@ -80,6 +98,7 @@ class userModel extends connection{
     public function updateCustomer($nodeName,$data){
         $this->updateDataTable("Customers",$nodeName,$data); 
     }
+
 
     public function getCompany($user){
         $result=$this->getQueryEqual('Company','CompanyEmail',$user);

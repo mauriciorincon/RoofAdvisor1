@@ -68,6 +68,25 @@ class userController{
         require_once("vista/footer.php");
     }
 
+    public function resetPasswordCustomer(){
+        $_user_type="customer";
+        require_once("vista/head.php");
+        require_once("vista/recover_password.php");
+        require_once("vista/footer.php");
+    }
+
+    public function resetPasswordCompany(){
+        $_user_type="company";
+        require_once("vista/head.php");
+        require_once("vista/recover_password.php");
+        require_once("vista/footer.php");
+    }
+
+    public function changePasswordS(){
+        require_once("vista/head.php");
+        require_once("vista/resetPassword.php");
+        require_once("vista/footer.php");
+    }
     
 
     public function loginCustomer(){
@@ -181,9 +200,7 @@ class userController{
 
     }
 
-    public function registerContractor(){
 
-    }
 
     public function validateEmail($table,$email){
         $this->_userModel=new userModel();
@@ -261,14 +278,16 @@ class userController{
         }else{
             $_lastCustomerID+=1;
         }
-        $_response=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],'',$arrayCustomer['password'],'customer');
-        //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
-        //return $hashActivationCode;
+        $hashActivationCode = md5( rand(0,1000) );
+        $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');
+        
+    
+       
 
-        if(is_array($_response) or gettype($_response)=="object"){
+        if(is_array($_responseU) or gettype($_responseU)=="object"){
             
             //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
-            $hashActivationCode = 'FBID';
+            //$hashActivationCode = 'FBID';
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
@@ -281,10 +300,11 @@ class userController{
                 "State" =>  $arrayCustomer['customerState'],
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
+                "uid" => $_responseU->uid,
             );
-            $_response=$this->_userModel->insertCustomer($hashActivationCode,$Customer);
-            $hashActivationCode = md5( rand(0,1000) );
-            $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode);
+            $_response=$this->_userModel->insertCustomer('FBID',$Customer);
+            
+            $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
             
             $this->_sendMail=new emailController();
             $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
@@ -302,7 +322,7 @@ class userController{
     }
 
 
-
+    
     public function validateCode($user,$code,$table){
         if(strcmp($table,'Company')==0){
             $this->_userModel=new userModel();
@@ -322,16 +342,56 @@ class userController{
             }
         }else if(strcmp($table,'Customers')==0){
             $this->_userModel=new userModel();
-            $_customer=$this->_userModel->getCustomer($user);
-            if(is_array($_customer)){
-                //print_r($_customer);
-                //if(strcmp($_customer['ComapnyLicNum'],$code)==0){
-                    //$this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
-                    //$this->_userModel->updateContractor($_customer['CompanyID'].'/CompanyStatus','Active');
-                    return "The code is correct";
-                //}else{
-                //    return "Error, the code is incorrect";    
-                //}
+            $_result=$this->_userModel->validateCustomerByID($user);
+            
+            if(is_array($_result) or gettype($_result)=="object" ){
+                //print_r($_result);
+                if(strcmp($_result->photoUrl,$code)==0){
+                    
+                    $properties = [
+                        'emailVerified' => true,
+                        'disabled' => false,
+                        'photoURL' => ''
+                    ];
+                    $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
+                    if(is_array($_result_update) or gettype($_result_update)=="object" ){
+                        /*$_message='<div class="container">
+                        <div class="notice notice-success">
+                            <strong>Notice</strong> The code is correct, your user was validated correctly
+                        </div>
+                        <div class="notice notice-danger">
+                            <strong>Notice</strong> notice-danger
+                        </div>
+                        <div class="notice notice-info">
+                            <strong>Notice</strong> notice-info
+                        </div>
+                        <div class="notice notice-warning">
+                            <strong>Notice</strong> notice-warning
+                        </div>
+                        <div class="notice notice-lg">
+                            <strong>Big notice</strong> notice-lg
+                        </div>
+                        <div class="notice notice-sm">
+                            <strong>Small notice</strong> notice-sm
+                        </div>
+                    </div>';*/
+
+                        
+
+                        $_message=$this->messageValidateUser('Your account was validated correctrly. Now you can use Roof Service Now!','notice-success');
+
+                        return $_message;
+                    }else{
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+
+                        return $_message;
+                        
+                    }
+                    
+                }else{
+                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
+                    return $_message;
+                }
             }else{
                 
                 return "Error, the user was no found";
@@ -601,13 +661,28 @@ class userController{
         return $_output_menu;
     }
     
-    public function welcomeMail($_customerArray,$_validation_code){
+    public function welcomeMail($_customerArray,$_validation_code,$_userData){
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'];
+        }
         $_message='
         <table>
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+<<<<<<< HEAD
             <tr><td colspan="2">Thank you for registering at roofservicenow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'">http://www.roofservicenow.com/vc/validateCode.php?t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2">Is your verification link not working? You can copy and paste this verification code as well.</td></tr>
+=======
+            <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+>>>>>>> 8f3014fe86ae53e9cc5881100432478dce734154
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
@@ -616,5 +691,143 @@ class userController{
         ';
         return $_message;
     }
+
+    public function resetMail($_customerArray,$_validation_code,$_userData){
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'];
+        }
+        $_message='
+        <table>
+            <tr><td>Dear '.$_customerArray['Fname'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
+            <tr><td colspan="2">Click the link below to reset your password:</td><tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
+            <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
+            <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
+            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+        </table>
+        ';
+        return $_message;
+    }
+
+    public function messageValidateUser($message,$icon_message){
+        if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+            $_dir=$_SERVER['REQUEST_URI'];
+            $pos1 = strpos($_dir,"/");
+            $pos2 = strpos($_dir,"/", $pos1 + 1);
+            //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+            $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        }else{
+            $_path1="http://" . $_SERVER['HTTP_HOST'];
+        }
+
+        return '<!-- Redirection Counter -->
+        <script type="text/javascript">
+          var count = 20; // Timer
+          var redirect = "'.$_path1.'"; // Target URL
+        
+          function countDown() {
+            var timer = document.getElementById("timer"); // Timer ID
+            if (count > 0) {
+              count--;
+              timer.innerHTML = "This page will redirect in " + count + " seconds."; // Timer Message
+              setTimeout("countDown()", 1000);
+            } else {
+              window.location.href = redirect;
+            }
+          }
+        </script>
+        
+        <div id="master-wrap">
+          <div id="logo-box">
+        
+            <div class="animated fast fadeInUp">
+              <div class="icon"></div>
+              <h1>Thank you for register in Roof Service Now</h1>
+            </div>
+        
+            <div class="notice animated fadeInUp '.$icon_message.'">
+              <p class="lead">'.$message.'</p>
+              
+            </div>
+        
+            <div class="footer animated slow fadeInUp">
+              <p id="timer">
+                <script type="text/javascript">
+                  countDown();
+                </script>
+              </p>
+              <p class="copyright">&copy; Roof Service Now.com</p>
+            </div>
+        
+          </div>
+          <!-- /#logo-box -->
+        </div>
+        <!-- /#master-wrap -->';
+    }
+
+    public function resetPassword($table,$user){
+        $message="";
+        $this->_userModel=new userModel();
+        $hashPassword = md5( rand(0,1000) );
+        $_result=$this->_userModel->changeUserPassword($user['uid'],$hashPassword,$table);
+        //$_user_data=validateCustomerByID($user['uid']);
+        if(is_array($_result) or gettype($_result)=="object" ){
+            $message="Password changed \n";
+            $properties = [
+                'disabled' => true,
+                'photoURL' => $hashPassword
+            ];
+            $_result_update=$this->_userModel->updateUserCustomer($user['uid'],$properties,$table);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                $message.="User updated \n";
+            }else{
+                $message.=$_result_update;
+            }
+            $_mail_body=$this->resetMail($user,$hashPassword,$_result);            
+            $this->_sendMail=new emailController();
+            $_mail_response=$this->_sendMail->sendMailSMTP($user['Email'],"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $message.= $_mail_response;
+            if(strpos($message,"Error")>-1){
+            }else{
+                $message.="\n Please check your mail to get instruccions to recover your password.";
+            }
+        }else{
+            $message.="Error, an error occurred when changing the password";
+        }
+        return $message;
+    }
+
+    public function changePassword($table,$userId,$newPassword){
+        $message="";
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->changeUserPassword($userId,$newPassword,$table);
+        if(is_array($_result) or gettype($_result)=="object" ){
+            $message="Password changed \n";
+            $properties = [
+                'disabled' => false,
+                'photoURL' => ''
+            ];
+            $_result_update=$this->_userModel->updateUserCustomer($userId,$properties,$table);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                $message.="User updated \n";
+            }else{
+                $message.=$_result_update;
+            }
+        }else{
+            $message.="Error, an error occurred when changing the password";
+        }
+        return $message;
+    }
+    
 }
 ?>
