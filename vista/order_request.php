@@ -290,7 +290,7 @@
 				</div>-->
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
 
 		</div>
@@ -393,7 +393,7 @@
 				</div>
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 			</div>
 		</div>
 		
@@ -555,7 +555,7 @@
 						</script>
 
 						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                		<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                		<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 					</div>
 			</div>
 		</div>
@@ -580,7 +580,7 @@
 	
 				</div> 
               <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -606,7 +606,7 @@
 				</div>
          
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -661,7 +661,7 @@
 				</div>-->
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -712,7 +712,7 @@
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
                 </div>
 				
-				<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+				<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 				
                
                 
@@ -755,7 +755,7 @@
 								</div>
 							</div>
 						</div>
-						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
 					</div>
 					<div class="col-sm-6">

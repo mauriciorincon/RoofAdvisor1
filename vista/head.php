@@ -28,6 +28,8 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/calendar.css">
 		<link rel="stylesheet" href="vista/css/simple-sidebar.css" >
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
+		<link rel="stylesheet" href="vista/css/segmented-controls.css">
+		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
 		
 		
