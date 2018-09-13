@@ -272,6 +272,7 @@ class userController{
                 $_mail_response="OK ".$_mail_response;
             }
 
+            
             return $_resultUser.$_resultCompany."<br>".$_mail_response;
         }else{
             return "Error".$_responseU;
