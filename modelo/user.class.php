@@ -37,6 +37,16 @@ class userModel extends connection{
         return "Error";
     }
 
+    public function validateCompanyByID($userId){
+        $result=$this->validateUserByID($userId,'company');
+        if(is_array($result) or gettype($result)=="object" ){
+            return $result;
+        }else{
+            return "Error ".$result;
+        }
+        return "Error";
+    }
+
     public function validateCompany($user,$pass){
        //echo "modelo company";
         $result=$this->validateUser($user,$pass,'company');

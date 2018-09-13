@@ -224,9 +224,8 @@ class userController{
         $password = rand(1000,5000);
 
         $_responseU=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],$hashActivationCode,$arrayContractor['password'],'company');
-        return "llego aca";
-        exit();
-        if(is_array($_response) or gettype($_response)=="object"){
+        
+        if(is_array($_responseU) or gettype($_responseU)=="object"){
             $Company = array(
                     "ComapnyLicNum" => "",
                     "CompanyAdd1" => "",
@@ -256,21 +255,26 @@ class userController{
                     "PrimaryFName" => $arrayContractor['firstNameCompany'],
                     "PrimaryLName" => $arrayContractor['lastNameCompany'],
                     "Status_Rating" => "5.0",
-                    "uid" => "hola",
+                    "uid" => $_responseU->uid,
             );
-            $_result=$this->_userModel->insertContractor($_newCompanyId,$Company);
-            $_mail_body=$this->welcomeMailCompany($arrayContractor,$hashActivationCode,$_responseU);
-echo "mail".$_mail_body;
+            $_resultUser="User created correctly <br>";
+            $_resultCompany=$this->_userModel->insertContractor($_newCompanyId,$Company);
+
+            $_mail_body=$this->welcomeMailCompany($Company,$hashActivationCode,$_responseU);
+            
+            
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayContractor['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+
             if($_mail_response==false){
-                return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+                $_mail_response="Error ".$_resultUser."<br>".$_resultCompany."<br>".$this->_sendMail->getMessageError();
             }else{
-                //return "OK ".$_response."<br>".$_mail_response;
+                $_mail_response="OK ".$_mail_response;
             }
-            return $_newCompanyId;
+
+            return $_resultUser.$_resultCompany."<br>".$_mail_response;
         }else{
-            return "Error".$_response;
+            return "Error".$_responseU;
         }
         
     }
@@ -282,6 +286,7 @@ echo "mail".$_mail_body;
     }
 
     public function insertCustomer($arrayCustomer){
+        $_response="";
         $this->_userModel=new userModel();
         $_lastCustomerID=$this->_userModel->getLasCustomerNumberParameter("Parameters/LastCustomerID");
         //$_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
@@ -337,12 +342,46 @@ echo "mail".$_mail_body;
     public function validateCode($user,$code,$table){
         if(strcmp($table,'Company')==0){
             $this->_userModel=new userModel();
-            $_customer=$this->_userModel->getCompany($user);
+            $_result=$this->_userModel->validateCompanyByID($user);
+            
+            if(is_array($_result) or gettype($_result)=="object" ){
+                //print_r($_result);
+                if(strcmp($_result->photoUrl,$code)==0){
+                    
+                    $properties = [
+                        'emailVerified' => true,
+                        'disabled' => false,
+                        'photoURL' => ''
+                    ];
+                    $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'company');
+                    if(is_array($_result_update) or gettype($_result_update)=="object" ){
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        return $_message;
+                    }else{
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+
+                        return $_message;
+                        
+                    }
+                    
+                }else{
+                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
+                    return $_message;
+                }
+            }else{
+                
+                return "Error, the user company was no found";
+            }
+
+
+
+            $this->_userModel=new userModel();
+            $_result=$this->_userModel->validateCustomerByID($user);
             if(is_array($_customer)){
                 //print_r($_customer);
                 if(strcmp($_customer['ComapnyLicNum'],$code)==0){
                     $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
-                    $this->_userModel->updateContractor($_customer['CompanyID'].'/CompanyStatus','Active');
+                    
                     return "The code is correct";
                 }else{
                     return "Error, the code is incorrect";    
@@ -587,6 +626,10 @@ echo "mail".$_mail_body;
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomer($user);  
     }
+    public function getCompanyE($user){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCompany($user);  
+    }
     public function getCustomerK($user){
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomerKey($user);  
@@ -672,6 +715,7 @@ echo "mail".$_mail_body;
         ';
         return $_message;
     }
+
     public function welcomeMailCompany($_companyArray,$_validation_code,$_userData){
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
             $_dir=$_SERVER['REQUEST_URI'];
@@ -687,7 +731,7 @@ echo "mail".$_mail_body;
         <table>
             <tr><td>Dear '.$_companyArray['CompanyName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">Thank you for registering at roofadvisorz.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
-            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=co&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=co&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=co&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
@@ -697,7 +741,9 @@ echo "mail".$_mail_body;
         return $_message;
     }
 
-    public function resetMail($_customerArray,$_validation_code,$_userData){
+    public function resetMail($_userArray,$_validation_code,$_userData){
+        $_userName="";
+        $_userType="";
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
             $_dir=$_SERVER['REQUEST_URI'];
             $pos1 = strpos($_dir,"/");
@@ -708,9 +754,16 @@ echo "mail".$_mail_body;
         }else{
             $_path1="http://" . $_SERVER['HTTP_HOST'];
         }
+        if(isset($_userArray['Fname'])){
+            $_userName=$_userArray['Fname'];
+            $_userType="c";
+        }else if(isset($_userArray['CompanyName'])){
+            $_userName=$_userArray['CompanyName'];
+            $_userType="co";
+        }
         $_message='
         <table>
-            <tr><td>Dear '.$_customerArray['Fname'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td>Dear '.$_userName.'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
             <tr><td colspan="2">Click the link below to reset your password:</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
@@ -782,6 +835,7 @@ echo "mail".$_mail_body;
 
     public function resetPassword($table,$user){
         $message="";
+        $_userMail="";
         $this->_userModel=new userModel();
         $hashPassword = md5( rand(0,1000) );
         $_result=$this->_userModel->changeUserPassword($user['uid'],$hashPassword,$table);
@@ -798,9 +852,14 @@ echo "mail".$_mail_body;
             }else{
                 $message.=$_result_update;
             }
+            if(isset($user['Email'])){
+                $_userMail=$user['Email'];
+            }else if(isset($user['CompanyEmail'])){
+                $_userMail=$user['CompanyEmail'];
+            }
             $_mail_body=$this->resetMail($user,$hashPassword,$_result);            
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($user['Email'],"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($_userMail,"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
             $message.= $_mail_response;
             if(strpos($message,"Error")>-1){
             }else{
@@ -841,7 +900,7 @@ echo "mail".$_mail_body;
                 $message.=$_result_update;
             }
         }else{
-            $message.="Error, an error occurred when changing the password";
+            $message.="Error, an error occurred when changing the password the result".$_result;
         }
         return $message;
     }

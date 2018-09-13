@@ -54,6 +54,6 @@ if(strpos($_companyID,"Error")!==false){
         $_driverController=new driverController();
         $_driverController->insertDrivers($_companyID,$_array_drivers);
     }
-    echo "Continue, Company was register correctly please check your email, to validate the user";
+    echo "Continue, Company was register correctly please check your email, to validate the user".$_companyID;
 }
 ?>
