@@ -167,16 +167,11 @@ class connection{
         }
     }
 
-    public function getDataTable($table){
-        
+    public function getDataTable($table){    
         $snapshot=$this->_firebase->getReference($table)
                             ->getSnapshot();
         $value = $snapshot->getValue();
-    
         $_array_data=$value;
-        //$value = $this->_firebase->get($table."/");
-
-        //$_array_company=json_decode($value,true);
         return $_array_data;
     }
 

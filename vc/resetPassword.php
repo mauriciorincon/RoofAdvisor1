@@ -58,7 +58,7 @@ if(strcmp($table,"c")==0){
                     <center><input maxlength="100" type="password" required="required" class="form-control" placeholder="Confirm password" id="retypepassword" name="retypepassword" /></center>
                     </div>
 
-                    <center><a href="#" onclick="chengePaswword('<?php echo $table ?>','<?php echo $email ?>','<?php echo $code ?>')" class="btn">Change my password</a></center>
+                    <center><a href="#" onclick="changePaswword('<?php echo $table ?>','<?php echo $email ?>','<?php echo $code ?>')" class="btn">Change my password</a></center>
                 </div>
             </div>
         </div>

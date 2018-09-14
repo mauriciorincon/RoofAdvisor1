@@ -91,10 +91,11 @@
                                 <th>#</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Repair Crew Phone</th>
-                                <th>Driver License</th>
+                                <th>Contact Phone</th>
                                 <th>Email</th>
                                 <th>Status</th>
+                                <th>Profile</th>
+                                <th>Driver License</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -104,7 +105,6 @@
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name" id="driverLastName[]" name="driverLastName[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td>
-                                <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License" id="driverLicense[]" name="driverLicense[]" /></td>
                                 <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td>
                                 <td><select class="form-control" id="driverStatus[]" name="driverStatus[]" disabled >
                                         <option value="Active">Active</option>
@@ -112,6 +112,13 @@
                                         <option value="Terminated">Terminated</option>
                                     </select>
                                 </td>
+                                <td><select class="form-control" id="driverProfile[]" name="driverProfile[]">
+                                    <?php foreach ($_profileList as $key => $value1) { ?>
+                                        <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                    <?php } ?>
+                                    </select>
+                                </td>
+                                <td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License" id="driverLicense[]" name="driverLicense[]" /></td>
                                 <td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td>
                             </tr>
                             </tbody>
@@ -121,7 +128,7 @@
                 </div>
                 
                 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtn pull-left" type="button">Previous</button>
             </div>
 
         </div>
@@ -144,7 +151,7 @@
 				</div>
                 
                 
-                <button class="btn btn-primary prevBtn pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtn pull-left" type="button">Previous</button>
             </div>
         </div>
         

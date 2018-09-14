@@ -29,7 +29,7 @@ $_arrayCompany = array(
 
 $_array_drivers=array();
 $_elementsCount=count($_arrayDivers);
-$_elementDivisor=$_elementsCount/6;
+$_elementDivisor=$_elementsCount/7;
 for($n=0;$n<$_elementDivisor;$n++){
     if(!empty($_arrayDivers[$n]) and !empty($_arrayDivers[$n+$_elementDivisor])){
     $_array=array(
@@ -39,6 +39,7 @@ for($n=0;$n<$_elementDivisor;$n++){
         "driverLicense"=>$_arrayDivers[$n+($_elementDivisor*3)],
         "driverEmail"=>$_arrayDivers[$n+($_elementDivisor*4)],
         "driverStatus"=>$_arrayDivers[$n+($_elementDivisor*5)],
+        "driverProfile"=>$_arrayDivers[$n+($_elementDivisor*6)],
     );
     array_push($_array_drivers,$_array);
     }

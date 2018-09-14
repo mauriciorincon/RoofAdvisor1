@@ -97,6 +97,7 @@ $(document).ready(function () {
         var cellCount=0;
         $(".form-group").removeClass("has-error");
         
+        isValid=true;
         isValid=validInputPassword()
         isValid=validInputRePassword();
         if (curStepBtn=="step-2"){
@@ -111,7 +112,7 @@ $(document).ready(function () {
                     
                 });
                 if(cellCount==5 || cellCount==0){
-                    isValid = true;
+                    //isValid = true;
                 }else{
                     isValid = false;
                     for (var i = 0; i < curInputs.length; i++) {
@@ -185,7 +186,13 @@ $(document).ready(function () {
 $(document).ready(function() {
     $("#addRowDriver").click(function(){
         var rowCount = $('table#table_drivers tr:last').index() + 2;
-        $("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
+        var $tr    = $('table#table_drivers tr:last');
+        var $clone = $tr.clone();
+        $clone.find(':text').val('');
+        $clone.find('td:first').text(rowCount);
+        $tr.after($clone);
+
+        //$("#table_drivers").append('<tr><td>'+rowCount+'</td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="First Name" id="driverFirstName[]" name="driverFirstName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Last Name"  id="driverLastName[]" name="driverLastName[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Repair Crew Phone" id="driverPhone[]" name="driverPhone[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Driver License"  id="driverLicense[]" name="driverLicense[]" /></td><td><input maxlength="30" type="text" required="required" class="form-control" placeholder="Email" id="driverEmail[]" name="driverEmail[]" /></td><td><select class="form-control"  id="driverStatus[]" name="driverStatus[]"><option value="Active">Active</option><option value="Inactive">Inactive</option><option value="Terminated">Terminated</option></select></td><td><select class="form-control" id="driverProfile[]" name="driverProfile[]"></select></td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
         
     });
     $("#table_drivers").on('click','#deleteRowDriver',function(){
@@ -264,6 +271,9 @@ function saveContractorData(){
         driver.push($(this).val());
     });
     $('select[name^="driverStatus"]').each(function() {
+        driver.push($(this).val());
+    });
+    $('select[name^="driverProfile"]').each(function() {
         driver.push($(this).val());
     });
 
@@ -2679,7 +2689,7 @@ function resetPassword(){
     });
 }
 
-function chengePaswword(table,id_user,temporal_password){
+function changePaswword(table,id_user,temporal_password){
     password=$('input#newpassword').val();
     password1=$('input#retypepassword').val();
 

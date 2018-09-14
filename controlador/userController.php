@@ -8,6 +8,7 @@ require_once($_SESSION['application_path']."/modelo/user.class.php");
 require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/controlador/othersController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 
 
@@ -27,6 +28,7 @@ class userController{
 
     private $_userModel=null;
     private $_orderController=null;
+    private $_otherController=null;
     private $_sendMail=null;
     private $_user="";
     private $_pass="";
@@ -56,6 +58,9 @@ class userController{
     }
 
     public function showRegisterContractor(){
+        $this->_otherController=new othersController();
+        $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
+
         require_once("vista/head.php");
         require_once("vista/register_contractor.php");
         require_once("vista/footer.php");
@@ -767,7 +772,7 @@ class userController{
             <tr><td>Dear '.$_userName.'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.</td><tr>
             <tr><td colspan="2">Click the link below to reset your password:</td><tr>
-            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
+            <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t='.$_userType.'&verify='.$_validation_code.'">'.$_path1.'/index.php?controller=user&accion=changePasswordS&u='.$_userData->uid.'&t='.$_userType.'&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>

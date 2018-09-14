@@ -90,7 +90,7 @@
                     <label class="control-label text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
                     
                 </div>
-                <button class="btn btn-primary prevBtnCustomer pull-left" id="prevBtnRegisterCustomer" name="prevBtnRegisterCustomer" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnCustomer pull-left" id="prevBtnRegisterCustomer" name="prevBtnRegisterCustomer" type="button">Previous</button>
             </div>
         </div>
         

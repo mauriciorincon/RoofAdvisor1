@@ -68,7 +68,8 @@ class driverController{
                 "ContPhoneNum" => $driverInsert['driverPhone'],
                 "ContRating" => "0",
                 "ContStatus" => $driverInsert['driverStatus'],
-                "ContractorID" => "$_newDriverId"
+                "ContractorID" => "$_newDriverId",
+                "ContractorProfile" => $driverInsert['driverProfile'],
             );
             $this->_driverModel->insertDriver($_newDriverId,$_driver);
             $_tmp=substr($_newDriverId,2);

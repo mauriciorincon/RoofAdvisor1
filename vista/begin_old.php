@@ -104,7 +104,7 @@
 				</div>
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
 
         </div>
@@ -185,7 +185,7 @@
 				
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
         
@@ -208,7 +208,7 @@
 
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -237,7 +237,7 @@
 
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -267,7 +267,7 @@
 				</div>
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -300,7 +300,7 @@
 
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
@@ -344,7 +344,7 @@
 				</div>
                 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Preview</button>
+                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
         </div>
 
