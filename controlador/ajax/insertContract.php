@@ -48,13 +48,18 @@ for($n=0;$n<$_elementDivisor;$n++){
 
 $_userController=new userController();
 $_companyID=$_userController->insertCompany($_arrayCompany);
+
 if(strpos($_companyID,"Error")!==false){
     echo "Error register company,try again ".$_companyID."";
 }else{
     if(count($_array_drivers)>0){
+        $_pos=strpos($_companyID,"*");
+        if($_pos!==false){
+            $_consecutive=substr($_companyID,0,$_pos);
+        }
         $_driverController=new driverController();
-        $_driverController->insertDrivers($_companyID,$_array_drivers);
+        $_driverController->insertDrivers($_consecutive,$_array_drivers);
     }
-    echo "Continue, Company was register correctly please check your email, to validate the user".$_companyID;
+    echo "Continue, Company was register correctly please check your email, to validate the user".$_consecutive;
 }
 ?>

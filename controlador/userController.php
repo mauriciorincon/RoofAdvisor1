@@ -278,7 +278,7 @@ class userController{
             }
 
             
-            return $_resultUser.$_resultCompany."<br>".$_mail_response;
+            return $_newCompanyId."*".$_resultUser.$_resultCompany."<br>".$_mail_response;
         }else{
             return "Error".$_responseU;
         }
@@ -507,7 +507,8 @@ class userController{
                 array_push($_array_orders_to_show,$order);
             }
             
-            
+            $this->_otherController=new othersController();
+            $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
             
             require_once("vista/head.php");
             require_once("vista/dashboard_company.php");

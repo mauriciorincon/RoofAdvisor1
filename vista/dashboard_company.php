@@ -1,29 +1,23 @@
 <div class="alert alert-success">
   <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
 </div>
-<?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+<?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
     </div>
 <?php } ?>
-<div class="row">
-    <div class="col-md-2">
-        <div class="vertical-menu">
-            <a href="#" class="active">Actions</a>
-            <a href="#myModalProfile" data-toggle="modal" >Profile</a>
-            <a href="#myModalDrivers" data-toggle="modal" >Drivers</a>
-            <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
-            <a href="#">Metrics in your Service Area</a>
-            <a href="#">Orders for the week</a>
-            <a href="#">Rechedule Order</a>
-            <a href="#">Repair Crew Offline</a>
-            <a href="#">Repair Crew Avalible</a>
-            <a href="#">Complete Your Registration</a>
-            
-        </div>
-    </div>
-    <div class="col-md-10">
 
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+		<div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Orders</button>
+			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
+			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
+			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');setActiveItemMenu(this);">Scheduler</button>
+		</div>
+		
+</div>
+
+<div id="mapDashBoard1" class="collapse in">
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
         <style>
@@ -511,16 +505,15 @@
                 </tbody>
             </table>
         </div>
-    </div>
+
               
 </div>
 
 
 
-<div class="modal" id="myModalProfile" role="dialog" style="height: 800px;">
-	<div class="modal-dialog modal-dialog-centered" role="document"> 
+
 		<!-- Modal content--> 
-		<div class="modal-content"> 
+<div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
@@ -598,18 +591,16 @@
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
                                 </div>
                                 <div class="form-group">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                                     <label class="control-label">Billing Address 2</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-=======
+
                                     <label class="control-label">Billing Address (Con't)</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
->>>>>>> 299c41f913cf7d67e501f865b380e880099fb665
-=======
+
                                     <label class="control-label">Billing Address (Con't)</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
->>>>>>> 9807759c06247c158bc815e90c034f07bd80901a
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">City</label>
@@ -625,8 +616,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Credit Card Expiration Month (MM)</label>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
                                 </div>
                                 <div class="form-group">
@@ -635,9 +625,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">PayInfoCredit Card Number</label>
-=======
-=======
->>>>>>> 9807759c06247c158bc815e90c034f07bd80901a
+
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
                                 </div>
                                 <div class="form-group">
@@ -646,10 +634,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Credit Card Number</label>
-<<<<<<< HEAD
->>>>>>> 299c41f913cf7d67e501f865b380e880099fb665
-=======
->>>>>>> 9807759c06247c158bc815e90c034f07bd80901a
+
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
                                 </div>
                                 <div class="form-group">
@@ -708,21 +693,20 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
                 </div> 
             </div>
-		</div> 
-	</div>
-</div>
+</div> 
 
-<div class="modal fade" id="myModalDrivers" role="dialog" style="height: 600px;width: 90%;">
-	<div class="modal-dialog modal-dialog-centered modal-lg" role="document"> 
+
+
+
 		<!-- Modal content--> 
-		<div class="modal-content"> 
+<div class="collapse container" id="companyDashEmployee1"> 
 			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerTextDriversCompany">Driver List</h4> 
+				
+				<h4 class="modal-title" id="headerTextDriversCompany">Employee List</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerDriversCompany"> 
                 <div class="table-responsive">
-                <?php if(strcmp($_actual_company['CompanyID'],'Active')!==0){?>
+                <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
                     <div class="alert alert-danger">
                         <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
                     </div>
@@ -733,9 +717,10 @@
                                 <th>ContractorID</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Repair Crew Phone</th>
-                                <th>Driver License</th>
-                                <th>Driver Email</th>
+                                <th>Employee Phone</th>
+                                <th>Employee License</th>
+                                <th>Employee Email</th>
+                                <th>Profile</th>
                                 <th>Status</th>
                                 <th>-Edit-</th>
                                 <th>Action</th>
@@ -750,6 +735,7 @@
                                     <td><?php echo $contractor['ContPhoneNum']?></td>
                                     <td><?php echo $contractor['ContLicenseNum']?></td>
                                     <td><?php if (isset($contractor['ContEmail'])){echo $contractor['ContEmail'];}else{echo '';}?></td>
+                                    <td><?php if (isset($contractor['ContractorProfile'])){echo $contractor['ContractorProfile'];}else{echo '';}?></td>
                                     <td><?php echo $contractor['ContStatus']?></td>
                                     <td>
                                         <a class="btn-info btn-sm" data-toggle="modal"  
@@ -779,17 +765,15 @@
                                             href="#myModalInsertContractor" 
                                             onClick="emptyTextNewDriver()"> 
                                             <span class="glyphicon glyphicon-file"></span>
-                                            New Driver
+                                            New Employee
                         </a>
                         
                 </div>
             </div> 
-			<div class="modal-footer" id="buttonrating"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+			
+</div> 
+
+
 
 
 <!-- formulario Modal Actualizar datos-->
@@ -798,7 +782,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Edit Contrator Data</h4>
+        <h4 class="modal-title">Edit Employee Data</h4>
       </div>
       <div class="modal-body">
 
@@ -818,17 +802,26 @@
                 oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
-                <label for="ContPhoneNumed">Repair Crew Phone</label>
+                <label for="ContPhoneNumed">Employee Phone</label>
                 <input type="text" class="form-control" name="ContPhoneNumed" id="ContPhoneNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
                 oninput="setCustomValidity('')">
             </div>
 
             <div class="form-group">
-                <label for="ContLicenseNumed">Driver License</label>
+                <label for="ContLicenseNumed">Employee License</label>
                 <input type="text" class="form-control" name="ContLicenseNumed" id="ContLicenseNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
                 oninput="setCustomValidity('')">
             </div>
             
+            <div class="form-group">
+            <label for="ContStatused">Profile</label>
+                    <select class="form-control" id="ContProfile" name="ContProfile">
+                        <?php foreach ($_profileList as $key => $value1) { ?>
+                            <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                        <?php } ?>
+                    </select>
+            </div>
+
             <div class="form-group">
             <label for="ContStatused">Status</label>
                     <select class="form-control" id="ContStatused" name="ContStatused" readonly>
@@ -893,6 +886,15 @@
             </div>
             
             <div class="form-group">
+            <label for="ContStatused">Profile</label>
+                    <select class="form-control" id="ContProfileIn" name="ContProfileIn">
+                        <?php foreach ($_profileList as $key => $value1) { ?>
+                            <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                        <?php } ?>
+                    </select>
+            </div>
+
+            <div class="form-group">
             <label for="ContStatused">Status</label>
                     <select class="form-control" id="ContStatusIn" name="ContStatusIn" disabled>
                         <option value="Active">Active</option>
@@ -912,23 +914,14 @@
 
 
 <!-- formulario Insertar contractor datos-->
-<div class="modal" id="myModalSchedyleCompany" role="dialog" style="height: 1000px;">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Service Schedule</h4>
-      </div>
-        <div class="modal-body"  id="scheduleCompany">
+<div class="collapse container" id="scheduleCompany">
             <?php   echo '<h2>June 2018</h2>';
                     $oCalendar=new calendar();
                     echo $oCalendar->draw_controls(6,2018);
                     $_eventsArray=$oCalendar->getEvents(6,2018);
                     echo $oCalendar->draw_calendar(6,2018,$_eventsArray);
             ?>
-        </div>
-    </div><!-- /cierro contenedor -->
-  </div><!-- /cierro dialogo-->
+     
 </div><!-- /cierro modal -->
 
 <!-- formulario Insertar contractor datos-->
