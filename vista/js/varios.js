@@ -279,7 +279,7 @@ function saveContractorData(){
 
     
     jsShowWindowLoad('');
-    $.post( "http://localhost/roofservicenow1/controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
+    $.post( "controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
                                                     "phoneContactCompany":phoneContactField,"emailValidation":emailField,"typeCompany":typeCompanyField,
                                                 "password":password,"arrayDrivers":driver}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
