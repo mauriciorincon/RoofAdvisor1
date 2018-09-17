@@ -31,29 +31,31 @@
         <div id="map"></div>
 
         <script>
+            var marketrs=[];
+            var contractorMarker=[];
+            var mapObject;
+            var infowindow;
+            var orderOpenContractor=[];
+            <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
             // Initialize and add the map
             function initMap() {
                 // The location of Uluru
                 var uluru = {lat: 25.745693, lng: -80.375028};
                 // The map, centered at Uluru
-                var map = new google.maps.Map(
-                    document.getElementById('map'), {zoom: 11, center: uluru});
+                mapObject = new google.maps.Map(
+				document.getElementById('map'), {zoom: 11, center: uluru});
 
                 // The marker, positioned at Uluru
                 //var marker = new google.maps.Marker({position: uluru, map: map});
                 var marker="";
-                var marketrs=[];
-                var infowindow;
-                <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+                infowindow = new google.maps.InfoWindow();
                 
-
-                
-
                 var iconBase = iconBase+'/img/img_maps/';
+
                 <?php echo 'var address = "'. $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'].'"';?>
 
                 var geocoder = new google.maps.Geocoder();
-                var infowindow = new google.maps.InfoWindow();
+                
 
                 if(address != "" && address != null && address != " "){
                     geocodeAddress(geocoder,map,address,iconBase);
@@ -65,21 +67,35 @@
                 ref.orderByChild("CompanyID").equalTo("<?php echo $_actual_company['CompanyID'] ?>").once("value", function(snapshot) {
 
                     datos=snapshot.val();
-                            for(k in datos){
-                                fila=datos[k];
-                                //pos={lat:parseFloat(fila.Latitude),lng:parseFloat(fila.Longitude)};
-                                //marker = new google.maps.Marker({position: pos, map: map});
-                                var marker={
-                                    lat: parseFloat(fila.Latitude),
-                                    lng: parseFloat(fila.Longitude),
-                                    icon: iconBase+'library_maps.png',
-                                    text: fila.SchDate
-                                };
-                                var oMarket=addMarket(marker,map,fila,infowindow);
-                                marketrs.push(oMarket);
-                            }
+                    for(k in datos){
+                        fila=datos[k];
 
-                console.log(snapshot.val());
+                        var marker={
+                            lat: parseFloat(fila.Latitude),
+                            lng: parseFloat(fila.Longitude),
+                            icon: iconBase+'library_maps.png',
+                            text: fila.SchDate
+                        };
+                        var oMarket=addMarket(marker,fila,infowindow);
+                        marketrs.push(oMarket);
+
+                        if(fila.Status=='D'){
+                            if(fila.ContractorID!="" || fila.ContractorID!=undefined){
+                                orderOpenContractor.push(fila.ContractorID);
+                                var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
+                                refContractor.once("value", function(snapshot) {
+                                    var updateContractor = snapshot.val();
+                                    var marker={
+                                        lat: parseFloat(updateContractor.CurrentLocation.latitude),
+                                        lng: parseFloat(updateContractor.CurrentLocation.longitude),
+                                        icon: iconBase+'library_maps.png'
+                                    };
+                                    var oMarket=addMarketContractor(marker,updateContractor);
+                                    contractorMarker.push(oMarket);
+                                });
+                            }
+                        }
+                    }
                 
                 });
                 
@@ -88,24 +104,66 @@
                 ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
-                        if(validateExist(newOrder.OrderNumber)==false){
-                            addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
-                        }
+                        row=validateExist(newOrder.OrderNumber)
+						if(row==-1){
+                                addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
+						}                        
                     }
                     console.log("Data: " + newOrder);
                     
                 });
+
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
                     var updateOrder = snapshot.val();
-                    //if(updateOrder.Status=='A' || updateOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
-                        if(validateExist(updateOrder.OrderNumber)==false){
-                            addOrderToTable(updateOrder,companyID,map,infowindow,iconBase);
+                    if(updateOrder.CompanyID==companyID){
+                        row=validateExist(updateOrder.OrderNumber);
+						if(row==-1){
+								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+						}else{
+								updateOrderOnTable(updateOrder,row);
+						}
+                        removeMarket(updateOrder.OrderNumber);
+                        var marker={
+                            lat: parseFloat(updateOrder.Latitude),
+                            lng: parseFloat(updateOrder.Longitude),
+                            icon: iconBase+'library_maps.png',
+                            text: updateOrder.SchDate
+                        };
+                        var oMarket=addMarket(marker,updateOrder,infowindow);
+                        marketrs.push(oMarket);
+
+                        //Function to paint driver position
+                        if(updateOrder.Status=='D'){
+                            if(updateOrder.ContractorID!="" || updateOrder.ContractorID!=undefined){
+                                if (orderOpenContractor.indexOf(updateOrder.ContractorID)==-1){
+                                    orderOpenContractor.push(fila.ContractorID);
+                                }
+                                var refContractor = firebase.database().ref("/Contractors/"+updateOrder.ContractorID);
+                                refContractor.once("value", function(snapshot) {
+                                    var updateContractor = snapshot.val();
+                                    removeMarketContractor(updateContractor.ContractorID);
+                                    var marker={
+                                        lat: parseFloat(updateContractor.CurrentLocation.latitude),
+                                        lng: parseFloat(updateContractor.CurrentLocation.longitude),
+                                        icon: iconBase+'library_maps.png'
+                                    };
+                                    var oMarket=addMarketContractor(marker,updateContractor);
+                                    contractorMarker.push(oMarket);
+                                });
+                            }
                         }else{
-                            updateOrderOnTable(updateOrder);
+                            removeMarketContractor(updateOrder.ContractorID);
                         }
-                    //}
-                    //addOrderToTable(newOrder,companyID);
+
+                    }else{
+                        if(updateOrder.Status!='A'){
+                            row=validateExist(updateOrder.OrderNumber);
+                            if(row>-1){
+                                removeOrderOnTable(updateOrder);
+                            }
+                        }
+					}
                     console.log("Data: " + updateOrder.OrderNumber);
                     
                 });
@@ -119,34 +177,73 @@
                     console.log("Data: " + deletedOrder.OrderNumber);
                     
                 });
- 
+
+                var refOpen = firebase.database().ref("Orders");
+                refOpen.orderByChild("CompanyID").equalTo("").once("value", function(snapshot) {
+                    datos=snapshot.val();
+                    for(k in datos){
+                        fila=datos[k];
+
+                        var marker={
+                            lat: parseFloat(fila.Latitude),
+                            lng: parseFloat(fila.Longitude),
+                            icon: iconBase+'library_maps.png',
+                            text: fila.SchDate
+                        };
+                        var oMarket=addMarket(marker,fila,infowindow);
+                        marketrs.push(oMarket);
+                    }
+                });
                 
             }
 
-            function addMarket(data,map,fila,infowindow){
+            function addMarket(data,fila,infowindow){
                 var image="";
-                    if(fila.Status==='A'){
-                        image="open_service.png";
-                    }else if(fila.Status=='D'){
-                        image="open_service_d.png";
-                    }else if(fila.Status=='E'){
-                        image="open_service_e.png";
-                    }else if(fila.Status=='F'){
-                        image="open_service_f.png";
-                    }
-                    var oMarket= new google.maps.Marker({
-                        position: new google.maps.LatLng(data.lat,data.lng),
-                        map:map,
-                        icon:'img/img_maps/'+image
-                    });
+					if(fila.Status==='A'){
+						image="open_service.png";
+					}else if(fila.Status=='D'){
+						image="open_service_d.png";
+					}else if(fila.Status=='E'){
+						image="open_service_e.png";
+					}else if(fila.Status=='F'){
+						image="open_service_f.png";
+					}else if(fila.Status=='G'){
+						image="open_service_g.png";
+					}else if(fila.Status=='H'){
+						image="open_service_h.png";
+					}else if(fila.Status=='I'){
+						image="open_service_i.png";
+					}else if(fila.Status=='J'){
+						image="open_service_j.png";
+					}else if(fila.Status=='K'){
+						image="open_service_k.png";
+					}else if(fila.Status=='C'){
+						image="open_service_c.png";
+					}else if(fila.Status=='P'){
+						image="open_service_p.png";
+					}else if(fila.Status=='R'){
+						image="open_service_r.png";
+					}else if(fila.Status=='S'){
+						image="open_service_s.png";
+					}else{
+						image="if_sign-error_299045.png";
+					}
+					var oMarket= new google.maps.Marker({
+						position: new google.maps.LatLng(data.lat,data.lng),
+						map:mapObject,
+						icon:'img/img_maps/'+image,
+						id:fila.OrderNumber
+					});
 
-                    oMarket.addListener('click', function() {
-                                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
-                                                            '</b><br><b>Customer:</b>'+fila.CustomerID+
-                                                            '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+'</p>');
+					oMarket.addListener('click', function() {
+                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+															'</b><br><b>Status:</b>'+getStatus(fila.Status)+
+															'<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
+                                                            '<br><b>Customer:</b>'+fila.CustomerID+
+                                                            '<br><b>Contracgtor:</b>'+fila.ContractorID+'</p>');
                                     infowindow.open(map, this);
-                                });
-                    return oMarket;
+								});
+					return oMarket;
                 }
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
@@ -208,67 +305,70 @@
                 '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
                 '</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
                 var marker={
-                                    lat: parseFloat(dataOrder.Latitude),
-                                    lng: parseFloat(dataOrder.Longitude),
-                                    icon: iconBase+'library_maps.png',
-                                    text: dataOrder.SchDate
-                                };
-                                var oMarket=addMarket(marker,map,dataOrder,infowindow);
+                    lat: parseFloat(dataOrder.Latitude),
+                    lng: parseFloat(dataOrder.Longitude),
+                    icon: iconBase+'library_maps.png',
+                    text: dataOrder.SchDate
+                };
+                var oMarket=addMarket(marker,dataOrder,infowindow);
+                marketrs.push(oMarket);
+
             }
 
             function updateOrderOnTable(dataOrder){
                 var value = dataOrder.OrderNumber;
                 $("#table_orders_company tr").each(function(index) {
-                        if (index !== 0) {
+                    if (index !== 0) {
 
-                            $row = $(this);
+                        $row = $(this);
 
-                            var id = $row.find("td:eq(0)").text();
+                        var id = $row.find("td:eq(0)").text();
 
-                            if (id.indexOf(value) === 0) {
-                                var requestType=getRequestType(dataOrder.RequestType);
-                                var status=getStatus(dataOrder.Status);
-                                var dataCustomer="";
-                                if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                                    dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
-                                                    'href="#myModalGetWork" '+
-                                                    'onClick="setOrderId("'+dataOrder.FBID+')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                }else{
-                                    dataCustomer=dataOrder.ContractorID;
-                                }
-                                $row.find("td:eq(1)").html(dataOrder.SchDate);
-                                $row.find("td:eq(2)").html(dataOrder.SchTime);
-                                $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-                                $row.find("td:eq(5)").html(requestType);
-                                $row.find("td:eq(6)").html(status);
-                                $row.find("td:eq(7)").html(dataOrder.ETA);
-                                $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
-                                $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                                $row.find("td:eq(10)").html(dataCustomer);
+                        if (id.indexOf(value) === 0) {
+                            var requestType=getRequestType(dataOrder.RequestType);
+                            var status=getStatus(dataOrder.Status);
+                            var dataCustomer="";
+                            if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
+                                dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                                                'href="#myModalGetWork" '+
+                                                'onClick="setOrderId("'+dataOrder.FBID+')"> '+
+                                                '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                            }else{
+                                dataCustomer=dataOrder.ContractorID;
                             }
-                            
+                            $row.find("td:eq(1)").html(dataOrder.SchDate);
+                            $row.find("td:eq(2)").html(dataOrder.SchTime);
+                            $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                            $row.find("td:eq(5)").html(requestType);
+                            $row.find("td:eq(6)").html(status);
+                            $row.find("td:eq(7)").html(dataOrder.ETA);
+                            $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+                            $row.find("td:eq(9)").html(dataOrder.PaymentType);
+                            $row.find("td:eq(10)").html(dataCustomer);
                         }
-                    });
+                        
+                    }
+                });
             }
 
             function removeOrderOnTable(dataOrder){
                 var value = dataOrder.OrderNumber;
-                var t = $('#table_orders_company').DataTable();
-                t.rows( function ( idx, data, node ) {
-                    return data[0] === value;
-                } )
-                .remove()
-                .draw();
+					var t = $('#table_orders_company').DataTable();
+					t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} )
+					.remove()
+					.draw();
             }
 
             function validateExist(orderID){
-               
                     var value = orderID;
                     var flag=false;
+                    var count=-1;
                     $("#table_orders_company tr").each(function(index) {
+                        
                         if (index !== 0) {
-
+                            count++;
                             $row = $(this);
 
                             var id = $row.find("td:eq(0)").text();
@@ -282,7 +382,11 @@
                             }
                         }
                     });
-                return flag;
+
+                if(flag==false){
+                    count=-1;
+                }
+                return count;
 
             }
 
@@ -342,6 +446,85 @@
                 }
                 return orderStatus;
             }
+
+            function addMarketContractor(data,fila){
+                var image="contractor.png";
+                var oMarket= new google.maps.Marker({
+                    position: new google.maps.LatLng(data.lat,data.lng),
+                    map:mapObject,
+                    icon:'img/img_maps/'+image,
+                    id:fila.ContractorID
+                });
+
+                oMarket.addListener('click', function() {
+                                infowindow.setContent('<p><b>Name:</b>'+fila.ContNameFirst+' '+fila.ContNameLast+'<br><b>Tel:</b>'+fila.ContPhoneNum+
+                                                        '<br><b>Status:</b>'+fila.ContWorkStatus+'</p>');
+                                infowindow.open(map, this);
+                            });
+                return oMarket;
+            }
+
+            function removeMarket(idOrder){
+                marketrs.map(function(marker) {
+                    if(marker.id==idOrder){
+                        marker.setVisible(false);
+                        marketrs.splice( marketrs.indexOf(marker), 1 );
+                    }
+                })
+                
+            }
+
+            function getStatus(status){
+                var orderStatus="";
+                switch (status) {
+                    case "A":
+						orderStatus = "Order Open";
+						break;
+					case "C":
+						orderStatus = "Acepted Order";
+						break;
+                    case "D":
+						orderStatus = "Order Assigned";
+                        break;
+                    case "E":
+						orderStatus = "Contractor Just Arrived";
+                        break;
+                    case "F":
+						orderStatus = "Estimate Sent";
+                        break;
+                    case "G":
+						orderStatus = "Estimate Approved";
+                        break;
+                    case "H":
+						orderStatus = "Work In Progress";
+                        break;
+                    case "I":
+						orderStatus = "Work Completed";
+                        break;
+                    case "J":
+						orderStatus = "Final Bill";
+                        break;
+                    case "K":
+						orderStatus = "Order Completed Paid";
+                        break;
+                    case "Z":
+						orderStatus = "Cancel work";
+						break;
+					case "P":
+						orderStatus = "Report In Progress";
+						break;
+					case "R":
+						orderStatus = "Report In Progress";
+						break;
+					case "S":
+						orderStatus = "Report Complete";
+						break;
+
+                    default:
+						orderStatus = "Undefined";
+                }
+                return orderStatus;
+			}
         </script>
 
         <script>
