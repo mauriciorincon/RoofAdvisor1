@@ -763,20 +763,12 @@
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
 								<div class="d-flex w-100 justify-content-between">
-									<span ><b>Are you new in RoofServiceNow?, fill the fields below</b></span><br><br>
+									<span ><b>Are you new to RoofServiceNow?, fill the fields below</b></span><br><br>
 									
 								</div>
 							</div>
 							
 							<div class="list-group-item " id="step6RegisterCustomerOrder">
-								<div class="form-group">
-									<label class="control-label">First Name</label>
-									<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
-									</div> 
-								<div class="form-group">
-									<label class="control-label">Last Name</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-								</div>  
 								<div class="form-group">
 									<label class="control-label ">Email</label>
 									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
@@ -794,29 +786,31 @@
 									<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
 								</div>
 
-								
+              							<div class="form-group">
+                                                                        <label class="control-label Rlft-frm">First Name</label>
+                                                                        <input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+                                                                        <label style="margin-left: 52px;" class="control-label Rlft-frm1">Last Name</label>
+                                                                        <input  maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+                                                                </div>
+	
 								<div class="form-group">
-									<label class="control-label">Address</label>
+									<label style="margin-left: 17px;" class="control-label Rlft-frm">Address</label>
 									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-								</div>
+								        <label class="control-label Rlft-frm1">City</label>
+                                                                        <input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
+                                                                </div>
 								<div class="form-group">
-									<label class="control-label">City</label>
-									<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
-								</div>
-								<div class="form-group">
-									<label class="control-label">State</label>
-									<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
-										
-										<?php foreach ($_array_state as $key => $value1) { ?>
-											<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
-										<?php } ?>
-									</select>
-								</div>
+              							        <label style="margin-left:37px;" class="control-label Rlft-frm">State</label>
+                                                                        <select style="display:inline-block;width:26%;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+
+                                                                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                                                                        <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                                                                <?php } ?>
+                                                                        </select>
+                                                                        <label style="margin-left: 66px;" class="control-label Rlft-frm1">Zip code</label>
+                                                                        <input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+                                                                </div>
 								
-								<div class="form-group">
-									<label class="control-label">Zip code</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-								</div> 
 								<div class="form-group">
 									<label class="control-label">Phone number</label>
 									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />

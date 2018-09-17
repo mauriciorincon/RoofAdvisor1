@@ -1447,7 +1447,7 @@ border-color:#fff !important;
     z-index: 400;
     color: #fff;
     font-size: 60px;
-    margin-top: 85px;
+    margin-top: 36px;
     margin-left: 271px;
 text-shadow:4px 4px 8px #151515c7;
 text-align:center;
@@ -1502,6 +1502,13 @@ margin-right: -101px !important;
 }
 .pbody-white{
 color:#fff !important;
+}
+.Rlft-frm{
+display:inline-block;
+}
+.Rlft-frm1{
+display:inline-block;
+margin-left:100px;
 }
 @media (min-width:1700px){
 .main-menu ul li a{
