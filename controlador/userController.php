@@ -188,8 +188,15 @@ class userController{
                         $_SESSION['start'] = time();
                         $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                         $_SESSION['email'] = $_result->email;
-                        $_SESSION['profile'] = 'company';
-                        $this->dashboardCompany($this->_user);
+                        
+                        if(strcmp($_data_company['CompanyID'],"CO000000")==0){
+                            $_SESSION['profile'] = 'admin';
+                            $this->dashboardAdmin();
+                        }else{
+                            $_SESSION['profile'] = 'company';
+                            $this->dashboardCompany($this->_user);
+                        }
+                        
 
                         return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                     }else{

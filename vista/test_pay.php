@@ -12,6 +12,7 @@
     require_once($_SESSION['application_path']."/controlador/pdfController.php");
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/modelo/order.class.php");
+    require_once($_SESSION['application_path']."/modelo/user.class.php");
     require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 
 
@@ -52,7 +53,7 @@
     //}else{
     //    echo $_result;
     //}
-    $_information=new customerFAQ();
+    /*$_information=new customerFAQ();
         $_array=$_information->getArrayOptions();
         $_output_html="";
         foreach($_array as $key => $item){
@@ -65,7 +66,17 @@
         echo $_information::number_1;
         echo $_information::number_2;
         echo $_information::number_3;
-        echo $_information::number_4;
+        echo $_information::number_4;*/
+
+        $_userModel=new userModel();
+        $_result=$_userModel->validateCompany('support@roofservicenow.com','123456');
+
+        $properties = [
+            'emailVerified' => true,
+            'disabled' => false,
+            'photoURL' => ''
+        ];
+        $_result_update=$_userModel->updateUserCustomer($_result->uid,$properties,'company');
 
 
 

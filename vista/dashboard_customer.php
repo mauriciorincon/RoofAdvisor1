@@ -417,12 +417,13 @@
 					'</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
 					'</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
 					var marker={
-										lat: parseFloat(dataOrder.Latitude),
-										lng: parseFloat(dataOrder.Longitude),
-										icon: iconBase+'library_maps.png',
-										text: dataOrder.SchDate
-									};
-									var oMarket=addMarket(marker,map,dataOrder,infowindow);
+						lat: parseFloat(dataOrder.Latitude),
+						lng: parseFloat(dataOrder.Longitude),
+						icon: iconBase+'library_maps.png',
+						text: dataOrder.SchDate
+					};
+					var oMarket=addMarket(marker,dataOrder,infowindow);
+					marketrs.push(oMarket);
 				}
 
 				function updateOrderOnTable(dataOrder,numberRow){
