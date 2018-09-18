@@ -1293,9 +1293,15 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-    var Rtype=$("input:radio[name='estep3Option']:checked").val();
-    var Water=$("input:radio[name='estep4Option']:checked").val();
-    var Hlevels=$("input:radio[name='estep5Option']:checked").val();
+    var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
+    var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
+    var Authorized=$('input[name=estep6Option]:checked').attr('data-value');
+    var Water=$('input[name=estep4Option]:checked').attr('data-value');
+
+    //var Rtype=$("input:radio[name='estep3Option']:checked").val();
+    //var Water=$("input:radio[name='estep4Option']:checked").val();
+    //var Hlevels=$("input:radio[name='estep5Option']:checked").val();
+    //var Authorized=$("input:radio[name='estep6Option']:checked").val();
     var SchDate=$("input[name='step6date']").val();
     var SchTime=$('input[name=step6time]').val();
     var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
@@ -1304,7 +1310,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
-    var Authorized=$("input:radio[name='estep6Option']:checked").val();
+    
 
     if(RequestType=='emergency'){
         RequestType='E'
