@@ -727,7 +727,17 @@
             </div>
             <div class="panel-body">
 				<div class="row">
-					<div style="display:none;" class="col-sm-6" >
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+					<div style="" class="col-sm-6" >
 						<div class="list-group">
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
@@ -758,6 +768,14 @@
 						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
 					</div>
+                                        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 					<div style="margin-bottom: 20px;" class="col-sm-12">
 						<div class="list-group">
 							<div class="list-group-item ">
@@ -817,7 +835,8 @@
 								</div>
                                                                 </div>  
 								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
-							</div>
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
+                                                          	</div>
 							
 						</div>
 						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
