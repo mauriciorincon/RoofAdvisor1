@@ -92,7 +92,7 @@ class orderController{
             "CompanyID"=>$arrayDataOrder['CompanyID'],
             "ContractorID" => $arrayDataOrder['ContractorID'],
             "CustomerID" => $_customer['CustomerID'],
-            "CutomerFBID" => $_customerK,
+            "CustomerFBID" => $_customerK,
             "DateTime" => date('m/d/Y H:i:s'),
             "ETA" => "",
             "EstAmtMat" => "",

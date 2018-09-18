@@ -77,6 +77,7 @@
                             text: fila.SchDate
                         };
                         var oMarket=addMarket(marker,fila,infowindow);
+                        
                         marketrs.push(oMarket);
 
                         if(fila.Status=='D'){
@@ -235,16 +236,33 @@
 						id:fila.OrderNumber
 					});
 
+                    
+                    
+                            
+                        
 					oMarket.addListener('click', function() {
-                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
-															'</b><br><b>Status:</b>'+getStatus(fila.Status)+
-															'<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
-                                                            '<br><b>Customer:</b>'+fila.CustomerID+
-                                                            '<br><b>Contracgtor:</b>'+fila.ContractorID+'</p>');
-                                    infowindow.open(map, this);
-								});
+                        var customerName="";
+                        var contractorName="";
+                        getContractorName(fila.ContractorID).then(function(contractorName){
+                            getCustomerName(fila.CustomerFBID).then(function(customerName) {  
+                            infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+                                                        '</b><br><b>Status:</b>'+getStatus(fila.Status)+
+                                                        '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
+                                                        '<br><b>Customer:</b>'+customerName+
+                                                        '<br><b>Contractor:</b>'+contractorName+'</p>');
+                                infowindow.open(map, oMarket); 
+                            });    
+                        });
+                        
+                            
+                        
+                    });
+                    
+					
 					return oMarket;
                 }
+
+                
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
                 var address = varAddress;
@@ -333,8 +351,11 @@
                                                 'href="#myModalGetWork" '+
                                                 'onClick="setOrderId("'+dataOrder.FBID+')"> '+
                                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                $row.find("td:eq(10)").html(contractorName);
                             }else{
-                                dataCustomer=dataOrder.ContractorID;
+                                getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                                    $row.find("td:eq(10)").html(contractorName);
+                                });
                             }
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
@@ -344,7 +365,9 @@
                             $row.find("td:eq(7)").html(dataOrder.ETA);
                             $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                            $row.find("td:eq(10)").html(dataCustomer);
+                            
+                                
+                            
                         }
                         
                     }
@@ -525,6 +548,44 @@
                 }
                 return orderStatus;
 			}
+
+            /*function getCustomerName(customerFBID){
+				var firstName="";
+				var lastName="";
+				var ref = firebase.database().ref("Customers/"+customerFBID);
+					ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return data.Fname+' '+data.Lname;
+						});
+				ref=null;
+					
+			}*/
+
+            function getCustomerName(customerFBID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Customers/"+customerFBID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.Fname+' '+data.Lname);
+						});
+                        //return reject("Undefined");
+                    });
+                
+            }
+            function getContractorName(ContractorID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Contractors/"+ContractorID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.ContNameFirst+' '+data.ContNameLast);
+						});
+                        //return resolve("Undefined");
+                    });
+                
+            }
+
         </script>
 
         <script>
@@ -576,11 +637,9 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Name/Addr/Phone</th>
-                    
                     <th>Description</th>
                     <th>Order Type</th>
                     <th>Status</th>
-
                     <th>Est Amt</th>
                     <th>Final Amt</th>
                     <th>Payment</th>
@@ -597,7 +656,12 @@
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
                             <td><?php  
-                                echo $order['RepAddress'].' / ';
+                                    $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');
+                                    $_customerName.=" ".$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Lname');
+
+                                    $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
+                                    $_phone_number=str_replace("+1","",$_phone_number);
+                                    echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
                                 ?></td>
                             
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
@@ -669,7 +733,10 @@
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
                                    <?php }else{
-                                        echo $order['ContractorID'];
+                                        $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                        $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+
+                                        echo $_contractorName;
                                     } 
                                     
                                 ?>
