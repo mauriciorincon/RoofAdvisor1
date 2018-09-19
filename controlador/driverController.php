@@ -81,12 +81,13 @@ class driverController{
     }
 
     public function updateDriver($_contractorID,$_contratorFirstName,$_contratorLastName,
-    $_contratorPhoneNumber,$_contratorLinceseNumber){
+    $_contratorPhoneNumber,$_contratorLinceseNumber,$_contratorProfile){
         $this->_driverModel=new driverModel();
         $this->_driverModel->updateDriver($_contractorID.'/ContNameFirst',$_contratorFirstName);
         $this->_driverModel->updateDriver($_contractorID.'/ContNameLast',$_contratorLastName);
         $this->_driverModel->updateDriver($_contractorID.'/ContPhoneNum',$_contratorPhoneNumber);
         $this->_driverModel->updateDriver($_contractorID.'/ContLicenseNum',$_contratorLinceseNumber);
+        $this->_driverModel->updateDriver($_contractorID.'/ContractorProfile',$_contratorProfile);
 
         return "The contractor identify by ".$_contractorID." was updated corretly";
     }

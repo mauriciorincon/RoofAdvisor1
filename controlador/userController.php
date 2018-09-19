@@ -508,12 +508,12 @@ class userController{
             
             $_orderController=new orderController();
             $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
-
+            
             $_array_orders_without_comapny=$_orderController->getOrderByCompany("");
             foreach($_array_orders_without_comapny as $key => $order){
                 array_push($_array_orders_to_show,$order);
             }
-            
+
             $this->_otherController=new othersController();
             $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
             
@@ -924,5 +924,9 @@ class userController{
         $this->_userModel->updateCustomerLastId("$customerId");
     }
     
+    public function getNode($node){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getNode($node);
+    }
 }
 ?>

@@ -1,9 +1,11 @@
-<div class="alert alert-success">
-  <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
-</div>
+
 <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
-        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+    </div>
+<?php }else{ ?>
+    <div class="alert alert-success">
+        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
     </div>
 <?php } ?>
 
@@ -21,11 +23,11 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
         <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px;  /* The height is 400 pixels */
-            width: 100%;  /* The width is the width of the web page */
-        }
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 400px;  /* The height is 400 pixels */
+                width: 100%;  /* The width is the width of the web page */
+            }
         </style>
 
         <div id="map"></div>
@@ -77,6 +79,7 @@
                             text: fila.SchDate
                         };
                         var oMarket=addMarket(marker,fila,infowindow);
+                        
                         marketrs.push(oMarket);
 
                         if(fila.Status=='D'){
@@ -235,16 +238,33 @@
 						id:fila.OrderNumber
 					});
 
+                    
+                    
+                            
+                        
 					oMarket.addListener('click', function() {
-                    infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
-															'</b><br><b>Status:</b>'+getStatus(fila.Status)+
-															'<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
-                                                            '<br><b>Customer:</b>'+fila.CustomerID+
-                                                            '<br><b>Contracgtor:</b>'+fila.ContractorID+'</p>');
-                                    infowindow.open(map, this);
-								});
+                        var customerName="";
+                        var contractorName="";
+                        getContractorName(fila.ContractorID).then(function(contractorName){
+                            getCustomerName(fila.CustomerFBID).then(function(customerName) {  
+                            infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+                                                        '</b><br><b>Status:</b>'+getStatus(fila.Status)+
+                                                        '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
+                                                        '<br><b>Customer:</b>'+customerName+
+                                                        '<br><b>Contractor:</b>'+contractorName+'</p>');
+                                infowindow.open(map, oMarket); 
+                            });    
+                        });
+                        
+                            
+                        
+                    });
+                    
+					
 					return oMarket;
                 }
+
+                
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
                 var address = varAddress;
@@ -333,8 +353,11 @@
                                                 'href="#myModalGetWork" '+
                                                 'onClick="setOrderId("'+dataOrder.FBID+')"> '+
                                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                $row.find("td:eq(10)").html(contractorName);
                             }else{
-                                dataCustomer=dataOrder.ContractorID;
+                                getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                                    $row.find("td:eq(10)").html(contractorName);
+                                });
                             }
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
@@ -344,7 +367,9 @@
                             $row.find("td:eq(7)").html(dataOrder.ETA);
                             $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                            $row.find("td:eq(10)").html(dataCustomer);
+                            
+                                
+                            
                         }
                         
                     }
@@ -525,39 +550,56 @@
                 }
                 return orderStatus;
 			}
+
+            /*function getCustomerName(customerFBID){
+				var firstName="";
+				var lastName="";
+				var ref = firebase.database().ref("Customers/"+customerFBID);
+					ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return data.Fname+' '+data.Lname;
+						});
+				ref=null;
+					
+			}*/
+
+            function getCustomerName(customerFBID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Customers/"+customerFBID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.Fname+' '+data.Lname);
+						});
+                        //return reject("Undefined");
+                    });
+                
+            }
+            function getContractorName(ContractorID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Contractors/"+ContractorID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.ContNameFirst+' '+data.ContNameLast);
+						});
+                        //return resolve("Undefined");
+                    });
+                
+            }
+
         </script>
 
         <script>
-        // Initialize Firebase
-        /*var config = {
-            apiKey: "AIzaSyB5HnjwLpr-WqknpRRU5WhrHCg6feVaYss",
-            authDomain: "pruebabasedatos-eacf6.firebaseapp.com",
-            databaseURL: "https://pruebabasedatos-eacf6.firebaseio.com",
-            projectId: "pruebabasedatos-eacf6",
-            storageBucket: "pruebabasedatos-eacf6.appspot.com",
-            messagingSenderId: "120748340913"
-        };*/
-        var config = {
-            apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-            authDomain: "roofadvisorzapp.firebaseapp.com",
-            databaseURL: "https://roofadvisorzapp.firebaseio.com",
-            projectId: "roofadvisorzapp",
-            storageBucket: "roofadvisorzapp.appspot.com",
-            messagingSenderId: "480788526390"
-        };
-        firebase.initializeApp(config);
-        //const dbRef = firebase.database().ref();
-        //const usersRef = dbRef.child('Orders');
-
-        
-        /*var ref = firebase.database().ref("Orders");
-            
-                ref.on('value',function(snapshot){
-                    snapshot.forEach(function(childSnapshot){
-                        var childData=childSnapshot.val();
-                    });
-                });*/
-
+            var config = {
+                apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
+                authDomain: "roofadvisorzapp.firebaseapp.com",
+                databaseURL: "https://roofadvisorzapp.firebaseio.com",
+                projectId: "roofadvisorzapp",
+                storageBucket: "roofadvisorzapp.appspot.com",
+                messagingSenderId: "480788526390"
+            };
+            firebase.initializeApp(config);
         </script>
 
 
@@ -568,26 +610,23 @@
        
 
          
-        <div class="row">          
+        <div class="table-responsive">          
             <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Name/Addr/Phone</th>
-                    
-                    <th>Description</th>
-                    <th>Order Type</th>
-                    <th>Status</th>
-
-                    <th>Est Amt</th>
-                    <th>Final Amt</th>
-                    <th>Payment</th>
-                    <th>Contractor</th>
-                    <th>Actions</th>
-
-                </tr>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Name/Addr/Phone</th>
+                        <th>Description</th>
+                        <th>Order Type</th>
+                        <th>Status</th>
+                        <th>Est Amt</th>
+                        <th>Final Amt</th>
+                        <th>Payment</th>
+                        <th>Contractor</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     
@@ -597,7 +636,12 @@
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
                             <td><?php  
-                                echo $order['RepAddress'].' / ';
+                                    $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');
+                                    $_customerName.=" ".$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Lname');
+
+                                    $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
+                                    $_phone_number=str_replace("+1","",$_phone_number);
+                                    echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
                                 ?></td>
                             
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
@@ -612,7 +656,6 @@
                                         case "R":
                                             echo "RoofReport";
                                             break;
-
                                         default:
                                             echo "Undefined";
                                             break;
@@ -669,34 +712,35 @@
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
                                    <?php }else{
-                                        echo $order['ContractorID'];
+                                        $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                        $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+
+                                        echo $_contractorName;
                                     } 
                                     
                                 ?>
                             </td>
                             <td>
-                                        <a class="btn-success btn-sm" data-toggle="modal"  
-                                            href="#myModalInvoice" 
-                                            onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
-                                            <span class="glyphicon glyphicon-list-alt"></span>
-                                        </a>
-                                    </td>
+                                <a class="btn-success btn-sm" data-toggle="modal"  
+                                    href="#myModalInvoice" 
+                                    onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+                            </td>
                            
                            
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-        </div>
-
-              
+        </div> 
 </div>
 
 
 
 
 		<!-- Modal content--> 
-<div class="collapse container" id="companyDashProfile1"> 
+        <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
@@ -862,7 +906,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Company Rating</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" />
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
                                 </div>
                             
                             </div>

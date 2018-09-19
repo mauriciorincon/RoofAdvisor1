@@ -384,11 +384,12 @@ function updateContractor(){
     var contratorLastName = $("input#ContNameLasted").val();
     var contratorPhoneNumber = $("input#ContPhoneNumed").val();
     var contratorLinceseNumber = $("input#ContLicenseNumed").val();
+    var contratorProfile = $('select#ContProfile').val();
 
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateContract.php", { "contractorID" : contractorID,"contratorFirstName": contratorFirstName,
                                                     "contratorLastName":contratorLastName,"contratorPhoneNumber":contratorPhoneNumber,
-                                                "contratorLinceseNumber":contratorLinceseNumber}, null, "text" )
+                                                "contratorLinceseNumber":contratorLinceseNumber,"contratorProfile":contratorProfile}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -404,7 +405,7 @@ function updateContractor(){
                     $(this).find('td').eq(2).text(contratorLastName);
                     $(this).find('td').eq(3).text(contratorPhoneNumber);
                     $(this).find('td').eq(4).text(contratorLinceseNumber);
-					
+					$(this).find('td').eq(6).text(contratorProfile);
 				}
  				
  			    })
@@ -485,6 +486,7 @@ function insertDriver(){
     var contractorLinceseNumber = $("input#ContLicenseNumIn").val();
     var contractorState = $("select#ContStatusIn").val();
     var contractorEmail=$("input#emailValidation").val();
+    var contractorProfile=$("select#ContProfileIn").val();
 
     var flag=true;
     var ListTextBox=$("#formInsertContractor").find("input");
@@ -509,7 +511,7 @@ function insertDriver(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertDriver.php", { "companyID" : companyID,"contractorFirstName" : contractorFirstName,"contractorLastName": contractorLastName,
     "contractorPhoneNumber":contractorPhoneNumber,"contractorLinceseNumber":contractorLinceseNumber,
-    "contractorState":contractorState,"contractorEmail":contractorEmail}, null, "text" )
+    "contractorState":contractorState,"contractorEmail":contractorEmail,"contractorProfile":contractorProfile}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -528,7 +530,7 @@ function insertDriver(){
                 $("#table_drivers_dashboard_company").append('<tr><td>'+consecutivo+'</td><td>'+contractorFirstName+
                                                             '</td><td>'+contractorLastName+'</td><td>'+contractorPhoneNumber+
                                                             '</td><td>'+contractorLinceseNumber+'</td><td>'+contractorEmail+
-                                                            '</td><td>'+contractorState+
+                                                            '</td><td>'+contractorProfile+'</td><td>'+contractorState+
                                                             '</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick="">'+
                                                             '<span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" '+
                                                             'class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" '+
@@ -1293,9 +1295,15 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-    var Rtype=$("input:radio[name='estep3Option']:checked").val();
-    var Water=$("input:radio[name='estep4Option']:checked").val();
-    var Hlevels=$("input:radio[name='estep5Option']:checked").val();
+    var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
+    var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
+    var Authorized=$('input[name=estep6Option]:checked').attr('data-value');
+    var Water=$('input[name=estep4Option]:checked').attr('data-value');
+
+    //var Rtype=$("input:radio[name='estep3Option']:checked").val();
+    //var Water=$("input:radio[name='estep4Option']:checked").val();
+    //var Hlevels=$("input:radio[name='estep5Option']:checked").val();
+    //var Authorized=$("input:radio[name='estep6Option']:checked").val();
     var SchDate=$("input[name='step6date']").val();
     var SchTime=$('input[name=step6time]').val();
     var CompanyID=$('a[name=linkCompany].active > input:hidden[name=idContractor]').val();
@@ -1304,7 +1312,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
-    var Authorized=$("input:radio[name='estep6Option']:checked").val();
+    
 
     if(RequestType=='emergency'){
         RequestType='E'
