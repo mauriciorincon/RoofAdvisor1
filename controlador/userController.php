@@ -248,7 +248,7 @@ class userController{
                     "CompanyName" => $arrayContractor['companyName'],
                     "CompanyPhone" => $arrayContractor['phoneContactCompany'],
                     "CompanyRating" => "",
-                    "CompanyStatus" => "Validating",
+                    "CompanyStatus" => "Inactive",
                     "CompanyType" => $arrayContractor['typeCompany'],
                     "InsLiabilityAgencyName" => "",
                     "InsLiabilityAgtName" => "",
@@ -276,7 +276,7 @@ class userController{
             
             
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($arrayContractor['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayContractor['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
 
             if($_mail_response==false){
                 $_mail_response="Error ".$_resultUser."<br>".$_resultCompany."<br>".$this->_sendMail->getMessageError();
@@ -336,7 +336,7 @@ class userController{
             $this->updateCustomerLastId($_lastCustomerID);
 
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
             if($_mail_response==false){
                 return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
             }else{
@@ -548,6 +548,15 @@ class userController{
                                     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
                                     $_InsLiabilityPolNum,$_Status_Rating){
         
+        $_aditional_message="";
+    $_result=$this->validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
+    $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
+    $_companyType,$_PayInfoBillingAddress1,$_PayInfoBillingAddress2,$_PayInfoBillingCity,
+    $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
+    $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
+    $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
+    $_InsLiabilityPolNum,$_Status_Rating);
+
         $this->_userModel=new userModel();                                        
         $this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
         $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_firstCompanyName);
@@ -575,9 +584,15 @@ class userController{
         $this->_userModel->updateContractor($_companyID.'/InsLiabilityPolNum',$_InsLiabilityPolNum);
         $this->_userModel->updateContractor($_companyID.'/Status_Rating',$_Status_Rating);
 
-
-
-        return "The contractor identify by ".$_companyID." was updated corretly";
+        if ($_result==true){
+            $_actual_status=$this->_userModel->getNode("Company/".$_companyID."/CompanyStatus");
+            if(strcmp($_actual_status,"Inactive")==0){
+                $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Validating");
+                $_aditional_message="<br>,Now that all the fields are filled, the company passes to RoofServiceNow validation";
+            }
+            
+        }
+        return "The contractor identify by ".$_companyID." was updated corretly".$_aditional_message;
 
     }
 
@@ -873,7 +888,7 @@ class userController{
             }
             $_mail_body=$this->resetMail($user,$hashPassword,$_result);            
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($_userMail,"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($_userMail,"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
             $message.= $_mail_response;
             if(strpos($message,"Error")>-1){
             }else{
@@ -927,6 +942,86 @@ class userController{
     public function getNode($node){
         $this->_userModel=new userModel();
         return $this->_userModel->getNode($node);
+    }
+
+    public function validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
+    $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
+    $_companyType,$_PayInfoBillingAddress1,$_PayInfoBillingAddress2,$_PayInfoBillingCity,
+    $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
+    $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
+    $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
+    $_InsLiabilityPolNum,$_Status_Rating){
+        $_flag_fill=true;
+
+        if (empty($_companyID)){$_flag_fill=false;}
+        if (empty($_compamnyName)){$_flag_fill=false;}
+        if (empty($_firstCompanyName)){$_flag_fill=false;}
+        if (empty($_lastCompanyName)){$_flag_fill=false;}
+        if (empty($_companyAddress1)){$_flag_fill=false;}
+        if (empty($_companyAddress2)){$_flag_fill=false;}
+        if (empty($_companyAddress3)){$_flag_fill=false;}
+        if (empty($_companyPhoneNumber)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingAddress1)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingAddress2)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingCity)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingST)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingZip)){$_flag_fill=false;}
+        if (empty($_PayInfoCCExpMon)){$_flag_fill=false;}
+        if (empty($_PayInfoCCExpYr)){$_flag_fill=false;}
+        if (empty($_PayInfoCCNum)){$_flag_fill=false;}
+        if (empty($_PayInfoCCSecCode)){$_flag_fill=false;}
+        if (empty($_PayInfoName)){$_flag_fill=false;}
+        if (empty($_PrimaryFName)){$_flag_fill=false;}
+        if (empty($_PrimaryLName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgencyName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgtName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgtNum)){$_flag_fill=false;}
+        if (empty($_InsLiabilityPolNum)){$_flag_fill=false;}
+        if (empty($_Status_Rating)){$_flag_fill=false;}
+        
+        return $_flag_fill;
+
+
+
+    }
+    
+    public function disableDriver($_contractorID){
+        $this->_driverModel=new driverModel();
+        $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Inactive');
+
+        
+        return "The contractor identify by ".$_contractorID." was updated corretly";
+    }
+
+    public function enableDriver($_contractorID){
+        $_message="";
+        $_flag=false;
+        $this->_driverModel=new driverModel();
+        $_actual_driver=$this->_driverModel->getDriverByID($_contractorID);
+
+        $this->_userController=new userController();
+        $_user_created=$this->_userController->insertUserDatabase($_actual_driver['ContEmail'],$_actual_driver['ContPhoneNum'],$_actual_driver['ContNameFirst'].' '.$_actual_driver['ContNameLast'],'',$_contractorID,'driver');
+        if(is_array($_user_created) or is_object($_user_created)){
+            $_message="User driver created correctly.";
+            
+            $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
+            $_flag=true;
+        }else{
+            $_message="Error creating the driver. $_user_created";
+            $_flag=false;
+        }
+
+        
+        
+
+        if($_flag==false){
+            return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
+        }else{
+            return "The contractor identify by ".$_contractorID." was updated correctly, $_message";
+        }
+        //print_r($_user_created);
+        
+
     }
 }
 ?>
