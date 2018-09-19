@@ -675,114 +675,85 @@
 
 				}
 
-			function getRequestType(requestType){
-                var RequestType="";
-                switch (requestType) {
-                    case "E":
-                        RequestType = "Emergency";
-                        break;
-                    case "S":
-                        RequestType = "Schedule";
-                        break;
-                    case "R":
-                        RequestType = "RoofReport";
-                        break;
-                    default:
-                        RequestType = "No value found";
-                }
-                return RequestType;
-            }
+				function getRequestType(requestType){
+					var RequestType="";
+					switch (requestType) {
+						case "E":
+							RequestType = "Emergency";
+							break;
+						case "S":
+							RequestType = "Schedule";
+							break;
+						case "R":
+							RequestType = "RoofReport";
+							break;
+						default:
+							RequestType = "No value found";
+					}
+					return RequestType;
+				}
 
-            function getStatus(status){
-                var orderStatus="";
-                switch (status) {
-                    case "A":
-						orderStatus = "Order Open";
-						break;
-					case "C":
-						orderStatus = "Acepted Order";
-						break;
-                    case "D":
-						orderStatus = "Order Assigned";
-                        break;
-                    case "E":
-						orderStatus = "Contractor Just Arrived";
-                        break;
-                    case "F":
-						orderStatus = "Estimate Sent";
-                        break;
-                    case "G":
-						orderStatus = "Estimate Approved";
-                        break;
-                    case "H":
-						orderStatus = "Work In Progress";
-                        break;
-                    case "I":
-						orderStatus = "Work Completed";
-                        break;
-                    case "J":
-						orderStatus = "Final Bill";
-                        break;
-                    case "K":
-						orderStatus = "Order Completed Paid";
-                        break;
-                    case "Z":
-						orderStatus = "Cancel work";
-						break;
-					case "P":
-						orderStatus = "Report In Progress";
-						break;
-					case "R":
-						orderStatus = "Report In Progress";
-						break;
-					case "S":
-						orderStatus = "Report Complete";
-						break;
+				function getStatus(status){
+					var orderStatus="";
+					switch (status) {
+						case "A":
+							orderStatus = "Order Open";
+							break;
+						case "C":
+							orderStatus = "Acepted Order";
+							break;
+						case "D":
+							orderStatus = "Order Assigned";
+							break;
+						case "E":
+							orderStatus = "Contractor Just Arrived";
+							break;
+						case "F":
+							orderStatus = "Estimate Sent";
+							break;
+						case "G":
+							orderStatus = "Estimate Approved";
+							break;
+						case "H":
+							orderStatus = "Work In Progress";
+							break;
+						case "I":
+							orderStatus = "Work Completed";
+							break;
+						case "J":
+							orderStatus = "Final Bill";
+							break;
+						case "K":
+							orderStatus = "Order Completed Paid";
+							break;
+						case "Z":
+							orderStatus = "Cancel work";
+							break;
+						case "P":
+							orderStatus = "Report In Progress";
+							break;
+						case "R":
+							orderStatus = "Report In Progress";
+							break;
+						case "S":
+							orderStatus = "Report Complete";
+							break;
 
-                    default:
-						orderStatus = "Undefined";
-                }
-                return orderStatus;
-			}
+						default:
+							orderStatus = "Undefined";
+					}
+					return orderStatus;
+				}
 			
-			function getCompanyName(companyID,orderID){
-				
-					var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
-					ref.once('value').then(function(snapshot) {
-						value=snapshot.val();
-						//$("#table_orders_customer tr:last").find("td:eq(9)").text(snapshot.val());
-						
-						$("#table_orders_customer tr").each(function(index) {
+				function getCompanyName(companyID,orderID){
+					
+						var ref = firebase.database().ref("Company/"+companyID+"/CompanyName");
+						ref.once('value').then(function(snapshot) {
+							value=snapshot.val();
+							//$("#table_orders_customer tr:last").find("td:eq(9)").text(snapshot.val());
 							
-							if (index !== 0) {
-								$row = $(this);
-								var id = $row.find("td:eq(0)").text();
-								if (id.indexOf(orderID) !== 0) {
-									
-								}
-								else {
-									$row.find("td:eq(9)").text(value);
-									return false;
-								}
-							}
-						});
-					}, function(error) {
-						// The callback failed.
-						console.error(error);
-					});
-			
-				
-			}
-			function getContractorName(contractorID,orderID){
-				var firstName="";
-				var lastName="";
-				var ref = firebase.database().ref("Contractors/"+contractorID);
-					ref.once('value').then(function(snapshot) {
-							data=snapshot.val();
-							//$("#table_orders_customer tr:last").find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
-
 							$("#table_orders_customer tr").each(function(index) {
-							
+								
 								if (index !== 0) {
 									$row = $(this);
 									var id = $row.find("td:eq(0)").text();
@@ -790,49 +761,67 @@
 										
 									}
 									else {
-										$row.find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+										$row.find("td:eq(9)").text(value);
 										return false;
 									}
 								}
 							});
-
+						}, function(error) {
+							// The callback failed.
+							console.error(error);
 						});
-				ref=null;
+				
 					
-			}
+				}
+				function getContractorName(contractorID,orderID){
+					var firstName="";
+					var lastName="";
+					var ref = firebase.database().ref("Contractors/"+contractorID);
+						ref.once('value').then(function(snapshot) {
+								data=snapshot.val();
+								//$("#table_orders_customer tr:last").find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
 
-			function updateOrderInfo(orderID,fieldNumber,value){
-				row=validateExist(orderID);
-				var t = $('#table_orders_customer').DataTable();	
-				var $row = t.row(row);
-				$row.cell($row, fieldNumber).data(value).draw();
+								$("#table_orders_customer tr").each(function(index) {
+								
+									if (index !== 0) {
+										$row = $(this);
+										var id = $row.find("td:eq(0)").text();
+										if (id.indexOf(orderID) !== 0) {
+											
+										}
+										else {
+											$row.find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
+											return false;
+										}
+									}
+								});
 
-			}
+							});
+					ref=null;
+						
+				}
+
+				function updateOrderInfo(orderID,fieldNumber,value){
+					row=validateExist(orderID);
+					var t = $('#table_orders_customer').DataTable();	
+					var $row = t.row(row);
+					$row.cell($row, fieldNumber).data(value).draw();
+
+				}
 			</script>
 
 			<script>
-			// Initialize Firebase
-			var config = {
-				apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-				authDomain: "roofadvisorzapp.firebaseapp.com",
-				databaseURL: "https://roofadvisorzapp.firebaseio.com",
-				projectId: "roofadvisorzapp",
-				storageBucket: "roofadvisorzapp.appspot.com",
-				messagingSenderId: "480788526390"
-			};
-			firebase.initializeApp(config);
-			//const dbRef = firebase.database().ref();
-			//const usersRef = dbRef.child('Orders');
-
-
-			/*var ref = firebase.database().ref("Orders");
-				
-					ref.on('value',function(snapshot){
-						snapshot.forEach(function(childSnapshot){
-							var childData=childSnapshot.val();
-						});
-					});*/
-
+			
+				var config = {
+					apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
+					authDomain: "roofadvisorzapp.firebaseapp.com",
+					databaseURL: "https://roofadvisorzapp.firebaseio.com",
+					projectId: "roofadvisorzapp",
+					storageBucket: "roofadvisorzapp.appspot.com",
+					messagingSenderId: "480788526390"
+				};
+				firebase.initializeApp(config);
+			
 			</script>
 
 

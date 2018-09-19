@@ -15,6 +15,7 @@ $_array=array(
     "driverLicense"=>$_POST['contractorLinceseNumber'],
     "driverStatus"=>$_POST['contractorState'],
     "driverEmail"=>$_POST['contractorEmail'],
+    "driverProfile"=>$_POST['contractorProfile'],
 );
 array_push($_array_drivers,$_array);
 

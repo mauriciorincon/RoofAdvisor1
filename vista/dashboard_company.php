@@ -1,9 +1,11 @@
-<div class="alert alert-success">
-  <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
-</div>
+
 <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
-        <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
+    </div>
+<?php }else{ ?>
+    <div class="alert alert-success">
+        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
     </div>
 <?php } ?>
 
@@ -21,11 +23,11 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
         <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px;  /* The height is 400 pixels */
-            width: 100%;  /* The width is the width of the web page */
-        }
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 400px;  /* The height is 400 pixels */
+                width: 100%;  /* The width is the width of the web page */
+            }
         </style>
 
         <div id="map"></div>
@@ -589,36 +591,15 @@
         </script>
 
         <script>
-        // Initialize Firebase
-        /*var config = {
-            apiKey: "AIzaSyB5HnjwLpr-WqknpRRU5WhrHCg6feVaYss",
-            authDomain: "pruebabasedatos-eacf6.firebaseapp.com",
-            databaseURL: "https://pruebabasedatos-eacf6.firebaseio.com",
-            projectId: "pruebabasedatos-eacf6",
-            storageBucket: "pruebabasedatos-eacf6.appspot.com",
-            messagingSenderId: "120748340913"
-        };*/
-        var config = {
-            apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-            authDomain: "roofadvisorzapp.firebaseapp.com",
-            databaseURL: "https://roofadvisorzapp.firebaseio.com",
-            projectId: "roofadvisorzapp",
-            storageBucket: "roofadvisorzapp.appspot.com",
-            messagingSenderId: "480788526390"
-        };
-        firebase.initializeApp(config);
-        //const dbRef = firebase.database().ref();
-        //const usersRef = dbRef.child('Orders');
-
-        
-        /*var ref = firebase.database().ref("Orders");
-            
-                ref.on('value',function(snapshot){
-                    snapshot.forEach(function(childSnapshot){
-                        var childData=childSnapshot.val();
-                    });
-                });*/
-
+            var config = {
+                apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
+                authDomain: "roofadvisorzapp.firebaseapp.com",
+                databaseURL: "https://roofadvisorzapp.firebaseio.com",
+                projectId: "roofadvisorzapp",
+                storageBucket: "roofadvisorzapp.appspot.com",
+                messagingSenderId: "480788526390"
+            };
+            firebase.initializeApp(config);
         </script>
 
 
@@ -629,24 +610,23 @@
        
 
          
-        <div class="row">          
+        <div class="table-responsive">          
             <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Name/Addr/Phone</th>
-                    <th>Description</th>
-                    <th>Order Type</th>
-                    <th>Status</th>
-                    <th>Est Amt</th>
-                    <th>Final Amt</th>
-                    <th>Payment</th>
-                    <th>Contractor</th>
-                    <th>Actions</th>
-
-                </tr>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Name/Addr/Phone</th>
+                        <th>Description</th>
+                        <th>Order Type</th>
+                        <th>Status</th>
+                        <th>Est Amt</th>
+                        <th>Final Amt</th>
+                        <th>Payment</th>
+                        <th>Contractor</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     
@@ -676,7 +656,6 @@
                                         case "R":
                                             echo "RoofReport";
                                             break;
-
                                         default:
                                             echo "Undefined";
                                             break;
@@ -742,28 +721,26 @@
                                 ?>
                             </td>
                             <td>
-                                        <a class="btn-success btn-sm" data-toggle="modal"  
-                                            href="#myModalInvoice" 
-                                            onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
-                                            <span class="glyphicon glyphicon-list-alt"></span>
-                                        </a>
-                                    </td>
+                                <a class="btn-success btn-sm" data-toggle="modal"  
+                                    href="#myModalInvoice" 
+                                    onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+                            </td>
                            
                            
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-        </div>
-
-              
+        </div> 
 </div>
 
 
 
 
 		<!-- Modal content--> 
-<div class="collapse container" id="companyDashProfile1"> 
+        <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
@@ -929,7 +906,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Company Rating</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" />
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
                                 </div>
                             
                             </div>
