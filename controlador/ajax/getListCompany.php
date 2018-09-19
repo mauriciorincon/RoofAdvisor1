@@ -40,6 +40,13 @@ $_string="";
                         onClick=""> 
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>';
+                    }elseif(strcmp($company['CompanyStatus'],"Inactive")==0){
+                        $_string.=' <a class="btn-default btn-sm" data-toggle="modal"  
+                        href="#myModal2" 
+                        onClick=""> 
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>';
+                    
                     }else{
                         $_string.=' <a class="btn-success btn-sm" data-toggle="modal"  
                         href="#myModal2" 

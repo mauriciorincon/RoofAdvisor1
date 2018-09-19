@@ -2777,3 +2777,55 @@ function countdown() {
         window.setTimeout("countdown()", 1000);
     }
 }
+
+
+function disableEnableCompany(companyID,action){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/enable_disable_driver.php", { "companyID" : companyId,"action":action}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+
+                $('#table_drivers_dashboard_company tr').each(function(){ 
+                    if($(this).find('td').eq(0).text()==id_driver){
+                        
+                        $(this).find('td').eq(6).text(action);
+                        //var tdv =$(this).find('td').eq(8);
+                        if(action=="Active"){ 
+                            $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
+                        }else{
+                            $(this).find('td').eq(8).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
+                            $(this).find('td').eq(8).find('a').removeClass('btn-danger').addClass('btn-success');
+                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
+                        }
+                        
+                        //$(tdv).find('span').addClass('glyphicon glyphicon-trash').removeClass('glyphicon glyphicon-ok');
+                        //$(tdv).find('a').addClass('glyphicon btn-danger').removeClass('btn-success');
+                        return false;
+                    }
+                 })
+
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+
+}
