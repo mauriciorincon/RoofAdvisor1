@@ -727,7 +727,17 @@
             </div>
             <div class="panel-body">
 				<div class="row">
-					<div class="col-sm-6" >
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+					<div style="" class="col-sm-6" >
 						<div class="list-group">
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
@@ -758,7 +768,15 @@
 						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
 					</div>
-					<div class="col-sm-6">
+                                        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+					<div style="margin-bottom: 20px;" class="col-sm-12">
 						<div class="list-group">
 							<div class="list-group-item ">
 								<span class="glyphicon glyphicon-info-sign"></span> Info 
@@ -785,7 +803,7 @@
 									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
 									<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
 								</div>
-
+                                                                <div id="reg-frm2">
               							<div class="form-group">
                                                                         <label class="control-label Rlft-frm">First Name</label>
                                                                         <input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
@@ -801,7 +819,7 @@
                                                                 </div>
 								<div class="form-group">
               							        <label style="margin-left:37px;" class="control-label Rlft-frm">State</label>
-                                                                        <select style="display:inline-block;width:26%;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+                                                                        <select style="display:inline-block;width:183px;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
 
                                                                                 <?php foreach ($_array_state as $key => $value1) { ?>
                                                                                         <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
@@ -812,11 +830,13 @@
                                                                 </div>
 								
 								<div class="form-group">
-									<label class="control-label">Phone number</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-								</div>  
+									<label style="margin-left:-31px;" class="control-label Rlft-frm">Phone number</label>
+									<input style="width: 498px;" maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+								</div>
+                                                                </div>  
 								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
-							</div>
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
+                                                          	</div>
 							
 						</div>
 						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
