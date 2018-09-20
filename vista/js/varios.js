@@ -2781,7 +2781,7 @@ function countdown() {
 
 function disableEnableCompany(companyID,action){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/enable_disable_driver.php", { "companyID" : companyId,"action":action}, null, "text" )
+    $.post( "controlador/ajax/enable_disable_compamy.php", { "companyID" : companyID,"action" : action}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -2790,7 +2790,7 @@ function disableEnableCompany(companyID,action){
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
 
-                $('#table_drivers_dashboard_company tr').each(function(){ 
+                $('#table_list_company tr').each(function(){ 
                     if($(this).find('td').eq(0).text()==id_driver){
                         
                         $(this).find('td').eq(6).text(action);

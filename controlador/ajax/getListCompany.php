@@ -22,10 +22,10 @@ $_string="";
         $_name = isset($company['CompanyName']) ? $company['CompanyName'] : '';
         $_phone =isset($company['CompanyPhone']) ? $company['CompanyPhone'] : '';
         $_string.="<tr>".
+                    "<td>".$company['CompanyID']."</td>".
                     "<td>".$_lic_num."</td>".
                     "<td>".$_address.' '.$_address2.' '.$_address3."</td>".
                     "<td>".$_mail."</td>".
-                    "<td>".$company['CompanyID']."</td>".
 					"<td>".$_name."</td>".
 					"<td>".$_phone."</td>".
 					"<td>".$company['CompanyStatus']."</td>".
@@ -43,7 +43,7 @@ $_string="";
                     }elseif(strcmp($company['CompanyStatus'],"Inactive")==0){
                         $_string.=' <a class="btn-default btn-sm" data-toggle="modal"  
                         href="#myModal2" 
-                        onClick=""> 
+                        onClick="disableEnableCompany(\''.$company['CompanyID'].'\',\'Active\')"> 
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>';
                     

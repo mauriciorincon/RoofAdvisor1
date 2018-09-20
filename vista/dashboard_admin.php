@@ -317,10 +317,10 @@ Welcome to RoofServicenow Admin
             <table class="table" id="table_list_company">
                 <thead>
                 <tr>
+                    <th>CompanyID</th>
                     <th>ComapnyLicNum</th>
                     <th>Address</th>
                     <th>CompanyEmail</th>
-                    <th>CompanyID</th>
                     <th>CompanyName</th>
                     <th>CompanyPhone</th>
                     <th>CompanyStatus</th>
