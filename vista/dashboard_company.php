@@ -24,15 +24,18 @@
                 Metrics
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <a class="dropdown-item" href="#">Emergency Repair</a>
-                <a class="dropdown-item" href="#">Schedule Repair</a>
-                <a class="dropdown-item" href="#">Report Repair</a>
-                <a class="dropdown-item" href="#">Repair Done</a>
-                <a class="dropdown-item" href="#">Repair Open</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="emergencyRepair" class="badge badge-primary" style="background:black;">4</span>Emergency Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span></span><span  name="scheduleRepair" class="badge badge-primary" style="background:black;">4</span>Schedule Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="reportRepair" class="badge badge-primary" style="background:black;">4</span>Report Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a>
                 </div>
             </div>
-		
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+        </div>    
 </div>
+
 
 <div id="mapDashBoard1" class="collapse in">
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
@@ -54,6 +57,12 @@
             var infowindow;
             var orderOpenContractor=[];
             <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+
+            var scheduleRepairCount=0;
+            var emergencyRepairCount=0;
+            var reportRepairCount=0;
+            var openService=0;
+            var closeService=0;
             // Initialize and add the map
             function initMap() {
                 // The location of Uluru
@@ -68,6 +77,8 @@
                 infowindow = new google.maps.InfoWindow();
                 
                 var iconBase = iconBase+'/img/img_maps/';
+
+               
 
                 <?php echo 'var address = "'. $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'].'"';?>
 
@@ -87,6 +98,27 @@
                     for(k in datos){
                         fila=datos[k];
 
+                        switch (fila.RequestType) {
+                            case "E":
+                                emergencyRepairCount++;
+                                break;
+                            case "S":
+                                scheduleRepairCount++;
+                                break;
+                            case "R":
+                                reportRepairCount++;
+                                break;
+                            default:
+                        }
+
+                        switch (fila.Status) {
+                            case "K":
+                                closeService++;
+                                break;
+                            default:
+                                openService++;
+                                break;
+                        }
                         var marker={
                             lat: parseFloat(fila.Latitude),
                             lng: parseFloat(fila.Longitude),
@@ -99,6 +131,7 @@
 
                         if(fila.Status=='D'){
                             if(fila.ContractorID!="" || fila.ContractorID!=undefined){
+                                
                                 orderOpenContractor.push(fila.ContractorID);
                                 var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
                                 refContractor.once("value", function(snapshot) {
@@ -116,6 +149,7 @@
                     }
                 
                 });
+                
                 
                 
                 // Retrieve new orders as they are added to our database
@@ -202,6 +236,14 @@
                     for(k in datos){
                         fila=datos[k];
 
+                        switch (fila.Status) {
+                            case "K":
+                                closeService++;
+                                break;
+                            default:
+                                openService++;
+                                break;
+                        }
                         var marker={
                             lat: parseFloat(fila.Latitude),
                             lng: parseFloat(fila.Longitude),
@@ -448,7 +490,7 @@
                 return RequestType;
             }
 
-            function getStatus(status){
+            /*function getStatus(status){
                 var orderStatus="";
                 switch (status) {
                     case "A":
@@ -485,7 +527,7 @@
                         orderStatus = "Undefined";
                 }
                 return orderStatus;
-            }
+            }*/
 
             function addMarketContractor(data,fila){
                 var image="contractor.png";
@@ -602,6 +644,8 @@
                     });
                 
             }
+
+
 
         </script>
 
@@ -724,7 +768,7 @@
                                         if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
                                         ?>
                                             <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-												href="#" 
+												href="" 
 												onClick="alert('You can not take the job until the company is active')"> 
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
@@ -746,7 +790,7 @@
                             </td>
                             <td>
                             <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-													href="#" 
+													href="" 
 													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
@@ -997,20 +1041,20 @@
                                     </td>
                                     <td>
                                     <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
-                                        <a href="#" class="inactivate-contractor-button btn-default btn-sm"  data-toggle1="tooltip"  title="Active Employee"
+                                        <a href="" class="inactivate-contractor-button btn-default btn-sm"  data-toggle1="tooltip"  title="Active Employee"
                                             id="inactivate-contractor-button" name="inactivate-contractor-button" 
                                             data-toggle="tooltip" title="Inactive Driver" onclick="alert('You can not active the employee until the company is active')" >
                                                 <span class="glyphicon glyphicon-exclamation-sign"></span>
                                             </a>
                                     <?php }else{ ?>
                                         <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
-                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
+                                            <a href="" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
                                              id="inactivate-contractor-button" name="inactivate-contractor-button" 
                                              data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         <?php } else{ ?>
-                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" 
+                                            <a href="" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" 
                                             name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"   data-toggle1="tooltip"  title="Active Employee"
                                             onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
                                                 <span class="glyphicon glyphicon-ok"></span>
@@ -1289,3 +1333,50 @@
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myFilterWindow" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Filter Options</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+                <p>
+                    <span class = "label label-default">Service Type</span>
+                    <div class="form-check">
+                        Schedule Repair<input class="form-check-input" type="checkbox" value="" id="defaultCheckType[]" checked>
+                    </div>
+                    <div class="form-check">
+                        Emergency Repair<input class="form-check-input" type="checkbox" value="" id="defaultCheckType[]" checked>
+                    </div>
+                    <div class="form-check">
+                        Report Repair<input class="form-check-input" type="checkbox" value="" id="defaultCheckType[]" checked>
+                    </div>
+                </p>
+                <p>
+                <span class = "label label-default">Service Status</span>
+                    <div class="form-check">Order Open<input class="form-check-input" type="checkbox" value="Order Open" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Acepted Order<input class="form-check-input" type="checkbox" value="Acepted Order" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Order Assigned<input class="form-check-input" type="checkbox" value="Order Assigned" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Contractor Just Arrived<input class="form-check-input" type="checkbox" value="Contractor Just Arrived" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Estimate Sent<input class="form-check-input" type="checkbox" value="Estimate Sent" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Estimate Approved<input class="form-check-input" type="checkbox" value="Estimate Approved" id="defaultCheck1[]" checked></div>
+                    <div class="form-check">Work In Progress<input class="form-check-input" type="checkbox" value="Work In Progress" id="defaultCheck1" checked></div>
+                    <div class="form-check">Work Completed<input class="form-check-input" type="checkbox" value="Work Completed" id="defaultCheck1" checked></div>
+                    <div class="form-check">Final Bill<input class="form-check-input" type="checkbox" value="Final Bill" id="defaultCheck1" checked></div>
+                    <div class="form-check">Order Completed Paid<input class="form-check-input" type="checkbox" value="Order Completed Paid" id="defaultCheck1"> checked</div>
+                    <div class="form-check">Cancel work<input class="form-check-input" type="checkbox" value="Cancel work" id="defaultCheck1" checked></div>
+                    <div class="form-check">Report In Progress<input class="form-check-input" type="checkbox" value="Report In Progress" id="defaultCheck1" checked></div>
+                    <div class="form-check">Report Complete<input class="form-check-input" type="checkbox" value="Report Complete" id="defaultCheck1" checked></div>
+                </p>
+			</div> 
+            <div class="modal-footer" id="buttonMessage"> 
+                <button type="button" class="btn btn-default" onclick="alert('Make Filter')">Filter</button> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+

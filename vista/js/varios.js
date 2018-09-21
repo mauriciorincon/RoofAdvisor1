@@ -8,6 +8,14 @@ $(document).ready(function() {
         }
       }
     );*/
+    
+        $('span[name=emergencyRepair]').text(emergencyRepairCount);
+        $('span[name=scheduleRepair]').text(scheduleRepairCount);
+        $('span[name=reportRepair]').text(reportRepairCount);
+        $('span[name=repairDone]').text(closeService);
+        $('span[name=repairOpen]').text(openService);
+        
+    
     $('[data-toggle1="tooltip"]').tooltip(); 
 
     //$('#table_orders_customer').DataTable();
