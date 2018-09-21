@@ -1734,6 +1734,7 @@ function getListCompany(tableName){
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
                 $('#'+tableName+' tbody').html(data);
+                $('[data-toggle1="tooltip"]').tooltip(); 
                 console.log( "La solicitud se ha completado correctamente."+jqXHR+textStatus);
             }
             jsRemoveWindowLoad('');
@@ -2781,35 +2782,34 @@ function countdown() {
 
 function disableEnableCompany(companyID,action){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/enable_disable_compamy.php", { "companyID" : companyID,"action" : action}, null, "text" )
+    $.post( "controlador/ajax/enable_disable_company.php", { "companyID" : companyID,"action" : action}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#myMensaje div.modal-body').html(data);
-                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
 
                 $('#table_list_company tr').each(function(){ 
-                    if($(this).find('td').eq(0).text()==id_driver){
-                        
-                        $(this).find('td').eq(6).text(action);
-                        //var tdv =$(this).find('td').eq(8);
+                    if($(this).find('td').eq(0).text()==companyID){
                         if(action=="Active"){ 
-                            $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
+                            text='<div class="alert alert-success">Active</div>';
+                            $(this).find('td').eq(6).html(text);
+                            $(this).find('td').eq(7).find('a:eq(1)').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(7).find('span:eq(1)').addClass('glyphicon-remove').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(7).find('a:eq(1)').attr("onclick","disableEnableCompany("+companyID+"','Inactive')");
                         }else{
-                            $(this).find('td').eq(8).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').removeClass('btn-danger').addClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
+                            text='<div class="alert alert-danger">Inactive</div>';
+                            $(this).find('td').eq(6).html(text);
+                            $(this).find('td').eq(7).find('a:eq(1)').addClass('btn-success').removeClass('btn-danger');
+                            $(this).find('td').eq(7).find('span:eq(1)').addClass('glyphicon-ok').removeClass('glyphicon-remove');
+                            $(this).find('td').eq(7).find('a:eq(1)').attr("onclick","disableEnableCompany("+companyID+"','Active')");
                         }
-                        
-                        //$(tdv).find('span').addClass('glyphicon glyphicon-trash').removeClass('glyphicon glyphicon-ok');
-                        //$(tdv).find('a').addClass('glyphicon btn-danger').removeClass('btn-success');
-                        return false;
                     }
                  })
+                 jsRemoveWindowLoad('');
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
 
             }else{
                 $('#myMensaje div.modal-body').html(data);

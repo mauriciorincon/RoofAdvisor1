@@ -14,8 +14,23 @@
             <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
-			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');setActiveItemMenu(this);">Scheduler</button>
-		</div>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');setActiveItemMenu(this);">Scheduler</button>
+            
+            
+            
+        </div>
+        <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Metrics
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="#">Emergency Repair</a>
+                <a class="dropdown-item" href="#">Schedule Repair</a>
+                <a class="dropdown-item" href="#">Report Repair</a>
+                <a class="dropdown-item" href="#">Repair Done</a>
+                <a class="dropdown-item" href="#">Repair Open</a>
+                </div>
+            </div>
 		
 </div>
 
@@ -705,13 +720,22 @@
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ ?>
-                                        <a class="btn-primary btn-sm" data-toggle="modal"  
+                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
+                                        if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
+                                        ?>
+                                            <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+												href="#" 
+												onClick="alert('You can not take the job until the company is active')"> 
+												<span class="glyphicon glyphicon-check"></span>Take work
+											</a>
+                                <?php }else{ ?>
+                                        <a class="btn btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
 												href="#myModalGetWork" 
 												onClick="setOrderId('<?php echo $order['FBID']?>')"> 
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
-                                   <?php }else{
+                                   <?php }
+                                    }else{
                                         $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
                                         $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
 
@@ -721,11 +745,11 @@
                                 ?>
                             </td>
                             <td>
-                                <a class="btn-success btn-sm" data-toggle="modal"  
-                                    href="#myModalInvoice" 
-                                    onClick="setOrderId('<?php echo $order['OrderNumber']?>');vefifyInvoice('<?php echo $order['OrderNumber']?>')"> 
-                                    <span class="glyphicon glyphicon-list-alt"></span>
-                                </a>
+                            <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
+													href="#" 
+													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
+													<span class="glyphicon glyphicon-list-alt"></span>
+										</a>
                             </td>
                            
                            
@@ -966,21 +990,33 @@
                                     <td><?php echo $contractor['ContStatus']?></td>
                                     <td>
                                         <a class="btn-info btn-sm" data-toggle="modal"  
-                                            href="#myModal2" 
+                                            href="#myModal2"  data-toggle1="tooltip"  title="Edit Employee"
                                             onClick=""> 
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </a>
                                     </td>
                                     <td>
+                                    <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
+                                        <a href="#" class="inactivate-contractor-button btn-default btn-sm"  data-toggle1="tooltip"  title="Active Employee"
+                                            id="inactivate-contractor-button" name="inactivate-contractor-button" 
+                                            data-toggle="tooltip" title="Inactive Driver" onclick="alert('You can not active the employee until the company is active')" >
+                                                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                                            </a>
+                                    <?php }else{ ?>
                                         <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
-                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
+                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
+                                             id="inactivate-contractor-button" name="inactivate-contractor-button" 
+                                             data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         <?php } else{ ?>
-                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"  onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
+                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" 
+                                            name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"   data-toggle1="tooltip"  title="Active Employee"
+                                            onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </a>
                                         <?php } ?>
+                                    <?php } ?>
                                     </td>
                                     
                                 </tr>
@@ -1215,21 +1251,39 @@
 	</div>
 </div>
 
-<div class="modal fade" id="myModalInvoice" role="dialog">
+
+<div class="modal fade" id="myInvoiceInfo" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="headerMessage">Invoice Order <span id="orderIDWorkText"></span></h4> 
+				<h4 class="modal-title" id="headerMyInvoice">Invoice Info</h4> 
 			</div> 
-			<div class="modal-body" id="textMessageInvoice"> 
-                <input type="hidden" value="" id="orderIDWork" />
-                <p>Here you can generate Invoce for customer</p> 
-                <span id="messageInvoice"></span>
-                
-			</div> 
-			<div class="modal-footer" id="buttonMessage"> 
+			<div class="modal-body" id="textMyInvoice"> 
+				<div class="table-responsive">
+					<table class="table table-condensed" id="invoiceInfo">
+						<thead>
+							<tr>
+								<td><strong>Invoice Numbre</strong></td>
+								<td class="text-center"><strong>Price</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Payment Type</strong></td>
+								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>View</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div id="detailStripe">
+
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonPayment"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

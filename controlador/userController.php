@@ -590,7 +590,8 @@ class userController{
                 $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Validating");
                 $_aditional_message="<br>,Now that all the fields are filled, the company passes to RoofServiceNow validation";
             }
-            
+        }else{
+            $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
         }
         return "The contractor identify by ".$_companyID." was updated corretly".$_aditional_message;
 
@@ -1003,7 +1004,7 @@ class userController{
         $_result=$this->_userModel->updateContractor($_companyID.'/CompanyStatus','Active');
 
         if(is_bool($_result) === true){
-            return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
+            return "The company identify by ".$_contractorID." can`t be updated correctly, $_message";
         }else{
             return "Error updating ".$_companyID."";
         }
