@@ -107,7 +107,7 @@ class userModel extends connection{
     }
 
     public function updateContractor($nodeName,$data){
-        $this->updateDataTable("Company",$nodeName,$data); 
+        return $this->updateDataTable("Company",$nodeName,$data); 
     }
 
     public function updateCustomer($nodeName,$data){

@@ -590,7 +590,8 @@ class userController{
                 $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Validating");
                 $_aditional_message="<br>,Now that all the fields are filled, the company passes to RoofServiceNow validation";
             }
-            
+        }else{
+            $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
         }
         return "The contractor identify by ".$_companyID." was updated corretly".$_aditional_message;
 
@@ -985,43 +986,28 @@ class userController{
 
     }
     
-    public function disableDriver($_contractorID){
-        $this->_driverModel=new driverModel();
-        $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Inactive');
-
+    public function disableCompany($_companyID){
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->updateContractor($_companyID.'/CompanyStatus','Inactive');
+        if(is_bool($_result) === true){
+            return "The company identify by ".$_companyID." was updated corretly";
+        }else{
+            return "Error updating ".$_companyID."";
+        }
         
-        return "The contractor identify by ".$_contractorID." was updated corretly";
     }
 
-    public function enableDriver($_contractorID){
+    public function enableCompany($_companyID){
         $_message="";
         $_flag=false;
-        $this->_driverModel=new driverModel();
-        $_actual_driver=$this->_driverModel->getDriverByID($_contractorID);
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->updateContractor($_companyID.'/CompanyStatus','Active');
 
-        $this->_userController=new userController();
-        $_user_created=$this->_userController->insertUserDatabase($_actual_driver['ContEmail'],$_actual_driver['ContPhoneNum'],$_actual_driver['ContNameFirst'].' '.$_actual_driver['ContNameLast'],'',$_contractorID,'driver');
-        if(is_array($_user_created) or is_object($_user_created)){
-            $_message="User driver created correctly.";
-            
-            $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
-            $_flag=true;
+        if(is_bool($_result) === true){
+            return "The company identify by ".$_contractorID." can`t be updated correctly, $_message";
         }else{
-            $_message="Error creating the driver. $_user_created";
-            $_flag=false;
+            return "Error updating ".$_companyID."";
         }
-
-        
-        
-
-        if($_flag==false){
-            return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
-        }else{
-            return "The contractor identify by ".$_contractorID." was updated correctly, $_message";
-        }
-        //print_r($_user_created);
-        
-
     }
 }
 ?>
