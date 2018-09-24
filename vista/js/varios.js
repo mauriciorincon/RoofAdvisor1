@@ -2866,21 +2866,45 @@ function filterCompany(nameType,nameStatus,tableName){
     var table = $('#'+tableName).DataTable();
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            return listTypeServiceName.indexOf(data[5])>-1 ? true : false;
+            return listTypeServiceName.indexOf(data[5])>-1 || listTypeStatusName.indexOf(data[6])>-1 ? true : false;
         }     
     );
     table.draw();
     $.fn.dataTable.ext.search.pop();
+}
 
-    //filtering datatable
+function filterCustomer(nameType,nameStatus,tableName){
+    var serviceTypeSelected=$('input[name="'+nameType+'"]:checked');
+    var serviceStatusSelected=$('input[name="'+nameStatus+'"]:checked');
+
+    var listTypeService="";
+    var listTypeStatus="";
+    var listTypeServiceName="";
+    var listTypeStatusName="";
+
+    $.each( serviceTypeSelected, function( key, value ) {
+        listTypeServiceName+=getRequestType($(this).val())+",";
+        listTypeService=listTypeService+$(this).val()+",";
+        console.log($(this).val());
+    });
+
+    $.each( serviceStatusSelected, function( key, value ) {
+        listTypeStatusName+=getStatus($(this).val())+",";
+        listTypeStatus=listTypeStatus+$(this).val()+",";
+        console.log($(this).val());
+    });
+
+    hideShowMarketByTypeServiceAndSatus(listTypeService,listTypeStatus);
+    //hideShowMarketByTypeService(listTypeService);
+    //hideShowMarketByStatus(listTypeStatus);
+    $('#myFilterWindow').modal('hide');
     
-    /*var filteredData = table
-        .column( 5 )
-        .data()
-        .filter( function ( value, index ) {
-            return listTypeServiceName.indexOf(value)>-1 ? true : false;
-        } );
-    console.log(filteredData);*/
-    //$("#myFilterWindow").hide();
-    //console.log(serviceTypeSelected);
+    var table = $('#'+tableName).DataTable();
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            return listTypeServiceName.indexOf(data[1])>-1 || listTypeStatusName.indexOf(data[4])>-1 ? true : false;
+        }     
+    );
+    table.draw();
+    $.fn.dataTable.ext.search.pop();
 }

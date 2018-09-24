@@ -12,7 +12,11 @@
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
     			</ul>
-  		</div>
+		  </div>
+		  
+		  <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+        </div>   
 		
 	</div>
 
@@ -270,7 +274,9 @@
 						position: new google.maps.LatLng(data.lat,data.lng),
 						map:mapObject,
 						icon:'img/img_maps/'+image,
-						id:fila.OrderNumber
+						id:fila.OrderNumber,
+						typeService:fila.RequestType,
+                        status:fila.Status
 					});
 
 					oMarket.addListener('click', function() {
@@ -800,6 +806,26 @@
 					ref=null;
 						
 				}
+
+				function hideShowMarketByTypeServiceAndSatus(listTypeService,listTypeStatus){
+					marketrs.map(function(marker) {
+						if(listTypeService.indexOf(marker.typeService)>-1 || listTypeStatus.indexOf(marker.status)>-1){
+							marker.setVisible(true);
+						}else{
+							marker.setVisible(false);
+						}
+					})                
+				}
+
+				/*function hideShowMarketByStatus(listTypeStatus){
+					marketrs.map(function(marker) {
+						if(listTypeStatus.indexOf(marker.status)>-1){
+							marker.setVisible(true);
+						}else{
+							marker.setVisible(false);
+						}
+					})                
+				}*/
 
 				function updateOrderInfo(orderID,fieldNumber,value){
 					row=validateExist(orderID);
@@ -1581,3 +1607,59 @@
 </div>
 
 <?php echo $_divs_info; ?>
+
+
+<div class="modal fade" id="myFilterWindow" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Filter Options</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+                <p>
+                <table class="table">
+                    <thead>
+                        <tr><th scope="col" colspan="2">Service Type</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Emergency Repair</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
+                    </tbody>
+                </table>
+                </p>
+                <p>
+                <table class="table">
+                    <thead>
+                        <tr><th scope="col" colspan="2">Order Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Order Assigned</td><td><input class="form-check-input" type="checkbox" value="D" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Contractor Just Arrived</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Estimate Sent</td><td><input class="form-check-input" type="checkbox" value="F" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Estimate Approved</td><td><input class="form-check-input" type="checkbox" value="G" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Work In Progress</td><td><input class="form-check-input" type="checkbox" value="H" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Work Completed</td><td><input class="form-check-input" type="checkbox" value="I" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Final Bill</td><td><input class="form-check-input" type="checkbox" value="J" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Order Completed Paid</td><td><input class="form-check-input" type="checkbox" value="K" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Cancel work</td><td><input class="form-check-input" type="checkbox" value="Z" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report In Progress</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report Incomplete Refund</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report Complete</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckStatus" checked></td></tr>
+                    </tbody>
+                </table>
+                   
+                </p>
+			</div> 
+            <div class="modal-footer" id="buttonMessage"> 
+                <button type="button" class="btn btn-default" onclick="filterCustomer('defaultCheckType','defaultCheckStatus','table_orders_customer')">Filter</button> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+

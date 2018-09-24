@@ -519,7 +519,17 @@
                 })                
             }
 
-            function hideShowMarketByTypeService(listTypeService){
+            function hideShowMarketByTypeServiceAndSatus(listTypeService,listTypeStatus){
+					marketrs.map(function(marker) {
+						if(listTypeService.indexOf(marker.typeService)>-1 || listTypeStatus.indexOf(marker.status)>-1){
+							marker.setVisible(true);
+						}else{
+							marker.setVisible(false);
+						}
+					})                
+                }
+                
+            /*function hideShowMarketByTypeService(listTypeService){
                 marketrs.map(function(marker) {
                     if(listTypeService.indexOf(marker.typeService)>-1){
                         marker.setVisible(true);
@@ -537,7 +547,7 @@
                         marker.setVisible(false);
                     }
                 })                
-            }
+            }*/
 
 
             function getStatus(status){
