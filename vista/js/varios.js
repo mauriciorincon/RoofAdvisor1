@@ -2837,3 +2837,49 @@ function disableEnableCompany(companyID,action){
         });
 
 }
+
+function filterCompany(nameType,nameStatus,tableName){
+    var serviceTypeSelected=$('input[name="'+nameType+'"]:checked');
+    var serviceStatusSelected=$('input[name="'+nameStatus+'"]:checked');
+
+    var listTypeService="";
+    var listTypeStatus="";
+    var listTypeServiceName="";
+    var listTypeStatusName="";
+
+    $.each( serviceStatusSelected, function( key, value ) {
+        listTypeServiceName+=getRequestType($(this).val())+",";
+        listTypeService=listTypeService+$(this).val()+",";
+        console.log($(this).val());
+    });
+
+    $.each( serviceStatusSelected, function( key, value ) {
+        listTypeStatusName+=getStatus($(this).val())+",";
+        listTypeStatus=listTypeStatus+$(this).val()+",";
+        console.log($(this).val());
+    });
+
+    hideShowMarketByTypeService(listTypeService);
+    $('#myFilterWindow').modal('hide');
+    
+    var table = $('#'+tableName).DataTable();
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            return listTypeServiceName.indexOf(data[5])>-1 ? true : false;
+        }     
+    );
+    table.draw();
+    $.fn.dataTable.ext.search.pop();
+
+    //filtering datatable
+    
+    /*var filteredData = table
+        .column( 5 )
+        .data()
+        .filter( function ( value, index ) {
+            return listTypeServiceName.indexOf(value)>-1 ? true : false;
+        } );
+    console.log(filteredData);*/
+    //$("#myFilterWindow").hide();
+    //console.log(serviceTypeSelected);
+}
