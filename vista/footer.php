@@ -75,7 +75,7 @@
 								</ul>
 							</div>
 						</div>	
-						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
+						<div class="col-lg-3 col-md-3 col-sm-6 mb-20" style="display:none;">
 							<div class="footer-widget">
 								<h3 class="widget-title">latest post</h3>
 								<div class="blog-post">
@@ -113,8 +113,8 @@
 						</div>		
 						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
 							<div class="footer-widget">
-								<h3 class="widget-title">CONTACT</h3>
-								<p>Lorem ipsum dolor sit amet, consetur acing elit, sed do eiusmod tempor</p>
+								<h3 class="widget-title">FEEDBACK</h3>
+								<p>Please provide your comments or feedback</p>
 								<div class="footer-form">
 									<form action="#">
 									  <input type="text" placeholder="Type your E-mail address..." />

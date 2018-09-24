@@ -41,6 +41,7 @@
     display: table-cell;
     text-align: center;
     position: relative;
+    margin-left:20px;
 }
 .btn-circle {
     width: 30px;
