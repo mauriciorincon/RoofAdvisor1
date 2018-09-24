@@ -9,12 +9,6 @@ $(document).ready(function() {
       }
     );*/
     
-        $('span[name=emergencyRepair]').text(emergencyRepairCount);
-        $('span[name=scheduleRepair]').text(scheduleRepairCount);
-        $('span[name=reportRepair]').text(reportRepairCount);
-        $('span[name=repairDone]').text(closeService);
-        $('span[name=repairOpen]').text(openService);
-        
     
     $('[data-toggle1="tooltip"]').tooltip(); 
 
@@ -61,7 +55,13 @@ $(document).ready(function() {
           }
         });
         
-
+        if(emergencyRepairCount !== (undefined || null)) {
+            $('span[name=emergencyRepair]').text(emergencyRepairCount);
+            $('span[name=scheduleRepair]').text(scheduleRepairCount);
+            $('span[name=reportRepair]').text(reportRepairCount);
+            $('span[name=repairDone]').text(closeService);
+            $('span[name=repairOpen]').text(openService);
+        }
 } );
 
 ///////////////////////////////////////////////
@@ -2847,7 +2847,7 @@ function filterCompany(nameType,nameStatus,tableName){
     var listTypeServiceName="";
     var listTypeStatusName="";
 
-    $.each( serviceStatusSelected, function( key, value ) {
+    $.each( serviceTypeSelected, function( key, value ) {
         listTypeServiceName+=getRequestType($(this).val())+",";
         listTypeService=listTypeService+$(this).val()+",";
         console.log($(this).val());
@@ -2860,6 +2860,7 @@ function filterCompany(nameType,nameStatus,tableName){
     });
 
     hideShowMarketByTypeService(listTypeService);
+    hideShowMarketByStatus(listTypeStatus);
     $('#myFilterWindow').modal('hide');
     
     var table = $('#'+tableName).DataTable();

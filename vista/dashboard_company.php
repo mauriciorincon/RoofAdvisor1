@@ -293,7 +293,8 @@
 						map:mapObject,
 						icon:'img/img_maps/'+image,
                         id:fila.OrderNumber,
-                        typeService:fila.RequestType
+                        typeService:fila.RequestType,
+                        status:fila.Status
 					});
 
                     
@@ -491,45 +492,7 @@
                 return RequestType;
             }
 
-            /*function getStatus(status){
-                var orderStatus="";
-                switch (status) {
-                    case "A":
-                        orderStatus = "Order Open";
-                        break;
-                    case "D":
-                        orderStatus = "Order Assigned";
-                        break;
-                    case "E":
-                        orderStatus = "Contractor Just Arrived";
-                        break;
-                    case "F":
-                        orderStatus = "Estimate Sent";
-                        break;
-                    case "G":
-                        orderStatus = "Estimate Approved";
-                        break;
-                    case "H":
-                        orderStatus = "Work In Progress";
-                        break;
-                    case "I":
-                        orderStatus = "Work Completed";
-                        break;
-                    case "J":
-                        orderStatus = "Final Bill";
-                        break;
-                    case "K":
-                        orderStatus = "Order Completed Paid";
-                        break;
-                    case "C":
-                        orderStatus = "Cancel work";
-                        break;
-                    default:
-                        orderStatus = "Undefined";
-                }
-                return orderStatus;
-            }*/
-
+           
             function addMarketContractor(data,fila){
                 var image="contractor.png";
                 var oMarket= new google.maps.Marker({
@@ -559,6 +522,16 @@
             function hideShowMarketByTypeService(listTypeService){
                 marketrs.map(function(marker) {
                     if(listTypeService.indexOf(marker.typeService)>-1){
+                        marker.setVisible(true);
+                    }else{
+                        marker.setVisible(false);
+                    }
+                })                
+            }
+
+            function hideShowMarketByStatus(listTypeStatus){
+                marketrs.map(function(marker) {
+                    if(listTypeStatus.indexOf(marker.status)>-1){
                         marker.setVisible(true);
                     }else{
                         marker.setVisible(false);
