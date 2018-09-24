@@ -1440,7 +1440,7 @@ border-color:#fff !important;
     position:relative;
     z-index:10000;
     border-radius: 0px 0px 13px 13px;
-    color:rgb(250, 81, 26);
+    color:#000;
 }
 #welcome-txt{
     position: absolute;
@@ -1454,7 +1454,7 @@ border-color:#fff !important;
 }
 .panel{
 position: relative;
-    width: 96%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
     z-index: 1000;
@@ -1519,6 +1519,18 @@ margin-bottom: -20px;
 #reg-frm2{
 margin-top: -200px; 
 margin-left: 350px;
+}
+.h1white{
+color:#fff;
+}
+.abouttxt1{
+    font-size: 33px !important;
+    line-height: 44px !important;
+    font-weight: 500;
+}
+.abouttxt-bg{
+    background-color: #00000091;
+    border-radius: 220px 220px 220px 220px;
 }
 @media (min-width:1700px){
 .main-menu ul li a{

@@ -93,24 +93,24 @@
 		<!-- counter-area end -->
 		
 		<!-- testimonial-area start -->
-		<div class="testimonial-area bg-img-2 pt-200 pb-150 bg-opacity">
+		<div class="testimonial-area bg-img-2 pt-200 pb-150">
 			<div class="container">
-				<div class="testimonial-active">
+				<div class="testimonial-active abouttxt-bg">
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>RoofServicePro is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
+							<p class="abouttxt1">RoofServicePro is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>•	RoofServicePro provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided, daily, weekly, and monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
+							<p class="abouttxt1">	RoofServicePro provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided, daily, weekly, and monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p>RepairCrews have their own RoofServicePro driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
+							<p class="abouttxt1">RepairCrews have their own RoofServicePro driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
 						</div>
 						
 					</div>

@@ -1,42 +1,91 @@
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                                        <div style="" class="col-sm-6" >
+                                                <div class="list-group">
+                                                        <div class="list-group-item ">
+                                                                <span class="glyphicon glyphicon-info-sign"></span> Info
+                                                                <div class="d-flex w-100 justify-content-between">
+                                                                        <span ><b>Please take just one more step, we need to verify your identity,please login or register</b></span><br><br>
+
+                                                                </div>
+                                                        </div>
+
+                                                        <div  class="list-group-item ">
+                                                                <span class="glyphicon glyphicon-info-sign"></span> Login
+                                                                <div class="d-flex w-100 justify-content-between">
+                                                                        <div class="form-group">
+                                                                                <label>User Name<span class="required">*</span></label>
+                                                                                <input type="text" placeholder="" required="true" id="userClientOrder" name="userClientOrder" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                                <label>Password<span class="required">*</span></label>
+                                                                                <input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
+                                                                        </div>
+                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
+                                                                        <label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+                                                                        <a href="#">Forgot password?</a>
+
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+                                                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+                                        </div>
+                                        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="appwiz" class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
                 <a href="#step-1"  type="button" class="btn btn-success btn-circle">1</a>
-                <p><small>Enter Zip Code</small></p>
+                <p><small>Z Code</small></p>
             </div>
-            <div class="stepwizard-step col-xs-2"> 
+            <div class="stepwizard-step col-xs-1"> 
                 <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                <p><small>Create a Work Order</small></p>
+                <p><small> Order </small></p>
 			</div>
-			<div class="stepwizard-step col-xs-2"> 
+			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled">2.1</a>
-                <p><small>Create a Work Order</small></p>
+                <p><small>Question?</small></p>
 			</div>
-			<div class="stepwizard-step col-xs-2"> 
+			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                <p><small>Enter Address</small></p>
+                <p><small>Address</small></p>
             </div>
-			<div class="stepwizard-step col-xs-2"> 
+			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                <p><small>Select Time</small></p>
+                <p><small>Time</small></p>
             </div>
-			<div class="stepwizard-step col-xs-2"> 
+			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
                 <p><small>Professional</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
-                <p><small>Review Order</small></p>
+                <p><small>Review</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
-                <p><small>User Validation</small></p>
+                <p><small>Validation</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
                 <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
-                <p><small>Complete Order</small></p>
+                <p><small>Complete</small></p>
             </div>
         </div>
     </div>
@@ -326,7 +375,6 @@
 								<label for="sc-1-1-6" data-value="Do not know">Do not know</label>
 							</div>					
 						</div>
-						<label>&nbsp;</label>
 				</div>
                 
 				<div class="list-group-item ">
@@ -346,7 +394,6 @@
 
 					</div>
 
-					<label>&nbsp;</label>
 				</div>
 
 				<div class="list-group-item ">
@@ -370,7 +417,6 @@
 						
 					</div>
 					
-					<label>&nbsp;</label>
 				</div>
 
 				<div class="list-group-item ">
@@ -389,7 +435,6 @@
 							</div>
 						
 					</div>
-					<label>&nbsp;</label>
 				</div>
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
@@ -402,7 +447,7 @@
                  <h1 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h1>
             </div>
             <div class="panel-body">
-				<span class="glyphicon glyphicon-info-sign"></span> <font size="5"><strong>Select the place for the service</strong></font>	
+				<span class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>	
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
@@ -567,15 +612,15 @@
             <div class="panel-body">
 				<div class="row">
 					<div class="col-sm-6">
-						<span ><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
+						<span class="h1white"><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
 					<div class="col-sm-6">
-						<span ><h4><b>Please select the time of service. </b></h4></span>
+						<span class="h1white"><h4><b>Please select the time of service. </b></h4></span>
 						<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
 					</div>
 					<div class="col-sm-12">
 						<br>
-						<center><h4><b>Schedule repair service are schedule a week in advance</b></h4></center>
+						<center><h4 class="h1white"><b>Schedule repair service are schedule a week in advance</b></h4></center>
 					</div>
 	
 				</div> 
@@ -592,10 +637,10 @@
 				<div class="form-group">
 				
 								<!--<label class="control-label" for="exampleRadios5">-->
-								<span ><h4><b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> </h4></span>
+								<span class="h1white" ><h4><b>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.</b> </h4></span>
 								<!--</label>-->
 								<!--<label class="control-label" for="exampleRadios5">-->
-								<h4><b>You can select one or the first available will respond to your work order?</b></h4>
+								<h4 class="h1white"><b>You can select one or the first available will respond to your work order?</b></h4>
 								<!--</label>-->
 							
 							
@@ -693,7 +738,7 @@
 							
 						</div>
 					<div class ="col-md-12">
-						<label class="control-label text-center h1"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
+						<label class="control-label text-center h1 h1white"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
 						<?php
 							if(!isset($_SESSION)) { 
 								session_start(); 
@@ -727,55 +772,6 @@
             </div>
             <div class="panel-body">
 				<div class="row">
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-					<div style="" class="col-sm-6" >
-						<div class="list-group">
-							<div class="list-group-item ">
-								<span class="glyphicon glyphicon-info-sign"></span> Info 
-								<div class="d-flex w-100 justify-content-between">
-									<span ><b>Please take just one more step, we need to verify your identity,please login or register</b></span><br><br>
-									
-								</div>
-							</div>
-
-							<div  class="list-group-item ">
-								<span class="glyphicon glyphicon-info-sign"></span> Login
-								<div class="d-flex w-100 justify-content-between">
-									<div class="form-group">
-										<label>User Name<span class="required">*</span></label>
-										<input type="text" placeholder="" required="true" id="userClientOrder" name="userClientOrder" />
-									</div>
-									<div class="form-group">
-										<label>Password<span class="required">*</span></label>
-										<input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
-									</div>
-									<button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
-									<label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-									<a href="#">Forgot password?</a>
-									
-								</div>
-							</div>
-						</div>
-						<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-						<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
-					</div>
-                                        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 					<div style="margin-bottom: 20px;" class="col-sm-12">
 						<div class="list-group">
 							<div class="list-group-item ">
