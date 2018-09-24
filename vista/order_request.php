@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-                                        <div style="" class="col-sm-6" >
+                                        <div style="width:100%;" class="col-sm-6" >
                                                 <div class="list-group">
                                                         <div class="list-group-item ">
                                                                 <span class="glyphicon glyphicon-info-sign"></span> Info
