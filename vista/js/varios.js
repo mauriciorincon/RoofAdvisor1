@@ -2859,8 +2859,9 @@ function filterCompany(nameType,nameStatus,tableName){
         console.log($(this).val());
     });
 
-    hideShowMarketByTypeService(listTypeService);
-    hideShowMarketByStatus(listTypeStatus);
+    hideShowMarketByTypeServiceAndSatus(listTypeService,listTypeStatus);
+    //hideShowMarketByTypeService(listTypeService);
+    //hideShowMarketByStatus(listTypeStatus);
     $('#myFilterWindow').modal('hide');
     
     var table = $('#'+tableName).DataTable();
