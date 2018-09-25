@@ -29,7 +29,9 @@
 								<i class="fa fa-sun-o"></i>
 							</div>
 							<h3>Emergency Repair</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<p>
+							RoofServiceNow is the only same day service that connects roofing professionals with their clients real time who need repairs done right away
+							</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
@@ -38,7 +40,9 @@
 								<i class="fa fa-book"></i>
 							</div>
 							<h3>schedule Rapair </h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<p>
+							With RoofServiceNow you can schedule a prescreened service professional for the day and time that is convenient for you for an estimate or repair. 
+							</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
@@ -47,7 +51,7 @@
 								<i class="fa fa-ticket"></i>
 							</div>
 							<h3>Order roof Report</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<p>RoofServiceNow provides a detailed roof report for only $29. Get an accurate aerial roof measurements and diagrams you can send to insurance adjusters.</p>
 						</div>
 					</div>
 					
