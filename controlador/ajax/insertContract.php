@@ -49,6 +49,7 @@ for($n=0;$n<$_elementDivisor;$n++){
 $_userController=new userController();
 $_companyID=$_userController->insertCompany($_arrayCompany);
 
+$_consecutive="";
 if(strpos($_companyID,"Error")!==false){
     echo "Error register company,try again ".$_companyID."";
 }else{

@@ -208,7 +208,30 @@ class orderController{
         $this->_orderModel=new orderModel();
         return $this->_orderModel->getOrderInvoices($orderID);
 
-    } 
+    }
+    
+    public function getOrderCommentaries($orderID){
+        $this->_orderModel=new orderModel();
+        return $this->_orderModel->getOrderCommentaries($orderID);
+
+    }
+
+    public function insertOrderComentary($orderID,$commentary){
+        $_commenary=[
+            "user_commentary" => $_SESSION['username'],
+            "date_commentary" => date('m-d-Y h:m:s'),
+            "text_commentary" =>$commentary
+            ];
+        $this->_orderModel=new orderModel();
+        $_result=$this->_orderModel->insertOrderCommentary($orderID,$_commenary);
+            
+        if(strpos($_result,'Error')>-1){
+            return "Error, An error occur while saving the commentary";
+        }else{
+            return "Ok, the commentary was saved susses";    
+        }
+        
+    }
     
 
 }

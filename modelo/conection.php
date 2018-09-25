@@ -216,6 +216,14 @@ class connection{
 
    
 
+    public function insertDataTableT($table,$data){
+        try {
+            $_key=$this->_firebase->getReference($table)->push($data);
+            return $_key;
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
     public function insertDataTable($table,$insertNode,$data,$key){
         
         if($key==true){
