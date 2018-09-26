@@ -1049,13 +1049,13 @@
                                         <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
                                             <a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
                                              id="inactivate-contractor-button" name="inactivate-contractor-button" 
-                                             data-toggle="tooltip" title="Inactive Employee" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
+                                             data-toggle="tooltip" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         <?php } else{ ?>
-                                            <a href="" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" 
-                                            name="inactivate-contractor-button" data-toggle="tooltip" title="Active Employee"   data-toggle1="tooltip"  title="Active Employee"
-                                            onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
+                                            <a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Employee"
+                                            id="inactivate-contractor-button" name="inactivate-contractor-button"  
+                                            data-toggle1="tooltip" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </a>
                                         <?php } ?>

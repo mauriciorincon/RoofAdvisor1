@@ -1888,10 +1888,8 @@ function disableEnableDriver(id_driver,action){
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                result1=false;
+                console.log( "La solicitud a fallado: " +  textStatus+ ' '+errorThrown);
                 jsRemoveWindowLoad('');
-                return result1;
             }
         });
 
@@ -2699,7 +2697,7 @@ function insertCommentary(){
         return;
     }
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/insertorderCommentary.php", { "orderID" : orderID,"commentary":commentary}, null, "text" )
+    $.post( "controlador/ajax/insertOrderCommentary.php", { "orderID" : orderID,"commentary":commentary}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");
