@@ -767,7 +767,7 @@
 												<span class="glyphicon glyphicon-check"></span>Take work
 											</a>
                                 <?php }else{ ?>
-                                        <a class="btn btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                        <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
 												href="#myModalGetWork" 
 												onClick="setOrderId('<?php echo $order['FBID']?>')"> 
 												<span class="glyphicon glyphicon-check"></span>Take work
@@ -784,10 +784,15 @@
                             </td>
                             <td>
                             <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-													href="" 
-													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-													<span class="glyphicon glyphicon-list-alt"></span>
-										</a>
+                                href="" 
+                                onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </a>
+                            <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                href="" 
+                                onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-comment"></span>
+                            </a>
                             </td>
                            
                            
@@ -1035,21 +1040,21 @@
                                     </td>
                                     <td>
                                     <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
-                                        <a href="" class="inactivate-contractor-button btn-default btn-sm"  data-toggle1="tooltip"  title="Active Employee"
+                                        <a href="#" class="inactivate-contractor-button btn-default btn-sm"  data-toggle1="tooltip"  title="Active Employee"
                                             id="inactivate-contractor-button" name="inactivate-contractor-button" 
-                                            data-toggle="tooltip" title="Inactive Driver" onclick="alert('You can not active the employee until the company is active')" >
+                                            data-toggle="tooltip" title="Inactive Employee" onclick="alert('You can not active the employee until the company is active')" >
                                                 <span class="glyphicon glyphicon-exclamation-sign"></span>
                                             </a>
                                     <?php }else{ ?>
                                         <?php if(strcmp($contractor['ContStatus'],"Active")==0){?>
-                                            <a href="" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
+                                            <a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Employee"
                                              id="inactivate-contractor-button" name="inactivate-contractor-button" 
-                                             data-toggle="tooltip" title="Inactive Driver" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
+                                             data-toggle="tooltip" title="Inactive Employee" onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Inactive')">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         <?php } else{ ?>
                                             <a href="" class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" 
-                                            name="inactivate-contractor-button" data-toggle="tooltip" title="Active Driver"   data-toggle1="tooltip"  title="Active Employee"
+                                            name="inactivate-contractor-button" data-toggle="tooltip" title="Active Employee"   data-toggle1="tooltip"  title="Active Employee"
                                             onclick="disableEnableDriver('<?php echo $contractor['ContractorID']?>','Active')">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </a>
@@ -1062,7 +1067,7 @@
                             </tbody>
                         </table>
                         
-                        <a class="btn btn-outline-primary" data-toggle="modal"  
+                        <a class="btn-primary btn-sm" data-toggle="modal"  
                                             href="#myModalInsertContractor" 
                                             onClick="emptyTextNewDriver()"> 
                                             <span class="glyphicon glyphicon-file"></span>
@@ -1094,23 +1099,23 @@
             </div>
             <div class="form-group">
                 <label for="ContNameFirsted">First name</label>
-                <input type="text" class="form-control" name="ContNameFirsted" id="ContNameFirsted"  required oninvalid="this.setCustomValidity('Por favor ingrese el valor del cupo')"
+                <input type="text" class="form-control" name="ContNameFirsted" id="ContNameFirsted"  required oninvalid="this.setCustomValidity('')"
                 oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
                 <label for="ContNameLasted">Last Name</label>
-                <input type="text" class="form-control" name="ContNameLasted" id="ContNameLasted" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+                <input type="text" class="form-control" name="ContNameLasted" id="ContNameLasted" maxlength="60" required oninvalid="this.setCustomValidity('')"
                 oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
                 <label for="ContPhoneNumed">Employee Phone</label>
-                <input type="text" class="form-control" name="ContPhoneNumed" id="ContPhoneNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+                <input type="text" class="form-control" name="ContPhoneNumed" id="ContPhoneNumed" maxlength="60" required oninvalid="this.setCustomValidity('')"
                 oninput="setCustomValidity('')">
             </div>
 
             <div class="form-group">
                 <label for="ContLicenseNumed">Employee License</label>
-                <input type="text" class="form-control" name="ContLicenseNumed" id="ContLicenseNumed" maxlength="60" required oninvalid="this.setCustomValidity('Por favor ingrese el plazo del cupo')"
+                <input type="text" class="form-control" name="ContLicenseNumed" id="ContLicenseNumed" maxlength="60" required oninvalid="this.setCustomValidity('')"
                 oninput="setCustomValidity('')">
             </div>
             
@@ -1174,13 +1179,13 @@
             </div>
 
             <div class="form-group">
-                <label for="ContLicenseNumed">Driver License</label>
+                <label for="ContLicenseNumed">Employee Driver License</label>
                 <input type="text" class="form-control" name="ContLicenseNumIn" id="ContLicenseNumIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the license number of contractor')"
                 oninput="setCustomValidity('')">
             </div>
 
             <div class="form-group">
-                <label for="ContLicenseNumed">Driver Email</label>
+                <label for="ContLicenseNumed">Employee Email</label>
                 <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
                 <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
@@ -1340,21 +1345,13 @@
                 <p>
                 <table class="table">
                     <thead>
-                        <tr><th scope="col" colspan="2">Service Type</th></tr>
+                        <tr><th scope="col">Service Type</th><th><input class="form-check-input" type="checkbox" value="S" name="selectAllTYpe" checked onchange="selectUnselectCheck('defaultCheckType',this)"></th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType"  checked></td></tr>
                         <tr><td>Emergency Repair</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckType" checked></td></tr>
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
-                    </tbody>
-                </table>
-                </p>
-                <p>
-                <table class="table">
-                    <thead>
-                        <tr><th scope="col" colspan="2">Order Status</th></tr>
-                    </thead>
-                    <tbody>
+                        <tr><td scope="col"><b>Service Type<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Order Assigned</td><td><input class="form-check-input" type="checkbox" value="D" name="defaultCheckStatus" checked></td></tr>
@@ -1371,8 +1368,7 @@
                         <tr><td>Report Complete</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckStatus" checked></td></tr>
                     </tbody>
                 </table>
-                   
-                </p>
+                
 			</div> 
             <div class="modal-footer" id="buttonMessage"> 
                 <button type="button" class="btn btn-default" onclick="filterCompany('defaultCheckType','defaultCheckStatus','table_orders_company')">Filter</button> 
@@ -1382,3 +1378,59 @@
 	</div>
 </div>
 
+<div class="modal fade" id="myCommentaryInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentary">Commentary Info</h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentary"> 
+                <input type="hidden" value="" id="commentaryIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="commentaryInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Commentary</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Commentary</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myCommentaryInfoN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentaryN">New Commentary </h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentaryN"> 
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="commentOrder"></textarea>
+                </div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <button type="button" class="btn-primary btn-sm" onclick="insertCommentary()">Save</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

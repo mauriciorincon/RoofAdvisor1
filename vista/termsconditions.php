@@ -86,7 +86,7 @@
 
 <li><a href="#">11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING. </a></li>
 
-<li><a href="#">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFADVISORZ.COM</a></li>
+<li><a href="#">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</a></li>
 
 <li><a href="#">13. LINKS TO THIRD PARTY SITES</a></li>
 
@@ -400,7 +400,7 @@ ABS will provide Angie's List with only a pass or fail designation. Angie's List
 
 </ol>
 
-<h4>12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFADVISORZ.COM</h4>
+<h4>12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</h4>
 
 <p>All Ratings and Reviews of a Service Professional displayed to you reflect the opinions of other consumers, and do not reflect or represent the opinions or representations of RoofServiceNow. RoofServiceNow disclaims any and all representations or warranties with regard to the Ratings and Reviews. RoofServiceNow does not assume responsibility or liability for any Review or for any claims, damages, or losses resulting from any use of the Site or the materials contained therein.</p>
 
