@@ -42,6 +42,7 @@
     text-align: center;
     position: relative;
     margin-left:20px;
+    width: 12.333333% !important;
 }
 .btn-circle {
     width: 30px;

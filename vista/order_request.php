@@ -42,7 +42,6 @@
                                         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -349,10 +348,10 @@
                  <h3 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h3>
 			</div>
 			<div class="panel-body">
-			<div class="list-group-item ">
+			<div class="list-group-item scr2fix">
 				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
 				</div>
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix ">
 						<div class="form-group">
 						
 							<style>
@@ -377,11 +376,11 @@
 						</div>
 				</div>
                 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9314;</font> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep4Option" data-value="Yes" id="estep4Option1" checked>
@@ -396,11 +395,11 @@
 
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep5Option" data-value="1 story" id="estep5Option1" checked>
@@ -419,11 +418,11 @@
 					
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9316;</font> <font size="5"><strong>Are you the owner or authorized to make property changes?</strong></font>		
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep6Option" data-value="Yes" id="estep6Option1" checked>
