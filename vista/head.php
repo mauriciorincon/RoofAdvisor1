@@ -113,7 +113,7 @@ if(!isset($_SESSION)) {
                                                                 <b class="caret"></b></a>
                                                                 <ul id="logindrop" class="dropdown-menu">
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-                                                                        <li><a href="?controller=user&accion=showLoginContractor">Company Area</a></li>
+                                                                        <li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
                                                                         <li class="divider"></li>
                                                                         <li><a href="?controller=user&accion=logout">Log Out</a></li>
                                                                 </ul>

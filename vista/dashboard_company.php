@@ -357,26 +357,70 @@
                 var status=getStatus(dataOrder.Status);
                 
                 var dataCustomer="";
+                var companyActions="";
+                
+                                       
+
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                    dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                    if(dataOrder.CompanyStatus!='Acive'){
+                        dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                'href="" '+
+                                'onClick="alert(\'You can not take the job until the company is active\')"> '+
+                                '<span class="glyphicon glyphicon-check"></span>Take work'+
+                                '</a>';
+                    }
+                        dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
 									'href="#myModalGetWork" '+
-									'onClick="setOrderId("'+dataOrder.FBID+')"> '+
-									'<span class="glyphicon glyphicon-check"></span>Take work</a>';
+									'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
+                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                    
                 }else{
-                    dataCustomer=dataOrder.ContractorID;
+                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                                dataContractor=contractorName; 
+                        });
                 }
+
+                companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
+                                'href="#" '+ 
+                                'onClick="getInvoices(\''.$order['FBID'].'\')">'+ 
+                                '<span class="glyphicon glyphicon-list-alt"></span>'+
+                            '</a>';
+                            
+                            <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
+                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                    href="" 
+                                    onClick="alert('You can not create comment until the company is active')"> 
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            <?php }else{ 
+                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
+                                ?>
+                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        href="" 
+                                        onClick="alert('You can not create comments to an order that you have not taken')"> 
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
+                                    <?php }else{ ?>
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        href="" 
+                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
+                            <?php 
+                            }} ?>
+
                 t.row.add( [
                         dataOrder.OrderNumber,
                         dataOrder.SchDate,
                         dataOrder.SchTime,
-                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         "",
+                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         requestType,
                         status,
                         dataOrder.ETA,
                         dataOrder.EstAmtMat,
-                        dataOrder.PaymentType,
-                        dataCustomer,
+                        dataOrder.PaymentTxype,
+                        dataContractor,
                     ] ).draw( false );
                 /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
                 dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
@@ -402,7 +446,7 @@
                         $row = $(this);
 
                         var id = $row.find("td:eq(0)").text();
-
+x
                         if (id.indexOf(value) === 0) {
                             var requestType=getRequestType(dataOrder.RequestType);
                             var status=getStatus(dataOrder.Status);
@@ -788,11 +832,28 @@
                                 onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
                                 <span class="glyphicon glyphicon-list-alt"></span>
                             </a>
-                            <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
-                                href="" 
-                                onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                <span class="glyphicon glyphicon-comment"></span>
-                            </a>
+                            <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
+                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                    href="" 
+                                    onClick="alert('You can not create comment until the company is active')"> 
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                            <?php }else{ 
+                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
+                                ?>
+                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        href="" 
+                                        onClick="alert('You can not create comments to an order that you have not taken')"> 
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
+                                    <?php }else{ ?>
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        href="" 
+                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+                                        <span class="glyphicon glyphicon-comment"></span>
+                                    </a>
+                            <?php 
+                            }} ?>
                             </td>
                            
                            
