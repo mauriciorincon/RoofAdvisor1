@@ -385,8 +385,8 @@
                                 'onClick="getInvoices(\''.$order['FBID'].'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                            
-                            <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
+                if(dataOrder.CompanyStatus!="Active"){    
+                    companyActions+=
                                 <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
                                     href="" 
                                     onClick="alert('You can not create comment until the company is active')"> 
