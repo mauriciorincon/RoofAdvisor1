@@ -111,6 +111,22 @@ class orderModel extends connection{
             return null;
         }  
     }
+
+    public function getOrderCommentaries($orderID){
+        $result=$this->getDataTable('Commentary/'.$orderID);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }  
+    }
+
+    public function insertOrderCommentary($orderID,$commentary){
+        
+        $result=$this->insertDataTableT("Commentary/".$orderID,$commentary);
+        //$result=$this->updateDataTable("Commentary/".$orderID,"1",$commentary); 
+        return $result;
+    }
  
 }
 ?>

@@ -126,9 +126,6 @@ class driverController{
             $_flag=false;
         }
 
-        
-        
-
         if($_flag==false){
             return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
         }else{

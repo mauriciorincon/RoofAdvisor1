@@ -542,8 +542,8 @@ function insertDriver(){
                                                             '</td><td><a class="btn-info btn-sm" data-toggle="modal" href="#myModal2" onClick="">'+
                                                             '<span class="glyphicon glyphicon-pencil"></span></a></td><td><a href="#" '+
                                                             'class="inactivate-contractor-button btn-success btn-sm" id="inactivate-contractor-button" '+
-                                                            'name="inactivate-contractor-button" title="Active Driver" onclick="disableEnableDriver('+
-                                                            consecutivo+','+'Active'+')"><span class="glyphicon glyphicon-ok"></span></a></td></tr>');
+                                                            'name="inactivate-contractor-button" title="Active Employee" onclick="disableEnableDriver(\''+
+                                                            consecutivo+'\','+'\'Active\''+')"><span class="glyphicon glyphicon-ok"></span></a></td></tr>');
                 //$('#selectDriverFilterDashboard').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
                 $("#selectDriverFilterDashboard option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
                 //$('#selectDriverFilterDashboard').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
@@ -1888,10 +1888,8 @@ function disableEnableDriver(id_driver,action){
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                result1=false;
+                console.log( "La solicitud a fallado: " +  textStatus+ ' '+errorThrown);
                 jsRemoveWindowLoad('');
-                return result1;
             }
         });
 
@@ -2653,6 +2651,83 @@ function getInvoices(orderID){
     });
 }
 
+function getCommentary(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListCommentary.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('input:hidden#commentaryIDOrder').val(orderID);
+                $('#myCommentaryInfo #commentaryInfo tbody').html(data);
+                //$( "#myInvoiceInfo" ).dialog('open');
+                $(document).ready(function(){$("#myCommentaryInfo").modal("show"); });
+                //console.log(data);
+            }else{
+                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function insertCommentary(){
+    var orderID=$('input:hidden#commentaryIDOrder').val();
+    var commentary=$('#commentOrder').val();
+    var message="";
+    if(orderID=="" || orderID==null || orderID==undefined){
+        message="Please select the order<br>";
+    }
+    if(commentary=="" || commentary==null || commentary==undefined){
+        message="Please write the commentary<br>";
+    }
+    if(message!=""){
+        alert(message);
+        return;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/insertOrderCommentary.php", { "orderID" : orderID,"commentary":commentary}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $("#myCommentaryInfo").modal("hide");
+                $("#myCommentaryInfoN").modal("hide");
+                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }else{
+                $("#myCommentaryInfo").modal("hide");
+                $("#myCommentaryInfoN").modal("hide");
+                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
 /*$( "#myInvoiceInfo" ).dialog({
     autoOpen: false,
     modal: true,
@@ -2908,4 +2983,11 @@ function filterCustomer(nameType,nameStatus,tableName){
     );
     table.draw();
     $.fn.dataTable.ext.search.pop();
+}
+
+function selectUnselectCheck(nameCheck,chek){
+    var checkSelected=$('input[name="'+nameCheck+'"]');
+    $.each( checkSelected, function( key, value ) {
+        $(this).attr('checked', $(chek).is(':checked'));
+    });
 }
