@@ -385,28 +385,31 @@
                                 'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                if(dataOrder.CompanyStatus!="Active"){    
-                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+ 
+                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                    if(companyStatus!="Active"){    
+                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
                                     'href="" '+
                                     'onClick="alert(\'You can not create comment until the company is active\')"> '+
                                     '<span class="glyphicon glyphicon-comment"></span>'+
                                     '</a>';
-                }else{ 
-                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
-                                        'href="" '+
-                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
-                    }else{
-                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
-                                        'href="" '+
-                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
+                    }else{ 
+                        if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+                            companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                            'href="" '+
+                                            'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                                            '<span class="glyphicon glyphicon-comment"></span>'+
+                                        '</a>';
+                        }else{
+                            companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                            'href="" '+
+                                            'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                            '<span class="glyphicon glyphicon-comment"></span>'+
+                                        '</a>';    
+                        }
+                    } 
+                });
                             
-                    }
-                } 
+                
 
                 t.row.add( [
                         dataOrder.OrderNumber,
@@ -446,7 +449,6 @@
                         $row = $(this);
 
                         var id = $row.find("td:eq(0)").text();
-x
                         if (id.indexOf(value) === 0) {
                             var requestType=getRequestType(dataOrder.RequestType);
                             var status=getStatus(dataOrder.Status);
@@ -462,9 +464,46 @@ x
                                     $row.find("td:eq(10)").html(contractorName);
                                 });
                             }
+                            getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                                $row.find("td:eq(3)").html(customerData);
+                            });
+
+                            
+                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                                companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
+                                    'href="#" '+ 
+                                    'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                    '<span class="glyphicon glyphicon-list-alt"></span>'+
+                                '</a>';
+                                if(companyStatus!="Active"){    
+                                companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
+                                                'href="" '+
+                                                'onClick="alert(\'You can not create comment until the company is active\')"> '+
+                                                '<span class="glyphicon glyphicon-comment"></span>'+
+                                                '</a>';
+                                }else{ 
+                                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+                                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                                        'href="" '+
+                                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                                    '</a>';
+                                    }else{
+                                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                                        'href="" '+
+                                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                                    '</a>';    
+                                    }
+                                } 
+                                $row.find("td:eq(11)").html(companyActions);
+                            });
+
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
-                            $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+
+                            $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
                             $row.find("td:eq(7)").html(dataOrder.ETA);
@@ -670,6 +709,32 @@ x
                     });
                 
             }
+
+            function getCustomerData(customerFBID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Customers/"+customerFBID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.Fname+' '+data.Lname+' / '+data.Address+' / '+data.Phone);
+						});
+                        //return reject("Undefined");
+                    });
+                
+            }
+
+            function getCompanyStatus(companyID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Company/"+companyID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.CompanyStatus);
+						});
+                    });
+                
+            }
+
             function getContractorName(ContractorID) {
                 return new Promise(function (resolve, reject) {
                    
@@ -833,7 +898,7 @@ x
                                 <span class="glyphicon glyphicon-list-alt"></span>
                             </a>
                             <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
-                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                     href="" 
                                     onClick="alert('You can not create comment until the company is active')"> 
                                     <span class="glyphicon glyphicon-comment"></span>
@@ -841,13 +906,13 @@ x
                             <?php }else{ 
                                     if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
                                 ?>
-                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                         href="" 
                                         onClick="alert('You can not create comments to an order that you have not taken')"> 
                                         <span class="glyphicon glyphicon-comment"></span>
                                     </a>
                                     <?php }else{ ?>
-                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                         href="" 
                                         onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
                                         <span class="glyphicon glyphicon-comment"></span>
@@ -855,8 +920,8 @@ x
                             <?php 
                             }} ?>
                             <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Report"  
-                                href="#myUploadReport" 
-                                onClick=""> 
+                                href="#" 
+                                onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
                                 <span class="glyphicon glyphicon-upload"></span>
                             </a>
                             </td>
@@ -1484,7 +1549,7 @@ x
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMyCommentaryN">New Commentary </h4> 
+				<h4 class="modal-title" id="headerMyCommentaryN">New Comment </h4> 
 			</div> 
 			<div class="modal-body" id="textMyCommentaryN"> 
                 <div class="form-group">
@@ -1546,9 +1611,9 @@ x
 			<div class="modal-body" id="textMyUploadReportN"> 
                 <div class="form-group">        
                         <label for="name">File Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required />
+                        <input type="text" class="form-control" id="file_name" name="name" placeholder="Enter name" required />
                 </div>
-                <input id="uploadImage" type="file" accept="image/*" name="image" />
+                <input id="uploadImage" type="file" accept="application/pdf" name="image" />
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 

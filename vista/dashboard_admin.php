@@ -231,7 +231,7 @@ Welcome to RoofServicenow Admin
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
         <br>
-        <form class="form-inline">
+        <!--<form class="form-inline">
         <div class="form-group mb-2">
             
             <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
@@ -260,7 +260,7 @@ Welcome to RoofServicenow Admin
         </div>
         <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
         
-        </form>
+        </form>-->
 
          
         <div class="table-responsive">          
