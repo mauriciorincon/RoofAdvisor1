@@ -1895,13 +1895,13 @@ function disableEnableDriver(id_driver,action){
                         $(this).find('td').eq(6).text(action);
                         //var tdv =$(this).find('td').eq(8);
                         if(action=="Active"){ 
-                            $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
+                            $(this).find('td').eq(9).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(9).find('a').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(9).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
                         }else{
-                            $(this).find('td').eq(8).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').removeClass('btn-danger').addClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
+                            $(this).find('td').eq(9).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
+                            $(this).find('td').eq(9).find('a').removeClass('btn-danger').addClass('btn-success');
+                            $(this).find('td').eq(9).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
                         }
                         
                         //$(tdv).find('span').addClass('glyphicon glyphicon-trash').removeClass('glyphicon glyphicon-ok');

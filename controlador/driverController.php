@@ -90,14 +90,14 @@ class driverController{
         $this->_driverModel->updateDriver($_contractorID.'/ContLicenseNum',$_contratorLinceseNumber);
         $this->_driverModel->updateDriver($_contractorID.'/ContractorProfile',$_contratorProfile);
 
-        return "The contractor identify by ".$_contractorID." was updated corretly";
+        return "The employee identify by ".$_contractorID." was updated corretly";
     }
 
     public function updateDriverState($_contractorID,$_contractorState){
         $this->_driverModel=new driverModel();
         $this->_driverModel->updateDriver($_contractorID.'/ContStatus',$_contractorState);
 
-        return "The contractor identify by ".$_contractorID." was updated corretly";
+        return "The employee identify by ".$_contractorID." was updated corretly";
     }
 
     public function disableDriver($_contractorID){
@@ -105,7 +105,7 @@ class driverController{
         $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Inactive');
 
         
-        return "The contractor identify by ".$_contractorID." was updated corretly";
+        return "The employee identify by ".$_contractorID." was updated corretly";
     }
 
     public function enableDriver($_contractorID){
@@ -117,7 +117,7 @@ class driverController{
         $this->_userController=new userController();
         $_user_created=$this->_userController->insertUserDatabase($_actual_driver['ContEmail'],$_actual_driver['ContPhoneNum'],$_actual_driver['ContNameFirst'].' '.$_actual_driver['ContNameLast'],'',$_contractorID,'driver');
         if(is_array($_user_created) or is_object($_user_created)){
-            $_message="User driver created correctly.";
+            $_message="User employee created correctly.";
             
             $this->_driverModel->updateDriver($_contractorID.'/ContStatus','Active');
             $_flag=true;
@@ -127,9 +127,9 @@ class driverController{
         }
 
         if($_flag==false){
-            return "The contractor identify by ".$_contractorID." can`t be updated correctly, $_message";
+            return "The employee identify by ".$_contractorID." can`t be updated correctly, $_message";
         }else{
-            return "The contractor identify by ".$_contractorID." was updated correctly, $_message";
+            return "The employee identify by ".$_contractorID." was updated correctly, $_message";
         }
         //print_r($_user_created);
         

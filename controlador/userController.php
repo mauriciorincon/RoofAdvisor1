@@ -593,7 +593,7 @@ class userController{
         }else{
             $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
         }
-        return "The contractor identify by ".$_companyID." was updated corretly".$_aditional_message;
+        return "The employee identify by ".$_companyID." was updated corretly".$_aditional_message;
 
     }
 
@@ -617,8 +617,7 @@ class userController{
 
 
     public function insertUserDatabase($mail,$number,$name,$url,$password,$profile){
-        echo "llego aca";
-        exit();
+        
         //$password = rand(1000,5000);
         //$password = "pass12345";
         //echo "password:".$password;
@@ -1007,7 +1006,7 @@ class userController{
         $_result=$this->_userModel->updateContractor($_companyID.'/CompanyStatus','Active');
 
         if(is_bool($_result) === true){
-            return "The company identify by ".$_contractorID." can`t be updated correctly, $_message";
+            return "The company identify by ".$_companyID." can`t be updated correctly, $_result";
         }else{
             return "Error updating ".$_companyID."";
         }
