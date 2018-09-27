@@ -232,6 +232,29 @@ class orderController{
         }
         
     }
+
+    public function getOrderFilesInfo($orderID){
+        $this->_orderModel=new orderModel();
+        return $this->_orderModel->getOrderFilesInfo($orderID);
+
+    }
+
+    public function insertOrderFile($orderID,$file_name){
+        $_file_data=[
+            "user_upload" => $_SESSION['username'],
+            "date_upload" => date('m-d-Y h:m:s'),
+            "file_name" =>$file_name
+            ];
+        $this->_orderModel=new orderModel();
+        $_result=$this->_orderModel->insertOrderFile($orderID,$_file_data);
+            
+        if(strpos($_result,'Error')>-1){
+            return "Error, An error occur while saving the file data";
+        }else{
+            return "Ok, the file data was saved successfully";    
+        }
+        
+    }
     
 
 }

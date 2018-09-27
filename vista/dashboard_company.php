@@ -382,37 +382,43 @@
 
                 companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                 'href="#" '+ 
-                                'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                if(dataOrder.CompanyStatus!="Active"){    
-                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+ 
+                getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                    dataCustomer=customerData;
+                });
+                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                    if(companyStatus!="Active"){    
+                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
                                     'href="" '+
                                     'onClick="alert(\'You can not create comment until the company is active\')"> '+
                                     '<span class="glyphicon glyphicon-comment"></span>'+
                                     '</a>';
-                }else{ 
-                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
-                                        'href="" '+
-                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
-                    }else{
-                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
-                                        'href="" '+
-                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
+                    }else{ 
+                        if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+                            companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                            'href="" '+
+                                            'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                                            '<span class="glyphicon glyphicon-comment"></span>'+
+                                        '</a>';
+                        }else{
+                            companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                            'href="" '+
+                                            'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                            '<span class="glyphicon glyphicon-comment"></span>'+
+                                        '</a>';    
+                        }
+                    } 
+                });
                             
-                    }
-                } 
+                
 
                 t.row.add( [
                         dataOrder.OrderNumber,
                         dataOrder.SchDate,
                         dataOrder.SchTime,
-                        "",
+                        dataCustomer,
                         dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         requestType,
                         status,
@@ -422,11 +428,7 @@
                         dataContractor,
                         companyActions,
                     ] ).draw( false );
-                /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
-                dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
-                dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
-                '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
-                '</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
+                
                 var marker={
                     lat: parseFloat(dataOrder.Latitude),
                     lng: parseFloat(dataOrder.Longitude),
@@ -446,7 +448,6 @@
                         $row = $(this);
 
                         var id = $row.find("td:eq(0)").text();
-x
                         if (id.indexOf(value) === 0) {
                             var requestType=getRequestType(dataOrder.RequestType);
                             var status=getStatus(dataOrder.Status);
@@ -456,15 +457,52 @@ x
                                                 'href="#myModalGetWork" '+
                                                 'onClick="setOrderId("'+dataOrder.FBID+')"> '+
                                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                $row.find("td:eq(10)").html(contractorName);
+                                $row.find("td:eq(10)").html(dataCustomer);
                             }else{
                                 getContractorName(dataOrder.ContractorID).then(function(contractorName){
                                     $row.find("td:eq(10)").html(contractorName);
                                 });
                             }
+                            getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                                $row.find("td:eq(3)").html(customerData);
+                            });
+
+                            
+                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                                companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
+                                    'href="#" '+ 
+                                    'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                    '<span class="glyphicon glyphicon-list-alt"></span>'+
+                                '</a>';
+                                if(companyStatus!="Active"){    
+                                companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
+                                                'href="" '+
+                                                'onClick="alert(\'You can not create comment until the company is active\')"> '+
+                                                '<span class="glyphicon glyphicon-comment"></span>'+
+                                                '</a>';
+                                }else{ 
+                                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+                                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                                        'href="" '+
+                                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                                    '</a>';
+                                    }else{
+                                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                                        'href="" '+
+                                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                                    '</a>';    
+                                    }
+                                } 
+                                $row.find("td:eq(11)").html(companyActions);
+                            });
+
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
-                            $row.find("td:eq(3)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+
+                            $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
                             $row.find("td:eq(7)").html(dataOrder.ETA);
@@ -572,7 +610,21 @@ x
 						}
 					})                
                 }
-                
+            
+            function removeMarketContractor(idContractor){
+                for(var i = contractorMarker.length - 1; i >= 0; i--) {
+                    if(contractorMarker[i].id === idContractor) {
+                        contractorMarker[i].setVisible(false);
+                        contractorMarker.splice(i, 1);
+                    }
+                }
+                /*contractorMarker.map(function(marker) {
+                    if(marker.id===idContractor){
+                        marker.setVisible(false);
+                        contractorMarker.splice( marketrs.indexOf(marker), 1 );
+                    }
+                })*/
+            }
             /*function hideShowMarketByTypeService(listTypeService){
                 marketrs.map(function(marker) {
                     if(listTypeService.indexOf(marker.typeService)>-1){
@@ -670,6 +722,32 @@ x
                     });
                 
             }
+
+            function getCustomerData(customerFBID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Customers/"+customerFBID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.Fname+' '+data.Lname+' / '+data.Address+' / '+data.Phone);
+						});
+                        //return reject("Undefined");
+                    });
+                
+            }
+
+            function getCompanyStatus(companyID) {
+                return new Promise(function (resolve, reject) {
+                   
+                    var ref = firebase.database().ref("Company/"+companyID);
+                    ref.once('value').then(function(snapshot) {
+							data=snapshot.val();
+							return resolve(data.CompanyStatus);
+						});
+                    });
+                
+            }
+
             function getContractorName(ContractorID) {
                 return new Promise(function (resolve, reject) {
                    
@@ -833,7 +911,7 @@ x
                                 <span class="glyphicon glyphicon-list-alt"></span>
                             </a>
                             <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
-                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                     href="" 
                                     onClick="alert('You can not create comment until the company is active')"> 
                                     <span class="glyphicon glyphicon-comment"></span>
@@ -841,19 +919,24 @@ x
                             <?php }else{ 
                                     if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
                                 ?>
-                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                         href="" 
                                         onClick="alert('You can not create comments to an order that you have not taken')"> 
                                         <span class="glyphicon glyphicon-comment"></span>
                                     </a>
                                     <?php }else{ ?>
-                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
                                         href="" 
                                         onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
                                         <span class="glyphicon glyphicon-comment"></span>
                                     </a>
                             <?php 
                             }} ?>
+                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Report"  
+                                href="#" 
+                                onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
                             </td>
                            
                            
@@ -1445,7 +1528,7 @@ x
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMyCommentary">Commentary Info</h4> 
+				<h4 class="modal-title" id="headerMyCommentary">Comment Info</h4> 
 			</div> 
 			<div class="modal-body" id="textMyCommentary"> 
                 <input type="hidden" value="" id="commentaryIDOrder" />
@@ -1455,7 +1538,7 @@ x
 							<tr>
 								<td class="text-center"><strong>User</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
-								<td class="text-center"><strong>Commentary</strong></td>
+								<td class="text-center"><strong>Comment</strong></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -1466,7 +1549,7 @@ x
 			</div>
 
 			<div class="modal-footer" id="buttonCommentary"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Commentary</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1479,7 +1562,7 @@ x
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMyCommentaryN">New Commentary </h4> 
+				<h4 class="modal-title" id="headerMyCommentaryN">New Comment </h4> 
 			</div> 
 			<div class="modal-body" id="textMyCommentaryN"> 
                 <div class="form-group">
@@ -1490,6 +1573,64 @@ x
 
 			<div class="modal-footer" id="buttonCommentary"> 
                 <button type="button" class="btn-primary btn-sm" onclick="insertCommentary()">Save</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReport" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadReport"> 
+                <input type="hidden" value="" id="UploadReportIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="UploadReportInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Download</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReportN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyUploadReportN">New Roof Report </h4> 
+			</div> 
+			<div class="modal-body" id="textMyUploadReportN"> 
+                <div class="form-group">        
+                        <label for="name">File Name</label>
+                        <input type="text" class="form-control" id="file_name" name="name" placeholder="Enter name" required />
+                </div>
+                <input id="uploadImage" type="file" accept="application/pdf" name="image" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

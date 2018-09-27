@@ -127,6 +127,22 @@ class orderModel extends connection{
         //$result=$this->updateDataTable("Commentary/".$orderID,"1",$commentary); 
         return $result;
     }
+
+    public function getOrderFilesInfo($orderID){
+        $result=$this->getDataTable('roofreportfiles/'.$orderID);
+        if(is_array($result)){
+            return $result;
+        }else{
+            return null;
+        }  
+    }
+
+    public function insertOrderFile($orderID,$file_data){
+        $result=$this->insertDataTableT("roofreportfiles/".$orderID,$file_data);
+        //$result=$this->updateDataTable("Commentary/".$orderID,"1",$commentary); 
+        return $result;
+    }
  
+
 }
 ?>

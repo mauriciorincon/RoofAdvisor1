@@ -3023,3 +3023,74 @@ function selectUnselectCheck(nameCheck,chek){
         $(this).attr('checked', $(chek).is(':checked'));
     });
 }
+
+function setInfoUploadFile(orderId){
+$('#UploadReportIDOrder').val(orderId);
+}
+function uploadAjax(fileName){
+    var file_name=$('#file_name').val();
+    var inputFileImage = document.getElementById(fileName);
+    var file = inputFileImage.files[0];
+    var data = new FormData();
+    data.append('file',file);
+    var url = 'controlador/ajax/uploadReports.php';
+    file_name = file_name.replace(/[^\w\s]/gi, '');
+    file_name = file_name.replace(/ /g, '_');
+    file_name = file_name.replace('.pdf', '');
+    data.append('file_name',file_name);
+    data.append('orderID',$('#UploadReportIDOrder').val());
+    
+    $.ajax({
+        url:url,
+        type:'POST',
+        contentType:false,
+        data:data,
+        processData:false,    
+        cache:false,
+        success : function(json) {
+            console.log(json);
+            data=jQuery.parseJSON(json);
+            alert(data.msg);
+            $("#myUploadReportN").modal("hide");  
+            $("#myUploadReport").modal("hide");  
+        },
+        error : function(xhr, status) {
+            alert('An error occurred when uploading the file. It could not be saved.');
+        },
+        complete : function(xhr, status) {
+            //alert('The operation end correctly');
+        }
+    });
+    
+    }
+
+    function getListReportFile(orderID){
+        jsShowWindowLoad('');
+        $.post( "controlador/ajax/getListReportFiles.php", { "orderID" : orderID}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $('input:hidden#UploadReportIDOrder').val(orderID);
+                    $('#myUploadReport #UploadReportInfo tbody').html(data);
+                    //$( "#myInvoiceInfo" ).dialog('open');
+                    $(document).ready(function(){$("#myUploadReport").modal("show"); });
+                    //console.log(data);
+                }else{
+                    $('#headerTextAnswerOrder').html('Roof Report response');
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+    }

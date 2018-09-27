@@ -391,6 +391,11 @@
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
 							'</a>';
+					actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                        'href="" '+
+                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                    '</a>';
 					if(dataOrder.RequestType=='E'){
 						dateValue=dataOrder.ETA.substring(0,10);
 						timeValue=dataOrder.ETA.substring(11,20);
@@ -502,7 +507,19 @@
 								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
 								'<span class="glyphicon glyphicon-list-alt"></span>'+
 							'</a>';
-							
+					actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  '+
+								'href="#" '+
+								'onClick="getCommentary(\''+dataOrder.FBID+'\')"> '+
+								'<span class="glyphicon glyphicon-comment"></span>'+
+							'</a>';
+					actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  '+
+								'href="#" '+
+								'onClick="getListReportFile(\''+dataOrder.FBID+'\')"> '+
+								'<span class="glyphicon glyphicon-download-alt"></span>'+
+							'</a>';
+
+					
+										
 
 					if(dataOrder.Status=="F"){
 						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
@@ -1078,6 +1095,15 @@
 													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
 													<span class="glyphicon glyphicon-list-alt"></span>
 										</a>
+										<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
+                                        href="#" 
+                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+										<span class="glyphicon glyphicon-comment"></span>
+										<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  
+											href="#" 
+											onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
+											<span class="glyphicon glyphicon-download-alt"></span>
+										</a>
 								</td>
 							</tr>
 						<?php } ?>
@@ -1649,6 +1675,122 @@
 			</div> 
             <div class="modal-footer" id="buttonMessage"> 
 				<button type="button" class="btn-primary btn-sm" onclick="filterCustomer('defaultCheckType','defaultCheckStatus','table_orders_customer')">Filter</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
+<div class="modal fade" id="myCommentaryInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentary">Comment Info</h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentary"> 
+                <input type="hidden" value="" id="commentaryIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="commentaryInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Comment</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <!-- <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> -->
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myCommentaryInfoN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentaryN">New Commentary </h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentaryN"> 
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="commentOrder"></textarea>
+                </div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <button type="button" class="btn-primary btn-sm" onclick="insertCommentary()">Save</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReport" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadReport"> 
+                <input type="hidden" value="" id="UploadReportIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="UploadReportInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Download</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReportN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyUploadReportN">New Roof Report </h4> 
+			</div> 
+			<div class="modal-body" id="textMyUploadReportN"> 
+                <div class="form-group">        
+                        <label for="name">File Name</label>
+                        <input type="text" class="form-control" id="file_name" name="name" placeholder="Enter name" required />
+                </div>
+                <input id="uploadImage" type="file" accept="application/pdf" name="image" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <!-- <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> -->
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
