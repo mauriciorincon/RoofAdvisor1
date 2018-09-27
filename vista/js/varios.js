@@ -22,6 +22,38 @@ $(document).ready(function() {
     
     
     $('#table_orders_company').DataTable();
+    step0=$('.stepwizard-step:eq(0)');
+    if(step0!=undefined){
+        step0.hide();
+    }
+    step1=$('.stepwizard-step:eq(1)');
+    if(step1!=undefined){
+        step1.hide();
+    }
+    step2=$('.stepwizard-step:eq(2)');
+    if(step2!=undefined){
+        step2.hide();
+    }
+    step3=$('.stepwizard-step:eq(3)');
+    if(step3!=undefined){
+        step3.hide();
+    }
+    step4=$('.stepwizard-step:eq(4)');
+    if(step4!=undefined){
+        step4.hide();
+    }
+    step5=$('.stepwizard-step:eq(5)');
+    if(step5!=undefined){
+        step5.hide();
+    }
+    step6=$('.stepwizard-step:eq(6)');
+    if(step6!=undefined){
+        step6.hide();
+    }
+    step7=$('.stepwizard-step:eq(7)');
+    if(step7!=undefined){
+        step7.hide();
+    }
     step8=$('.stepwizard-step:eq(8)');
     if(step8!=undefined){
         step8.hide();
@@ -1863,13 +1895,13 @@ function disableEnableDriver(id_driver,action){
                         $(this).find('td').eq(6).text(action);
                         //var tdv =$(this).find('td').eq(8);
                         if(action=="Active"){ 
-                            $(this).find('td').eq(8).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').addClass('btn-danger').removeClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
+                            $(this).find('td').eq(9).find('span').addClass('glyphicon-trash').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(9).find('a').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(9).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Inactive')");
                         }else{
-                            $(this).find('td').eq(8).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
-                            $(this).find('td').eq(8).find('a').removeClass('btn-danger').addClass('btn-success');
-                            $(this).find('td').eq(8).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
+                            $(this).find('td').eq(9).find('span').removeClass('glyphicon-trash').addClass('glyphicon-ok');
+                            $(this).find('td').eq(9).find('a').removeClass('btn-danger').addClass('btn-success');
+                            $(this).find('td').eq(9).find('a').attr("onclick","disableEnableDriver('"+id_driver+"','Active')");
                         }
                         
                         //$(tdv).find('span').addClass('glyphicon glyphicon-trash').removeClass('glyphicon glyphicon-ok');
@@ -1948,8 +1980,8 @@ function showHideSteps(typeService){
         step5=$('.stepwizard-step:eq(5)');
         step8=$('.stepwizard-step:eq(8)');
 
-        step4.show();
-        step5.show();
+        //step4.show();
+        //step5.show();
         step8.hide();
         $('#step-6 h3').html('Review Scheduled Repair Order Details');
     }else if(typeService=='emergency' || typeService=='roofreport'){
@@ -1958,7 +1990,7 @@ function showHideSteps(typeService){
         step8=$('.stepwizard-step:eq(8)');
         step4.hide();
         step5.hide();
-        step8.show();
+        //step8.show();
         if(typeService=='emergency'){
             $('#step-6 h3').html('Review Emergency Repair Order Details');
         }else{
