@@ -378,7 +378,7 @@ $(".inactivate-contractor-button").click(function(){
 });
 
 
-function insertDriver(){
+/*function insertDriver(){
     var companyID = $("input#companyID").val();
     var contractorFirstName = $("input#ContNameFirstIn").val();
     var contractorLastName = $("input#ContNameLastIn").val();
@@ -423,7 +423,7 @@ function insertDriver(){
         }
     });
 
-}
+}*/
 
 function emptyTextNewDriver(){
     //$("input#companyID").val('');

@@ -1247,7 +1247,7 @@ x
 
             <div class="form-group">
                 <label for="ContLicenseNumed">Employee Email</label>
-                <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
+                <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" onfocusout="validateEmail('Contractors')" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
                 <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
             </div>
