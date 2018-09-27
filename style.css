@@ -1535,6 +1535,11 @@ margin-bottom:-16px;
     background-color: #00000091;
     border-radius: 220px 220px 220px 220px;
 }
+.mheadr{
+     text-align:center;
+     background-color :#fa511a;
+     color:#fff;
+} 
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
