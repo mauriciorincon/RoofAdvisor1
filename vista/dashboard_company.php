@@ -382,9 +382,12 @@
 
                 companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                 'href="#" '+ 
-                                'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
+                getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                    dataCustomer=customerData;
+                });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                     if(companyStatus!="Active"){    
                     companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
@@ -415,7 +418,7 @@
                         dataOrder.OrderNumber,
                         dataOrder.SchDate,
                         dataOrder.SchTime,
-                        "",
+                        dataCustomer,
                         dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         requestType,
                         status,
@@ -425,11 +428,7 @@
                         dataContractor,
                         companyActions,
                     ] ).draw( false );
-                /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
-                dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
-                dataOrder.Rtype+', '+dataOrder.Water+'</td><td>'+dataOrder.RequestType+'</td><td>'+dataOrder.Status+
-                '</td><td>'+dataOrder.ETA+'</td><td>'+dataOrder.EstAmtMat+'</td><td>'+dataOrder.PaymentType+
-                '</td><td>'+dataOrder.ContractorID+'</td></tr>');*/
+                
                 var marker={
                     lat: parseFloat(dataOrder.Latitude),
                     lng: parseFloat(dataOrder.Longitude),
@@ -458,7 +457,7 @@
                                                 'href="#myModalGetWork" '+
                                                 'onClick="setOrderId("'+dataOrder.FBID+')"> '+
                                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                $row.find("td:eq(10)").html(contractorName);
+                                $row.find("td:eq(10)").html(dataCustomer);
                             }else{
                                 getContractorName(dataOrder.ContractorID).then(function(contractorName){
                                     $row.find("td:eq(10)").html(contractorName);
@@ -611,7 +610,21 @@
 						}
 					})                
                 }
-                
+            
+            function removeMarketContractor(idContractor){
+                for(var i = contractorMarker.length - 1; i >= 0; i--) {
+                    if(contractorMarker[i].id === idContractor) {
+                        contractorMarker[i].setVisible(false);
+                        contractorMarker.splice(i, 1);
+                    }
+                }
+                /*contractorMarker.map(function(marker) {
+                    if(marker.id===idContractor){
+                        marker.setVisible(false);
+                        contractorMarker.splice( marketrs.indexOf(marker), 1 );
+                    }
+                })*/
+            }
             /*function hideShowMarketByTypeService(listTypeService){
                 marketrs.map(function(marker) {
                     if(listTypeService.indexOf(marker.typeService)>-1){
