@@ -12,7 +12,7 @@
                                                 <div class="list-group">
                                                         <div class="list-group-item ">
                                                                 <span class="glyphicon glyphicon-info-sign"></span> Info
-                                                                <div class="d-flex w-100 justify-content-between">
+                                                                <div class="d-flex w-100 justify-content-between" style="margin-top:30px">
                                                                         <span ><b>Please take just one more step, we need to verify your identity,please login or register</b></span><br><br>
 
                                                                 </div>
@@ -22,14 +22,14 @@
                                                                 <span class="glyphicon glyphicon-info-sign"></span> Login
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                         <div class="form-group">
-                                                                                <label>User Name<span class="required">*</span></label>
+                                                                                <label style="display: inline-block;margin-left: 61px;">User Name<span class="required">*</span></label>
                                                                                 <input type="text" placeholder="" required="true" id="userClientOrder" name="userClientOrder" />
                                                                         </div>
                                                                         <div class="form-group">
-                                                                                <label>Password<span class="required">*</span></label>
+                                                                                <label style="display: inline-block;margin-left: 70px;">Password<span class="required">*</span></label>
                                                                                 <input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
                                                                         </div>
-                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
+                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
                                                                         <label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
                                                                         <a href="#">Forgot password?</a>
 
