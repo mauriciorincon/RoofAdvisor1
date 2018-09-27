@@ -854,6 +854,11 @@ x
                                     </a>
                             <?php 
                             }} ?>
+                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Report"  
+                                href="#myUploadReport" 
+                                onClick=""> 
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
                             </td>
                            
                            
@@ -1445,7 +1450,7 @@ x
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMyCommentary">Commentary Info</h4> 
+				<h4 class="modal-title" id="headerMyCommentary">Comment Info</h4> 
 			</div> 
 			<div class="modal-body" id="textMyCommentary"> 
                 <input type="hidden" value="" id="commentaryIDOrder" />
@@ -1455,7 +1460,7 @@ x
 							<tr>
 								<td class="text-center"><strong>User</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
-								<td class="text-center"><strong>Commentary</strong></td>
+								<td class="text-center"><strong>Comment</strong></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -1466,7 +1471,7 @@ x
 			</div>
 
 			<div class="modal-footer" id="buttonCommentary"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Commentary</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1490,6 +1495,64 @@ x
 
 			<div class="modal-footer" id="buttonCommentary"> 
                 <button type="button" class="btn-primary btn-sm" onclick="insertCommentary()">Save</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReport" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadReport"> 
+                <input type="hidden" value="" id="UploadReportIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="UploadReportInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Download</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReportN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyUploadReportN">New Roof Report </h4> 
+			</div> 
+			<div class="modal-body" id="textMyUploadReportN"> 
+                <div class="form-group">        
+                        <label for="name">File Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required />
+                </div>
+                <input id="uploadImage" type="file" accept="image/*" name="image" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
