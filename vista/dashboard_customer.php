@@ -1609,6 +1609,7 @@
 <?php echo $_divs_info; ?>
 
 
+
 <div class="modal fade" id="myFilterWindow" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 
@@ -1621,21 +1622,13 @@
                 <p>
                 <table class="table">
                     <thead>
-                        <tr><th scope="col" colspan="2">Service Type</th></tr>
+                        <tr><th scope="col">Service Type</th><th><input class="form-check-input" type="checkbox" value="S" name="selectAllTYpe" checked onchange="selectUnselectCheck('defaultCheckType',this)"></th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType"  checked></td></tr>
                         <tr><td>Emergency Repair</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckType" checked></td></tr>
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
-                    </tbody>
-                </table>
-                </p>
-                <p>
-                <table class="table">
-                    <thead>
-                        <tr><th scope="col" colspan="2">Order Status</th></tr>
-                    </thead>
-                    <tbody>
+                        <tr><td scope="col"><b>Service Type<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Order Assigned</td><td><input class="form-check-input" type="checkbox" value="D" name="defaultCheckStatus" checked></td></tr>
@@ -1652,14 +1645,12 @@
                         <tr><td>Report Complete</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckStatus" checked></td></tr>
                     </tbody>
                 </table>
-                   
-                </p>
+                
 			</div> 
             <div class="modal-footer" id="buttonMessage"> 
-                <button type="button" class="btn btn-default" onclick="filterCustomer('defaultCheckType','defaultCheckStatus','table_orders_customer')">Filter</button> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<button type="button" class="btn-primary btn-sm" onclick="filterCustomer('defaultCheckType','defaultCheckStatus','table_orders_customer')">Filter</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>
 </div>
-

@@ -382,32 +382,31 @@
 
                 companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                 'href="#" '+ 
-                                'onClick="getInvoices(\''.$order['FBID'].'\')">'+ 
+                                'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
                 if(dataOrder.CompanyStatus!="Active"){    
-                    companyActions+=
-                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
-                                    href="" 
-                                    onClick="alert('You can not create comment until the company is active')"> 
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                </a>
-                            <?php }else{ 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                ?>
-                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
-                                        href="" 
-                                        onClick="alert('You can not create comments to an order that you have not taken')"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                                    <?php }else{ ?>
-                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary"  
-                                        href="" 
-                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                            <?php 
-                            }} ?>
+                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+ 
+                                    'href="" '+
+                                    'onClick="alert(\'You can not create comment until the company is active\')"> '+
+                                    '<span class="glyphicon glyphicon-comment"></span>'+
+                                    '</a>';
+                }else{ 
+                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
+                                        'href="" '+
+                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                    '</a>';
+                    }else{
+                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Commentary" '+
+                                        'href="" '+
+                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                        '<span class="glyphicon glyphicon-comment"></span>'+
+                                    '</a>';
+                            
+                    }
+                } 
 
                 t.row.add( [
                         dataOrder.OrderNumber,
@@ -421,6 +420,7 @@
                         dataOrder.EstAmtMat,
                         dataOrder.PaymentTxype,
                         dataContractor,
+                        companyActions,
                     ] ).draw( false );
                 /*$("#table_orders_company").append('<tr><td>'+dataOrder.OrderNumber+'</td><td>'+
                 dataOrder.SchDate+'</td><td>'+dataOrder.SchTime+'</td><td></td><td>'+dataOrder.Hlevels+', '+
@@ -1432,8 +1432,8 @@ x
                 
 			</div> 
             <div class="modal-footer" id="buttonMessage"> 
-                <button type="button" class="btn btn-default" onclick="filterCompany('defaultCheckType','defaultCheckStatus','table_orders_company')">Filter</button> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                <button type="button" class="btn-primary btn-sm" onclick="filterCompany('defaultCheckType','defaultCheckStatus','table_orders_company')">Filter</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

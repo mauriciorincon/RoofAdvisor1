@@ -52,39 +52,39 @@
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
-                <a href="#step-1"  type="button" class="btn btn-success btn-circle">1</a>
+                <a href="#step-1"  type="button" class="btn btn-success btn-circle" >1</a>
                 <p><small>Z Code</small></p>
             </div>
             <div class="stepwizard-step col-xs-1"> 
-                <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2</a>
                 <p><small> Order </small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled">2.1</a>
+                <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2.1</a>
                 <p><small>Question?</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled" >3</a>
                 <p><small>Address</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled" >4</a>
                 <p><small>Time</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled" >5</a>
                 <p><small>Professional</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled" >6</a>
                 <p><small>Review</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled" >7</a>
                 <p><small>Validation</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
+                <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled" >8</a>
                 <p><small>Complete</small></p>
             </div>
         </div>
