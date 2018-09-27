@@ -226,9 +226,9 @@ class orderController{
         $_result=$this->_orderModel->insertOrderCommentary($orderID,$_commenary);
             
         if(strpos($_result,'Error')>-1){
-            return "Error, An error occur while saving the commentary";
+            return "Error, An error occur while saving the comment";
         }else{
-            return "Ok, the commentary was saved susses";    
+            return "Ok, the comment was saved successfully";    
         }
         
     }

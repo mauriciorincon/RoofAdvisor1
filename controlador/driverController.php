@@ -73,7 +73,7 @@ class driverController{
             );
             $this->_driverModel->insertDriver($_newDriverId,$_driver);
             $_tmp=substr($_newDriverId,2);
-            $_tmp=intval($_tmp)+1;
+            $_tmp=intval($_tmp);
             $_newDriverId="CN".str_pad($_tmp, 4, "0", STR_PAD_LEFT);
         }
         return $_newDriverId;
