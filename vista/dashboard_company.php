@@ -409,7 +409,7 @@
                                             '<span class="glyphicon glyphicon-comment"></span>'+
                                         '</a>';    
                         }
-                    } 
+                    }
                 });
                             
                 

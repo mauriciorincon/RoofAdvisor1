@@ -14,11 +14,18 @@ class payingController{
     }
 
     public function setPaying(){
-        $amount = 0;
-        if(is_null($this->_payingModel)){
-            $this->_payingModel=new paying_stripe();
+        if(!isset($_SESSION['application_path'])){
+            $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
+            require_once($_SESSION['application_path']."/modelo/paying.class.php");
         }
+        $amount = 0;
+
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        
         if(isset($_POST['param'])){
+            echo "esto viene en el parametro estamos adentro ".$_POST['param'];
             $obj = $this->json_validate($_POST['param']);
             if(is_string($obj)){
                 echo "Error, ".$obj."<br> string is:".$_POST['param'];
@@ -29,6 +36,7 @@ class payingController{
                 $currency='usd';
 
                 $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
+                echo "llego aca y el resultado es:".$_result;
                 if($_result==true){
                     $_objCharge=$this->_payingModel->getCharge();
                     $array_data=$this->getPayingStatus($_objCharge->id);
@@ -67,7 +75,7 @@ class payingController{
     }
 
     public function showPayingWindow(){
-        $this->_payingModel=new paying_stripe();
+        $this->_payingModel= new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         echo '<form action="http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying" method="post" id="payingFormStripe">
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -83,7 +91,7 @@ class payingController{
     }
 
     public function showPayingWindow1(){
-        $this->_payingModel=new paying_stripe();
+        $this->_payingModel= new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         
         //////////////////////////////////////////////////////////////////////////
@@ -127,7 +135,7 @@ class payingController{
     public function getPayingStatus($chargeID){
         try {
             if(is_null($this->_payingModel)){
-                $this->_payingModel=new paying_stripe();
+                $this->_payingModel= new paying_stripe();
             }
             $_result=$this->_payingModel->getPayinStatus($chargeID);
             if(is_array($_result) or is_object($_result)){
@@ -169,7 +177,7 @@ class payingController{
     public function getPayingData($chargeID){
         try {
             if(is_null($this->_payingModel)){
-                $this->_payingModel=new paying_stripe();
+                $this->_payingModel= new paying_stripe();
             }
             $_result=$this->_payingModel->getPayinStatus($chargeID);
             if(is_array($_result) or is_object($_result)){
@@ -264,7 +272,7 @@ class payingController{
 
     function getEmergencyValue(){
         if(is_null($this->_payingModel)){
-            $this->_payingModel=new paying_stripe();
+            $this->_payingModel= new paying_stripe();
         }
         $_emergency_value=$this->_payingModel->getNode('Parameters/AmountER');
         if(is_null($_emergency_value) or $_emergency_value=="" ){
@@ -277,7 +285,7 @@ class payingController{
 
     function getRoofReport(){
         if(is_null($this->_payingModel)){
-            $this->_payingModel=new paying_stripe();
+            $this->_payingModel= new paying_stripe();
         }
         $_emergency_value=$this->_payingModel->getNode('Parameters/AmountER');
         if(is_null($_emergency_value) or $_emergency_value=="" ){
