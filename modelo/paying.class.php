@@ -4,6 +4,7 @@ if(!isset($_SESSION)) {
 } 
 
 require_once($_SESSION['application_path']."/modelo/conection.php");
+require_once($_SESSION['application_path']."/modelo/others.class.php");
 require $_SESSION['application_path'].'/vendor/autoload.php';
 
 
@@ -17,10 +18,22 @@ class paying_stripe  extends connection{
     function __construct()
 	{
         parent::__construct();
-        $this->stripe = array(
+        //paying mauricio
+        /*$this->stripe = array(
             "secret_key"      => "sk_test_I4map4XuV7w5Dn5Ss8HGRDtn",
             "publishable_key" => "pk_test_iubKDaao3vNKYYrr45bJPUOl"
+          );*/
+          
+          $_otherModel=new othersModel();
+          $_public_key=$_otherModel->getParameterValue('Parameters/publishable_key');
+          $_secret_key=$_otherModel->getParameterValue('Parameters/secret_key');
+          //echo "public".$_public_key." secret:".$_secret_key;
+       
+          $this->stripe = array(
+            "secret_key"      => $_secret_key,
+            "publishable_key" => $_public_key
           );
+          
           \Stripe\Stripe::setApiKey($this->stripe['secret_key']);
     }
 
