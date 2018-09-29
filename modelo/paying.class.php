@@ -25,8 +25,9 @@ class paying_stripe  extends connection{
     }
 
     public function setPaying($customerID,$token,$amount,$currency){
-        
+        //echo "entro a setpaying ".$customerID." ".$token." ".$amount." ".$currency;
         $_customer=$this->createCustomer($customerID,$token);
+        //echo "el resultado de customer es:".$_customer;
         if(is_object($_customer)){
             $_charge=$this->createCharge($_customer,$amount,$currency);
             if(is_object($_charge)){
