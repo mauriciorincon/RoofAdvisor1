@@ -16,7 +16,7 @@ class payingController{
     public function setPaying(){
         if(!isset($_SESSION['application_path'])){
             $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
-            require_once($_SESSION['application_path']."/modelo/paying.class.php");
+            echo "entro aca variable";
         }
         $amount = 0;
 
@@ -25,7 +25,9 @@ class payingController{
         }
         
         if(isset($_POST['param'])){
-            echo "esto viene en el parametro estamos adentro ".$_POST['param'];
+            require_once($_SESSION['application_path']."/modelo/paying.class.php");
+            
+            //echo "esto viene en el parametro estamos adentro ".$_POST['param'];
             $obj = $this->json_validate($_POST['param']);
             if(is_string($obj)){
                 echo "Error, ".$obj."<br> string is:".$_POST['param'];
@@ -36,7 +38,7 @@ class payingController{
                 $currency='usd';
 
                 $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
-                echo "llego aca y el resultado es:".$_result;
+                //echo "llego aca y el resultado es:".$_result;
                 if($_result==true){
                     $_objCharge=$this->_payingModel->getCharge();
                     $array_data=$this->getPayingStatus($_objCharge->id);
