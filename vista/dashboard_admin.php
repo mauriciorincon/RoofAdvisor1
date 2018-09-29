@@ -1,22 +1,36 @@
 Welcome to RoofServicenow Admin
-<div class="row">
-    <div class="col-md-2">
-        <div class="vertical-menu">
-            <a href="#" class="active">Actions</a>
-            <a href="#" data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashBoard1')" >Orders</a>
-            <a href="#" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a>
-            <a href="#myModalSchedyleCompany" data-toggle="modal">Scheduler</a>
-            <a href="#">Metrics in your Service Area</a>
-            <a href="#">Orders for the week</a>
-            <a href="#">Rechedule Order</a>
-            <a href="#">Repair Crew Offline</a>
-            <a href="#">Repair Crew Avalible</a>
-            <a href="#">Complete Your Registration</a>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+		<div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');setActiveItemMenu(this);">Orders</button>
+            <button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashBoard" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');getListCompany('table_list_company');setActiveItemMenu(this);">Company</button>
+			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
+			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');setActiveItemMenu(this);">Scheduler</button>
+            
+            
             
         </div>
-    </div>
-    <div class="col-md-10" id="mapDashBoard">
-        <div id="mapDashBoard1" class="collapse in">
+        <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Metrics
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="emergencyRepair" class="badge badge-primary" style="background:black;">4</span>Emergency Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span></span><span  name="scheduleRepair" class="badge badge-primary" style="background:black;">4</span>Schedule Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="reportRepair" class="badge badge-primary" style="background:black;">4</span>Report Repair</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a>
+                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a>
+                </div>
+            </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+        </div>   
+        <a href="#" data-toggle="collapse" data-target="#companyDashBoard1" onclick="hideShowDivs('mapDashBoard1');getListCompany('table_list_company');" >Company</a> 
+</div>
+
+
+    
+<div id="mapDashBoard1" class="collapse in">
 
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 
@@ -120,7 +134,7 @@ Welcome to RoofServicenow Admin
                         icon:'img/img_maps/open_service.png'
                     });
                     
-                }
+            }
             
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
                 var address = varAddress;
@@ -212,17 +226,7 @@ Welcome to RoofServicenow Admin
             messagingSenderId: "480788526390"
         };
         firebase.initializeApp(config);
-        //const dbRef = firebase.database().ref();
-        //const usersRef = dbRef.child('Orders');
-
         
-        /*var ref = firebase.database().ref("Orders");
-            
-                ref.on('value',function(snapshot){
-                    snapshot.forEach(function(childSnapshot){
-                        var childData=childSnapshot.val();
-                    });
-                });*/
 
         </script>
 
@@ -231,38 +235,9 @@ Welcome to RoofServicenow Admin
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
         <br>
-        <!--<form class="form-inline">
-        <div class="form-group mb-2">
-            
-            <input type="text" id="datepickerFilterDashboard" class="form-control" placeholder="Select a date">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="optionStateFilterDashboard">
-                <option value="0">-Select State-</option>
-                <option value="A">Order Open</option>
-                <option value="D">Order Assigned</option>
-                <option value="E">Contractor Just Arrived</option>
-                <option value="F">Estimate Sent</option>
-                <option value="G">Estimate Approved</option>
-                <option value="H">Work In Progress</option>
-                <option value="I">Work Completed</option>
-                <option value="J">Final Bill</option>
-                <option value="K">Order Completed Paid</option>
-            </select>
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" id="selectDriverFilterDashboard">
-                <option value="0">-Select Driver-</option>
-                <?php foreach ($_array_contractors_to_show as $key => $contractor) { ?>
-                    <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>     
-                <?php } ?>
-            </select>
-        </div>
-        <button type="button" class="btn-primary btn-sm" onClick="filterDashboard('table_orders_company')" >Search</button>
-        
-        </form>-->
 
-         
+
+
         <div class="table-responsive">          
             <table class="table" id="table_orders_company">
                 <thead>
@@ -280,6 +255,7 @@ Welcome to RoofServicenow Admin
                     <th>Final Amt</th>
                     <th>Payment</th>
                     <th>Contractor</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -303,17 +279,34 @@ Welcome to RoofServicenow Admin
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php echo $order['ContractorID']?></td>
                            
-                           
+                            <td>
+                                <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
+                                    href="" 
+                                    onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+                                <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
+                                            href="" 
+                                            onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                </a>
+                                <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Report"  
+                                    href="#" 
+                                    onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
+                                    <span class="glyphicon glyphicon-upload"></span>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
         </div>
-        </div>
-    </div>
+</div>
+    
+<div class="collapse container" id="companyDashBoard">
+    
 
-    <div class="col-md-10" id="companyDashBoard"  >
-        <div class="table-responsive collapse" id="companyDashBoard1">          
+        <div class="table-responsive">          
             <table class="table" id="table_list_company">
                 <thead>
                 <tr>
@@ -332,9 +325,8 @@ Welcome to RoofServicenow Admin
                 </tbody>
             </table>
         </div>
-    </div>
-              
-</div>
+</div>         
+
 
 
 
