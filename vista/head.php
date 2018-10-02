@@ -77,12 +77,10 @@ if(!isset($_SESSION)) {
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
 							<div id ="socico" class="social-icon text-right">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-linkedin"></i></a>
+								<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fa fa-linkedin"></i></a>
 								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-behance"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
-								<a href="#"><i class="fa fa-tumblr"></i></a>	
+								<a href="https://www.instagram.com/roofservicenow/?utm_source=ig_profile_share&igshid=jgt3twpfxve7"><i class="fa fa-instagram"></i></a>
 							</div>
 							
 							</div>
