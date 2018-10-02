@@ -118,7 +118,7 @@ class pdfController{
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,40,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
@@ -217,7 +217,7 @@ class pdfController{
         </table>
         ';
         
-        $pdf->Image($_SESSION['application_path']."/img/logo.png",30,180,40);
+        $pdf->Image($_SESSION['application_path']."/img/logo_s.png",30,180,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
@@ -339,7 +339,7 @@ class pdfController{
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo.png",80,40,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
