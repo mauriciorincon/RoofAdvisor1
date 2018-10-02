@@ -1230,7 +1230,7 @@ label {
 #}
 #appwiz{
 padding-bottom: 26px;
-    padding-top: 5px;
+    padding-top: 100px;
 }
 #srvapp1{
 padding-bottom:i150px;
@@ -1445,12 +1445,12 @@ border-color:#fff !important;
 #welcome-txt{
     position: absolute;
     z-index: 400;
-    color: #fff;
+    color: #005678;
     font-size: 60px;
-    margin-top: 36px;
-    text-shadow:4px 4px 8px #151515c7;
+    margin-top: 20px;
+    text-shadow:3px 2px 5px #151515c7;
     text-align:center;
-    width:86%;
+    width:100%;
 }
 .panel{
 position: relative;
@@ -1496,13 +1496,16 @@ background-color: #eee0;
 }
 #logindrop{
 margin-right: -101px !important;
-    z-index: 10;
+    z-index:999; 
     margin-top: -18px;
     border-radius: 7px;
     border-top: 3px solid #dd6741;
 }
 .pbody-white{
 color:#fff !important;
+}
+.stepwizard-row:before{
+top: -84px !important;
 }
 .Rlft-frm{
 display:inline-block;

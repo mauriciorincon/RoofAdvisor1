@@ -46,7 +46,11 @@
     </div>
   </div>
 </div>
-
+<div id="welcome-txt">
+    <span>
+    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
+    </span>
+    </div>
 <div id="appwiz" class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
@@ -89,11 +93,6 @@
         </div>
     </div>
     <div id="appfrm1">
-    <div id="welcome-txt">
-    <span>
-    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong>service!
-    </span>
-    </div>
     <form role="form">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
