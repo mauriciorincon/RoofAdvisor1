@@ -45,7 +45,7 @@
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (801) 877 529 5995</span>
+										<span>Telephone : (877) 529 5995</span>
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>

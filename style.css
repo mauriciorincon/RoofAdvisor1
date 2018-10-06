@@ -1544,6 +1544,27 @@ margin-bottom:-16px;
      background-color :#fa511a;
      color:#fff;
 } 
+.wizsrch1{
+margin-left: 34% !important;
+    display: block !important;
+    border-radius: 100px! !important ;
+    height: 35px !important;
+    margin-top: -36px;
+    margin-bottom: 9px;
+    display: block;
+    border-radius: 100px;
+    height: 35px;
+}
+.inpwiz1{
+margin-left: 10%;
+    margin-right: -10%;
+}
+.inpwiz2{
+right:-15%;
+}
+.wizhead{
+text-align:center;
+}
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
