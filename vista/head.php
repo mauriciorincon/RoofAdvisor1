@@ -70,8 +70,8 @@ if(!isset($_SESSION)) {
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
 								<div class="email-address">
-									<span class="email"><i class="fa fa-envelope"></i>Email: support@roofservicenow.com</span>
-									<span class="phone"><i class="fa fa-phone"></i>Phone: +1 (877) 529 5995</span>
+									<span class="email" style="display:none"><i class="fa fa-envelope"></i>Email: support@roofservicenow.com</span>
+									<span class="phone" style="display:none"><i class="fa fa-phone"></i>Phone: +1 (877) 529 5995</span>
 								</div>
 							</div>
 						</div>
