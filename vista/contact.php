@@ -88,9 +88,19 @@
 			</div>
 		</div>
 		<!-- map-area end-->
+        <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 25.7617, lng: 80.1918},
+                zoom: 8
+                });
+             }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDldA96UaOpfnWLrVXXg3OKl69srn2ltUQ&callback=initMap"
+    async defer></script>
 		
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDldA96UaOpfnWLrVXXg3OKl69srn2ltUQ"></script>
-		<script>
+       	<!--<script>
 		
             // When the window has finished loading create our google map below
             google.maps.event.addDomListener(window, 'load', init);
@@ -193,17 +203,19 @@
 
                 // Get the HTML DOM element that will contain your map 
                 // We are using a div with id="map" seen below in the <body>
-                var mapElement = document.getElementById('map');
+               // var mapElement = document.getElementById('map');
 
                 // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
+                //var map = new google.maps.Map(mapElement, mapOptions);
 
                 // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(25.7617, 80.1918),
-                    map: map,
-                    title: 'Miami'
-                });
+                //var marker = new google.maps.Marker({
+                //    position: new google.maps.LatLng(25.7617, 80.1918),
+                //    map: map,
+                //    title: 'Miami'
+                //});
             }
 		</script>
-		
+		-->
+
+
