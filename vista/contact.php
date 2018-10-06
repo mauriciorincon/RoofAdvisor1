@@ -42,7 +42,7 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 							<div class="contact-text">
-								<p>info@devssquad.com<br>www.yourmail.com</p>
+								<p>info@roofservicenow.com<br>www.roofservicenow.com</p>
                             </div>
 						</div>
 					</div>
