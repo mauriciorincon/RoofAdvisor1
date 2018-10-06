@@ -81,7 +81,7 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="map-area">
-							<div id="map"></div>
+							<div id="map1"></div>
 						</div>
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 		</div>
 		<!-- map-area end-->
 		
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_5nh83Fd_eMJ-Xii87WOpSDhSzHa7le4"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDldA96UaOpfnWLrVXXg3OKl69srn2ltUQ"></script>
 		<script>
 		
             // When the window has finished loading create our google map below
@@ -196,12 +196,12 @@
                 var mapElement = document.getElementById('map');
 
                 // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
+                var map1 = new google.maps.Map(mapElement, mapOptions);
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(25.7617, 80.1918),
-                    map: map,
+                    map: map1,
                     title: 'Miami'
                 });
             }
