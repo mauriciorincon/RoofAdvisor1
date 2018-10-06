@@ -64,11 +64,11 @@
 
 <ul>
 
-<li><a href="#">1. INTRODUCTION TO ROOFADVISORZ</a></li>
+<li><a href="#">1. INTRODUCTION TO ROOFSERVICENOW</a></li>
 
 <li><a href="#">2. THE SERVICES</a></li>
 
-<li><a href="#">3. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</a></li>
+<li><a href="#">3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</a></li>
 
 <li><a href="#">4. PAYMENTS</a></li>
 
@@ -110,7 +110,7 @@
 
 
 
-<h4>1. INTRODUCTION TO ROOFADVISORZ</h4>
+<h4>1. INTRODUCTION TO ROOFSERVICENOW</h4>
 
 <p>Upon registration, you may choose your own password or RoofServiceNow will assign you a password to access the Services through the RoofServiceNow website or mobile apps.</p>
 
@@ -144,7 +144,7 @@
 
 </ol>
 
-<h4>3. YOUR USE OF THE ROOFADVISORZ SERVICES AND PROHIBITED USES</h4>
+<h4>3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</h4>
 
 <p>You acknowledge and agree that your use of RoofServiceNow is for your personal use and not for advertising purposes. You may not use RoofServiceNow to recreate or compete with RoofServiceNow, to solicit or harass Service Professionals, or for any other purpose not contemplated herein. You acknowledge that a violation of the foregoing could result in significant damages, and you agree that you are liable to RoofServiceNow for any such damages, and will indemnify RoofServiceNow in the event of any claims against RoofServiceNow based on or arising from your violation of the foregoing. We reserve the right to revoke your access to any RoofServiceNow Services, products or properties at any time. All information about Service Professionals is confidential and for your personal use only. If it is determined or suspected by RoofServiceNow in its sole discretion that you are misusing or attempting to misuse or circumvent the RoofServiceNow services or system, or are using or attempting to use them for any inappropriate or non-personal purposes, including but not limited to activities such as hacking, scraping content, infiltrating, fraud, advertising, jamming or spamming, RoofServiceNow reserves the right, in its sole discretion, to immediately terminate your access without notice and to initiate without notice appropriate legal actions or proceedings to seek appropriate remedies and/or damages, including but not limited to lost revenue, repairs, legal fees, costs and expenses, and to seek injunctions or other equitable remedies.	
 
@@ -340,7 +340,7 @@ WE PERFORM THE ABOVE SCREENING BASED UPON INFORMATION PROVIDED TO US BY THE SERV
 
 <br>
 
-NOTE: ROOFADVISORZ PERFORMS SCREENING SOLELY AT THE TIME THE SERVICE PROFESSIONAL APPLIES FOR MEMBERSHIP IN THE ROOFADVISORZ NETWORK, AND THEREFORE A SERVICE PROFESSIONAL'S INFORMATION MAY CHANGE OR EXPIRE OVER TIME. THUS, ROOFADVISORZ CANNOT AND DOES NOT WARRANT OR REPRESENT THAT PROFILE AND SCREENING INFORMATION IS UP TO DATE. ROOFADVISORZ IS UNDER NO OBLIGATION TO UPDATE A SERVICE PROFESSIONAL'S SCREENING INFORMATION. WE RECOMMEND THAT BEFORE WORKING WITH A SERVICE PROFESSIONAL YOU VERIFY THAT INFORMATION PRESENTED IN THE SERVICE PROFESSIONAL'S PROFILE IS STILL ACCURATE, CURRENT AND ACCEPTABLE TO YOU.
+NOTE: ROOFSERVICENOW PERFORMS SCREENING SOLELY AT THE TIME THE SERVICE PROFESSIONAL APPLIES FOR MEMBERSHIP IN THE ROOFSERVICENOW NETWORK, AND THEREFORE A SERVICE PROFESSIONAL'S INFORMATION MAY CHANGE OR EXPIRE OVER TIME. THUS, ROOFSERVICENOW CANNOT AND DOES NOT WARRANT OR REPRESENT THAT PROFILE AND SCREENING INFORMATION IS UP TO DATE. ROOFSERVICENOW IS UNDER NO OBLIGATION TO UPDATE A SERVICE PROFESSIONAL'S SCREENING INFORMATION. WE RECOMMEND THAT BEFORE WORKING WITH A SERVICE PROFESSIONAL YOU VERIFY THAT INFORMATION PRESENTED IN THE SERVICE PROFESSIONAL'S PROFILE IS STILL ACCURATE, CURRENT AND ACCEPTABLE TO YOU.
 
 <br>
 
@@ -356,7 +356,7 @@ The above procedures may change from time to time at the sole discretion of Roof
 
 <br>
 
-DISCLAIMER: ROOFADVISORZ EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS OR IMPLIED RELATING TO THE SCREENING PROCESS, CRITERIA, PROCEDURES, OR INFORMATION OBTAINED OR PRESENTED IN THE SCREENING PROCESS OR DISCLOSURES INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR USE, OR THAT THE SCREENING OR VERIFICATION PROCEDURES OR STANDARDS ARE SUFFICIENT OR THAT THE INFORMATION RECEIVED IN THESE SCREENING OR VERIFICATION PROCEDURES IS ACCURATE, TIMELY OR ERROR FREE.
+DISCLAIMER: ROOFSERVICENOW EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS OR IMPLIED RELATING TO THE SCREENING PROCESS, CRITERIA, PROCEDURES, OR INFORMATION OBTAINED OR PRESENTED IN THE SCREENING PROCESS OR DISCLOSURES INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR USE, OR THAT THE SCREENING OR VERIFICATION PROCEDURES OR STANDARDS ARE SUFFICIENT OR THAT THE INFORMATION RECEIVED IN THESE SCREENING OR VERIFICATION PROCEDURES IS ACCURATE, TIMELY OR ERROR FREE.
 
 <br>
 
@@ -432,7 +432,7 @@ RoofServiceNow respects the intellectual property rights of others.
 
 <p>
 
-Permission to use documents (such as press releases, datasheets, content, informational items and FAQs) from the RoofServiceNow server ("Server") is granted, provided that (1) the below copyright notice appears in all copies and that both the copyright notice and this permission notice appear, (2) use of such documents from the Web site is for your informational and non-commercial or personal use only and will not be copied or posted on any network computer or broadcast in any media, and (3) no modifications of any Documents are made. Educational institutions (specifically K-12, universities and state community colleges) may download and reproduce the Documents for distribution in the classroom. Distribution outside the classroom requires express written permission of RoofServiceNow. Use for any other purpose is expressly prohibited by law, and may result in severe civil and criminal penalties. Violators will be prosecuted to the maximum extent possible. Documents specified above do not include the design or layout of the RoofServiceNow or apps or any other RoofServiceNow owned, operated, licensed or controlled site. Elements of the RoofServiceNow or apps are protected by trade dress, trademark, unfair competition, and other laws and may not be copied or imitated in whole or in part. No logo, graphic, sound or image from any RoofServiceNow web Site may be copied or retransmitted unless expressly permitted by RoofServiceNow. You may not use any deep-link, page-scrape, spider, robot, crawl, index, Internet agent or other automatic device, program, algorithm or technology which does the same things, to use, access, copy, acquire information, generate impressions, input information, store information, search, generate searches or monitor any portion of this website. ROOFADVISORZ AND/OR ITS RESPECTIVE SUPPLIERS MAKE NO REPRESENTATIONS OR WARRANTIES ABOUT THE SUITABILITY OF THE INFORMATION CONTAINED IN THE DOCUMENTS AND RELATED GRAPHICS PUBLISHED ON THIS SERVER FOR ANY PURPOSE. ALL SUCH DOCUMENTS AND RELATED GRAPHICS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. ROOFADVISORZ AND/OR ITS RESPECTIVE SUPPLIERS HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS INFORMATION, INCLUDING ALL IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. THE DOCUMENTS AND RELATED GRAPHICS PUBLISHED ON THE ROOFADVISORZ WEB SITE COULD INCLUDE TECHNICAL INACCURACIES OR TYPOGRAPHICAL ERRORS. CHANGES ARE PERIODICALLY ADDED TO THE INFORMATION HEREIN. ROOFADVISORZ AND/OR ITS RESPECTIVE SUPPLIERS MAY MAKE IMPROVEMENTS AND/OR CHANGES IN THE PRODUCT(S) AND/OR THE PROGRAM(S) DESCRIBED HEREIN AT ANY TIME.
+Permission to use documents (such as press releases, datasheets, content, informational items and FAQs) from the RoofServiceNow server ("Server") is granted, provided that (1) the below copyright notice appears in all copies and that both the copyright notice and this permission notice appear, (2) use of such documents from the Web site is for your informational and non-commercial or personal use only and will not be copied or posted on any network computer or broadcast in any media, and (3) no modifications of any Documents are made. Educational institutions (specifically K-12, universities and state community colleges) may download and reproduce the Documents for distribution in the classroom. Distribution outside the classroom requires express written permission of RoofServiceNow. Use for any other purpose is expressly prohibited by law, and may result in severe civil and criminal penalties. Violators will be prosecuted to the maximum extent possible. Documents specified above do not include the design or layout of the RoofServiceNow or apps or any other RoofServiceNow owned, operated, licensed or controlled site. Elements of the RoofServiceNow or apps are protected by trade dress, trademark, unfair competition, and other laws and may not be copied or imitated in whole or in part. No logo, graphic, sound or image from any RoofServiceNow web Site may be copied or retransmitted unless expressly permitted by RoofServiceNow. You may not use any deep-link, page-scrape, spider, robot, crawl, index, Internet agent or other automatic device, program, algorithm or technology which does the same things, to use, access, copy, acquire information, generate impressions, input information, store information, search, generate searches or monitor any portion of this website. ROOFSERVICENOW AND/OR ITS RESPECTIVE SUPPLIERS MAKE NO REPRESENTATIONS OR WARRANTIES ABOUT THE SUITABILITY OF THE INFORMATION CONTAINED IN THE DOCUMENTS AND RELATED GRAPHICS PUBLISHED ON THIS SERVER FOR ANY PURPOSE. ALL SUCH DOCUMENTS AND RELATED GRAPHICS ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. ROOFSERVICENOW AND/OR ITS RESPECTIVE SUPPLIERS HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS INFORMATION, INCLUDING ALL IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. THE DOCUMENTS AND RELATED GRAPHICS PUBLISHED ON THE ROOFSERVICENOW WEB SITE COULD INCLUDE TECHNICAL INACCURACIES OR TYPOGRAPHICAL ERRORS. CHANGES ARE PERIODICALLY ADDED TO THE INFORMATION HEREIN. ROOFSERVICENOW AND/OR ITS RESPECTIVE SUPPLIERS MAY MAKE IMPROVEMENTS AND/OR CHANGES IN THE PRODUCT(S) AND/OR THE PROGRAM(S) DESCRIBED HEREIN AT ANY TIME.
 
 </p>
 
@@ -440,7 +440,7 @@ Permission to use documents (such as press releases, datasheets, content, inform
 
 <p>
 
-YOU AGREE TO INDEMNIFY ROOFADVISORZ, AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, CO-BRANDERS, AND ANY PARTNERS AND HOLD THEM EACH HARMLESS FROM ANY AND ALL CLAIMS OR DEMANDS, INCLUDING ATTORNEY'S FEES, MADE BY ANY THIRD PARTY DUE TO OR ARISING FROM YOUR USE OF THE ROOFADVISORZ SERVICES IN CONNECTION WITH THE ROOFADVISORZ WEB SITE, WITH REGARD TO ANY DISPUTE BETWEEN YOU AND A SERVICE PROFESSIONAL, OR YOUR VIOLATION OF THESE TERMS AND CONDITIONS, OR ARISING FROM YOUR VIOLATION OF ANY RIGHTS OF A THIRD PARTY.
+YOU AGREE TO INDEMNIFY ROOFSERVICENOW, AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, CO-BRANDERS, AND ANY PARTNERS AND HOLD THEM EACH HARMLESS FROM ANY AND ALL CLAIMS OR DEMANDS, INCLUDING ATTORNEY'S FEES, MADE BY ANY THIRD PARTY DUE TO OR ARISING FROM YOUR USE OF THE ROOFSERVICENOW SERVICES IN CONNECTION WITH THE ROOFSERVICENOW WEB SITE, WITH REGARD TO ANY DISPUTE BETWEEN YOU AND A SERVICE PROFESSIONAL, OR YOUR VIOLATION OF THESE TERMS AND CONDITIONS, OR ARISING FROM YOUR VIOLATION OF ANY RIGHTS OF A THIRD PARTY.
 
 </p>
 
