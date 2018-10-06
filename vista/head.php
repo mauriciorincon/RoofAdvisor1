@@ -32,7 +32,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
                 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
-		
+	        <link href='vendor/sweetalert2/dist/sweetalert2.min.css' rel='stylesheet'>	
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="js/fontawesome.min.js"></script>

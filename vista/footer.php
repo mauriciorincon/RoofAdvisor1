@@ -158,7 +158,7 @@
 		<script src="vista/js/dataTables.bootstrap.min.js"></script>
 		
 		<script src="vista/js/mdtimepicker.js"></script>
-		
+	       <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>	
 		
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
 
