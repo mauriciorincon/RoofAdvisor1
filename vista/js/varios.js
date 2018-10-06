@@ -1278,8 +1278,11 @@ function getListContractor(){
 $(document).ready(function() {
     $('#lastFinishButtonOrder').hide();
     $("#buttonLoginCustomer").click(function(){
-
-        $('#lastFinishButtonOrder').hide();
+var modal = document.getElementById('login-modal');
+     if (event.target == modal) {
+        modal.style.display = "none";
+}
+    $('#lastFinishButtonOrder').hide();
 
         var userClientOrder=$('#userClientOrder').val();
         var passwordClientOrder=$('#passwordClientOrder').val();
