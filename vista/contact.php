@@ -22,7 +22,7 @@
 								<i class="fa fa-map-marker"></i>
 							</div>
 							<div class="contact-text">
-								<p>112 meril avenue, Ocland City<br>NA USA</p>
+								<p>130 NEWBURY ST<br>BOSTON, MA</p>
                             </div>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 								<i class="fa fa-phone"></i>
 							</div>
 							<div class="contact-text">
-								<p>(+123) 123 321 345<br>+(213) 123 765 432 765</p>
+								<p>(877) 529 5995</p>
                             </div>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<div class="contact-text">
-								<p>Monday-Friday:7am to 7pm<br>Sunday:Closed</p>
+								<p>Always open</p>
                             </div>
 						</div>
 					</div>
