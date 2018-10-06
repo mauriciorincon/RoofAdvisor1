@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header mheadr">
-        <h3 class="modal-title" id="exampleModalLabel">MEMBER LOGIN</h3>
+        <h3 class="modal-title" id="wizlogin">MEMBER LOGIN</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,7 +31,7 @@
                                                                         </div>
                                                                         <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
                                                                         <label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-                                                                        <a href="#">Forgot password?</a>
+                                                                        <a href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
 
                                                                 </div>
                                                         </div>
