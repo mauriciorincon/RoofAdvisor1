@@ -105,7 +105,7 @@
                     scrollwheel: false,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(25.7617, 80.1918), // Miami
+                    center: new google.maps.LatLng( 25.7617, 80.1918), // Miami
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -196,7 +196,7 @@
                 var mapElement = document.getElementById('map');
 
                 // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
+                //var map = new google.maps.Map(mapElement, mapOptions);
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
