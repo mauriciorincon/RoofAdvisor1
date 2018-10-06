@@ -193,7 +193,7 @@
 
                 // Get the HTML DOM element that will contain your map 
                 // We are using a div with id="map" seen below in the <body>
-                var mapElement = document.getElementById('map');
+                var mapElement = document.getElementById('map1');
 
                 // Create the Google Map using our element and options defined above
                 var map1 = new google.maps.Map(mapElement, mapOptions);
@@ -201,7 +201,7 @@
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(25.7617, 80.1918),
-                    map: map1,
+                    map: map,
                     title: 'Miami'
                 });
             }
