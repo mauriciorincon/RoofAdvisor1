@@ -22,7 +22,7 @@
 								<i class="fa fa-map-marker"></i>
 							</div>
 							<div class="contact-text">
-								<p>130 NEWBURY ST<br>BOSTON, MA</p>
+								<p>30 NEWBURY ST<br>BOSTON, MA</p>
                             </div>
 						</div>
 					</div>
@@ -89,7 +89,7 @@
 		</div>
 		<!-- map-area end-->
 		
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByZeiCm6nbhUpByOG-M1gGm7BIVIolopM"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_5nh83Fd_eMJ-Xii87WOpSDhSzHa7le4"></script>
 		<script>
 		
             // When the window has finished loading create our google map below
@@ -105,7 +105,7 @@
                     scrollwheel: false,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(25.7617, 80.1918), // Miami
+                    center: new google.maps.LatLng( 25.7617, 80.1918), // Miami
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
