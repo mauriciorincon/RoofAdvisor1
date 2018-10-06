@@ -202,7 +202,7 @@
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(25.7617, 80.1918),
                     map: map,
-                    title: 'Snazzy!'
+                    title: 'Miami'
                 });
             }
 		</script>
