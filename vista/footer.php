@@ -29,7 +29,7 @@
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
-			<div class="footer-top pt-80 pb-60">
+			<div class="footer-top pt-20 pb-5">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
@@ -48,17 +48,14 @@
 										<span>Telephone : (801) 877 529 5995</span>
 									</li>
 									<li>
-										<i class="fa fa-globe"></i>
+										<i class="fa fa-envelope-o"></i>
 										<span><a href="mailto:info@roofservicenow.com">info@roofservicenow.com</a> </span>
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span> Web : <a href='http://www.roofservicenow.com'>www.roofservicenow.com</span>
+										<span><a href='http://www.roofservicenow.com'>www.roofservicenow.com</span>
 									</li>
-									<p>
-									<a href='?controller=termsconditions&accion=showinfo'>Legal</a> | 
-									<a href='?controller=termsconditions&accion=privacyinfo'>Privacy Center</a>
-									</p>
+									
 								</ul>
 						    </div>
 						</div>
@@ -131,6 +128,7 @@
 				<div class="container">
 					<div class="copyright-text text-center">
 						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.viaplix.com/">Viaplix</a></p>
+						<p><a href='?controller=termsconditions&accion=showinfo'>Legal</a> | <a href='?controller=termsconditions&accion=privacyinfo'>Privacy Center</a></p>
 					</div>
 				</div>
 			</div>

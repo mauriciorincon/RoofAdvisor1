@@ -82,8 +82,10 @@ body {font-family: 'Poppins', sans-serif;font-weight:300;font-size:14px;}
 .pt-120{padding-top:120px}
 .pt-100{padding-top:100px}
 .pt-200{padding-top:200px}
+.pt-20{padding-top:20px}
 .pt-50{padding-top:50px}
 .pt-80{padding-top:80px}
+.pb-5{padding-bottom:5px}
 .pb-30{padding-bottom:30px}
 .pb-60{padding-bottom:60px}
 .pb-80{padding-bottom:80px}
@@ -613,13 +615,13 @@ border:3px solid #fff;
 .widget-contact{}
 .widget-contact li {
   color: #fff;
-  margin-bottom:22px;
+  margin-bottom:10px;
 }
 .widget-contact li i {
   float: left;
   margin-right:15px;
   font-size:15px;
-  line-height:22px;
+  line-height:15px;
   margin-bottom:7px
 }
 .widget-contact li span {
