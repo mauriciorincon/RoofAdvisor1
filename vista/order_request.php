@@ -1,25 +1,19 @@
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content logmodal">
       <div class="modal-header mheadr">
         <h3 class="modal-title" id="wizlogin">MEMBER LOGIN</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-                                        <div style="width:100%;" class="col-sm-6" >
+     <div style="margin-left:15px;">
+       <span class="glyphicon glyphicon-info-sign"></span>Info</br></br>
+       <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
+      </div>     
+ <div class="modal-body" style="height:250px;">
                                                 <div class="list-group">
-                                                        <div class="list-group-item ">
-                                                                <span class="glyphicon glyphicon-info-sign"></span> Info
-                                                                <div class="d-flex w-100 justify-content-between" style="margin-top:30px">
-                                                                        <span ><b>Please take just one more step, we need to verify your identity,please login or register</b></span><br><br>
-
-                                                                </div>
-                                                        </div>
-
                                                         <div  class="list-group-item ">
-                                                                <span class="glyphicon glyphicon-info-sign"></span> Login
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                         <div class="form-group">
                                                                                 <label style="display: inline-block;margin-left: 61px;">User Name<span class="required">*</span></label>
@@ -30,12 +24,11 @@
                                                                                 <input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
                                                                         </div>
                                                                         <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
-                                                                        <label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+                                                                        <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
                                                                         <a href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
 
                                                                 </div>
                                                         </div>
-                                                </div>
                                                 <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
                                                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                                         </div>

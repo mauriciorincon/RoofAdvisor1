@@ -1451,7 +1451,7 @@ border-color:#fff !important;
     color: #005678;
     font-size: 60px;
     margin-top: 20px;
-    text-shadow:1px 2px 7px #151515c7;
+    text-shadow:1px 1px 1px #717171;
     text-align:center;
     width:100%;
 }
@@ -1566,6 +1566,11 @@ right:-15%;
 }
 .wizhead{
 text-align:center;
+}
+.logmodal{
+background-color:#005678f0;
+color:#fff;
+border-radius:20px;
 }
 @media (min-width:1700px){
 .main-menu ul li a{
