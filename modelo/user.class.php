@@ -160,6 +160,16 @@ class userModel extends connection{
         return $result;
     }
 
+    public function getListData($table,$field,$searchValue){
+        if(empty($field)){
+            $result=$this->getDataTable($table);    
+        }else{
+            $result=$this->getQueryEqualM($table,$field,$searchValue);
+        }
+        
+        return $result;
+    }
+
     public function getOrdersCustomer($idCustomer){
         $result=$this->getQueryEqualM('Orders','CustomerID',$idCustomer);
         return $result;

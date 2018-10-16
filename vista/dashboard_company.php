@@ -33,6 +33,9 @@
             </div>
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
         </div>    
 </div>
 
@@ -1631,6 +1634,50 @@
 
 			<div class="modal-footer" id="buttonUploadReport"> 
                 <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myRoofReportRequest" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyRoofReportRequest">Roof Report Request</h4> 
+			</div> 
+			<div class="modal-body" id="textmyRoofReportRequest"> 
+                <div class="form-group">
+                    <label class="control-label">Select type RequestType</label>
+                    <select id="customerTypeRequest" name="customerTypeRequest" onchange="changeSelection()" required="required" class="form-control" placeholder="Select state">
+                        <option value="order">From existing order</option>
+                        <option value="customer">From existing customer</option>
+                        <option value="newCustomer">From new customer</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label class="control-label" id="labelorderNumberRRR">Type order number</label>
+                    <input maxlength="100" type="text" class="form-control" onblur="getInforCustomerForRoofReport()" placeholder="Order Number" id="orderNumberRRR" name="orderNumberRRR" />
+                </div> 
+                <div class="form-group">
+                    <label class="control-label" id="labelcustomerIDRRR" hidden>Select customer</label>
+                    <input maxlength="100" type="text" class="form-control" placeholder="Customer Id" id="customerIDRRR" name="customerIDRRR" />
+                    <button type="button" class="btn-primary btn-sm" id="buttoncustomerIDRRR" hidden>+</button>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Customer Info</label>
+                    <textarea class="form-control" rows="5" id="customerInfoRRR"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Work Order</label>
+                    <input maxlength="100" type="text" class="form-control" placeholder="Customer Id" id="customerIDRRR" name="customerIDRRR" />
+                </div>
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
