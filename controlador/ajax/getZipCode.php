@@ -32,7 +32,10 @@
     //$zipinfo['zip']   = $zip;
     //$zipinfo['city']  = $city;
     //$zipinfo['state'] = $state;
-    if(empty($city)){
+    //Need to fix not pulling city or state for now hard coded.
+    $city='Miami';    
+    $state='FL'; 
+if(empty($city)){
       $_othersController=new othersController();
         $_result=$_othersController->verifyZipCode($_zipcode);
         echo "Error the zipcode is not asigned, try again - ".$_zipcode;

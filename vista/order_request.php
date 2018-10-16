@@ -1,53 +1,49 @@
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+    <div class="modal-content logmodal">
+      <div class="modal-header mheadr">
+        <h3 class="modal-title" id="wizlogin">MEMBER LOGIN</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-                                        <div style="" class="col-sm-6" >
+     <div style="margin-left:15px;">
+       <span class="glyphicon glyphicon-info-sign"></span>Info</br></br>
+       <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
+      </div>     
+ <div class="modal-body" style="height:250px;">
                                                 <div class="list-group">
-                                                        <div class="list-group-item ">
-                                                                <span class="glyphicon glyphicon-info-sign"></span> Info
-                                                                <div class="d-flex w-100 justify-content-between">
-                                                                        <span ><b>Please take just one more step, we need to verify your identity,please login or register</b></span><br><br>
-
-                                                                </div>
-                                                        </div>
-
                                                         <div  class="list-group-item ">
-                                                                <span class="glyphicon glyphicon-info-sign"></span> Login
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                         <div class="form-group">
-                                                                                <label>User Name<span class="required">*</span></label>
+                                                                                <label style="display: inline-block;margin-left: 61px;">User Name<span class="required">*</span></label>
                                                                                 <input type="text" placeholder="" required="true" id="userClientOrder" name="userClientOrder" />
                                                                         </div>
                                                                         <div class="form-group">
-                                                                                <label>Password<span class="required">*</span></label>
+                                                                                <label style="display: inline-block;margin-left: 70px;">Password<span class="required">*</span></label>
                                                                                 <input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
                                                                         </div>
-                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
-                                                                        <label id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-                                                                        <a href="#">Forgot password?</a>
+                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
+                                                                        <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+                                                                        <a href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
 
                                                                 </div>
                                                         </div>
-                                                </div>
                                                 <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
                                                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                                         </div>
                                         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Register</button>
       </div>
     </div>
   </div>
 </div>
-
+<div id="welcome-txt">
+    <span>
+    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
+    </span>
+    </div>
 <div id="appwiz" class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
@@ -90,15 +86,10 @@
         </div>
     </div>
     <div id="appfrm1">
-    <div id="welcome-txt">
-    <span>
-    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong>service!
-    </span>
-    </div>
     <form role="form">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder" id="step-1">
-            <div id="zip-panel-heading" class="panel-heading">
+            <div id="zip-panel-heading" class="panel-heading wizhead">
                  <h3 class="panel-title">ZIP CODE</h3>
             </div>
             <div class="panel-body pbody-white">
@@ -117,7 +108,7 @@
         </div>
         <div class="panel panel-primary setup-contentOrder" id="step-2">
             <div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
@@ -346,13 +337,13 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-10">
 			<div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
 			</div>
 			<div class="panel-body">
-			<div class="list-group-item ">
+			<div class="list-group-item scr2fix">
 				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
 				</div>
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix ">
 						<div class="form-group">
 						
 							<style>
@@ -377,11 +368,11 @@
 						</div>
 				</div>
                 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9314;</font> <font size="5"><strong>Are you aware of any leaks or damage to the roof?</strong></font>		
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep4Option" data-value="Yes" id="estep4Option1" checked>
@@ -396,11 +387,11 @@
 
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9315;</font> <font size="5"><strong>How many stories is your home?</strong></font>
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep5Option" data-value="1 story" id="estep5Option1" checked>
@@ -419,11 +410,11 @@
 					
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<font size="5">&#9316;</font> <font size="5"><strong>Are you the owner or authorized to make property changes?</strong></font>		
 				</div>
 
-				<div class="list-group-item ">
+				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
 								<input type="radio" name="estep6Option" data-value="Yes" id="estep6Option1" checked>
@@ -444,7 +435,7 @@
 		
 		<div class="panel panel-primary setup-contentOrder" id="step-3">
             <div class="panel-heading">
-                 <h1 class="panel-title"><font size="10"><strong>Create a work order</strong></font> </h1>
+                 <h1 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h1>
             </div>
             <div class="panel-body">
 				<span class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>	
@@ -454,8 +445,8 @@
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
 					
-							<input id="pac-input" class="controls" type="text"
-								placeholder="Enter a location" style="margin-left: 20px;margin-top:10px;">
+							<input id="pac-input" class="controls wizsrch1" type="text"
+								placeholder="Enter a location" >
                             
                                 <style>
 						/* Set the size of the div element that contains the map */
@@ -607,20 +598,21 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-4">
             <div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Select a time for service ....</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
-					<div class="col-sm-6">
+                                         <div class="col-sm-12">
+                                                <br>
+                                                <center><h4 class="h1white"><b>Schedule repair service are schedule a week in advance</b></h4></center>
+                                        </div>
+
+					<div class="col-sm-6 inpwiz1">
 						<span class="h1white"><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6 inpwiz2">
 						<span class="h1white"><h4><b>Please select the time of service. </b></h4></span>
 						<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
-					</div>
-					<div class="col-sm-12">
-						<br>
-						<center><h4 class="h1white"><b>Schedule repair service are schedule a week in advance</b></h4></center>
 					</div>
 	
 				</div> 
@@ -631,7 +623,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-5">
             <div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Select the professional</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Select the professional</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">
@@ -657,7 +649,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-6">
             <div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Review Scheduled Repair Order Details</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Review Scheduled Repair Order Details</strong></font></h3>
             </div>
             <div class="panel-body">
 				
@@ -712,7 +704,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-8">
             <div class="panel-heading">
-                 <h3 class="panel-title">Payment Processing</h3>
+                 <h3 class="panel-title wizhead">Payment Processing</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">		
@@ -768,7 +760,7 @@
 		<div class="panel panel-primary setup-contentOrder" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading">
-                 <h3 class="panel-title"><font size="10"><strong>Customer information</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">

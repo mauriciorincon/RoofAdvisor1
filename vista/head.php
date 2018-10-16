@@ -32,7 +32,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
                 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
-		
+	        <link href='vendor/sweetalert2/dist/sweetalert2.min.css' rel='stylesheet'>	
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="js/fontawesome.min.js"></script>
@@ -43,7 +43,17 @@ if(!isset($_SESSION)) {
     color: orange;
 }
 </style>
-		
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126810340-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-126810340-1');
+	</script>
+	
+
     </head>
     <body>
     <div class="">
@@ -60,19 +70,17 @@ if(!isset($_SESSION)) {
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
 								<div class="email-address">
-									<span class="email"><i class="fa fa-envelope"></i>Email: support@roofservicenow.com</span>
-									<span class="phone"><i class="fa fa-phone"></i>Phone: +1 (877) 529 5995</span>
+									<span class="email" style="display:none"><i class="fa fa-envelope"></i>Email: support@roofservicenow.com</span>
+									<span class="phone" style="display:none"><i class="fa fa-phone"></i>Phone: +1 (877) 529 5995</span>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
 							<div id ="socico" class="social-icon text-right">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-linkedin"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-behance"></i></a>
-								<a href="#"><i class="fa fa-pinterest"></i></a>
-								<a href="#"><i class="fa fa-tumblr"></i></a>	
+								<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fa fa-linkedin"></i></a>
+								<a href="https://twitter.com/viaplix"><i class="fa fa-twitter"></i></a>
+								<a href="https://www.instagram.com/roofservicenow/?utm_source=ig_profile_share&igshid=jgt3twpfxve7"><i class="fa fa-instagram"></i></a>
 							</div>
 							
 							</div>

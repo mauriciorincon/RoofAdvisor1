@@ -1,5 +1,5 @@
 
-		
+	
 		<!-- breadcrum-area start-->
 		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
 			<div class="container">
@@ -22,7 +22,7 @@
 								<i class="fa fa-map-marker"></i>
 							</div>
 							<div class="contact-text">
-								<p>112 meril avenue, Ocland City<br>NA USA</p>
+								<p>30 NEWBURY ST<br>BOSTON, MA</p>
                             </div>
 						</div>
 					</div>
@@ -32,7 +32,7 @@
 								<i class="fa fa-phone"></i>
 							</div>
 							<div class="contact-text">
-								<p>(+123) 123 321 345<br>+(213) 123 765 432 765</p>
+								<p>(877) 529 5995</p>
                             </div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 							<div class="contact-text">
-								<p>info@devssquad.com<br>www.yourmail.com</p>
+								<p>info@roofservicenow.com<br>www.roofservicenow.com</p>
                             </div>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<div class="contact-text">
-								<p>Monday-Friday:7am to 7pm<br>Sunday:Closed</p>
+								<p>Always open</p>
                             </div>
 						</div>
 					</div>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
 		<!-- map-area end-->
-		
+       
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByZeiCm6nbhUpByOG-M1gGm7BIVIolopM"></script>
 		<script>
 		
@@ -105,7 +105,7 @@
                     scrollwheel: false,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(25.7617, 80.1918), // Miami
+                    center: new google.maps.LatLng(25.7617, -80.1918), // Miami
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -200,10 +200,9 @@
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(25.7617, 80.1918),
+                    position: new google.maps.LatLng(25.7617, -80.1918),
                     map: map,
                     title: 'Snazzy!'
                 });
             }
 		</script>
-		

@@ -1432,11 +1432,33 @@ function validateIsLoggedIn(){
                         nextStepWizard.removeAttr('disabled').trigger('click');
                         curStepWizard.attr('disabled', 'disabled');
                         if(typeof handler !== undefined){
-                            handler.open({
-                                name: 'RoofServicenow',
+                                  // $('#login-modal').style.display = "none";
+                                let timerInterval 
+                                      swal({ 
+                                            title: 'You have successfully logged in!',
+                                            type: 'success', 
+                                            html: 'You will be automatically redirected in <strong></strong> seconds.', 
+                                            timer: 2000, 
+                                            onOpen: () => { 
+                                                swal.showLoading() 
+                                               }, 
+                                             onClose: () => { 
+                                                clearInterval(timerInterval) 
+                                                } 
+                                               }).then((result) => { 
+                                                if ( // Read more about handling dismissals 
+                                               result.dismiss === swal.DismissReason.timer 
+                                                ) { 
+                                                console.log('login has been completed successfully') }
+                                                  $("#login-modal").removeClass('fade').modal('hide');
+                                                  });
+
+                                /* handler.open({
+                                name: 'testinRoofServicenow',
                                 description: 'pay your service',
                                 amount: amount_value
-                              });
+                              });*/
+                             
                         }
                     }else{
                         jsRemoveWindowLoad('');
