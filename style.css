@@ -1572,6 +1572,10 @@ background-color:#005678f0;
 color:#fff;
 border-radius:20px;
 }
+.login-list1{
+background-color:#fff0;
+border:0px;
+}
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;

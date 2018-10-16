@@ -13,15 +13,15 @@
       </div>     
  <div class="modal-body" style="height:250px;">
                                                 <div class="list-group">
-                                                        <div  class="list-group-item ">
+                                                        <div  class="list-group-item login-list1">
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                         <div class="form-group">
-                                                                                <label style="display: inline-block;margin-left: 61px;">User Name<span class="required">*</span></label>
-                                                                                <input type="text" placeholder="" required="true" id="userClientOrder" name="userClientOrder" />
+                                                                                <label style="display: inline-block;margin-left: 61px;"><i class="fa fa-user" aria-hidden="true"></i><span class="required">*</span></label>
+                                                                                <input type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" />
                                                                         </div>
                                                                         <div class="form-group">
-                                                                                <label style="display: inline-block;margin-left: 70px;">Password<span class="required">*</span></label>
-                                                                                <input type="password" placeholder="" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
+                                                                                <label style="display: inline-block;margin-left: 70px;"><i class="fa fa-key" aria-hidden="true"></i><span class="required">*</span></label>
+                                                                                <input type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
                                                                         </div>
                                                                         <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
                                                                         <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
