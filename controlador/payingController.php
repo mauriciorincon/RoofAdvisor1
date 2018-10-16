@@ -24,7 +24,7 @@ class payingController{
             $this->_payingModel= new paying_stripe();
         }
         
-        echo "esto viene en el parametro estamos adentro ".$_POST['param'];
+        //echo "esto viene en el parametro estamos adentro ".$_POST['param'];
         if(isset($_POST['param'])){
             require_once($_SESSION['application_path']."/modelo/paying.class.php");
             
@@ -35,7 +35,7 @@ class payingController{
             }else{
                 $token  = $obj->stripeToken;
                 $email  = $obj->stripeEmail;
-                $amount = $obj->totalAmount;
+                $amount = intval($obj->totalAmount);
                 $currency='usd';
 
                 $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
