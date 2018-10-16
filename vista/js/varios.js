@@ -3049,6 +3049,7 @@ function selectUnselectCheck(nameCheck,chek){
 function setInfoUploadFile(orderId){
 $('#UploadReportIDOrder').val(orderId);
 }
+
 function uploadAjax(fileName){
     var file_name=$('#file_name').val();
     var inputFileImage = document.getElementById(fileName);
@@ -3086,33 +3087,127 @@ function uploadAjax(fileName){
     
     }
 
-    function getListReportFile(orderID){
-        jsShowWindowLoad('');
-        $.post( "controlador/ajax/getListReportFiles.php", { "orderID" : orderID}, null, "text" )
-        .done(function( data, textStatus, jqXHR ) {
-            if ( console && console.log ) {
-                var n = data.indexOf("Error");
-                if(n==-1){
-                    $('input:hidden#UploadReportIDOrder').val(orderID);
-                    $('#myUploadReport #UploadReportInfo tbody').html(data);
-                    //$( "#myInvoiceInfo" ).dialog('open');
-                    $(document).ready(function(){$("#myUploadReport").modal("show"); });
-                    //console.log(data);
-                }else{
-                    $('#headerTextAnswerOrder').html('Roof Report response');
-                    $('#myMensaje div.modal-body').html(data);
-                    $(document).ready(function(){$("#myMensaje").modal("show"); });
-                }
-                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                jsRemoveWindowLoad('');
+function getListReportFile(orderID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getListReportFiles.php", { "orderID" : orderID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('input:hidden#UploadReportIDOrder').val(orderID);
+                $('#myUploadReport #UploadReportInfo tbody').html(data);
+                //$( "#myInvoiceInfo" ).dialog('open');
+                $(document).ready(function(){$("#myUploadReport").modal("show"); });
+                //console.log(data);
+            }else{
+                $('#headerTextAnswerOrder').html('Roof Report response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
             }
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                result1=false;
-                jsRemoveWindowLoad('');
-                return result1;
-            }
-        });
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function changeSelection(selectionType){
+    selectionType=$("#customerTypeRequest").find(":selected").val()
+    switch (selectionType){
+        case "order":
+            $('#orderNumberRRR').show();
+            $('#labelorderNumberRRR').show();
+            $('#customerIDRRR').hide();
+            $('#labelcustomerIDRRR').hide();
+            $('#buttoncustomerIDRRR').hide();
+            
+            
+            break;
+        case "customer":
+            $('#orderNumberRRR').hide();
+            $('#labelorderNumberRRR').hide();
+            
+            $('#customerIDRRR').show();
+            $('#labelcustomerIDRRR').show();
+            $('#buttoncustomerIDRRR').show();
+            break;
+        case "newCustomer":
+            $('#orderNumberRRR').hide();
+            $('#labelorderNumberRRR').hide();
+            $('#customerIDRRR').hide();
+            $('#labelcustomerIDRRR').hide();
+            $('#buttoncustomerIDRRR').hide();
+            break;
     }
+}
+
+function getCustomerInfo(customerID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataCustomer.php", { "customerID" : customerID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                customer=jQuery.parseJSON(data);
+                $('#customerInfoRRR').val("Address: "+customer.Address+'\n'+"City: "+customer.City+'\n'+"Email: "+customer.Email+'\n'+"Name: "+customer.Fname+' '+customer.Lname+'\n'+"Phone: "+customer.Phone);
+            }else{
+                $('#headerTextAnswerOrder').html('Roof Report response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function getInforCustomerForRoofReport(){
+    var orderId=$('#orderNumberRRR').val();
+    if(orderId==undefined || orderId==''){
+        alert("Please fill the order field.");
+        return;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                order=jQuery.parseJSON(data);
+                jsRemoveWindowLoad('');
+                getCustomerInfo(order.CustomerID);
+            }else{
+                $('#headerTextAnswerOrder').html('Roof Report response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+
+    
+}

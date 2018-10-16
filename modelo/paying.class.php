@@ -95,6 +95,7 @@ class paying_stripe  extends connection{
     }
 
     public function createCharge($customer,$amount,$currency){
+        //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
         try{
             $charge = \Stripe\Charge::create(array(
@@ -106,24 +107,24 @@ class paying_stripe  extends connection{
             $charge="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
             // Too many requests made to the API too quickly
-            $charge="Too many requests made to the API too quickly";
+            $charge="Too many requests made to the API too quickly ".$e->getMessage();
         } catch (\Stripe\Error\InvalidRequest $e) {
             // Invalid parameters were supplied to Stripe's API
-            $charge="Invalid parameters were supplied to Stripe's API";
+            $charge="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
         } catch (\Stripe\Error\Authentication $e) {
             // Authentication with Stripe's API failed
             // (maybe you changed API keys recently)
-            $charge="Authentication with Stripe's API failed";
+            $charge="Authentication with Stripe's API failed ".$e->getMessage();
         } catch (\Stripe\Error\ApiConnection $e) {
             // Network communication with Stripe failed
-            $charge="Network communication with Stripe failed";
+            $charge="Network communication with Stripe failed ".$e->getMessage();
         } catch (\Stripe\Error\Base $e) {
             // Display a very generic error to the user, and maybe send
             // yourself an email
-            $charge="Display a very generic error to the user, and maybe send";
+            $charge="Display a very generic error to the user, and maybe send ".$e->getMessage();
         } catch (Exception $e) {
             // Something else happened, completely unrelated to Stripe
-            $charge="Something else happened, completely unrelated to Stripe";
+            $charge="Something else happened, completely unrelated to Stripe ".$e->getMessage();
         }
         return $charge;
     }

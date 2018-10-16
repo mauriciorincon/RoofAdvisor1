@@ -297,6 +297,11 @@ class userController{
         $_result=$this->_userModel->getListCompany('Company',$field,$value);
         return $_result;
     }
+    public function getListData($field="",$value=""){
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->getListCompany('Customers',$field,$value);
+        return $_result;
+    }
 
     public function insertCustomer($arrayCustomer){
         $_response="";
