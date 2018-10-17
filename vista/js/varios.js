@@ -3211,3 +3211,5 @@ function getInforCustomerForRoofReport(){
 
     
 }
+
+function getCustomerListRR
