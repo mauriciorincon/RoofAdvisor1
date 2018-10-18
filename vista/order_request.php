@@ -394,13 +394,13 @@
 				<div class="list-group-item scr2fix">
 					<div class="form-group">
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
-								<input type="radio" name="estep5Option" data-value="1 story" id="estep5Option1" checked>
-								<input type="radio" name="estep5Option" data-value="2 story" id="estep5Option2">
+								<input type="radio" name="estep5Option" data-value="1 Story" id="estep5Option1" checked>
+								<input type="radio" name="estep5Option" data-value="2 Story" id="estep5Option2">
 								<input type="radio" name="estep5Option" data-value="3 or more" id="estep5Option3" >
 								<input type="radio" name="estep5Option" data-value="3 or more" id="estep5Option4">
 								
-								<label for="estep5Option1" data-value="1 story">One</label>
-								<label for="estep5Option2" data-value="2 story">Two</label>
+								<label for="estep5Option1" data-value="1 Story">One</label>
+								<label for="estep5Option2" data-value="2 Story">Two</label>
 								<label for="estep5Option3" data-value="3 or more">Three</label>
 								<label for="estep5Option4" data-value="3 or more">More</label>
 								
@@ -445,7 +445,7 @@
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
 					
-							<input id="pac-input" class="controls wizsrch1" type="text"
+							<input id="pac-input" class="controls" type="text"
 								placeholder="Enter a location" >
                             
                                 <style>

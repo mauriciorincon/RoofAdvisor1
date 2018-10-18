@@ -1,4 +1,4 @@
-
+<input type="hidden" value="<?php echo $_actual_company['CompanyID']?> " id="companyIDhidden" >
 <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
@@ -54,6 +54,12 @@
         <div id="map"></div>
 
         <script>
+            function initialization(){
+					
+					initMap();
+					initMapOrder();
+					
+				}
             var marketrs=[];
             var contractorMarker=[];
             var mapObject;
@@ -781,9 +787,10 @@
         </script>
 
 
-        <script async defer
+        <!--<script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&callback=initMap">
         </script>
+        -->
         <br>
        
 
@@ -1650,11 +1657,11 @@
 			</div> 
 			<div class="modal-body" id="textmyRoofReportRequest"> 
                 <div class="form-group">
-                    <label class="control-label">Select type RequestType</label>
+                    <label class="control-label">Select Option</label>
                     <select id="customerTypeRequest" name="customerTypeRequest" onchange="changeSelection()" required="required" class="form-control" placeholder="Select state">
-                        <option value="order">From existing order</option>
+                        <option value="order">Based on existing order</option>
                         <option value="customer">From existing customer</option>
-                        <option value="newCustomer">From new customer</option>
+                        <option value="newCustomer">No RoofService customer</option>
                     </select>
                 </div> 
                 <div class="form-group">
@@ -1671,15 +1678,56 @@
                     <textarea class="form-control" rows="5" id="customerInfoRRR"></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Work Order</label>
-                    <input maxlength="100" type="text" class="form-control" placeholder="Customer Id" id="customerIDRRR" name="customerIDRRR" />
+                    <label class="control-label">Best select the type of roofing material on your property?</label>
+                    <select name="question1" id="question1" class="form-control">
+                        <option value="Flat, Single Ply">Flat, Single Ply</option>
+                        <option value="Asphalt">Asphalt</option>
+                        <option value="Wood Shake/Composite">Wood Shake/Composite</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Tile">Tile</option>
+                        <option value="Do not know">Do not know</option>
+                    </select>
+                    	
                 </div>
+                <div class="form-group">
+                    <label class="control-label">Are you aware of any leaks or damage to the roof?</label>
+                    <select name="question2" id="question2" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>	
+                </div>
+                <div class="form-group">
+                    <label class="control-label">How many stories is your home?</label>
+                    <select name="question3" id="question3" class="form-control">
+                        <option value="1 Story">1 story</option>
+                        <option value="2 Story">2 story</option>
+                        <option value="3 or more">Three</option>
+                        <option value="3 or more">More</option>
+                    </select>	
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Are you the owner or authorized to make property changes?</label>
+                    <select name="question4" id="question4" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>	
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Select the place for the service</label>
+                    <input type="text" class="form-control" id="question5" placeholder="Address" onclick="showMapSelect()">	
+                </div>
+                
+                
 			</div>
-
-			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
-				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
-			</div> 
+            <div class="modal-footer" id="buttonUploadReport"> 
+            
+                    <button type="button" class="btn-primary btn-sm" onclick="insertOrderRoofReport()">Request</button> 
+                
+				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+                  
+			 </div>
+                
+			
 		</div> 
 	</div>
 </div>
@@ -1699,6 +1747,187 @@
 			<div class="modal-footer" id="buttonUploadReport"> 
                 <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myMapSelectAddress" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyMapSelectAddress">Service Address</h4> 
+			</div> 
+			<div class="modal-body" id="textmyMapSelectAddress"> 
+
+                <div class="panel-body">
+				    <span class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>	
+					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
+					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
+					<input type="hidden" id="step5Address" name="step5Address"/>
+					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
+					<div class="list-group">
+					
+							<input id="pac-input" class="controls" type="text"
+								placeholder="Enter a location" >
+                            
+                                <style>
+						/* Set the size of the div element that contains the map */
+						#map2 {
+							height: 400px;  /* The height is 400 pixels */
+							width: 100%;  /* The width is the width of the web page */
+						}
+                        </style>
+						
+							
+							<div id="map2"></div>
+
+							<script>
+							// This example requires the Places library. Include the libraries=places
+							// parameter when you first load the API. For example:
+							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+							var map_ = null;
+
+							function initMapOrder() {
+								
+
+								map_ = new google.maps.Map(document.getElementById('map2'), {
+								center: {lat: 27.332617, lng: -81.255690},
+								zoom: 12
+								});
+
+								////Get lat and long from zipcode
+							
+								setLocation(map_,"")
+								/////////////////////////////////////
+
+								var input = /** @type {!HTMLInputElement} */(
+									document.getElementById('pac-input'));
+
+								var types = document.getElementById('type-selector');
+								map_.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+								map_.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+								var autocomplete = new google.maps.places.Autocomplete(input);
+								autocomplete.bindTo('bounds', map_);
+
+								var infowindow = new google.maps.InfoWindow();
+								var marker = new google.maps.Marker({
+								    map: map_,
+								    anchorPoint: new google.maps.Point(0, -29)
+								});
+
+								autocomplete.addListener('place_changed', function() {
+									infowindow.close();
+									marker.setVisible(false);
+									var place = autocomplete.getPlace();
+									if (!place.geometry) {
+									// User entered the name of a Place that was not suggested and
+									// pressed the Enter key, or the Place Details request failed.
+									window.alert("No details available for input: '" + place.name + "'");
+									return;
+									}
+
+									// If the place has a geometry, then present it on a map.
+									if (place.geometry.viewport) {
+										map_.fitBounds(place.geometry.viewport);
+									} else {
+										map_.setCenter(place.geometry.location);
+										map_.setZoom(17);  // Why 17? Because it looks good.
+									}
+									marker.setIcon(/** @type {google.maps.Icon} */({
+										url: place.icon,
+										size: new google.maps.Size(71, 71),
+										origin: new google.maps.Point(0, 0),
+										anchor: new google.maps.Point(17, 34),
+										scaledSize: new google.maps.Size(35, 35)
+									}));
+									marker.setPosition(place.geometry.location);
+									marker.setVisible(true);
+									$("#step5Logintud").val(place.geometry.location.lng());
+									$("#step5Latitude").val(place.geometry.location.lat());
+									
+									//console.log(place.geometry.location.lat());
+									//console.log(place.geometry.location.lng());
+									var address = '';
+									if (place.address_components) {
+										address = [
+										(place.address_components[0] && place.address_components[0].short_name || ''),
+										(place.address_components[1] && place.address_components[1].short_name || ''),
+										(place.address_components[2] && place.address_components[2].short_name || '')
+										].join(' ');
+										$('#step5Address').val(address);
+										$('#step5ZipCode').val(place.address_components[7].short_name);
+									}
+									
+
+									infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+									infowindow.open(map_, marker);
+								});
+
+								// Sets a listener on a radio button to change the filter type on Places
+								// Autocomplete.
+								/*function setupClickListener(id, types) {
+								var radioButton = document.getElementById(id);
+								radioButton.addEventListener('click', function() {
+									autocomplete.setTypes(types);
+								});
+								}
+
+								setupClickListener('changetype-all', []);
+								setupClickListener('changetype-address', ['address']);
+								setupClickListener('changetype-establishment', ['establishment']);
+								setupClickListener('changetype-geocode', ['geocode']);*/
+							}
+
+							function setLocation(map,zipcode){
+								//var address = $('#zipCodeBegin').val();
+								var address=zipcode;
+								if(address==undefined || address==""){
+									address = '33101';
+								} 
+								console.log("zipcode: "+address);
+								geocoder = new google.maps.Geocoder();
+								
+								geocoder.geocode( { 'address': address}, function(results, status) {
+								if (status == 'OK') {
+									map.setCenter(results[0].geometry.location);
+									var marker = new google.maps.Marker({
+										map: map,
+										position: results[0].geometry.location
+									});
+								} else {
+									alert('Geocode was not successful for the following reason: ' + status);
+								}
+								});
+							}
+
+							function clearMarkers(map) {
+        						map.clearOverlays();
+      						}
+
+							</script>
+							<style>
+                                .pac-container {
+                                    z-index: 10000 !important;
+                                }
+                            </style>
+						<script async defer
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initialization">
+						</script>
+
+						
+					</div>
+			    </div>
+            </div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect()">Set Location</button>
+                <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button>
+                		
 			</div> 
 		</div> 
 	</div>

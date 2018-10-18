@@ -33,8 +33,8 @@
     //$zipinfo['city']  = $city;
     //$zipinfo['state'] = $state;
     //Need to fix not pulling city or state for now hard coded.
-    $city='Miami';    
-    $state='FL'; 
+    //$city='Miami';    
+    //$state='FL'; 
 if(empty($city)){
       $_othersController=new othersController();
         $_result=$_othersController->verifyZipCode($_zipcode);

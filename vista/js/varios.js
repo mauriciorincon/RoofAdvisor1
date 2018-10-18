@@ -3189,8 +3189,13 @@ function getInforCustomerForRoofReport(){
             var n = data.indexOf("Error");
             if(n==-1){
                 order=jQuery.parseJSON(data);
-                jsRemoveWindowLoad('');
+                $('#question1').val(order.Rtype);
+                $('#question2').val(order.Water);
+                $('#question3').val(order.Hlevels);
+                $('#question4').val(order.Authorized);
+                $('#question5').val(order.RepAddress);
                 getCustomerInfo(order.CustomerID);
+
             }else{
                 $('#headerTextAnswerOrder').html('Roof Report response');
                 $('#myMensaje div.modal-body').html(data);
@@ -3212,4 +3217,87 @@ function getInforCustomerForRoofReport(){
     
 }
 
-function getCustomerListRR
+function getCustomerListRR(){
+
+}
+
+function showMapSelect(){
+    $(document).ready(function(){$("#myMapSelectAddress").modal("show"); });
+}
+function closeMapSelect(){
+    $('#question5').val($("#step5Logintud").val()+' '+$("#step5Latitude").val()+' '+$('#step5Address').val()+' '+$('#step5ZipCode').val());
+    $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
+}
+
+function insertOrderRoofReport(idStripeCharge,amountValue){
+    var RepZIP=$('#zipCodeBegin').val();
+    var RequestType="roofreport";
+    
+    var Rtype=$("#question1").find(":selected").val();
+    var Water=$("#question2").find(":selected").val();
+    var Hlevels=$("#question3").find(":selected").val();
+    var Authorized=$("#question4").find(":selected").val();
+    var CompanyID=$('#companyIDhidden').val();
+    var email="";
+    var password="";
+    var latitude=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+    
+
+    if(RequestType=='emergency'){
+        RequestType='E'
+    }else if(RequestType=='schedule'){
+        RequestType='S'
+    }else if(RequestType=='roofreport'){
+        RequestType='R'
+    }
+    
+    if(CompanyID==undefined){
+        CompanyID="";
+    }
+    if(amountValue==undefined){
+        amountValue=0;
+    }
+    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
+    $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
+                                                "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
+                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            
+
+            if(n==-1){
+                    
+                    
+                    $('#textAnswerOrder').html(data+'');
+                    
+
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                    $('#headerTextAnswerOrder').html('Error validating User Account');
+                    $('#textAnswerOrder').html(data+'<br><br>Please try again');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+            jsRemoveWindowLoad('');
+        }
+    });
+}
