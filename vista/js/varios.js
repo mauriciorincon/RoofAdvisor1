@@ -3243,7 +3243,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
-    
+    var SchDate='';
+    var SchTime='';
 
     if(RequestType=='emergency'){
         RequestType='E'
@@ -3272,7 +3273,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
 
             if(n==-1){
                     
-                    
+                     $(document).ready(function(){$("#myRoofReportRequest").modal("hide"); });
+
                     $('#textAnswerOrder').html(data+'');
                     
 

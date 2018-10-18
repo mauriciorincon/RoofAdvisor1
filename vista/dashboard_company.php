@@ -177,7 +177,7 @@
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
                     var updateOrder = snapshot.val();
-                    if(updateOrder.CompanyID==companyID){
+                    if(updateOrder.CompanyID==companyID || updateOrder.CompanyID=='' ){
                         row=validateExist(updateOrder.OrderNumber);
 						if(row==-1){
 								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
@@ -394,8 +394,8 @@
                                 'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
-                    dataCustomer=customerData;
+                getCustomerData(dataOrder.CustomerFBID).then(function(customerDataX) {  
+                    dataCustomer=customerDataX;
                 });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                     if(companyStatus!="Active"){    
@@ -418,7 +418,13 @@
                                             '<span class="glyphicon glyphicon-comment"></span>'+
                                         '</a>';    
                         }
+                        companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                                        'href="#" ' +
+                                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
+                                        '<span class="glyphicon glyphicon-upload"></span>'+
+                                    '</a>';
                     }
+                    
                 });
                             
                 
@@ -433,7 +439,7 @@
                         status,
                         dataOrder.ETA,
                         dataOrder.EstAmtMat,
-                        dataOrder.PaymentTxype,
+                        dataOrder.PaymentType,
                         dataContractor,
                         companyActions,
                     ] ).draw( false );
@@ -503,6 +509,11 @@
                                                         '<span class="glyphicon glyphicon-comment"></span>'+
                                                     '</a>';    
                                     }
+                                    companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                                        'href="#" ' +
+                                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
+                                        '<span class="glyphicon glyphicon-upload"></span>'+
+                                    '</a>';
                                 } 
                                 $row.find("td:eq(11)").html(companyActions);
                             });
@@ -942,7 +953,7 @@
                                     </a>
                             <?php 
                             }} ?>
-                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Report"  
+                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files"  
                                 href="#" 
                                 onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
                                 <span class="glyphicon glyphicon-upload"></span>
@@ -1928,6 +1939,24 @@
                 <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect()">Set Location</button>
                 <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button>
                 		
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

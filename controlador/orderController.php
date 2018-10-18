@@ -49,6 +49,9 @@ class orderController{
         $this->_orderModel=new orderModel();
         $_customer=$this->_userController->getCustomer($_SESSION['email']);
         $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        //echo $_customer;
+        //echo $_customerK;
+        //exit;
         //$_lastOrderNumber=$this->_orderModel->getLastOrderNumber("Orders","OrderNumber");
         $_lastOrderNumber=$this->_orderModel->getLasOrderNumberParameter('Parameters/LastOrderID');
         $_contractor=$this->_userController->getContractorById($arrayDataOrder['ContractorID']);
@@ -129,6 +132,7 @@ class orderController{
             if(strcmp($arrayDataOrder['RequestType'],"E")==0 or strcmp($arrayDataOrder['RequestType'],"R")==0){
                 $_objPDF=new pdfController();
                 $Order['FBID']=$_result->getKey();
+                //create invoce for customer
                 $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe']);
             }
         }
