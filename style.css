@@ -100,9 +100,9 @@ body {font-family: 'Poppins', sans-serif;font-weight:300;font-size:14px;}
 .bg-sky{background: rgb(3, 169, 244) none repeat scroll 0 0;}
 .btn {
   -moz-user-select: none;
-  background:rgb(245, 177, 32);
-  border: 1px solid rgb(243, 188, 22);
-  color: #fff;
+  background:rgb(255, 255, 255);
+  border: 2px solid rgb(250, 81, 26);
+  color: #fa511a;
   cursor: pointer;
   display: inline-block;
   font-size: 18px;
@@ -115,11 +115,12 @@ body {font-family: 'Poppins', sans-serif;font-weight:300;font-size:14px;}
    margin-top: 30px;
    border-radius:0;
    text-decoration:none;
+   border-radius:15px;
 }
 .btn.btn-blue{padding:14px 20px;margin-top:0px;font-size:14px;color:#fff}
 .sidebar-form form button:hover, .btn-more:hover, .respond-form button:hover, .contact-form button:hover, .btn-blue:hover,.btn:hover {
-	background-color: rgb(247, 208, 92);
-    border-color: rgb(247, 208, 92);
+	background-color: #fa511a;
+    border-color: #fff;
     color: rgb(255, 255, 255);
     transition: all 0.3s ease 0s;
 	}
@@ -908,7 +909,7 @@ label {
 }
 /* scrollUp */
 a#scrollUp {
-  background: rgb(243, 188, 22) none repeat scroll 0 0 padding-box;
+  background: rgb(250, 81, 26) none repeat scroll 0 0 padding-box;
     border: 1px solid rgba(0, 0, 0, 0);
     border-radius: 50%;
     bottom: 45px;
@@ -919,7 +920,7 @@ a#scrollUp {
     height: 45px;
     line-height: 41px;
     position: fixed;
-    right: 12px;
+    right: 30px;
     text-align: center;
     width: 45px;
     z-index: 999;
@@ -1547,7 +1548,7 @@ margin-bottom:-16px;
      color:#fff;
 } 
 .wizsrch1{
-margin-left: 34% !important;
+margin-left: 410px !important;
     display: block !important;
     border-radius: 100px! !important ;
     height: 35px !important;
@@ -1556,6 +1557,7 @@ margin-left: 34% !important;
     display: block;
     border-radius: 100px;
     height: 35px;
+    width:55% !important;
 }
 .inpwiz1{
 margin-left: 10%;
@@ -1568,13 +1570,23 @@ right:-15%;
 text-align:center;
 }
 .logmodal{
-background-color:#005678f0;
+background-color:#1515159e;
 color:#fff;
 border-radius:20px;
+margin-right:35px;
 }
 .login-list1{
 background-color:#fff0;
 border:0px;
+}
+.loglable{
+    background-color: #fff;
+    padding: 3px 11px 3px 13px;
+    margin-right: -3px;
+    border-radius: 5px 0px 0px 5px;
+}
+.modal-backdrop{
+opacity:0.79 !important;
 }
 @media (min-width:1700px){
 .main-menu ul li a{

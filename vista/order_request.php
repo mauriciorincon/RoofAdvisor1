@@ -7,26 +7,27 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <div style="margin-left:15px;">
-       <span class="glyphicon glyphicon-info-sign"></span>Info</br></br>
+     <div style="margin-left:30px;margin-top:30px;margin-bottom:-15px;">
+       <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Info</br></br>
        <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
       </div>     
- <div class="modal-body" style="height:250px;">
+ <div class="modal-body" style="height:175px;">
                                                 <div class="list-group">
                                                         <div  class="list-group-item login-list1">
                                                                 <div class="d-flex w-100 justify-content-between">
                                                                         <div class="form-group">
-                                                                                <label style="display: inline-block;margin-left: 61px;"><i class="fa fa-user" aria-hidden="true"></i><span class="required">*</span></label>
-                                                                                <input type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" />
+                                                                                <label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+                                                                                <input style="width:60%;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                                <label style="display: inline-block;margin-left: 70px;"><i class="fa fa-key" aria-hidden="true"></i><span class="required">*</span></label>
-                                                                                <input type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/>
+                                                                                <label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+                                                                                <input style="width:60%;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
                                                                         </div>
-                                                                        <button class=" btn-primary btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button><br><br><br><br>
+                                                                        <div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+                                                                        <a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+                                                                        </div>
+                                                                       <br><br><br>
                                                                         <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-                                                                        <a href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
-
                                                                 </div>
                                                         </div>
                                                 <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
@@ -34,7 +35,8 @@
                                         </div>
                                         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Register</button>
+        <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button>
+       <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
       </div>
     </div>
   </div>
@@ -106,7 +108,7 @@
             </div>
         </div>
         </div>
-        <div class="panel panel-primary setup-contentOrder" id="step-2">
+        <div style="margin-top:-50px;" class="panel panel-primary setup-contentOrder" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
             </div>
@@ -649,7 +651,7 @@
 
 		<div class="panel panel-primary setup-contentOrder" id="step-6">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Review Scheduled Repair Order Details</strong></font></h3>
+                 <h1 class="panel-title wizhead"><font size="41"><strong>Review Scheduled Repair Order Details</strong></font></h1>
             </div>
             <div class="panel-body">
 				
@@ -757,7 +759,7 @@
             </div>
 		</div>
 		
-		<div class="panel panel-primary setup-contentOrder" id="step-7">
+		<div style="margin-top:-75px" class="panel panel-primary setup-contentOrder" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
@@ -823,7 +825,7 @@
 								</div>
                                                                 </div>  
 								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
-                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
+                                                                <button type="button" class="btn" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
                                                           	</div>
 							
 						</div>
