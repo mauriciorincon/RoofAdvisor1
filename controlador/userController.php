@@ -297,9 +297,9 @@ class userController{
         $_result=$this->_userModel->getListCompany('Company',$field,$value);
         return $_result;
     }
-    public function getListData($field="",$value=""){
+    public function getListData($table,$field="",$value=""){
         $this->_userModel=new userModel();
-        $_result=$this->_userModel->getListCompany('Customers',$field,$value);
+        $_result=$this->_userModel->getListData($table,$field,$value);
         return $_result;
     }
 

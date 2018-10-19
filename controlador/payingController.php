@@ -119,6 +119,7 @@ class payingController{
             var amount_value='.$_amount.';
             var public_key=\''.$_key.'\';
             var action_type=\'pay_emergency_service\';
+            var email_user_logued=\''.$_SESSION['email'].'\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';
 

@@ -62,7 +62,8 @@ var handler = StripeCheckout.configure({
     handler.open({
       name: 'RoofServicenow',
       description: 'pay your service',
-      amount: amount_value
+      amount: amount_value,
+      email: email_user_logued
     });
     e.preventDefault();
   });
