@@ -190,11 +190,11 @@
 							<div class ="col-md-5">
 							</div>
 							<div class ="col-md-1">
-								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
+								<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat" checked>
 							</div>
 							<div class="col-md-6"> 
 								<label class="form-check-label" for="estep3Option1">
-									Flat, Single Ply
+									Flat
 								</label>
 							</div>
 						</div>
@@ -354,13 +354,13 @@
 								}
 							</style>
 							<div class="segmented-control" style="width: 100%; color: #319DD4">
-								<input type="radio" name="estep3Option" data-value="Flat, Single Ply" id="sc-1-1-1" checked>
+								<input type="radio" name="estep3Option" data-value="Flat" id="sc-1-1-1" checked>
 								<input type="radio" name="estep3Option" data-value="Asphalt" id="sc-1-1-2">
 								<input type="radio" name="estep3Option" data-value="Wood Shake/Composite" id="sc-1-1-3" >
 								<input type="radio" name="estep3Option" data-value="Metal" id="sc-1-1-4">
 								<input type="radio" name="estep3Option" data-value="Tile" id="sc-1-1-5">
 								<input type="radio" name="estep3Option" data-value="Do not know" id="sc-1-1-6">
-								<label for="sc-1-1-1" data-value="Flat, Single Ply">Flat, Single Ply</label>
+								<label for="sc-1-1-1" data-value="Flat">Flat</label>
 								<label for="sc-1-1-2" data-value="Asphalt">Asphalt</label>
 								<label for="sc-1-1-3" data-value="Wood Shake/Composite">Wood Shake/Composite</label>
 								<label for="sc-1-1-4" data-value="Metal">Metal</label>

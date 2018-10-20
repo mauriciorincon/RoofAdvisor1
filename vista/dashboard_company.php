@@ -1691,7 +1691,7 @@
                 <div class="form-group">
                     <label class="control-label">Best select the type of roofing material on your property?</label>
                     <select name="question1" id="question1" class="form-control">
-                        <option value="Flat, Single Ply">Flat, Single Ply</option>
+                        <option value="Flat">Flat</option>
                         <option value="Asphalt">Asphalt</option>
                         <option value="Wood Shake/Composite">Wood Shake/Composite</option>
                         <option value="Metal">Metal</option>
