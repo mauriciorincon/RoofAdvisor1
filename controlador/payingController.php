@@ -16,7 +16,7 @@ class payingController{
     public function setPaying(){
         if(!isset($_SESSION['application_path'])){
             $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
-            echo "entro aca variable";
+            //echo "entro aca variable";
         }
         $amount = 0;
 

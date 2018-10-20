@@ -267,7 +267,7 @@
             }
 
             function addMarket(data,fila,infowindow){
-                var image="";
+                    var image="";
 					if(fila.Status==='A'){
 						image="open_service.png";
 					}else if(fila.Status=='D'){
@@ -815,7 +815,7 @@
                         <th>Time</th>
                         <th>Name/Addr/Phone</th>
                         <th>Description</th>
-                        <th>Order Type</th>
+                        <th>Request Type</th>
                         <th>Status</th>
                         <th>Est Amt</th>
                         <th>Final Amt</th>

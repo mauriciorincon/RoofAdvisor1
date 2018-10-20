@@ -68,8 +68,27 @@ class driverController{
                 "ContPhoneNum" => $driverInsert['driverPhone'],
                 "ContRating" => "0",
                 "ContStatus" => $driverInsert['driverStatus'],
+                "ContWorkStatus" => "Online",
                 "ContractorID" => "$_newDriverId",
                 "ContractorProfile" => $driverInsert['driverProfile'],
+                "CurrentLocation" => [
+                    "accuracy" => "",
+                    "altitude" => "",
+                    "bearing" => "",
+                    "complete" => "",
+                    "elapsedRealtimeNanos" => "",
+                    "extras" => [
+                        "empty" => "",
+                        "emptyParcel" => "",
+                        "parcelled" => "",
+                    ],
+                    "fromMockProvider" => "",
+                    "latitude" => "",
+                    "longitude" => "",
+                    "provider" => "",
+                    "speed" => "",
+                    "time" => "",
+                ],
             );
             $this->_driverModel->insertDriver($_newDriverId,$_driver);
             $_tmp=substr($_newDriverId,2);

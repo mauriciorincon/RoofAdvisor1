@@ -101,19 +101,6 @@
 											});
 										}
 									}
-									
-									
-									/*total_orders++;
-									if(fila.RequestType=='S'){
-										total_schedule_orders++;
-									}
-									if(fila.RequestType=='E'){
-										total_emergengy_orders++;
-									}*/
-								}
-						
-						
-					//console.log(snapshot.val());
 					
 					});
 

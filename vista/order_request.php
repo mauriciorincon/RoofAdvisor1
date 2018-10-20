@@ -163,7 +163,7 @@
 									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								<h4>Get a detailed roof report for $29 within 24 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
+								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
 								</td>
 							</tr>
 						</table>

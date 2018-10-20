@@ -167,6 +167,7 @@ class userController{
     }
 
     public function loginContractor(){
+        
         if(!isset($_POST['userContractor']) or !isset($_POST['passwordContractor'])){
             $this->showLoginContractor();
         }else{
