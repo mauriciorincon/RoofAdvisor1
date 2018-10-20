@@ -372,17 +372,24 @@
 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
                     if(dataOrder.CompanyStatus!='Acive'){
-                        dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                        if(dataOrder.RequestType=='R'){
+                            dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                'href="" '+
+                                'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
+                                '<span class="glyphicon glyphicon-check"></span>--'+
+                                '</a>';
+                        }else{
+                            dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="" '+
                                 'onClick="alert(\'You can not take the job until the company is active\')"> '+
                                 '<span class="glyphicon glyphicon-check"></span>Take work'+
                                 '</a>';
+                        } 
                     }
-                        dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                    dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
 									'href="#myModalGetWork" '+
 									'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
                                     '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                    
                 }else{
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                                 dataContractor=contractorName; 
