@@ -3239,18 +3239,7 @@ function closeMapSelect(){
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
 
-function showPaymentStripe(){
-    
-    amount_value=29;
-    action_type="pay_invoice_service";
-    if(typeof handler !== undefined){
-        handler.open({
-            name: 'RoofServiceNow',
-            description: 'pay your service',
-            amount: amount_value
-            });
-    }
-}
+
 function insertOrderRoofReport(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType="roofreport";

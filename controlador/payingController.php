@@ -93,10 +93,9 @@ class payingController{
             </form>';
     }
 
-    public function showPayingWindow1($buttonMessaje){
-        if(!isset($buttonMessaje)){
-            $buttonMessaje="Pay your service";
-        }
+    public function showPayingWindow1($buttonMessaje="Pay your service",$typePaying="pay_emergency_service"){
+       
+        
         $this->_payingModel= new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         
@@ -121,7 +120,7 @@ class payingController{
         <script>
             var amount_value='.$_amount.';
             var public_key=\''.$_key.'\';
-            var action_type=\'pay_emergency_service\';
+            var action_type=\''.$typePaying.'\';
             var email_user_logued=\''.$_SESSION['email'].'\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';

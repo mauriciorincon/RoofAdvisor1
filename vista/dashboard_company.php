@@ -1732,7 +1732,7 @@
 			</div>
             <div class="modal-footer" id="buttonUploadReport"> 
             
-            <?php
+                    <?php
 							if(!isset($_SESSION)) { 
 								session_start(); 
 							} 
@@ -1741,11 +1741,11 @@
 						
 							$_objPay=new payingController();
 							echo "<center>";
-							$_objPay->showPayingWindow1('Request');
+							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
 							echo "</center>";
 						?>
                         
-                    <button type="button" class="btn-primary btn-sm" onclick="showPaymentStripe()">Request</button> 
+                    <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
                 
 				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
                   
