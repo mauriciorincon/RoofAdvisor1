@@ -2719,7 +2719,7 @@ function getCommentary(orderID){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('input:hidden#commentaryIDOrder').val(orderID);
-                $('#myCommentaryInfo #commentaryInfo tbody').html(data);
+                $('#commentaryInfo tbody').html(data);
                 //$( "#myInvoiceInfo" ).dialog('open');
                 $(document).ready(function(){$("#myCommentaryInfo").modal("show"); });
                 //console.log(data);
@@ -3249,6 +3249,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     var Hlevels=$("#question3").find(":selected").val();
     var Authorized=$("#question4").find(":selected").val();
     var CompanyID=$('#companyIDhidden').val();
+    CompanyID=CompanyID.trim();
     var email="";
     var password="";
     var latitude=$('input:hidden[name=step5Latitude]').val();

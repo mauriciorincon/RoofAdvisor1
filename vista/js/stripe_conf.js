@@ -32,13 +32,13 @@ var handler = StripeCheckout.configure({
                     if(objStripe.message=='Payment complete.'){
                         if(action_type=="pay_emergency_service"){
                             jsRemoveWindowLoad('');
-                            insertOrderCustomer(objStripe.id,(amount_value/100));
+                            insertOrderCustomer(objStripe.id,(amount_value));
                         }else if(action_type=="pay_company_roofreport"){
                             jsRemoveWindowLoad('');
-                            insertOrderRoofReport(objStripe.id,(amount_value/100));
+                            insertOrderRoofReport(objStripe.id,(amount_value));
                         }else if(action_type=="pay_invoice_service"){
                             jsRemoveWindowLoad('');
-                            payOnlineInvoce(objStripe.id,(amount_value/100));
+                            payOnlineInvoce(objStripe.id,(amount_value));
                         }
                         
                     }else{

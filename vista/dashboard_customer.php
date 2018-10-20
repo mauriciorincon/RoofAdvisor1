@@ -1161,13 +1161,9 @@
 						$_eventsArrayAux=$oCalendar->getEvents($_month,$_year);
 					}
 					
-						foreach($_eventsArrayAux as $key => $orderData){
-							if(strcmp( $orderData['CustomerID'], $_actual_customer['CustomerID']) == 0){
-								array_push($_eventsArray,$order);
-							}
-						}
-					
-                    //print_r($_eventsArray);
+					foreach($_eventsArrayAux as $key => $orderData){
+						array_push($_eventsArray,$order);	
+					}
                     echo $oCalendar->draw_calendar($_month,$_year,$_eventsArray);
 
             ?>

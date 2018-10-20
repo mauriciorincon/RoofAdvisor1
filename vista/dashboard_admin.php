@@ -755,21 +755,21 @@ Welcome to RoofServicenow Admin
                             ?>
                         </td>
                         <td>
-                        <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-                            href="#" 
-                            onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-                            <span class="glyphicon glyphicon-list-alt"></span>
-                        </a>
-                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                    href="#" 
-                                    onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                </a>
-                        <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files"  
-                            href="#" 
-                            onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
-                            <span class="glyphicon glyphicon-upload"></span>
-                        </a>
+                            <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
+                                href="#" 
+                                onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </a>
+                            <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
+                                href="#" 
+                                onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-comment"></span>
+                            </a>
+                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files"  
+                                href="#" 
+                                onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </a>
                         </td>
                     
                     
@@ -1235,3 +1235,202 @@ Welcome to RoofServicenow Admin
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+
+<div class="modal fade" id="myFilterWindow" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Filter Options</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+                <p>
+                <table class="table">
+                    <thead>
+                        <tr><th scope="col">Service Type</th><th><input class="form-check-input" type="checkbox" value="S" name="selectAllTYpe" checked onchange="selectUnselectCheck('defaultCheckType',this)"></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Schedule Repair</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckType"  checked></td></tr>
+                        <tr><td>Emergency Repair</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
+                        <tr><td scope="col"><b>Service Type<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
+                        <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Order Assigned</td><td><input class="form-check-input" type="checkbox" value="D" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Contractor Just Arrived</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Estimate Sent</td><td><input class="form-check-input" type="checkbox" value="F" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Estimate Approved</td><td><input class="form-check-input" type="checkbox" value="G" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Work In Progress</td><td><input class="form-check-input" type="checkbox" value="H" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Work Completed</td><td><input class="form-check-input" type="checkbox" value="I" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Final Bill</td><td><input class="form-check-input" type="checkbox" value="J" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Order Completed Paid</td><td><input class="form-check-input" type="checkbox" value="K" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Cancel work</td><td><input class="form-check-input" type="checkbox" value="Z" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report In Progress</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report Incomplete Refund</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckStatus" checked></td></tr>
+                        <tr><td>Report Complete</td><td><input class="form-check-input" type="checkbox" value="S" name="defaultCheckStatus" checked></td></tr>
+                    </tbody>
+                </table>
+                
+			</div> 
+            <div class="modal-footer" id="buttonMessage"> 
+                <button type="button" class="btn-primary btn-sm" onclick="filterCompany('defaultCheckType','defaultCheckStatus','table_orders_company')">Filter</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myInvoiceInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyInvoice">Invoice Info</h4> 
+			</div> 
+			<div class="modal-body" id="textMyInvoice"> 
+				<div class="table-responsive">
+					<table class="table table-condensed" id="invoiceInfo">
+						<thead>
+							<tr>
+								<td><strong>Invoice Numbre</strong></td>
+								<td class="text-center"><strong>Price</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Payment Type</strong></td>
+								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>View</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div id="detailStripe">
+
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonPayment"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myCommentaryInfo" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentary">Comment Info</h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentary"> 
+                <input type="hidden" value="" id="commentaryIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="commentaryInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Comment</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myCommentaryInfoN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyCommentaryN">New Comment </h4> 
+			</div> 
+			<div class="modal-body" id="textMyCommentaryN"> 
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="commentOrder"></textarea>
+                </div>
+			</div>
+
+			<div class="modal-footer" id="buttonCommentary"> 
+                <button type="button" class="btn-primary btn-sm" onclick="insertCommentary()">Save</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReport" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadReport"> 
+                <input type="hidden" value="" id="UploadReportIDOrder" />
+				<div class="table-responsive">
+					<table class="table table-condensed" id="UploadReportInfo">
+						<thead>
+							<tr>
+								<td class="text-center"><strong>User</strong></td>
+								<td class="text-center"><strong>Date</strong></td>
+								<td class="text-center"><strong>Download</strong></td>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadReportN" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMyUploadReportN">New Roof Report </h4> 
+			</div> 
+			<div class="modal-body" id="textMyUploadReportN"> 
+                <div class="form-group">        
+                        <label for="name">File Name</label>
+                        <input type="text" class="form-control" id="file_name" name="name" placeholder="Enter name" required />
+                </div>
+                <input id="uploadImage" type="file" accept="application/pdf" name="image" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

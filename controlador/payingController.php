@@ -284,7 +284,7 @@ class payingController{
         if(is_null($_emergency_value) or $_emergency_value=="" ){
             $_emergency_value=0;
         }else{
-            $_emergency_value=$_emergency_value*100;
+            $_emergency_value=$_emergency_value;
         }
         return $_emergency_value;
     }
@@ -297,7 +297,7 @@ class payingController{
         if(is_null($_emergency_value) or $_emergency_value=="" ){
             $_emergency_value=0;
         }else{
-            $_emergency_value=$_emergency_value*100;
+            $_emergency_value=$_emergency_value;
         }
         return $_emergency_value;
     }
