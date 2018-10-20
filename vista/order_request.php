@@ -440,16 +440,14 @@
                  <h1 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h1>
             </div>
             <div class="panel-body">
-				<span class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>	
+			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
-					
-							<input id="pac-input" class="controls" type="text"
-								placeholder="Enter a location" >
-                            
+							<input style="margin-top:-30px;margin-left:auto;display:block;margin-bottom:20px;margin-right:5%;width:50%;border-radius:10px;height:30px;" id="pac-input" class="controls" type="text" placeholder="Enter a location" >
+                       
                                 <style>
 						/* Set the size of the div element that contains the map */
 						#map1 {

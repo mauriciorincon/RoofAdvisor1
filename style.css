@@ -1457,7 +1457,7 @@ border-color:#fff !important;
     width:100%;
 }
 .panel{
-position: relative;
+    position: relative;
     width: 85%;
     margin-left: auto;
     margin-right: auto;
@@ -1465,6 +1465,7 @@ position: relative;
     background:rgba(0, 0, 0, 0.6);
     border-radius:13px;
     border:2px solid #fff;
+    margin-top:-75px;
 }
 #hworks{
     width:100%;
@@ -1607,6 +1608,14 @@ margin-left:40% !important;
 padding-right:17% !important;
 padding-top:43px !important;
 padding-bottom:20px !important;
+}
+}
+@media (max-width:1280px){
+#srchinftxt1{
+font-size:15px;
+}
+.h1white{
+font-size:15px;
 }
 }
 @media (max-width:1200px){

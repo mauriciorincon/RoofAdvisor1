@@ -185,7 +185,6 @@
   background-color: #4CAF50;
   color: white;
 }
-
 /*Para cajas de texto largas*/
 @media screen and (min-width: 992px) {
     .modal-lg {
