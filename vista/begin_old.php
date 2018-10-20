@@ -120,11 +120,11 @@
 					<div class ="col-md-5">
 					</div>
 					<div class ="col-md-1">
-						<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat, Single Ply" checked>
+						<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option1" value="Flat" checked>
 					</div>
 					<div class="col-md-6"> 
 						<label class="form-check-label" for="estep3Option1">
-							Flat, Single Ply
+							Flat
 						</label>
 					</div>
 				</div>

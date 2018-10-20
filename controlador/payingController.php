@@ -16,7 +16,7 @@ class payingController{
     public function setPaying(){
         if(!isset($_SESSION['application_path'])){
             $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
-            echo "entro aca variable";
+            //echo "entro aca variable";
         }
         $amount = 0;
 
@@ -93,7 +93,9 @@ class payingController{
             </form>';
     }
 
-    public function showPayingWindow1(){
+    public function showPayingWindow1($buttonMessaje="Pay your service",$typePaying="pay_emergency_service"){
+       
+        
         $this->_payingModel= new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         
@@ -114,11 +116,11 @@ class payingController{
         ////////////////////////////////////////////////////////////////
         $_amount=$this->getEmergencyValue();
         echo '
-        <button id="customButton" class="btn">Pay your service</button>
+        <button id="customButton" class="btn">'.$buttonMessaje.'</button>
         <script>
             var amount_value='.$_amount.';
             var public_key=\''.$_key.'\';
-            var action_type=\'pay_emergency_service\';
+            var action_type=\''.$typePaying.'\';
             var email_user_logued=\''.$_SESSION['email'].'\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';

@@ -267,7 +267,7 @@
             }
 
             function addMarket(data,fila,infowindow){
-                var image="";
+                    var image="";
 					if(fila.Status==='A'){
 						image="open_service.png";
 					}else if(fila.Status=='D'){
@@ -815,7 +815,7 @@
                         <th>Time</th>
                         <th>Name/Addr/Phone</th>
                         <th>Description</th>
-                        <th>Order Type</th>
+                        <th>Request Type</th>
                         <th>Status</th>
                         <th>Est Amt</th>
                         <th>Final Amt</th>
@@ -1691,7 +1691,7 @@
                 <div class="form-group">
                     <label class="control-label">Best select the type of roofing material on your property?</label>
                     <select name="question1" id="question1" class="form-control">
-                        <option value="Flat, Single Ply">Flat, Single Ply</option>
+                        <option value="Flat">Flat</option>
                         <option value="Asphalt">Asphalt</option>
                         <option value="Wood Shake/Composite">Wood Shake/Composite</option>
                         <option value="Metal">Metal</option>
@@ -1732,7 +1732,20 @@
 			</div>
             <div class="modal-footer" id="buttonUploadReport"> 
             
-                    <button type="button" class="btn-primary btn-sm" onclick="insertOrderRoofReport()">Request</button> 
+                    <?php
+							if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							echo "<center>";
+							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
+							echo "</center>";
+						?>
+                        
+                    <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
                 
 				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
                   

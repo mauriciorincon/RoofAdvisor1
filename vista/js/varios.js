@@ -1,5 +1,11 @@
-$(document).ready(function() {
+var emergencyRepairCount=0;
+var openService=0;
+var scheduleRepairCount=0;
+var reportRepairCount=0;
+var closeService=0;
 
+$(document).ready(function() {
+ 
     /*$('#table_orders_customer').DataTable({
         rowCallback: function(row, data, index){
             if(data[4]=='Estimate Sent'){
@@ -1010,7 +1016,7 @@ function getValueService(){
                 if ( console && console.log ) {
                     var n = data.indexOf("Error");
                     if(n==-1){
-                        amount_value=data*100;
+                        amount_value=data;
                     }else{
                         amount_value=0;
                     }
@@ -2477,11 +2483,11 @@ function selectPaymentType(){
         totalValue=row.find("td:eq(3)").html();
         totalValue=totalValue.replace("$", "");
         totalValue=totalValue.replace(".00", "");
-        amount_value=totalValue*100;
+        amount_value=totalValue;
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
-                name: 'RoofServicenow',
+                name: 'RoofServiceNow',
                 description: 'pay your service',
                 amount: amount_value
               });
@@ -2681,7 +2687,7 @@ function getInvoices(orderID){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#myInvoiceInfo #invoiceInfo tbody').html(data);
+                $('#invoiceInfo tbody').html(data);
                 //$( "#myInvoiceInfo" ).dialog('open');
                 $(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
                 $('#detailStripe').html("");
@@ -3194,6 +3200,10 @@ function getInforCustomerForRoofReport(){
                 $('#question3').val(order.Hlevels);
                 $('#question4').val(order.Authorized);
                 $('#question5').val(order.RepAddress);
+                $('input:hidden[name=step5Latitude]').val(order.Latitude);
+                $('input:hidden[name=step5Logintud]').val(order.Longitude);
+                $('input:hidden[name=step5Address]').val(order.RepAddress);
+                $('input:hidden[name=step5ZipCode]').val(order.RepZIP);
                 getCustomerInfo(order.CustomerID);
 
             }else{
@@ -3228,6 +3238,7 @@ function closeMapSelect(){
     $('#question5').val($("#step5Logintud").val()+' '+$("#step5Latitude").val()+' '+$('#step5Address').val()+' '+$('#step5ZipCode').val());
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
+
 
 function insertOrderRoofReport(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();

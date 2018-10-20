@@ -73,63 +73,50 @@
 					ref.orderByChild("CustomerID").equalTo(customerID).once("value", function(snapshot) {
 
 						datos=snapshot.val();
-								for(k in datos){
-									fila=datos[k];
+						for(k in datos){
+							fila=datos[k];
 
-									var marker={
-										lat: parseFloat(fila.Latitude),
-										lng: parseFloat(fila.Longitude),
-										icon: iconBase+'library_maps.png',
-										text: fila.SchDate
-									};
-									var oMarket=addMarket(marker,fila,infowindow);
-									marketrs.push(oMarket);
+							var marker={
+								lat: parseFloat(fila.Latitude),
+								lng: parseFloat(fila.Longitude),
+								icon: iconBase+'library_maps.png',
+								text: fila.SchDate
+							};
+							var oMarket=addMarket(marker,fila,infowindow);
+							marketrs.push(oMarket);
 
-									if(fila.Status=='D'){
-										if(fila.ContractorID!="" || fila.ContractorID!=undefined){
-											orderOpenContractor.push(fila.ContractorID);
-											var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
-											refContractor.once("value", function(snapshot) {
-												var updateContractor = snapshot.val();
-												var marker={
-													lat: parseFloat(updateContractor.CurrentLocation.latitude),
-													lng: parseFloat(updateContractor.CurrentLocation.longitude),
-													icon: iconBase+'library_maps.png'
-												};
-												var oMarket=addMarketContractor(marker,updateContractor);
-												contractorMarker.push(oMarket);
-											});
-										}
-									}
-									
-									
-									/*total_orders++;
-									if(fila.RequestType=='S'){
-										total_schedule_orders++;
-									}
-									if(fila.RequestType=='E'){
-										total_emergengy_orders++;
-									}*/
+							if(fila.Status=='D'){
+								if(fila.ContractorID!="" || fila.ContractorID!=undefined){
+									orderOpenContractor.push(fila.ContractorID);
+									var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
+									refContractor.once("value", function(snapshot) {
+										var updateContractor = snapshot.val();
+										var marker={
+											lat: parseFloat(updateContractor.CurrentLocation.latitude),
+											lng: parseFloat(updateContractor.CurrentLocation.longitude),
+											icon: iconBase+'library_maps.png'
+										};
+										var oMarket=addMarketContractor(marker,updateContractor);
+										contractorMarker.push(oMarket);
+									});
 								}
-						
-						
-					//console.log(snapshot.val());
-					
+							}
+							}
 					});
 
-					addListeneContractor();	
-					// Retrieve new orders as they are added to our database
-					ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
-						var newOrder = snapshot.val();
-						if(newOrder.CustomerID==customerID){
-							row=validateExist(newOrder.OrderNumber)
-							if(row==-1){
-								addOrderToTable(newOrder,customerID,map,infowindow,iconBase);
+						addListeneContractor();	
+						// Retrieve new orders as they are added to our database
+						ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
+							var newOrder = snapshot.val();
+							if(newOrder.CustomerID==customerID){
+								row=validateExist(newOrder.OrderNumber)
+								if(row==-1){
+									addOrderToTable(newOrder,customerID,map,infowindow,iconBase);
+								}
 							}
-						}
-						console.log("Data: " + newOrder);
-						
-					});
+							console.log("Data: " + newOrder);
+							
+						});
 					// Retrieve orders that are update in database
 					ref.on("child_changed", function(snapshot, prevChildKey) {
 						var updateOrder = snapshot.val();
@@ -199,6 +186,7 @@
 					
 					
 				}
+			
 
 				function addListeneContractor(){
 					var refContractor = firebase.database().ref("/Contractors");

@@ -167,6 +167,7 @@ class userController{
     }
 
     public function loginContractor(){
+        
         if(!isset($_POST['userContractor']) or !isset($_POST['passwordContractor'])){
             $this->showLoginContractor();
         }else{
@@ -191,7 +192,12 @@ class userController{
                         
                         if(strcmp($_data_company['CompanyID'],"CO000000")==0){
                             $_SESSION['profile'] = 'admin';
-                            $this->dashboardAdmin();
+                            $_SESSION['loggedin'] = true;
+                            $_SESSION['username'] = $_result->displayName;
+                            $_SESSION['start'] = time();
+                            $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                            $_SESSION['email'] = $_result->email;
+                            $this->dashboardAdmin($this->_user);
                         }else{
                             $_SESSION['profile'] = 'company';
                             $this->dashboardCompany($this->_user);
@@ -530,19 +536,35 @@ class userController{
         }
     }
 
-    public function dashboardAdmin(){
+    public function dashboardAdmin($_id_company=""){
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['profile']) && $_SESSION['profile'] == 'admin'){
 
-        $this->_userModel=new userModel();
+            if(empty($_id_company)){
+                $_id_company=$_SESSION['email'];
+            }
+            $_userMail=$_id_company;
+            $this->_userModel=new userModel();
 
-        $_array_orders_to_show=array();
-        $_orderController=new orderController();
-        $_array_orders_to_show=$_orderController->getOrdersAll();
-        
-        require_once("vista/head.php");
-        require_once("vista/dashboard_admin.php");
-        require_once("vista/footer.php");
+            //echo "company id".$_id_company;
+            $_actual_company=$this->_userModel->getCompany($_userMail);
 
+            //print_r($_actual_company);
+            $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
+            
+            $_array_orders_to_show=array();
 
+            
+            $_orderController=new orderController();
+            $_orderController=new orderController();
+            $_array_orders_to_show=$_orderController->getOrdersAll();
+            
+                        
+            require_once("vista/head.php");
+            require_once("vista/dashboard_admin.php");
+            require_once("vista/footer.php");
+        }else{
+            $this->showLoginContractor();
+        }
     }
     
     public function updateCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
