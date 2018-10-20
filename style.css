@@ -100,9 +100,9 @@ body {font-family: 'Poppins', sans-serif;font-weight:300;font-size:14px;}
 .bg-sky{background: rgb(3, 169, 244) none repeat scroll 0 0;}
 .btn {
   -moz-user-select: none;
-  background:rgb(255, 255, 255);
+  background:rgb(250, 81, 26);
   border: 2px solid rgb(250, 81, 26);
-  color: #fa511a;
+  color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-size: 18px;
@@ -1547,6 +1547,7 @@ margin-bottom:-16px;
      text-align:center;
      background-color :#fa511a;
      color:#fff;
+     border-radius: 10px 10px 0px 0px;
 } 
 .wizsrch1{
 margin-left: 410px !important;
