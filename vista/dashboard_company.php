@@ -1732,7 +1732,20 @@
 			</div>
             <div class="modal-footer" id="buttonUploadReport"> 
             
-                    <button type="button" class="btn-primary btn-sm" onclick="insertOrderRoofReport()">Request</button> 
+            <?php
+							if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							echo "<center>";
+							$_objPay->showPayingWindow1('Request');
+							echo "</center>";
+						?>
+                        
+                    <button type="button" class="btn-primary btn-sm" onclick="showPaymentStripe()">Request</button> 
                 
 				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
                   

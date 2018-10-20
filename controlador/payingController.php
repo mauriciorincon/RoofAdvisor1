@@ -93,7 +93,10 @@ class payingController{
             </form>';
     }
 
-    public function showPayingWindow1(){
+    public function showPayingWindow1($buttonMessaje){
+        if(!isset($buttonMessaje)){
+            $buttonMessaje="Pay your service";
+        }
         $this->_payingModel= new paying_stripe();
         $_key=$this->_payingModel->getPublishKey();
         
@@ -114,7 +117,7 @@ class payingController{
         ////////////////////////////////////////////////////////////////
         $_amount=$this->getEmergencyValue();
         echo '
-        <button id="customButton" class="btn">Pay your service</button>
+        <button id="customButton" class="btn">'.$buttonMessaje.'</button>
         <script>
             var amount_value='.$_amount.';
             var public_key=\''.$_key.'\';

@@ -326,35 +326,22 @@ Welcome to RoofServicenow Admin
                 getCustomerData(dataOrder.CustomerFBID).then(function(customerDataX) {  
                     dataCustomer=customerDataX;
                 });
-                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                    if(companyStatus!="Active"){    
-                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
-                                    'href="" '+
-                                    'onClick="alert(\'You can not create comment until the company is active\')"> '+
-                                    '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
-                    }else{ 
-                        if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                            companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                            'href="" '+
-                                            'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                            '<span class="glyphicon glyphicon-comment"></span>'+
-                                        '</a>';
-                        }else{
-                            companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                            'href="" '+
-                                            'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                            '<span class="glyphicon glyphicon-comment"></span>'+
-                                        '</a>';    
-                        }
-                        companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
-                                        'href="#" ' +
-                                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-upload"></span>'+
-                                    '</a>';
-                    }
+                
                     
-                });
+                companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                                'href="" '+
+                                'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                                '<span class="glyphicon glyphicon-comment"></span>'+
+                            '</a>';    
+                
+                companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                                'href="#" ' +
+                                'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
+                                '<span class="glyphicon glyphicon-upload"></span>'+
+                            '</a>';
+                    
+                    
+                
                             
                 
 

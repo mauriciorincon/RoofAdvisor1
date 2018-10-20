@@ -2487,7 +2487,7 @@ function selectPaymentType(){
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
-                name: 'RoofServicenow',
+                name: 'RoofServiceNow',
                 description: 'pay your service',
                 amount: amount_value
               });
@@ -3200,6 +3200,10 @@ function getInforCustomerForRoofReport(){
                 $('#question3').val(order.Hlevels);
                 $('#question4').val(order.Authorized);
                 $('#question5').val(order.RepAddress);
+                $('input:hidden[name=step5Latitude]').val(order.Latitude);
+                $('input:hidden[name=step5Logintud]').val(order.Longitude);
+                $('input:hidden[name=step5Address]').val(order.RepAddress);
+                $('input:hidden[name=step5ZipCode]').val(order.RepZIP);
                 getCustomerInfo(order.CustomerID);
 
             }else{
@@ -3235,6 +3239,18 @@ function closeMapSelect(){
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
 
+function showPaymentStripe(){
+    
+    amount_value=29;
+    action_type="pay_invoice_service";
+    if(typeof handler !== undefined){
+        handler.open({
+            name: 'RoofServiceNow',
+            description: 'pay your service',
+            amount: amount_value
+            });
+    }
+}
 function insertOrderRoofReport(idStripeCharge,amountValue){
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType="roofreport";
