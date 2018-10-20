@@ -2687,7 +2687,7 @@ function getInvoices(orderID){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#myInvoiceInfo #invoiceInfo tbody').html(data);
+                $('#invoiceInfo tbody').html(data);
                 //$( "#myInvoiceInfo" ).dialog('open');
                 $(document).ready(function(){$("#myInvoiceInfo").modal("show"); });
                 $('#detailStripe').html("");
