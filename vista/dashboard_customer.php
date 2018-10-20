@@ -101,8 +101,8 @@
 									});
 								}
 							}
-					
-						});
+							}
+					});
 
 						addListeneContractor();	
 						// Retrieve new orders as they are added to our database
@@ -186,7 +186,7 @@
 					
 					
 				}
-			}
+			
 
 				function addListeneContractor(){
 					var refContractor = firebase.database().ref("/Contractors");
