@@ -20,9 +20,9 @@ if(is_null($_result)){
 }else{
     foreach ($_result as $key => $invoice) {
         $_string.='<tr>
-                    <td>'.$invoice['user_commentary'].'</td>
-                    <td>'.$invoice['date_commentary'].'</td>
-                    <td>'.$invoice['text_commentary'].'</td>
+                    <td>'.$invoice['user_comment'].'</td>
+                    <td>'.$invoice['date_comment'].'</td>
+                    <td>'.$invoice['text_comment'].'</td>
                 </tr>';
     }
 }

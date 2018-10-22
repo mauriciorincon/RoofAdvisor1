@@ -4,10 +4,10 @@
     } 
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     $_orderID=$_POST['orderID'];
-    $_commentary=$_POST['commentary'];
+    $_comment=$_POST['commentary'];
 
     $_orderController = new orderController();
 
-    $_result=$_orderController->insertOrderComentary($_orderID,$_commentary);
+    $_result=$_orderController->insertOrderComentary($_orderID,$_comment);
     echo $_result;
 ?>

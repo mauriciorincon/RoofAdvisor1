@@ -185,7 +185,7 @@ class userController{
                     if(!is_null($_data_company)){
                         $this->cleanVariables();
                         $_SESSION['loggedin'] = true;
-                        $_SESSION['username'] = $_result->displayName;
+                        $_SESSION['username'] = $_data_company['CompanyName'];
                         $_SESSION['start'] = time();
                         $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                         $_SESSION['email'] = $_result->email;
@@ -193,7 +193,7 @@ class userController{
                         if(strcmp($_data_company['CompanyID'],"CO000000")==0){
                             $_SESSION['profile'] = 'admin';
                             $_SESSION['loggedin'] = true;
-                            $_SESSION['username'] = $_result->displayName;
+                            $_SESSION['username'] = $_data_company['CompanyName'];
                             $_SESSION['start'] = time();
                             $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                             $_SESSION['email'] = $_result->email;

@@ -401,7 +401,7 @@
                                 'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                getCustomerData(dataOrder.CustomerFBID).then(function(customerDataX) {  
+                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
                     dataCustomer=customerDataX;
                 });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
@@ -485,7 +485,7 @@
                                     $row.find("td:eq(10)").html(contractorName);
                                 });
                             }
-                            getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
                                 $row.find("td:eq(3)").html(customerData);
                             });
 
@@ -493,7 +493,7 @@
                             getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                                 companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                     'href="#" '+ 
-                                    'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                    'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                     '<span class="glyphicon glyphicon-list-alt"></span>'+
                                 '</a>';
                                 if(companyStatus!="Active"){    
@@ -677,50 +677,50 @@
                 var orderStatus="";
                 switch (status) {
                     case "A":
-						orderStatus = "Order Open";
-						break;
-					case "C":
-						orderStatus = "Acepted Order";
-						break;
-                    case "D":
-						orderStatus = "Order Assigned";
-                        break;
-                    case "E":
-						orderStatus = "Contractor Just Arrived";
-                        break;
-                    case "F":
-						orderStatus = "Estimate Sent";
-                        break;
-                    case "G":
-						orderStatus = "Estimate Approved";
-                        break;
-                    case "H":
-						orderStatus = "Work In Progress";
-                        break;
-                    case "I":
-						orderStatus = "Work Completed";
-                        break;
-                    case "J":
-						orderStatus = "Final Bill";
-                        break;
-                    case "K":
-						orderStatus = "Order Completed Paid";
-                        break;
-                    case "Z":
-						orderStatus = "Cancel work";
-						break;
-					case "P":
-						orderStatus = "Report In Progress";
-						break;
-					case "R":
-						orderStatus = "Report In Progress";
-						break;
-					case "S":
-						orderStatus = "Report Complete";
-						break;
+							orderStatus = "Order Open";
+							break;
+						case "C":
+							orderStatus = "Acepted Order";
+							break;
+						case "D":
+							orderStatus = "Order Assigned";
+							break;
+						case "E":
+							orderStatus = "Contractor Just Arrived";
+							break;
+						case "F":
+							orderStatus = "Estimate Sent";
+							break;
+						case "G":
+							orderStatus = "Estimate Approved";
+							break;
+						case "H":
+							orderStatus = "Work In Progress";
+							break;
+						case "I":
+							orderStatus = "Work Completed";
+							break;
+						case "J":
+							orderStatus = "Final Bill";
+							break;
+						case "K":
+							orderStatus = "Order Completed Paid";
+							break;
+						case "Z":
+							orderStatus = "Cancel work";
+							break;
+						case "P":
+							orderStatus = "Report In Progress";
+							break;
+						case "R":
+							orderStatus = "Report In Progress";
+							break;
+						case "S":
+							orderStatus = "Report Complete";
+							break;
 
-                    default:
-						orderStatus = "Undefined";
+						default:
+							orderStatus = "Undefined";
                 }
                 return orderStatus;
 			}
@@ -750,13 +750,13 @@
                 
             }
 
-            function getCustomerData(customerFBID) {
+            function getCustomerData(customerFBID,RepAddress) {
                 return new Promise(function (resolve, reject) {
                    
                     var ref = firebase.database().ref("Customers/"+customerFBID);
                     ref.once('value').then(function(snapshot) {
 							data=snapshot.val();
-							return resolve(data.Fname+' '+data.Lname+' / '+data.Address+' / '+data.Phone);
+							return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
 						});
                         //return reject("Undefined");
                     });
@@ -870,6 +870,9 @@
                                     case "A":
                                         echo "Order Open";
                                         break;
+                                    case "C":
+                                        echo "Acepted Order";
+                                        break;
                                     case "D":
                                         echo "Order Assigned";
                                         break;
@@ -894,8 +897,17 @@
                                     case "K":
                                         echo "Order Completed Paid";
                                         break;
-                                    case "C":
+                                    case "Z":
                                         echo "Cancel work";
+                                        break;
+                                    case "P":
+                                        echo "Report In Progress";
+                                        break;
+                                    case "R":
+                                        echo "Report In Progress";
+                                        break;
+                                    case "S":
+                                        echo "Report Complete";
                                         break;
                                     default:
                                         echo "Undefined";
@@ -1613,7 +1625,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+				<h4 class="modal-title" id="headerUploadReport">Files</h4> 
 			</div> 
 			<div class="modal-body" id="textUploadReport"> 
                 <input type="hidden" value="" id="UploadReportIDOrder" />
@@ -1634,7 +1646,7 @@
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New File</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

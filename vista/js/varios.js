@@ -2011,7 +2011,7 @@ function showHideSteps(typeService){
         //step4.show();
         //step5.show();
         step8.hide();
-        $('#step-6 h3').html('Review Scheduled Repair Order Details');
+        $('#step-6 h1').html('<font size="41"><strong>Review Scheduled Repair Order Details</strong></font>');
     }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
@@ -2020,9 +2020,9 @@ function showHideSteps(typeService){
         step5.hide();
         //step8.show();
         if(typeService=='emergency'){
-            $('#step-6 h3').html('Review Emergency Repair Order Details');
+            $('#step-6 h1').html('<font size="41"><strong>Review Emergency Repair Order Details</strong></font>');
         }else{
-            $('#step-6 h3').html('Review Roof Report Order Details');
+            $('#step-6 h1').html('<font size="41"><strong>Review Roof Report Order Details</strong></font>');
         }
         
     }
