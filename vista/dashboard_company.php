@@ -166,7 +166,7 @@
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
                         row=validateExist(newOrder.OrderNumber)
-						if(row==-1){
+						if(row==-1 || row==undefined){
                                 addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
 						}                        
                     }
@@ -179,7 +179,7 @@
                     var updateOrder = snapshot.val();
                     if(updateOrder.CompanyID==companyID || updateOrder.CompanyID=='' ){
                         row=validateExist(updateOrder.OrderNumber);
-						if(row==-1){
+						if(row==-1 || row==undefined){
 								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
 						}else{
 								updateOrderOnTable(updateOrder,row);
@@ -220,7 +220,7 @@
                     }else{
                         if(updateOrder.Status!='A'){
                             row=validateExist(updateOrder.OrderNumber);
-                            if(row>-1){
+                            if(row==-1 || row==undefined){
                                 removeOrderOnTable(updateOrder);
                             }
                         }
@@ -232,7 +232,8 @@
                 // Remove orders that are deleted from database
                 ref.on("child_removed", function(snapshot) {
                     var deletedOrder = snapshot.val();
-                        if(validateExist(deletedOrder.OrderNumber)==true){
+                        row=validateExist(deletedOrder.OrderNumber);
+                        if(row==-1 || row==undefined){
                             removeOrderOnTable(deletedOrder);
                         }
                     console.log("Data: " + deletedOrder.OrderNumber);
@@ -555,7 +556,14 @@
             }
 
             function validateExist(orderID){
-                    var value = orderID;
+                var t = $('#table_orders_company').DataTable();
+					t.rows( function ( idx, data, node ) {
+                        if (data[0] === orderID){
+                            return idx;
+                        }
+					} )
+                
+                    /*var value = orderID;
                     var flag=false;
                     var count=-1;
                     $("#table_orders_company tr").each(function(index) {
@@ -578,8 +586,8 @@
 
                 if(flag==false){
                     count=-1;
-                }
-                return count;
+                }*/
+                //return count;
 
             }
 
@@ -920,29 +928,39 @@
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                        if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
+                                    if(strcmp($order['RequestType'],"R")==0){
                                         ?>
-                                            <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-												href="" 
-												onClick="alert('You can not take the job until the company is active')"> 
-												<span class="glyphicon glyphicon-check"></span>Take work
-											</a>
-                                <?php }else{ ?>
-                                        <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-												href="#myModalGetWork" 
-												onClick="setOrderId('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span>Take work
-											</a>
-                                   <?php }
-                                    }else{
-                                        $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
-                                        $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-
-                                        echo $_contractorName;
+                                        <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                            href="" 
+                                            onClick="alert('Only RoofServiceNow can take this type of service')"> 
+                                            <span class="glyphicon glyphicon-check"></span>Take work
+                                        </a>
+                                    <?php }else{
+                                        if(!isset($order['ContractorID']) or empty($order['ContractorID'])){
+                                            if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
+                                            ?>
+                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                                    href="" 
+                                                    onClick="alert('You can not take the job until the company is active')"> 
+                                                    <span class="glyphicon glyphicon-check"></span>Take work
+                                                </a>
+                                    <?php   }else{ ?>
+                                            <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                                    href="#myModalGetWork" 
+                                                    onClick="setOrderId('<?php echo $order['FBID']?>')"> 
+                                                    <span class="glyphicon glyphicon-check"></span>Take work
+                                                </a>
+                                       <?php }
+                                        }else{
+                                            $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                            $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+    
+                                            echo $_contractorName;
+                                        } 
                                     } 
+                                    ?>
                                     
-                                ?>
+                                    
                             </td>
                             <td>
                             <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
@@ -1759,14 +1777,15 @@
 							
 						
 							$_objPay=new payingController();
-							echo "<center>";
+							//echo "<center>";
 							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
-							echo "</center>";
+							//echo "</center>";
 						?>
                         
-                    <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
+                        <button id="customButton" class="btn" data-dismiss="modal">Close</button>
+                    
                 
-				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+				    <!--<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> -->
                   
 			 </div>
                 
