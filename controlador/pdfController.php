@@ -22,6 +22,9 @@ class pdfController{
 
     function paymentConfirmation1($_orderID,$object_order,$_amount=0,$_stripe_id=""){
         
+        if($_amount>0){
+            $_amount=$_amount/100; 
+        }
         $_invoice_number="";
         $_consecutive_invoice=0;
         $_card_data="";
@@ -234,6 +237,11 @@ class pdfController{
     }
 
     function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
+
+        if($_amount>0){
+            $_amount=$_amount/100; 
+        }
+        
         $_invoice_number="";
         $_consecutive_invoice=0;
         $_card_data="";

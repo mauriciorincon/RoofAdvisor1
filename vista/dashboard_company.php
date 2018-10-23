@@ -166,7 +166,7 @@
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
                         row=validateExist(newOrder.OrderNumber)
-						if(row==-1){
+						if(row==-1 || row==undefined){
                                 addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
 						}                        
                     }
@@ -179,7 +179,7 @@
                     var updateOrder = snapshot.val();
                     if(updateOrder.CompanyID==companyID || updateOrder.CompanyID=='' ){
                         row=validateExist(updateOrder.OrderNumber);
-						if(row==-1){
+						if(row==-1 || row==undefined){
 								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
 						}else{
 								updateOrderOnTable(updateOrder,row);
@@ -220,7 +220,7 @@
                     }else{
                         if(updateOrder.Status!='A'){
                             row=validateExist(updateOrder.OrderNumber);
-                            if(row>-1){
+                            if(row==-1 || row==undefined){
                                 removeOrderOnTable(updateOrder);
                             }
                         }
@@ -232,7 +232,8 @@
                 // Remove orders that are deleted from database
                 ref.on("child_removed", function(snapshot) {
                     var deletedOrder = snapshot.val();
-                        if(validateExist(deletedOrder.OrderNumber)==true){
+                        row=validateExist(deletedOrder.OrderNumber);
+                        if(row==-1 || row==undefined){
                             removeOrderOnTable(deletedOrder);
                         }
                     console.log("Data: " + deletedOrder.OrderNumber);
@@ -401,7 +402,7 @@
                                 'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                 '<span class="glyphicon glyphicon-list-alt"></span>'+
                             '</a>';
-                getCustomerData(dataOrder.CustomerFBID).then(function(customerDataX) {  
+                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
                     dataCustomer=customerDataX;
                 });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
@@ -485,7 +486,7 @@
                                     $row.find("td:eq(10)").html(contractorName);
                                 });
                             }
-                            getCustomerData(dataOrder.CustomerFBID).then(function(customerData) {  
+                            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
                                 $row.find("td:eq(3)").html(customerData);
                             });
 
@@ -493,7 +494,7 @@
                             getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                                 companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                     'href="#" '+ 
-                                    'onClick="getInvoices(\''+$order['FBID']+'\')">'+ 
+                                    'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                     '<span class="glyphicon glyphicon-list-alt"></span>'+
                                 '</a>';
                                 if(companyStatus!="Active"){    
@@ -555,7 +556,14 @@
             }
 
             function validateExist(orderID){
-                    var value = orderID;
+                var t = $('#table_orders_company').DataTable();
+					t.rows( function ( idx, data, node ) {
+                        if (data[0] === orderID){
+                            return idx;
+                        }
+					} )
+                
+                    /*var value = orderID;
                     var flag=false;
                     var count=-1;
                     $("#table_orders_company tr").each(function(index) {
@@ -578,8 +586,8 @@
 
                 if(flag==false){
                     count=-1;
-                }
-                return count;
+                }*/
+                //return count;
 
             }
 
@@ -677,50 +685,50 @@
                 var orderStatus="";
                 switch (status) {
                     case "A":
-						orderStatus = "Order Open";
-						break;
-					case "C":
-						orderStatus = "Acepted Order";
-						break;
-                    case "D":
-						orderStatus = "Order Assigned";
-                        break;
-                    case "E":
-						orderStatus = "Contractor Just Arrived";
-                        break;
-                    case "F":
-						orderStatus = "Estimate Sent";
-                        break;
-                    case "G":
-						orderStatus = "Estimate Approved";
-                        break;
-                    case "H":
-						orderStatus = "Work In Progress";
-                        break;
-                    case "I":
-						orderStatus = "Work Completed";
-                        break;
-                    case "J":
-						orderStatus = "Final Bill";
-                        break;
-                    case "K":
-						orderStatus = "Order Completed Paid";
-                        break;
-                    case "Z":
-						orderStatus = "Cancel work";
-						break;
-					case "P":
-						orderStatus = "Report In Progress";
-						break;
-					case "R":
-						orderStatus = "Report In Progress";
-						break;
-					case "S":
-						orderStatus = "Report Complete";
-						break;
+							orderStatus = "Order Open";
+							break;
+						case "C":
+							orderStatus = "Acepted Order";
+							break;
+						case "D":
+							orderStatus = "Order Assigned";
+							break;
+						case "E":
+							orderStatus = "Contractor Just Arrived";
+							break;
+						case "F":
+							orderStatus = "Estimate Sent";
+							break;
+						case "G":
+							orderStatus = "Estimate Approved";
+							break;
+						case "H":
+							orderStatus = "Work In Progress";
+							break;
+						case "I":
+							orderStatus = "Work Completed";
+							break;
+						case "J":
+							orderStatus = "Final Bill";
+							break;
+						case "K":
+							orderStatus = "Order Completed Paid";
+							break;
+						case "Z":
+							orderStatus = "Cancel work";
+							break;
+						case "P":
+							orderStatus = "Report In Progress";
+							break;
+						case "R":
+							orderStatus = "Report In Progress";
+							break;
+						case "S":
+							orderStatus = "Report Complete";
+							break;
 
-                    default:
-						orderStatus = "Undefined";
+						default:
+							orderStatus = "Undefined";
                 }
                 return orderStatus;
 			}
@@ -750,13 +758,13 @@
                 
             }
 
-            function getCustomerData(customerFBID) {
+            function getCustomerData(customerFBID,RepAddress) {
                 return new Promise(function (resolve, reject) {
                    
                     var ref = firebase.database().ref("Customers/"+customerFBID);
                     ref.once('value').then(function(snapshot) {
 							data=snapshot.val();
-							return resolve(data.Fname+' '+data.Lname+' / '+data.Address+' / '+data.Phone);
+							return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
 						});
                         //return reject("Undefined");
                     });
@@ -870,6 +878,9 @@
                                     case "A":
                                         echo "Order Open";
                                         break;
+                                    case "C":
+                                        echo "Acepted Order";
+                                        break;
                                     case "D":
                                         echo "Order Assigned";
                                         break;
@@ -894,8 +905,17 @@
                                     case "K":
                                         echo "Order Completed Paid";
                                         break;
-                                    case "C":
+                                    case "Z":
                                         echo "Cancel work";
+                                        break;
+                                    case "P":
+                                        echo "Report In Progress";
+                                        break;
+                                    case "R":
+                                        echo "Report In Progress";
+                                        break;
+                                    case "S":
+                                        echo "Report Complete";
                                         break;
                                     default:
                                         echo "Undefined";
@@ -908,29 +928,39 @@
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                        if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
+                                    if(strcmp($order['RequestType'],"R")==0){
                                         ?>
-                                            <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-												href="" 
-												onClick="alert('You can not take the job until the company is active')"> 
-												<span class="glyphicon glyphicon-check"></span>Take work
-											</a>
-                                <?php }else{ ?>
-                                        <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-												href="#myModalGetWork" 
-												onClick="setOrderId('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span>Take work
-											</a>
-                                   <?php }
-                                    }else{
-                                        $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
-                                        $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-
-                                        echo $_contractorName;
+                                        <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                            href="" 
+                                            onClick="alert('Only RoofServiceNow can take this type of service')"> 
+                                            <span class="glyphicon glyphicon-check"></span>Take work
+                                        </a>
+                                    <?php }else{
+                                        if(!isset($order['ContractorID']) or empty($order['ContractorID'])){
+                                            if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
+                                            ?>
+                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                                    href="" 
+                                                    onClick="alert('You can not take the job until the company is active')"> 
+                                                    <span class="glyphicon glyphicon-check"></span>Take work
+                                                </a>
+                                    <?php   }else{ ?>
+                                            <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
+                                                    href="#myModalGetWork" 
+                                                    onClick="setOrderId('<?php echo $order['FBID']?>')"> 
+                                                    <span class="glyphicon glyphicon-check"></span>Take work
+                                                </a>
+                                       <?php }
+                                        }else{
+                                            $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                            $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+    
+                                            echo $_contractorName;
+                                        } 
                                     } 
+                                    ?>
                                     
-                                ?>
+                                    
                             </td>
                             <td>
                             <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
@@ -1613,7 +1643,7 @@
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+				<h4 class="modal-title" id="headerUploadReport">Files</h4> 
 			</div> 
 			<div class="modal-body" id="textUploadReport"> 
                 <input type="hidden" value="" id="UploadReportIDOrder" />
@@ -1634,7 +1664,7 @@
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New File</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1747,14 +1777,15 @@
 							
 						
 							$_objPay=new payingController();
-							echo "<center>";
+							//echo "<center>";
 							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
-							echo "</center>";
+							//echo "</center>";
 						?>
                         
-                    <button type="button" class="btn-primary btn-sm" onclick="">Request</button> 
+                        <button id="customButton" class="btn" data-dismiss="modal">Close</button>
+                    
                 
-				    <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+				    <!--<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> -->
                   
 			 </div>
                 

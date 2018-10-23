@@ -222,11 +222,11 @@ class orderController{
 
     }
 
-    public function insertOrderComentary($orderID,$commentary){
+    public function insertOrderComentary($orderID,$comment){
         $_commenary=[
-            "user_commentary" => $_SESSION['username'],
-            "date_commentary" => date('m-d-Y h:m:s'),
-            "text_commentary" =>$commentary
+            "user_comment" => $_SESSION['username'],
+            "date_comment" => date('m-d-Y h:m:s'),
+            "text_comment" =>$comment
             ];
         $this->_orderModel=new orderModel();
         $_result=$this->_orderModel->insertOrderCommentary($orderID,$_commenary);

@@ -113,7 +113,7 @@ class orderModel extends connection{
     }
 
     public function getOrderCommentaries($orderID){
-        $result=$this->getDataTable('Commentary/'.$orderID);
+        $result=$this->getDataTable('Comment/'.$orderID);
         if(is_array($result)){
             return $result;
         }else{
@@ -123,8 +123,8 @@ class orderModel extends connection{
 
     public function insertOrderCommentary($orderID,$commentary){
         
-        $result=$this->insertDataTableT("Commentary/".$orderID,$commentary);
-        //$result=$this->updateDataTable("Commentary/".$orderID,"1",$commentary); 
+        $result=$this->insertDataTableT("Comment/".$orderID,$commentary);
+        
         return $result;
     }
 
@@ -139,7 +139,7 @@ class orderModel extends connection{
 
     public function insertOrderFile($orderID,$file_data){
         $result=$this->insertDataTableT("roofreportfiles/".$orderID,$file_data);
-        //$result=$this->updateDataTable("Commentary/".$orderID,"1",$commentary); 
+        
         return $result;
     }
  

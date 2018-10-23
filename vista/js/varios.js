@@ -2011,7 +2011,7 @@ function showHideSteps(typeService){
         //step4.show();
         //step5.show();
         step8.hide();
-        $('#step-6 h3').html('Review Scheduled Repair Order Details');
+        $('#step-6 h1').html('<font size="41"><strong>Review Scheduled Repair Order Details</strong></font>');
     }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
@@ -2020,9 +2020,9 @@ function showHideSteps(typeService){
         step5.hide();
         //step8.show();
         if(typeService=='emergency'){
-            $('#step-6 h3').html('Review Emergency Repair Order Details');
+            $('#step-6 h1').html('<font size="41"><strong>Review Emergency Repair Order Details</strong></font>');
         }else{
-            $('#step-6 h3').html('Review Roof Report Order Details');
+            $('#step-6 h1').html('<font size="41"><strong>Review Roof Report Order Details</strong></font>');
         }
         
     }
@@ -3235,13 +3235,13 @@ function showMapSelect(){
     $(document).ready(function(){$("#myMapSelectAddress").modal("show"); });
 }
 function closeMapSelect(){
-    $('#question5').val($("#step5Logintud").val()+' '+$("#step5Latitude").val()+' '+$('#step5Address').val()+' '+$('#step5ZipCode').val());
+    $('#question5').val($('#step5Address').val());
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
 
 
 function insertOrderRoofReport(idStripeCharge,amountValue){
-    var RepZIP=$('#zipCodeBegin').val();
+    var RepZIP=$('#step5ZipCode').val();
     var RequestType="roofreport";
     
     var Rtype=$("#question1").find(":selected").val();
@@ -3255,8 +3255,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
-    var SchDate='';
-    var SchTime='';
+    var SchDate=formatActualDate();
+    var SchTime=formatActualTime(2);
 
     if(RequestType=='emergency'){
         RequestType='E'
@@ -3314,4 +3314,29 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
             jsRemoveWindowLoad('');
         }
     });
+}
+
+function formatActualDate() {
+    var d = new Date();
+    var n = d.getFullYear();
+    var m = d.getMonth();
+    var da = d.getDate();
+    da=("00" + da).slice(-2);
+    m=("00" + m).slice(-2);
+    return m.toString()+'/'+da.toString()+'/'+n.toString();
+}
+
+function formatActualTime(aditionHours) {
+    var d = new Date();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    if(aditionHours>0){
+        hour=hour+2;
+        if(hour>23){
+            hour=hour-23;
+        }
+    }
+    hour=("00" + hour).slice(-2);
+    min=("00" + min).slice(-2);
+    return hour.toString()+':'+min.toString();
 }

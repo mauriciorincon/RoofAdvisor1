@@ -446,7 +446,7 @@
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
-							<input style="margin-top:-30px;margin-left:auto;display:block;margin-bottom:20px;margin-right:5%;width:50%;border-radius:10px;height:30px;" id="pac-input" class="controls" type="text" placeholder="Enter a location" >
+							<input  id="pac-input" class="controls" type="text" placeholder="Enter a location" >
                        
                                 <style>
 						/* Set the size of the div element that contains the map */
