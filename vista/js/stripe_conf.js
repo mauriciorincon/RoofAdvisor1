@@ -1,7 +1,7 @@
 var handler = StripeCheckout.configure({
     key: public_key,
     //key: 'pk_test_iubKDaao3vNKYYrr45bJPUOl',
-    image: 'img/logo.png',
+    image: 'img/stripe-logo.png',
     locale: 'auto',
     token: function(token) {
         var http = new XMLHttpRequest();
