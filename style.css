@@ -667,7 +667,7 @@ border:3px solid #fff;
   font-size:14px;
 }
 .footer-form button {
-  background: rgb(243, 188, 22) none repeat scroll 0 0 ;
+  background: rgb(250, 81, 26) none repeat scroll 0 0;
     float: left;
     font-weight: 500;
     padding: 5px 20px 2px;
@@ -679,11 +679,11 @@ border:3px solid #fff;
 	border:none;
 }
 .footer-form button:hover{
-	background-color: rgb(247, 208, 92);
-    border-color: rgb(247, 208, 92);
+    background-color: rgb(250, 86, 33);
+    border: 1px solid #fff;
     color: rgb(255, 255, 255);
-    transition: all 0.3s ease 0s;
-	}
+    transition: all 0.3s ease 0s;	
+}
 .blog-post{margin-top:20px}
 .blog-post ul{}
 .blog-post ul li {
@@ -738,7 +738,7 @@ border:3px solid #fff;
   font-weight:300;
   line-height:24px;
 }
-.copyright-text > p a{color:rgb(243, 188, 22)}
+.copyright-text > p a{color:#337ab7)}
 .footer-form input::-webkit-input-placeholder{
     /* Chrome */
     color: #fff;
@@ -1589,6 +1589,15 @@ border:0px;
 }
 .modal-backdrop{
 opacity:0.79 !important;
+}
+#db-cus-main{
+width: 98%;
+    display: block;
+    margin: auto;
+    box-shadow: 3px 5px 12px -4px;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px solid #54545461;
+    padding: 20px;
 }
 @media (min-width:1700px){
 .main-menu ul li a{
