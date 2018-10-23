@@ -3126,6 +3126,21 @@ function getListReportFile(orderID){
 
 function changeSelection(selectionType){
     selectionType=$("#customerTypeRequest").find(":selected").val()
+
+    $('#customButton').hide();
+    $('#question1').val('');
+    $('#question2').val('');
+    $('#question3').val('');
+    $('#question4').val('');
+    $('#question5').val('');
+    $('#orderNumberRRR').val('');
+    $('#customerInfoRRR').val('');
+    
+    $('input:hidden[name=step5Latitude]').val('');
+    $('input:hidden[name=step5Logintud]').val('');
+    $('input:hidden[name=step5Address]').val('');
+    $('input:hidden[name=step5ZipCode]').val('');
+
     switch (selectionType){
         case "order":
             $('#orderNumberRRR').show();
@@ -3135,6 +3150,7 @@ function changeSelection(selectionType){
             $('#buttoncustomerIDRRR').hide();
             
             
+
             break;
         case "customer":
             $('#orderNumberRRR').hide();
@@ -3150,6 +3166,7 @@ function changeSelection(selectionType){
             $('#customerIDRRR').hide();
             $('#labelcustomerIDRRR').hide();
             $('#buttoncustomerIDRRR').hide();
+            
             break;
     }
 }
@@ -3163,6 +3180,7 @@ function getCustomerInfo(customerID){
             if(n==-1){
                 customer=jQuery.parseJSON(data);
                 $('#customerInfoRRR').val("Address: "+customer.Address+'\n'+"City: "+customer.City+'\n'+"Email: "+customer.Email+'\n'+"Name: "+customer.Fname+' '+customer.Lname+'\n'+"Phone: "+customer.Phone);
+                $('#customButton').show();
             }else{
                 $('#headerTextAnswerOrder').html('Roof Report response');
                 $('#myMensaje div.modal-body').html(data);
@@ -3192,25 +3210,32 @@ function getInforCustomerForRoofReport(){
     $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
-            var n = data.indexOf("Error");
-            if(n==-1){
-                order=jQuery.parseJSON(data);
-                $('#question1').val(order.Rtype);
-                $('#question2').val(order.Water);
-                $('#question3').val(order.Hlevels);
-                $('#question4').val(order.Authorized);
-                $('#question5').val(order.RepAddress);
-                $('input:hidden[name=step5Latitude]').val(order.Latitude);
-                $('input:hidden[name=step5Logintud]').val(order.Longitude);
-                $('input:hidden[name=step5Address]').val(order.RepAddress);
-                $('input:hidden[name=step5ZipCode]').val(order.RepZIP);
-                getCustomerInfo(order.CustomerID);
-
-            }else{
+            if(data.indexOf("null")>-1){
                 $('#headerTextAnswerOrder').html('Roof Report response');
-                $('#myMensaje div.modal-body').html(data);
-                $(document).ready(function(){$("#myMensaje").modal("show"); });
+                $('#myModalRespuesta div.modal-body').html('the entered order does not exist') ;
+                $(document).ready(function(){$("#myModalRespuesta").modal("show"); });
+            }else{
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    order=jQuery.parseJSON(data);
+                    $('#question1').val(order.Rtype);
+                    $('#question2').val(order.Water);
+                    $('#question3').val(order.Hlevels);
+                    $('#question4').val(order.Authorized);
+                    $('#question5').val(order.RepAddress);
+                    $('input:hidden[name=step5Latitude]').val(order.Latitude);
+                    $('input:hidden[name=step5Logintud]').val(order.Longitude);
+                    $('input:hidden[name=step5Address]').val(order.RepAddress);
+                    $('input:hidden[name=step5ZipCode]').val(order.RepZIP);
+                    getCustomerInfo(order.CustomerID);
+                    $('#customButton').show();
+                }else{
+                    $('#headerTextAnswerOrder h4').html('Roof Report response');
+                    $('#myMensaje div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                }
             }
+            
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             jsRemoveWindowLoad('');
         }

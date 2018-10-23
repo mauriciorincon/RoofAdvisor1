@@ -368,29 +368,32 @@
                 
                 var dataCustomer="";
                 var companyActions="";
-                
+                var dataContractor="";
                                        
 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                    if(dataOrder.CompanyStatus!='Acive'){
-                        if(dataOrder.RequestType=='R'){
-                            dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                    if(dataOrder.RequestType=='R'){
+                        dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="" '+
                                 'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
-                                '<span class="glyphicon glyphicon-check"></span>--'+
-                                '</a>';
-                        }else{
-                            dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                'href="" '+
-                                'onClick="alert(\'You can not take the job until the company is active\')"> '+
-                                '<span class="glyphicon glyphicon-check"></span>Take work'+
-                                '</a>';
-                        } 
+                                '<span class="glyphicon glyphicon-check"></span>Info</a>';
+
+                    }else{
+                        getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                            if(companyStatus=='Acive'){
+                                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                                            'href="#myModalGetWork" '+
+                                            'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
+                                            '<span class="glyphicon glyphicon-check"></span>Take work1</a>';        
+                            }else{
+                                    dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                        'href="" '+
+                                        'onClick="alert(\'You can not take the job until the company is active\')"> '+
+                                        '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                            } 
+                        });
                     }
-                    dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
-									'href="#myModalGetWork" '+
-									'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
-                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                    
                 }else{
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                                 dataContractor=contractorName; 
@@ -407,7 +410,7 @@
                 });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                     if(companyStatus!="Active"){    
-                    companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
+                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
                                     'href="" '+
                                     'onClick="alert(\'You can not create comment until the company is active\')"> '+
                                     '<span class="glyphicon glyphicon-comment"></span>'+
@@ -557,11 +560,14 @@
 
             function validateExist(orderID){
                 var t = $('#table_orders_company').DataTable();
-					t.rows( function ( idx, data, node ) {
-                        if (data[0] === orderID){
-                            return idx;
+                var data = t.rows().data();
+                var indice=-1;
+                var row = data.each(function (value, index) {
+                    if (value[0] === orderID){
+                        indice=index;
                         }
-					} )
+                });	
+                return indice;
                 
                     /*var value = orderID;
                     var flag=false;
@@ -1708,8 +1714,7 @@
                     <label class="control-label">Select Option</label>
                     <select id="customerTypeRequest" name="customerTypeRequest" onchange="changeSelection()" required="required" class="form-control" placeholder="Select state">
                         <option value="order">Based on existing order</option>
-                        <option value="customer">From existing customer</option>
-                        <option value="newCustomer">No RoofService customer</option>
+                        <option value="newCustomer">New customer</option>
                     </select>
                 </div> 
                 <div class="form-group">
@@ -1782,7 +1787,7 @@
 							//echo "</center>";
 						?>
                         
-                        <button id="customButton" class="btn" data-dismiss="modal">Close</button>
+                        <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
                     
                 
 				    <!--<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> -->
@@ -2000,7 +2005,7 @@
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				
 				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerOrder"> 

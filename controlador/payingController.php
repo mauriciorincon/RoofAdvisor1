@@ -114,7 +114,13 @@ class payingController{
         /////////////////////////////////////////////////////////////////
         //working
         ////////////////////////////////////////////////////////////////
-        $_amount=$this->getEmergencyValue();
+        if(strcmp($typePaying,'pay_company_roofreport')==0){
+            
+            $_amount=$this->getRoofReport();
+        }else{
+            $_amount=$this->getEmergencyValue();
+        }
+        
         echo '
         <button id="customButton" class="btn">'.$buttonMessaje.'</button>
         <script>
@@ -293,7 +299,7 @@ class payingController{
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_emergency_value=$this->_payingModel->getNode('Parameters/AmountER');
+        $_emergency_value=$this->_payingModel->getNode('Parameters/AmountReport');
         if(is_null($_emergency_value) or $_emergency_value=="" ){
             $_emergency_value=0;
         }else{

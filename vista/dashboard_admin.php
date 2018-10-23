@@ -443,7 +443,16 @@ Welcome to RoofServicenow Admin
         }
 
         function validateExist(orderID){
-            var value = orderID;
+            var t = $('#table_orders_company').DataTable();
+            var data = t.rows().data();
+            var indice=-1;
+            var row = data.each(function (value, index) {
+                if (value[0] === orderID){
+                    indice=index;
+                    }
+            });	
+            return indice;
+            /*var value = orderID;
             var flag=false;
             var count=-1;
             $("#table_orders_company tr").each(function(index) {
@@ -467,7 +476,7 @@ Welcome to RoofServicenow Admin
             if(flag==false){
                 count=-1;
             }
-            return count;
+            return count;*/
         }
 
         function getRequestType(requestType){
