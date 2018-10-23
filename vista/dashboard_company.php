@@ -32,10 +32,10 @@
                 </div>
             </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
         </div>    
 </div>
 
@@ -376,15 +376,15 @@
                         dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="" '+
                                 'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
-                                '<span class="glyphicon glyphicon-check"></span>Info</a>';
+                                '<span class="glyphicon glyphicon-check"></span>Take work</a>';
 
                     }else{
                         getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                             if(companyStatus=='Acive'){
-                                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                             'href="#myModalGetWork" '+
-                                            'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
-                                            '<span class="glyphicon glyphicon-check"></span>Take work1</a>';        
+                                            'onClick="setOrderId(\''+dataOrder.FBID+'\')" > '+
+                                            '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
                             }else{
                                     dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                         'href="" '+
@@ -478,17 +478,35 @@
                             var requestType=getRequestType(dataOrder.RequestType);
                             var status=getStatus(dataOrder.Status);
                             var dataCustomer="";
+
                             if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                                dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
-                                                'href="#myModalGetWork" '+
-                                                'onClick="setOrderId("'+dataOrder.FBID+')"> '+
-                                                '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                $row.find("td:eq(10)").html(dataCustomer);
+                                if(dataOrder.RequestType=='R'){
+                                    dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                            'href="" '+
+                                            'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
+                                            '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                }else{
+                                    getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                                        if(companyStatus=='Acive'){
+                                            dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                                        'href="#myModalGetWork" '+
+                                                        'onClick="setOrderId(\''+dataOrder.FBID+'\')" > '+
+                                                        '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
+                                        }else{
+                                                dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                                                    'href="" '+
+                                                    'onClick="alert(\'You can not take the job until the company is active\')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                        } 
+                                    });
+                                }
+                                $row.find("td:eq(10)").html(dataContractor);
                             }else{
                                 getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                                    $row.find("td:eq(10)").html(contractorName);
-                                });
+                                        $row.find("td:eq(10)").html(contractorName);
+                                    });
                             }
+
                             getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
                                 $row.find("td:eq(3)").html(customerData);
                             });
@@ -531,19 +549,13 @@
 
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
-
                             $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
                             $row.find("td:eq(7)").html(dataOrder.ETA);
                             $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                            
-                                
-                            
                         }
-                        
                     }
                 });
             }
@@ -1729,6 +1741,7 @@
                 <div class="form-group">
                     <label class="control-label">Customer Info</label>
                     <textarea class="form-control" rows="5" id="customerInfoRRR"></textarea>
+                    <a href="#" class="btn input-block-level form-control" data-toggle="modal" data-target="#myRegisterNewCustomer" id="linkNewCustomer">Fill info new customer</a>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Best select the type of roofing material on your property?</label>
@@ -2013,6 +2026,76 @@
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myRegisterNewCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerRegisterNewCustomer">Customer Info</h4> 
+			</div> 
+            <div class="modal-body" id="textRegisterNewCustomer">
+                <div class="list-group1" id="myCustomerListGroup">
+                        <div class="form-group">
+                            <label class="control-label">First Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label ">Email</label>
+                            <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomer" name="emailValidationCustomer" onfocusout="validateEmail('customer')"/>
+                            <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="control-label ">Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+                            <div class="help-block">Minimum of 6 characters</div>
+                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label ">Confirm Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCity" name="customerCity" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                    <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                <?php } ?>
+                            </select>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Zip code</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">Phone number</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+                        </div>
+                </div>
+            </div>
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer()">Save Info</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

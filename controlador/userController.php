@@ -525,6 +525,9 @@ class userController{
                 array_push($_array_orders_to_show,$order);
             }
 
+            $this->_userModel=new userModel();
+            $_array_state=$this->_userModel->getNode('Parameters/state');
+
             $this->_otherController=new othersController();
             $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
             
@@ -553,6 +556,8 @@ class userController{
             
             $_array_orders_to_show=array();
 
+            $this->_otherController=new othersController();
+            $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
             
             $_orderController=new orderController();
             $_orderController=new orderController();

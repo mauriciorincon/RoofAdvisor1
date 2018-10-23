@@ -360,7 +360,7 @@ Welcome to RoofServicenow Admin
                             if(dataOrder.RequestType!='R'){
                                 dataContractor='';
                             }else{
-                                dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal"'+
+                                dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take work" '+
                                             'href="#myModalGetWork" '+
                                             'onClick="setOrderId("'+dataOrder.FBID+')"> '+
                                             '<span class="glyphicon glyphicon-check"></span>Take work</a>';
@@ -1002,7 +1002,7 @@ Welcome to RoofServicenow Admin
 			</div> 
 			<div class="modal-body" id="textAnswerDriversCompany"> 
                 <div class="table-responsive">
-                        <table class="table" id="table_drivers_dashboard_admin" name="table_drivers_dashboard_admin">
+                        <table class="table" id="table_drivers_dashboard_company" name="table_drivers_dashboard_company">
                             <thead>
                             <tr>
                                 <th>ContractorID</th>
@@ -1170,10 +1170,10 @@ Welcome to RoofServicenow Admin
       </div>
       <div class="modal-body">
 
-        <form role="form" method="post" action="?controlador=precontrato&accion=editaCupo">
+        <form role="form" method="post" action="" id="formInsertContractor">
             <div class="form-group">
                 <label for="ContractorIDed">ContractorID</label>
-                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn"  required readonly>
+                <input type="text" class="form-control" name="ContractorIDIn" id="ContractorIDIn" readonly>
             </div>
             <div class="form-group">
                 <label for="ContNameFirsted">First name</label>
@@ -1192,22 +1192,32 @@ Welcome to RoofServicenow Admin
             </div>
 
             <div class="form-group">
-                <label for="ContLicenseNumed">Driver License</label>
+                <label for="ContLicenseNumed">Employee Driver License</label>
                 <input type="text" class="form-control" name="ContLicenseNumIn" id="ContLicenseNumIn" maxlength="60" required oninvalid="this.setCustomValidity('Write the license number of contractor')"
                 oninput="setCustomValidity('')">
             </div>
 
             <div class="form-group">
-                <label for="ContLicenseNumed">Driver Email</label>
-                <input type="text" class="form-control" name="ContEmail" id="ContEmail" maxlength="60" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
+                <label for="ContLicenseNumed">Employee Email</label>
+                <input type="text" class="form-control" name="emailValidation" id="emailValidation" maxlength="60" onfocusout="validateEmail('Contractors')" required oninvalid="this.setCustomValidity('Write the email for the contractor')"
                 oninput="setCustomValidity('')">
+                <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
             </div>
             
             <div class="form-group">
+            <label for="ContStatused">Profile</label>
+                    <select class="form-control" id="ContProfileIn" name="ContProfileIn">
+                        <?php foreach ($_profileList as $key => $value1) { ?>
+                            <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                        <?php } ?>
+                    </select>
+            </div>
+
+            <div class="form-group">
             <label for="ContStatused">Status</label>
-                    <select class="form-control" id="ContStatusIn" name="ContStatusIn">
+                    <select class="form-control" id="ContStatusIn" name="ContStatusIn" disabled>
                         <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="Inactive" selected>Inactive</option>
                         <option value="Terminated">Terminated</option>
                     </select>
             </div>
@@ -1220,7 +1230,6 @@ Welcome to RoofServicenow Admin
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
-
 
 <!-- formulario Insertar contractor datos-->
 <div class="modal" id="myModalSchedyleCompany" role="dialog" style="height: 1000px;">
@@ -1440,3 +1449,48 @@ Welcome to RoofServicenow Admin
 		</div> 
 	</div>
 </div>
+
+<!-- formulario Insertar contractor datos-->
+<div class="modal" id="myModalGetWork" role="dialog" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Take work</h4>
+      </div>
+        <div class="modal-body"  id="myModalGetWorkBody">
+            <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
+            <input type="hidden" value="" id="orderIDWork" />
+            <div class="form-group">
+                <label for="dateWork">Date for the work</label>
+                <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
+            </div>
+            <div class="form-group">
+                <label for="timeWork">Time for the work</label>
+                <select name="timeWork" id="timeWork" class="form-control" required>
+                    <option value="9:00 am">9:00 am</option>
+                    <option value="10:00 am">10:00 am</option>
+                    <option value="11:00 am">11:00 am</option>
+                    <option value="12:00 pm">12:00 pm</option>
+                    <option value="1:00 pm">1:00 pm</option>
+                    <option value="2:00 pm">2:00 pm</option>
+                    <option value="3:00 pm">3:00 pm</option>
+                    <option value="4:00 pm">4:00 pm</option>
+                    <option value="5:00 pm">5:00 pm</option>
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="driverWork">Driver for the work</label>
+                <select name="driverWork" id="driverWork" class="form-control" required>
+                    <?php foreach ($_array_contractors_to_show as $key => $contractor) {?>
+                        <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <button type="button" class="btn-primary btn-sm" onClick="takeWork()" >Save</button>
+            <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+        </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->

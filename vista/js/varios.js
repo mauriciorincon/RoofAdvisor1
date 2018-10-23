@@ -3145,12 +3145,11 @@ function changeSelection(selectionType){
         case "order":
             $('#orderNumberRRR').show();
             $('#labelorderNumberRRR').show();
+            $('#customerInfoRRR').show();
             $('#customerIDRRR').hide();
             $('#labelcustomerIDRRR').hide();
             $('#buttoncustomerIDRRR').hide();
-            
-            
-
+            $('#linkNewCustomer').hide();
             break;
         case "customer":
             $('#orderNumberRRR').hide();
@@ -3163,9 +3162,11 @@ function changeSelection(selectionType){
         case "newCustomer":
             $('#orderNumberRRR').hide();
             $('#labelorderNumberRRR').hide();
-            $('#customerIDRRR').hide();
+            $('#customerInfoRRR').hide();
             $('#labelcustomerIDRRR').hide();
             $('#buttoncustomerIDRRR').hide();
+            $('#linkNewCustomer').show();
+            
             
             break;
     }
@@ -3364,4 +3365,47 @@ function formatActualTime(aditionHours) {
     hour=("00" + hour).slice(-2);
     min=("00" + min).slice(-2);
     return hour.toString()+':'+min.toString();
+}
+
+function validateInfoCustomer(){
+    var firstCustomerName = $("input#firstCustomerName").val();
+    var lastCustomerName = $("input#lastCustomerName").val();
+    var emailValidation = $("input#emailValidationCustomer").val();
+    var customerAddress = $("input#customerAddress").val();
+    var customerCity = $("input#customerCity").val();
+    var customerState = $("select#customerState").val();
+    var customerZipCode = $("input#customerZipCode").val();
+    var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
+    var message = "";
+
+    if(firstCustomerName==undefined || firstCustomerName==''){
+        message+="Please, fill the Customer name field \n";
+    }
+    if(lastCustomerName==undefined || lastCustomerName==''){
+        message+="Please, fill the Customer last name field \n";
+    }
+    if(emailValidation==undefined || emailValidation==''){
+        message+="Please, fill the email field \n";
+    }
+    if(customerAddress==undefined || customerAddress==''){
+        message+="Please, fill the address field \n";
+    }
+    if(customerCity==undefined || customerCity==''){
+        message+="Please, fill the city field \n";
+    }
+    if(customerState==undefined || customerState==''){
+        message+="Please, fill the state field \n";
+    }
+    if(customerZipCode==undefined || customerZipCode==''){
+        message+="Please, fill the zip code field \n";
+    }
+    if(customerPhoneNumber==undefined || customerPhoneNumber==''){
+        message+="Please, fill the phone number field \n";
+    }
+    if(message!=""){
+        alert(message);
+        return;
+    }else{
+        $(document).ready(function(){$("#myRegisterNewCustomer").modal("hide"); });
+    }
 }
