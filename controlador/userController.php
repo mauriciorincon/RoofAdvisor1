@@ -309,8 +309,9 @@ class userController{
         return $_result;
     }
 
-    public function insertCustomer($arrayCustomer){
+    public function insertCustomer($arrayCustomer,$_selectionType=""){
         $_response="";
+        $_uid_user="";
         $this->_userModel=new userModel();
         $_lastCustomerID=$this->_userModel->getLasCustomerNumberParameter("Parameters/LastCustomerID");
         //$_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
@@ -319,10 +320,21 @@ class userController{
         }else{
             $_lastCustomerID++;
         }
-        $hashActivationCode = md5( rand(0,1000) );
-        $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');
 
-        if(is_array($_responseU) or gettype($_responseU)=="object"){
+        $hashActivationCode = md5( rand(0,1000) );
+        if(strcmp($_selectionType,"newCustomer")!=0){
+            $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');    
+            if(gettype($_responseU)=="object"){
+                $_uid_user=$_responseU->uid;
+            }else{
+                $_uid_user="undefined";
+            }
+        }else{
+            $_uid_user="undefined";
+        }
+        
+        
+        if(is_array($_responseU) or gettype($_responseU)=="object" or strcmp($_selectionType,"newCustomer")==0){
             
             //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
             //$hashActivationCode = 'FBID';
@@ -338,20 +350,23 @@ class userController{
                 "State" =>  $arrayCustomer['customerState'],
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
-                "uid" => $_responseU->uid,
+                "uid" => $_uid_user,
             );
+            
             $_response=$this->_userModel->insertCustomer('FBID',$Customer);
             
             $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
             
             $this->updateCustomerLastId($_lastCustomerID);
 
-            $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
-            if($_mail_response==false){
-                return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
-            }else{
-                //return "OK ".$_response."<br>".$_mail_response;
+            if(strcmp($_selectionType,"newCustomer")!=0){
+                $this->_sendMail=new emailController();
+                $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
+                if($_mail_response==false){
+                    return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+                }else{
+                    //return "OK ".$_response."<br>".$_mail_response;
+                }
             }
         }else{
             return "Error".$_response;

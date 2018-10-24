@@ -1,4 +1,7 @@
 <input type="hidden" value="<?php echo $_actual_company['CompanyID']?> " id="companyIDhidden" >
+<?php
+echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+?>
 <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
@@ -1799,7 +1802,7 @@
 							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
 							//echo "</center>";
 						?>
-                        
+                        <button id="customButtonCancel" class="btn" onclick="showPayWindow()">Request</button>
                         <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
                     
                 
