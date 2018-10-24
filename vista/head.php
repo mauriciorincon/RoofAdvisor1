@@ -37,6 +37,9 @@ if(!isset($_SESSION)) {
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="js/fontawesome.min.js"></script>
 		<script src="https://checkout.stripe.com/checkout.js"></script>
+
+                <link rel="stylesheet" href="css/lity.min.css">
+
 		
 		<style>
 .checked {
