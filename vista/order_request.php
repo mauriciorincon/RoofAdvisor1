@@ -108,7 +108,8 @@
             </div>
         </div>
         </div>
-        <div style="margin-top:-50px;" class="panel panel-primary setup-contentOrder" id="step-2">
+        <button class="btnvid1"><a style="color:#fff" ref="video/roofpromo.mp4" data-lity>Test the video</a></button>
+         <div style="margin-top:-50px;" class="panel panel-primary setup-contentOrder" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
             </div>
