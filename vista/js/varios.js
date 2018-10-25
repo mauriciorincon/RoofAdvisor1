@@ -3250,11 +3250,19 @@ function getCustomerListRR(){
 
 }
 
-function showMapSelect(){
+function showMapSelect(typeService){
+    if(typeService=='roofReport'){
+        $('#buttonRoofReport').show();
+        $('#buttonPostCard').hide();
+        
+    }else if(typeService=='postCard'){
+        $('#buttonPostCard').show();
+        $('#buttonRoofReport').hide();
+    }
     $(document).ready(function(){$("#myMapSelectAddress").modal("show"); });
 }
-function closeMapSelect(){
-    $('#question5').val($('#step5Address').val());
+function closeMapSelect(textBoxInfo){
+    $('#'+textBoxInfo).val($('#step5Address').val());
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
 

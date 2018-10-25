@@ -39,6 +39,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
         </div>
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="">Post Card</button>
         </div>    
 </div>
 
@@ -1783,7 +1786,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 </div>
                 <div class="form-group">
                     <label class="control-label">Select the place for the service</label>
-                    <input type="text" class="form-control" id="question5" placeholder="Address" onclick="showMapSelect()">	
+                    <input type="text" class="form-control" id="question5" placeholder="Address" onclick="showMapSelect('roofReport')">	
                 </div>
                 
                 
@@ -2008,7 +2011,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             </div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect()">Set Location</button>
+                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('question5')" id='buttonRoofReport'>Set Location</button>
+                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('placePostCard')" id='buttonPostCard'>Set Location</button>
+                
                 <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button>
                 		
 			</div> 
@@ -2100,6 +2105,32 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer()">Save Info</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myPostCard" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyRoofReportRequest">Post Card Request</h4> 
+			</div> 
+			<div class="modal-body" id="textmyPostCard"> 
+                <div class="form-group">
+                    <label class="control-label">Select the place for the post cards deliver</label>
+                    <input type="text" class="form-control" id="placePostCard" placeholder="Address" onclick="showMapSelect('postCard')">	
+                </div>
+                <div class="form-group">
+                    <label class="control-label" id="labelPostCardQuantity">Type post card quantity</label>
+                    <input maxlength="100" type="text" class="form-control"  placeholder="post card quantity" id="labelPostCardQuantity" name="labelPostCardQuantity" />
+                </div> 
+			</div>
+            <div class="modal-footer" id="buttonPostCard"> 
+                <button id="customButtonCancel" class="btn" onclick="showPayWindow()">Request</button>
+                <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
+			 </div>
 		</div> 
 	</div>
 </div>

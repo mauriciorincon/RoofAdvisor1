@@ -15,6 +15,8 @@ $_customerZipCode = $_POST['customerZipCode'];
 $_customerPhoneNumber = $_POST['customerPhoneNumber'];
 $_password=$_POST['password'];
 
+$_selectionType="";
+
 if(!isset($_POST['selectionType'])){
     $_selectionType="";
 }else{
