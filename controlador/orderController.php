@@ -47,8 +47,18 @@ class orderController{
         $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
-        $_customer=$this->_userController->getCustomer($_SESSION['email']);
-        $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        if(strcmp($arrayDataOrder['RequestType'],"P")!=0){
+            $_customer=$this->_userController->getCustomer($_SESSION['email']);
+            $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+        }else{
+            $_customer=array(
+                "CustomerID"=>"",
+                "City"=>"",
+                "State"=>"",
+            );
+            $_customerK="";
+        }
+        
         //echo $_customer;
         //echo $_customerK;
         //exit;
@@ -83,7 +93,9 @@ class orderController{
                 $arrayDataOrder['ContractorID']="";
 
                 break;
-
+            case "P":
+                $_firstStatus="P";
+                break;
         }
         $Order = array(
             "ActAmtMat" => "",

@@ -3379,6 +3379,92 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     });
 }
 
+function insertOrderPostCard(){
+    
+    var RequestType="postcard";
+    
+    var Rtype="";
+    var Water="";
+    var Hlevels="";
+    var Authorized="";
+    var CompanyID=$('#companyIDhidden').val();
+    CompanyID=CompanyID.trim();
+    var email="";
+    var password="";
+    var latitude=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+    var RepZIP=$('#step5ZipCode').val();
+    var SchDate=formatActualDate();
+    var SchTime=formatActualTime(2);
+    var idStripeCharge=$('#textPostCardQuantity').val();
+    var amountValue=$('#textPostCardQuantity').val();
+
+    var selectionType="PostCard"
+
+    if(RequestType=='emergency'){
+        RequestType='E'
+    }else if(RequestType=='schedule'){
+        RequestType='S'
+    }else if(RequestType=='roofreport'){
+        RequestType='R'
+    }else if(RequestType=='postcard'){
+        RequestType='P'
+    }
+    
+    if(CompanyID==undefined){
+        CompanyID="";
+    }
+    if(amountValue==undefined){
+        amountValue=0;
+    }
+    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
+    $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
+                                                "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
+                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            
+
+            if(n==-1){
+                    var dataSplit=data.split(",");
+                    var orderIDSplit=dataSplit[2].split("/");
+                    var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                    
+                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
+
+                    $('#textAnswerOrder').html(data+'');
+                    
+
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                    $('#headerTextAnswerOrder').html('Error validating User Account');
+                    $('#textAnswerOrder').html(data+'<br><br>Please try again');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+            jsRemoveWindowLoad('');
+        }
+    });
+}
+
 function formatActualDate() {
     var d = new Date();
     var n = d.getFullYear();

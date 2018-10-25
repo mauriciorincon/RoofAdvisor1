@@ -76,6 +76,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             var scheduleRepairCount=0;
             var emergencyRepairCount=0;
             var reportRepairCount=0;
+            var postCardCount=0;
+
             var openService=0;
             var closeService=0;
             // Initialize and add the map
@@ -122,6 +124,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 break;
                             case "R":
                                 reportRepairCount++;
+                                break;
+                            case "P":
+                                postCardCount++;
                                 break;
                             default:
                         }
@@ -378,7 +383,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                        
 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                    if(dataOrder.RequestType=='R'){
+                    if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
                         dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="" '+
                                 'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
@@ -486,7 +491,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             var dataCustomer="";
 
                             if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                                if(dataOrder.RequestType=='R'){
+                                if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
                                     dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                             'href="" '+
                                             'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
@@ -626,6 +631,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         break;
                     case "R":
                         RequestType = "RoofReport";
+                        break;
+                    case "P":
+                        RequestType = "PostCard";
                         break;
                     default:
                         RequestType = "No value found";
@@ -891,6 +899,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                         case "R":
                                             echo "RoofReport";
                                             break;
+                                        case "P":
+                                            echo "PostCard";
+                                            break;
                                         default:
                                             echo "Undefined";
                                             break;
@@ -952,7 +963,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(strcmp($order['RequestType'],"R")==0){
+                                    if(strcmp($order['RequestType'],"R")==0 and strcmp($order['RequestType'],"P")==0){
                                         ?>
                                         <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
                                             href="" 
@@ -1838,6 +1849,32 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+<div class="modal fade" id="myPostCard" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyRoofReportRequest">Post Card Request</h4> 
+			</div> 
+			<div class="modal-body" id="textmyPostCard"> 
+                <div class="form-group">
+                    <label class="control-label">Select the place for the post cards deliver</label>
+                    <input type="text" class="form-control" id="placePostCard" placeholder="Address" onclick="showMapSelect('postCard')">	
+                </div>
+                <div class="form-group">
+                    <label class="control-label" id="labelPostCardQuantity">Type post card quantity</label>
+                    <input maxlength="100" type="text" class="form-control"  placeholder="post card quantity" id="textPostCardQuantity" name="textPostCardQuantity" />
+                </div> 
+			</div>
+            <div class="modal-footer" id="buttonPostCard"> 
+                <button id="customButtonCancel" class="btn" onclick="insertOrderPostCard()">Request</button>
+                <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
+			 </div>
+		</div> 
+	</div>
+</div>
+
 <div class="modal fade" id="myMapSelectAddress" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -1882,7 +1919,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 								map_ = new google.maps.Map(document.getElementById('map2'), {
 								center: {lat: 27.332617, lng: -81.255690},
-								zoom: 12
+                                zoom: 12,
+                                streetViewControl: false,
+                                mapTypeControl: false
 								});
 
 								////Get lat and long from zipcode
@@ -2109,28 +2148,3 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
-<div class="modal fade" id="myPostCard" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headermyRoofReportRequest">Post Card Request</h4> 
-			</div> 
-			<div class="modal-body" id="textmyPostCard"> 
-                <div class="form-group">
-                    <label class="control-label">Select the place for the post cards deliver</label>
-                    <input type="text" class="form-control" id="placePostCard" placeholder="Address" onclick="showMapSelect('postCard')">	
-                </div>
-                <div class="form-group">
-                    <label class="control-label" id="labelPostCardQuantity">Type post card quantity</label>
-                    <input maxlength="100" type="text" class="form-control"  placeholder="post card quantity" id="labelPostCardQuantity" name="labelPostCardQuantity" />
-                </div> 
-			</div>
-            <div class="modal-footer" id="buttonPostCard"> 
-                <button id="customButtonCancel" class="btn" onclick="showPayWindow()">Request</button>
-                <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
-			 </div>
-		</div> 
-	</div>
-</div>

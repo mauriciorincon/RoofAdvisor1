@@ -698,6 +698,9 @@
 						case "R":
 							RequestType = "RoofReport";
 							break;
+						case "P":
+							RequestType = "PostCard";
+							break;
 						default:
 							RequestType = "No value found";
 					}
@@ -893,7 +896,9 @@
 											case "R":
 												echo "RoofReport";
 												break;
-	
+											case "P":
+												echo "RoofReport";
+												break;
 											default:
 												echo "Undefined";
 												break;
