@@ -792,14 +792,19 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
             function getCustomerData(customerFBID,RepAddress) {
                 return new Promise(function (resolve, reject) {
-                   
+                   if(customerFBID==""){
+                    return resolve(RepAddress);
+                   }else{
                     var ref = firebase.database().ref("Customers/"+customerFBID);
                     ref.once('value').then(function(snapshot) {
 							data=snapshot.val();
 							return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
 						});
                         //return reject("Undefined");
-                    });
+                    
+                   }
+                });
+                    
                 
             }
 
@@ -963,7 +968,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(strcmp($order['RequestType'],"R")==0 and strcmp($order['RequestType'],"P")==0){
+                                    if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
                                         ?>
                                         <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
                                             href="" 
