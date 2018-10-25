@@ -312,6 +312,7 @@ class userController{
     public function insertCustomer($arrayCustomer,$_selectionType=""){
         $_response="";
         $_uid_user="";
+        $_responseU="undefined";
         $this->_userModel=new userModel();
         $_lastCustomerID=$this->_userModel->getLasCustomerNumberParameter("Parameters/LastCustomerID");
         //$_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
