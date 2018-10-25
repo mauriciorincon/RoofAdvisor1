@@ -356,7 +356,9 @@ class userController{
             
             $_response=$this->_userModel->insertCustomer('FBID',$Customer);
             
-            $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
+            if(strcmp($_selectionType,"newCustomer")!=0){
+                $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
+            }
             
             $this->updateCustomerLastId($_lastCustomerID);
 
