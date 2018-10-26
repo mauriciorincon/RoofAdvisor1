@@ -3652,7 +3652,7 @@ function loadPostCardCompany(){
         alert('minimum value allowed is 2500');
         return false;
     }
-    data="postCardValue,"+quantity;
+    var data="postCardValue,"+quantity;
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateDataCompany.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
