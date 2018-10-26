@@ -274,6 +274,7 @@ class userController{
                     "PrimaryLName" => $arrayContractor['lastNameCompany'],
                     "Status_Rating" => "5.0",
                     "uid" => $_responseU->uid,
+                    "postCardValue" =>0,
             );
             $_resultUser="User created correctly <br>";
             $_resultCompany=$this->_userModel->insertContractor($_newCompanyId,$Company);
@@ -645,6 +646,16 @@ class userController{
         }
         return "The employee identify by ".$_companyID." was updated corretly".$_aditional_message;
 
+    }
+
+    public function updateCompanyFields($companyID,$arrayFields){
+    
+        $this->_userModel=new userModel();
+    
+        for($n=0;$n<count($arrayFields);$n+=2){
+            $_result=$this->_userModel->updateCompany($companyID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+        }    
+        return $_result;
     }
 
     public function updateCustomer($_customerID,$_arrayCustomer){

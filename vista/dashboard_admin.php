@@ -53,6 +53,7 @@ Welcome to RoofServicenow Admin
         var reportRepairCount=0;
         var postCardCount=0;
 
+        var openService=0;
         <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
 
         // Initialize and add the map
@@ -1504,6 +1505,32 @@ Welcome to RoofServicenow Admin
                 </select>
             </div>
             <button type="button" class="btn-primary btn-sm" onClick="takeWork()" >Save</button>
+            <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+        </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->
+
+<!-- formulario Insertar contractor datos-->
+<div class="modal" id="myModalPostAdmin" role="dialog" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Take work</h4>
+      </div>
+        <div class="modal-body"  id="myModalPostAdminBody">
+            <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyPostCard" />
+            <div class="form-group">
+                <label for="dateWork">PostCard Balance</label>
+                <input type="text" class="form-control" name="postCardBalance" id="postCardBalance" readonly >
+            </div>
+            <div class="form-group">
+                <label for="dateWork">Quantity PostCard Company</label>
+                <input type="text" class="form-control" name="postCardQuantity" id="postCardQuantity" required >
+            </div>
+            
+            <button type="button" class="btn-primary btn-sm" onClick="loadPostCardCompany()" >Load Post Cards</button>
             <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
     </div><!-- /cierro contenedor -->

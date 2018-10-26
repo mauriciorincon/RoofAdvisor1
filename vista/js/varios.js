@@ -3619,3 +3619,60 @@ function showPayWindow(){
         }
     }
 }
+
+function showPostCardInfo(companyID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getBalancePostCard.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#postCardBalance').val(data);
+            }else{
+                
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+
+}
+
+function loadPostCardCompany(){
+    var quantity=$('#postCardQuantity').val();
+    if(quantity<2500){
+        alert('minimum value allowed is 2500');
+        return false;
+    }
+    data="postCardValue,"+quantity;
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/updateDataCompany.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                alert("The post card was load to the company");
+            }else{
+                
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
