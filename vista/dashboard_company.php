@@ -41,7 +41,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="">Post Card</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
         </div>    
 </div>
 
@@ -1863,6 +1863,10 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<h4 class="modal-title" id="headermyRoofReportRequest">Post Card Request</h4> 
 			</div> 
 			<div class="modal-body" id="textmyPostCard"> 
+                <div class="form-group">
+                    <label class="control-label">PostCard Balance</label>
+                    <input type="text" class="form-control" id="postCardBalance" placeholder="Balance postCard" onclick="" readonly>	
+                </div>
                 <div class="form-group">
                     <label class="control-label">Select the place for the post cards deliver</label>
                     <input type="text" class="form-control" id="placePostCard" placeholder="Address" onclick="showMapSelect('postCard')">	

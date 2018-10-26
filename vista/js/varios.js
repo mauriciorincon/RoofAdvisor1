@@ -3381,6 +3381,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
 
 function insertOrderPostCard(){
     
+    
     var RequestType="postcard";
     
     var Rtype="";
@@ -3399,7 +3400,16 @@ function insertOrderPostCard(){
     var SchTime=formatActualTime(2);
     var idStripeCharge=$('#textPostCardQuantity').val();
     var amountValue=$('#textPostCardQuantity').val();
+    var balance=$('#postCardBalance').val();
 
+    if(amountValue>balance){
+        alert('The quantity of post cards request can not be higher than the balance post card of the company');
+        return;
+    }
+    if(amountValue<2500){
+        alert('The quantity of post cards request can not be smaller than 2500');
+        return;
+    }
     var selectionType="PostCard"
 
     if(RequestType=='emergency'){
@@ -3628,6 +3638,7 @@ function showPostCardInfo(companyID){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#postCardBalance').val(data);
+                $('#companyPostCard').val(companyID);
             }else{
                 
             }
@@ -3648,18 +3659,22 @@ function showPostCardInfo(companyID){
 
 function loadPostCardCompany(){
     var quantity=$('#postCardQuantity').val();
+    var companyID=$('#companyPostCard').val();
+    var balance=$('#postCardBalance').val();
     if(quantity<2500){
         alert('minimum value allowed is 2500');
         return false;
     }
-    var data="postCardValue,"+quantity;
+    var total=parseInt(balance)+parseInt(quantity);
+    var data="postCardValue,"+total;
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/updateDataCompany.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
+    $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
                 alert("The post card was load to the company");
+                $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
             }else{
                 
             }
