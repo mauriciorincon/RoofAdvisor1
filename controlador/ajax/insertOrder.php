@@ -65,7 +65,7 @@ if (is_null($_id_order)){
     if(strpos($_id_order,'Error')>-1){
         return   $_id_order;  
     }else{
-        echo "Continue, Order was register correctly";
+        echo "Continue, Order was register correctly, $_id_order";
     }
     
 }

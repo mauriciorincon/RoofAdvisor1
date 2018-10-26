@@ -15,7 +15,13 @@ $_customerZipCode = $_POST['customerZipCode'];
 $_customerPhoneNumber = $_POST['customerPhoneNumber'];
 $_password=$_POST['password'];
 
+$_selectionType="";
 
+if(!isset($_POST['selectionType'])){
+    $_selectionType="";
+}else{
+    $_selectionType=$_POST['selectionType'];
+}
 
 $_arrayCustomer = array(
     "firstCustomerName" => "$_firstCustomerName",
@@ -30,11 +36,17 @@ $_arrayCustomer = array(
 );
 
 $_userController=new userController();
-$_customerID=$_userController->insertCustomer($_arrayCustomer);
+$_customerID=$_userController->insertCustomer($_arrayCustomer,$_selectionType);
+
 if(strpos($_customerID,"Error")!==false){
     echo "Error register customer,try again <br>".$_customerID;
 }else{
-    echo "Continue, Customer was register correctly please check your email, to validate the user";
+    if(strcmp($_selectionType,'newCustomer')==0){
+        echo $_customerID;
+    }else{
+        echo "Continue, Customer was register correctly please check your email, to validate the user";
+    }
+    
 }
 
 ?>

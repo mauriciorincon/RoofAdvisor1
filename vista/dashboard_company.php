@@ -1,4 +1,7 @@
 <input type="hidden" value="<?php echo $_actual_company['CompanyID']?> " id="companyIDhidden" >
+<?php
+echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+?>
 <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
@@ -36,6 +39,9 @@
         </div>
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="">Post Card</button>
         </div>    
 </div>
 
@@ -70,6 +76,8 @@
             var scheduleRepairCount=0;
             var emergencyRepairCount=0;
             var reportRepairCount=0;
+            var postCardCount=0;
+
             var openService=0;
             var closeService=0;
             // Initialize and add the map
@@ -116,6 +124,9 @@
                                 break;
                             case "R":
                                 reportRepairCount++;
+                                break;
+                            case "P":
+                                postCardCount++;
                                 break;
                             default:
                         }
@@ -372,7 +383,7 @@
                                        
 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                    if(dataOrder.RequestType=='R'){
+                    if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
                         dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="" '+
                                 'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
@@ -480,7 +491,7 @@
                             var dataCustomer="";
 
                             if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                                if(dataOrder.RequestType=='R'){
+                                if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
                                     dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                             'href="" '+
                                             'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
@@ -620,6 +631,9 @@
                         break;
                     case "R":
                         RequestType = "RoofReport";
+                        break;
+                    case "P":
+                        RequestType = "PostCard";
                         break;
                     default:
                         RequestType = "No value found";
@@ -778,14 +792,19 @@
 
             function getCustomerData(customerFBID,RepAddress) {
                 return new Promise(function (resolve, reject) {
-                   
+                   if(customerFBID==""){
+                    return resolve(RepAddress);
+                   }else{
                     var ref = firebase.database().ref("Customers/"+customerFBID);
                     ref.once('value').then(function(snapshot) {
 							data=snapshot.val();
 							return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
 						});
                         //return reject("Undefined");
-                    });
+                    
+                   }
+                });
+                    
                 
             }
 
@@ -885,6 +904,9 @@
                                         case "R":
                                             echo "RoofReport";
                                             break;
+                                        case "P":
+                                            echo "PostCard";
+                                            break;
                                         default:
                                             echo "Undefined";
                                             break;
@@ -946,7 +968,7 @@
                             <td><?php echo $order['EstAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(strcmp($order['RequestType'],"R")==0){
+                                    if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
                                         ?>
                                         <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
                                             href="" 
@@ -1780,7 +1802,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Select the place for the service</label>
-                    <input type="text" class="form-control" id="question5" placeholder="Address" onclick="showMapSelect()">	
+                    <input type="text" class="form-control" id="question5" placeholder="Address" onclick="showMapSelect('roofReport')">	
                 </div>
                 
                 
@@ -1799,7 +1821,7 @@
 							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
 							//echo "</center>";
 						?>
-                        
+                        <button id="customButtonCancel" class="btn" onclick="showPayWindow()">Request</button>
                         <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
                     
                 
@@ -1828,6 +1850,32 @@
                 <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myPostCard" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyRoofReportRequest">Post Card Request</h4> 
+			</div> 
+			<div class="modal-body" id="textmyPostCard"> 
+                <div class="form-group">
+                    <label class="control-label">Select the place for the post cards deliver</label>
+                    <input type="text" class="form-control" id="placePostCard" placeholder="Address" onclick="showMapSelect('postCard')">	
+                </div>
+                <div class="form-group">
+                    <label class="control-label" id="labelPostCardQuantity">Type post card quantity</label>
+                    <input maxlength="100" type="text" class="form-control"  placeholder="post card quantity" id="textPostCardQuantity" name="textPostCardQuantity" />
+                </div> 
+			</div>
+            <div class="modal-footer" id="buttonPostCard"> 
+                <button id="customButtonCancel" class="btn" onclick="insertOrderPostCard()">Request</button>
+                <button id="customButtonCancel" class="btn" data-dismiss="modal">Close</button>
+			 </div>
 		</div> 
 	</div>
 </div>
@@ -1876,7 +1924,9 @@
 
 								map_ = new google.maps.Map(document.getElementById('map2'), {
 								center: {lat: 27.332617, lng: -81.255690},
-								zoom: 12
+                                zoom: 12,
+                                streetViewControl: false,
+                                mapTypeControl: false
 								});
 
 								////Get lat and long from zipcode
@@ -2005,7 +2055,9 @@
             </div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect()">Set Location</button>
+                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('question5')" id='buttonRoofReport'>Set Location</button>
+                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('placePostCard')" id='buttonPostCard'>Set Location</button>
+                
                 <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button>
                 		
 			</div> 
@@ -2100,3 +2152,4 @@
 		</div> 
 	</div>
 </div>
+

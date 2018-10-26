@@ -47,6 +47,12 @@ Welcome to RoofServicenow Admin
         var mapObject;
         var infowindow;
         var orderOpenContractor=[];
+
+        var scheduleRepairCount=0;
+        var emergencyRepairCount=0;
+        var reportRepairCount=0;
+        var postCardCount=0;
+
         <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
 
         // Initialize and add the map
@@ -88,6 +94,9 @@ Welcome to RoofServicenow Admin
                             break;
                         case "R":
                             reportRepairCount++;
+                            break;
+                        case "P":
+                            postCardCount++;
                             break;
                         default:
                     }
@@ -276,7 +285,7 @@ Welcome to RoofServicenow Admin
                                 
 
             if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                if(dataOrder.RequestType!='R'){
+                if(dataOrder.RequestType!='R' && dataOrder.RequestType!='P'){
                     dataContractor='';
                 }else{
                     dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
@@ -357,7 +366,7 @@ Welcome to RoofServicenow Admin
                         var dataCustomer="";
 
                         if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                            if(dataOrder.RequestType!='R'){
+                            if(dataOrder.RequestType!='R' && dataOrder.RequestType!='P'){
                                 dataContractor='';
                             }else{
                                 dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take work" '+
@@ -490,6 +499,9 @@ Welcome to RoofServicenow Admin
                         break;
                     case "R":
                         RequestType = "RoofReport";
+                        break;
+                    case "P":
+                        RequestType = "PostCard";
                         break;
                     default:
                         RequestType = "No value found";
@@ -678,6 +690,9 @@ Welcome to RoofServicenow Admin
                                     case "R":
                                         echo "RoofReport";
                                         break;
+                                    case "P":
+                                        echo "PostCard";
+                                        break;
                                     default:
                                         echo "Undefined";
                                         break;
@@ -740,7 +755,7 @@ Welcome to RoofServicenow Admin
                         <td><?php echo $order['PaymentType']?></td>
                         <td><?php 
                                 if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                    if(strcmp($order['RequestType'],'R')!==0){
+                                    if(strcmp($order['RequestType'],'R')!==0 and  strcmp($order['RequestType'],'P')!==0){
                                        
                                     ?>
                                         

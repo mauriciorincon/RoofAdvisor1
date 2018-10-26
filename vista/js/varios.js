@@ -1458,13 +1458,6 @@ function validateIsLoggedIn(){
                                                 console.log('login has been completed successfully') }
                                                   $("#login-modal").removeClass('fade').modal('hide');
                                                   });
-
-                                /* handler.open({
-                                name: 'testinRoofServicenow',
-                                description: 'pay your service',
-                                amount: amount_value
-                              });*/
-                             
                         }
                     }else{
                         jsRemoveWindowLoad('');
@@ -3257,11 +3250,19 @@ function getCustomerListRR(){
 
 }
 
-function showMapSelect(){
+function showMapSelect(typeService){
+    if(typeService=='roofReport'){
+        $('#buttonRoofReport').show();
+        $('#buttonPostCard').hide();
+        
+    }else if(typeService=='postCard'){
+        $('#buttonPostCard').show();
+        $('#buttonRoofReport').hide();
+    }
     $(document).ready(function(){$("#myMapSelectAddress").modal("show"); });
 }
-function closeMapSelect(){
-    $('#question5').val($('#step5Address').val());
+function closeMapSelect(textBoxInfo){
+    $('#'+textBoxInfo).val($('#step5Address').val());
     $(document).ready(function(){$("#myMapSelectAddress").modal("hide"); });
 }
 
@@ -3283,6 +3284,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     var address=$('input:hidden[name=step5Address]').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
+
+    var selectionType=$("#customerTypeRequest").find(":selected").val()
 
     if(RequestType=='emergency'){
         RequestType='E'
@@ -3310,8 +3313,128 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
             
 
             if(n==-1){
-                    
+                    var dataSplit=data.split(",");
+                    var orderIDSplit=dataSplit[2].split("/");
+                    var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                    if (selectionType=="newCustomer"){
+                        var firstCustomerName = $("input#firstCustomerName").val();
+                        var lastCustomerName = $("input#lastCustomerName").val();
+                        var emailValidation = $("input#emailValidationCustomer").val();
+                        var customerAddress = $("input#customerAddress").val();
+                        var customerCity = $("input#customerCity").val();
+                        var customerState = $("select#customerState").val();
+                        var customerZipCode = $("input#customerZipCode").val();
+                        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
+
+                        $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
+                                                        "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password,
+                                                    "selectionType":selectionType}, null, "text" )
+                        .done(function( dataC, textStatusC, jqXHRC ) {
+                            if ( console && console.log ) {
+                                var n = dataC.indexOf("Error");
+                                if(n==-1){
+                                    arrayChanges="CustomerID,"+dataC;
+                                    updateOrder(orderIDSplit1[0],arrayChanges)
+                                }
+                                console.log(dataC);
+                            }
+                        })
+                        .fail(function( jqXHR, textStatus, errorThrown ) {
+                            if ( console && console.log ) {
+                                console.log( "La solicitud a fallado: " +  textStatusC);
+                                result=false;
+                                
+                            }
+                        });
+                    }
                      $(document).ready(function(){$("#myRoofReportRequest").modal("hide"); });
+
+                    $('#textAnswerOrder').html(data+'');
+                    
+
+                    $('#headerTextAnswerOrder').html('Success');
+                  
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').show();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                    $('#headerTextAnswerOrder').html('Error validating User Account');
+                    $('#textAnswerOrder').html(data+'<br><br>Please try again');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+            jsRemoveWindowLoad('');
+        }
+    });
+}
+
+function insertOrderPostCard(){
+    
+    var RequestType="postcard";
+    
+    var Rtype="";
+    var Water="";
+    var Hlevels="";
+    var Authorized="";
+    var CompanyID=$('#companyIDhidden').val();
+    CompanyID=CompanyID.trim();
+    var email="";
+    var password="";
+    var latitude=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+    var RepZIP=$('#step5ZipCode').val();
+    var SchDate=formatActualDate();
+    var SchTime=formatActualTime(2);
+    var idStripeCharge=$('#textPostCardQuantity').val();
+    var amountValue=$('#textPostCardQuantity').val();
+
+    var selectionType="PostCard"
+
+    if(RequestType=='emergency'){
+        RequestType='E'
+    }else if(RequestType=='schedule'){
+        RequestType='S'
+    }else if(RequestType=='roofreport'){
+        RequestType='R'
+    }else if(RequestType=='postcard'){
+        RequestType='P'
+    }
+    
+    if(CompanyID==undefined){
+        CompanyID="";
+    }
+    if(amountValue==undefined){
+        amountValue=0;
+    }
+    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
+    $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
+                                                "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
+                                                "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
+                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            
+
+            if(n==-1){
+                    var dataSplit=data.split(",");
+                    var orderIDSplit=dataSplit[2].split("/");
+                    var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                    
+                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
 
                     $('#textAnswerOrder').html(data+'');
                     
@@ -3404,8 +3527,95 @@ function validateInfoCustomer(){
     }
     if(message!=""){
         alert(message);
-        return;
+        $('#linkNewCustomer').addClass('btn-danger').removeClass('btn-success');
+        return false;
     }else{
         $(document).ready(function(){$("#myRegisterNewCustomer").modal("hide"); });
+        $('#linkNewCustomer').addClass('btn-success').removeClass('btn-danger');
+        return true;
+    }
+}
+
+function validateOrderInfo(){
+    var RepZIP=$('#step5ZipCode').val();
+    var RequestType="roofreport";
+    var Rtype=$("#question1").find(":selected").val();
+    var Water=$("#question2").find(":selected").val();
+    var Hlevels=$("#question3").find(":selected").val();
+    var Authorized=$("#question4").find(":selected").val();
+    var CompanyID=$('#companyIDhidden').val();
+    var latitude=$('input:hidden[name=step5Latitude]').val();
+    var longitude=$('input:hidden[name=step5Logintud]').val();
+    var address=$('input:hidden[name=step5Address]').val();
+    var message = "";
+
+    if(RepZIP==undefined || RepZIP==''){
+        message+="Please, fill the address field \n";
+    }
+    if(RequestType==undefined || RequestType==''){
+        message+="Please, fill the request type field \n";
+    }
+    if(Rtype==undefined || Rtype==''){
+        message+="Please, select roof type field \n";
+    }
+    if(Water==undefined || Water==''){
+        message+="Please, define leaks question \n";
+    }
+    if(Hlevels==undefined || Hlevels==''){
+        message+="Please, define stories quetion \n";
+    }
+    if(Authorized==undefined || Authorized==''){
+        message+="Please, define Authorized quetion \n";
+    }
+    if(CompanyID==undefined || CompanyID==''){
+        message+="Please, define company ID \n";
+    }
+    if(latitude==undefined || latitude==''){
+        message+="Please, fill the address field \n";
+    }
+    if(longitude==undefined || longitude==''){
+        message+="Please, fill the address field \n";
+    }
+    if(address==undefined || address==''){
+        message+="Please, fill the address field \n";
+    }
+    if(message!=""){
+        alert(message);
+        return false; 
+    }else{
+        return true;
+    }
+}
+
+
+function showPayWindow(){
+    var selectionType=$("#customerTypeRequest").find(":selected").val();
+    if(validateOrderInfo()==false){
+        return;
+    }else{
+        if(selectionType=='newCustomer'){
+            if(validateInfoCustomer()==false){
+                return false;
+            }else{
+                //action_type="pay_invoice_service";
+                if(typeof handler !== undefined){
+                    handler.open({
+                        name: 'RoofServiceNow',
+                        description: 'pay your service',
+                        amount: amount_value,
+                        email:userMailCompany
+                      });
+                } 
+            }
+        }else{
+            if(typeof handler !== undefined){
+                handler.open({
+                    name: 'RoofServiceNow',
+                    description: 'pay your service',
+                    amount: amount_value,
+                    email:userMailCompany
+                  });
+            }
+        }
     }
 }
