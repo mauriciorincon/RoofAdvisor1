@@ -159,7 +159,7 @@
                 <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 	                        <script src="js/lity.min.js"></script>
                 <script src="js/fontawesome.min.js"></script>
-	
+		<script src="vista/js/wickedpicker.js"></script>
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
 
 				

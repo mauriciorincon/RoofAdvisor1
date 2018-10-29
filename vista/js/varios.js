@@ -75,6 +75,7 @@ $(document).ready(function() {
       });
 
       $('.timepicker').mdtimepicker();
+      $('.timepickerX').wickedpicker();
 
       $('.timepicker').mdtimepicker().on('timechanged', function(e){
           console.log(e.value);
@@ -102,10 +103,7 @@ $(document).ready(function() {
         }
 
         
-            $('#datetimepicker3').datetimepicker({
-                format: 'LT'
-            });
-        
+            
 } );
 
 ///////////////////////////////////////////////

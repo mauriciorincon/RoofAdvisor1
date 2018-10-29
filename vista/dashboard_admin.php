@@ -1508,21 +1508,7 @@ Welcome to RoofServicenow Admin
                 </select>
                 
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <input type="text" name="timepicker" class="timepickerX"/>
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>
