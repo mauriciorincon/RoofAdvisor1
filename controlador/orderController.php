@@ -94,7 +94,7 @@ class orderController{
 
                 break;
             case "P":
-                $_firstStatus="P";
+                $_firstStatus="T";
                 break;
         }
         $Order = array(
@@ -134,6 +134,7 @@ class orderController{
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
             "StripeID"=>$arrayDataOrder['id_stripe'],
+            "postCardValue"=>$arrayDataOrder['postCardValue'],
         );
        // print_r($Order);
         $_result=$this->_orderModel->insertOrder("FBID",$Order);
