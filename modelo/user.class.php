@@ -203,5 +203,9 @@ class userModel extends connection{
     public function updateCustomerLastId($customerID){
         $this->updateDataTable("Parameters","LastCustomerID",$customerID);
     }
+
+    public function updateCompany($nodeName,$data){
+        return $this->updateDataTable("Company",$nodeName,$data); 
+    }
 }
 ?>

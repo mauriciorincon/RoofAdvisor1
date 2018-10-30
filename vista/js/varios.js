@@ -100,6 +100,12 @@ $(document).ready(function() {
             $('span[name=repairDone]').text(closeService);
             $('span[name=repairOpen]').text(openService);
         }
+
+        
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+            });
+        
 } );
 
 ///////////////////////////////////////////////
@@ -3381,6 +3387,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
 
 function insertOrderPostCard(){
     
+    
     var RequestType="postcard";
     
     var Rtype="";
@@ -3397,9 +3404,18 @@ function insertOrderPostCard(){
     var RepZIP=$('#step5ZipCode').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
-    var idStripeCharge=$('#textPostCardQuantity').val();
+    var idStripeCharge="";
     var amountValue=$('#textPostCardQuantity').val();
+    var balance=$('#postCardBalance').val();
 
+    if(parseInt(amountValue)>parseInt(balance)){
+        alert('The quantity of post cards request can not be higher than the balance post card of the company');
+        return;
+    }
+    if(parseInt(amountValue)<2500){
+        alert('The quantity of post cards request can not be smaller than 2500');
+        return;
+    }
     var selectionType="PostCard"
 
     if(RequestType=='emergency'){
@@ -3418,11 +3434,11 @@ function insertOrderPostCard(){
     if(amountValue==undefined){
         amountValue=0;
     }
-    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
+    jsShowWindowLoad('One second we are saving the order.');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"postCardValue":amountValue}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -3434,16 +3450,38 @@ function insertOrderPostCard(){
                     var orderIDSplit=dataSplit[2].split("/");
                     var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                     
-                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
-
+                    $(document).ready(function(){$("#myPostCard").modal("hide"); });
                     $('#textAnswerOrder').html(data+'');
-                    
-
                     $('#headerTextAnswerOrder').html('Success');
-                  
-                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#lastFinishButtonOrder').show();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
+
+                    balance=parseInt(balance)-parseInt(amountValue);
+                    var data="postCardValue,"+balance;
+
+                    
+                    $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : CompanyID,"arrayChanges":data}, null, "text" )
+                    .done(function( data, textStatus, jqXHR ) {
+                        if ( console && console.log ) {
+                            var n = data.indexOf("Error");
+                            if(n==-1){
+                                alert("The post card was load to the company");
+                                $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
+                            }else{
+                                
+                            }
+                            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                            jsRemoveWindowLoad('');
+                        }
+                    })
+                    .fail(function( jqXHR, textStatus, errorThrown ) {
+                        if ( console && console.log ) {
+                            console.log( "La solicitud a fallado: " +  textStatus);
+                            result1=false;
+                            
+                            return result1;
+                        }
+                    });
+
             }else{
                     $('#headerTextAnswerOrder').html('Error validating User Account');
                     $('#textAnswerOrder').html(data+'<br><br>Please try again');
@@ -3618,4 +3656,66 @@ function showPayWindow(){
             }
         }
     }
+}
+
+function showPostCardInfo(companyID){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getBalancePostCard.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#postCardBalance').val(data);
+                $('#companyPostCard').val(companyID);
+            }else{
+                
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+
+}
+
+function chargePostCardCompany(){
+    var quantity=$('#postCardQuantity').val();
+    var companyID=$('#companyPostCard').val();
+    var balance=$('#postCardBalance').val();
+    if(quantity<2500){
+        alert('minimum value allowed is 2500');
+        return false;
+    }
+    var total=parseInt(balance)+parseInt(quantity);
+    var data="postCardValue,"+total;
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                alert("The post card was load to the company");
+                $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
+            }else{
+                
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
 }

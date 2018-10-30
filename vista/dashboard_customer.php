@@ -755,7 +755,12 @@
 						case "S":
 							orderStatus = "Report Complete";
 							break;
-
+						case "T":
+							orderStatus = "Orden In Progress";
+                            break;
+                        case "U":
+							orderStatus = "Orden Asigned";
+                            break;
 						default:
 							orderStatus = "Undefined";
 					}
@@ -953,6 +958,12 @@
 												break;
 											case "S":
 												echo "Report Complete";
+												break;
+											case "T":
+												echo "Orden In Progress";
+												break;
+											case "U":
+												echo "Orden Asigned";
 												break;
 											default:
 												echo "Undefined";

@@ -68,6 +68,11 @@ $_string="";
                         onClick="getListDrivers('."'".$company['CompanyID']."'".')"> 
                         <span class="glyphicon glyphicon-object-align-horizontal"></span>
                         </a>';
+                    $_string.=' <a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Post Card"
+                        href="#myModalPostAdmin" 
+                        onClick="showPostCardInfo('."'".$company['CompanyID']."'".')"> 
+                        <span class="glyphicon glyphicon glyphicon-envelope"></span>
+                        </a>';
                     $_string.='</td>'.
                 "</tr>";
 		
