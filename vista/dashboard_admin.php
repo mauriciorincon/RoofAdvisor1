@@ -291,7 +291,7 @@ Welcome to RoofServicenow Admin
                 }else{
                     dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
                                 'href="#myModalGetWork" '+
-                                'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
+                                'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+ dataOrder.RequestType+'\')"> '+
                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
                 }
             }else{
@@ -372,7 +372,7 @@ Welcome to RoofServicenow Admin
                             }else{
                                 dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take work" '+
                                             'href="#myModalGetWork" '+
-                                            'onClick="setOrderId("'+dataOrder.FBID+')"> '+
+                                            'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+ dataOrder.RequestType+'\')"> '+
                                             '<span class="glyphicon glyphicon-check"></span>Take work</a>';
                                 $row.find("td:eq(10)").html(dataCustomer);
                             }
@@ -775,7 +775,7 @@ Welcome to RoofServicenow Admin
                             <?php }else{ ?>
                                     <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
                                             href="#myModalGetWork" 
-                                            onClick="setOrderId('<?php echo $order['FBID']?>')"> 
+                                            onClick="setOrderId('<?php echo $order['FBID']?>','<?php echo $order['RequestType']?>')"> 
                                             <span class="glyphicon glyphicon-check"></span>Take work
                                         </a>
                             <?php }
@@ -1508,7 +1508,12 @@ Welcome to RoofServicenow Admin
                 </select>
                 
             </div>
-            <input type="text" name="timepicker" class="timepickerX"/>
+            <div class="input-group bootstrap-timepicker timepicker1">
+                <input id="timepicker" class="form-control" data-provide="timepicker1" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/>
+            </div>
+            <div class="form-group">
+                <input type="text" name="timepicker1xxx" id="timepicker1xxx" class="timepicker1"/>
+            </div>
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>
@@ -1549,3 +1554,16 @@ Welcome to RoofServicenow Admin
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+ <?php
+							/*if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							//echo "<center>";
+							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
+							//echo "</center>";*/
+						?>
