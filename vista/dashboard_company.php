@@ -1,4 +1,4 @@
-<input type="hidden" value="<?php echo $_actual_company['CompanyID']?> " id="companyIDhidden" >
+<input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
@@ -459,8 +459,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         requestType,
                         status,
-                        dataOrder.ETA,
                         dataOrder.EstAmtMat,
+                        dataOrder.ActAmtMat,
                         dataOrder.PaymentType,
                         dataContractor,
                         companyActions,
@@ -563,8 +563,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
-                            $row.find("td:eq(7)").html(dataOrder.ETA);
-                            $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+                            $row.find("td:eq(7)").html(dataOrder.EstAmtMat);
+                            $row.find("td:eq(8)").html(dataOrder.ActAmtMat);
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
                         }
                     }
@@ -976,8 +976,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 ?>
                             </td>                            
 
-                            <td><?php echo $order['ETA']?></td>
                             <td><?php echo $order['EstAmtMat']?></td>
+                            <td><?php echo $order['ActAmtMat']?></td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
                                     if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
@@ -1495,6 +1495,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
             <input type="hidden" value="" id="orderIDWork" />
+            <input type="hidden" value="" id="orderTypeTakeWork" />
             <div class="form-group">
                 <label for="dateWork">Date for the work</label>
                 <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
@@ -2191,3 +2192,27 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+<?php 
+echo $_actual_company['postCardValue'];
+if(!empty($_actual_company['postCardValue'])){
+    echo '
+    <div class="modal fade" id="myMessagePostCardsPay" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            
+            <!-- Modal content--> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="headermyMessagePostCardsPay">Postcard Info</h4> 
+                </div> 
+                <div class="modal-body" id="textmyMessagePostCardsPay">
+                    <p>
+                    We are very grateful for your choice, to be able to use the postcards please make the payment by clicking <a href="#" onclick="showPayPostCards('.($_actual_company['postCardValue']*100).')">here</a>
+                    </p>              
+                </div>
+            </div> 
+        </div>
+    </div>
+    ';
+}
+?>

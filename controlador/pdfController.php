@@ -361,7 +361,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table  style="width: 700px;border: 1px solid black;">
+        <table  style="width: 600px;border: 1px solid black;">
             <tr>
                 <td align="rigth">CO ID:</td><td>'.$_order['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
@@ -377,7 +377,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table bgcolor="#dcdfe5" style="width: 700px">
+        <table bgcolor="#dcdfe5" style="width: 600px">
             <tr>
                 <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
             </tr>
@@ -463,7 +463,198 @@ class pdfController{
         return true;
     }
 
-    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="online"){
+    function paymentConfirmation3($_companyID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
+
+        if($_amount>0){
+            $_amount=$_amount/100; 
+        }
+        
+        $_invoice_number="";
+        $_consecutive_invoice=0;
+        $_card_data="";
+        $_exp_date="";
+        $_order_type="";
+        $this->_otherController=new othersController();
+        
+
+        $_companyCustomerController=new userController();
+        $_company=$_companyCustomerController->getCompanyById($_companyID);
+
+        if(is_null($_company)){
+            echo "The company no exists";
+            return;
+        }
+
+        $_consecutive_invoice=$this->_otherController->getParameterValue("Parameters/InvoiceNum");
+        
+        if(is_null($_consecutive_invoice) or $_consecutive_invoice==""){
+            $_invoice_number=$_companyID."_10000";
+        }else{
+            $_invoice_number=$_companyID."_".$_consecutive_invoice;
+        }
+
+        
+        $_title_bill="Postcard Roof Service";
+        $_order_type= "Postcard Service";
+
+        $_date_invoice=date('m-d-Y');
+        
+        if(!empty($_stripe_id)){
+            $_payingController = new payingController();
+            $_result=$_payingController->getPayingData($_stripe_id);
+            $_card_data=$_result->source->last4;
+            $_exp_date=$_result->source->exp_month." / ".$_result->source->exp_year;
+        }
+       
+       
+
+        $pdf = new TCPDF();                 // create TCPDF object with default constructor args
+        $pdf->AddPage();                    // pretty self-explanatory
+
+        $pdf->SetMargins(25, 31 , 15); 
+        $pdf->SetAutoPageBreak(TRUE, 35);
+        $pdf -> SetX(25);
+        $pdf -> SetY(31);
+        
+        $pdf->SetFont('times','',10);
+
+        if(!isset($_order['SchDate']) or is_null($_order['SchDate']) or $_order['SchDate']==""){
+            $_date_value=date('m-d-y');
+        }else{
+            $_date_value=$_order['SchDate'];
+        }
+        
+        $_hour_value=0;
+        $_total_invoice=$_amount;
+
+        $_hmtl='
+        <table>
+            <tr>
+                <td colspan="2">RoofServicenow no-reply@roofservicenow.com\</td>
+                <td></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="2">To: '.$_company['CompanyEmail'].'</td>
+                <td></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
+            </tr>
+            <tr>
+                <td colspan="5"><br><br><br><br><br></td>
+            </tr>
+            <tr>
+                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
+            </tr>
+            <tr>
+                <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table  style="width: 500px;border: 1px solid black;">
+            <tr>
+                <td align="rigth">CO ID:</td><td>'.$_company['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
+            </tr>
+            <tr>
+                <td align="rigth">CO License:</td><td>'.$_company['ComapnyLicNum'].'</td><td align="rigth">CO Phone:</td><td>'.$_company['CompanyPhone'].'</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td align="rigth">Service Date:</td><td>'.$_date_value.'</td><td align="rigth">SP Address:</td><td>'.$_company['CompanyAdd1'].'</td><td>'.$_company['CompanyAdd2'].'</td><td>'.$_company['CompanyAdd3'].'</td>
+            </tr>
+            <tr>
+                <td align="rigth">Service Repair Address:</td><td colspan="2">'.$_company['CompanyAdd1'].' '.$_company['CompanyAdd2'].' '.$_company['CompanyAdd3'].'</td><td></td><td></td><td></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table bgcolor="#dcdfe5" style="width: 500px">
+            <tr>
+                <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
+            </tr>
+            <tr>
+                <td><b>Summary</b></td><td></td><td></td><td></td><td>Rate</td><td></td>
+            </tr>
+            
+            <tr>
+                <td>Postcard</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_total_invoice.',00</td>
+            </tr>
+            <tr>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.',00</b></td>
+            </tr>
+            <tr>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_value.'</td>
+            </tr>
+            <tr>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.',00</td>
+            </tr>
+            
+            <tr>
+                <td>Payment Type</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_paymentType.'</td>
+            </tr>
+            <tr>
+                <td colspan="6" align="center">Thank You for using RoofServiceNow</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td>http://www.roofservicenow.com/</td>
+            </tr>
+            <tr>
+                <td>Use the link above to return to RoofServiceNow to review your order status and rate the service professional. </td>
+            </tr>
+            <tr>
+                <td>Is your  link not working? You can log in to RoofServiceNow.com and review the invoice. </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>If you have any questions about our website, please don\'t hesitate to contact us.</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <td>Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td>
+            </tr>
+        </table>
+        ';
+        
+        //$pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
+        $pdf->writeHTML($_hmtl, true, 0, true, true);
+
+        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
+
+        if($_amount==0){
+            $_amount=$_total_invoice;
+        }
+        $_result=$this->registerPathInvoice($_invoice_number,$_company['CompanyID'],$_amount,$_stripe_id,$_paymentType,"company");
+        
+        $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+
+        $_mailController = new emailController();
+
+        $_mailController->sendMailSMTP($_company['CompanyEmail'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
+        
+        return true;
+    }
+
+    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="online",$_source_payment="order"){
         $_path='/invoice/invoice_'.$_orderID.'.pdf';
         $_path2="";
         if(is_null($this->_otherController)){
@@ -493,19 +684,18 @@ class pdfController{
         //$_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
         $this->_otherController=new othersController();
         $_result=$this->_otherController->setInvoicePath($firebaseOrderID,$_orderID,"",$_invoice_data);
-        if(is_null($this->_orderController)){
-            $this->_orderController=new orderController();
+
+
+        if(strcmp($_source_payment,"order")==0){
+            if(is_null($this->_orderController)){
+                $this->_orderController=new orderController();
+            }
+            $_updateFields="InvoiceNum,$_path1";
+            $_arrayFields=explode(",",$_updateFields);
+            $_result_order=$this->_orderController->updateOrder($firebaseOrderID,$_arrayFields);
+    
         }
         
-        
-        
-        $_updateFields="InvoiceNum,$_path1";
-        $_arrayFields=explode(",",$_updateFields);
-        //$_result=$this->_orderController->updateOrder($_orderID,$_arrayFields);
-
-        //$_path.="InvoiceNum,".$_path;
-        //$_arrayFields=explode(",",$_path);
-        $_result_order=$this->_orderController->updateOrder($firebaseOrderID,$_arrayFields);
         if($_result==true){
             return true;
         }else{

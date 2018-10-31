@@ -1489,6 +1489,8 @@ Welcome to RoofServicenow Admin
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
             <input type="hidden" value="" id="orderIDWork" />
+            <input type="hidden" value="" id="orderTypeTakeWork" />
+            
             <div class="form-group">
                 <label for="dateWork">Date for the work</label>
                 <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
@@ -1506,13 +1508,10 @@ Welcome to RoofServicenow Admin
                     <option value="4:00 pm">4:00 pm</option>
                     <option value="5:00 pm">5:00 pm</option>
                 </select>
-                
-            </div>
-            <div class="input-group bootstrap-timepicker timepicker1">
-                <input id="timepicker" class="form-control" data-provide="timepicker1" data-template="modal" data-minute-step="1" data-modal-backdrop="true" type="text"/>
             </div>
             <div class="form-group">
-                <input type="text" name="timepicker1xxx" id="timepicker1xxx" class="timepicker1"/>
+                <label for="amountPostCard" id="amountPostCardLabel">Amount</label>
+                <input type="text" class="form-control" name="amountPostCard" id="amountPostCard" >
             </div>
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
@@ -1535,20 +1534,24 @@ Welcome to RoofServicenow Admin
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Take work</h4>
+        <h4 class="modal-title">Charge PostCard</h4>
       </div>
         <div class="modal-body"  id="myModalPostAdminBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyPostCard" />
             <div class="form-group">
-                <label for="dateWork">PostCard Balance</label>
+                <label for="postCardBalance">PostCard Balance</label>
                 <input type="text" class="form-control" name="postCardBalance" id="postCardBalance" readonly >
             </div>
             <div class="form-group">
-                <label for="dateWork">Quantity PostCard Company</label>
+                <label for="postCardQuantity">Quantity PostCard Company</label>
                 <input type="text" class="form-control" name="postCardQuantity" id="postCardQuantity" required >
             </div>
+            <div class="form-group">
+                <label for="dateWork">PostCard Value</label>
+                <input type="text" class="form-control" name="postCardValue" id="postCardValue" required >
+            </div>
             
-            <button type="button" class="btn-primary btn-sm" onClick="chargePostCardCompany()" >Load Post Cards</button>
+            <button type="button" class="btn-primary btn-sm" onClick="chargePostCardCompany()" >Charge Post Cards</button>
             <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
     </div><!-- /cierro contenedor -->
