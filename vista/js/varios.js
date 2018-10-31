@@ -14,7 +14,7 @@ $(document).ready(function() {
         }
       }
     );*/
-    
+    $("#myMessagePostCardsPay").modal("show");
     
     $('[data-toggle1="tooltip"]').tooltip(); 
 
@@ -76,6 +76,33 @@ $(document).ready(function() {
 
       $('.timepicker').mdtimepicker();
 
+      
+      /*var options_fixed = { 
+		now: "00:00", //hh:mm 24 hour format only, defaults to current time
+		twentyFour: true, //Display 24 hour format, defaults to false
+		upArrow: 'wickedpicker__controls__up', //The up arrow class selector to use, for custom CSS
+		downArrow: 'wickedpicker__controls__down', //The down arrow class selector to use, for custom CSS
+		close: 'wickedpicker__close', //The close class selector to use, for custom CSS
+		hoverState: 'hover-state', //The hover state class to use, for custom CSS
+		title: '', //The Wickedpicker's title,
+		showSeconds: false, //Whether or not to show seconds,
+		secondsInterval: 1, //Change interval for seconds, defaults to 1
+		minutesInterval: 1, //Change interval for minutes, defaults to 1
+		clearable: false, //Make the picker's input clearable (has clickable "x")
+		beforeShow: null,
+		show:
+		function positionning() {
+			$('#step6time').parent().append($('.timepicker1'));
+			$('.timepicker1').css({'left':'20px','top':'71px'});
+		}
+	};*/
+
+    //$('.timepicker1').wickedpicker(options_fixed);
+    
+    $('.timepicker1').wickedpicker();
+
+
+
       $('.timepicker').mdtimepicker().on('timechanged', function(e){
           console.log(e.value);
           console.log(e.time);
@@ -100,6 +127,9 @@ $(document).ready(function() {
             $('span[name=repairDone]').text(closeService);
             $('span[name=repairOpen]').text(openService);
         }
+
+        
+            
 } );
 
 ///////////////////////////////////////////////
@@ -2169,16 +2199,28 @@ function getOrderScheduleDateTime(orderId){
     
 }
 
-function setOrderId(orderID){
+function setOrderId(orderID,RequestType){
     $('#orderIDWork').val(orderID);
     $('#orderIDWorkText').html(orderID);
+    $('#orderTypeTakeWork').val(RequestType);
+
+    if(RequestType=='P'){
+        $('#amountPostCard').show();
+        $('#amountPostCardLabel').show();
+    }else{
+        $('#amountPostCard').hide();
+        $('#amountPostCardLabel').hide();
+    }
+
 }
 function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
     var companyID=$('input:hidden#companyIDWork').val();
-    var dateWork=$('input#dateWork').val()
-    var timeWork=$('select#timeWork').val()
-    var driverID=$('select#driverWork').val()
+    var dateWork=$('input#dateWork').val();
+    var timeWork=$('select#timeWork').val();
+    var driverID=$('select#driverWork').val();
+    var amountPostCard=$('input#amountPostCard').val();
+    var orderType=$('#orderTypeTakeWork').val();
 
     var message="";
 
@@ -2197,13 +2239,28 @@ function takeWork(){
     if(driverID=="" || driverID==undefined){
         message+="Plese select the driver<br>";
     }
+    if(orderType!=""){
+        if(orderType=="P"){
+            if(amountPostCard=="" || amountPostCard==undefined){
+                message+="Plese fill the amount of the postcards<br>";
+            }
+        }
+    
+    }else{
+        amountPostCard=0;
+    }
     if (message!=""){
         $('#myMensaje > #headerMessage').html('Error validating');
         $('#myMensaje div.modal-body').html('You have to fill some fields:<br>'+message);
         $("#myMensaje").modal("show");
         return;
     }
-    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+    if(orderType=="P"){
+        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+    }else{
+        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+    }
+    
     updateOrder(orderID,arrayChanges)
     $("#myModalGetWork").modal("hide");
 }
@@ -2405,17 +2462,26 @@ function getFinalAmount(orderId){
                 $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
 
                 $row=$('#totalAmountTable tr').eq(2);
-                valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                if(order.ActTime!="" && order.ActAmtTime!=""){
+                    valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                }else{
+                    valorHour=0;
+                }
+                
                 $row.find("td:eq(1)").html('$'+valorHour);
                 $row.find("td:eq(2)").html(order.ActTime);
                 $row.find("td:eq(3)").html('$'+order.ActAmtTime+'.00');
 
                 $row=$('#totalAmountTable tr').eq(3);
-                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                $total=$total+$total1;
                 $row.find("td:eq(3)").html('$'+$total+'.00');
 
                 $row=$('#totalAmountTable tr').eq(4);
-                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                $total=$total+$total1;
                 $row.find("td:eq(3)").html('$'+$total+'.00');
                 
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
@@ -2476,13 +2542,14 @@ function selectPaymentType(){
         totalValue=row.find("td:eq(3)").html();
         totalValue=totalValue.replace("$", "");
         totalValue=totalValue.replace(".00", "");
-        amount_value=totalValue;
+        amount_value=totalValue*100;
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
                 description: 'pay your service',
-                amount: amount_value
+                amount: amount_value,
+                email:userMailCompany
               });
         }
     }
@@ -2494,7 +2561,42 @@ function payOnlineInvoce(stripeID,amount){
     
     $('#myPaymentType').modal('hide');
     $('#myFinalAmount').modal('hide');
+    
     updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount);
+
+}
+
+function payOnlineInvocePostCard(stripeID,amount){
+    var companyID=$('#companyIDhidden').val();
+    
+    $('#myMessagePostCardsPay').modal('hide');
+    
+    data="PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",postCardValue,0";
+
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                alert("The paymanet was made correctly, now you can create orders of Postcards");
+                $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
+                $(document).ready(function(){$("#myPostCard").modal("hide"); });
+            }else{
+                alert("Error, "+data);
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
 
 }
 
@@ -3398,16 +3500,16 @@ function insertOrderPostCard(){
     var RepZIP=$('#step5ZipCode').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
-    var idStripeCharge=$('#textPostCardQuantity').val();
+    var idStripeCharge="";
     var amountValue=$('#textPostCardQuantity').val();
     var balance=$('#postCardBalance').val();
 
-    if(amountValue>balance){
+    if(parseInt(amountValue)>parseInt(balance)){
         alert('The quantity of post cards request can not be higher than the balance post card of the company');
         return;
     }
-    if(amountValue<2500){
-        alert('The quantity of post cards request can not be smaller than 2500');
+    if(parseInt(amountValue)<250){
+        alert('The quantity of post cards request can not be smaller than 250');
         return;
     }
     var selectionType="PostCard"
@@ -3428,11 +3530,11 @@ function insertOrderPostCard(){
     if(amountValue==undefined){
         amountValue=0;
     }
-    jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
+    jsShowWindowLoad('One second we are saving the order.');
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"postCardValue":amountValue}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -3444,16 +3546,38 @@ function insertOrderPostCard(){
                     var orderIDSplit=dataSplit[2].split("/");
                     var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                     
-                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
-
+                    $(document).ready(function(){$("#myPostCard").modal("hide"); });
                     $('#textAnswerOrder').html(data+'');
-                    
-
                     $('#headerTextAnswerOrder').html('Success');
-                  
-                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#lastFinishButtonOrder').show();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
+
+                    balance=parseInt(balance)-parseInt(amountValue);
+                    var data="postCardValue,"+balance;
+
+                    
+                    $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : CompanyID,"arrayChanges":data}, null, "text" )
+                    .done(function( data, textStatus, jqXHR ) {
+                        if ( console && console.log ) {
+                            var n = data.indexOf("Error");
+                            if(n==-1){
+                                alert("The postcard was charged to the company");
+                                $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
+                            }else{
+                                
+                            }
+                            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                            jsRemoveWindowLoad('');
+                        }
+                    })
+                    .fail(function( jqXHR, textStatus, errorThrown ) {
+                        if ( console && console.log ) {
+                            console.log( "La solicitud a fallado: " +  textStatus);
+                            result1=false;
+                            
+                            return result1;
+                        }
+                    });
+
             }else{
                     $('#headerTextAnswerOrder').html('Error validating User Account');
                     $('#textAnswerOrder').html(data+'<br><br>Please try again');
@@ -3639,6 +3763,11 @@ function showPostCardInfo(companyID){
             if(n==-1){
                 $('#postCardBalance').val(data);
                 $('#companyPostCard').val(companyID);
+                if(parseInt(data)==0){
+                    $(document).ready(function(){$("#myPostCard").modal("hide"); });
+                    $(document).ready(function(){$("#myPostCardServiceP").modal("show"); });
+                }
+                $("#myMessagePostCardsPay").modal("show");
             }else{
                 
             }
@@ -3657,23 +3786,39 @@ function showPostCardInfo(companyID){
 
 }
 
-function loadPostCardCompany(){
+function chargePostCardCompany(){
     var quantity=$('#postCardQuantity').val();
     var companyID=$('#companyPostCard').val();
     var balance=$('#postCardBalance').val();
-    if(quantity<2500){
-        alert('minimum value allowed is 2500');
+    var amount=$('#postCardValue').val();
+    
+    if(quantity<250){
+        alert('The minimum value allowed for postcards is 250');
         return false;
     }
+    if(amount=='' || amount==0){
+        alert('Please review the amount of postcards, it cannot be 0 or empty');
+        return false;
+    }
+    /*amount_value=70000;
+    action_type="pay_invoice_postcard";
+    if(typeof handler !== undefined){
+        handler.open({
+            name: 'RoofServiceNow',
+            description: 'pay your service',
+            amount: amount_value
+            });
+    }*/
+
     var total=parseInt(balance)+parseInt(quantity);
-    var data="postCardValue,"+total;
+    var data="postCardQuantity,"+total+",postCardValue,"+amount;
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateDataCompany1.php", { "companyID" : companyID,"arrayChanges":data}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                alert("The post card was load to the company");
+                alert("The post card was charged to the company");
                 $(document).ready(function(){$("#myModalPostAdmin").modal("hide"); });
             }else{
                 
@@ -3690,4 +3835,17 @@ function loadPostCardCompany(){
             return result1;
         }
     });
+}
+
+function showPayPostCards(totalValue){
+    amount_value=totalValue;
+    action_type="pay_postcard_service";
+    if(typeof handler !== undefined){
+        handler.open({
+            name: 'RoofServiceNow',
+            description: 'pay your service',
+            amount: amount_value,
+            email:userMailCompany
+            });
+    }
 }

@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content logmodal">
@@ -447,7 +448,7 @@
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
-							<input  id="pac-input" class="wizsrch1 controls" type="text" placeholder="Enter a location" >
+							<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
                        
                                 <style>
 						/* Set the size of the div element that contains the map */
@@ -613,9 +614,11 @@
 					</div>
 					<div class="col-sm-6 inpwiz2">
 						<span class="h1white"><h4><b>Please select the time of service. </b></h4></span>
-						<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />
+						<input type="text" name="step6time" id="step6time" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;"/>
+						<!--<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />-->
+						
 					</div>
-	
+					
 				</div> 
               <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
                 <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>

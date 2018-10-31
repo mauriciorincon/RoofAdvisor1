@@ -653,8 +653,24 @@ class userController{
         $this->_userModel=new userModel();
     
         for($n=0;$n<count($arrayFields);$n+=2){
-            $_result=$this->_userModel->updateCompany($companyID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+            if(strcmp($arrayFields[$n],"StripeID")==0){
+                $stripeID=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"amount")==0){
+                $amount=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"PaymentType")==0){
+                $paymentType=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"StripeID")!=0 and strcmp($arrayFields[$n],"amount")!=0 and strcmp($arrayFields[$n],"PaymentType")!=0){
+                $_result=$this->_userModel->updateCompany($companyID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+            }
         }    
+
+        if(!empty($paymentType)){
+            $_objPDF=new pdfController();
+            $_result_invoice=$_objPDF->paymentConfirmation3($companyID,null,$amount,$stripeID,$paymentType);
+        }
         return $_result;
     }
 

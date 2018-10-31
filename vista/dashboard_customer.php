@@ -1,3 +1,6 @@
+<?php
+echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+?>
 <div id="db-cus-main">
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
@@ -309,8 +312,17 @@
 					var finalAmount='';
 					var valorTotal=0;
 					var actions="";
+
+					valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+					valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+					valueMatA=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+					valueTimeA=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
 					if(dataOrder.Status=="F"){
-						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
+
+						valorTotal=(parseInt(valueMat)+parseInt(valueTime));
 						
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
@@ -318,20 +330,24 @@
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
-						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
+						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
 						estimateAmount = estimateAmount ? estimateAmount : '$0';
 					
 						
 					}
 					if(dataOrder.Status=="J"){
-						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						
+
+						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
-						finalAmount=parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime);
+						
+						finalAmount=parseInt(valueMat)+parseInt(valueTime);
 						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 					
@@ -506,30 +522,39 @@
 								'<span class="glyphicon glyphicon-download-alt"></span>'+
 							'</a>';
 
-					
-										
+					valueMat=isNaN(parseInt(order.EstAmtMat)) ? 0 : parseInt(order.EstAmtMat);
+					valueTime=isNaN(parseInt(order.EstAmtTime)) ? 0 : parseInt(order.EstAmtTime);
+
+					valueMatA=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+					valueTimeA=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
 
 					if(dataOrder.Status=="F"){
-						valorTotal=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						
+
+						valorTotal=(parseInt(valueMat)+parseInt(valueTime));
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
+						
 
-						estimateAmount=(parseInt(dataOrder.EstAmtMat)+parseInt(dataOrder.EstAmtTime));
+						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
 						estimateAmount = estimateAmount ? estimateAmount : '$0';
 					}
 					if(dataOrder.Status=="J"){
-						valorTotal=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						
+						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
-						finalAmount=(parseInt(dataOrder.ActAmtMat)+parseInt(dataOrder.ActAmtTime));
+						
+
+						finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 
@@ -755,7 +780,12 @@
 						case "S":
 							orderStatus = "Report Complete";
 							break;
-
+						case "T":
+							orderStatus = "Orden In Progress";
+                            break;
+                        case "U":
+							orderStatus = "Orden Asigned";
+                            break;
 						default:
 							orderStatus = "Undefined";
 					}
@@ -953,6 +983,12 @@
 												break;
 											case "S":
 												echo "Report Complete";
+												break;
+											case "T":
+												echo "Orden In Progress";
+												break;
+											case "U":
+												echo "Orden Asigned";
 												break;
 											default:
 												echo "Undefined";

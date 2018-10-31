@@ -29,14 +29,17 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
 		<link rel="stylesheet" href="vista/css/segmented-controls.css">
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
+		
+		<link rel="stylesheet" href="vista/timepicker/stylesheets/wickedpicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
-                <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
-	        <link href='vendor/sweetalert2/dist/sweetalert2.min.css' rel='stylesheet'>	
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
+		<link href='vendor/sweetalert2/dist/sweetalert2.min.css' rel='stylesheet'>	
 		
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://checkout.stripe.com/checkout.js"></script>
 
-                <link rel="stylesheet" href="css/lity.min.css">
+				<link rel="stylesheet" href="css/lity.min.css">
+				
 
 		
 		<style>

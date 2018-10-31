@@ -291,7 +291,7 @@ Welcome to RoofServicenow Admin
                 }else{
                     dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
                                 'href="#myModalGetWork" '+
-                                'onClick="setOrderId(\''+dataOrder.FBID+'\')"> '+
+                                'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+ dataOrder.RequestType+'\')"> '+
                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';
                 }
             }else{
@@ -372,7 +372,7 @@ Welcome to RoofServicenow Admin
                             }else{
                                 dataCustomer='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take work" '+
                                             'href="#myModalGetWork" '+
-                                            'onClick="setOrderId("'+dataOrder.FBID+')"> '+
+                                            'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+ dataOrder.RequestType+'\')"> '+
                                             '<span class="glyphicon glyphicon-check"></span>Take work</a>';
                                 $row.find("td:eq(10)").html(dataCustomer);
                             }
@@ -554,7 +554,13 @@ Welcome to RoofServicenow Admin
 							break;
 						case "S":
 							orderStatus = "Report Complete";
-							break;
+                            break;
+                        case "T":
+                            orderStatus = "Orden In Progress";
+                            break;
+                        case "U":
+                            orderStatus = "Orden Asigned";
+                            break;
 
 						default:
 							orderStatus = "Undefined";
@@ -744,6 +750,12 @@ Welcome to RoofServicenow Admin
                                 case "S":
                                     echo "Report Complete";
                                     break;
+                                case "T":
+                                    echo "Orden In Progress";
+                                    break;
+                                case "U":
+                                    echo "Orden Asigned";
+                                    break;
                                 default:
                                     echo "Undefined";
                                     break;
@@ -763,7 +775,7 @@ Welcome to RoofServicenow Admin
                             <?php }else{ ?>
                                     <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
                                             href="#myModalGetWork" 
-                                            onClick="setOrderId('<?php echo $order['FBID']?>')"> 
+                                            onClick="setOrderId('<?php echo $order['FBID']?>','<?php echo $order['RequestType']?>')"> 
                                             <span class="glyphicon glyphicon-check"></span>Take work
                                         </a>
                             <?php }
@@ -1477,6 +1489,8 @@ Welcome to RoofServicenow Admin
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
             <input type="hidden" value="" id="orderIDWork" />
+            <input type="hidden" value="" id="orderTypeTakeWork" />
+            
             <div class="form-group">
                 <label for="dateWork">Date for the work</label>
                 <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
@@ -1494,7 +1508,10 @@ Welcome to RoofServicenow Admin
                     <option value="4:00 pm">4:00 pm</option>
                     <option value="5:00 pm">5:00 pm</option>
                 </select>
-                
+            </div>
+            <div class="form-group">
+                <label for="amountPostCard" id="amountPostCardLabel">Amount</label>
+                <input type="text" class="form-control" name="amountPostCard" id="amountPostCard" >
             </div>
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
@@ -1517,22 +1534,39 @@ Welcome to RoofServicenow Admin
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Take work</h4>
+        <h4 class="modal-title">Charge PostCard</h4>
       </div>
         <div class="modal-body"  id="myModalPostAdminBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyPostCard" />
             <div class="form-group">
-                <label for="dateWork">PostCard Balance</label>
+                <label for="postCardBalance">PostCard Balance</label>
                 <input type="text" class="form-control" name="postCardBalance" id="postCardBalance" readonly >
             </div>
             <div class="form-group">
-                <label for="dateWork">Quantity PostCard Company</label>
+                <label for="postCardQuantity">Quantity PostCard Company</label>
                 <input type="text" class="form-control" name="postCardQuantity" id="postCardQuantity" required >
             </div>
+            <div class="form-group">
+                <label for="dateWork">PostCard Value</label>
+                <input type="text" class="form-control" name="postCardValue" id="postCardValue" required >
+            </div>
             
-            <button type="button" class="btn-primary btn-sm" onClick="loadPostCardCompany()" >Load Post Cards</button>
+            <button type="button" class="btn-primary btn-sm" onClick="chargePostCardCompany()" >Charge Post Cards</button>
             <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+ <?php
+							/*if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							//echo "<center>";
+							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
+							//echo "</center>";*/
+						?>
