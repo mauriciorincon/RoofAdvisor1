@@ -16,11 +16,10 @@ if(!isset($_SESSION)) {
 		<!-- all css here -->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="css/all.css">
+                <link rel="stylesheet" href="css/owl.carousel.css">
 		<link rel="stylesheet" href="css/meanmenu.css">
 		<link rel="stylesheet" href="css/animate.css">
-        <link rel="stylesheet" href="css/icofont.css">
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="css/responsive.css">
 		<link rel="stylesheet" href="vista/css/step_by_step.css">
@@ -79,10 +78,10 @@ if(!isset($_SESSION)) {
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
 							<div id ="socico" class="social-icon text-right">
-								<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fa fa-linkedin"></i></a>
-								<a href="https://twitter.com/viaplix"><i class="fa fa-twitter"></i></a>
-								<a href="https://www.instagram.com/roofservicenow/?utm_source=ig_profile_share&igshid=jgt3twpfxve7"><i class="fa fa-instagram"></i></a>
+								<a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
+								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fab fa-linkedin"></i></a>
+								<a href="https://twitter.com/viaplix"><i class="fab fa-twitter-square"></i></a>
+								<a href="https://www.instagram.com/roofservicenow/?utm_source=ig_profile_share&igshid=jgt3twpfxve7"><i class="fab fa-instagram"></i></a>
 							</div>
 							
 							</div>
@@ -98,7 +97,7 @@ if(!isset($_SESSION)) {
 								<a href="index.php"><img id="logo-site" src="img/logo.png" alt="" /></a>
 							</div>
 						</div>
-						<div class="col-lg-9 col-md-10 col-sm-10">
+						<div class="col-lg-9 col-md-10 col-sm-10" style="margin-bottom:2%;">
                                                     <img id="menu-head" src="img/menu-header.png">
 							<div class="main-menu text-right hidden-xs">
 								<nav id="navtxt">
