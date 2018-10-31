@@ -135,6 +135,7 @@
 		</footer>
 		<!-- footer-area end -->
 		<!-- all js here -->
+		
 		<script src="vista/js/jquery-3.3.1.js"></script>
 				
 				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
@@ -159,13 +160,16 @@
                 <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 	                        <script src="js/lity.min.js"></script>
                 <script src="js/fontawesome.min.js"></script>
-	
+		
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
 
 				
 				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
 <script src="vista/js/varios.js"></script>
+<script src="vista/timepicker/src/wickedpicker.js"></script>
+
+
 
 <?php
         if(isset($_GET['aditionalMessage'])){?>

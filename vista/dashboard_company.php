@@ -2169,3 +2169,25 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+
+  
+
+<div class="modal fade" id="myPostCardServiceP" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyPostCardServiceP">Postcard Info</h4> 
+			</div> 
+            <div class="modal-body" id="textmyPostCardServiceP">
+            <embed src="rsndocs/PostcardsService.pdf" type="application/pdf" width="900" height="600"></embed>
+            </div>
+			<div class="modal-footer" id="buttonmyPostCardServiceP"> 
+                
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+

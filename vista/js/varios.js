@@ -76,6 +76,33 @@ $(document).ready(function() {
 
       $('.timepicker').mdtimepicker();
 
+      
+      /*var options_fixed = { 
+		now: "00:00", //hh:mm 24 hour format only, defaults to current time
+		twentyFour: true, //Display 24 hour format, defaults to false
+		upArrow: 'wickedpicker__controls__up', //The up arrow class selector to use, for custom CSS
+		downArrow: 'wickedpicker__controls__down', //The down arrow class selector to use, for custom CSS
+		close: 'wickedpicker__close', //The close class selector to use, for custom CSS
+		hoverState: 'hover-state', //The hover state class to use, for custom CSS
+		title: '', //The Wickedpicker's title,
+		showSeconds: false, //Whether or not to show seconds,
+		secondsInterval: 1, //Change interval for seconds, defaults to 1
+		minutesInterval: 1, //Change interval for minutes, defaults to 1
+		clearable: false, //Make the picker's input clearable (has clickable "x")
+		beforeShow: null,
+		show:
+		function positionning() {
+			$('#step6time').parent().append($('.timepicker1'));
+			$('.timepicker1').css({'left':'20px','top':'71px'});
+		}
+	};*/
+
+    //$('.timepicker1').wickedpicker(options_fixed);
+    
+    $('.timepicker1').wickedpicker();
+
+
+
       $('.timepicker').mdtimepicker().on('timechanged', function(e){
           console.log(e.value);
           console.log(e.time);
@@ -102,10 +129,7 @@ $(document).ready(function() {
         }
 
         
-            $('#datetimepicker3').datetimepicker({
-                format: 'LT'
-            });
-        
+            
 } );
 
 ///////////////////////////////////////////////
@@ -2175,9 +2199,11 @@ function getOrderScheduleDateTime(orderId){
     
 }
 
-function setOrderId(orderID){
+function setOrderId(orderID,RequestType){
     $('#orderIDWork').val(orderID);
     $('#orderIDWorkText').html(orderID);
+    
+
 }
 function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
@@ -3412,8 +3438,8 @@ function insertOrderPostCard(){
         alert('The quantity of post cards request can not be higher than the balance post card of the company');
         return;
     }
-    if(parseInt(amountValue)<2500){
-        alert('The quantity of post cards request can not be smaller than 2500');
+    if(parseInt(amountValue)<250){
+        alert('The quantity of post cards request can not be smaller than 250');
         return;
     }
     var selectionType="PostCard"
@@ -3667,6 +3693,10 @@ function showPostCardInfo(companyID){
             if(n==-1){
                 $('#postCardBalance').val(data);
                 $('#companyPostCard').val(companyID);
+                if(parseInt(data)==0){
+                    $(document).ready(function(){$("#myPostCard").modal("hide"); });
+                    $(document).ready(function(){$("#myPostCardServiceP").modal("show"); });
+                }
             }else{
                 
             }
@@ -3689,10 +3719,20 @@ function chargePostCardCompany(){
     var quantity=$('#postCardQuantity').val();
     var companyID=$('#companyPostCard').val();
     var balance=$('#postCardBalance').val();
-    if(quantity<2500){
-        alert('minimum value allowed is 2500');
+    if(quantity<250){
+        alert('minimum value allowed is 250');
         return false;
     }
+    /*amount_value=70000;
+    action_type="pay_invoice_postcard";
+    if(typeof handler !== undefined){
+        handler.open({
+            name: 'RoofServiceNow',
+            description: 'pay your service',
+            amount: amount_value
+            });
+    }*/
+
     var total=parseInt(balance)+parseInt(quantity);
     var data="postCardValue,"+total;
     jsShowWindowLoad('');
