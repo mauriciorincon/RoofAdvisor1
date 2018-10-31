@@ -41,6 +41,12 @@
     }else{
         $_orderController = new orderController();
         $_result=$_orderController->insertOrderFile($_orderID,$_path2.$_path);
+        $_order_data=$_orderController->getOrder('FBID',$_orderID);
+        if($_order_data['Status']=='K' and $_order_data['RequestType']=='P'){
+            $_updateFields="Status,L";
+            $_arrayFields=explode(",",$_updateFields);
+            $_orderController->updateOrder($_orderID,$_arrayFields);
+        }
         $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$_POST['file_name'].".pdf]");
     }
 

@@ -237,11 +237,11 @@ class pdfController{
     }
 
     function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
-
+        
         if($_amount>0){
             $_amount=$_amount/100; 
         }
-        
+        $_user_mail_send="";
         $_invoice_number="";
         $_consecutive_invoice=0;
         $_card_data="";
@@ -269,11 +269,17 @@ class pdfController{
             return;
         }
 
-        $_customer=$_companyCustomerController->getCustomerById($_order['CustomerID']);
-        if(is_null($_customer)){
-            echo "The customer no exists";
-            return;
+        if(strcmp($_order['RequestType'],"P")!=0){
+            $_customer=$_companyCustomerController->getCustomerById($_order['CustomerID']);
+            if(is_null($_customer)){
+                echo "The customer no exists";
+                return;
+            }
+            $_user_mail_send=$_customer['Email'];
+        }else{
+            $_user_mail_send=$_company['CompanyEmail'];
         }
+        
 
         $_consecutive_invoice=$this->_otherController->getParameterValue("Parameters/InvoiceNum");
         
@@ -298,6 +304,11 @@ class pdfController{
             case "S":
                 $_order_type= "Schedule Service";
                 $_title_bill="";
+                break;
+            case "P":
+                $_order_type= "Postcard Service";
+                $_title_bill="";
+                break;
             default:
                 $_order_type= "Undefined";
                 $_title_bill="";
@@ -331,8 +342,16 @@ class pdfController{
             $_date_value=$_order['SchDate'];
         }
         
-        $_hour_value=intval($_order['ActAmtTime'])/intval($_order['ActTime']);
-        $_total_invoice=intval($_order['ActAmtTime'])+intval($_order['ActAmtMat']);
+        $_actual_value=intval($_order['ActAmtTime']);
+        $_actual_time=intval($_order['ActTime']);
+        if($_actual_time!=0 and $_actual_value!=0){
+            $_hour_value=intval($_order['ActAmtTime'])/intval($_order['ActTime']);
+            $_total_invoice=intval($_order['ActAmtTime'])+intval($_order['ActAmtMat']);
+        }else{
+            $_hour_value=0;
+            $_total_invoice=$_actual_value;
+        }
+        
 
         $_hmtl='
         <table>
@@ -361,7 +380,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table  style="width: 600px;border: 1px solid black;">
+        <table  style="width: 500px;border: 1px solid black;">
             <tr>
                 <td align="rigth">CO ID:</td><td>'.$_order['CompanyID'].'</td><td align="rigth">CO Name:</td><td>'.$_company['CompanyName'].'</td><td>Customer Rating:</td><td>'.$_company['CompanyRating'].'</td>
             </tr>
@@ -377,7 +396,7 @@ class pdfController{
         </table>
         <br>
         <br>
-        <table bgcolor="#dcdfe5" style="width: 600px">
+        <table bgcolor="#dcdfe5" style="width: 500px">
             <tr>
                 <td><b>Invoice</b></td><td>'.$_invoice_number.'</td><td></td><td></td><td>Repair ID</td><td align="rigth">'.$_consecutive_invoice.'</td>
             </tr>
@@ -458,7 +477,7 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
+        $_mailController->sendMailSMTP($_user_mail_send,"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
         
         return true;
     }

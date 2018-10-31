@@ -2256,7 +2256,7 @@ function takeWork(){
         return;
     }
     if(orderType=="P"){
-        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,F,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
     }else{
         arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
     }
@@ -2462,17 +2462,26 @@ function getFinalAmount(orderId){
                 $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
 
                 $row=$('#totalAmountTable tr').eq(2);
-                valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                if(order.ActTime!="" && order.ActAmtTime!=""){
+                    valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                }else{
+                    valorHour=0;
+                }
+                
                 $row.find("td:eq(1)").html('$'+valorHour);
                 $row.find("td:eq(2)").html(order.ActTime);
                 $row.find("td:eq(3)").html('$'+order.ActAmtTime+'.00');
 
                 $row=$('#totalAmountTable tr').eq(3);
-                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                $total=$total+$total1;
                 $row.find("td:eq(3)").html('$'+$total+'.00');
 
                 $row=$('#totalAmountTable tr').eq(4);
-                $total=parseInt(order.ActAmtMat)+parseInt(order.ActAmtTime);
+                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                $total=$total+$total1;
                 $row.find("td:eq(3)").html('$'+$total+'.00');
                 
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
@@ -2533,13 +2542,14 @@ function selectPaymentType(){
         totalValue=row.find("td:eq(3)").html();
         totalValue=totalValue.replace("$", "");
         totalValue=totalValue.replace(".00", "");
-        amount_value=totalValue;
+        amount_value=totalValue*100;
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
                 description: 'pay your service',
-                amount: amount_value
+                amount: amount_value,
+                email:userMailCompany
               });
         }
     }
