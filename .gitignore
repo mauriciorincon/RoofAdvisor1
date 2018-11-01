@@ -1,3 +1,6 @@
 !/.imgrepo*
 .imgrepo
 invoice/
+!/roofreport/
+roofreport/
+roofreport
