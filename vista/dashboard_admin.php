@@ -561,7 +561,9 @@ Welcome to RoofServicenow Admin
                         case "U":
                             orderStatus = "Orden Asigned";
                             break;
-
+                        case "M":
+                            orderStatus = "Mailed";
+                            break;
 						default:
 							orderStatus = "Undefined";
                 }
@@ -755,6 +757,9 @@ Welcome to RoofServicenow Admin
                                     break;
                                 case "U":
                                     echo "Orden Asigned";
+                                    break;
+                                case "M":
+                                    echo "Mailed";
                                     break;
                                 default:
                                     echo "Undefined";

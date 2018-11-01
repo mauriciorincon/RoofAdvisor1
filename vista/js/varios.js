@@ -3761,13 +3761,18 @@ function showPostCardInfo(companyID){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#postCardBalance').val(data);
+                data=jQuery.parseJSON(data);
+
+                $('#postCardBalance').val(data.postCardQuantity);
                 $('#companyPostCard').val(companyID);
-                if(parseInt(data)==0){
+
+                if(parseInt(data.postCardQuantity)==0){
                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
                     $(document).ready(function(){$("#myPostCardServiceP").modal("show"); });
                 }
-                $("#myMessagePostCardsPay").modal("show");
+                if(parseInt(data.postCardValue)!=0){
+                    $("#myMessagePostCardsPay").modal("show");
+                }
             }else{
                 
             }
@@ -3809,7 +3814,8 @@ function chargePostCardCompany(){
             amount: amount_value
             });
     }*/
-
+    balance=isNaN(parseInt(balance)) ? 0 : parseInt(balance);
+    
     var total=parseInt(balance)+parseInt(quantity);
     var data="postCardQuantity,"+total+",postCardValue,"+amount;
     jsShowWindowLoad('');
@@ -3848,4 +3854,8 @@ function showPayPostCards(totalValue){
             email:userMailCompany
             });
     }
+}
+
+function closeExtraWindows(){
+    $(document).ready(function(){$("#myPostCard").modal("hide"); });
 }
