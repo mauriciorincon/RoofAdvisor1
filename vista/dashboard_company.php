@@ -1,4 +1,4 @@
-<input type="hidden" value="<?php echo $_actual_company['CompanyID']?> " id="companyIDhidden" >
+<input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
@@ -381,7 +381,38 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 var companyActions="";
                 var dataContractor="";
                                        
+                valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+                valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
 
+                valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+                valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+                        
+                if(dataOrder.Status=="F" && dataOrder.RequestType=="P"){
+                        
+						valorTotal=(parseInt(valueMat)+parseInt(valueTime));
+						
+						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+											'href="#myEstimateAmount" '+
+											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+					}else{
+
+						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+						estimateAmount = estimateAmount ? estimateAmount : '$0';		
+                }
+                if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
+						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
+						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+											'href="#myFinalAmount" '+
+											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+										'</a>';
+                }else{
+                    finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
+                    finalAmount = finalAmount ? finalAmount : '$0';
+                }
+                
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
                     if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
                         dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
@@ -459,8 +490,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
                         requestType,
                         status,
-                        dataOrder.ETA,
-                        dataOrder.EstAmtMat,
+                        estimateAmount,
+                        finalAmount,
                         dataOrder.PaymentType,
                         dataContractor,
                         companyActions,
@@ -558,13 +589,42 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 $row.find("td:eq(11)").html(companyActions);
                             });
 
+                            valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+                            valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+                            valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+                            valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+
+                            if(dataOrder.Status=="F" && dataOrder.RequestType=="P"){
+                                valorTotal=(parseInt(valueMat)+parseInt(valueTime));
+                                estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
+                                                    'href="#myEstimateAmount" '+
+                                                    'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                '</a>';
+                            }else{
+
+                                estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+                                estimateAmount = estimateAmount ? estimateAmount : '$0';
+                            }
+                            if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
+                                valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
+                                finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+                                                    'href="#myFinalAmount" '+
+                                                    'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                '</a>';
+                            }else{
+                                finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
+                                finalAmount = finalAmount ? finalAmount : '$0';
+                            }
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
                             $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
-                            $row.find("td:eq(7)").html(dataOrder.ETA);
-                            $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+                            $row.find("td:eq(7)").html(estimateAmount);
+                            $row.find("td:eq(8)").html(finalAmount);
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
                         }
                     }
@@ -976,8 +1036,35 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 ?>
                             </td>                            
 
-                            <td><?php echo $order['ETA']?></td>
-                            <td><?php echo $order['EstAmtMat']?></td>
+                            <td align="right"><?php 
+                                    if($order['Status']=='F' and $order['RequestType']=='P' ){
+                                ?>
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  
+                                            href="#myEstimateAmount" 
+                                            onClick="getEstimateAmount('<?php echo $order['OrderNumber']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+                                        </a>
+                                <?php
+                                    }else{
+                                        echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime']));
+                                    }
+                                    
+                                ?>
+                            </td>                            
+                            <td align="right"><?php 
+                                    if($order['Status']=='J' and $order['RequestType']=='P' ){											
+                                ?>
+                                    <a class="btn-success btn-sm" data-toggle="modal"  
+                                            href="#myFinalAmount" 
+                                            onClick="getFinalAmount('<?php echo $order['OrderNumber']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                        </a>
+                                <?php
+                                    }else{
+                                        echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime']));
+                                    }
+                                ?>
+                            </td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
                                     if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
@@ -1495,6 +1582,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
             <input type="hidden" value="" id="orderIDWork" />
+            <input type="hidden" value="" id="orderTypeTakeWork" />
             <div class="form-group">
                 <label for="dateWork">Date for the work</label>
                 <input type="text" class="form-control datepickers" name="dateWork" id="dateWork" required >
@@ -2191,3 +2279,148 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+<?php 
+echo $_actual_company['postCardValue'];
+if(!empty($_actual_company['postCardValue'])){
+    echo '
+    <div class="modal fade" id="myMessagePostCardsPay" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            
+            <!-- Modal content--> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="headermyMessagePostCardsPay">Postcard Info</h4> 
+                </div> 
+                <div class="modal-body" id="textmyMessagePostCardsPay">
+                    <p>
+                    We are very grateful for your choice, to be able to use the postcards please make the payment by clicking <a href="#" onclick="showPayPostCards('.($_actual_company['postCardValue']*100).')">here</a>
+                    </p>              
+                </div>
+            </div> 
+        </div>
+    </div>
+    ';
+}
+?>
+
+
+<div class="modal fade" id="myFinalAmount" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyFinalAmount">Confirm Final Amount</h4> 
+			</div> 
+			<div class="modal-body" id="textSchedule"> 
+				<input type="hidden" value="" id="orderIDFinal" />
+				<!--<table>
+					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
+					<tr><td>Final Amount Materials</td><td><input type="text" value="" id="finalAmountMaterials" readonly></td></tr>
+					<tr><td>Final Amount Time</td><td><input type="text" value="" id="finalAmountTime" readonly></td></tr>
+					<tr><td>Final Time</td><td><input type="text" value="" id="finalime" readonly></td></tr>
+				</table>-->
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="totalAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Final Amount Materials</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Final Amount Time</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div> 
+			<div class="modal-footer" id="buttonmyFinalAmount"> 
+				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
+				
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myPaymentType" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">How do you prefer to pay</h4> 
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDPaymentType" />
+				<div class="form-group">
+				<label for="ContStatused">Payment Type</label>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="cash" checked>Cash</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="online">Online</label>
+					</div>
+
+					
+					<!--<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
+						<option value="cash">Cash</option>
+						<option value="check">Check</option>
+						<option value="online">Online</option>
+					</select>-->
+				</div>
+				
+			</div> 
+			<div class="modal-footer" id="buttonPaymentType"> 
+				<button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				
+				
+			</div> 
+		</div> 
+	</div>
+</div>

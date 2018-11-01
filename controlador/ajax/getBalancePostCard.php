@@ -9,8 +9,9 @@ $_contractorController=new userController();
 $_result=$_contractorController->getCompanyById($_companyID);
 //print_r($_result);
 if(is_array($_result)){
-    if(isset($_result['postCardValue'])){
-        echo $_result['postCardValue'];
+    
+    if(isset($_result['postCardQuantity'])){
+        echo $_result['postCardQuantity'];
     }else{
         echo 0;
     }
