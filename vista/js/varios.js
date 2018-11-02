@@ -2548,7 +2548,7 @@ function selectPaymentType(){
             handler.open({
                 name: 'RoofServiceNow',
                 description: 'pay your service',
-                amount: amount_value,
+                amount: parseInt(amount_value),
                 email:userMailCompany
               });
         }
@@ -3736,7 +3736,7 @@ function showPayWindow(){
                     handler.open({
                         name: 'RoofServiceNow',
                         description: 'pay your service',
-                        amount: amount_value,
+                        amount: parseInt(amount_value),
                         email:userMailCompany
                       });
                 } 
@@ -3746,7 +3746,7 @@ function showPayWindow(){
                 handler.open({
                     name: 'RoofServiceNow',
                     description: 'pay your service',
-                    amount: amount_value,
+                    amount: parseInt(amount_value),
                     email:userMailCompany
                   });
             }
@@ -3850,7 +3850,7 @@ function showPayPostCards(totalValue){
         handler.open({
             name: 'RoofServiceNow',
             description: 'pay your service',
-            amount: amount_value,
+            amount: parseInt(amount_value),
             email:userMailCompany
             });
     }
