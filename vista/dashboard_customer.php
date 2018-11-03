@@ -787,7 +787,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 							orderStatus = "Orden Asigned";
 							break;
 						case "M":
-							orderStatus = "Orden Asigned";
+							orderStatus = "Mailed";
                             break;
 						default:
 							orderStatus = "Undefined";
