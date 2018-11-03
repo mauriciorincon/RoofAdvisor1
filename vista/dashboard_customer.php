@@ -785,6 +785,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             break;
                         case "U":
 							orderStatus = "Orden Asigned";
+							break;
+						case "M":
+							orderStatus = "Orden Asigned";
                             break;
 						default:
 							orderStatus = "Undefined";
@@ -988,6 +991,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 												echo "Orden In Progress";
 												break;
 											case "U":
+												echo "Orden Asigned";
+												break;
+											case "M":
 												echo "Orden Asigned";
 												break;
 											default:

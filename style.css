@@ -185,7 +185,7 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
   margin-top:20px;
 }
 .main-menu{
-margin-right:140px;
+margin-right:110px;
 }
 .main-menu ul{}
 .main-menu ul li {
@@ -1259,7 +1259,8 @@ background:#005678;
 position:absolute;
 z-index:-1;
 right:0px;
-height:110px;
+height:90px;
+width:95%;
 }
 #login-img{
     position: absolute;
@@ -1276,6 +1277,8 @@ background-color: #fa511a;
     border-radius: 10px;
     z-index:1000;
     margin-bottom:20px;
+    height:45px;
+    padding:12px;
 }
 #navtxt{
 padding-right:22%;
@@ -1285,8 +1288,9 @@ padding-top:40px;
 margin-right:-294px;
 }
 #logoimg{
-    margin-left: 75px;
-    margin-top: 10px;
+    margin-left: 40px;
+    margin-top: 37px;
+    width:110%
 }
 #appdl2{
 padding-top:50px;
@@ -1299,7 +1303,10 @@ z-index: 900;
 position: relative;
 }
 #logo-site{
-width:85%
+    width: 66%;
+    margin-left: 80px;
+    margin-top: -34px;
+    margin-bottom: 5px;
 }
 #appdiv1{
 margin-right: 51%;
@@ -1364,9 +1371,13 @@ background-color:#fa511a;
 color:#fff;
 height:400px;
 margin-top: 600px;
+background-image: url(img/florida-house.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 50%;
 }
 #cmapp2{
-width: 621px;
+width: 50%;
     font-size: 22px;
     font-weight: 400;
     padding: 55px;
@@ -1501,7 +1512,7 @@ background-color: #eee0;
 }
 #logindrop{
 margin-right: -101px !important;
-    z-index:999; 
+    z-index:10000 !important; 
     margin-top: -18px;
     border-radius: 7px;
     border-top: 3px solid #dd6741;
@@ -1602,15 +1613,28 @@ width: 98%;
 .compreglable{
 color:#fff;
 }
+.labeltwht{
+color:#fff;
+}
 .btnvid1{
-width: 210px;
+    margin-top:60px;
+    width: 250px;
     height: 50px;
-    background-color: #005678;
+    background-color: #005678f2;
     border: 1px solid #fff;
     margin-left: auto;
     margin-right: auto;
     display: block;
     border-radius: 10px;
+}
+.panel-mv1{
+margin-top:-200px;
+}
+.has-success .control-label{
+color: #3ee441 !important;
+}
+.has-error .control-label{
+color:#f90500 !important;
 }
 @media (min-width:1700px){
 .main-menu ul li a{
@@ -1633,6 +1657,16 @@ padding-top:43px !important;
 padding-bottom:20px !important;
 }
 }
+@media (max-width:1290px){
+#login-txt{
+margin-top:-34px !important;
+right:0px !important;
+width:100px;
+}
+.main-menu{
+margin-right:15px !important;
+}
+}
 @media (max-width:1280px){
 #srchinftxt1{
 font-size:15px;
@@ -1649,5 +1683,25 @@ margin-left:450px !important;
 @media (max-width:970px){
 #appdiv2{
 margin-left:400px !important;
+}
+}
+@media (max-width:767px){
+.mean-bar{
+background: rgba(243, 188, 22, 0) !important;
+}
+#menu-head{
+    height: 55px;
+}
+#appwiz{
+display:none;
+}
+#socico {
+    margin-right: -200px;
+}
+#srvapp1{
+height: 1150px;
+    display: block;
+    margin-top: 500px;
+    position: relative;
 }
 }

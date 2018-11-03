@@ -824,7 +824,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         case "U":
 							orderStatus = "Orden Asigned";
                             break;
-
+                        case "M":
+							orderStatus = "Mailed";
+                            break;
 						default:
 							orderStatus = "Undefined";
                 }
@@ -1027,6 +1029,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                         echo "Orden In Progress";
                                         break;
                                     case "U":
+                                        echo "Orden Asigned";
+                                        break;
+                                    case "M":
                                         echo "Orden Asigned";
                                         break;
                                     default:
@@ -2289,7 +2294,7 @@ if(!empty($_actual_company['postCardValue'])){
             <!-- Modal content--> 
             <div class="modal-content"> 
                 <div class="modal-header"> 
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
                     <h4 class="modal-title" id="headermyMessagePostCardsPay">Postcard Info</h4> 
                 </div> 
                 <div class="modal-body" id="textmyMessagePostCardsPay">
@@ -2297,6 +2302,9 @@ if(!empty($_actual_company['postCardValue'])){
                     We are very grateful for your choice, to be able to use the postcards please make the payment by clicking <a href="#" onclick="showPayPostCards('.($_actual_company['postCardValue']*100).')">here</a>
                     </p>              
                 </div>
+                <div class="modal-footer" id="buttonPaymentType"> 
+                    <button type="button" class="btn-danger btn-sm"  data-dismiss="modal" onClick="closeExtraWindows()">Close</button>
+                </div> 
             </div> 
         </div>
     </div>
@@ -2418,8 +2426,6 @@ if(!empty($_actual_company['postCardValue'])){
 			<div class="modal-footer" id="buttonPaymentType"> 
 				<button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Accept</button>
 				<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
-				
-				
 			</div> 
 		</div> 
 	</div>

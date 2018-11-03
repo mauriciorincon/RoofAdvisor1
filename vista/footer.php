@@ -45,7 +45,7 @@
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (877) 529 5995</span>
+										<span>Telephone : (888) 400 5996</span>
 									</li>
 									<li>
 										<i class="fa fa-envelope-o"></i>
@@ -159,8 +159,8 @@
 		<script src="vista/js/mdtimepicker.js"></script>
                 <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 	                        <script src="js/lity.min.js"></script>
-                <script src="js/fontawesome.min.js"></script>
-		
+                <script src="js/all.js"></script>
+	
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
 
 				

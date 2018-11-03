@@ -1,7 +1,7 @@
 <br>
 <br>
 <br>
-<div class="container">
+<div class="container" style="margin-top:30px;">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelCustomer">
             <div class="stepwizard-step col-xs-6"> 
@@ -24,39 +24,39 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                        <label class="control-label">First Name</label>
+                        <label class="control-label labeltwht">First Name</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Last Name</label>
+                        <label class="control-label labeltwht">Last Name</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
                     </div>  
                     <div class="form-group">
-                        <label class="control-label ">Email</label>
+                        <label class="control-label labeltwht ">Email</label>
                         <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-                        <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                        <label class="control-label labeltwht" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                     </div>
                     <div class="form-group">
-                        <label class="control-label ">Password</label>
+                        <label class="control-label labeltwht ">Password</label>
                         <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-                        <div class="help-block">Minimum of 6 characters</div>
-                        <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                        <div class="help-block labeltwht">Minimum of 6 characters</div>
+                        <label class="control-label labeltwht" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
                     </div>
                     <div class="form-group">
-                        <label class="control-label ">Confirm Password</label>
+                        <label class="control-label labeltwht ">Confirm Password</label>
                         <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-                        <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                        <label class="control-label labeltwht" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
                     </div> 
                     <div class="form-group">
-                        <label class="control-label">Address</label>
+                        <label class="control-label labeltwht">Address</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" />
                     </div>
                     <div class="form-group">
-                        <label class="control-label">City</label>
+                        <label class="control-label labeltwht">City</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCity" name="customerCity" />
                     </div> 
                     <div class="form-group">
-                        <label class="control-label">State</label>
+                        <label class="control-label labeltwht">State</label>
                         <select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
                             <?php foreach ($_array_state as $key => $value1) { ?>
                                 <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
@@ -66,11 +66,11 @@
                         
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Zip code</label>
+                        <label class="control-label labeltwht">Zip code</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
                     </div> 
                     <div class="form-group">
-                        <label class="control-label">Phone number</label>
+                        <label class="control-label labeltwht">Phone number</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
                     </div>    
                 
@@ -87,7 +87,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="control-label text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
+                    <label class="control-label labeltwht text-center h1" id="validatingMessajeCode" name="validatingMessajeCode"><big></big></label>
                     
                 </div>
                 <button class="btn btn-primary prevBtnCustomer pull-left" id="prevBtnRegisterCustomer" name="prevBtnRegisterCustomer" type="button">Previous</button>

@@ -1,4 +1,85 @@
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:1200px" role="document">
+    <div class="modal-content logmodal">
+      <div class="modal-header mheadr">
+        <h3 class="modal-title" id="wizlogin">Please Enter Your Information To Register</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div style="margin-left:30px;margin-top:30px;margin-bottom:-15px;">
+       <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Info</br></br>
+       <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
+      </div>     
+ <div class="modal-body" style="height:175px;">
+<div class="list-group">
+							<div class="list-group-item ">
+								<span class="glyphicon glyphicon-info-sign"></span> Info 
+								<div class="d-flex w-100 justify-content-between">
+									<span ><b>Are you new to RoofServiceNow?, fill the fields below</b></span><br><br>
+									
+								</div>
+							</div>
+							
+							<div class="list-group-item " id="step6RegisterCustomerOrder">
+								<div class="form-group">
+									<label class="control-label ">Email</label>
+									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
+									<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+								</div>
+								<div class="form-group">
+									<label class="control-label ">Password</label>
+									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+									<div class="help-block">Minimum of 6 characters</div>
+									<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+								</div>
+								<div class="form-group">
+									<label class="control-label ">Confirm Password</label>
+									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+									<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+								</div>
+                                                                <div id="reg-frm2">
+              							<div class="form-group">
+                                                                        <label class="control-label Rlft-frm">First Name</label>
+                                                                        <input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
+                                                                        <label style="margin-left: 52px;" class="control-label Rlft-frm1">Last Name</label>
+                                                                        <input  maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+                                                                </div>
+	
+								<div class="form-group">
+									<label style="margin-left: 17px;" class="control-label Rlft-frm">Address</label>
+									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+								        <label class="control-label Rlft-frm1">City</label>
+                                                                        <input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
+                                                                </div>
+								<div class="form-group">
+              							        <label style="margin-left:37px;" class="control-label Rlft-frm">State</label>
+                                                                        <select style="display:inline-block;width:183px;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
 
+                                                                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                                                                        <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                                                                <?php } ?>
+                                                                        </select>
+                                                                        <label style="margin-left: 66px;" class="control-label Rlft-frm1">Zip code</label>
+                                                                        <input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+                                                                </div>
+								
+								<div class="form-group">
+									<label style="margin-left:-31px;" class="control-label Rlft-frm">Phone number</label>
+									<input style="width: 498px;" maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+								</div>
+                                                                </div>  
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
+                                                          	</div>
+							
+						</div>
+						          </div>
+      <div class="modal-footer" style="border-top:0;">
+        <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content logmodal">
@@ -36,7 +117,7 @@
                                         </div>
                                         </div>
       <div class="modal-footer">
-        <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button>
+        <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</button>
        <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
       </div>
     </div>
@@ -91,9 +172,9 @@
     <div id="appfrm1">
     <form role="form">
      <div id="step1contain">
-        <div class="panel panel-primary setup-contentOrder" id="step-1">
+        <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
-                 <h3 class="panel-title">ZIP CODE</h3>
+                 <h3 class="panel-title">Request Service</h3>
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
@@ -109,10 +190,10 @@
             </div>
         </div>
         </div>
-        <button class="btnvid1"><a style="color:#fff" href="video/roofpromo.mp4" data-lity><i class="fas fa-play"></i>WATCH THE VIDEO</a></button>
-         <div style="margin-top:-50px;" class="panel panel-primary setup-contentOrder" id="step-2">
+        <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+         <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Select Service</strong></font> </h3>
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
@@ -339,9 +420,9 @@
 
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-10">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10">
 			<div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Answer Some Questions</strong></font> </h3>
 			</div>
 			<div class="panel-body">
 			<div class="list-group-item scr2fix">
@@ -437,9 +518,9 @@
 			</div>
 		</div>
 		
-		<div class="panel panel-primary setup-contentOrder" id="step-3">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="10"><strong>Create a work order</strong></font> </h1>
+                 <h1 class="panel-title wizhead"><font size="10"><strong>Enter Service Location</strong></font> </h1>
             </div>
             <div class="panel-body">
 			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>
@@ -598,7 +679,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-4">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
@@ -606,7 +687,7 @@
 				<div class="row">
                                          <div class="col-sm-12">
                                                 <br>
-                                                <center><h4 class="h1white"><b>Schedule repair service are schedule a week in advance</b></h4></center>
+                                                <center><h4 class="h1white"><b>Please Note; Schedule repair service are schedule a week in advance.</b></h4></center>
                                         </div>
 
 					<div class="col-sm-6 inpwiz1">
@@ -625,9 +706,9 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-5">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Select the professional</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="10"><strong>Contractor List</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">
@@ -651,9 +732,9 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-6">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="41"><strong>Review Scheduled Repair Order Details</strong></font></h1>
+                 <h1 class="panel-title wizhead"><font size="41"><strong>Review Your Order Details</strong></font></h1>
             </div>
             <div class="panel-body">
 				
@@ -706,7 +787,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder" id="step-8">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-8">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead">Payment Processing</h3>
             </div>
@@ -761,72 +842,16 @@
             </div>
 		</div>
 		
-		<div style="margin-top:-75px" class="panel panel-primary setup-contentOrder" id="step-7">
+		<div style="margin-top: -200px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width: 1120px;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
-            <div class="panel-heading">
+            <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
-					<div style="margin-bottom: 20px;" class="col-sm-12">
-						<div class="list-group">
-							<div class="list-group-item ">
-								<span class="glyphicon glyphicon-info-sign"></span> Info 
-								<div class="d-flex w-100 justify-content-between">
-									<span ><b>Are you new to RoofServiceNow?, fill the fields below</b></span><br><br>
-									
-								</div>
-							</div>
-							
-							<div class="list-group-item " id="step6RegisterCustomerOrder">
-								<div class="form-group">
-									<label class="control-label ">Email</label>
-									<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-									<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
-								</div>
-								<div class="form-group">
-									<label class="control-label ">Password</label>
-									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-									<div class="help-block">Minimum of 6 characters</div>
-									<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-								</div>
-								<div class="form-group">
-									<label class="control-label ">Confirm Password</label>
-									<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-									<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-								</div>
-                                                                <div id="reg-frm2">
-              							<div class="form-group">
-                                                                        <label class="control-label Rlft-frm">First Name</label>
-                                                                        <input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
-                                                                        <label style="margin-left: 52px;" class="control-label Rlft-frm1">Last Name</label>
-                                                                        <input  maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-                                                                </div>
-	
-								<div class="form-group">
-									<label style="margin-left: 17px;" class="control-label Rlft-frm">Address</label>
-									<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-								        <label class="control-label Rlft-frm1">City</label>
-                                                                        <input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
-                                                                </div>
-								<div class="form-group">
-              							        <label style="margin-left:37px;" class="control-label Rlft-frm">State</label>
-                                                                        <select style="display:inline-block;width:183px;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
-
-                                                                                <?php foreach ($_array_state as $key => $value1) { ?>
-                                                                                        <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
-                                                                                <?php } ?>
-                                                                        </select>
-                                                                        <label style="margin-left: 66px;" class="control-label Rlft-frm1">Zip code</label>
-                                                                        <input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-                                                                </div>
-								
-								<div class="form-group">
-									<label style="margin-left:-31px;" class="control-label Rlft-frm">Phone number</label>
-									<input style="width: 498px;" maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-								</div>
-                                                                </div>  
-								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
+					<div style="margin-bottom: 20px;    margin-top: 520px;" class="col-sm-12">
+				<div>  
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
                                                                 <button type="button" class="btn" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
                                                           	</div>
 							
@@ -858,7 +883,7 @@
 				<p >Some text in the modal.</p> 
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">GO!</button> 
 			</div> 
 		</div> 
 	</div>
