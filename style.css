@@ -1371,9 +1371,13 @@ background-color:#fa511a;
 color:#fff;
 height:400px;
 margin-top: 600px;
+background-image: url(img/florida-house.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 50%;
 }
 #cmapp2{
-width: 621px;
+width: 50%;
     font-size: 22px;
     font-weight: 400;
     padding: 55px;
@@ -1623,6 +1627,9 @@ color:#fff;
     display: block;
     border-radius: 10px;
 }
+.panel-mv1{
+margin-top:-200px;
+}
 .has-success .control-label{
 color: #3ee441 !important;
 }
@@ -1648,6 +1655,16 @@ margin-left:40% !important;
 padding-right:17% !important;
 padding-top:43px !important;
 padding-bottom:20px !important;
+}
+}
+@media (max-width:1290px){
+#login-txt{
+margin-top:-34px !important;
+right:0px !important;
+width:100px;
+}
+.main-menu{
+margin-right:15px !important;
 }
 }
 @media (max-width:1280px){
