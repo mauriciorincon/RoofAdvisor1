@@ -45,7 +45,7 @@
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (877) 529 5995</span>
+										<span>Telephone : (888) 400 5996</span>
 									</li>
 									<li>
 										<i class="fa fa-envelope-o"></i>
