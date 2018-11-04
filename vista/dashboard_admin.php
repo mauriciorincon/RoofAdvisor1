@@ -305,7 +305,7 @@ Welcome to RoofServicenow Admin
                             'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                             '<span class="glyphicon glyphicon-list-alt"></span>'+
                         '</a>';
-            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
+            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {                  
                 dataCustomer=customerDataX;
             });
             
@@ -325,14 +325,18 @@ Welcome to RoofServicenow Admin
                 
             
                         
-            
+            if(dataOrder.RequestType=='P'){
+                description='Number of Postcard: '+dataOrder.postCardValue;
+            }else{
+                description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+            }
 
             t.row.add( [
                     dataOrder.OrderNumber,
                     dataOrder.SchDate,
                     dataOrder.SchTime,
                     dataCustomer,
-                    dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                    description,
                     requestType,
                     status,
                     dataOrder.ETA,
@@ -411,7 +415,12 @@ Welcome to RoofServicenow Admin
                         $row.find("td:eq(1)").html(dataOrder.SchDate);
                         $row.find("td:eq(2)").html(dataOrder.SchTime);
 
-                        $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                        if(dataOrder.RequestType=='P'){
+                            description='Number of Postcard: '+dataOrder.postCardValue;
+                        }else{
+                            description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                        }
+                        $row.find("td:eq(4)").html(description);
 
                         $row.find("td:eq(5)").html(requestType);
                         $row.find("td:eq(6)").html(status);
@@ -657,12 +666,12 @@ Welcome to RoofServicenow Admin
         <table class="table table-striped table-bordered" id="table_orders_company">
             <thead>
                 <tr>
-                    <th>Order ID</th>
+                    <th>ID</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Name/Addr/Phone</th>
                     <th>Description</th>
-                    <th>Request Type</th>
+                    <th>Req Type</th>
                     <th>Status</th>
                     <th>Est Amt</th>
                     <th>Final Amt</th>
@@ -685,9 +694,18 @@ Welcome to RoofServicenow Admin
                                 $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
                                 $_phone_number=str_replace("+1","",$_phone_number);
                                 echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
+                                
+                                
                             ?></td>
                         
-                        <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
+                        <td><?php 
+                                if(strcmp($order['RequestType'],"P")==0){
+                                    echo 'Number of Postcard: '.$order['postCardValue'];
+                                }else{
+                                    echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water'];
+                                }
+                            ?>
+                        </td>
                         <td><?php 
                                 switch ($order['RequestType']) {
                                     case "E":
@@ -768,8 +786,8 @@ Welcome to RoofServicenow Admin
                             ?>
                         </td>                            
 
-                        <td><?php echo $order['ETA']?></td>
                         <td><?php echo $order['EstAmtMat']?></td>
+                        <td><?php echo $order['ActAmtMat']?></td>
                         <td><?php echo $order['PaymentType']?></td>
                         <td><?php 
                                 if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
@@ -1515,9 +1533,14 @@ Welcome to RoofServicenow Admin
                 </select>
             </div>
             <div class="form-group">
+                <label for="numberPostCard" id="numberPostCardLabel">Number of postcards</label>
+                <input type="text" class="form-control" name="numberPostCard" id="numberPostCard" readonly >
+            </div>
+            <div class="form-group">
                 <label for="amountPostCard" id="amountPostCardLabel">Amount</label>
                 <input type="text" class="form-control" name="amountPostCard" id="amountPostCard" >
             </div>
+            
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>

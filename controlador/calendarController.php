@@ -93,7 +93,7 @@ class calendar{
                 foreach($events as $key => $event) {
                     //echo $event_day;
                     if(strcmp($event['SchDate'],$event_day)==0){
-                        $calendar.= '<div class="event"><a onclick="showEventCalendar('.$event['OrderNumber'].')">Order Id: '.$event['OrderNumber'].'<br>'.'Customer: '.$event['CustomerID'].',Time: '.$event['SchTime'].'</a></div>';
+                        $calendar.= '<div class="event"><a onclick="showEventCalendar('.$event['FBID'].')">Order Id: '.$event['OrderNumber'].'<br>'.'Customer: '.$event['CustomerID'].',Time: '.$event['SchTime'].'</a></div>';
                         $flag=true;
                     }
                 }
