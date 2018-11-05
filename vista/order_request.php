@@ -94,28 +94,28 @@
        <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
       </div>     
  <div class="modal-body" style="height:175px;">
-                                                <div class="list-group">
-                                                        <div  class="list-group-item login-list1">
-                                                                <div class="d-flex w-100 justify-content-between">
-                                                                        <div class="form-group">
-                                                                                <label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
-                                                                                <input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                                <label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
-                                                                                <input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
-                                                                        </div>
-                                                                        <div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
-                                                                        <a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
-                                                                        </div>
-                                                                       <br><br><br>
-                                                                        <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-                                                                </div>
-                                                        </div>
-                                                <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-                                                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
-                                        </div>
-                                        </div>
+				<div class="list-group">
+						<div  class="list-group-item login-list1">
+								<div class="d-flex w-100 justify-content-between">
+										<div class="form-group">
+												<label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+												<input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
+										</div>
+										<div class="form-group">
+												<label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+												<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
+										</div>
+										<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+										<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+										</div>
+										<br><br><br>
+										<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+								</div>
+						</div>
+				<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+				<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+		</div>
+		</div>
       <div class="modal-footer">
         <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</button>
        <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
@@ -554,7 +554,9 @@
 
 								map = new google.maps.Map(document.getElementById('map1'), {
 								center: {lat: 27.332617, lng: -81.255690},
-								zoom: 12
+								zoom: 12,
+                                streetViewControl: false,
+                                mapTypeControl: false
 								});
 
 								////Get lat and long from zipcode
@@ -740,7 +742,7 @@
 				
 				<div class="list-group">
 						<a href="#" class="list-group-item ">
-							<span class="glyphicon glyphicon-envelope"></span> Details <span class="badge">1</span>
+							<span class="glyphicon glyphicon-envelope"></span> Details 
 							<div class="d-flex w-100 justify-content-between">
 								<span ><b>Repair Description: </b></span><span id="step8RepairDescription"></span><br>
 								<span ><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>	
@@ -751,7 +753,7 @@
 
 				<div class="list-group">
 						<a href="#" class="list-group-item ">
-							<span class="glyphicon glyphicon-wrench"></span> Contractor <span class="badge">1</span>
+							<span class="glyphicon glyphicon-wrench"></span> Contractor 
 							<div class="d-flex w-100 justify-content-between">
 								<span ><b>Name: </b></span><span id="step8CompanyName"></span><br>
 								
@@ -761,7 +763,7 @@
 
 				<div class="list-group">
 						<a href="#" class="list-group-item ">
-							<span class="glyphicon glyphicon-map-marker"></span> Address of service <span class="badge">1</span>
+							<span class="glyphicon glyphicon-map-marker"></span> Address of service 
 							<div class="d-flex w-100 justify-content-between">
 								<span ><b>Address: </b></span><span id="step8Address"></span><br>
 								<span ><b>ZipCode: </b></span><span id="step8ZipCode"></span><br>
