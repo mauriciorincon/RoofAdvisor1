@@ -849,6 +849,28 @@
             </div>
             <div class="panel-body">
 				<div class="row">
+             <div class="list-group" style="margin-top: 20%;margin-left: 400px;">
+                                                        <div  class="list-group-item login-list1">
+                                                                <div class="d-flex w-100 justify-content-between">
+                                                                        <div class="form-group">
+                                                                                <label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+                                                                                <input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                                <label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+                                                                                <input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
+                                                                        </div>
+                                                                        <div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+                                                                        <a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+                                                                        </div>
+                                                                       <br><br><br>
+                                                                        <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+                                                                </div>
+                                                        </div>
+                                                <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+                                                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+                                                <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
+                                        </div>
 					<div style="margin-bottom: 20px;    margin-top: 520px;" class="col-sm-12">
 				<div>  
 								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
