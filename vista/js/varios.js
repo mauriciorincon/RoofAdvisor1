@@ -27,7 +27,13 @@ $(document).ready(function() {
       });
     
     
-    $('#table_orders_company').DataTable();
+    $('#table_orders_company').DataTable({
+        "columnDefs": [
+          { className: "text-right", "targets": [7,8] },
+        ]
+      }
+
+    );
     step0=$('.stepwizard-step:eq(0)');
     if(step0!=undefined){
         step0.hide();
@@ -1299,6 +1305,7 @@ function getListContractor(){
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
         jsRemoveWindowLoad();
+        $('html,body').scrollTop(0);
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
@@ -1329,7 +1336,7 @@ $(document).ready(function() {
                 var n = data.indexOf("Error");
                 
 
-                if(n==-1){
+                if(n==-1 && n !== null){
 
                     /*$('#textAnswerOrder').html(data+'');
                     $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
@@ -1369,6 +1376,12 @@ $(document).ready(function() {
 } );
 
 function insertOrderCustomer(idStripeCharge,amountValue){
+    if(idStripeCharge== undefined){
+        idStripeCharge="";
+    }
+    if(amountValue== undefined){
+        amountValue="";
+    }
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -1505,11 +1518,11 @@ function validateIsLoggedIn(){
                     }
                     
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
-                    $('#headerTextAnswerOrder').html('User validation');
-                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
+                    //$('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
+                    //$('#headerTextAnswerOrder').html('User validation');
+                    //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    $('#login-modal').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');

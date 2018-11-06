@@ -399,7 +399,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					}else{
 
 						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
-						estimateAmount = estimateAmount ? estimateAmount : '$0';		
+						estimateAmount = estimateAmount ? '$'+estimateAmount : '$0';		
                 }
                 if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
 						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
@@ -410,7 +410,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										'</a>';
                 }else{
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
-                    finalAmount = finalAmount ? finalAmount : '$0';
+                    finalAmount = finalAmount ? '$'+finalAmount : '$0';
                 }
                 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
@@ -480,7 +480,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     
                 });
                             
-                
+                if(dataOrder.RequestType=='P'){
+                    description='Number of Postcard: '+dataOrder.postCardValue;
+                }else{
+                    description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                }
 
                 t.row.add( [
                         dataOrder.OrderNumber,
@@ -616,11 +620,17 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                                 '</a>';
                             }else{
                                 finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
-                                finalAmount = finalAmount ? finalAmount : '$0';
+                                finalAmount = finalAmount ? '$'+finalAmount : '$0';
                             }
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
-                            $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                            if(dataOrder.RequestType=='P'){
+                                description='Number of Postcard: '+dataOrder.postCardValue;
+                            }else{
+                                description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                            }
+
+                            $row.find("td:eq(4)").html(description);
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
                             $row.find("td:eq(7)").html(estimateAmount);
@@ -960,7 +970,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                     echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
                                 ?></td>
                             
-                            <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
+                            <td><?php 
+                                if(strcmp($order['RequestType'],"P")==0){
+                                    echo 'Number of Postcard: '.$order['postCardValue'];
+                                }else{
+                                    echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water'];
+                                }
+                                
+
+                                ?></td>
                             <td><?php 
                                     switch ($order['RequestType']) {
                                         case "E":

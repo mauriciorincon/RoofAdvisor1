@@ -322,9 +322,18 @@ Welcome to RoofServicenow Admin
                             '<span class="glyphicon glyphicon-upload"></span>'+
                         '</a>';
                 
-                
-            
+            valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+            valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+            valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+            valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+
+            estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+			estimateAmount = estimateAmount ? estimateAmount : '0';		
                         
+            finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
+            finalAmount = finalAmount ? finalAmount : '0';
+
             if(dataOrder.RequestType=='P'){
                 description='Number of Postcard: '+dataOrder.postCardValue;
             }else{
@@ -339,8 +348,8 @@ Welcome to RoofServicenow Admin
                     description,
                     requestType,
                     status,
-                    dataOrder.ETA,
-                    dataOrder.EstAmtMat,
+                    '$'+estimateAmount,
+                    '$'+finalAmount,
                     dataOrder.PaymentType,
                     dataContractor,
                     companyActions,
@@ -424,8 +433,21 @@ Welcome to RoofServicenow Admin
 
                         $row.find("td:eq(5)").html(requestType);
                         $row.find("td:eq(6)").html(status);
-                        $row.find("td:eq(7)").html(dataOrder.ETA);
-                        $row.find("td:eq(8)").html(dataOrder.EstAmtMat);
+
+                        valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+                        valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+                        valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+                        valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+
+                        estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+                        estimateAmount = estimateAmount ? estimateAmount : '0';		
+                                    
+                        finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
+                        finalAmount = finalAmount ? finalAmount : '0';
+
+                        $row.find("td:eq(7)").html('$'+estimateAmount);
+                        $row.find("td:eq(8)").html('$'+finalAmount);
                         $row.find("td:eq(9)").html(dataOrder.PaymentType);   
                     }
                 }
@@ -786,8 +808,8 @@ Welcome to RoofServicenow Admin
                             ?>
                         </td>                            
 
-                        <td><?php echo $order['EstAmtMat']?></td>
-                        <td><?php echo $order['ActAmtMat']?></td>
+                        <td><?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime']))?></td>
+                        <td><?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime']))?></td>
                         <td><?php echo $order['PaymentType']?></td>
                         <td><?php 
                                 if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 

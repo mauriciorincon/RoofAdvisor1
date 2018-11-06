@@ -903,15 +903,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<table class="table table-striped table-bordered" id="table_orders_customer">
 					<thead>
 					<tr>
-						<th>Order ID</th>
+						<th>ID</th>
 						<th>Order Type</th>
 						<th>Address</th>
 						<th>Description</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
-						<th>Estimate Amount</th>
-                    	<th>Total Final Amount</th>
+						<th>Est Amt</th>
+                    	<th>Tot Amt</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
