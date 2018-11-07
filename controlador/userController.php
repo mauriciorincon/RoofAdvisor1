@@ -147,7 +147,11 @@ class userController{
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $_result->email;
                     $_SESSION['profile'] = 'customer';
+
                     
+                    echo '<script>
+                        var email_user_logued=\''.$_SESSION['email'].'\';
+                    </script>';
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                 }else{
