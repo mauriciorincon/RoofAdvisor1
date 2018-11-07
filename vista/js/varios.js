@@ -319,7 +319,12 @@ function validateEmail(table) {
             
         return result;    
      }
-};
+}
+
+function validateFormatMail(Email){
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Email);
+}
 
 function saveContractorData(){
     var companyNameField = $("input#companyName").val();
@@ -889,6 +894,10 @@ $(document).ready(function () {
             if(password!=Repassword){
                 flag = false;
             }
+            if(validateFormatMail(emailValidation)==false){
+                flag = false;
+            }
+
             if (flag==false){
                 alert('Please fill all fields to continue with register');
                 return;
