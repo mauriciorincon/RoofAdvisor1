@@ -4,6 +4,36 @@ if(!isset($_SESSION)) {
 } 
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
+if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
+    var_dump($_POST['g-recaptcha-response']);
+    $_secret="6LeiZnkUAAAAAE0V7yDVIYLwwoZoZaG6c_A6HyWF";
+    $_ip=$_SERVER['REMOTE_ADDR'];
+
+    $_capcha=$_POST['g-recaptcha-response'];
+
+    $_result=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$_secret&response=$_capcha&remoteip=$_ip");
+
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    var_dump($_result);
+
+    $_array=json_decode($_result,true);
+
+    if($_array['success']){
+        echo "todo bien";
+    }else{
+       return; 
+    }
+}else{
+    //echo "fill capcha";
+    $_path="../../?controller=user&accion=showRegisterCustomer";
+
+    header("Location: $_path");
+    return;
+}
+
+
 
 $_firstCustomerName = $_POST['firstCustomerName'];
 $_lastCustomerName = $_POST['lastCustomerName'];

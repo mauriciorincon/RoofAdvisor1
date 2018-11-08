@@ -110,8 +110,8 @@
 						</div>		
 						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
 							<div class="footer-widget">
-								<h3 class="widget-title">FEEDBACK</h3>
-								<p>Please provide your comments or feedback</p>
+								<h3 class="widget-title">REQUEST A DEMO</h3>
+								<p>Please provide your email to request a demo.</p>
 								<div class="footer-form">
 									<form action="#">
 									  <input type="text" placeholder="Type your E-mail address..." />

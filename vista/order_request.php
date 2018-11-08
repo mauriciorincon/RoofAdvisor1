@@ -111,7 +111,7 @@
        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Info</br></br>
        <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
       </div>     
- <div class="modal-body" style="height:175px;">
+ 		<div class="modal-body" style="height:175px;">
 				<div class="list-group">
 						<div  class="list-group-item login-list1">
 								<div class="d-flex w-100 justify-content-between">
@@ -124,7 +124,7 @@
 												<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
 										</div>
 										<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
-										<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+											<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
 										</div>
 										<br><br><br>
 										<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
@@ -132,7 +132,7 @@
 						</div>
 				<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 				<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
-		</div>
+				</div>
 		</div>
       <div class="modal-footer">
         <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Register</button>

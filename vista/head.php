@@ -113,24 +113,28 @@ if(!isset($_SESSION)) {
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 									</ul>
 					  			</nav>
-							<ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
+								<ul class="nav navbar-nav navbar-right">
+                                	<li class="dropdown">
                                     <!--<img id="login-img" src="img/login.png">-->
                                     <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-                                    <span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-                                        echo $_SESSION['username'];
-                                                } else{
-                                                echo "Log In";
-                                                                }?></span>
+										<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
+											echo $_SESSION['username'];
+													} else{
+													echo "Log In";
+																	}?>
+										</span>
                                                                 <b class="caret"></b></a>
                                                                 <ul id="logindrop" class="dropdown-menu">
-                                                                        <li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-                                                                        <li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
-                                                                        <li class="divider"></li>
-                                                                        <li><a href="?controller=user&accion=logout">Log Out</a></li>
-                                                                </ul>
-                                                        </li>
-                                                </ul>				
+                                                                        <li><a href="?controller=user&accion=dashboardCustomer">Homeowner</a></li>
+                                                                        <li><a href="?controller=user&accion=dashboardCompany">ContractPro</a></li>
+																		<li class="divider"></li>
+																		<?php if(isset($_SESSION['username'])){
+																			echo '<li><a href="?controller=user&accion=logout">Log Out</a></li>';
+                                                } ?>
+                                                                        
+                                            </ul>
+                                    </li>
+                                </ul>				
 							</div>
 						</div>
 						<div class="mobile-menu-area visible-xs ">
@@ -138,19 +142,26 @@ if(!isset($_SESSION)) {
 								<div class="mobile-menu">
 									<nav id="mobile-menu">
 										<ul>
-										<li class="active"><a href="index.php">HOME <i class="fa fa-angle-down"></i></a></li>
-										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US</a></li>
-										<li><a href="?controller=services&accion=showinfo">SERVICE</a></li>
-										<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
-										<li><a href="?controller=download&accion=showinfo">DOWNLOAD</a></li>
-										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
-										<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
-											<li class="active"><a href="#">Log In <i class="fa fa-angle-down"></i></a>
-												<ul>
-													<li><a href="?controller=user&accion=dashboardCustomer">Customer Area</a></li>
-													<li><a href="?controller=user&accion=dashboardCompany">Company Area</a></li>
-												</ul>
-										</li>
+										<li class="dropdown">
+                                    <!--<img id="login-img" src="img/login.png">-->
+                                    <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
+										<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
+											echo $_SESSION['username'];
+													} else{
+													echo "Log In";
+																	}?>
+										</span>
+                                                                <b class="caret"></b></a>
+                                                                <ul id="logindrop" class="dropdown-menu">
+                                                                        <li><a href="?controller=user&accion=dashboardCustomer">Homeowner</a></li>
+                                                                        <li><a href="?controller=user&accion=dashboardCompany">ContractPro</a></li>
+																		<li class="divider"></li>
+																		<?php if(isset($_SESSION['username'])){
+																			echo '<li><a href="?controller=user&accion=logout">Log Out</a></li>';
+                                                } ?>
+                                                                        
+                                            </ul>
+                                    </li>
 										</ul>
 									</nav>
 								</div>
