@@ -4,6 +4,7 @@ if(!isset($_SESSION)) {
 } 
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
+$_userController=new userController();
 if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
     var_dump($_POST['g-recaptcha-response']);
     $_secret="6LeiZnkUAAAAAE0V7yDVIYLwwoZoZaG6c_A6HyWF";
@@ -26,10 +27,15 @@ if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
        return; 
     }
 }else{
+    $this->_userModel=new userModel();
+    $_array_state=$this->_userModel->getNode('Parameters/state');
+    require_once("vista/head.php");
+    require_once("vista/register_customer.php");
+    require_once("vista/footer.php");
     //echo "fill capcha";
-    $_path="../../?controller=user&accion=showRegisterCustomer";
+    //$_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage='Please check the captcha'";
 
-    header("Location: $_path");
+    //header("Location: $_path");
     return;
 }
 
@@ -65,7 +71,7 @@ $_arrayCustomer = array(
     "password"=>$_password,
 );
 
-$_userController=new userController();
+
 $_customerID=$_userController->insertCustomer($_arrayCustomer,$_selectionType);
 
 if(strpos($_customerID,"Error")!==false){

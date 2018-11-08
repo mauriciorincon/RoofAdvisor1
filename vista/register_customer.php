@@ -72,11 +72,11 @@
                     
                     <div class="form-group">
                         <label class="control-label labeltwht">Zip code</label>
-                        <input maxlength="100" type="number" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" oninvalid="this.setCustomValidity('Please Enter Zipcode')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="number" min="0" onkeypress="return isNumber(event)" max="99999" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" oninvalid="this.setCustomValidity('Please Enter Zipcode,Max length 5')" oninput="setCustomValidity('')"/>
                     </div> 
                     <div class="form-group">
                         <label class="control-label labeltwht">Phone number</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')"/>
                     </div>    
                     <div  class="form-group">
                         <div class="g-recaptcha" data-sitekey="6LeiZnkUAAAAAA6gqLw6IFIMuchbHXyiRRYyTC1n"></div>
