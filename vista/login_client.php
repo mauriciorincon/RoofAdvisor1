@@ -22,7 +22,7 @@
 									<input type="password" placeholder="" required="true" id="passwordClient" name="passwordClient"/>
 								
                                 <button type="submit">Login</button><br><br>
-                                <a href="?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+								<a href="?controller=user&accion=resetPasswordCustomer">Forgot password?</a>    
 							</form>
 						</div>
 					</div>
@@ -30,13 +30,13 @@
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
                             <h1>you don't have an account?</h1>
-                            
+							<h1><a href="?controller=user&accion=showRegisterCustomer">Register Here</a></h1>
 						</div>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
-                        <a href="?controller=user&accion=showRegisterCustomer">Register Customer</a>
+                        
 						</div>
                     </div>
 					

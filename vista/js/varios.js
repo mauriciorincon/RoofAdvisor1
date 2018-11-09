@@ -319,7 +319,12 @@ function validateEmail(table) {
             
         return result;    
      }
-};
+}
+
+function validateFormatMail(Email){
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Email);
+}
 
 function saveContractorData(){
     var companyNameField = $("input#companyName").val();
@@ -889,6 +894,10 @@ $(document).ready(function () {
             if(password!=Repassword){
                 flag = false;
             }
+            if(validateFormatMail(emailValidation)==false){
+                flag = false;
+            }
+
             if (flag==false){
                 alert('Please fill all fields to continue with register');
                 return;
@@ -1117,6 +1126,8 @@ $(document).ready(function () {
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
+
+            
         }
     });
     
@@ -1136,6 +1147,14 @@ $(document).ready(function () {
                 isValid = false;
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
+        }
+
+        if(curStepBtn=="step-1"  && isValid==true ){
+            $(".btnvid1").hide();
+        }
+
+        if(curStepBtn=="step-2"  && isValid==true ){
+            //nextStepWizard = $('div.setup-panelOrder div a[href="#step-10"]').parent().next().children("a");
         }
 
         if(curStepBtn=="step-2"  && isValid==true ){
@@ -1275,7 +1294,11 @@ $(document).ready(function () {
             //}
 
         $(".form-group").removeClass("has-error");
-        
+
+        if(curStepBtn=="step-2"){
+            $(".btnvid1").show();
+        }
+
         if (curStepBtn=="step-6"){
             var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
             if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -3912,4 +3935,13 @@ function showPayPostCards(totalValue){
 
 function closeExtraWindows(){
     $(document).ready(function(){$("#myPostCard").modal("hide"); });
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+        return false;
+    }
+    return true;
 }

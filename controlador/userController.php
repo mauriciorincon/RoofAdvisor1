@@ -377,7 +377,7 @@ class userController{
                 }
             }
         }else{
-            return "Error".$_response;
+            return "Error".$_response."response create user:".$_responseU;
         } 
         return $_lastCustomerID;
         
