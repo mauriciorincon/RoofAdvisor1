@@ -1,3 +1,9 @@
+<?php
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    }
+   
+?>
 <br>
 <br>
 <br>
@@ -29,17 +35,19 @@
                     <div class="form-group">
                         <label class="control-label labeltwht" for="firstCustomerName">First Name</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" oninvalid="this.setCustomValidity('Please Enter First Name')"
- oninput="setCustomValidity('')" value="<?php if(isset($_POST['firstCustomerName'])){echo $_POST['firstCustomerName']; } ?>"/>
+ oninput="setCustomValidity('')" value="<?php if(isset($_SESSION['post_info']['firstCustomerName'])){echo $_SESSION['post_info']['firstCustomerName']; } ?>"/>
                         
                     </div>
                     <div class="form-group">
                         <label class="control-label labeltwht">Last Name</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName" oninvalid="this.setCustomValidity('Please Enter Last Name')" oninput="setCustomValidity('')" />
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName" oninvalid="this.setCustomValidity('Please Enter Last Name')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['lastCustomerName'])){echo $_SESSION['post_info']['lastCustomerName']; } ?>" />
                         
                     </div>  
                     <div class="form-group">
                         <label class="control-label labeltwht ">Email</label>
-                        <input maxlength="100"  type="email" required="required" class="form-control" placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')" oninvalid="this.setCustomValidity('Please Enter Email')" oninput="setCustomValidity('')" />
+                        <input maxlength="100"  type="email" required="required" class="form-control" placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')" oninvalid="this.setCustomValidity('Please Enter Email')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['emailValidation'])){echo $_SESSION['post_info']['emailValidation']; } ?>" />
                         <label class="control-label labeltwht" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                     </div>
                     <div class="form-group">
@@ -55,15 +63,18 @@
                     </div> 
                     <div class="form-group">
                         <label class="control-label labeltwht">Address</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" oninvalid="this.setCustomValidity('Please Enter Address')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" oninvalid="this.setCustomValidity('Please Enter Address')" oninput="setCustomValidity('')"
+                        value="<?php if(isset($_SESSION['post_info']['customerAddress'])){echo $_SESSION['post_info']['customerAddress']; } ?>" />
                     </div>
                     <div class="form-group">
                         <label class="control-label labeltwht">City</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCity" name="customerCity" oninvalid="this.setCustomValidity('Please Enter City')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCity" name="customerCity" oninvalid="this.setCustomValidity('Please Enter City')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerCity'])){echo $_SESSION['post_info']['customerCity']; } ?>" />
                     </div> 
                     <div class="form-group">
                         <label class="control-label labeltwht">State</label>
-                        <select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state" oninvalid="this.setCustomValidity('Please Enter State')" oninput="setCustomValidity('')">
+                        <select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state" oninvalid="this.setCustomValidity('Please Enter State')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerState'])){echo $_SESSION['post_info']['customerState']; } ?>" >
                             <?php foreach ($_array_state as $key => $value1) { ?>
                                 <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
                             <?php } ?>
@@ -72,11 +83,13 @@
                     
                     <div class="form-group">
                         <label class="control-label labeltwht">Zip code</label>
-                        <input maxlength="100" type="number" min="0" onkeypress="return isNumber(event)" max="99999" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" oninvalid="this.setCustomValidity('Please Enter Zipcode,Max length 5')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="number" min="0" onkeypress="return isNumber(event)" max="99999" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" oninvalid="this.setCustomValidity('Please Enter Zipcode,Max length 5')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerZipCode'])){echo $_SESSION['post_info']['customerZipCode']; } ?>" />
                     </div> 
                     <div class="form-group">
                         <label class="control-label labeltwht">Phone number</label>
-                        <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')"/>
+                        <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerPhoneNumber'])){echo $_SESSION['post_info']['customerPhoneNumber']; } ?>"/>
                     </div>    
                     <div  class="form-group">
                         <div class="g-recaptcha" data-sitekey="6LeiZnkUAAAAAA6gqLw6IFIMuchbHXyiRRYyTC1n"></div>
@@ -105,5 +118,10 @@
     </form>
 </div>
 
+<?php
+if(isset($_SESSION['post_info'])){
+    unset($_SESSION['post_info']);
+}
 
+?>
 

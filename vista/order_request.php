@@ -818,7 +818,7 @@
 								<a href="#" class="list-group-item ">
 									<span class="glyphicon glyphicon-info-sign"></span>Emergency Service 
 									<div class="d-flex w-100 justify-content-between">
-									<b>Emergency Repair Service Charge of $75 is the initial cost to secure the same day service response from a qualified, pre-screened service professional. If the service professional is unable to provide service within 24 hours from the time you submit payment, we will refund the emergency repair charge.</b>
+									<b>Emergency Repair Service Charge of $79 is the initial cost to secure the same day service response from a qualified, pre-screened service professional. If the service professional is unable to provide service within 24 hours from the time you submit payment, we will refund the emergency repair charge.</b>
 									</div>
 								</a>
 							</div>
