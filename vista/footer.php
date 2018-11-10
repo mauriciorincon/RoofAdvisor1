@@ -29,7 +29,7 @@
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
-			<div class="footer-top pt-20 pb-10">
+			<div style="margin-left:17%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
