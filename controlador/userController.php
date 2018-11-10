@@ -705,7 +705,7 @@ class userController{
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
-            'phoneNumber' => $number,
+            'phoneNumber' => '+1'.$number,
             'password' => $password,
             'displayName' => $name,
             'photoUrl' => $url,
@@ -1091,6 +1091,12 @@ class userController{
         }else{
             return "Error updating ".$_companyID."";
         }
+    }
+
+    public function showMessage(){
+        require_once("vista/head.php");
+		require_once("vista/message_process.php");
+		require_once("vista/footer.php");
     }
 }
 ?>
