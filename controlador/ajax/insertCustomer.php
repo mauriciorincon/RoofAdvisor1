@@ -3,8 +3,10 @@ if(!isset($_SESSION)) {
     session_start(); 
 } 
 require_once($_SESSION['application_path']."/controlador/userController.php");
+require_once($_SESSION['application_path']."/modelo/user.class.php");
 
-$_userController=new userController();
+
+
 if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
     var_dump($_POST['g-recaptcha-response']);
     $_secret="6LeiZnkUAAAAAE0V7yDVIYLwwoZoZaG6c_A6HyWF";
@@ -27,7 +29,7 @@ if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
        return; 
     }
 }else{
-    $this->_userModel=new userModel();
+    $_userModel=new userModel();
     $_array_state=$this->_userModel->getNode('Parameters/state');
     require_once("vista/head.php");
     require_once("vista/register_customer.php");
