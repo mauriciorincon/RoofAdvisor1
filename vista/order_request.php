@@ -192,7 +192,7 @@
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
-                 <h3 class="panel-title">Request Service</h3>
+                 <h3 class="panel-title">Start Here</h3>
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
@@ -264,7 +264,7 @@
 									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
+								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
 								</td>
 							</tr>
 						</table>
@@ -541,12 +541,12 @@
                  <h1 class="panel-title wizhead"><font size="10"><strong>Enter Service Location</strong></font> </h1>
             </div>
             <div class="panel-body">
-			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>
+			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Enter the place for the service</strong></font>
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
-					<div class="list-group">
+                                         <div class="list-group">
 							<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
                        
                                 <style>
@@ -707,14 +707,14 @@
 				<div class="row">
                                          <div class="col-sm-12">
                                                 <br>
-                                                <center><h4 class="h1white"><b>Please Note; Schedule repair service are schedule a week in advance.</b></h4></center>
+                                                <center><h4 class="h1white"><b>Please Note:&nbsp; Repair service are schedule a week in advance.</b></h4></center>
                                         </div>
 
 					<div class="col-sm-6 inpwiz1">
-						<span class="h1white"><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
+						<span class="h1white"><h4><b>Select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
 					<div class="col-sm-6 inpwiz2">
-						<span class="h1white"><h4><b>Please select the time of service. </b></h4></span>
+						<span class="h1white"><h4><b>Select the time of service. </b></h4></span>
 						<input type="text" name="step6time" id="step6time" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;"/>
 						<!--<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />-->
 						

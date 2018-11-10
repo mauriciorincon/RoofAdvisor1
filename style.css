@@ -630,6 +630,9 @@ border:3px solid #fff;
   margin-left: 30px;
   font-weight: 300;
   font-size: 14px;
+  margin-bottom: -18px;
+  margin-top: -18px;
+  padding-bottom: 20px;
 }
 .footer-menu{margin-top:20px}
 .footer-menu li {
@@ -1577,7 +1580,7 @@ margin-left: 10%;
     margin-right: -10%;
 }
 .inpwiz2{
-right:-15%;
+right:-10%;
 }
 .wizhead{
 text-align:center;
@@ -1658,6 +1661,9 @@ padding-bottom:20px !important;
 }
 }
 @media (max-width:1290px){
+.inpwiz2{
+right:0;
+}
 #login-txt{
 margin-top:-34px !important;
 right:0px !important;
