@@ -1,9 +1,10 @@
 <?php   
     $_year=date("Y");
     $_month=date("m");
-    echo "<h2>$_month $_year </h2>";
+    
     $_eventsArray=array();
     $oCalendar=new calendar();
+    
     //echo $oCalendar->draw_controls($_month,$_year);
     if(strlen($_month)==1){
         $_eventsArrayAux=$oCalendar->getEvents("0".$_month,$_year);
@@ -17,8 +18,9 @@
             //}
         }
     
-    print_r($_eventsArray);
+    //print_r($_eventsArray);
     //echo $oCalendar->draw_calendar($_month,$_year,$_eventsArray);
+    
 ?>
  
     <!-- Page Content -->
@@ -26,8 +28,7 @@
  
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>FullCalendar PHP MySQL</h1>
-                <p class="lead">Completa con rutas de archivo predefinidas que no tendrás que cambiar!</p>
+                
                 <div id="calendar" class="col-centered">
                 </div>
             </div>
@@ -106,12 +107,36 @@
 			  <div class="modal-body">
 				
 				  <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Titulo</label>
+					<label for="title" class="col-sm-2 control-label">Order ID</label>
 					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo" readonly>
 					</div>
-				  </div>
-				  <div class="form-group">
+          </div>
+          <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Date Registration</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="datetimeReg" placeholder="Titulo" readonly>
+					</div>
+          </div>
+          <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Comapny</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
+					</div>
+          </div>
+          <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Customer</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="customerID" placeholder="Titulo" readonly>
+					</div>
+          </div>
+          <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Total Value</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="totalValue" placeholder="Titulo" readonly>
+					</div>
+          </div>
+				  <!--<div class="form-group">
 					<label for="color" class="col-sm-2 control-label">Color</label>
 					<div class="col-sm-10">
 					  <select name="color" class="form-control" id="color">
@@ -133,15 +158,16 @@
 							<label class="text-danger"><input type="checkbox"  name="delete"> Eliminar Evento</label>
 						  </div>
 						</div>
-					</div>
+					</div>-->
 				  
+          
 				  <input type="hidden" name="id" class="form-control" id="id">
 				
 				
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Guardar</button>
+				<!--<button type="submit" class="btn btn-primary">Guardar</button>-->
 			  </div>
 			</form>
 			</div>
@@ -154,6 +180,7 @@
 
 <script src="vista/js/jquery-3.3.1.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script>
     $(document).ready(function() {
  
@@ -162,6 +189,9 @@ var yyyy = date.getFullYear().toString();
 var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
 var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
  
+
+   
+
  $('#calendar').fullCalendar({
      header: {
           language: 'en',
@@ -186,6 +216,20 @@ var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toStrin
              $('#ModalEdit #id').val(event.id);
              $('#ModalEdit #title').val(event.title);
              $('#ModalEdit #color').val(event.color);
+             $('#ModalEdit #companyID').val(event.company);
+             $('#ModalEdit #customerID').val(event.customer);
+             $('#ModalEdit #datetimeReg').val(event.date_register);
+             $('#ModalEdit #totalValue').val(event.total_value);
+             
+             getCustomerName(event.customer).then(function(customerName) {  
+              $('#ModalEdit #customerID').val(customerName);
+                            //alert(customerName);
+                            });
+              getCompanyName(event.company).then(function(companyName) {  
+              $('#ModalEdit #companyID').val(companyName);
+                            //alert(customerName);
+                            });
+
              $('#ModalEdit').modal('show');
          });
      },
@@ -199,47 +243,53 @@ var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toStrin
          edit(event);
 
      },
-     events: [
-        <?php foreach($_eventsArray as $event): 
+     events: function(start, end, timezone, callback) {
+      var events = [];
+      var month =moment($('#calendar').fullCalendar('getView').intervalStart).format('MM');
+      var year =moment($('#calendar').fullCalendar('getView').intervalStart).format('YYYY');
+      var ref = firebase.database().ref("Orders");
+      var month1=jQuery("#calendar").fullCalendar('getDate').month();
+      var month2=moment($('#calendar').fullCalendar('getView').intervalEnd).format('MM');
+      var date = new Date($('#calendar').fullCalendar('getDate'));
+      var month_int = date.getMonth();
+      ref.orderByChild("SchDate").endAt(year).once("value", function(snapshot) {
+
+          datos=snapshot.val();
+          for(r in datos){
+              
+            data=datos[r];
+            if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
+              var start = data.SchDate.split("/");
+              var start1=start[2]+"-"+start[0]+"-"+start[1];
+              var end1=start[2]+"-"+start[0]+"-"+start[1];
+
+              var typeR=getRequestType(data.RequestType);
+              var color=getRequestColor(data.RequestType);
+              var status=getStatus(data.Status);
+
+              valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
+              valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
+
+              events.push({
+                  id: data.OrderNumber,
+                  title: data.OrderNumber+' - '+typeR+' - '+status,
+                  start: start1,
+                  end: end1,
+                  color: color,
+                  company: data.CompanyID,
+                  customer: data.CustomerFBID,
+                  status: status,
+                  date_register: data.DateTime,
+                  total_value: valueMatA+valueTimeA,
+              });
+  
+            }
+          }
+          callback(events);
+      });
+      
+    }
      
-            $start = explode("/", $event['SchDate']);
-            $end = explode("/", $event['SchDate']);
-
-            $start1=$start[2]."-".$start[0]."-".$start[1];
-            $end1=$end[2]."-".$end[0]."-".$end[1];
-            
-            $_color="#0071c5";
-            switch($event['RequestType']){
-                
-            }
-            if($event['RequestType']=="S"){
-
-            }
-        ?>
-            {
-                id: '<?php echo $event['OrderNumber']; ?>',
-                title: '<?php echo $event['CustomerID']; ?>',
-                start: '<?php echo $start1; ?>',
-                end: '<?php echo $end1; ?>',
-                color: '<?php echo '#0071c5'; ?>',
-            },
-        <?php endforeach; ?>
-
-        /*{
-         id: '1',
-         title: 'Hello<br>como estas',
-         start: '2018-11-01',
-         end: '2018-11-03',
-         color: '#0071c5',
-        },
-        {
-         id: '2',
-         title: 'Hello<br>como estas',
-         start: '2018-11-15',
-         end: '2018-11-16',
-         color: '#0071c5',
-        },*/
-     ]
  });
  
  function edit(event){
@@ -272,5 +322,145 @@ var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toStrin
  }
  
 });
+
+function getCustomerName(customerFBID) {
+  return new Promise(function (resolve, reject) {
+        
+      var ref = firebase.database().ref("Customers/"+customerFBID);
+      ref.once('value').then(function(snapshot) {
+      data=snapshot.val();
+      return resolve(data.Fname+' '+data.Lname);
+  });
+            //return reject("Undefined");
+  });  
+}
+
+function getCompanyName(companyID) {
+    return new Promise(function (resolve, reject) {
+        
+    var ref = firebase.database().ref("Company/"+companyID);
+    ref.once('value').then(function(snapshot) {
+    data=snapshot.val();
+    return resolve(data.CompanyName);
+  });
+});
+    
+}
+
+function getRequestType(requestType){
+                var RequestType="";
+                switch (requestType) {
+                    case "E":
+                        RequestType = "Emergency";
+                        break;
+                    case "S":
+                        RequestType = "Schedule";
+                        break;
+                    case "R":
+                        RequestType = "RoofReport";
+                        break;
+                    case "P":
+                        RequestType = "PostCard";
+                        break;
+                    default:
+                        RequestType = "No value found";
+                }
+                return RequestType;
+            }
+
+  function getRequestColor(requestType){
+      var colorType="";
+      switch (requestType) {
+          case "E":
+              colorType = "#FF0000";
+              break;
+          case "S":
+              colorType = "#0071c5";
+              break;
+          case "R":
+              colorType = "#FFD700";
+              break;
+          case "P":
+              colorType = "#40E0D0";
+              break;
+          default:
+              colorType = "#000";
+      }
+      return colorType;
+  }
+
+function getStatus(status){
+                var orderStatus="";
+                switch (status) {
+                    case "A":
+							orderStatus = "Order Open";
+							break;
+						case "C":
+							orderStatus = "Acepted Order";
+							break;
+						case "D":
+							orderStatus = "Order Assigned";
+							break;
+						case "E":
+							orderStatus = "Contractor Just Arrived";
+							break;
+						case "F":
+							orderStatus = "Estimate Sent";
+							break;
+						case "G":
+							orderStatus = "Estimate Approved";
+							break;
+						case "H":
+							orderStatus = "Work In Progress";
+							break;
+						case "I":
+							orderStatus = "Work Completed";
+							break;
+						case "J":
+							orderStatus = "Final Bill";
+							break;
+						case "K":
+							orderStatus = "Order Completed Paid";
+							break;
+						case "Z":
+							orderStatus = "Cancel work";
+							break;
+						case "P":
+							orderStatus = "Report In Progress";
+							break;
+						case "R":
+							orderStatus = "Report In Progress";
+							break;
+						case "S":
+							orderStatus = "Report Complete";
+                            break;
+                        case "T":
+                            orderStatus = "Orden In Progress";
+                            break;
+                        case "U":
+                            orderStatus = "Orden Asigned";
+                            break;
+                        case "M":
+                            orderStatus = "Mailed";
+                            break;
+						default:
+							orderStatus = "Undefined";
+                }
+                return orderStatus;
+            }
+
+  var config = {
+      apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
+      authDomain: "roofadvisorzapp.firebaseapp.com",
+      databaseURL: "https://roofadvisorzapp.firebaseio.com",
+      projectId: "roofadvisorzapp",
+      storageBucket: "roofadvisorzapp.appspot.com",
+      messagingSenderId: "480788526390"
+  };
+  firebase.initializeApp(config);
+
+
+
+ 
 
 </script>
