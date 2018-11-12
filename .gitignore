@@ -4,3 +4,4 @@ invoice/
 !/roofreport/
 roofreport/
 roofreport
+.DS_Store
