@@ -1242,6 +1242,9 @@ padding-bottom: 26px;
 padding-bottom:i150px;
 height:620px;
 }
+#srvapps{
+margin-left:5%;
+}
 #srvapps1{
 padding-top:35px;
 }
@@ -1306,13 +1309,15 @@ z-index: 900;
 position: relative;
 }
 #logo-site{
-    width: 66%;
-    margin-left: 80px;
+    width: 46%;
     margin-top: -34px;
     margin-bottom: 5px;
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 #appdiv1{
-margin-right: 51%;
+margin-right: 52%;
 text-align:right;
 padding-top:43px;
 }
@@ -1631,7 +1636,7 @@ color:#fff;
     border-radius: 10px;
 }
 .panel-mv1{
-margin-top:-200px;
+margin-top:-55px;
 }
 .has-success .control-label{
 color: #3ee441 !important;
@@ -1651,6 +1656,16 @@ width:53% !important;
 }
 #aphtxt1{
 margin-left:40% !important;
+}
+}
+@media (max-width:1600px){
+#logo-site{
+width:54%;
+}
+}
+@media (max-width:1400px){
+#logo-site{
+width:58%
 }
 }
 @media (min-width:1290px){

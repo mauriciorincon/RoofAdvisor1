@@ -74,9 +74,10 @@ This app saved the day and is so easy to use. I had water leaking into the house
   </div>
   <div id='appdiv2'>
    <span id='appdl3-tx2'><strong>FREE!</strong></span>
-  </div>
+  </div><div style="margin-top:-50px;">
   <img id='appand1' src='img/PlayStore.png'>
   <img id='appand2' src='img/AppleStore.png'>
+  </div>
   </div>
 </div>
 

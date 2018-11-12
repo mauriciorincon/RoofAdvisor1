@@ -862,7 +862,7 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -200px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:75%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:54%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
@@ -891,10 +891,9 @@
                                                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                                                 <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
                                         </div>
-					<div style="margin-bottom: 20px;    margin-top: 520px;" class="col-sm-12">
+					<div style="margin-bottom: 20px;    margin-top: 0px;" class="col-sm-12">
 				<div>  
-								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
-                                                                <button type="button" class="btn" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-right" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
                                                           	</div>
 							
 						</div>
