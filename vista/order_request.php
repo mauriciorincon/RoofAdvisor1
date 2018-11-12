@@ -540,7 +540,7 @@
                  <h1 class="panel-title wizhead"><font size="5"><strong>Enter Service Location</strong></font> </h1>
             </div>
             <div class="panel-body">
-			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>
+			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Enter the place for the service</strong></font>
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>

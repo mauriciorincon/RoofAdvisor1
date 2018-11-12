@@ -127,7 +127,7 @@
 			<div class="copyright-area">
 				<div class="container">
 					<div class="copyright-text text-center">
-						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.viaplix.com/">Viaplix</a></p>
+						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.roofservicenow.com/">RoofServiceNow</a></p>
 						<p><a href='?controller=termsconditions&accion=showinfo'>Legal</a> | <a href='?controller=termsconditions&accion=privacyinfo'>Privacy Center</a></p>
 					</div>
 				</div>
@@ -157,9 +157,17 @@
 		<script src="vista/js/dataTables.bootstrap.min.js"></script>
 		
 		<script src="vista/js/mdtimepicker.js"></script>
-                <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-	                        <script src="js/lity.min.js"></script>
-                <script src="js/all.js"></script>
+        <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+	    <script src="js/lity.min.js"></script>
+        <script src="js/all.js"></script>
+		
+
+		<script src="vista/js/moment.min.js"></script>
+		<script src="vista/js/fullcalendar.js"></script>
+		<script src="vista/js/fullcalendar.min.js"></script>
+		<script src="vista/js/locale/en-au.js"></script>
+		
+		
 	
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->
 

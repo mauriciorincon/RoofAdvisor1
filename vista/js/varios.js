@@ -133,10 +133,10 @@ $(document).ready(function() {
             $('span[name=repairDone]').text(closeService);
             $('span[name=repairOpen]').text(openService);
         }
-
-        
-            
+    
 } );
+
+
 
 ///////////////////////////////////////////////
 //Register Company
