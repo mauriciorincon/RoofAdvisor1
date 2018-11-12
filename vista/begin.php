@@ -37,7 +37,7 @@ This is a same day, on-demand service for hiring prescreened service professiona
 </br>
 <li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a prescreened service professional will confirm your order for an appointment. </li>
 </br>
-<li id="reportli">Need a roof report? RoofServiceNow can provide in a couple of hours a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. <a href="rsndocs/SampleReport.pdf" target="_blank" >See sample</a></li>
+<li id="reportli">Need a roof report? RoofServiceNow can provide in a couple of hours a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. <a href="rsndocs/SampleReport.pdf" style="color: #fa511a;" target="_blank" >See sample</a></li>
 </br>
 </ul>
 </br>
@@ -74,9 +74,10 @@ This app saved the day and is so easy to use. I had water leaking into the house
   </div>
   <div id='appdiv2'>
    <span id='appdl3-tx2'><strong>FREE!</strong></span>
-  </div>
+  </div><div style="margin-top:-50px;">
   <img id='appand1' src='img/PlayStore.png'>
   <img id='appand2' src='img/AppleStore.png'>
+  </div>
   </div>
 </div>
 

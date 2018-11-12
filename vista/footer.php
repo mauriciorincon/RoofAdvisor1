@@ -40,8 +40,8 @@
 								<p>Roof Service Now takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
 									<li>
-										<i class="fa fa-map-marker"></i>
-										<span>30 NEWBURY ST,BOSTON, MA.</span>
+										<!--<i class="fa fa-map-marker"></i>
+										<span>30 NEWBURY ST,BOSTON, MA.</span>-->
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>

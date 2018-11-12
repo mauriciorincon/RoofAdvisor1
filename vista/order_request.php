@@ -193,7 +193,11 @@
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
+<<<<<<< HEAD
                  <h3 class="panel-title"><font size="5"><strong>Request Service</strong></font></h3>
+=======
+                 <h3 class="panel-title">Start Here</h3>
+>>>>>>> 948933e0bc512a32f965397755c9f2b4b9d961fc
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
@@ -263,7 +267,7 @@
 									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. See sample. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
+								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
 								</td>
 							</tr>
 						</table>
@@ -545,7 +549,7 @@
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
-					<div class="list-group">
+                                         <div class="list-group">
 							<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
                        
                                 <style>
@@ -706,14 +710,14 @@
 				<div class="row">
                                          <div class="col-sm-12">
                                                 <br>
-                                                <center><h4 class="h1white"><b>Please Note; Schedule repair service are schedule a week in advance.</b></h4></center>
+                                                <center><h4 class="h1white"><b>Please Note:&nbsp; Repair service are schedule a week in advance.</b></h4></center>
                                         </div>
 
 					<div class="col-sm-6 inpwiz1">
-						<span class="h1white"><h4><b>Please select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
+						<span class="h1white"><h4><b>Select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
 					<div class="col-sm-6 inpwiz2">
-						<span class="h1white"><h4><b>Please select the time of service. </b></h4></span>
+						<span class="h1white"><h4><b>Select the time of service. </b></h4></span>
 						<input type="text" name="step6time" id="step6time" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;"/>
 						<!--<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />-->
 						
@@ -861,7 +865,7 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -200px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:75%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:54%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
@@ -890,10 +894,9 @@
                                                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                                                 <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
                                         </div>
-					<div style="margin-bottom: 20px;    margin-top: 520px;" class="col-sm-12">
+					<div style="margin-bottom: 20px;    margin-top: 0px;" class="col-sm-12">
 				<div>  
-								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
-                                                                <button type="button" class="btn" data-toggle="modal" data-target="#login-modal">I already have an account.</button>			
+								<button class=" btn-primary  btn-lg nextBtnOrder pull-right" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
                                                           	</div>
 							
 						</div>
