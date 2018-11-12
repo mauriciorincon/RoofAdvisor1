@@ -27,7 +27,13 @@ $(document).ready(function() {
       });
     
     
-    $('#table_orders_company').DataTable();
+    $('#table_orders_company').DataTable({
+        "columnDefs": [
+          { className: "text-right", "targets": [7,8] },
+        ]
+      }
+
+    );
     step0=$('.stepwizard-step:eq(0)');
     if(step0!=undefined){
         step0.hide();
@@ -313,7 +319,12 @@ function validateEmail(table) {
             
         return result;    
      }
-};
+}
+
+function validateFormatMail(Email){
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Email);
+}
 
 function saveContractorData(){
     var companyNameField = $("input#companyName").val();
@@ -883,6 +894,10 @@ $(document).ready(function () {
             if(password!=Repassword){
                 flag = false;
             }
+            if(validateFormatMail(emailValidation)==false){
+                flag = false;
+            }
+
             if (flag==false){
                 alert('Please fill all fields to continue with register');
                 return;
@@ -975,6 +990,7 @@ $(document).ready(function () {
                     }
                     //$('#loading').html('');
                     jsRemoveWindowLoad();
+                    $('html,body').scrollTop(0);
                 })
                 .fail(function( jqXHR, textStatus, errorThrown ) {
                     if ( console && console.log ) {
@@ -1110,6 +1126,8 @@ $(document).ready(function () {
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
+
+            
         }
     });
     
@@ -1129,6 +1147,14 @@ $(document).ready(function () {
                 isValid = false;
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
+        }
+
+        if(curStepBtn=="step-1"  && isValid==true ){
+            $(".btnvid1").hide();
+        }
+
+        if(curStepBtn=="step-2"  && isValid==true ){
+            //nextStepWizard = $('div.setup-panelOrder div a[href="#step-10"]').parent().next().children("a");
         }
 
         if(curStepBtn=="step-2"  && isValid==true ){
@@ -1268,7 +1294,11 @@ $(document).ready(function () {
             //}
 
         $(".form-group").removeClass("has-error");
-        
+
+        if(curStepBtn=="step-2"){
+            $(".btnvid1").show();
+        }
+
         if (curStepBtn=="step-6"){
             var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
             if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -1298,6 +1328,7 @@ function getListContractor(){
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
         jsRemoveWindowLoad();
+        $('html,body').scrollTop(0);
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
@@ -1328,7 +1359,7 @@ $(document).ready(function() {
                 var n = data.indexOf("Error");
                 
 
-                if(n==-1){
+                if(n==-1 && n !== null){
 
                     /*$('#textAnswerOrder').html(data+'');
                     $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
@@ -1368,6 +1399,12 @@ $(document).ready(function() {
 } );
 
 function insertOrderCustomer(idStripeCharge,amountValue){
+    if(idStripeCharge== undefined){
+        idStripeCharge="";
+    }
+    if(amountValue== undefined){
+        amountValue="";
+    }
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -1504,11 +1541,11 @@ function validateIsLoggedIn(){
                     }
                     
                 }else{
-                    $('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
-                    $('#headerTextAnswerOrder').html('User validation');
-                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
+                    //$('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
+                    //$('#headerTextAnswerOrder').html('User validation');
+                    //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    $('#login-modal').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
@@ -2207,9 +2244,35 @@ function setOrderId(orderID,RequestType){
     if(RequestType=='P'){
         $('#amountPostCard').show();
         $('#amountPostCardLabel').show();
+        $('#numberPostCardLabel').show();
+        $('#numberPostCard').show();
+
+        jsShowWindowLoad('Searching Info');
+        $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderID,"fieldSearch":"FBID"}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    order=jQuery.parseJSON(data);
+                    $('input#numberPostCard').val(order.postCardValue);
+                }else{
+                    $('input#numberPostCard').val(0);
+                }
+                jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                jsRemoveWindowLoad('');
+            }
+        });
+
     }else{
         $('#amountPostCard').hide();
         $('#amountPostCardLabel').hide();
+        $('#numberPostCardLabel').hide();
+        $('#numberPostCard').hide();
     }
 
 }
@@ -2449,40 +2512,54 @@ function getFinalAmount(orderId){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                
                 order=jQuery.parseJSON(data);
-                $('#myFinalAmount  #orderIDFinal').val(order.FBID);
-                /*$('#myFinalAmount  #finalAmountOrderID').val(order.OrderNumber);
-                $('#myFinalAmount  #finalAmountMaterials').val(order.ActAmtMat);
-                $('#myFinalAmount  #finalAmountTime').val(order.ActAmtTime);
-                $('#myFinalAmount  #finalime').val(order.ActTime);*/
-
-                $row=$('#totalAmountTable tr').eq(1);
-                $row.find("td:eq(1)").html('$'+order.ActAmtMat+'.00');
-                $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
-
-                $row=$('#totalAmountTable tr').eq(2);
-                if(order.ActTime!="" && order.ActAmtTime!=""){
-                    valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                if(order.RequestType=='P'){
+                    $('#myFinalAmount  #orderIDFinal').val(order.FBID);
+                    total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                    total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                    total=total+total1;
+                    amount_value=total*100;
+                    action_type="pay_invoice_service";
+                    if(typeof handler !== undefined){
+                        handler.open({
+                            name: 'RoofServiceNow',
+                            description: 'pay your service',
+                            amount: parseInt(amount_value),
+                            email:userMailCompany
+                        });
+                    }
                 }else{
-                    valorHour=0;
+                    $('#myFinalAmount  #orderIDFinal').val(order.FBID);
+               
+                    $row=$('#totalAmountTable tr').eq(1);
+                    $row.find("td:eq(1)").html('$'+order.ActAmtMat+'.00');
+                    $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
+
+                    $row=$('#totalAmountTable tr').eq(2);
+                    if(order.ActTime!="" && order.ActAmtTime!=""){
+                        valorHour=(order.ActAmtTime/order.ActTime).toFixed(2);
+                    }else{
+                        valorHour=0;
+                    }
+                    
+                    $row.find("td:eq(1)").html('$'+valorHour);
+                    $row.find("td:eq(2)").html(order.ActTime);
+                    $row.find("td:eq(3)").html('$'+order.ActAmtTime+'.00');
+
+                    $row=$('#totalAmountTable tr').eq(3);
+                    $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                    $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                    $total=$total+$total1;
+                    $row.find("td:eq(3)").html('$'+$total+'.00');
+
+                    $row=$('#totalAmountTable tr').eq(4);
+                    $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
+                    $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+                    $total=$total+$total1;
+                    $row.find("td:eq(3)").html('$'+$total+'.00');
                 }
                 
-                $row.find("td:eq(1)").html('$'+valorHour);
-                $row.find("td:eq(2)").html(order.ActTime);
-                $row.find("td:eq(3)").html('$'+order.ActAmtTime+'.00');
-
-                $row=$('#totalAmountTable tr').eq(3);
-                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
-                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
-                $total=$total+$total1;
-                $row.find("td:eq(3)").html('$'+$total+'.00');
-
-                $row=$('#totalAmountTable tr').eq(4);
-                $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
-                $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
-                $total=$total+$total1;
-                $row.find("td:eq(3)").html('$'+$total+'.00');
+                
                 
                 //$(document).ready(function(){$("#myEstimateAmount").modal("show"); });
             }else{
@@ -2548,7 +2625,7 @@ function selectPaymentType(){
             handler.open({
                 name: 'RoofServiceNow',
                 description: 'pay your service',
-                amount: amount_value,
+                amount: parseInt(amount_value),
                 email:userMailCompany
               });
         }
@@ -3303,7 +3380,7 @@ function getInforCustomerForRoofReport(){
         return;
     }
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId}, null, "text" )
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderId,"fieldSearch":"OrderNumber"}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             if(data.indexOf("null")>-1){
@@ -3736,7 +3813,7 @@ function showPayWindow(){
                     handler.open({
                         name: 'RoofServiceNow',
                         description: 'pay your service',
-                        amount: amount_value,
+                        amount: parseInt(amount_value),
                         email:userMailCompany
                       });
                 } 
@@ -3746,7 +3823,7 @@ function showPayWindow(){
                 handler.open({
                     name: 'RoofServiceNow',
                     description: 'pay your service',
-                    amount: amount_value,
+                    amount: parseInt(amount_value),
                     email:userMailCompany
                   });
             }
@@ -3850,7 +3927,7 @@ function showPayPostCards(totalValue){
         handler.open({
             name: 'RoofServiceNow',
             description: 'pay your service',
-            amount: amount_value,
+            amount: parseInt(amount_value),
             email:userMailCompany
             });
     }
@@ -3858,4 +3935,13 @@ function showPayPostCards(totalValue){
 
 function closeExtraWindows(){
     $(document).ready(function(){$("#myPostCard").modal("hide"); });
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+        return false;
+    }
+    return true;
 }

@@ -7,8 +7,15 @@ require_once($_SESSION['application_path']."/controlador/userController.php");
 
 $_orderID =$_POST["orderId"];
 
+
 $_orderController=new orderController();
-$_result=$_orderController->getOrder('OrderNumber',$_orderID);
+
+if(isset($_POST["fieldSearch"])){
+    $_result=$_orderController->getOrder($_POST["fieldSearch"],$_orderID);
+}else{
+    $_result=$_orderController->getOrder("FBID",$_orderID);
+}
+
 $_result1= array();
 if(is_null($_result)){
     "Error, no order were found.";

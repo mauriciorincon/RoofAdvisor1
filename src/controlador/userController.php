@@ -147,7 +147,11 @@ class userController{
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $_result->email;
                     $_SESSION['profile'] = 'customer';
+
                     
+                    echo '<script>
+                        var email_user_logued=\''.$_SESSION['email'].'\';
+                    </script>';
 
                     return "Welcome Mr/Mrs <b>[".$_SESSION['username']."]</b>, please press finish button to save the order.";
                 }else{
@@ -373,7 +377,7 @@ class userController{
                 }
             }
         }else{
-            return "Error".$_response;
+            return "Error".$_response."response create user:".$_responseU;
         } 
         return $_lastCustomerID;
         
@@ -701,7 +705,7 @@ class userController{
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
-            'phoneNumber' => $number,
+            'phoneNumber' => '+1'.$number,
             'password' => $password,
             'displayName' => $name,
             'photoUrl' => $url,
@@ -1087,6 +1091,12 @@ class userController{
         }else{
             return "Error updating ".$_companyID."";
         }
+    }
+
+    public function showMessage(){
+        require_once("vista/head.php");
+		require_once("vista/message_process.php");
+		require_once("vista/footer.php");
     }
 }
 ?>

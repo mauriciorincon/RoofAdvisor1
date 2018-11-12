@@ -326,7 +326,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
-											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -342,7 +342,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
-											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -534,7 +534,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						valorTotal=(parseInt(valueMat)+parseInt(valueTime));
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
 											'href="#myEstimateAmount" '+
-											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -548,7 +548,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
-											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
@@ -787,7 +787,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 							orderStatus = "Orden Asigned";
 							break;
 						case "M":
-							orderStatus = "Orden Asigned";
+							orderStatus = "Mailed";
                             break;
 						default:
 							orderStatus = "Undefined";
@@ -903,15 +903,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<table class="table table-striped table-bordered" id="table_orders_customer">
 					<thead>
 					<tr>
-						<th>Order ID</th>
+						<th>ID</th>
 						<th>Order Type</th>
 						<th>Address</th>
 						<th>Description</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
-						<th>Estimate Amount</th>
-                    	<th>Total Final Amount</th>
+						<th>Est Amt</th>
+                    	<th>Tot Amt</th>
 						<th>Company</th>
 						<th>Driver</th>
 						<th>Actions</th>
@@ -1025,7 +1025,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 									?>
 											<a class="btn-warning btn-sm" data-toggle="modal"  
 												href="#myEstimateAmount" 
-												onClick="getEstimateAmount('<?php echo $order['OrderNumber']?>')"> 
+												onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
 												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
 											</a>
 									<?php
@@ -1040,7 +1040,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 									?>
 										<a class="btn-success btn-sm" data-toggle="modal"  
 												href="#myFinalAmount" 
-												onClick="getFinalAmount('<?php echo $order['OrderNumber']?>')"> 
+												onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
 												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
 											</a>
 									<?php

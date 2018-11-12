@@ -393,24 +393,24 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
-											'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
 					}else{
 
 						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
-						estimateAmount = estimateAmount ? estimateAmount : '$0';		
+						estimateAmount = estimateAmount ? '$'+estimateAmount : '$0';		
                 }
                 if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
 						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
-											'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
 											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
 										'</a>';
                 }else{
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
-                    finalAmount = finalAmount ? finalAmount : '$0';
+                    finalAmount = finalAmount ? '$'+finalAmount : '$0';
                 }
                 
                 if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
@@ -480,7 +480,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     
                 });
                             
-                
+                if(dataOrder.RequestType=='P'){
+                    description='Number of Postcard: '+dataOrder.postCardValue;
+                }else{
+                    description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                }
 
                 t.row.add( [
                         dataOrder.OrderNumber,
@@ -599,7 +603,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 valorTotal=(parseInt(valueMat)+parseInt(valueTime));
                                 estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
                                                     'href="#myEstimateAmount" '+
-                                                    'onClick="getEstimateAmount(\''+dataOrder.OrderNumber+'\')"> '+
+                                                    'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
                                                     '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
                                                 '</a>';
                             }else{
@@ -611,16 +615,22 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
                                 finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
                                                     'href="#myFinalAmount" '+
-                                                    'onClick="getFinalAmount(\''+dataOrder.OrderNumber+'\')"> '+
+                                                    'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
                                                     '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
                                                 '</a>';
                             }else{
                                 finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
-                                finalAmount = finalAmount ? finalAmount : '$0';
+                                finalAmount = finalAmount ? '$'+finalAmount : '$0';
                             }
                             $row.find("td:eq(1)").html(dataOrder.SchDate);
                             $row.find("td:eq(2)").html(dataOrder.SchTime);
-                            $row.find("td:eq(4)").html(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
+                            if(dataOrder.RequestType=='P'){
+                                description='Number of Postcard: '+dataOrder.postCardValue;
+                            }else{
+                                description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                            }
+
+                            $row.find("td:eq(4)").html(description);
                             $row.find("td:eq(5)").html(requestType);
                             $row.find("td:eq(6)").html(status);
                             $row.find("td:eq(7)").html(estimateAmount);
@@ -930,15 +940,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             <table class="table table-striped table-bordered" id="table_orders_company">
                 <thead>
                     <tr>
-                        <th>Order ID</th>
+                        <th>ID</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Name/Addr/Phone</th>
                         <th>Description</th>
-                        <th>Request Type</th>
+                        <th>Req Type</th>
                         <th>Status</th>
-                        <th>Est Amt</th>
-                        <th>Final Amt</th>
+                        <th>Est. Amt</th>
+                        <th>Final. Amt</th>
                         <th>Payment</th>
                         <th>Contractor</th>
                         <th>Actions</th>
@@ -960,7 +970,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                     echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
                                 ?></td>
                             
-                            <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
+                            <td><?php 
+                                if(strcmp($order['RequestType'],"P")==0){
+                                    echo 'Number of Postcard: '.$order['postCardValue'];
+                                }else{
+                                    echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water'];
+                                }
+                                
+
+                                ?></td>
                             <td><?php 
                                     switch ($order['RequestType']) {
                                         case "E":
@@ -1046,7 +1064,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 ?>
                                         <a class="btn-warning btn-sm" data-toggle="modal"  
                                             href="#myEstimateAmount" 
-                                            onClick="getEstimateAmount('<?php echo $order['OrderNumber']?>')"> 
+                                            onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
                                             <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
                                         </a>
                                 <?php
@@ -1057,11 +1075,19 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 ?>
                             </td>                            
                             <td align="right"><?php 
-                                    if($order['Status']=='J' and $order['RequestType']=='P' ){											
+                                    if($order['Status']=='J'){											
                                 ?>
                                     <a class="btn-success btn-sm" data-toggle="modal"  
                                             href="#myFinalAmount" 
-                                            onClick="getFinalAmount('<?php echo $order['OrderNumber']?>')"> 
+                                            onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                        </a>
+                                <?php 
+                                    }else if ( $order['RequestType']=='P' ){
+                                ?>
+                                    <a class="btn-success btn-sm" data-toggle="modal"  
+                                            href="#" 
+                                            onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
                                             <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
                                         </a>
                                 <?php

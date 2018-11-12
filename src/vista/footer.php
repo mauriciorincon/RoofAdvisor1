@@ -29,7 +29,7 @@
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
-			<div class="footer-top pt-20 pb-10">
+			<div style="margin-left:17%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
@@ -40,12 +40,12 @@
 								<p>Roof Service Now takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
 									<li>
-										<i class="fa fa-map-marker"></i>
-										<span>30 NEWBURY ST,BOSTON, MA.</span>
+										<!--<i class="fa fa-map-marker"></i>
+										<span>30 NEWBURY ST,BOSTON, MA.</span>-->
 									</li>
 									<li>
 										<i class="fa fa-phone"></i>
-										<span>Telephone : (877) 529 5995</span>
+										<span>Telephone : (888) 400 5996</span>
 									</li>
 									<li>
 										<i class="fa fa-envelope-o"></i>
@@ -110,8 +110,8 @@
 						</div>		
 						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
 							<div class="footer-widget">
-								<h3 class="widget-title">FEEDBACK</h3>
-								<p>Please provide your comments or feedback</p>
+								<h3 class="widget-title">REQUEST A DEMO</h3>
+								<p>Please provide your email to request a demo.</p>
 								<div class="footer-form">
 									<form action="#">
 									  <input type="text" placeholder="Type your E-mail address..." />
