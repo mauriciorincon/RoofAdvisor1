@@ -215,7 +215,7 @@ class pdfController{
         <br>
         <table>
             <tr>
-                <td>Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td>
+                <td>RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td>
             </tr>
         </table>
         ';
@@ -458,7 +458,7 @@ class pdfController{
         <br>
         <table>
             <tr>
-                <td>Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td>
+            <td>RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td>
             </tr>
         </table>
         ';
@@ -649,7 +649,7 @@ class pdfController{
         <br>
         <table>
             <tr>
-                <td>Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td>
+            <td>RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td>
             </tr>
         </table>
         ';

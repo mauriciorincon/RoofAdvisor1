@@ -98,6 +98,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content logmodal">
@@ -192,7 +193,7 @@
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
-                 <h3 class="panel-title">Request Service</h3>
+                 <h3 class="panel-title"><font size="5"><strong>Request Service</strong></font></h3>
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
@@ -201,17 +202,15 @@
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
                 </div>
                 
-				
-               
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button" id="firstNextBegin" name="firstNextBegin">Next</button>
                 
             </div>
         </div>
-        </div>
-        <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+    </div>
+    <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Select Service</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
@@ -440,7 +439,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10">
 			<div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Answer Some Questions</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Answer Some Questions</strong></font> </h3>
 			</div>
 			<div class="panel-body">
 			<div class="list-group-item scr2fix">
@@ -538,10 +537,10 @@
 		
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="10"><strong>Enter Service Location</strong></font> </h1>
+                 <h1 class="panel-title wizhead"><font size="5"><strong>Enter Service Location</strong></font> </h1>
             </div>
             <div class="panel-body">
-			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Select the place for the service</strong></font>
+			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Enter the place for the service</strong></font>
 					<input type="hidden" id="step5Logintud" name="step5Logintud"/>
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
@@ -701,7 +700,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Select a Date & Time for service</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
@@ -728,7 +727,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Contractor List</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Contractor List</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">
@@ -754,7 +753,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="41"><strong>Review Your Order Details</strong></font></h1>
+                 <h1 class="panel-title wizhead"><font size="5"><strong>Review Your Order Details</strong></font></h1>
             </div>
             <div class="panel-body">
 				
@@ -785,8 +784,8 @@
 							<div class="d-flex w-100 justify-content-between">
 								<span ><b>Address: </b></span><span id="step8Address"></span><br>
 								<span ><b>ZipCode: </b></span><span id="step8ZipCode"></span><br>
-								<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
-								<span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>
+								<!--<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
+								<span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>-->
 								
 							</div>
 						</a>
@@ -862,13 +861,35 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -200px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width: 1120px;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div style="margin-top: -200px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:75%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
+             <div class="list-group" style="margin-top: 20%;margin-left: 400px;">
+				<div  class="list-group-item login-list1">
+						<div class="d-flex w-100 justify-content-between">
+								<div class="form-group">
+										<label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+										<input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
+								</div>
+								<div class="form-group">
+										<label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+										<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
+								</div>
+								<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+								<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+								</div>
+								<br><br><br>
+								<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+						</div>
+				</div>
+                                                <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+                                                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+                                                <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
+                                        </div>
 					<div style="margin-bottom: 20px;    margin-top: 520px;" class="col-sm-12">
 				<div>  
 								<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>

@@ -18,7 +18,32 @@ if(strcmp($table,"c")==0){
 
 
 <div class="container">
-    <div class="row">
+
+    <div id="step1contain">
+        <div class="panel" id="step-111">
+            <div id="zip-panel-heading" class="panel-heading wizhead">
+                 <h3 class="panel-title">Reset your password</h3>
+            </div>
+            <div class="panel-body pbody-white">
+                <div class="form-group">
+                    <input type="hidden" id="typeUser" name="typeUser" value="<?php echo $table ?>" />
+
+                    
+                    <center><p>Please enter the new password</p></center>
+                    <div class="form-group">
+                        <center><input maxlength="100" type="password" required="required" class="form-control" placeholder="New password" id="newpassword" name="newpassword" /></center>
+                    </div>
+                    <div class="form-group">
+                        <center><input maxlength="100" type="password" required="required" class="form-control" placeholder="Confirm password" id="retypepassword" name="retypepassword" /></center>
+                    </div>
+
+                    <center><a href="#" onclick="changePaswword('<?php echo $table ?>','<?php echo $email ?>','<?php echo $code ?>')" class="btn">Change my password</a></center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="box">
                 <div class="box-icon">
@@ -40,7 +65,7 @@ if(strcmp($table,"c")==0){
                 </div>
             </div>
         </div>
-	</div>
+	</div>-->
 </div>
 <br>
 <br>

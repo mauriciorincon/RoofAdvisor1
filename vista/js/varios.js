@@ -133,10 +133,10 @@ $(document).ready(function() {
             $('span[name=repairDone]').text(closeService);
             $('span[name=repairOpen]').text(openService);
         }
-
-        
-            
+    
 } );
+
+
 
 ///////////////////////////////////////////////
 //Register Company
@@ -3935,4 +3935,13 @@ function showPayPostCards(totalValue){
 
 function closeExtraWindows(){
     $(document).ready(function(){$("#myPostCard").modal("hide"); });
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+        return false;
+    }
+    return true;
 }
