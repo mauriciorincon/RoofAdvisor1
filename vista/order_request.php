@@ -564,6 +564,8 @@
 							padding: 0 11px 0 13px;
 							text-overflow: ellipsis;
 							width: 400px;
+							border-radius: 7px;
+							background-color : #7ba8f2;
 						}
 
                         </style>

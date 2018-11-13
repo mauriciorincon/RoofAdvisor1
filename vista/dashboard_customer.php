@@ -367,7 +367,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P") && dataOrder.RequestType!="R"){
 						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
-								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+								'onClick="getOrderScheduleDateTime(\''+dataOrder.FBID+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
 					}else{
@@ -482,7 +482,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P") && dataOrder.RequestType!="R"){
 						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
 								'href="#myScheduleChange" '+
-								'onClick="getOrderScheduleDateTime(\''+dataOrder.OrderNumber+'\')"> '+ 
+								'onClick="getOrderScheduleDateTime(\''+dataOrder.FBID+'\')"> '+ 
 								'<span class="glyphicon glyphicon-calendar"></span> '+
 							'</a>';
 					}else{
@@ -1103,7 +1103,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<?php if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"C")==0 or strcmp($order['Status'],"P")==0) and strcmp($order['RequestType'],"R")!=0){?>
 									<a class="btn-primary btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
 												href="#myScheduleChange" 
-												onClick="<?php echo "getOrderScheduleDateTime('".$order['OrderNumber']."')" ?>"> 
+												onClick="<?php echo "getOrderScheduleDateTime('".$order['FBID']."')" ?>"> 
 												<span class="glyphicon glyphicon-calendar"></span>
 									</a>
 								<?php }else{ ?>

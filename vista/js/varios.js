@@ -1506,7 +1506,7 @@ function validateIsLoggedIn(){
                         curStepWizard.attr('disabled', 'disabled');
                         if(typeof handler !== undefined){
                                   // $('#login-modal').style.display = "none";
-                                let timerInterval 
+                                let timerInterval; 
                                       swal({ 
                                             title: 'You have successfully logged in!',
                                             type: 'success', 
@@ -1782,12 +1782,14 @@ function refreshCalendar(pmonth,pyear,customerID){
 
 //Date picker order
 $( function() {
-        $( ".datepicker" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 7  });
+        $.datepicker.setDefaults($.datepicker.regional['en']);
+        $( ".datepicker" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 7  } );
   } );
 
 //Date picker order
 $( function() {
-    $( ".datepickers" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 1  });
+    $.datepicker.setDefaults($.datepicker.regional['en']);
+    $( ".datepickers" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 1 });
 } );
 
   
