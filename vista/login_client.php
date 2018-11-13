@@ -11,6 +11,10 @@
                             <h3>Your Roof Professionals</h3>
                             <h5>Customer Area</h5>
 						</div>
+						<div class="contact-form">
+                            <h1>you don't have an account?</h1>
+							<h1><a href="?controller=user&accion=showRegisterCustomer">Register Here</a></h1>
+						</div>
                     </div>
                     
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -21,24 +25,13 @@
 								<label>Password<span class="required">*</span></label>
 									<input type="password" placeholder="" required="true" id="passwordClient" name="passwordClient"/>
 								
-                                <button type="submit">Login</button><br><br>
+                                <button type="submit" id="submitLoginCustomer">Login</button><br><br>
 								<a href="?controller=user&accion=resetPasswordCustomer">Forgot password?</a>    
 							</form>
 						</div>
 					</div>
 
-					<div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="contact-form">
-                            <h1>you don't have an account?</h1>
-							<h1><a href="?controller=user&accion=showRegisterCustomer">Register Here</a></h1>
-						</div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-						<div class="contact-form">
-                        
-						</div>
-                    </div>
+					
 					
 				</div>
 			</div>

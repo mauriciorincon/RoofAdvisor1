@@ -136,11 +136,11 @@
 		<!-- footer-area end -->
 		<!-- all js here -->
 		
-		<script src="vista/js/jquery-3.3.1.js"></script>
+		<!--<script src="vista/js/jquery-3.3.1.js"></script>
 				
 				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 				
-				<script src="js/bootstrap.min.js"></script>
+				<script src="js/bootstrap.min.js"></script>-->
 				<script src="js/owl.carousel.min.js"></script>
 				<script src="js/jquery.counterup.min.js"></script>
 				<script src="js/jquery.scrollUp.min.js"></script>
@@ -164,8 +164,8 @@
 
 		<script src="vista/js/moment.min.js"></script>
 		<script src="vista/js/fullcalendar.js"></script>
-		<script src="vista/js/fullcalendar.min.js"></script>
-		<script src="vista/js/locale/en-au.js"></script>
+		<!--<script src="vista/js/fullcalendar.min.js"></script>-->
+		<script src="vista/js/locale/es-us.js"></script>
 		
 		
 	

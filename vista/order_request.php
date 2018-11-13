@@ -151,40 +151,40 @@
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
-                <a href="#step-1"  type="button" class="btn btn-success btn-circle" >1</a>
-                <p><small>Z Code</small></p>
+                <a href="#step-1"  type="button" class="btn btn-success btn-circle invisible" >1</a>
+                <p class="invisible"><small>Z Code</small></p>
             </div>
             <div class="stepwizard-step col-xs-1"> 
-                <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2</a>
-                <p><small> Order </small></p>
+                <a href="#step-2"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >2</a>
+                <p class="invisible"><small> Order </small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2.1</a>
-                <p><small>Question?</small></p>
+                <a href="#step-10"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >2.1</a>
+                <p class="invisible"><small>Question?</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled" >3</a>
-                <p><small>Address</small></p>
+                <a href="#step-3"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >3</a>
+                <p class="invisible"><small>Address</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled" >4</a>
-                <p><small>Time</small></p>
+                <a href="#step-4"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >4</a>
+                <p class="invisible"><small>Time</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled" >5</a>
-                <p><small>Professional</small></p>
+                <a href="#step-5"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >5</a>
+                <p class="invisible"><small>Professional</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled" >6</a>
-                <p><small>Review</small></p>
+                <a href="#step-6"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >6</a>
+                <p class="invisible"><small>Review</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled" >7</a>
-                <p><small>Validation</small></p>
+                <a href="#step-7"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >7</a>
+                <p class="invisible"><small>Validation</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled" >8</a>
-                <p><small>Complete</small></p>
+                <a href="#step-8"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >8</a>
+                <p class="invisible"><small>Complete</small></p>
             </div>
         </div>
     </div>
@@ -193,11 +193,7 @@
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
-<<<<<<< HEAD
-                 <h3 class="panel-title"><font size="5"><strong>Request Service</strong></font></h3>
-=======
                  <h3 class="panel-title">Start Here</h3>
->>>>>>> 948933e0bc512a32f965397755c9f2b4b9d961fc
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
@@ -549,8 +545,8 @@
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
-                                         <div class="list-group">
-							<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
+                    <div class="list-group">
+							
                        
                                 <style>
 						/* Set the size of the div element that contains the map */
@@ -558,9 +554,21 @@
 							height: 400px;  /* The height is 400 pixels */
 							width: 100%;  /* The width is the width of the web page */
 						}
+						#pac-input {
+							background-color: #fff;
+							font-family: Roboto;
+							font-size: 15px;
+							font-weight: 300;
+							margin-left: 33%;
+							margin-top: 10px;
+							padding: 0 11px 0 13px;
+							text-overflow: ellipsis;
+							width: 400px;
+						}
+
                         </style>
 						
-							
+						<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
 							<div id="map1"></div>
 
 							<script>

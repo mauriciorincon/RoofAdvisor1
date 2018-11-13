@@ -3945,3 +3945,27 @@ function isNumber(evt) {
     }
     return true;
 }
+
+$("#userClient").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submitLoginCustomer").click();
+    }
+});
+
+$("#passwordClient").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submitLoginCustomer").click();
+    }
+});
+
+$("#userContractor").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submitLoginContractor").click();
+    }
+});
+
+$("#passwordContractor").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submitLoginContractor").click();
+    }
+});
