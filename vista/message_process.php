@@ -5,7 +5,7 @@
    //var_dump($_SESSION);
 ?>
 <script type="text/javascript">
-    var timeleft = 5;
+    var timeleft = 10;
     var downloadTimer = setInterval(function(){
     timeleft--;
     document.getElementById("countdowntimer").textContent = timeleft;

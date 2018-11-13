@@ -30,6 +30,8 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/segmented-controls.css">
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
 		
+		<link rel="stylesheet" href="vista/css/fullcalendar.css">
+		
 		<link rel="stylesheet" href="vista/timepicker/stylesheets/wickedpicker.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
@@ -38,8 +40,12 @@ if(!isset($_SESSION)) {
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://checkout.stripe.com/checkout.js"></script>
 
-				<link rel="stylesheet" href="css/lity.min.css">
+			<link rel="stylesheet" href="css/lity.min.css">
+			<script src="vista/js/jquery-3.3.1.js"></script>
 				
+				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+				
+				<script src="js/bootstrap.min.js"></script>	
 
 		
 		<style>
@@ -117,14 +123,15 @@ if(!isset($_SESSION)) {
                                 	<li class="dropdown">
                                     <!--<img id="login-img" src="img/login.png">-->
                                     <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-										<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-											echo $_SESSION['username'];
+										<span id="labelUserLoggedIn" name="labelUserLoggedIn">
+											<?php if(isset($_SESSION['username'])){
+													echo $_SESSION['username'];
 													} else{
 													echo "Log In";
-																	}?>
+											}?>
 										</span>
-                                                                <b class="caret"></b></a>
-                                                                <ul id="logindrop" class="dropdown-menu">
+                                                <b class="caret"></b></a>
+                                        	<ul id="logindrop" class="dropdown-menu">
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Homeowner</a></li>
                                                                         <li><a href="?controller=user&accion=dashboardCompany">ContractPro</a></li>
 																		<li class="divider"></li>

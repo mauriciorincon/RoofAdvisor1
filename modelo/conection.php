@@ -143,7 +143,7 @@ class connection{
     }
 
     public function getDataByDate($table,$field,$startYear,$startMonth,$finishYear,$finishMonth){
-        echo $startYear."-".$startMonth;
+        
         $snapshot=$this->_firebase->getReference($table)
                         ->orderByChild($field)
                         ->startAt($startMonth)

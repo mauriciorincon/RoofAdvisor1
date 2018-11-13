@@ -98,6 +98,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content logmodal">
@@ -150,40 +151,40 @@
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
-                <a href="#step-1"  type="button" class="btn btn-success btn-circle" >1</a>
-                <p><small>Z Code</small></p>
+                <a href="#step-1"  type="button" class="btn btn-success btn-circle invisible" >1</a>
+                <p class="invisible"><small>Z Code</small></p>
             </div>
             <div class="stepwizard-step col-xs-1"> 
-                <a href="#step-2"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2</a>
-                <p><small> Order </small></p>
+                <a href="#step-2"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >2</a>
+                <p class="invisible"><small> Order </small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-10"  type="button" class="btn btn-default btn-circle" disabled="disabled" >2.1</a>
-                <p><small>Question?</small></p>
+                <a href="#step-10"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >2.1</a>
+                <p class="invisible"><small>Question?</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-3"  type="button" class="btn btn-default btn-circle" disabled="disabled" >3</a>
-                <p><small>Address</small></p>
+                <a href="#step-3"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >3</a>
+                <p class="invisible"><small>Address</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-4"  type="button" class="btn btn-default btn-circle" disabled="disabled" >4</a>
-                <p><small>Time</small></p>
+                <a href="#step-4"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >4</a>
+                <p class="invisible"><small>Time</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-5"  type="button" class="btn btn-default btn-circle" disabled="disabled" >5</a>
-                <p><small>Professional</small></p>
+                <a href="#step-5"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >5</a>
+                <p class="invisible"><small>Professional</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-6"  type="button" class="btn btn-default btn-circle" disabled="disabled" >6</a>
-                <p><small>Review</small></p>
+                <a href="#step-6"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >6</a>
+                <p class="invisible"><small>Review</small></p>
             </div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-7"  type="button" class="btn btn-default btn-circle" disabled="disabled" >7</a>
-                <p><small>Validation</small></p>
+                <a href="#step-7"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >7</a>
+                <p class="invisible"><small>Validation</small></p>
 			</div>
 			<div class="stepwizard-step col-xs-1"> 
-                <a href="#step-8"  type="button" class="btn btn-default btn-circle" disabled="disabled" >8</a>
-                <p><small>Complete</small></p>
+                <a href="#step-8"  type="button" class="btn btn-default btn-circle invisible" disabled="disabled" >8</a>
+                <p class="invisible"><small>Complete</small></p>
             </div>
         </div>
     </div>
@@ -201,17 +202,15 @@
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
                 </div>
                 
-				
-               
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button" id="firstNextBegin" name="firstNextBegin">Next</button>
                 
             </div>
         </div>
-        </div>
-        <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+    </div>
+    <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Select Service</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>
             <div class="panel-body">
 				<div class="list-group-item ">
@@ -440,7 +439,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10">
 			<div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Answer Some Questions</strong></font> </h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Answer Some Questions</strong></font> </h3>
 			</div>
 			<div class="panel-body">
 			<div class="list-group-item scr2fix">
@@ -538,7 +537,7 @@
 		
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="10"><strong>Enter Service Location</strong></font> </h1>
+                 <h1 class="panel-title wizhead"><font size="5"><strong>Enter Service Location</strong></font> </h1>
             </div>
             <div class="panel-body">
 			<span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span> <font size="5"><strong class="h1white">Enter the place for the service</strong></font>
@@ -546,8 +545,8 @@
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
-                                         <div class="list-group">
-							<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
+                    <div class="list-group">
+							
                        
                                 <style>
 						/* Set the size of the div element that contains the map */
@@ -555,9 +554,21 @@
 							height: 400px;  /* The height is 400 pixels */
 							width: 100%;  /* The width is the width of the web page */
 						}
+						#pac-input {
+							background-color: #fff;
+							font-family: Roboto;
+							font-size: 15px;
+							font-weight: 300;
+							margin-left: 33%;
+							margin-top: 10px;
+							padding: 0 11px 0 13px;
+							text-overflow: ellipsis;
+							width: 400px;
+						}
+
                         </style>
 						
-							
+						<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
 							<div id="map1"></div>
 
 							<script>
@@ -701,7 +712,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Select a Date & Time for service</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="row">
@@ -728,7 +739,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5">
             <div class="panel-heading">
-                 <h3 class="panel-title wizhead"><font size="10"><strong>Contractor List</strong></font></h3>
+                 <h3 class="panel-title wizhead"><font size="5"><strong>Contractor List</strong></font></h3>
             </div>
             <div class="panel-body">
 				<div class="form-group">
@@ -754,7 +765,7 @@
 
 		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6">
             <div class="panel-heading">
-                 <h1 class="panel-title wizhead"><font size="41"><strong>Review Your Order Details</strong></font></h1>
+                 <h1 class="panel-title wizhead"><font size="5"><strong>Review Your Order Details</strong></font></h1>
             </div>
             <div class="panel-body">
 				
@@ -785,8 +796,8 @@
 							<div class="d-flex w-100 justify-content-between">
 								<span ><b>Address: </b></span><span id="step8Address"></span><br>
 								<span ><b>ZipCode: </b></span><span id="step8ZipCode"></span><br>
-								<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
-								<span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>
+								<!--<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
+								<span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>-->
 								
 							</div>
 						</a>
@@ -870,23 +881,23 @@
             <div class="panel-body">
 				<div class="row">
              <div class="list-group" style="margin-top: 20%;margin-left: 400px;">
-                                                        <div  class="list-group-item login-list1">
-                                                                <div class="d-flex w-100 justify-content-between">
-                                                                        <div class="form-group">
-                                                                                <label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
-                                                                                <input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                                <label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
-                                                                                <input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
-                                                                        </div>
-                                                                        <div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
-                                                                        <a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
-                                                                        </div>
-                                                                       <br><br><br>
-                                                                        <label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
-                                                                </div>
-                                                        </div>
+				<div  class="list-group-item login-list1">
+						<div class="d-flex w-100 justify-content-between">
+								<div class="form-group">
+										<label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+										<input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
+								</div>
+								<div class="form-group">
+										<label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+										<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
+								</div>
+								<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+								<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
+								</div>
+								<br><br><br>
+								<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+						</div>
+				</div>
                                                 <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
                                                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                                                 <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
