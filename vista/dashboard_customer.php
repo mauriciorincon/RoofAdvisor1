@@ -59,7 +59,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					var uluru = {lat: 25.745693, lng: -80.375028};
 					
 					mapObject = new google.maps.Map(
-					document.getElementById('map'), {zoom: 11, center: uluru});
+					document.getElementById('map'), {zoom: 11, center: uluru,streetViewControl: false,
+                                mapTypeControl: false});
 					
 					var marker="";
 					var total_orders=0;

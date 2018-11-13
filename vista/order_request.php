@@ -7,99 +7,82 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <div style="margin-left:30px;margin-top:30px;margin-bottom:-15px;">
-       <span class="glyphicon glyphicon-info-sign"></span>&nbsp;Info</br></br>
-       <span ><b>One more step, we need to verify your identity, please login or register</b></span><br><br>
-	  </div>   
-	    
- <div class="modal-body" style="height:175px;">
-	<div class="list-group">
-		<div class="list-group-item ">
-			<span class="glyphicon glyphicon-info-sign"></span> Info 
-			<div class="d-flex w-100 justify-content-between">
-				<span ><b>Are you new to RoofServiceNow?, fill the fields below</b></span><br><br>
-				
-			</div>
-		</div>			
-		<div class="form-row" id="step6RegisterCustomerOrder">
-			<div class="form-group col-md-4">
-				<label class="control-label ">Email</label>
-				<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-				<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
-			</div>
-			<div class="form-group col-md-4">
-				<label class="control-label ">Password</label>
-				<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-				<div class="help-block">Minimum of 6 characters</div>
-				<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-			</div>
-			<div class="form-group col-md-4">
-				<label class="control-label ">Confirm Password</label>
-				<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-				<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-			</div>
-		</div>
-		<div class="list-group-item " id="step6RegisterCustomerOrder">
-			<div class="form-group">
-				<label class="control-label ">Email</label>
-				<input maxlength="100"  type="text" required="required"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-				<label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
-			</div>
-			<div class="form-group">
-				<label class="control-label ">Password</label>
-				<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-				<div class="help-block">Minimum of 6 characters</div>
-				<label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-			</div>
-			<div class="form-group">
-				<label class="control-label ">Confirm Password</label>
-				<input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-				<label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-			</div>
-											<div id="reg-frm2">
-					<div class="form-group">
-													<label class="control-label Rlft-frm">First Name</label>
-													<input  type="text" required="required" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"  />
-													<label style="margin-left: 52px;" class="control-label Rlft-frm1">Last Name</label>
-													<input  maxlength="100" type="text" required="required"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+     
+	  <div class="modal-body" style="height:175px;">
+				<div class="list-group">
+						<div  class="list-group-item login-list1">
+								<div class="d-flex w-100 ">
+										<div class="form-row" id="step6RegisterCustomerOrder">
+											<div class="form-group col-md-4">
+												<label class="control-label">First Name</label>
+												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="firstCustomerName" name="firstCustomerName"  />
+												
 											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label">Last Name</label>
+												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
+												
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label ">Email</label>
+												<input maxlength=""  type="text" required="required" class="colorStandarInpur"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
+												<small  class="form-text text-muted" id="answerEmailValidate" name="answerEmailValidate">Answer</small>
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label ">Password</label>
+												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+												<small  class="form-text text-muted" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6">Minimum of 6 characters</small>
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label ">Confirm Password</label>
+												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label">Address</label>
+												<input maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
+												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label">City</label>
+												<input maxlength="100" type="text" required="required" class="colorStandarInpur" placeholder="Enter city" id="customerCity" name="customerCity" />
+												
+											</div>
+											
+											<div class="form-group col-md-4">
+												<label class="control-label">Zip code</label>
+												<input maxlength="5" type="text" required="required" class="colorStandarInpur"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
+												
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label">Phone number</label>
+												<input maxlength="10" type="text" required="required" class="colorStandarInpur"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
+												
+											</div>
+											<div class="form-group col-md-4">
+												<label class="control-label">State</label>
+												<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
+													<?php foreach ($_array_state as $key => $value1) { ?>
+															<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+													<?php } ?>
+												</select>
 
-			<div class="form-group">
-				<label style="margin-left: 17px;" class="control-label Rlft-frm">Address</label>
-				<input maxlength="100" type="text" required="required"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-					<label class="control-label Rlft-frm1">City</label>
-													<input maxlength="100" type="text" required="required" placeholder="Enter city" id="customerCity" name="customerCity" />
 											</div>
-			<div class="form-group">
-							<label style="margin-left:37px;" class="control-label Rlft-frm">State</label>
-													<select style="display:inline-block;width:183px;" id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
-
-															<?php foreach ($_array_state as $key => $value1) { ?>
-																	<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
-															<?php } ?>
-													</select>
-													<label style="margin-left: 66px;" class="control-label Rlft-frm1">Zip code</label>
-													<input maxlength="100" type="text" required="required"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-											</div>
-			
-			<div class="form-group">
-				<label style="margin-left:-31px;" class="control-label Rlft-frm">Phone number</label>
-				<input style="width: 498px;" maxlength="100" type="text" required="required"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-			</div>
-											</div>  
-			<button class=" btn-primary  btn-lg nextBtnOrder pull-left" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button><br><br>
+										</div>
+								</div>
+						</div>
+				</div>
 		</div>
-							
-	</div>
-		</div>
+		<!--<center><button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button></center>-->
       <div class="modal-footer" style="border-top:0;">
-        <button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button>
+	  		<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>
+        
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content logmodal">
       <div class="modal-header mheadr">
@@ -131,8 +114,8 @@
 										<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 								</div>
 						</div>
-				<!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-				<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+				<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+				<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
 				</div>
 		</div>
       <div class="modal-footer">
@@ -141,7 +124,8 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
 <div id="welcome-txt">
     <span>
     Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
@@ -868,10 +852,6 @@
                 </div>
 				
 				<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-				
-               
-                
-                
             </div>
 		</div>
 		
@@ -885,36 +865,36 @@
              <div class="list-group" style="margin-top: 20%;margin-left: 400px;">
 				<div  class="list-group-item login-list1">
 						<div class="d-flex w-100 justify-content-between">
-								<div class="form-group">
-										<label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
-										<input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
-								</div>
-								<div class="form-group">
-										<label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
-										<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
-								</div>
-								<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
+							<div class="form-group">
+								<label class="loglable" style="display: inline-block;margin-left:73px;"><i class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
+								<input style="width:60%;color:#646363;" type="text" placeholder="Username" required="true" id="userClientOrder" name="userClientOrder" /><span class="required">&nbsp;&nbsp;*</span>
+							</div>
+							<div class="form-group">
+								<label class="loglable" style="display: inline-block;margin-left: 73px;padding:3.1px 10px 3.1px 10px;" ><i class="fa fa-key" aria-hidden="true" style="color:#fa511a"></i></label>
+								<input style="width:60%;color:#646363;" type="password" placeholder="password" required="true" id="passwordClientOrder" name="passwordClientOrder"/><span class="required">&nbsp;&nbsp;*</span>
+							</div>
+							<div style="display:inline-block;text-align:left !important; position:absolute;left:200px;margin-top:-6px;">
 								<a style="color:#fff;" href="index.php?controller=user&accion=resetPasswordCustomer">Forgot password?</a>
-								</div>
-								<br><br><br>
-								<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
+							</div>
+							<br><br><br>
+							<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 						</div>
 				</div>
-                                                <!--<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-                                                <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
-                                                <button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>
-                                        </div>
-					<div style="margin-bottom: 20px;    margin-top: 0px;" class="col-sm-12">
-				<div>  
-								<button class=" btn-primary  btn-lg nextBtnOrder pull-right" type="button" data-toggle="modal" data-target="#register-modal">Register</button><br><br>
-                                                          	</div>
-							
-						</div>
-						<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
-					</div>
+                <p><h1>Please <a href="#register-modal" data-toggle="modal">register</a> or <a href="#" onclick="login_customer_order_request()">login</a></h1></p>                                
+                	<!--<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
+                	<!--<button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>-->
+            </div>
+				<div style="margin-bottom: 20px;    margin-top: 0px;" class="col-sm-12">
+					<div>  
+						<br><br>
+					</div>	
+				</div>
+					<button class="btn btn-primary nextBtnCustomer pull-right" type="button" id="lastFinishButtonOrder" name="lastFinishButtonOrder">Finish Order</button>
+				</div>
 					
 						
 					</div>
+					<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
 				</div>
 			</div>
 

@@ -1305,6 +1305,9 @@ $(document).ready(function () {
                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-4"]').parent().prev().children("a");
             }
         }
+        if (curStepBtn=="step-8"){
+            nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().prev().children("a")
+        }
 
         if (isValid) {
         
@@ -1398,6 +1401,55 @@ $(document).ready(function() {
     
 } );
 
+function login_customer_order_request(){
+    $('#lastFinishButtonOrder').hide();
+    var userClientOrder=$('#userClientOrder').val();
+    var passwordClientOrder=$('#passwordClientOrder').val();
+    if(userClientOrder=="" || userClientOrder==undefined){
+        alert("Please fill user field");
+        return false;
+    }
+    if(passwordClientOrder=="" || passwordClientOrder==undefined){
+        alert("Please fill password field");
+        return false;
+    }
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/validateUser.php", { "userClientOrder" : userClientOrder,"passwordClientOrder":passwordClientOrder}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1 && n !== null){
+                email_user_logued=userClientOrder;
+                var i = data.indexOf("[");
+                var i1 = data.indexOf("]");
+                var user = data.substring(i+1, i1);
+                $('span#labelUserLoggedIn').html(user);
+                $("#logindrop").append('<li><a href="?controller=user&accion=logout">Log Out</a></li>');
+                jsRemoveWindowLoad('');
+                validateIsLoggedIn();
+            }else{
+                $('#textAnswerOrder').html(data);
+                $('#headerTextAnswerOrder').html('Error');
+                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                $('#lastFinishButtonOrder').hide();
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result=false;
+        }
+        jsRemoveWindowLoad('');
+    });
+
+    
+}
+
 function insertOrderCustomer(idStripeCharge,amountValue){
     if(idStripeCharge== undefined){
         idStripeCharge="";
@@ -1454,7 +1506,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
             
 
             if(n==-1){
-                    
+                jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
                     window.location.href = "index.php?controller=user&accion=dashboardCustomer";
                     /*$('#textAnswerOrder').html(data+'');
                     $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+email+','+password+',datos)">Continue to Customer Area</button><br><br>');
@@ -1486,7 +1538,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
 }
 
 function validateIsLoggedIn(){
-    jsShowWindowLoad('');
+    jsShowWindowLoad('Validating Login');
     $.post( "controlador/ajax/validateLoggedIn.php", {}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -1495,6 +1547,7 @@ function validateIsLoggedIn(){
                 
 
                 if(n==-1){
+
                     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                     if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -1511,7 +1564,7 @@ function validateIsLoggedIn(){
                                             title: 'You have successfully logged in!',
                                             type: 'success', 
                                             html: 'You will be automatically redirected in <strong></strong> seconds.', 
-                                            timer: 2000, 
+                                            timer: 1, 
                                             onOpen: () => { 
                                                 swal.showLoading() 
                                                }, 
@@ -1544,8 +1597,8 @@ function validateIsLoggedIn(){
                     //$('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
                     //$('#headerTextAnswerOrder').html('User validation');
                     //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
-                    $('#lastFinishButtonOrder').hide();
-                    $('#login-modal').modal({backdrop: 'static'});
+                    //$('#lastFinishButtonOrder').hide();
+                    //$('#login-modal').modal({backdrop: 'static'});
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
@@ -1696,7 +1749,7 @@ function jsShowWindowLoad(mensaje) {
     jsRemoveWindowLoad();
  
     //si no enviamos mensaje se pondra este por defecto
-    if (mensaje === undefined) mensaje = "Procesando la información<br>Espere por favor";
+    if (mensaje === undefined) mensaje = "Processing information<br>please wait";
  
     //centrar imagen gif
     height = 20;//El div del titulo, para que se vea mas arriba (H)

@@ -120,14 +120,19 @@ class payingController{
         }else{
             $_amount=$this->getEmergencyValue();
         }
-        
+        $_email='';
+        if(isset($_SESSION['email'])){
+            $_email=$_SESSION['email'];
+        }else{
+            $_email='';
+        }
         echo '
         <button id="customButton" class="btn">'.$buttonMessaje.'</button>
         <script>
             var amount_value='.$_amount.';
             var public_key=\''.$_key.'\';
             var action_type=\''.$typePaying.'\';
-            var email_user_logued=\''.$_SESSION['email'].'\';
+            var email_user_logued=\''.$_email.'\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';
 
