@@ -15,9 +15,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
     			</ul>
-		  </div>
+		</div>
 		  
-		  <div class="btn-group" role="group">
+		<div class="btn-group" role="group">
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
         </div>   
 		
@@ -1234,7 +1234,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			?>
 		</div>
 		
-	</div>
+</div>
 	
 
 

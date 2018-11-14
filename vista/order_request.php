@@ -38,7 +38,7 @@
 												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
 												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
 											</div>
-											<div class="form-group col-md-4">
+											<!--<div class="form-group col-md-4">
 												<label class="control-label">Address</label>
 												<input maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
 												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
@@ -53,13 +53,13 @@
 												<label class="control-label">Zip code</label>
 												<input maxlength="5" type="text" required="required" class="colorStandarInpur"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
 												
-											</div>
+											</div>-->
 											<div class="form-group col-md-4">
 												<label class="control-label">Phone number</label>
 												<input maxlength="10" type="text" required="required" class="colorStandarInpur"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
 												
 											</div>
-											<div class="form-group col-md-4">
+											<!--<div class="form-group col-md-4">
 												<label class="control-label">State</label>
 												<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
 													<?php foreach ($_array_state as $key => $value1) { ?>
@@ -67,7 +67,7 @@
 													<?php } ?>
 												</select>
 
-											</div>
+											</div>-->
 										</div>
 								</div>
 						</div>
@@ -810,8 +810,10 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">		
-						<div class ="col-md-6">
-							<div class="list-group">
+						<div class ="col-md-3">
+						</div>
+						<div class ="col-md-6" id="divEmergencyService">
+							<div class="list-group" >
 								<a href="#" class="list-group-item ">
 									<span class="glyphicon glyphicon-info-sign"></span>Emergency Service 
 									<div class="d-flex w-100 justify-content-between">
@@ -820,7 +822,7 @@
 								</a>
 							</div>
 						</div>
-						<div class ="col-md-6">
+						<div class ="col-md-6" id="divRoofService">
 							<div class="list-group">
 								<a href="#" class="list-group-item ">
 									<span class="glyphicon glyphicon-info-sign"></span>Roof Report 
@@ -829,7 +831,8 @@
 									</div>
 								</a>
 							</div>
-							
+						</div>
+						<div class ="col-md-3">
 						</div>
 					<div class ="col-md-12">
 						<label class="control-label text-center h1 h1white"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>

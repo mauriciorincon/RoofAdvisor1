@@ -871,13 +871,17 @@ $(document).ready(function () {
         var customerCity = $("input#customerCity").val();
         var customerState = $("select#customerState").val();
         var customerZipCode = $("input#customerZipCode").val();
-        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
+        var customerPhoneNumber = $("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
         var Repassword=$('input:password#inputPasswordConfirm').val();
 
-        
+        customerAddress = "";
+        customerState = "";
+        customerZipCode = "";
+        customerAddress = "";
+        customerCity = "";
         if(p_pantalla=="Order"){
-            var flag=true;
+            var flagMensaje="";
             var ListTextBox=$("#step6RegisterCustomerOrder").find("input");
             for (var i = 0; i < ListTextBox.length; i++) {
                 if (!ListTextBox[i].validity.valid) {
@@ -885,40 +889,67 @@ $(document).ready(function () {
                     $(ListTextBox[i]).closest(".form-group").addClass("has-error").removeClass("has-success");
                 }
             }
+            if(firstCustomerName.length==0){
+                flagMensaje+="Please fill the customer firt name.\n";
+            }
+            if(lastCustomerName.length==0){
+                flagMensaje+="Please fill the customer last name.\n";
+            }
+            if(emailValidation.length==0){
+                flagMensaje+="Please fill the customer email.\n";
+            }
             if(password.length<6){
-                flag = false;
+                flagMensaje+="Please verify the password field, remember it must have at least 6 characters.\n";
             }
             if(Repassword.length<6){
-                flag = false;
+                flagMensaje+="Please verify the verification password field, remembet it must have at least 6 characters.\n";
             }
             if(password!=Repassword){
-                flag = false;
+                flagMensaje+="Please verify the password and verification are not the same.\n";
             }
             if(validateFormatMail(emailValidation)==false){
-                flag = false;
+                flagMensaje+="Please verify the email field.\n";
             }
-
-            if (flag==false){
-                alert('Please fill all fields to continue with register');
-                return;
+            /*if(customerAddress.length==0){
+                flagMensaje+="Please fill the customer address.\n";
+            }
+            if(customerCity.length==0){
+                flagMensaje+="Please fill the customer city.\n";
+            }
+            if(customerState.length==0){
+                flagMensaje+="Please fill the customer state.\n";
+            }
+            if(customerZipCode.length==0){
+                flagMensaje+="Please fill the customer zip code.\n";
+            }*/
+            if(customerPhoneNumber.length==0){
+                flagMensaje+="Please fill the customer phone number.\n";
+            }
+            
+            if (flagMensaje!=''){
+                alert(flagMensaje);
+                return false;
             }
 
         }
         jsShowWindowLoad('');
         $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
-                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password}, null, "text" )
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"inputPassword":password,
+                                                    "source_call":p_pantalla }, null, "text" )
                 .done(function( data, textStatus, jqXHR ) {
                     if ( console && console.log ) {
                         $("#validatingMessajeCode").html(data);
                         var n = data.indexOf("Error");
                         if(n==-1){
                             if(p_pantalla=="Order"){
+                                $('#register-modal').modal('hide');
+                                
                                 $('#headerTextAnswerOrder').html('Mail Verification');
                                 $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click next step');
                                 dataString="'"+emailValidation+"','"+password+"','step8'";
                                 $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
-                                $('#myModalRespuesta').modal({backdrop: 'static'});
+                                $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
                             }
                             //$("#firstNextValidation").show();
                             if(p_pantalla=="register"){
@@ -1039,7 +1070,7 @@ $('#step2OtypeService').on('click', 'a', function(){
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
     curStepWizard.attr('disabled', 'disabled');
-
+    
    return false;
 });
 
@@ -1684,6 +1715,14 @@ function loginUser(user,password,url){
                 if(n==-1){
                     
                     if(url=="step8"){
+                        var ind = data.indexOf("'");
+                        var ind1 = data.indexOf("'", data.indexOf("'") + 1);
+                        email_user_logued= data.substring(ind+1, ind1);
+                        var i = data.indexOf("[");
+                        var i1 = data.indexOf("]");
+                        var user = data.substring(i+1, i1);
+                        $('span#labelUserLoggedIn').html(user);
+                        $("#logindrop").append('<li><a href="?controller=user&accion=logout">Log Out</a></li>');
                         validateIsLoggedIn();
                     }else{
                         window.location.href = "";
@@ -1697,7 +1736,7 @@ function loginUser(user,password,url){
                     $('#headerTextAnswerOrder').html('Error login user');
                     $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                     $('#lastFinishButtonOrder').hide();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                     jsRemoveWindowLoad('');
                     return  false;
@@ -2136,8 +2175,12 @@ function showHideSteps(typeService){
         //step8.show();
         if(typeService=='emergency'){
             $('#step-6 h1').html('<font size="41"><strong>Review Emergency Repair Order Details</strong></font>');
+            $('#divEmergencyService').show();
+            $('#divRoofService').hide();
         }else{
             $('#step-6 h1').html('<font size="41"><strong>Review Roof Report Order Details</strong></font>');
+            $('#divEmergencyService').hide();
+            $('#divRoofService').show();
         }
         
     }
@@ -3563,7 +3606,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
                         $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
                                                         "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
                                                     "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password,
-                                                    "selectionType":selectionType}, null, "text" )
+                                                    "selectionType":selectionType,"source_call":"company_dash"}, null, "text" )
                         .done(function( dataC, textStatusC, jqXHRC ) {
                             if ( console && console.log ) {
                                 var n = dataC.indexOf("Error");
