@@ -377,7 +377,7 @@ class userController{
                 }
             }
         }else{
-            return "Error".$_response."response create user:".$_responseU;
+            return "Error ".$_response." response create user: ".$_responseU;
         } 
         return $_lastCustomerID;
         
@@ -818,7 +818,7 @@ class userController{
         $_message='
         <table>
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
-            <tr><td colspan="2">Thank you for registering at RoofServiceNow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2">Thank you for registering at RoofServiceNow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>

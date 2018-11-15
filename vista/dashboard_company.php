@@ -1739,8 +1739,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
     
 
             $('#calendar').fullCalendar({
+                locale: 'en',
                 header: {
-                    language: 'en',
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,basicWeek,basicDay',
@@ -1996,7 +1996,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             return orderStatus;
                         }
 
-            var config = {
+            /*var config = {
                 apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
                 authDomain: "roofadvisorzapp.firebaseapp.com",
                 databaseURL: "https://roofadvisorzapp.firebaseio.com",
@@ -2004,7 +2004,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 storageBucket: "roofadvisorzapp.appspot.com",
                 messagingSenderId: "480788526390"
             };
-            firebase.initializeApp(config);
+            firebase.initializeApp(config);*/
 
 
 
@@ -2726,7 +2726,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div>
 
 <?php 
-echo $_actual_company['postCardValue'];
+//echo $_actual_company['postCardValue'];
 if(!empty($_actual_company['postCardValue'])){
     echo '
     <div class="modal fade" id="myMessagePostCardsPay" role="dialog">

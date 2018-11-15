@@ -20,8 +20,16 @@
     curl_close($ch);
 
     $_info = json_decode($html, true);
-    $city = $_info['results'][0]['address_components'][1]['long_name'];
-    $state=$_info['results'][0]['address_components'][3]['long_name'];
+    //print_r($_info);
+    if(strcmp($_info['status'],'ZERO_RESULTS')==0){
+      $city = "";
+      $state = "";
+    }else{
+      $city = $_info['results'][0]['address_components'][1]['long_name'];
+      $state=$_info['results'][0]['address_components'][3]['long_name'];
+    }
+    
+    
     
     if(empty($city)){
       $_othersController=new othersController();

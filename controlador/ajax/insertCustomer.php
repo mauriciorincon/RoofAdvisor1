@@ -7,41 +7,51 @@ require_once($_SESSION['application_path']."/modelo/user.class.php");
 
 
 $_userController=new userController();
-if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
-    //var_dump($_POST['g-recaptcha-response']);
-    $_secret="6LeiZnkUAAAAAE0V7yDVIYLwwoZoZaG6c_A6HyWF";
-    $_ip=$_SERVER['REMOTE_ADDR'];
 
-    $_capcha=$_POST['g-recaptcha-response'];
+if(!isset($_POST['source_call'])){
+    $_source_call='Order';
+}else{
+    $_source_call=$_POST['source_call'];
+}
+    
 
-    $_result=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$_secret&response=$_capcha&remoteip=$_ip");
-
-    //echo "<br>";
-    //echo "<br>";
-    //echo "<br>";
-    //var_dump($_result);
-
-    $_array=json_decode($_result,true);
-
-    if($_array['success']){
-        //echo "todo bien";
+if(strcmp('Customer_register',$_source_call)==0){
+    if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){
+        //var_dump($_POST['g-recaptcha-response']);
+        $_secret="6LeiZnkUAAAAAE0V7yDVIYLwwoZoZaG6c_A6HyWF";
+        $_ip=$_SERVER['REMOTE_ADDR'];
+    
+        $_capcha=$_POST['g-recaptcha-response'];
+    
+        $_result=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$_secret&response=$_capcha&remoteip=$_ip");
+    
+        //echo "<br>";
+        //echo "<br>";
+        //echo "<br>";
+        //var_dump($_result);
+    
+        $_array=json_decode($_result,true);
+    
+        if($_array['success']){
+            //echo "todo bien";
+        }else{
+            $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Please check the captcha";
+            $_SESSION['post_info'] = $_POST;
+            header("Location: $_path");
+            return;
+        }
     }else{
+        //$_userModel=new userModel();
+        //$_array_state=$_userModel->getNode('Parameters/state');
+        //require_once("../../vista/head.php");
+        //require_once("../../vista/register_customer.php");
+        //require_once("../../vista/footer.php");
+        //echo "fill capcha";
         $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Please check the captcha";
         $_SESSION['post_info'] = $_POST;
         header("Location: $_path");
         return;
     }
-}else{
-    //$_userModel=new userModel();
-    //$_array_state=$_userModel->getNode('Parameters/state');
-    //require_once("../../vista/head.php");
-    //require_once("../../vista/register_customer.php");
-    //require_once("../../vista/footer.php");
-    //echo "fill capcha";
-    $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Please check the captcha";
-    $_SESSION['post_info'] = $_POST;
-    header("Location: $_path");
-    return;
 }
 
 
@@ -80,26 +90,37 @@ $_arrayCustomer = array(
 $_customerID=$_userController->insertCustomer($_arrayCustomer,$_selectionType);
 
 if(strpos($_customerID,"Error")!==false){
-    $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Error register customer,try again <br>".$_customerID;
-    $_SESSION['post_info'] = $_POST;
-    header("Location: $_path");
-
+    if(strcmp($_source_call,'Customer_register')==0){
+        $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Error register customer,try again <br>".$_customerID;
+        $_SESSION['post_info'] = $_POST;
+        header("Location: $_path");
+    }else{
+        echo $_customerID;
+    }
     //echo "Error register customer,try again <br>".$_customerID;
 }else{
-    if(strcmp($_selectionType,'newCustomer')==0){
-        echo $_customerID;
-    }else{
-        $_message=array(
-            'title'=>"Register Customer",
-            'subtitle'=>"Thank you for register",
-            'content'=>"Customer was register correctly please check your email, to validate the user",
-        );
-        $_SESSION['response'] = $_message;
-        $_path="../../?controller=user&accion=showMessage";
-        header("Location: $_path");
-        //echo "Customer was register correctly please check your email, to validate the user";
+    switch($_source_call){
+        case "company_dash":
+            echo $_customerID;
+            break;
+        case "Customer_register":
+            $_message=array(
+                'title'=>"Register Customer",
+                'subtitle'=>"Thank you for register",
+                'content'=>"Customer was register correctly please check your email, to validate the user",
+            );
+            $_SESSION['response'] = $_message;
+            $_path="../../?controller=user&accion=showMessage";
+            header("Location: $_path");
+            break;
+        case "Order":
+            $_message=array(
+                'title'=>"Register Customer",
+                'subtitle'=>"Thank you for register",
+                'content'=>"Customer was register correctly please check your email, to validate the user",
+            );
+            print_r($_message);
     }
-    
 }
 
 ?>

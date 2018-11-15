@@ -268,7 +268,7 @@ class connection{
     
 
     public function createUserDatabse($_userProperties,$_profile){
-        
+        //print_r($_userProperties);
         try {
             if(strcmp($_profile,"customer")==0){
                 $auth = $this->_factory_firebase->getAuth();
