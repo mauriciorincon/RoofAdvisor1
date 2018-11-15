@@ -883,7 +883,29 @@
 							<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 						</div>
 				</div>
-                <p><h1>Please <a href="#register-modal" data-toggle="modal">register</a> or <a href="#" onclick="login_customer_order_request()">login</a></h1></p>                                
+                <p>
+				<table style="border-spacing: 15px;padding: 12px;">
+					<tr>
+						<td><h1>Please</h1></td>
+						<td></td>
+						<td><a class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
+							href="#" 
+							onClick="login_customer_order_request()" > login</a>
+						</td>
+						<!--<td><a href="#" onclick="login_customer_order_request()">login</a></td>-->
+						<!--<td>&#32;<button class="btn-primary btn-lg" type="button" id="button1" name="button1" onclick="login_customer_order_request()">login</button>&#32;</td>-->
+						<td></td>
+						<td><h1>or</h1></td>
+						<!--<td><h1><a href="#register-modal" data-toggle="modal">register</a></h1></td>
+						<td><button class="btn-primary btn-lg" type="button" id="button2" name="button2" onclick="login_customer_order_request()">register</button></td>-->
+						<td></td>
+						<td><a class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
+							href="#register-modal" 
+							onClick="" > register</a>
+						</td>
+					</tr>
+				</table>
+				 </p>
                 	<!--<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                 	<!--<button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>-->
             </div>
