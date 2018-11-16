@@ -32,10 +32,17 @@ if(isset($_POST['stripeCharge'])){
 }else{
     $_stripe_chargue="";
 }
-if(isset($_POST['postCardValue'])){
-    $_amount_value=$_POST['postCardValue'];
+
+if(isset($_POST['amount_value'])){
+    $_amount_value=$_POST['amount_value'];
 }else{
     $_amount_value=0;
+    
+}
+if(isset($_POST['postCardValue'])){
+    $_amount_valueP=$_POST['postCardValue'];
+}else{
+    $_amount_valueP=0;
 }
 
 $_array=array(
@@ -53,10 +60,11 @@ $_array=array(
     "Address"=>$_POST['Address'],
     "id_stripe"=>$_stripe_chargue,
     "Authorized"=>$_POST['Authorized'],
-    "postCardValue"=>$_amount_value,
+    "postCardValue"=>$_amount_valueP,
+    "amount_value"=>$_amount_value,
 );
 
-
+print_r($_array);
 $_orderController=new orderController();
 $_id_order=$_orderController->insertOrder($_array);
 if (is_null($_id_order)){
