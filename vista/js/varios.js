@@ -1941,6 +1941,7 @@ $( function() {
 function hideShowDivs(divName){
     $('#'+divName).collapse('hide');
     $('#'+divName).collapse('hide');
+    $('#calendar').fullCalendar('option', 'height', 1500);
 }
 
 function setActiveItemMenu(item){
