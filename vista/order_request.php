@@ -172,8 +172,8 @@
             </div>
         </div>
     </div>
-    <div id="appfrm1">
-    <form role="form">
+    <div id="appfrm1" align="center">
+    <form role="form" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 80%; height: 800px; background-size: 100% 100%;">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
@@ -196,7 +196,7 @@
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" align="left">
 				<div class="list-group-item ">
 				<font size="5">&#9312;</font><font size="5"><strong>What type of service?</strong></font>
 				</div>
@@ -421,7 +421,7 @@
 
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10" align="left">
 			<div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Answer Some Questions</strong></font> </h3>
 			</div>
@@ -519,7 +519,7 @@
 			</div>
 		</div>
 		
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3" align="left">
             <div class="panel-heading">
                  <h1 class="panel-title wizhead"><font size="5"><strong>Enter Service Location</strong></font> </h1>
             </div>
@@ -696,7 +696,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4" align="left">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
@@ -723,7 +723,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5" align="left">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Contractor List</strong></font></h3>
             </div>
@@ -749,7 +749,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6" align="left"> 
             <div class="panel-heading">
                  <h1 class="panel-title wizhead"><font size="5"><strong>Review Your Order Details</strong></font></h1>
             </div>
@@ -810,7 +810,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">		
-						<div class ="col-md-3">
+						<div class ="col-md-3">&nbsp;
 						</div>
 						<div class ="col-md-6" id="divEmergencyService">
 							<div class="list-group" >
@@ -832,7 +832,7 @@
 								</a>
 							</div>
 						</div>
-						<div class ="col-md-3">
+						<div class ="col-md-3">&nbsp;
 						</div>
 					<div class ="col-md-12">
 						<label class="control-label text-center h1 h1white"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
@@ -858,7 +858,7 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:54%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:70%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
@@ -883,7 +883,29 @@
 							<label style="display:none" id="answerValidateUserOrder" name="answerValidateUserOrder">Answer</label>
 						</div>
 				</div>
-                <p><h1>Please <a href="#register-modal" data-toggle="modal">register</a> or <a href="#" onclick="login_customer_order_request()">login</a></h1></p>                                
+                <p>
+				<table style="border-spacing: 15px;padding: 12px;">
+					<tr>
+						<td><h1>Please</h1></td>
+						<td></td>
+						<td><a class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
+							href="#" 
+							onClick="login_customer_order_request()" > login</a>
+						</td>
+						<!--<td><a href="#" onclick="login_customer_order_request()">login</a></td>-->
+						<!--<td>&#32;<button class="btn-primary btn-lg" type="button" id="button1" name="button1" onclick="login_customer_order_request()">login</button>&#32;</td>-->
+						<td></td>
+						<td><h1>or</h1></td>
+						<!--<td><h1><a href="#register-modal" data-toggle="modal">register</a></h1></td>
+						<td><button class="btn-primary btn-lg" type="button" id="button2" name="button2" onclick="login_customer_order_request()">register</button></td>-->
+						<td></td>
+						<td><a class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
+							href="#register-modal" 
+							onClick="" > register</a>
+						</td>
+					</tr>
+				</table>
+				 </p>
                 	<!--<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                 	<!--<button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>-->
             </div>

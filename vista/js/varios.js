@@ -1298,6 +1298,7 @@ $(document).ready(function () {
 
         if (curStepBtn=="step-6" && isValid==true ){
             validateIsLoggedIn();
+            
         }
         
         if(curStepBtn=="step-7" && logedUser==true){
@@ -1630,9 +1631,11 @@ function validateIsLoggedIn(){
                     //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
                     //$('#lastFinishButtonOrder').hide();
                     //$('#login-modal').modal({backdrop: 'static'});
+                    
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
+                $('html,body').scrollTop(0);
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -1938,6 +1941,7 @@ $( function() {
 function hideShowDivs(divName){
     $('#'+divName).collapse('hide');
     $('#'+divName).collapse('hide');
+    $('#calendar').fullCalendar('option', 'height', 1500);
 }
 
 function setActiveItemMenu(item){

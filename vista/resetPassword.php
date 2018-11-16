@@ -17,7 +17,7 @@ if(strcmp($table,"c")==0){
 ?>
 
 
-<div class="container">
+<div class="container" style="background-image: url('img/roof.home.wiz.bg.png'); width: 50%; height: 500px;">
 
     <div id="step1contain">
         <div class="panel" id="step-111">

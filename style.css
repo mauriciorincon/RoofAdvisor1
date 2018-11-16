@@ -1431,7 +1431,7 @@ color: #fff;
 #appfrm1{
     height: 800px;
     margin-top: 10px;
-    background-image: url(img/roof.home.wiz.bg.png);
+    /*background-image: url(img/roof.home.wiz.bg.png);*/
     background-repeat: no-repeat;
     background-size: 1900px 100%;
 }
