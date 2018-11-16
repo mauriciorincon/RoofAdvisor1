@@ -196,7 +196,7 @@
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" align="left">
 				<div class="list-group-item ">
 				<font size="5">&#9312;</font><font size="5"><strong>What type of service?</strong></font>
 				</div>
@@ -421,7 +421,7 @@
 
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-10" align="left">
 			<div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Answer Some Questions</strong></font> </h3>
 			</div>
@@ -519,7 +519,7 @@
 			</div>
 		</div>
 		
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-3" align="left">
             <div class="panel-heading">
                  <h1 class="panel-title wizhead"><font size="5"><strong>Enter Service Location</strong></font> </h1>
             </div>
@@ -696,7 +696,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-4" align="left">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select a Date & Time for service</strong></font></h3>
             </div>
@@ -723,7 +723,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-5" align="left">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Contractor List</strong></font></h3>
             </div>
@@ -749,7 +749,7 @@
             </div>
         </div>
 
-		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6">
+		<div class="panel panel-primary setup-contentOrder panel-mv1" id="step-6" align="left"> 
             <div class="panel-heading">
                  <h1 class="panel-title wizhead"><font size="5"><strong>Review Your Order Details</strong></font></h1>
             </div>
@@ -810,7 +810,7 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">		
-						<div class ="col-md-3">
+						<div class ="col-md-3">&nbsp;
 						</div>
 						<div class ="col-md-6" id="divEmergencyService">
 							<div class="list-group" >
@@ -832,7 +832,7 @@
 								</a>
 							</div>
 						</div>
-						<div class ="col-md-3">
+						<div class ="col-md-3">&nbsp;
 						</div>
 					<div class ="col-md-12">
 						<label class="control-label text-center h1 h1white"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
