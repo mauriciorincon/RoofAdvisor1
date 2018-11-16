@@ -1749,7 +1749,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<table>
 					<tr><td>New Date</td><td><input type="text" id="newDateSchedule" name="newDateSchedule" class="datepicker"></td></tr>
 					<tr><td>New Time</td><td>
-						<input type="text" id="newTimeSchedule" class="timepicker" />
+						<input type="text" id="newTimeSchedule" class="timepicker1" />
 					</td></tr>
 					
 				</table>

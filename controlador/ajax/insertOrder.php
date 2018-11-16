@@ -64,7 +64,6 @@ $_array=array(
     "amount_value"=>$_amount_value,
 );
 
-print_r($_array);
 $_orderController=new orderController();
 $_id_order=$_orderController->insertOrder($_array);
 if (is_null($_id_order)){
