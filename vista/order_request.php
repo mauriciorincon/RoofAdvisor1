@@ -858,7 +858,7 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:70%;" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:70%;    background-color: rgba(29, 29, 29, 0.86);" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>
@@ -884,18 +884,18 @@
 						</div>
 				</div>
                 <p>
-				<table style="border-spacing: 15px;padding: 12px;">
+				<table style="border-spacing: 15px;padding: 12px;margin-left: 65px;">
 					<tr>
-						<td><h1>Please</h1></td>
+						<td><h1 style="margin-right: 13px;" class="labeltwht">Please</h1></td>
 						<td></td>
-						<td><a class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
+						<td><a style="margin-right:13px;" class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
 							href="#" 
 							onClick="login_customer_order_request()" > login</a>
 						</td>
 						<!--<td><a href="#" onclick="login_customer_order_request()">login</a></td>-->
 						<!--<td>&#32;<button class="btn-primary btn-lg" type="button" id="button1" name="button1" onclick="login_customer_order_request()">login</button>&#32;</td>-->
 						<td></td>
-						<td><h1>or</h1></td>
+						<td><h1 style="margin-right: 10px;" class="labeltwht">or</h1></td>
 						<!--<td><h1><a href="#register-modal" data-toggle="modal">register</a></h1></td>
 						<td><button class="btn-primary btn-lg" type="button" id="button2" name="button2" onclick="login_customer_order_request()">register</button></td>-->
 						<td></td>
@@ -919,8 +919,10 @@
 					
 						
 					</div>
-					<button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
-				</div>
+                                       <div id="prebtn1">
+					<button class="btn btn-primary prevBtnOrder pull-left prebtn2" type="button">Previous</button>
+			               </div>
+                                 	</div>
 			</div>
 
 		</div>
