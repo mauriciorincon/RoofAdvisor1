@@ -1580,6 +1580,16 @@ margin-left: 410px !important;
     height: 35px;
     width:55% !important;
 }
+.wizsrch2{
+    width: 38% !important;
+    background-color: #005678 !important;
+    height: 35px !important;
+    border: 2px #fff solid !important;
+        box-shadow: 2px 3px 5px #4e4e4e !important;
+}
+input.wizsrch2::placeholder{
+color:#fff !important;
+}
 .inpwiz1{
 margin-left: 10%;
     margin-right: -10%;

@@ -554,7 +554,7 @@
 
                         </style>
 						
-						<input  id="pac-input" class="" type="text" placeholder="Enter a location" >
+						<input  id="pac-input" class="wizsrch2" type="text" placeholder="Enter a location" >
 							<div id="map1"></div>
 
 							<script>
