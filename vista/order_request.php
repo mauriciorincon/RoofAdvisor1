@@ -173,7 +173,7 @@
         </div>
     </div>
     <div id="appfrm1" align="center">
-    <form role="form" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 80%; height: 800px; background-size: 100% 100%;">
+    <form role="form" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 100%; height: 800px; background-size: 100% 100%;">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
@@ -858,7 +858,7 @@
             </div>
 		</div>
 		
-		<div style="margin-top: -55px;  background-image: url(img/woman-hard-hat.png);    height: 668px;    background-size: contain;    background-repeat: no-repeat;width:70%;    background-color: rgba(29, 29, 29, 0.86);" class="panel panel-primary setup-contentOrder panel-mv1" id="step-7">
+		<div  class="logbox1 panel panel-primary setup-contentOrder panel-mv1" id="step-7">
 			<input type="hidden" id="userLoguedIn" value="false" />
             <div class="panel-heading" style="display:none">
                  <h3 class="panel-title wizhead"><font size="10"><strong>Customer information</strong></font></h3>

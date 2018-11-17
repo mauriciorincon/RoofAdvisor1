@@ -1568,6 +1568,15 @@ margin-bottom:-16px;
      color:#fff;
      border-radius: 10px 10px 0px 0px;
 } 
+.logbox1{
+margin-top: -55px;
+    background-image: url(img/woman-hard-hat.png);
+    height: 680px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 59%;
+    background-color: rgba(29, 29, 29, 0.86);
+}
 .wizsrch1{
 margin-left: 410px !important;
     display: block !important;
