@@ -8,17 +8,20 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#mapDashBoardOrder1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);setFirstStep()" >New Order</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);$('#calendar').fullCalendar('option', 'height', 1500);">Scheduler</button>
-		</div>
-		<div class="btn-group">
-    		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+			<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 				Resources <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
-    			</ul>
+				</ul>
 		</div>
+		</div>
+		
 		  
 		<div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+            
         </div>   
 		
 	</div>
@@ -416,7 +419,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					t.row.add( [
 							dataOrder.OrderNumber,
 							requestType,
-							dataOrder.RepAddress,
+							dataOrder.RepAddress+' '+dataOrder.RepCity+' '+dataOrder.RepState,
 							dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
 							status,
 							dataOrder.SchDate,
@@ -524,11 +527,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								'<span class="glyphicon glyphicon-download-alt"></span>'+
 							'</a>';
 
-					valueMat=isNaN(parseInt(order.EstAmtMat)) ? 0 : parseInt(order.EstAmtMat);
-					valueTime=isNaN(parseInt(order.EstAmtTime)) ? 0 : parseInt(order.EstAmtTime);
+					valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+					valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
 
-					valueMatA=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
-					valueTimeA=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
+					valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+					valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
 
 					if(dataOrder.Status=="F"){
 						
@@ -612,7 +615,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					
 					
 					$row.cell($row, 1).data(requestType).draw();
-					$row.cell($row, 2).data(dataOrder.RepAddress).draw();
+					$row.cell($row, 2).data(dataOrder.RepAddress +' '+dataOrder.RepCity+' '+dataOrder.RepState).draw();
 					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw();
 					$row.cell($row, 4).data(status).draw();
 					if(dataOrder.RequestType=='E'){
@@ -677,7 +680,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 				function validateExist(orderID){
 				
-					var t = $('#table_orders_company').DataTable();
+					var t = $('#table_orders_customer').DataTable();
 					var data = t.rows().data();
 					var indice=-1;
 					var row = data.each(function (value, index) {
@@ -943,7 +946,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										}
 									?>
 								</td>
-								<td><?php if(isset($order['RepAddress'])){echo $order['RepAddress'];} ?></td>
+								<td><?php echo $order['RepAddress']." ".$order['RepCity']." ".$order['RepState'] ?></td>
 								<td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>
 								<td><?php 
 										switch ($order['Status']) {
@@ -1749,7 +1752,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<table>
 					<tr><td>New Date</td><td><input type="text" id="newDateSchedule" name="newDateSchedule" class="datepicker"></td></tr>
 					<tr><td>New Time</td><td>
-						<input type="text" id="newTimeSchedule" class="timepicker1" />
+						<input type="text" id="newTimeSchedule" class="timepicker1" style="z-index: 5000;" />
 					</td></tr>
 					
 				</table>
@@ -1766,22 +1769,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 <div class="modal fade" id="myEstimateAmount" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
-		<div class="modal-content"> 
+		<div class="modal-content" > 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textEstimateAmount"> 
+			<div class="modal-body" id="textEstimateAmount" style="position:relative;right:0px;top:45px;"> 
 				<input type="hidden" value="" id="orderID" />
-				<!-- <table>
-					<tr><td>Order ID</td><td><input type="text" value="" id="estimatedAmountOrderID" readonly></td></tr>
-					<tr><td>Estimate Time</td><td><input type="text" value="" id="estimatedTime" readonly></td></tr>
-					<tr><td>Estimate Amount Materials</td><td><input type="text" value="" id="estimatedAmountMaterials" readonly></td></tr>
-					<tr><td>Estimate Amount Time</td><td><input type="text" value="" id="estimatedAmountTime" readonly></td></tr>
-					<tr><td><b>Total Amount</b></td><td><input type="text" value="" id="totalEstimatedAmount" readonly></td></tr>
-					
-				</table>--> 
-
+				
+				
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-default">
@@ -1853,7 +1849,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerEstimateAmount">Confirm Final Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textSchedule"> 
+			<div class="modal-body" id="textSchedule" style="position:relative;right:0px;top:45px;"> 
 				<input type="hidden" value="" id="orderIDFinal" />
 				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>

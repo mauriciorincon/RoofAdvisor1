@@ -733,7 +733,7 @@ function updateDataCustomer(customerID){
     var firstCustomerName = $("input#firstCustomerNameProfile").val();
     var lastCustomerName = $("input#lastCustomerNameProfile").val();
     var emailValidation = $("input#emailValidationProfile").val();
-    var customerAddress = $("input#customerAddress").val();
+    var customerAddress = $("input#customerAddressProfile").val();
     var customerCity = $("input#customerCityProfile").val();
     var customerState = $("select#customerStateProfile").val();
     var customerZipCode = $("input#customerZipCodeProfile").val();
@@ -2263,8 +2263,8 @@ function changeSchedule(){
     var orderID=$('input#orderIDChangeSchedule').val();
     var dateSchedule=$('input#newDateSchedule').val();
     var requestType=$('input#orderTypeService').val();
-    //var timeSchedule=$('input#newTimeSchedule').val();
-    var timeSchedule=$('input#newTimeSchedule').attr("data-time");
+    var timeSchedule=$('input#newTimeSchedule').val();
+    
     
     if(dateSchedule=="" || timeSchedule==""){
         alert("Please fill the date and time");

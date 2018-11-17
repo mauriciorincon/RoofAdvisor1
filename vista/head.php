@@ -17,7 +17,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/all.css">
-                <link rel="stylesheet" href="css/owl.carousel.css">
+        <link rel="stylesheet" href="css/owl.carousel.css">
 		<link rel="stylesheet" href="css/meanmenu.css">
 		<link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="style.css">
@@ -29,6 +29,8 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
 		<link rel="stylesheet" href="vista/css/segmented-controls.css">
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
+		<link rel="stylesheet" href="vista/css/fontawesome.css">
+		<link rel="stylesheet" href="vista/css/font-fontawesome.min.css">
 		
 		<link rel="stylesheet" href="vista/css/fullcalendar.css">
 		
@@ -40,12 +42,12 @@ if(!isset($_SESSION)) {
 		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
 		<script src="https://checkout.stripe.com/checkout.js"></script>
 
-			<link rel="stylesheet" href="css/lity.min.css">
-			<script src="vista/js/jquery-3.3.1.js"></script>
+		<link rel="stylesheet" href="css/lity.min.css">
+		<script src="vista/js/jquery-3.3.1.js"></script>
 				
-				<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 				
-				<script src="js/bootstrap.min.js"></script>	
+		<script src="js/bootstrap.min.js"></script>	
 
 		
 		<style>
