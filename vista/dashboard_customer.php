@@ -11,12 +11,19 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
 			<div class="btn-group">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 				Resources <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
 				</ul>
-		</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+				Urls <span class="caret"></span></button>
+    			<ul class="dropdown-menu" role="menu">
+					<?php echo $_menu_urls; ?>
+				</ul>
+			</div>
 		</div>
 		
 		  
@@ -898,10 +905,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				firebase.initializeApp(config);
 			
 			</script>
-
-
-
-
 
 			<br>
 			<div class="table-responsive">          
@@ -1968,6 +1971,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+				
 			</div> 
 			<div class="modal-body" id="PaymentType"> 
 				<input type="hidden" value="" id="orderIDRating" />
@@ -1984,14 +1988,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 				<div class="form-group">
 					<label for="ratingQuestion">How would you rate the service company?</label>
-					<div class="votable hide">
-						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
-						
-					</div>
+						<div class="votable hide">
+							<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						</div>
 					<div class="voted">
 						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
@@ -2011,6 +2014,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
 					</div>
+					
 					<div class="voted1">
 						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>

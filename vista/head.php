@@ -14,7 +14,14 @@ if(!isset($_SESSION)) {
         <!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- all css here -->
+		<script type="text/javascript">
+      	// Notice how this gets configured before we load Font Awesome
+      	window.FontAwesomeConfig = { autoReplaceSvg: false }
+    	</script>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		
+		
+		
         <link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/all.css">
         <link rel="stylesheet" href="css/owl.carousel.css">
@@ -29,8 +36,9 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/menu_slide.css" >
 		<link rel="stylesheet" href="vista/css/segmented-controls.css">
 		<link rel="stylesheet" href="vista/css/mdtimepicker.css">
-		<link rel="stylesheet" href="vista/css/fontawesome.css">
-		<link rel="stylesheet" href="vista/css/font-fontawesome.min.css">
+		<!--<link rel="stylesheet" href="vista/css/fontawesome.css">
+		<link rel="stylesheet" href="vista/css/font-awesome.min.css">-->
+		
 		
 		<link rel="stylesheet" href="vista/css/fullcalendar.css">
 		
@@ -48,7 +56,7 @@ if(!isset($_SESSION)) {
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 				
 		<script src="js/bootstrap.min.js"></script>	
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<style>
 .checked {
