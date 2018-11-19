@@ -8,11 +8,14 @@
 </script>
 <!-- Dashboard New Order -->
 
-			<?php 
+<?php 
+	require_once($_SESSION['application_path']."/controlador/othersController.php");
 
-				include_once('vista/order_request.php');
-				//echo $order_request
-			?>
+	$_otherModel=new othersController();
+	$_array_state=$_otherModel->getParameterValue('Parameters/state');
+	include_once('vista/order_request.php');
+	//echo $order_request
+?>
 
 <!-- Detail for roofservicenow -->
 <div id='srvapp1' class="container">

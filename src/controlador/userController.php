@@ -377,7 +377,7 @@ class userController{
                 }
             }
         }else{
-            return "Error".$_response."response create user:".$_responseU;
+            return "Error ".$_response." response create user: ".$_responseU;
         } 
         return $_lastCustomerID;
         
@@ -818,12 +818,12 @@ class userController{
         $_message='
         <table>
             <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
-            <tr><td colspan="2">Thank you for registering at RoofServiceNow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
+            <tr><td colspan="2">Thank you for registering at RoofServiceNow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
-            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+            <tr><td colspan="2">RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td></tr>
         </table>
         ';
         return $_message;
@@ -848,7 +848,7 @@ class userController{
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
-            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+            <tr><td colspan="2">RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td></tr>
         </table>
         ';
         return $_message;
@@ -883,7 +883,7 @@ class userController{
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
             <tr><td colspan="2">If you have any questions about our website, please don\'t hesitate to contact us.</td></tr>
             <tr><td colspan="2"><img src="cid:logoimg" /></td></tr>
-            <tr><td colspan="2">Viaplix LLC | Site : ww.viaplix.com | Viaplix © 2017 | info@viaplix.com</td></tr>
+            <tr><td colspan="2">RoofServiceNow LLC | Site : www.roofservicenow.com | RoofServiceNow © 2017 | info@roofservicenow.com</td></tr>
         </table>
         ';
         return $_message;
@@ -1097,6 +1097,12 @@ class userController{
         require_once("vista/head.php");
 		require_once("vista/message_process.php");
 		require_once("vista/footer.php");
+    }
+
+    public function showCalendar(){
+        require_once("vista/head.php");
+        require_once("vista/test_calendar.php");
+        require_once("vista/footer.php");
     }
 }
 ?>

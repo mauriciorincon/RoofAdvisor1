@@ -4,11 +4,14 @@
     }
    
 ?>
-<br>
-<br>
-<br>
+
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<div class="container" style="margin-top:30px;">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container" align="center">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelCustomer">
             <div class="stepwizard-step col-xs-6"> 
@@ -23,15 +26,15 @@
             
         </div>
     </div>
-    
-    <form role="form" action="controlador/ajax/insertCustomer.php" method="POST" >
+
+    <form role="form" action="controlador/ajax/insertCustomer.php" method="POST" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 50%; height: 100vh;" >
         <div class="panel panel-primary setup-contentCustomer" id="step-1">
             <div class="panel-heading mheadr">
                  <h3 class="panel-title">About you</h3>
             </div>
-            
+            <input type="hidden" value="Customer_register" id="source_call" name="source_call" />
             <div class="panel-body">
-            
+                    
                     <div class="form-group">
                         <label class="control-label labeltwht" for="firstCustomerName">First Name</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" oninvalid="this.setCustomValidity('Please Enter First Name')"
@@ -116,6 +119,7 @@
         
         
     </form>
+    
 </div>
 
 <?php
