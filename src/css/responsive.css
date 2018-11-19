@@ -10,7 +10,23 @@ font-size: 45px;}
 @media (min-width: 768px) and (max-width: 991px) {
 .sm-100{width:100%}
 .social-icon a{margin-left:10px;}
-.main-menu ul li a { padding:40px 8px;}
+.main-menu ul li a {
+    padding: 0px;
+    font-size: 10px;
+}
+#welcome-txt {
+    font-size: 2.6em;
+}
+#login-txt {
+    right: 22px !important;
+    width:100px;
+}
+#labelUserLoggedIn{
+font-size:9px;
+}
+#appfrm1{
+margin-top:-20px !important;
+}
 .service-box {
   padding: 35px 20px;
 }

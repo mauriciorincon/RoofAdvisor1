@@ -5,7 +5,6 @@ var reportRepairCount=0;
 var closeService=0;
 
 $(document).ready(function() {
- 
     /*$('#table_orders_customer').DataTable({
         rowCallback: function(row, data, index){
             if(data[4]=='Estimate Sent'){

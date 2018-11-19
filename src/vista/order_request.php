@@ -865,7 +865,7 @@
             </div>
             <div class="panel-body">
 				<div class="row">
-             <div class="list-group" style="margin-top: 20%;margin-left: 400px;">
+             <div class="list-group logbox2" >
 				<div  class="list-group-item login-list1">
 						<div class="d-flex w-100 justify-content-between">
 							<div class="form-group">
@@ -884,7 +884,7 @@
 						</div>
 				</div>
                 <p>
-				<table style="border-spacing: 15px;padding: 12px;margin-left: 65px;">
+				<table class="logbox3" style="border-spacing: 15px;padding: 12px;margin-left: 65px;">
 					<tr>
 						<td><h1 style="margin-right: 13px;" class="labeltwht">Please</h1></td>
 						<td></td>

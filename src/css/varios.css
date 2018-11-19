@@ -71,12 +71,11 @@
     top:0px;
     left:0px;
     z-index:3200;
-    filter:alpha(opacity=65);
-   -moz-opacity:65;
-    opacity:0.65;
-    background:#999;
+    filter:alpha(opacity=85);
+   -moz-opacity:85;
+    opacity:0.85;
+    background:#fff;
 }
-
 /* for the admin menu */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 

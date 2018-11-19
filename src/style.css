@@ -185,7 +185,7 @@ background: rgba(0, 0, 0, 0) url("img/bg/2.jpg") repeat scroll center center / c
   margin-top:20px;
 }
 .main-menu{
-margin-right:110px;
+margin-right:265px;
 }
 .main-menu ul{}
 .main-menu ul li {
@@ -196,7 +196,7 @@ margin-right:110px;
 .main-menu ul li a {
   color:  #fff;
   display: block;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   text-decoration:none;
   text-transform:uppercase;
@@ -1291,7 +1291,6 @@ padding-right:22%;
 padding-top:40px;
 }
 #socico{
-margin-right:-294px;
 }
 #logoimg{
     margin-left: 40px;
@@ -1571,11 +1570,11 @@ margin-bottom:-16px;
 .logbox1{
 margin-top: -55px;
     background-image: url(img/woman-hard-hat.png);
-    height: 680px;
     background-size: contain;
     background-repeat: no-repeat;
     width: 59%;
     background-color: rgba(29, 29, 29, 0.86);
+    height: 78%;
 }
 .wizsrch1{
 margin-left: 410px !important;
@@ -1669,16 +1668,25 @@ color:#f90500 !important;
     width: 100%;
     height: 110px;
     border-radius: 0px 0px 11px 11px;
+        position: absolute;
+    bottom: 0;
+    left: 0;
 }
 .prebtn2{
     width: 40%;
     margin-left: 30%;
     margin-right: 30%;
 }
+.logbox2{
+margin-top: 20%;
+margin-left: 400px;
+}
+#soctop1{
+width:90%
+}
 @media (min-width:1700px){
 .main-menu ul li a{
 letter-spacing:3px !important;
-font-size:17px !important;
 }
 #cmapp3{
 margin:-4.4% !important;
@@ -1689,14 +1697,56 @@ width:53% !important;
 margin-left:40% !important;
 }
 }
+@media (max-width:1680px){
+.logbox1{
+height: 69%;
+}
+.logbox2{
+margin-top: 15%;
+    margin-left: 310px;
+}
+}
 @media (max-width:1600px){
 #logo-site{
 width:54%;
 }
 }
+@media (max-width:1500px){
+.logbox2 {
+    margin-top: 16%;
+    margin-left: 250px;
+}
+
+#soctop1{
+    width: 96%;
+}
+.main-menu ul li a{
+font-size:16px;
+}
+.main-menu{
+margin-right:150px;
+}
+}
 @media (max-width:1400px){
+.logbox1 {
+    height: 61%;
+}
+.logbox2 {
+    margin-top: 14%;
+    margin-left: 225px;
+    /* margin-bottom: -200px; */
+}
+.logbox3{
+    margin-top: -39px;
+}
 #logo-site{
 width:58%
+}
+}
+@media (max-wdith:1300px){
+.logbox2 {
+    margin-top: 16%;
+    margin-left: 190px;
 }
 }
 @media (min-width:1290px){
@@ -1712,8 +1762,8 @@ right:0;
 }
 #login-txt{
 margin-top:-34px !important;
-right:0px !important;
-width:100px;
+right:55px !important;
+width:113px;
 }
 .main-menu{
 margin-right:15px !important;
@@ -1731,6 +1781,21 @@ font-size:15px;
 #appdiv2{
 margin-left:450px !important;
 }
+#logo-site {
+    width: 100%;
+}
+#welcome-txt{
+font-size:49px;
+}
+.main-menu ul li a {
+    font-size: 14px;
+}
+#login-txt {
+    right: 38px !important;
+}
+}
+@media (max-width:993px){
+
 }
 @media (max-width:970px){
 #appdiv2{

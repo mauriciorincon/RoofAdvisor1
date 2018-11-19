@@ -64,11 +64,9 @@ if(!isset($_SESSION)) {
 	gtag('js', new Date());
 	gtag('config', 'UA-126810340-1');
 	</script>
-	
-
     </head>
     <body>
-    <div class="">
+    <div class="didiload" >
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -87,7 +85,7 @@ if(!isset($_SESSION)) {
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
+						<div id="soctop1" class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
 							<div id ="socico" class="social-icon text-right">
 								<a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
 								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fab fa-linkedin"></i></a>
