@@ -1,7 +1,7 @@
-!/.imgrepo*
-.imgrepo
-invoice/
-!/roofreport/
-roofreport/
-roofreport
+!/src/.imgrepo*
+src/.imgrepo
+src/invoice/
+!/src/roofreport/
+src/roofreport/
+src/roofreport
 .DS_Store
