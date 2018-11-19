@@ -1,0 +1,82 @@
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+.slider-content h2 {
+font-size: 45px;}
+
+}
+
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+.sm-100{width:100%}
+.social-icon a{margin-left:10px;}
+.main-menu ul li a {
+    padding: 0px;
+    font-size: 10px;
+}
+#welcome-txt {
+    font-size: 2.6em;
+}
+#login-txt {
+    right: 22px !important;
+    width:100px;
+}
+#labelUserLoggedIn{
+font-size:9px;
+}
+#appfrm1{
+margin-top:-20px !important;
+}
+.service-box {
+  padding: 35px 20px;
+}
+.single-service{
+  padding:30px;
+  }
+.slider-content h2 {
+  font-size: 40px;
+  margin-bottom:10px;}
+.btn{margin-right:15px;}
+.subscribe-text h3 {font-size:20px}
+.tag-menu{margin-top:30px}
+}
+ .blog-post ul li .sidebar-post-img {
+  margin-bottom:12px;
+  margin-right:16px;
+}
+.blog-post ul li .post-text {
+  margin-left:0;
+}
+
+/* small mobile :320px. */
+@media (max-width: 767px) {
+.container {width:300px}
+ .social-icon {text-align:center}
+ .email-address{display:none}
+ .logo {
+  text-align: center;
+  margin: 20px 0;
+}
+.single-slider{padding:100px 0;}
+.owl-dot{display:none}
+.slider-content p{display:none}
+.slider-content h3{font-size:30px}
+.slider-content h2{font-size:40px;}
+.slider-content a{margin-bottom:15px}
+.contact-form button{margin-bottom:20px}
+.blog-post ul li .sidebar-post-img {
+  margin-bottom:12px;
+  margin-right:16px;
+}
+.blog-post ul li .post-text {
+  margin-left:0;
+}
+.section-heading h2 {font-size:20px}
+.btn-more{margin-bottom:20px}
+.testimonial-area{padding-top:130px;padding-bottom:80px}
+/* Large Mobile :480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+.container {width:450px}
+ 
+}
+ 
