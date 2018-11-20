@@ -10,6 +10,7 @@ require_once($_SESSION['application_path']."/controlador/calendarController.php"
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+require_once($_SESSION['application_path']."/vista/usefull_urls.php");
 
 
 //include 'vendor/autoload.php';
@@ -513,6 +514,9 @@ class userController{
 
             $_menu_item=$this->getItemMenu();
             $_divs_info=$this->fillInformationMenu();
+
+            $_menu_urls=$this->getItemMenuURLS();
+
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
             require_once("vista/footer.php");
@@ -803,6 +807,18 @@ class userController{
         
         return $_output_menu;
     }
+
+    public function getItemMenuURLS(){
+        $_information=new usefullURLS();
+        $_array=$_information->getArrayOptions();
+        $_output_menu="";
+        foreach($_array as $key => $item){
+            $_output_menu.='<li><a href="'.call_user_func( array( "usefullURLS", $item ) ).'" target="_blank">'.constant("usefullURLS::$item").'</a></li>';
+        }
+        
+        return $_output_menu;
+    }
+    
     
     public function welcomeMail($_customerArray,$_validation_code,$_userData){
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
