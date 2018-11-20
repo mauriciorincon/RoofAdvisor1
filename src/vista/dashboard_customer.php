@@ -16,7 +16,14 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
 				</ul>
-		</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+				Urls <span class="caret"></span></button>
+    			<ul class="dropdown-menu" role="menu">
+					<?php echo $_menu_urls; ?>
+				</ul>
+			</div>
 		</div>
 		
 		  
