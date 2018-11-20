@@ -10,7 +10,12 @@ if(!isset($_SESSION)) {
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>RoofServiceNow</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script type="text/javascript">
+      	// Notice how this gets configured before we load Font Awesome
+      	window.FontAwesomeConfig = { autoReplaceSvg: false }
+    	</script>
         <!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- all css here -->
@@ -48,7 +53,7 @@ if(!isset($_SESSION)) {
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 				
 		<script src="js/bootstrap.min.js"></script>	
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<style>
 .checked {
