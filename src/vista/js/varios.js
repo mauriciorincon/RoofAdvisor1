@@ -3778,17 +3778,18 @@ function insertOrderPostCard(){
 }
 
 function formatActualDate() {
-    var d = new Date();
-    var n = d.getFullYear();
-    var m = d.getMonth();
+    /*var d = new Date();
+    var n = moment().format("HH");
+    var m = moment().format("MM");
     var da = d.getDate();
     da=("00" + da).slice(-2);
-    m=("00" + m).slice(-2);
-    return m.toString()+'/'+da.toString()+'/'+n.toString();
+    m=("00" + m).slice(-2);*/
+    return moment().format("MM/DD/YYYY");
+
 }
 
 function formatActualTime(aditionHours) {
-    var d = new Date();
+    /*var d = moment();
     var hour = d.getHours();
     var min = d.getMinutes();
     if(aditionHours>0){
@@ -3799,7 +3800,8 @@ function formatActualTime(aditionHours) {
     }
     hour=("00" + hour).slice(-2);
     min=("00" + min).slice(-2);
-    return hour.toString()+':'+min.toString();
+    hour.toString()+':'+min.toString();*/
+    return moment().add(aditionHours, 'hours').format('hh:mm A');
 }
 
 function validateInfoCustomer(){

@@ -10,7 +10,12 @@ if(!isset($_SESSION)) {
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>RoofServiceNow</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script type="text/javascript">
+      	// Notice how this gets configured before we load Font Awesome
+      	window.FontAwesomeConfig = { autoReplaceSvg: false }
+    	</script>
         <!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 		<!-- all css here -->
