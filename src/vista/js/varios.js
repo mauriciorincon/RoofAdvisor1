@@ -1007,6 +1007,9 @@ $(document).ready(function () {
                             if (data.indexOf("Sorry")==-1){
                                 $('#firstNextBegin').show();
                                 setLocation(map,zipcode);
+
+                                nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
+                                nextStepWizard.removeAttr('disabled').trigger('click');
                             }else{
                                 $('#firstNextBegin').hide(); 
                                 setLocation(map,zipcode);
