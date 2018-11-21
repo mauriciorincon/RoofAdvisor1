@@ -1,5 +1,6 @@
 {
 	"require-dev": {
+		"phploc/phploc": "~3",
 		"phpunit/phpunit": "^7",
 		"phpunit/php-code-coverage": "^6"
 	}
