@@ -819,10 +819,7 @@ class userController{
         
         return $_output_menu;
     }
-<<<<<<< HEAD
-=======
     
->>>>>>> 6048aca3ebef21386f5603500e64bc48903e97fe
     
     public function welcomeMail($_customerArray,$_validation_code,$_userData){
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){

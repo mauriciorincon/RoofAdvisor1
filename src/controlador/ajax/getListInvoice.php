@@ -27,7 +27,7 @@ if(is_null($_result)){
         }
         $_string.='<tr>
                     <td>'.$invoice['user_invoice_num'].'</td>
-                    <td>'.$invoice['invoice_value'].'</td>
+                    <td>$'.$invoice['invoice_value'].'.00 (US)</td>
                     <td>'.$invoice['invoice_date'].'</td>
                     <td>'.$_payment_type.'</td>
                     <td><a class="btn-success btn-sm" data-toggle="modal"  

@@ -16,7 +16,7 @@
         <div class="stepwizard-row setup-panelCustomer">
             <div class="stepwizard-step col-xs-6"> 
                 <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
-                <p><small>About you</small></p>
+                <p><small>Register Here</small></p>
             </div>
             
             <div class="stepwizard-step col-xs-6"> 
@@ -27,10 +27,10 @@
         </div>
     </div>
 
-    <form role="form" action="controlador/ajax/insertCustomer.php" method="POST" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 50%; height: 100vh;" >
+    <form role="form" action="controlador/ajax/insertCustomer.php" method="POST" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 50%; height: 100%;" >
         <div class="panel panel-primary setup-contentCustomer" id="step-1">
             <div class="panel-heading mheadr">
-                 <h3 class="panel-title">About you</h3>
+                 <h3 class="panel-title">Register Here</h3>
             </div>
             <input type="hidden" value="Customer_register" id="source_call" name="source_call" />
             <div class="panel-body">
@@ -64,7 +64,7 @@
                         <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()"  oninvalid="this.setCustomValidity('Please Enter Confirm Password')" oninput="setCustomValidity('')" />
                         <label class="control-label labeltwht" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
                     </div> 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label class="control-label labeltwht">Address</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" oninvalid="this.setCustomValidity('Please Enter Address')" oninput="setCustomValidity('')"
                         value="<?php if(isset($_SESSION['post_info']['customerAddress'])){echo $_SESSION['post_info']['customerAddress']; } ?>" />
@@ -88,7 +88,7 @@
                         <label class="control-label labeltwht">Zip code</label>
                         <input maxlength="100" type="number" min="0" onkeypress="return isNumber(event)" max="99999" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" oninvalid="this.setCustomValidity('Please Enter Zipcode,Max length 5')" oninput="setCustomValidity('')" 
                         value="<?php if(isset($_SESSION['post_info']['customerZipCode'])){echo $_SESSION['post_info']['customerZipCode']; } ?>" />
-                    </div> 
+                    </div> -->
                     <div class="form-group">
                         <label class="control-label labeltwht">Phone number</label>
                         <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')" 

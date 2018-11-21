@@ -1,4 +1,3 @@
-
 <br>
 <br>
 <br>
@@ -6,19 +5,22 @@
 		<div class="contact-widget pb-80">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="col-lg-12 col-md-12 col-sm-12" align="center">
 						<div class="contact-form">
-                            <h1>Welcome to RoofServiceNow</h1>
-                            <h3>Your Roof Professionals</h3>
-							<h5>Company Area</h5>
-							<div class="contact-form">
-                            <h1>you don't have an account?</h1>
-							<h1><a href="?controller=user&accion=showRegisterContractor">Register Here</a></h1>
-							</div>
+                            <h1>Welcome to the RoofServiceNow Contractor Login</h1>
+						</div>
+					</div>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12" align="center">
+						<div class="contact-form">
+                            <h4><b><i>If new to RoofServiceNow, <a href="?controller=user&accion=showRegisterContractor">Register Here</a></i></b></h4>
 						</div>
                     </div>
                     
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+					<div class ="col-md-4">&nbsp;
+						</div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4" align="center">
 						<div class="contact-form">
 							<form action="?controller=user&accion=loginContractor" method="post">
 								<label>User Name<span class="required">*</span></label>
@@ -31,8 +33,10 @@
 							</form>
 						</div>
 					</div>
-                    
-                   
+
+					<div class ="col-md-4">&nbsp;
+						</div>
+					
 				</div>
 			</div>
 		</div>

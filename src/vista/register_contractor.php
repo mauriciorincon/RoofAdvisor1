@@ -24,7 +24,7 @@
     <form role="form">
         <div class="panel panel-primary setup-content" id="step-1">
             <div class="panel-heading">
-                 <h3 class="panel-title">About you</h3>
+                 <h3 class="panel-title">Enter Company Information</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
