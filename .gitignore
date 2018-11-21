@@ -5,3 +5,4 @@ src/invoice/
 src/roofreport/
 src/roofreport
 .DS_Store
+build/*
