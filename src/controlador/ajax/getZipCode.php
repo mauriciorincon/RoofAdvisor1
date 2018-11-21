@@ -39,7 +39,7 @@
         $_othersController=new othersController();
         $_result=$_othersController->verifyZipCode($_zipcode);
         if(is_null($_result)){
-          echo "Sorry, we do not have the service in your area (".$city." - ".$state." - ".$_zipcode.")";
+          echo "Sorry, currently not servicing your area (".$_zipcode.",".$city." - ".$state.")";
         }else{
           echo $city." - ".$state." - ".$_zipcode;
         }

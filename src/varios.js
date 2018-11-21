@@ -790,7 +790,7 @@ $(document).ready(function () {
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
                     var valStep5Address=$('input:hidden[name=step5Address]').val();
                     var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                    $('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+' '+', '+valStep4);
                     $('#step8Schedule').html('Defined by the administrator');
                     $('#step8Time').html('Defined by the administrator');
                     $('#step8CompanyName').html('Defined by the administrator');
@@ -835,7 +835,7 @@ $(document).ready(function () {
                 $('#textAnswerOrder').html('Plese select the contractor for your service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
-                $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4);
+                $('#step8RepairDescription').html(valStep3+', Stories: '+valStep5+''+', '+valStep4);
                 $('#step8Schedule').html(valStep6);
                 $('#step8Time').html(valStep6t);
                 $('#step8CompanyName').html(valStep7);

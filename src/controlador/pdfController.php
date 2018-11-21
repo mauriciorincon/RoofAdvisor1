@@ -127,7 +127,7 @@ class pdfController{
                 <td colspan="5"><br><br><br><br><br></td>
             </tr>
             <tr>
-                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
+                <td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
                 <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
@@ -159,10 +159,10 @@ class pdfController{
                 <td><b>Summary</b></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             <tr>
-                <td colspan="2">'.$_title_bill.'</td><td></td><td></td><td></td><td align="rigth">$'.$_amount.',00</td>
+                <td colspan="2">'.$_title_bill.'</td><td></td><td></td><td></td><td align="rigth">$'.$_amount.'.00</td>
             </tr>
             <tr>
-                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_amount.',00</b></td>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_amount.'.00</b></td>
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td></td><td></td>
@@ -171,7 +171,7 @@ class pdfController{
                 <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_invoice.'</td>
             </tr>
             <tr>
-                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_amount.',00</td>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_amount.'.00</td>
             </tr>
             <tr>
                 <td>***Approved***</td><td></td><td></td><td></td><td colspan="2" align="rigth">XXXXXXXXXXXX'.$_card_data.'</td>
@@ -372,7 +372,7 @@ class pdfController{
                 <td colspan="5"><br><br><br><br><br></td>
             </tr>
             <tr>
-                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
+                <td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
                 <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
@@ -404,13 +404,13 @@ class pdfController{
                 <td><b>Summary</b></td><td></td><td></td><td>Hour</td><td>Rate</td><td></td>
             </tr>
             <tr>
-                <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].',00</td>
+                <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
             </tr>
             <tr>
-                <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].',00</td>
+                <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
             </tr>
             <tr>
-                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.',00</b></td>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.'.00</b></td>
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td></td><td></td>
@@ -419,7 +419,7 @@ class pdfController{
                 <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_value.'</td>
             </tr>
             <tr>
-                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.',00</td>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.'.00</td>
             </tr>
             
             <tr>
@@ -565,7 +565,7 @@ class pdfController{
                 <td colspan="5"><br><br><br><br><br></td>
             </tr>
             <tr>
-                <td colspan="5">Thank you for ordering '.$_order_type.'. Below, please find your invoice details.  </td>
+                <td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td>
             </tr>
             <tr>
                 <td colspan="5">Please remember to return to RoofServiceNow.com to get updates on the status of your order and to rate your service professional after the project is completed. </td>
@@ -598,10 +598,10 @@ class pdfController{
             </tr>
             
             <tr>
-                <td>Postcard</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_total_invoice.',00</td>
+                <td>Postcard</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_total_invoice.'.00</td>
             </tr>
             <tr>
-                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.',00</b></td>
+                <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.'.00</b></td>
             </tr>
             <tr>
                 <td></td><td></td><td></td><td></td><td></td><td></td>
@@ -610,7 +610,7 @@ class pdfController{
                 <td>Payment Date</td><td></td><td></td><td></td><td></td><td align="rigth">'.$_date_value.'</td>
             </tr>
             <tr>
-                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.',00</td>
+                <td>Payment Amt</td><td></td><td></td><td></td><td></td><td align="rigth">$'.$_total_invoice.'.00</td>
             </tr>
             
             <tr>

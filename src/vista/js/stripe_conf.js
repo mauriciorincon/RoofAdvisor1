@@ -67,7 +67,7 @@ var handler = StripeCheckout.configure({
     // Open Checkout with further options:
     handler.open({
       name: 'RoofServicenow',
-      description: 'pay your service',
+      description: 'Agree to Initiate Service',
       amount: amount_value,
       email: email_user_logued
     });

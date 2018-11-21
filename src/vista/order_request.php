@@ -427,7 +427,7 @@
 			</div>
 			<div class="panel-body">
 			<div class="list-group-item scr2fix">
-				<font size="5">&#9313;</font> <font size="5"><strong>Best select the type of roofing material on your property?</strong></font>		
+				<font size="5">&#9313;</font> <font size="5"><strong>Select the type of roofing material on your property?</strong></font>		
 				</div>
 				<div class="list-group-item scr2fix ">
 						<div class="form-group">
@@ -759,7 +759,7 @@
 						<a href="#" class="list-group-item ">
 							<span class="glyphicon glyphicon-envelope"></span> Details 
 							<div class="d-flex w-100 justify-content-between">
-								<span ><b>Repair Description: </b></span><span id="step8RepairDescription"></span><br>
+								<span ><b>Repair Description:</b> Roof Material: </span><span id="step8RepairDescription"></span><br>
 								<span ><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>	
 								<span ><b>Time: </b></span><span id="step8Time"></span>
 							</div>
@@ -835,7 +835,7 @@
 						<div class ="col-md-3">&nbsp;
 						</div>
 					<div class ="col-md-12">
-						<label class="control-label text-center h1 h1white"><big>To finish your order, please click on <b>Pay Your Service</b> button to make the charge to your card.</big></label>
+						<label class="control-label text-center h1 h1white"><big>To initiate the emergency repair process, click on the “Agree to Initiate Service” button.</big></label>
 						<?php
 							if(!isset($_SESSION)) { 
 								session_start(); 
@@ -845,7 +845,7 @@
 						
 							$_objPay=new payingController();
 							echo "<center>";
-							$_objPay->showPayingWindow1();
+							$_objPay->showPayingWindow1("Agree to Initiate Service");
 							echo "</center>";
 						?>
 					</div>	

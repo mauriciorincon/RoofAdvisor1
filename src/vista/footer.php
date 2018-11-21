@@ -152,14 +152,14 @@
         <script src="js/plugins.js"></script>
 		<script src="js/main.js"></script>
 		
-		
+	
 		<script src="vista/js/jquery.dataTables.min.js"></script>
 		<script src="vista/js/dataTables.bootstrap.min.js"></script>
 		
 		<script src="vista/js/mdtimepicker.js"></script>
         <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 	    <script src="js/lity.min.js"></script>
-        <script src="js/all.js"></script>
+        <script src="js/all.js" ></script>
 		
 
 		<script src="vista/js/moment.min.js"></script>
@@ -176,7 +176,6 @@
 
 <script src="vista/js/varios.js"></script>
 <script src="vista/timepicker/src/wickedpicker.js"></script>
-
 
 
 <?php

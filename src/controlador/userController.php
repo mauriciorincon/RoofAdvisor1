@@ -797,6 +797,7 @@ class userController{
         return $_output_html;
     }
 
+
     public function getItemMenu(){
         $_information=new customerFAQ();
         $_array=$_information->getArrayOptions();
