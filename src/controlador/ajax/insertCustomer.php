@@ -91,13 +91,13 @@ $_customerID=$_userController->insertCustomer($_arrayCustomer,$_selectionType);
 
 if(strpos($_customerID,"Error")!==false){
     if(strcmp($_source_call,'Customer_register')==0){
-        $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Error register customer,try again <br>".$_customerID;
+        $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Error registering customer <br>".$_customerID;
         $_SESSION['post_info'] = $_POST;
         header("Location: $_path");
     }else{
         echo $_customerID;
     }
-    //echo "Error register customer,try again <br>".$_customerID;
+    //echo "Error registering customer <br>".$_customerID;
 }else{
     switch($_source_call){
         case "company_dash":
