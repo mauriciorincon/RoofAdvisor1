@@ -6,3 +6,6 @@ src/roofreport/
 src/roofreport
 .DS_Store
 build/*
+vendor/**
+composer.lock
+cache.properties

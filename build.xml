@@ -78,9 +78,14 @@
   <mkdir dir="${basedir}/build/logs"/>
   <mkdir dir="${basedir}/build/pdepend"/>
   <mkdir dir="${basedir}/build/phpdox"/>
-  <exec executable="composer" taskname="dependencies">
+  <exec executable="composer" taskname="dependency-install">
    <arg value="install" />
    <arg value="--dev" />
+   <arg value="-q" />
+  </exec>
+  <exec executable="composer" taskname="dependency-update">
+   <arg value="update" />
+   <arg value="-q" />
   </exec>
   <property name="prepare.done" value="true"/>
  </target>
@@ -142,6 +147,7 @@
    <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
    <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
    <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+   <arg value="--ignore=${basedir}/src/vendor" />
    <arg path="${basedir}/src" />
   </exec>
 
