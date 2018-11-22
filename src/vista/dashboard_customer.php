@@ -2,6 +2,11 @@
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
 <div id="db-cus-main">
+
+
+
+
+
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
 			<button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Orders</button>
@@ -10,28 +15,30 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);$('#calendar').fullCalendar('option', 'height', 1500);">Scheduler</button>
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				Resources <span class="caret"></span></button>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
 				</ul>
 			</div>
+			
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				Urls <span class="caret"></span></button>
-    			<ul class="dropdown-menu" role="menu">
-					<?php echo $_menu_urls; ?>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Urls <span class="caret"></span></button>
+				
+				<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<?php echo $_menu_urls; ?>
+					</ul>
+				</div>
 				</ul>
 			</div>
 		</div>
 		
 		  
-		<div class="btn-group" role="group">
-            
-        </div>   
 		
-	</div>
 
 	<br>
 

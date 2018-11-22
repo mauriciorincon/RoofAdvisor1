@@ -218,7 +218,7 @@ $(document).ready(function () {
 
         
     
-        if (curStepBtn=="step-2" && isValid==true ){
+        if (curStepBtn=="step-1" && isValid==true ){
             saveContractorData();
         }
     
@@ -227,9 +227,9 @@ $(document).ready(function () {
             isValid=validateCodeEmail('Company');
         }*/
     
-        if(curStepBtn=="step-1"){
+        /*if(curStepBtn=="step-1"){
             if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-        }
+        }*/
     });
     
     allPrevBtn.click(function () {
@@ -334,7 +334,7 @@ function saveContractorData(){
     var companyNameField = $("input#companyName").val();
     var firstNameField = $("input#firstNameCompany").val();
     var lastNameField = $("input#lastNameCompany").val();
-    var phoneContactField = "+1"+$("input#phoneContactCompany").val();
+    var phoneContactField = $("input#phoneContactCompany").val();
     var emailField = $("input#emailValidation").val();
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
@@ -4080,3 +4080,7 @@ $("#passwordContractor").keyup(function(event) {
         $("#submitLoginContractor").click();
     }
 });
+
+
+
+
