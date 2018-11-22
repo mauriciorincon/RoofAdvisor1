@@ -24,6 +24,7 @@
  <available file="${phploc}" property="tool.phploc.present"/>
  <available file="${phpmd}" property="tool.phpmd.present"/>
  <available file="${phpunit}" property="tool.phpunit.present"/>
+ <available file="${basedir}/build/tools/" type="dir" property="tool.present"/>
 
  <!-- Use this when the tools are managed by Composer in ${basedir}/vendor/bin >
  <property name="pdepend" value="${basedir}/vendor/bin/pdepend"/>
@@ -147,16 +148,19 @@
   <chmod perm="a+x" file="${phpunit}" />
  </target>
 
+ <target name="prepare-tools" unless="tool.present" >
+  <mkdir dir="${basedir}/build/tools"/>
+ </target>
+
  <target name="prepare"
          unless="prepare.done"
-         depends="clean,prepare-pdepend,prepare-phpcpd,prepare-phpcs,prepare-phpdox,prepare-phploc,prepare-phpmd,prepare-phpunit"
+         depends="clean,prepare-tools,prepare-pdepend,prepare-phpcpd,prepare-phpcs,prepare-phpdox,prepare-phploc,prepare-phpmd,prepare-phpunit"
          description="Prepare for build">
   <mkdir dir="${basedir}/build/api"/>
   <mkdir dir="${basedir}/build/coverage"/>
   <mkdir dir="${basedir}/build/logs"/>
   <mkdir dir="${basedir}/build/pdepend"/>
   <mkdir dir="${basedir}/build/phpdox"/>
-  <mkdir dir="${basedir}/build/tools"/>
   <property name="prepare.done" value="true"/>
  </target>
 
