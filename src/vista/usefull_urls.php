@@ -126,13 +126,30 @@ class usefullURLS{
 
 
 
-    public function getArrayOptions(){
-        return $this->miami_country;
+    public function getArrayOptions($city){
+        switch ($city) {
+            case "Miami-Dade County":
+                return $this->miami_country;
+                break;
+            case "Broward County":
+                return $this->broward_country;
+                break;
+            case "Palm Beach County":
+                return $this->palm_beach_county;
+                break;
+            case "Monroe County":
+                return $this->Monroe_County;
+                break;
+            default:
+                return "";
+                break;
+        }
+        
+        
     }
 
-    public function getArrayOptions1(){
-        return $this->broward_country;
-    }
+
+
 
     public function number_1(){
         return "https://www.cityofaventura.com/169/Building-Permits";

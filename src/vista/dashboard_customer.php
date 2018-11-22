@@ -3,10 +3,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
 <div id="db-cus-main">
 
-
-
-
-
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
 			<button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Orders</button>
@@ -22,19 +18,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<?php echo $_menu_item; ?>
 				</ul>
 			</div>
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
 			
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Urls <span class="caret"></span></button>
-				
-				<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-				<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<?php echo $_menu_urls; ?>
-					</ul>
-				</div>
-				</ul>
-			</div>
 		</div>
 		
 		  
@@ -2247,6 +2232,65 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myUrls" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyUrls">Imformation </h4> 
+			</div> 
+			<div class="modal-body" id="textmyUrls"> 
+					<div class="container">
+						<div class="row">
+						<div class="col-md-3">
+							<div class="well no-padding">
+								<div>
+									<ul class="nav nav-list nav-menu-list-style">
+										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Miami-Dade County
+													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">
+												<?php echo $_menu_urls; ?>
+											</ul>
+										</li>
+										<li class="divider"></li>
+										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Broward County
+													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">
+												<?php echo $_menu_urls1; ?>
+											</ul>
+										</li>
+										<li class="divider"></li>
+										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Palm Beach County
+													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">
+												<?php echo $_menu_urls2; ?>
+											</ul>
+										</li>
+										<li class="divider"></li>
+										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Monroe County
+													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">
+												<?php echo $_menu_urls3; ?>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+			</div>
+
+			<div class="modal-footer" id="buttonmyUrls"> 
+                <!-- <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> -->
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
 </div>
 
 <br>

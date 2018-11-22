@@ -515,8 +515,11 @@ class userController{
             $_menu_item=$this->getItemMenu();
             $_divs_info=$this->fillInformationMenu();
 
-            $_menu_urls=$this->getItemMenuURLS();
-            $_menu_urls1=$this->getItemMenuURLS1();
+            $_menu_urls=$this->getItemMenuURLS("Miami-Dade County");
+            $_menu_urls1=$this->getItemMenuURLS("Broward County");
+            $_menu_urls2=$this->getItemMenuURLS("Palm Beach County");
+            $_menu_urls3=$this->getItemMenuURLS("Monroe County");
+            
 
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
@@ -810,9 +813,9 @@ class userController{
         return $_output_menu;
     }
 
-    public function getItemMenuURLS(){
+    public function getItemMenuURLS($city){
         $_information=new usefullURLS();
-        $_array=$_information->getArrayOptions();
+        $_array=$_information->getArrayOptions($city);
         $_output_menu="";
         foreach($_array as $key => $item){
             $_output_menu.='<li><a href="'.call_user_func( array( "usefullURLS", $item ) ).'" target="_blank">'.constant("usefullURLS::$item").'</a></li>';
@@ -821,16 +824,7 @@ class userController{
         return $_output_menu;
     }
 
-    public function getItemMenuURLS1(){
-        $_information=new usefullURLS();
-        $_array=$_information->getArrayOptions1();
-        $_output_menu="";
-        foreach($_array as $key => $item){
-            $_output_menu.='<li><a href="'.call_user_func( array( "usefullURLS", $item ) ).'" target="_blank">'.constant("usefullURLS::$item").'</a></li>';
-        }
-        
-        return $_output_menu;
-    }
+  
     
     
     public function welcomeMail($_customerArray,$_validation_code,$_userData){
