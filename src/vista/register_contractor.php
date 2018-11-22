@@ -2,7 +2,7 @@
 <br>
 <br>
 <br>
-<div class="container"style="margin-top: 30px;">
+<div class="container"style="margin-top: 30px;" align="center">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step col-xs-4"> 
@@ -21,7 +21,7 @@
         </div>
     </div>
     
-    <form role="form">
+    <form role="form"  align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 50%; height: 100%;">
         <div class="panel panel-primary setup-content" id="step-1">
             <div class="panel-heading">
                  <h3 class="panel-title">Enter Company Information</h3>
@@ -71,7 +71,7 @@
                     <!--<input maxlength="100" type="text" required="required" class="form-control" placeholder="Company Type" />-->
                 </div>
                 
-                <button class="btn btn-primary nextBtn pull-right" type="button" id="firstNextValidation" name="firstNextValidation">Next</button>
+                <button class="btn btn-primary nextBtn pull-right" type="button" id="firstNextValidation" name="firstNextValidation">Register</button>
                 
             </div>
         </div>
