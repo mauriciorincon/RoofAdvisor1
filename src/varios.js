@@ -1199,7 +1199,6 @@ function jsShowWindowLoad(mensaje) {
         $("#WindowLoad").html(imgCentro);
  
 }
-
 $(document).ready(function () {
 
     $('#sidebarCollapse').on('click', function () {

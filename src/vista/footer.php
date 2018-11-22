@@ -53,7 +53,7 @@
 									</li>
 									<li>
 										<i class="fa fa-globe"></i>
-										<span><a href='http://www.roofservicenow.com'>www.roofservicenow.com</span>
+										<span><a href='http://www.roofservicenow.com'>www.roofservicenow.com</a></span>
 									</li>
 									
 								</ul>
@@ -188,5 +188,10 @@
         }  
     ?>
 </div>    
+<script language="javascript" type="text/javascript">
+    $(window).on('load', function(){ 
+     $('#loading5').fadeOut(500);
+  });
+</script>
 </body>
 </html>
