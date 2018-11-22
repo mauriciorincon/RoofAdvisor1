@@ -9,10 +9,10 @@ $_customerID=$_POST['customerID'];
 $_firstCustomerName = $_POST['firstCustomerName'];
 $_lastCustomerName = $_POST['lastCustomerName'];
 $_emailValidation = $_POST['emailValidation'];
-$_customerAddress = $_POST['customerAddress'];
-$_customerCity = $_POST['customerCity'];
-$_customerState = $_POST['customerState'];
-$_customerZipCode = $_POST['customerZipCode'];
+if(isset($_POST['customerAddress'])){$_customerAddress = $_POST['customerAddress'];}else{$_customerAddress = "";}
+if(isset($_POST['customerCity'])){$_customerCity = $_POST['customerCity'];}else{$_customerCity = "";}
+if(isset($_POST['customerState'])){$_customerState = $_POST['customerState'];}else{$_customerState = "";}
+if(isset($_POST['customerZipCode'])){$_customerZipCode = $_POST['customerZipCode'];}else{$_customerZipCode = "";}
 $_customerPhoneNumber = $_POST['customerPhoneNumber'];
 
 $_arrayCustomer = array(

@@ -2,6 +2,11 @@
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
 <div id="db-cus-main">
+
+
+
+
+
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
 			<button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Orders</button>
@@ -10,28 +15,30 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('customerDashProfile1');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);$('#calendar').fullCalendar('option', 'height', 1500);">Scheduler</button>
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+
 			<div class="btn-group">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				Resources <span class="caret"></span></button>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
     			<ul class="dropdown-menu" role="menu">
 					<?php echo $_menu_item; ?>
 				</ul>
 			</div>
+			
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				Urls <span class="caret"></span></button>
-    			<ul class="dropdown-menu" role="menu">
-					<?php echo $_menu_urls; ?>
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Urls <span class="caret"></span></button>
+				
+				<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<?php echo $_menu_urls; ?>
+					</ul>
+				</div>
 				</ul>
 			</div>
 		</div>
 		
 		  
-		<div class="btn-group" role="group">
-            
-        </div>   
 		
-	</div>
 
 	<br>
 
@@ -905,10 +912,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				firebase.initializeApp(config);
 			
 			</script>
-
-
-
-
 
 			<br>
 			<div class="table-responsive">          
@@ -1975,6 +1978,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+				
 			</div> 
 			<div class="modal-body" id="PaymentType"> 
 				<input type="hidden" value="" id="orderIDRating" />
@@ -1991,14 +1995,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 				<div class="form-group">
 					<label for="ratingQuestion">How would you rate the service company?</label>
-					<div class="votable hide">
-						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
-						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
-						
-					</div>
+						<div class="votable hide">
+							<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						</div>
 					<div class="voted">
 						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
@@ -2018,6 +2021,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
 					</div>
+					
 					<div class="voted1">
 						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
 						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
@@ -2057,7 +2061,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>
-								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>Trans ID</strong></td>
 								<td class="text-center"><strong>View</strong></td>
 							</tr>
 						</thead>

@@ -2100,7 +2100,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>
-								<td class="text-center"><strong>Stripe ID</strong></td>
+								<td class="text-center"><strong>Trans ID</strong></td>
 								<td class="text-center"><strong>View</strong></td>
 							</tr>
 						</thead>

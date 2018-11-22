@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <?php
     if(!isset($_SESSION)) { 
         session_start(); 
@@ -81,6 +83,23 @@
 
 
 ?>
+<div class="votable hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<div class="voted">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<i><label id="ratingCompany">Rating: 0</label></i>
 <form action="http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying" method="post">
     Parametros;<input type="text" id="param" name="param" value='{ "stripeToken" : "xxxxiiiissss","stripeEmail":"mauricio.rincon@gmail.com","totalAmount":"50" }'/>
     <input type="submit" value="enviar pago" />

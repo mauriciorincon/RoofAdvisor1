@@ -120,7 +120,7 @@ class userController{
                     Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
                 }
             }elseif(is_string($_result)){
-                Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginClient");
+                Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginClient");
             }
         }
     }
@@ -166,7 +166,7 @@ class userController{
             //echo " 4 ";
         }elseif(strcmp(gettype($_result),"string")==0){
             //echo " 5 ";
-            return "Error, User or password are wrong, please try again ($_result)";
+            return "Error, User or password are incorrect, please try again";
         }
         //echo " 6 ";
     }
@@ -217,7 +217,7 @@ class userController{
                     Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
                 }
             }elseif(is_string($_result)){
-                Header("Location: ?aditionalMessage=User or password are wrong, please try again $_result&controller=user&accion=showLoginContractor");
+                Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginContractor");
             }
         }
         
@@ -516,6 +516,7 @@ class userController{
             $_divs_info=$this->fillInformationMenu();
 
             $_menu_urls=$this->getItemMenuURLS();
+            $_menu_urls1=$this->getItemMenuURLS1();
 
             require_once("vista/head.php");
             require_once("vista/dashboard_customer.php");
@@ -797,6 +798,7 @@ class userController{
         return $_output_html;
     }
 
+
     public function getItemMenu(){
         $_information=new customerFAQ();
         $_array=$_information->getArrayOptions();
@@ -811,6 +813,17 @@ class userController{
     public function getItemMenuURLS(){
         $_information=new usefullURLS();
         $_array=$_information->getArrayOptions();
+        $_output_menu="";
+        foreach($_array as $key => $item){
+            $_output_menu.='<li><a href="'.call_user_func( array( "usefullURLS", $item ) ).'" target="_blank">'.constant("usefullURLS::$item").'</a></li>';
+        }
+        
+        return $_output_menu;
+    }
+
+    public function getItemMenuURLS1(){
+        $_information=new usefullURLS();
+        $_array=$_information->getArrayOptions1();
         $_output_menu="";
         foreach($_array as $key => $item){
             $_output_menu.='<li><a href="'.call_user_func( array( "usefullURLS", $item ) ).'" target="_blank">'.constant("usefullURLS::$item").'</a></li>';

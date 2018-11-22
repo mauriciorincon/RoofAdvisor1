@@ -104,7 +104,12 @@ $(document).ready(function() {
 
     //$('.timepicker1').wickedpicker(options_fixed);
     
-    $('.timepicker1').wickedpicker();
+    var options = { 
+    now: "08:00", //hh:mm 24 hour format only, defaults to current time
+    };
+    $('.timepicker1').wickedpicker(options);
+
+    //$('.timepicker1').wickedpicker();
 
 
 
@@ -213,7 +218,7 @@ $(document).ready(function () {
 
         
     
-        if (curStepBtn=="step-2" && isValid==true ){
+        if (curStepBtn=="step-1" && isValid==true ){
             saveContractorData();
         }
     
@@ -222,9 +227,9 @@ $(document).ready(function () {
             isValid=validateCodeEmail('Company');
         }*/
     
-        if(curStepBtn=="step-1"){
+        /*if(curStepBtn=="step-1"){
             if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-        }
+        }*/
     });
     
     allPrevBtn.click(function () {
@@ -329,7 +334,7 @@ function saveContractorData(){
     var companyNameField = $("input#companyName").val();
     var firstNameField = $("input#firstNameCompany").val();
     var lastNameField = $("input#lastNameCompany").val();
-    var phoneContactField = "+1"+$("input#phoneContactCompany").val();
+    var phoneContactField = $("input#phoneContactCompany").val();
     var emailField = $("input#emailValidation").val();
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
@@ -966,7 +971,7 @@ $(document).ready(function () {
                         }else{
                             
                             $('#textAnswerOrder').html(data);
-                            $('#headerTextAnswerOrder').html('Error register customer');
+                            $('#headerTextAnswerOrder').html('Error registering customer');
                             $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                             $('#lastFinishButtonOrder').hide();
                             $('#myModalRespuesta').modal({backdrop: 'static'});
@@ -1007,6 +1012,9 @@ $(document).ready(function () {
                             if (data.indexOf("Sorry")==-1){
                                 $('#firstNextBegin').show();
                                 setLocation(map,zipcode);
+
+                                nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
+                                nextStepWizard.removeAttr('disabled').trigger('click');
                             }else{
                                 $('#firstNextBegin').hide(); 
                                 setLocation(map,zipcode);
@@ -1218,7 +1226,7 @@ $(document).ready(function () {
                     var valStep5lat=$('input:hidden[name=step5Latitude]').val();
                     var valStep5Address=$('input:hidden[name=step5Address]').val();
                     var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-                    $('#step8RepairDescription').html(valStep3+', '+valStep5+' story'+', '+valStep4+', Autorization:'+valStep5Auto);
+                    $('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+' '+',  Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
                     $('#step8Schedule').html('Pending');
                     $('#step8Time').html('Pending');
                     $('#step8CompanyName').html('Pending');
@@ -1268,7 +1276,7 @@ $(document).ready(function () {
             if(valStep7==""){
                 valStep7="Pending";
             }
-            $('#step8RepairDescription').html(valStep3+', '+valStep5+', Leaks:'+valStep4+', Autorization:'+valStep5Auto);
+            $('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+', Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
             $('#step8Schedule').html(valStep6);
             $('#step8Time').html(valStep6t);
             $('#step8CompanyName').html(valStep7);
@@ -4072,3 +4080,7 @@ $("#passwordContractor").keyup(function(event) {
         $("#submitLoginContractor").click();
     }
 });
+
+
+
+
