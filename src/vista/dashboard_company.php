@@ -14,35 +14,25 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Orders</button>
-			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
-			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');setActiveItemMenu(this);">Scheduler</button>
-            
-            
-            
-        </div>
-        <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Metrics
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="emergencyRepair" class="badge badge-primary" style="background:black;">4</span>Emergency Repair</a>
-                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span></span><span  name="scheduleRepair" class="badge badge-primary" style="background:black;">4</span>Schedule Repair</a>
-                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="reportRepair" class="badge badge-primary" style="background:black;">4</span>Report Repair</a>
-                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a>
-                    <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a>
-                </div>
-            </div>
-        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
+			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
+			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
+            <div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Metrics <span class="caret"></span></button>
+    			<ul class="dropdown-menu" role="menu">
+                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="emergencyRepair" class="badge badge-primary" style="background:black;">4</span>Emergency Repair</a></li>
+                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span></span><span  name="scheduleRepair" class="badge badge-primary" style="background:black;">4</span>Schedule Repair</a></li>
+                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="reportRepair" class="badge badge-primary" style="background:black;">4</span>Report Repair</a></li>
+                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a></li>
+                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a></li>
+                </ul>
+			</div>    
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
-        </div>
-        <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
-        </div>
-        <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
-        </div>    
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+        </div>
 </div>
 
 
@@ -2850,3 +2840,26 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+<div class="collapse container" id="listCustomerByCompany">
+    <div class="table-responsive">          
+        <table class="table" id="table_list_customer_by_company">
+            <thead>
+            <tr>
+                <th>CustomerID</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Upload Clients</button>
+</div>         
