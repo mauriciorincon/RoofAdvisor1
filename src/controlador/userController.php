@@ -288,7 +288,7 @@ class userController{
             
             
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($arrayContractor['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($arrayContractor['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
 
             if($_mail_response==false){
                 $_mail_response="Error ".$_resultUser."<br>".$_resultCompany."<br>".$this->_sendMail->getMessageError();
@@ -370,7 +370,7 @@ class userController{
 
             if(strcmp($_selectionType,"newCustomer")!=0){
                 $this->_sendMail=new emailController();
-                $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
+                $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
                 if($_mail_response==false){
                     return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
                 }else{
@@ -995,7 +995,7 @@ class userController{
             }
             $_mail_body=$this->resetMail($user,$hashPassword,$_result);            
             $this->_sendMail=new emailController();
-            $_mail_response=$this->_sendMail->sendMailSMTP($_userMail,"Reset Password",$_mail_body,"",$_SESSION['application_path']."/img/logo_s.png");
+            $_mail_response=$this->_sendMail->sendMailSMTP($_userMail,"Reset Password",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
             $message.= $_mail_response;
             if(strpos($message,"Error")>-1){
             }else{

@@ -4,7 +4,8 @@ if(!isset($_SESSION)) {
 } 
 
 require_once($_SESSION['application_path']."/modelo/conection.php");
-require $_SESSION['application_path'].'/vendor/autoload.php';
+//require $_SESSION['application_path'].'/vendor/autoload.php';
+require $_SESSION['library_path_autoload'];
 
 
 

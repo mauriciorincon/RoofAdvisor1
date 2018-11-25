@@ -54,7 +54,7 @@ Welcome to RoofServicenow Admin
         var postCardCount=0;
 
         var openService=0;
-        <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+        <?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
 
         // Initialize and add the map
         function initMap() {
@@ -67,7 +67,7 @@ Welcome to RoofServicenow Admin
             // The marker, positioned at Uluru
             //var marker = new google.maps.Marker({position: uluru, map: map});
             var marker="";
-            var iconBase = iconBase+'/img/img_maps/';
+            var iconBase = iconBase+'img_maps/';
             
 
             var geocoder = new google.maps.Geocoder();
@@ -654,23 +654,8 @@ Welcome to RoofServicenow Admin
     </script>
 
     <script>
-    // Initialize Firebase
-    /*var config = {
-        apiKey: "AIzaSyB5HnjwLpr-WqknpRRU5WhrHCg6feVaYss",
-        authDomain: "pruebabasedatos-eacf6.firebaseapp.com",
-        databaseURL: "https://pruebabasedatos-eacf6.firebaseio.com",
-        projectId: "pruebabasedatos-eacf6",
-        storageBucket: "pruebabasedatos-eacf6.appspot.com",
-        messagingSenderId: "120748340913"
-    };*/
-    var config = {
-        apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-        authDomain: "roofadvisorzapp.firebaseapp.com",
-        databaseURL: "https://roofadvisorzapp.firebaseio.com",
-        projectId: "roofadvisorzapp",
-        storageBucket: "roofadvisorzapp.appspot.com",
-        messagingSenderId: "480788526390"
-    };
+    <?php echo $_SESSION['firebase_path_javascript']; ?>
+    
     firebase.initializeApp(config);
 
 

@@ -3,7 +3,8 @@ if(!isset($_SESSION)) {
     session_start(); 
 } 
 
-require $_SESSION['application_path'].'/vendor/autoload.php';
+//require $_SESSION['application_path'].'/vendor/autoload.php';
+require $_SESSION['library_path_autoload'];
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
@@ -121,7 +122,7 @@ class pdfController{
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['image_path']."logo_s.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
@@ -220,10 +221,10 @@ class pdfController{
         </table>
         ';
         
-        $pdf->Image($_SESSION['application_path']."/img/logo_s.png",30,180,40);
+        $pdf->Image($_SESSION['image_path']."logo_s.png",30,180,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
+        $pdf->Output($_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf','F'); 
 
         $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
         
@@ -231,9 +232,13 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
+        $_result_mail=$_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
+        if($_result_mail==false){
+            return $_mailController->getMessageError();
+        }else{
+            return true;
+        }
         
-        return true;
     }
 
     function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
@@ -366,7 +371,7 @@ class pdfController{
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['image_path']."logo_s.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
@@ -463,10 +468,10 @@ class pdfController{
         </table>
         ';
         
-        //$pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
+        //$pdf->Image($_SESSION['image_path']."logo.png",30,200,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
+        $pdf->Output($_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf','F'); 
 
         if($_amount==0){
             $_amount=$_total_invoice;
@@ -477,9 +482,12 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_mailController->sendMailSMTP($_user_mail_send,"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
-        
-        return true;
+        $_result_mail=$_mailController->sendMailSMTP($_user_mail_send,"Roofadvizor Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
+        if($_result_mail==false){
+            return $_mailController->getMessageError();
+        }else{
+            return true;
+        }
     }
 
     function paymentConfirmation3($_companyID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
@@ -559,7 +567,7 @@ class pdfController{
                 <td colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="5">'.$pdf->Image($_SESSION['application_path']."/img/logo_s.png",80,40,40).'</td>
+                <td colspan="5">'.$pdf->Image($_SESSION['image_path']."logo_s.png",80,40,40).'</td>
             </tr>
             <tr>
                 <td colspan="5"><br><br><br><br><br></td>
@@ -654,10 +662,10 @@ class pdfController{
         </table>
         ';
         
-        //$pdf->Image($_SESSION['application_path']."/img/logo.png",30,200,40);
+        //$pdf->Image($_SESSION['image_path']."logo.png",30,200,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
-        $pdf->Output($_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf','F'); 
+        $pdf->Output($_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf','F'); 
 
         if($_amount==0){
             $_amount=$_total_invoice;
@@ -668,9 +676,13 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_mailController->sendMailSMTP($_company['CompanyEmail'],"Roofadvizor Invoice",$_hmtl,$_SESSION['application_path'].'/invoice/invoice_'.$_invoice_number.'.pdf');
+        $_result_mail=$_mailController->sendMailSMTP($_company['CompanyEmail'],"Roofadvizor Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
         
-        return true;
+        if($_result_mail==false){
+            return $_mailController->getMessageError();
+        }else{
+            return true;
+        }
     }
 
     public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="online",$_source_payment="order"){

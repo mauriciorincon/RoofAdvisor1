@@ -7,7 +7,7 @@
     require_once($_SESSION['application_path']."/controlador/userController.php");
 
     $_orderID=$_POST['orderID'];
-    $_file_path=$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf';
+    $_file_path=$_SESSION['invoice_path'].'invoice_'.$_orderID.'.pdf';
     
     if(file_exists($_file_path)){
 
@@ -28,7 +28,7 @@
 
         $_objMail=new emailController();
 
-        $_result=$_objMail->sendMail2($_customer['Email'],"<p>Hello, this is the <b>invoice</b></p>",$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf');
+        $_result=$_objMail->sendMail2($_customer['Email'],"<p>Hello, this is the <b>invoice</b></p>",$_SESSION['invoice_path'].'invoice_'.$_orderID.'.pdf');
         if(is_bool($_result)){
             echo "Error, ".$_objMail->getMessageError();
         }else{

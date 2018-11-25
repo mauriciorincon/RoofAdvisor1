@@ -2,7 +2,8 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-require $_SESSION['application_path'].'/vendor/autoload.php';
+//require $_SESSION['application_path'].'/vendor/autoload.php';
+require $_SESSION['library_path_autoload'];
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
@@ -25,7 +26,7 @@ class connection{
     function __construct()
 	{		
         //$serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/pruebabasedatos-eacf6-firebase.json');
-        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['firebase_path_customer_php']);
         //echo "roofadvizorz-firebase.json";
         
         //->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
@@ -41,7 +42,7 @@ class connection{
     }
 
     public function companyConnection(){
-        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-company-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['firebase_path_company_php']);
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
@@ -53,7 +54,7 @@ class connection{
     }
 
     public function driverConnection(){
-        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['application_path'].'/vendor/roofadvisorz-driver-firebase.json');
+        $serviceAccount = ServiceAccount::fromJsonFile($_SESSION['firebase_path_driver_php']);
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)

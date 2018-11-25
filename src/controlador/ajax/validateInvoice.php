@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 
 $_orderID=$_POST['orderID'];
 
-$_file_path=$_SESSION['application_path'].'/invoice/invoice_'.$_orderID.'.pdf';
+$_file_path=$_SESSION['invoice_path'].'invoice_'.$_orderID.'.pdf';
 //echo $_file_path;
 if(file_exists($_file_path)){
     echo '<p><a href="invoice/invoice_'.$_orderID.'.pdf" target="_blank" class="btn btn-primary btn-lg active" role="button">View Invoice</a></p>

@@ -71,7 +71,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             var mapObject;
             var infowindow;
             var orderOpenContractor=[];
-            <?php echo 'var iconBase = "'. $_SESSION['application_path'].'"';?>
+            <?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
 
             var scheduleRepairCount=0;
             var emergencyRepairCount=0;
@@ -93,7 +93,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 var marker="";
                 infowindow = new google.maps.InfoWindow();
                 
-                var iconBase = iconBase+'/img/img_maps/';
+                var iconBase = iconBase+'img_maps/';
 
                
 
@@ -916,14 +916,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
         </script>
 
         <script>
-            var config = {
-                apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-                authDomain: "roofadvisorzapp.firebaseapp.com",
-                databaseURL: "https://roofadvisorzapp.firebaseio.com",
-                projectId: "roofadvisorzapp",
-                storageBucket: "roofadvisorzapp.appspot.com",
-                messagingSenderId: "480788526390"
-            };
+            <?php echo $_SESSION['firebase_path_javascript']; ?>
+            
             firebase.initializeApp(config);
         </script>
 
@@ -1995,21 +1989,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             }
                             return orderStatus;
                         }
-
-            /*var config = {
-                apiKey: "AIzaSyCJIT-8FqBp-hO01ZINByBqyq7cb74f2Gg",
-                authDomain: "roofadvisorzapp.firebaseapp.com",
-                databaseURL: "https://roofadvisorzapp.firebaseio.com",
-                projectId: "roofadvisorzapp",
-                storageBucket: "roofadvisorzapp.appspot.com",
-                messagingSenderId: "480788526390"
-            };
-            firebase.initializeApp(config);*/
-
-
-
-            
-
         </script>
 
 

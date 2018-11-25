@@ -73,14 +73,8 @@ Welcome to Roof Service Now, <?php echo $_actual_company['CompanyID']." - ".$_ac
 
         <script>
         // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyB5HnjwLpr-WqknpRRU5WhrHCg6feVaYss",
-            authDomain: "pruebabasedatos-eacf6.firebaseapp.com",
-            databaseURL: "https://pruebabasedatos-eacf6.firebaseio.com",
-            projectId: "pruebabasedatos-eacf6",
-            storageBucket: "pruebabasedatos-eacf6.appspot.com",
-            messagingSenderId: "120748340913"
-        };
+        <?php echo $_SESSION['firebase_path_javascript']; ?>
+        
         firebase.initializeApp(config);
         //const dbRef = firebase.database().ref();
         //const usersRef = dbRef.child('Orders');

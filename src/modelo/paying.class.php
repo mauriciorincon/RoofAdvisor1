@@ -5,7 +5,8 @@ if(!isset($_SESSION)) {
 
 require_once($_SESSION['application_path']."/modelo/conection.php");
 require_once($_SESSION['application_path']."/modelo/others.class.php");
-require $_SESSION['application_path'].'/vendor/autoload.php';
+//require $_SESSION['application_path'].'/vendor/autoload.php';
+require $_SESSION['library_path_autoload'];
 
 
 //require 'path-to-Stripe.php';

@@ -4,7 +4,8 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-require $_SESSION['application_path'].'/vendor/autoload.php';
+//require $_SESSION['application_path'].'/vendor/autoload.php';
+require $_SESSION['library_path_autoload'];
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
