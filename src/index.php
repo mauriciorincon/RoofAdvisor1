@@ -2,13 +2,15 @@
 //Test
 if(!isset($_SESSION)) { 
     session_start(); 
+    require 'conf.php';
 } 
 
 
 if (isset($_GET['logout'])) {
     unset($_SESSION);
+    require 'conf.php';
 }
-require 'conf.php';
+
 
 //if(!isset($_SESSION['application_path'])){
 //   $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);

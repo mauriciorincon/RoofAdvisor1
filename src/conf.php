@@ -9,14 +9,19 @@
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
     
+    $_SESSION['library_path']=$_SESSION['application_path'].'/vendor/';
+
     //define library path autoload
-    $_SESSION['library_path_autoload']=$_SESSION['application_path'].'/vendor/autoload.php';
+    $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';
 
     //define invoice path
     $_SESSION['invoice_path']=$_SESSION['application_path'].'/invoice/';
 
     //define image path
     $_SESSION['image_path']=$_SESSION['application_path'].'/img/';
+
+    //define report path
+    $_SESSION['report_path']=$_SESSION['application_path'].'/roofreport/';
 
     //define path firebase javascript
     $_SESSION['firebase_path_javascript']='var config = {
@@ -29,8 +34,8 @@
     };';
 
     //define path firebase php
-    $_SESSION['firebase_path_customer_php']=$_SESSION['application_path'].'/vendor/roofadvizorz-firebase.json';
-    $_SESSION['firebase_path_company_php']=$_SESSION['application_path'].'/vendor/roofadvisorz-company-firebase.json';
-    $_SESSION['firebase_path_driver_php']=$_SESSION['application_path'].'/vendor/roofadvisorz-driver-firebase.json';
+    $_SESSION['firebase_path_customer_php']=$_SESSION['library_path'].'roofadvizorz-firebase.json';
+    $_SESSION['firebase_path_company_php']=$_SESSION['library_path'].'roofadvisorz-company-firebase.json';
+    $_SESSION['firebase_path_driver_php']=$_SESSION['library_path'].'roofadvisorz-driver-firebase.json';
 
 ?>

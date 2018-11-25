@@ -4,7 +4,7 @@
     }
     require_once($_SESSION['application_path']."/controlador/orderController.php");
 
-    $_path_report=$_SESSION['application_path'].'/roofreport';  
+    $_path_report=$_SESSION['report_path'];  
     $_orderID=$_POST['orderID'];
     $_filename=$_POST['file_name'];
     
@@ -15,7 +15,7 @@
     
     $file_name = $_orderID."_".$_filename.".pdf";
 
-    $_path='/roofreport/'.$file_name;
+    $_path=$_SESSION['report_path'].$file_name;
     $_path2="";
     
     if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
