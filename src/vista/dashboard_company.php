@@ -2944,6 +2944,9 @@ if(!empty($_actual_company['postCardValue'])){
 				<h4 class="modal-title" id="headerUploadListCustomer">List Customers</h4> 
 			</div> 
 			<div class="modal-body" id="textUploadListCustomer"> 
+                <div class="alert alert-danger">
+                    You can upload the list of clients, for such purpose please use the template provided by clicking <a href="rsndocs/curstomer_format.xlsx">here</a>, after completing it please use the upload button. 
+                </div>
                 <input id="uploadFile" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="uploadFile" />
 			</div>
 

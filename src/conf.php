@@ -8,6 +8,7 @@
     if(!isset($_SESSION['application_path'])){
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
+    //echo  $_SESSION['application_path'];
     
     $_SESSION['library_path']=$_SESSION['application_path'].'/vendor/';
 
@@ -20,6 +21,9 @@
     //define image path
     $_SESSION['image_path']=$_SESSION['application_path'].'/img/';
 
+    //define roofservice documents
+    $_SESSION['rsn_documents_path']=$_SESSION['application_path'].'/rsndocs/';
+    
     //define report path
     $_SESSION['report_path']=$_SESSION['application_path'].'/roofreport/';
 
@@ -37,5 +41,8 @@
     $_SESSION['firebase_path_customer_php']=$_SESSION['library_path'].'roofadvizorz-firebase.json';
     $_SESSION['firebase_path_company_php']=$_SESSION['library_path'].'roofadvisorz-company-firebase.json';
     $_SESSION['firebase_path_driver_php']=$_SESSION['library_path'].'roofadvisorz-driver-firebase.json';
+
+    //define path temporal
+    $_SESSION['temporal_path']=$_SESSION['application_path']."/tmp/";
 
 ?>
