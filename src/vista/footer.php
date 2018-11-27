@@ -51,24 +51,19 @@
 										<i class="fa fa-envelope-o"></i>
 										<span><a href="mailto:info@roofservicenow.com">info@roofservicenow.com</a> </span>
 									</li>
-									<li>
-										<i class="fa fa-globe"></i>
-										<span><a href='http://www.roofservicenow.com'>www.roofservicenow.com</a></span>
-									</li>
-									
 								</ul>
 						    </div>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
 							<div class="footer-widget">
-								<h3 class="widget-title">Custom Feature</h3>
+								<h3 class="widget-title">Site Map</h3>
 								<ul class="footer-menu">
-									<li><a href="#">home</a></li>
-									<li><a href="#">about us</a></li>
-									<li><a href="#">service</a></li>
-									<li><a href="#">download</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">contact us</a></li>
+									<li><a href="index.php">home</a></li>
+									<li><a href="?controller=aboutus&accion=showinfo">about us</a></li>
+									<li><a href="?controller=services&accion=showinfo">service</a></li>
+									<li><a href="?controller=download&accion=showinfo">download</a></li>
+									<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
+									<li><a href="?controller=contact&accion=showinfo">contact us</a></li>
 								</ul>
 							</div>
 						</div>	
@@ -128,7 +123,7 @@
 				<div class="container">
 					<div class="copyright-text text-center">
 						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.roofservicenow.com/">RoofServiceNow</a></p>
-						<p><a href='?controller=termsconditions&accion=showinfo'>Legal</a> | <a href='?controller=termsconditions&accion=privacyinfo'>Privacy Center</a></p>
+						<p><a href='?controller=termsconditions&accion=showinfo'>Legal</a> | <a href='?controller=termsconditions&accion=privacyinfo'>Privacy Policy</a></p>
 					</div>
 				</div>
 			</div>

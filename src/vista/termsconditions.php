@@ -64,41 +64,41 @@
 
 <ul>
 
-<li><a href="#">1. INTRODUCTION TO ROOFSERVICENOW</a></li>
+<li><a href="#point1">1. INTRODUCTION TO ROOFSERVICENOW</a></li>
 
-<li><a href="#">2. THE SERVICES</a></li>
+<li><a href="#point2">2. THE SERVICES</a></li>
 
-<li><a href="#">3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</a></li>
+<li><a href="#point3">3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</a></li>
 
-<li><a href="#">4. PAYMENTS</a></li>
+<li><a href="#point4">4. PAYMENTS</a></li>
 
-<li><a href="#">5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</a></li>
+<li><a href="#point5">5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</a></li>
 
-<li><a href="#">6. SMS MESSAGING</a></li>
+<li><a href="#point6">6. SMS MESSAGING</a></li>
 
-<li><a href="#">7. DISPUTE RESOLUTION ASSISTANCE</a></li>
+<li><a href="#point7">7. DISPUTE RESOLUTION ASSISTANCE</a></li>
 
-<li><a href="#">8. CALL RECORDING</a></li>
+<li><a href="#point8">8. CALL RECORDING</a></li>
 
-<li><a href="#">9. USER GENERATED CONTENT</a></li>
+<li><a href="#point9">9. USER GENERATED CONTENT</a></li>
 
-<li><a href="#">10. SERVICE PROFESSIONAL PRE SCREENING PROCEDURES AND DISCLAIMERS</a></li>
+<li><a href="#point10">10. SERVICE PROFESSIONAL PRE SCREENING PROCEDURES AND DISCLAIMERS</a></li>
 
-<li><a href="#">11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING. </a></li>
+<li><a href="#point11">11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING. </a></li>
 
-<li><a href="#">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</a></li>
+<li><a href="#point12">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</a></li>
 
-<li><a href="#">13. LINKS TO THIRD PARTY SITES</a></li>
+<li><a href="#point13">13. LINKS TO THIRD PARTY SITES</a></li>
 
-<li><a href="#">14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</a></li>
+<li><a href="#point14">14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</a></li>
 
-<li><a href="#">15. INDEMNIFICATION</a></li>
+<li><a href="#point15">15. INDEMNIFICATION</a></li>
 
-<li><a href="#">16. ARBITRATION AND GOVERNING LAW </a></li>
+<li><a href="#point16">16. ARBITRATION AND GOVERNING LAW </a></li>
 
-<li><a href="#">17. NOTICE OF RIGHTS </a></li>
+<li><a href="#point17">17. NOTICE OF RIGHTS </a></li>
 
-<li><a href="#">18. GENERAL PROVISIONS</a></li>
+<li><a href="#point18">18. GENERAL PROVISIONS</a></li>
 
 </ul>
 
@@ -110,13 +110,13 @@
 
 
 
-<h4>1. INTRODUCTION TO ROOFSERVICENOW</h4>
+<h4><a name="point1">1. INTRODUCTION TO ROOFSERVICENOW</a></h4>
 
 <p>Upon registration, you may choose your own password or RoofServiceNow will assign you a password to access the Services through the RoofServiceNow website or mobile apps.</p>
 
 
 
-<h4>2. THE SERVICES</h4>
+<h4><a name="point2">2. THE SERVICES</a></h4>
 
 <p>RoofServiceNow is committed to making your total RoofServiceNow experience a positive one. There are several ways you can find service professionals through RoofServiceNow (collectively, "Service Professionals"). Our Emergency Repair Service allows you to request on demand same day service emergency roof repair via our mobile applications and our web application. Our Schedule Service Repair is our service where you request a service professional for a specific future scheduled day, and where you choose the service professional or where the service professional accepts the scheduled time you requested. You will be able to view all Service Professional’s ratings and reviews.	
 
@@ -144,19 +144,19 @@
 
 </ol>
 
-<h4>3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</h4>
+<h4><a name="point3">3. YOUR USE OF THE ROOFSERVICENOW SERVICES AND PROHIBITED USES</a></h4>
 
 <p>You acknowledge and agree that your use of RoofServiceNow is for your personal use and not for advertising purposes. You may not use RoofServiceNow to recreate or compete with RoofServiceNow, to solicit or harass Service Professionals, or for any other purpose not contemplated herein. You acknowledge that a violation of the foregoing could result in significant damages, and you agree that you are liable to RoofServiceNow for any such damages, and will indemnify RoofServiceNow in the event of any claims against RoofServiceNow based on or arising from your violation of the foregoing. We reserve the right to revoke your access to any RoofServiceNow Services, products or properties at any time. All information about Service Professionals is confidential and for your personal use only. If it is determined or suspected by RoofServiceNow in its sole discretion that you are misusing or attempting to misuse or circumvent the RoofServiceNow services or system, or are using or attempting to use them for any inappropriate or non-personal purposes, including but not limited to activities such as hacking, scraping content, infiltrating, fraud, advertising, jamming or spamming, RoofServiceNow reserves the right, in its sole discretion, to immediately terminate your access without notice and to initiate without notice appropriate legal actions or proceedings to seek appropriate remedies and/or damages, including but not limited to lost revenue, repairs, legal fees, costs and expenses, and to seek injunctions or other equitable remedies.	
 
 </p>
 
-<h4>4. PAYMENTS</h4>
+<h4><a name="point4">4. PAYMENTS</a></h4>
 
 <p>We may allow you to pay for goods or services provided by Service Professionals, through the RoofServiceNow website, apps, or services. Should you have any dispute with the goods or services provided by the Service Professional(s) you select, as set forth in in Section 2, #7, you must contact the Service Professional and resolve such dispute with the Service Professional. However, if the dispute is regarding the amount of money that you paid for the services by the Service Professional (including that you were not charged the amount you agreed to in your agreement with the Service Professional) please advise us immediately. If we have not heard from you with documented proof of any issues provided within ten (10) days after the payment has been made for the Service Professional services, the purchase of the services is final and you will not be entitled to a refund, except as may expressly be limited by Federal, state or local law.</p>
 
 
 
-<h4>5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</h4>
+<h4><a name="point5">5. INFORMATION YOU PROVIDE TO US/TCPA CONSENT</a></h4>
 
 <p>
 
@@ -172,7 +172,7 @@ TO KNOWINGLY INPUT FALSE INFORMATION, INCLUDING BUT NOT LIMITED TO NAME, PHONE N
 
 
 
-<h4>6. SMS MESSAGING</h4>
+<h4><a name="point6">6. SMS MESSAGING</a></h4>
 
 <p>
 
@@ -182,7 +182,7 @@ By submitting a service request, you agree that RoofServiceNow and the Service P
 
 
 
-<h4>7. DISPUTE RESOLUTION ASSISTANCE</h4>
+<h4><a name="point7">7. DISPUTE RESOLUTION ASSISTANCE</a></h4>
 
 <p>
 
@@ -194,7 +194,7 @@ While we cannot guarantee the work performed by a listed Service Professional, a
 
 
 
-<h4>8. CALL RECORDING</h4>
+<h4><a name="point8">8. CALL RECORDING</a></h4>
 
 <p>You acknowledge and agree that RoofServiceNow may monitor and/or record any telephone calls between you and RoofServiceNow.
 
@@ -202,7 +202,7 @@ While we cannot guarantee the work performed by a listed Service Professional, a
 
 
 
-<h4>9. USER GENERATED CONTENT</h4>
+<h4><a name="point9">9. USER GENERATED CONTENT</a></h4>
 
 <p>
 
@@ -300,7 +300,7 @@ Ratings Explanation. Where Angie's List Service Professionals are displayed, the
 
 </ol>
 
-<h4>10. SERVICE PROFESSIONAL PRE SCREENING PROCEDURES AND DISCLAIMERS</h4>
+<h4><a name="point10">10. SERVICE PROFESSIONAL PRE SCREENING PROCEDURES AND DISCLAIMERS</a></h4>
 
 <p>Unless otherwise noted on the screening tab of a Service Professional's profile page, RoofServiceNow.com uses the following criteria as part of its registration enrollment process ("registration") for new Service Professionals, with the exception of Corporate Accounts (as described below) and service professionals providing services in Canada (neither of which are screened) applying for membership in our network:
 
@@ -366,7 +366,7 @@ DISCLAIMER: ROOFSERVICENOW EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS O
 
 
 
-<h4>11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING. </h4>
+<h4><a name="point11">11. AFFILIATE SERVICE PROFESSIONAL PRE-SCREENING.</a></h4>
 
 <p>
 
@@ -400,7 +400,7 @@ ABS will provide Angie's List with only a pass or fail designation. Angie's List
 
 </ol>
 
-<h4>12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</h4>
+<h4><a name="point12">12. RATINGS & REVIEWS ARE NOT ENDORSED BY ROOFSERVICENOW.COM</a></h4>
 
 <p>All Ratings and Reviews of a Service Professional displayed to you reflect the opinions of other consumers, and do not reflect or represent the opinions or representations of RoofServiceNow. RoofServiceNow disclaims any and all representations or warranties with regard to the Ratings and Reviews. RoofServiceNow does not assume responsibility or liability for any Review or for any claims, damages, or losses resulting from any use of the Site or the materials contained therein.</p>
 
@@ -412,7 +412,7 @@ RoofServiceNow provides certain content relating to home improvement, repair, ma
 
 </p>
 
-<h4>13. LINKS TO THIRD PARTY SITES</h4>
+<h4><a name="point13">13. LINKS TO THIRD PARTY SITES</a></h4>
 
 <p>
 
@@ -420,7 +420,7 @@ The links in the RoofServiceNow or apps will let you leave RoofServiceNow's Web 
 
 </p>
 
-<h4>14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</h4>
+<h4><a name="point14">14. THIRD PARTY COPYRIGHTS AND OTHER RIGHTS</a></h4>
 
 <p>
 
@@ -436,7 +436,7 @@ Permission to use documents (such as press releases, datasheets, content, inform
 
 </p>
 
-<h4>15. INDEMNIFICATION</h4>
+<h4><a name="point15">15. INDEMNIFICATION</a></h4>
 
 <p>
 
@@ -446,7 +446,7 @@ YOU AGREE TO INDEMNIFY ROOFSERVICENOW, AND ITS SUBSIDIARIES, AFFILIATES, OFFICER
 
 
 
-<h4>16. ARBITRATION AND GOVERNING LAW </h4>
+<h4><a name="point16">16. ARBITRATION AND GOVERNING LAW</a></h4>
 
 <ol type="a">
 
@@ -454,7 +454,7 @@ YOU AGREE TO INDEMNIFY ROOFSERVICENOW, AND ITS SUBSIDIARIES, AFFILIATES, OFFICER
 
 </ol>
 
-<h4>17. NOTICE OF RIGHTS </h4>
+<h4><a name="point17">17. NOTICE OF RIGHTS</a></h4>
 
 <ol type="a">
 
@@ -474,7 +474,7 @@ YOU AGREE TO INDEMNIFY ROOFSERVICENOW, AND ITS SUBSIDIARIES, AFFILIATES, OFFICER
 
 
 
-<h4>18. GENERAL PROVISIONS </h4>
+<h4><a name="point18">18. GENERAL PROVISIONS</a></h4>
 
 <p>
 
