@@ -34,7 +34,7 @@
     $file_size = $_FILES['file']['size'];
     $tmp_file = $_FILES['file']['tmp_name'];
 
-    $archivador = $upload_folder . '/'. $file_name;
+    $archivador = $upload_folder . $file_name;
 
     if (!move_uploaded_file($tmp_file, $archivador)) {
         $return = Array('ok' => "FALSE", 'msg' => "An error occurred when uploading the file. It could not be saved.", 'status' => 'error');

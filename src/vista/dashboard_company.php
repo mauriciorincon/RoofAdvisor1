@@ -2913,7 +2913,7 @@ if(!empty($_actual_company['postCardValue'])){
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Upload Clients</button>
+    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myUploadListCustomer" onclick="">Upload Clients</button>
     <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="">New Client</button>
 </div>         
 
@@ -2930,6 +2930,26 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadListCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadListCustomer">List Customers</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadListCustomer"> 
+                <input id="uploadFile" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="uploadFile" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjaxXls('uploadFile','<?php echo $_actual_company['CompanyID']?>')">Upload</button>
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

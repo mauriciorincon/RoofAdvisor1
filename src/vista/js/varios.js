@@ -3441,8 +3441,46 @@ function uploadAjax(fileName){
             //alert('The operation end correctly');
         }
     });
+}
+
+function uploadAjaxXls(fileName,id_parent_file){
+    var file_name=$('#uploadFile').val();
+    var inputFileImage = document.getElementById(fileName);
+    var file = inputFileImage.files[0];
+    var data = new FormData();
+    data.append('file',file);
+    fileExt = file.name.substring(file.name.lastIndexOf('.'));
+    var url = 'controlador/ajax/uploadReports.php';
+    file_name = file_name.replace(/[^\w\s]/gi, '');
+    file_name = file_name.replace(/ /g, '_');
+    file_name = file_name.replace(fileExt, '');
+    data.append('file_name',file_name);
+    data.append('id_parent',id_parent_file);
+    data.append('extension',fileExt);
     
-    }
+    $.ajax({
+        url:url,
+        type:'POST',
+        contentType:false,
+        data:data,
+        processData:false,    
+        cache:false,
+        success : function(json) {
+            console.log(json);
+            data=jQuery.parseJSON(json);
+            alert(data.msg);
+            $("#myUploadReportN").modal("hide");  
+            $("#myUploadReport").modal("hide");  
+            $("#myUploadReport").modal("hide");
+        },
+        error : function(xhr, status) {
+            alert('An error occurred when uploading the file. It could not be saved.');
+        },
+        complete : function(xhr, status) {
+            //alert('The operation end correctly');
+        }
+    });
+}
 
 function getListReportFile(orderID){
     jsShowWindowLoad('');
