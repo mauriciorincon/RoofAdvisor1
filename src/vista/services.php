@@ -19,7 +19,7 @@
 					<h2>Our Services </h2>
 					<p>RoofServiceNow is the only on demand emergency roof repair services.</p>
 					<p>
-					This same day, on-demand service for hiring a prescreened service professional to fix a leaky roof before the demand is done.  From fixing leaky pipes to repairing your heating system on a cold winter day, together with hundreds of other urgent projects, RoofServiceNow same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofServiceNow, you answer 5 questions about the repair through the RoofServiceNow app or website; and a prescreened, local service professional will confirm they are on the way.
+					This same day, on-demand service for hiring a pre-screened service professional to fix a leaky roof before the damage is done.  From fixing leaky pipes to repairing your heating system on a cold winter day, together with hundreds of other urgent projects, RoofServiceNow same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofServiceNow, you answer 5 questions about the repair through the RoofServiceNow app or website; and a pre-screened, local service professional will confirm they are on the way.
 					</p>
 				</div>
 				<div class="row">
@@ -30,7 +30,7 @@
 							</div>
 							<h3>Emergency Repair</h3>
 							<p>
-							RoofServiceNow is the only same day service that connects roofing professionals with their clients real time who need repairs done right away
+							Roof ServiceNow’s same day service that connects roofing professionals with their clients real time who need repairs done right away
 							</p>
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 							</div>
 							<h3>schedule Rapair </h3>
 							<p>
-							With RoofServiceNow you can schedule a prescreened service professional for the day and time that is convenient for you for an estimate or repair. 
+							With RoofServiceNow you can schedule a pre-screened service professional for the day and time that is convenient for you for an estimate or repair. 
 							</p>
 						</div>
 					</div>

@@ -27,12 +27,12 @@
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="about-text">
 							<h3>WELCOME TO RoofServiceNow </h3>
-							<p>RoofServiceNow provides homeowners via mobile app and online services the ability to order on demand emergency roof repair services. RoofServiceNow also provides homeowners the ability to book appointments, receive estimates, receive pictures, tracking via GPS, and electronic payments via mobile app and online with local, prescreened service professionals.</p>
+							<p>RoofServiceNow provides homeowners via mobile app and online services the ability to order on demand emergency roof repair services. RoofServiceNow also provides homeowners the ability to book appointments, receive estimates, receive pictures, tracking via GPS, and electronic payments via mobile app and online with local, pre-screened service professionals.</p>
 
 							<h3>Here’s How It Works</h3>
 							<ul>
 								<li>Visit RoofServiceNow.com or download the RoofServiceNow app on IOS or Android and answer 5 questions</li>
-								<li>A local, prescreened and customer-rated service professional will take your order and connect with you to repair your leaky roof.</li>
+								<li>A local, pre-screened and customer-rated service professional will take your order and connect with you to repair your leaky roof.</li>
 								<li>You will be able to track your service professional as he/she arrives at your residence, see when they start and complete work, review before and after pictures, approve all estimates prior to work, and easily pay on line.</li>
 							</ul>
 							<a class="btn-more" href="#">learn more</a>
@@ -98,19 +98,19 @@
 				<div class="testimonial-active abouttxt-bg">
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p class="abouttxt1">RoofServicePro is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
+							<p class="abouttxt1">Roof Service Now is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p class="abouttxt1">	RoofServicePro provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided, daily, weekly, and monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
+							<p class="abouttxt1">	Roof Service Now provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided daily/weekly, monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
 						</div>
 						
 					</div>
 					<div class="single-testimonial">
 						<div class="testimonial-text">
-							<p class="abouttxt1">RepairCrews have their own RoofServicePro driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
+							<p class="abouttxt1">Repair crews have their own Roof Service Now driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
 						</div>
 						
 					</div>
