@@ -13,6 +13,11 @@ if(!isset($_POST['source_call'])){
 }else{
     $_source_call=$_POST['source_call'];
 }
+if(!isset($_POST['CompanyID'])){
+    $_companyID='CO000000';
+}else{
+    $_companyID=$_POST['CompanyID'];
+}
     
 
 if(strcmp('Customer_register',$_source_call)==0){
@@ -84,6 +89,7 @@ $_arrayCustomer = array(
     "customerZipCode" => "$_customerZipCode",
     "customerPhoneNumber" => "$_customerPhoneNumber",
     "password"=>$_password,
+    "CompanyID"=>$_companyID,
 );
 
 
@@ -120,6 +126,14 @@ if(strpos($_customerID,"Error")!==false){
                 'content'=>"Customer was register correctly please check your email, to validate the user",
             );
             print_r($_message);
+        case "Company":
+            $_message=array(
+                'title'=>"Register Customer",
+                'subtitle'=>"Thank you for register",
+                'content'=>"Customer was register correctly",
+                'customerID'=>$_customerID,
+            );
+            print_r(json_encode($_message));
     }
 }
 

@@ -358,6 +358,7 @@ class userController{
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
                 "uid" => $_uid_user,
+                "CompanyID"=>$arrayCustomer['CompanyID'],
             );
             
             $_response=$this->_userModel->insertCustomer('FBID',$Customer);
