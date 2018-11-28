@@ -52,6 +52,14 @@
          depends="lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci"
          description="Performs static analysis" />
 
+ <target name="package"
+         description="Creates a zip file with the web application" >
+  <zip destfile="${basedir}/build/roofservicenow-web.zip">
+    <zipfileset dir="src" excludes="roofreport/ .imgrepo/ invoice/" />
+    <zipfileset dir="vendor" prefix="vendor" />
+  </zip>
+ </target>
+
  <!-- Adjust the threadCount attribute's value to the number of CPUs -->
  <target name="static-analysis-parallel"
          description="Performs static analysis (executing the tools in parallel)">

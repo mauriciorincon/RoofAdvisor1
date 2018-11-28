@@ -9,7 +9,7 @@
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
     
-    $_SESSION['library_path']=$_SESSION['application_path'].'/vendor/';
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/vendor/';
 
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';

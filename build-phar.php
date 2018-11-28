@@ -16,16 +16,24 @@ class BuildPhar
    */
   public function __construct($_sourceDirectory, $stubFile, $_outputDirectory = null, $pharFileName = 'myPhar.phar') {
 
-    if ((file_exists($_sourceDirectory) === false) || (is_dir($_sourceDirectory) === false)) {
-      throw new Exception('No valid source directory given.');
-    }
-    $this->_sourceDirectory = $_sourceDirectory;
+    if (is_array($_sourceDirectory)) $this->_sourceDirectory = $_sourceDirectory;
+    else $this->_sourceDirectory = array($_sourceDirectory);
 
-    if (file_exists($this->_sourceDirectory.'/'.$stubFile) === false) {
+    $this->_stubFile = null;
+    foreach ($this->_sourceDirectory as $s) {
+      if ((file_exists($s) === false) || (is_dir($s) === false)) {
+        throw new Exception('No valid ($s) source directory given.');
+      }
+
+      if (file_exists($s.'/'.$stubFile) === true and is_null($this->_stubFile)) {
+        $this->_stubFile = $stubFile;
+      }
+    }
+
+    if (!$this->_stubFile) {
       throw new Exception('Your given stub file doesn\'t exists.');
     }
 
-    $this->_stubFile = $stubFile;
 
     if(empty($pharFileName) === true) {
       throw new Exception('Your given output name for your phar-file is empty.');
@@ -58,9 +66,13 @@ class BuildPhar
   }
 
   private function buildPhar() {
+    echo "output ".$this->_outputDirectory;
     $phar = new Phar($this->_outputDirectory.'/'.$this->_pharFileName);
 #    $phar->buildFromDirectory($this->_sourceDirectory,'/.php$/');
-    $phar->buildFromDirectory($this->_sourceDirectory);
+    $exclude = '/^(?!(.*\/conf.php$))/i';
+    foreach ($this->_sourceDirectory as $s) {
+      $phar->buildFromDirectory($s,$exclude);
+    }
     $phar->setDefaultStub($this->_stubFile);
   }
 }
@@ -68,7 +80,7 @@ class BuildPhar
 
 //Example Usage:
 $builder = new BuildPhar(
-  dirname(__FILE__).'/src',
+  [dirname(__FILE__).'/src',dirname(__FILE__).'/vendor'],
   'index.php',
   dirname(__FILE__).'/build',
   'roofservicenow-web.phar'

@@ -7,7 +7,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 if (isset($_GET['logout'])) {
-    unset($_SESSION);
+    // unset($_SESSION);
+    session_destroy();
+    session_start();
     require 'conf.php';
 }
 
