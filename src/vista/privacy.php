@@ -65,42 +65,33 @@ Use of cookies and other technologies to collect information. We use various tec
 
 <li><b>Information collected by third-parties.</b> We may allow third-parties advertising companies, and ad networks, to display advertisements on our site. These companies may use tracking technologies to collect information about users who view or interact with their advertisements. This information allows them to deliver targeted advertisements and gauge their effectiveness. Some of these third-party advertising companies may be advertising networks that are members of the Network Advertising Initiative, which offers a single location to opt out of ad targeting from member companies (www.networkadvertising.org).</li>
 
-<li>How we use the information we collect</li>
+<li><b>How we use the information we collect</b></li>
 
 <p>
 
 In general. We may use information that we collect about you to: 
 
-<ol>
 
-<li>deliver the products and services that you have requested;</li>
+<ul>
+	<li>deliver the products and services that you have requested;</li>
 
-<li>manage your account and provide you with customer support;</li>
+	<li>manage your account and provide you with customer support;</li>
 
-<li>perform research and analysis about your use of, or interest in, our products, services, or content, or products, services or content offered by others;</li>
+	<li>perform research and analysis about your use of, or interest in, our products, services, or content, or products, services or content offered by others;</li>
 
-<li>communicate with you by e-mail, postal mail, telephone and/or mobile devices or send newsletters about products or services that may be of interest to you from us;
+	<li>communicate with you by e-mail, postal mail, telephone and/or mobile devices or send newsletters about products or services that may be of interest to you from us;communicate with you with regard to partially completed service requests;</li>
 
-communicate with you with regard to partially completed service requests;</li>
+	<li>develop and display content and advertising tailored to your interests on our site and other sites;</li>
 
-<li>develop and display content and advertising tailored to your interests on our site and other sites;</li>
+	<li>perform background screening, which may include the use of third parties, on Service Professionals;</li>
 
-</li>
+	<li>enforce our terms and conditions;
 
-<li>
+	<li>publicly-display comments, ratings and reviews and other content provided by you; manage our business; and </li>
 
-<li>perform background screening, which may include the use of third parties, on Service Professionals;</li>
-
-<li>enforce our terms and conditions;
-
-<li>publicly-display comments, ratings and reviews and other content provided by you;
-
-manage our business; and </li>
-
-<li>perform functions as otherwise described to you at the time of collection.</li>
-
-
-
+	<li>perform functions as otherwise described to you at the time of collection.</li>
+</ul>
+</p>
 <p><b>Payment and Financial information.</b> For Service Professionals, we may use financial information or payment method to process payment for any purchases made on our website, enroll you in the discount, rebate, and other programs in which you elect to participate, to pre-qualify you for credit card and other offers that you might find of interest, to pre-qualify Service Professionals to participate in our contractor network, to protect against or identify possible fraudulent transactions, and otherwise as needed to manage our business. For consumers, we may use credit card information to process payment for any payments made on our website.</p>
 
 

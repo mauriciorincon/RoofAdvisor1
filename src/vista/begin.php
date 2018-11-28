@@ -26,7 +26,7 @@
 <span style="font-size:34px;"> <strong>Emergency Roof Repair? Schedule an Appointment? Need a Roof Report?</strong> </span>
 </br></br>
 <p class='srvappph1'>
-This is a same day, on-demand service for hiring prescreened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
+This is a same day, on-demand service for hiring pre-screened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
 </p>
 <ul id="rhlist">
   <li>Track the contractor’s arrival to your home via GPS tracking</li>
@@ -38,7 +38,7 @@ This is a same day, on-demand service for hiring prescreened service professiona
 <ul class='srvappph1'>
 <li id="easyli">RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home. It’s that easy!</li>
 </br>
-<li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a prescreened service professional will confirm your order for an appointment. </li>
+<li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a pre-screened service professional will confirm your order for an appointment. </li>
 </br>
 <li id="reportli">Need a roof report? RoofServiceNow can provide in a couple of hours a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. <a href="rsndocs/SampleReport.pdf" style="color: #fa511a;" target="_blank" >See sample</a></li>
 </br>

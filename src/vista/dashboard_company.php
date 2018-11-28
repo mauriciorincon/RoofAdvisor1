@@ -2584,23 +2584,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
-<div class="modal fade" id="myModalRespuesta" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				
-				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myRegisterNewCustomer" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -2672,7 +2656,75 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
-
+<div class="modal fade" id="myRegisterNewCustomerCompany" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerRegisterNewCustomer">Customer Info</h4> 
+			</div> 
+            <div class="modal-body" id="textRegisterNewCustomer">
+                <div class="list-group1" id="myCustomerListGroup">
+                        <div class="form-group">
+                            <label class="control-label">First Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerNameCompany" name="firstCustomerNameCompany"  />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerNameCompany" name="lastCustomerNameCompany"  />
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label ">Email</label>
+                            <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomerCompany" name="emailValidationCustomerCompany" onfocusout="validateEmail('customer')"/>
+                            <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="control-label ">Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+                            <div class="help-block">Minimum of 6 characters</div>
+                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label ">Confirm Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddressCompany" name="customerAddressCompany" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCityCompany" name="customerCityCompany" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <select id="customerStateCompany" name="customerStateCompany" required="required" class="form-control" placeholder="Select state">
+                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                    <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                <?php } ?>
+                            </select>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Zip code</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCodeCompany" name="customerZipCodeCompany" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">Phone number</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumberCompany" name="customerPhoneNumberCompany"  />
+                        </div>
+                </div>
+            </div>
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer('Company')">Save Info</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
   
 
 <div class="modal fade" id="myPostCardServiceP" role="dialog">
@@ -2861,5 +2913,47 @@ if(!empty($_actual_company['postCardValue'])){
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn-primary btn-sm" onClick="selectPaymentType()" >Upload Clients</button>
+    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myUploadListCustomer" onclick="">Upload Clients</button>
+    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="">New Client</button>
 </div>         
+
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myUploadListCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerUploadListCustomer">List Customers</h4> 
+			</div> 
+			<div class="modal-body" id="textUploadListCustomer"> 
+                <div class="alert alert-danger">
+                    You can upload the list of clients, for such purpose please use the template provided by clicking <a href="rsndocs/curstomer_format.xlsx">here</a>, after completing it please use the upload button. 
+                </div>
+                <input id="uploadFile" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="uploadFile" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjaxXls('uploadFile','<?php echo $_actual_company['CompanyID']?>')">Upload</button>
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

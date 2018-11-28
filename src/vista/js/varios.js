@@ -864,6 +864,52 @@ $(document).ready(function () {
     $('div.setup-panelCustomer div a.btn-success').trigger('click');
     });
  
+    function saveCustomerDataC(firstCustomerName,lastCustomerName,emailValidation,customerAddress,customerCity,customerState,customerZipCode,customerPhoneNumber,password,p_pantalla,CompanyID){
+
+        jsShowWindowLoad('');
+        $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
+                                                        "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
+                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"inputPassword":password,
+                                                    "source_call":p_pantalla,"CompanyID":CompanyID,"selectionType":"newCustomer" }, null, "text" )
+                .done(function( data, textStatus, jqXHR ) {
+                    if ( console && console.log ) {
+                       
+                        $("#validatingMessajeCode").html(data);
+                        var n = data.indexOf("Error");
+                        if(n==-1){
+                            data=jQuery.parseJSON(data);
+                            $(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
+                            $('#textAnswerOrder').html(data.content);
+                            $('#headerTextAnswerOrder').html(data.title);
+                            $('#myModalRespuesta').modal({backdrop: 'static'});
+
+                            $("#table_list_customer_by_company").append('<tr><td>'+data.customerID+
+                                                            '</td><td>'+firstCustomerName+' '+lastCustomerName+'</td><td>'+customerAddress+
+                                                            '</td><td>'+customerCity+'</td><td>'+customerState+
+                                                            '</td><td>'+customerZipCode+'</td><td>'+emailValidation+'</td><td>'+customerPhoneNumber+'</tr>');
+                        }else{
+                            
+                            $('#textAnswerOrder').html(data);
+                            $('#headerTextAnswerOrder').html('Error registering customer');
+                            $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                            //$(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
+                            
+                            $('#myModalRespuesta').modal({backdrop: 'static'});
+                            result=false;
+                        }
+                        
+                        console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                        jsRemoveWindowLoad('');
+                    }
+                })
+                .fail(function( jqXHR, textStatus, errorThrown ) {
+                    if ( console && console.log ) {
+                        console.log( "La solicitud a fallado: " +  textStatus);
+                        result=false;
+                        jsRemoveWindowLoad('');
+                    }
+                });
+    }
 /////////////////////////////////////////////////////////////////////////////
 
     function saveCustomerData(p_pantalla){
@@ -3395,8 +3441,46 @@ function uploadAjax(fileName){
             //alert('The operation end correctly');
         }
     });
+}
+
+function uploadAjaxXls(fileName,id_parent_file){
+    var file_name=$('#uploadFile').val();
+    var inputFileImage = document.getElementById(fileName);
+    var file = inputFileImage.files[0];
+    var data = new FormData();
+    data.append('file',file);
+    fileExt = file.name.substring(file.name.lastIndexOf('.'));
+    var url = 'controlador/ajax/uploadReports.php';
+    file_name = file_name.replace(/[^\w\s]/gi, '');
+    file_name = file_name.replace(/ /g, '_');
+    file_name = file_name.replace(fileExt, '');
+    data.append('file_name',file_name);
+    data.append('id_parent',id_parent_file);
+    data.append('extension',fileExt);
     
-    }
+    $.ajax({
+        url:url,
+        type:'POST',
+        contentType:false,
+        data:data,
+        processData:false,    
+        cache:false,
+        success : function(json) {
+            console.log(json);
+            data=jQuery.parseJSON(json);
+            alert(data.msg);
+            $("#myUploadReportN").modal("hide");  
+            $("#myUploadReport").modal("hide");  
+            $("#myUploadReport").modal("hide");
+        },
+        error : function(xhr, status) {
+            alert('An error occurred when uploading the file. It could not be saved.');
+        },
+        complete : function(xhr, status) {
+            //alert('The operation end correctly');
+        }
+    });
+}
 
 function getListReportFile(orderID){
     jsShowWindowLoad('');
@@ -3836,16 +3920,20 @@ function formatActualTime(aditionHours) {
     return moment().add(aditionHours, 'hours').format('hh:mm A');
 }
 
-function validateInfoCustomer(){
-    var firstCustomerName = $("input#firstCustomerName").val();
-    var lastCustomerName = $("input#lastCustomerName").val();
-    var emailValidation = $("input#emailValidationCustomer").val();
-    var customerAddress = $("input#customerAddress").val();
-    var customerCity = $("input#customerCity").val();
-    var customerState = $("select#customerState").val();
-    var customerZipCode = $("input#customerZipCode").val();
-    var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
+function validateInfoCustomer(suffix){
+    if(suffix==undefined){
+        suffix="";
+    }
+    var firstCustomerName = $("input#firstCustomerName"+suffix).val();
+    var lastCustomerName = $("input#lastCustomerName"+suffix).val();
+    var emailValidation = $("input#emailValidationCustomer"+suffix).val();
+    var customerAddress = $("input#customerAddress"+suffix).val();
+    var customerCity = $("input#customerCity"+suffix).val();
+    var customerState = $("select#customerState"+suffix).val();
+    var customerZipCode = $("input#customerZipCode"+suffix).val();
+    var customerPhoneNumber = "+1"+$("input#customerPhoneNumber"+suffix).val();
     var message = "";
+    var companyID=$('#companyIDhidden').val();
 
     if(firstCustomerName==undefined || firstCustomerName==''){
         message+="Please, fill the Customer name field \n";
@@ -3871,15 +3959,24 @@ function validateInfoCustomer(){
     if(customerPhoneNumber==undefined || customerPhoneNumber==''){
         message+="Please, fill the phone number field \n";
     }
+    
     if(message!=""){
         alert(message);
         $('#linkNewCustomer').addClass('btn-danger').removeClass('btn-success');
         return false;
     }else{
-        $(document).ready(function(){$("#myRegisterNewCustomer").modal("hide"); });
-        $('#linkNewCustomer').addClass('btn-success').removeClass('btn-danger');
-        return true;
+        if(suffix!=""){
+            saveCustomerDataC(firstCustomerName,lastCustomerName,emailValidation,customerAddress,customerCity,customerState,customerZipCode,customerPhoneNumber,"","Company",companyID);
+        }else{
+            $(document).ready(function(){$("#myRegisterNewCustomer").modal("hide"); });
+            $('#linkNewCustomer').addClass('btn-success').removeClass('btn-danger');
+            return true;
+        }
+        
     }
+
+    
+    
 }
 
 function validateOrderInfo(){
