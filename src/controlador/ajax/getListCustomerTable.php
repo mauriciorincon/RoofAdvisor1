@@ -32,15 +32,20 @@ $_string="";
         $_Email =isset($customer['Email']) ? $customer['Email'] : '';
         $_Phone =isset($customer['Phone']) ? $customer['Phone'] : '';
 
-        $_actions="";
+        
+        $_actions='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '.
+            'href="#myRegisterUpdateCustomerCompany" '.
+            'onClick="getCustomerInfoTable('.$customer['CustomerID'].')"> ' .
+            '<span class="glyphicon glyphicon-pencil"></span>'.
+        '</a>';
         if(strcmp($customer['uid'],"undefined")==0){
-            $_actions='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' .
+            $_actions.='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' .
             'id="inactivate-customer-button" name="inactivate-customer-button"  ' .
             'data-toggle1="tooltip" onclick="disableEnableCustomer('.$customer['CustomerID'].',\'Active\')"> ' .
             '<span class="glyphicon glyphicon-ok"></span></a>';
             
         } else{
-            $_actions='<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' .
+            $_actions.='<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' .
              'id="inactivate-customer-button" name="inactivate-customer-button" ' .
              'data-toggle="tooltip" onclick="disableEnableCustomer('.$customer['CustomerID'].',\'Inactive\')"> ' .
              '<span class="glyphicon glyphicon-trash"></span></a>';

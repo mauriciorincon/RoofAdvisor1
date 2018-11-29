@@ -3627,6 +3627,50 @@ function getCustomerInfo(customerID){
     });
 }
 
+function getCustomerInfoTable(customerID){
+    $('#firstCustomerNameCompanyU').val("");
+    $('#lastCustomerNameCompanyU').val("");
+    $('#emailValidationCustomerCompanyU').val("");
+    $('#customerAddressCompanyU').val("");
+    $('#customerCityCompanyU').val("");
+    $('#customerStateCompanyU').val("");
+    $('#customerZipCodeCompanyU').val("");
+    $('#customerPhoneNumberCompanyU').val("");
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataCustomer.php", { "customerID" : customerID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                customer=jQuery.parseJSON(data);
+                $('#firstCustomerNameCompanyU').val(customer.Fname);
+                $('#lastCustomerNameCompanyU').val(customer.Lname);
+                $('#emailValidationCustomerCompanyU').val(customer.Email);
+                $('#customerAddressCompanyU').val(customer.Address);
+                $('#customerCityCompanyU').val(customer.City);
+                $('#customerStateCompanyU').val(customer.State);
+                $('#customerZipCodeCompanyU').val(customer.ZIP);
+                $('#customerPhoneNumberCompanyU').val(customer.Phone);
+            }else{
+
+                $('#headerTextAnswerOrder').html('Roof Report response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
 function getInforCustomerForRoofReport(){
     var orderId=$('#orderNumberRRR').val();
     if(orderId==undefined || orderId==''){

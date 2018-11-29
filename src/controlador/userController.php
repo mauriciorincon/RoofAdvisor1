@@ -1122,29 +1122,38 @@ class userController{
     public function enableCustomer($_customerID){
         $_msg="";
         $_customer_data=$this->getCustomerById($_customerID);
-        print_r($_customer_data);
+        //print_r($_customer_data);
         if($this->is_valid_email($_customer_data['Email'])==false){
             $_msg="The email is incorrect, please review \n";
         }
         if($this->is_valid_phone($_customer_data['Phone'])==false){
             $_msg="The phone number is incorrect, please review \n";
         }
-        $hashActivationCode = md5( rand(0,1000) );
-        $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$arrayCustomer['Fname'].' '.$arrayCustomer['Lname'],$hashActivationCode,'12345','customer');
-        if(gettype($_responseU)=="object"){
-            $_uid_user=$_responseU->uid;
+        if(!empty($_msg)){
+            return "Error ".$_msg;
         }else{
-            $_uid_user="undefined";
+            $hashActivationCode = md5( rand(0,1000) );
+            $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$arrayCustomer['Fname'].' '.$arrayCustomer['Lname'],$hashActivationCode,'123456','customer');
+            if(gettype($_responseU)=="object"){
+                $_uid_user=$_responseU->uid;
+            }else{
+                $_uid_user="undefined";
+            }
+            if(strcmp($_uid_user,"undefined")==0){
+                return "Error ".$_responseU;
+            }else{
+                $_mail_body=$this->welcomeMail($_customer_data,$hashActivationCode,$_responseU);
+            
+                $this->_sendMail=new emailController();
+                $_mail_response=$this->_sendMail->sendMailSMTP($_customer_data['Email'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
+                if($_mail_response==false){
+                    return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+                }else{
+                    return "OK ".$_response."<br>".$_mail_response."<br>".$_uid_user;
+                }
+            }
         }
-        $_mail_body=$this->welcomeMail($_customer_data,$hashActivationCode,$_responseU);
         
-        $this->_sendMail=new emailController();
-        $_mail_response=$this->_sendMail->sendMailSMTP($_customer_data['Email'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
-        if($_mail_response==false){
-            return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
-        }else{
-            return "OK ".$_response."<br>".$_mail_response;
-        }
     }
 
     public function disableCustomer($_customerID){

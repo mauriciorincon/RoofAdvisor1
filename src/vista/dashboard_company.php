@@ -2958,3 +2958,74 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+
+<div class="modal fade" id="myRegisterUpdateCustomerCompany" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerRegisterUpdateCustomer">Customer Info</h4> 
+			</div> 
+            <div class="modal-body" id="textRegisterUpdateCustomer">
+                <div class="list-group1" id="myCustomerListGroup">
+                        <div class="form-group">
+                            <label class="control-label">First Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerNameCompanyU" name="firstCustomerNameCompanyU"  />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerNameCompanyU" name="lastCustomerNameCompanyU"  />
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label ">Email</label>
+                            <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomerCompanyU" name="emailValidationCustomerCompanyU" onfocusout="validateEmail('customer')"/>
+                            <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="control-label ">Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
+                            <div class="help-block">Minimum of 6 characters</div>
+                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label ">Confirm Password</label>
+                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
+                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddressCompanyU" name="customerAddressCompanyU" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCityCompanyU" name="customerCityCompanyU" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <select id="customerStateCompanyU" name="customerStateCompanyU" required="required" class="form-control" placeholder="Select state">
+                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                    <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                <?php } ?>
+                            </select>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Zip code</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCodeCompanyU" name="customerZipCodeCompanyU" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">Phone number</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumberCompanyU" name="customerPhoneNumberCompanyU"  />
+                        </div>
+                </div>
+            </div>
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer('Company')">Update Info</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
