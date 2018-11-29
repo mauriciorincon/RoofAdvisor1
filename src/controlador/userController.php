@@ -321,13 +321,15 @@ class userController{
         $_responseU="undefined";
         $this->_userModel=new userModel();
         $_lastCustomerID=$this->_userModel->getLasCustomerNumberParameter("Parameters/LastCustomerID");
+        
         //$_lastCustomerID=$this->_userModel->getLastNodeCustomer("Customers","CustomerID");
         if (is_null($_lastCustomerID)){
             $_lastCustomerID=1;
         }else{
             $_lastCustomerID++;
         }
-
+        $this->updateCustomerLastId($_lastCustomerID);
+        
         $hashActivationCode = md5( rand(0,1000) );
         if(strcmp($_selectionType,"newCustomer")!=0){
             $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');    
@@ -367,7 +369,7 @@ class userController{
                 $_mail_body=$this->welcomeMail($arrayCustomer,$hashActivationCode,$_responseU);
             }
             
-            $this->updateCustomerLastId($_lastCustomerID);
+            
 
             if(strcmp($_selectionType,"newCustomer")!=0){
                 $this->_sendMail=new emailController();
@@ -1117,6 +1119,50 @@ class userController{
         }
     }
 
+    public function enableCustomer($_customerID){
+        $_msg="";
+        $_customer_data=$this->getCustomerById($_customerID);
+        print_r($_customer_data);
+        if($this->is_valid_email($_customer_data['Email'])==false){
+            $_msg="The email is incorrect, please review \n";
+        }
+        if($this->is_valid_phone($_customer_data['Phone'])==false){
+            $_msg="The phone number is incorrect, please review \n";
+        }
+        $hashActivationCode = md5( rand(0,1000) );
+        $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$arrayCustomer['Fname'].' '.$arrayCustomer['Lname'],$hashActivationCode,'12345','customer');
+        if(gettype($_responseU)=="object"){
+            $_uid_user=$_responseU->uid;
+        }else{
+            $_uid_user="undefined";
+        }
+        $_mail_body=$this->welcomeMail($_customer_data,$hashActivationCode,$_responseU);
+        
+        $this->_sendMail=new emailController();
+        $_mail_response=$this->_sendMail->sendMailSMTP($_customer_data['Email'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
+        if($_mail_response==false){
+            return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+        }else{
+            return "OK ".$_response."<br>".$_mail_response;
+        }
+    }
+
+    public function disableCustomer($_customerID){
+        
+    }
+
+    function is_valid_email($str)
+    {
+        return (false !== strpos($str, "@") && false !== strpos($str, "."));
+    }
+
+    function is_valid_phone($str){
+        if(strlen($str)!=12){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public function showMessage(){
         require_once("vista/head.php");
 		require_once("vista/message_process.php");

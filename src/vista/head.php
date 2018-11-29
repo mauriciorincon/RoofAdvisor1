@@ -103,6 +103,8 @@ if(!isset($_SESSION)) {
 							</div>
 						</div>
 						<div id="soctop1" class="col-lg-4 col-md-4 col-sm-2 col-xs-12">
+							
+							
 							<div id ="socico" class="social-icon text-right">
 								<a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
 								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fab fa-linkedin"></i></a>

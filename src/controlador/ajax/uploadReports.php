@@ -4,7 +4,9 @@
     }
     require_once($_SESSION['application_path']."/controlador/orderController.php");
     require_once($_SESSION['application_path']."/controlador/readXLSXController.php");
+    require_once($_SESSION['application_path']."/controlador/userController.php");
 
+    $_ext_msg="";
     $file_name=$_POST['file_name'];
     if(isset($_POST['orderID'])){
         $_orderID=$_POST['orderID'];
@@ -57,9 +59,18 @@
         }else if(isset($_POST['id_parent'])){
             
             $_readExcel=new read_excel();
-            $result=$_readExcel->read_file_excel($archivador);
+            $result=$_readExcel->read_file_excel($archivador,$_POST['id_parent']);
+            $_userController=new userController();
+
+            $_id_customers_array=array();
+            foreach ($result as $key => $_new_customer) {
+                $_customerID=$_userController->insertCustomer($_new_customer,"newCustomer");
+                array_push($_id_customers_array,$_customerID);
+            }
+            //print_r($_id_customers_array);
+            $_ext_msg="The process finished correctly ".count($_id_customers_array)." curtomers was uploaded";
         }
-        $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$_POST['file_name']."] $result");
+        $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$_POST['file_name']."]",'extmsg'=>$_ext_msg);
     }
 
     echo json_encode($return);

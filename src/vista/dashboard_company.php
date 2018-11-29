@@ -2,7 +2,7 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
-<?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
+<!--<?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
     </div>
@@ -10,7 +10,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
     <div class="alert alert-success">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
     </div>
-<?php } ?>
+<?php } ?>-->
 
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
@@ -2906,6 +2906,7 @@ if(!empty($_actual_company['postCardValue'])){
                 <th>Zip Code</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
