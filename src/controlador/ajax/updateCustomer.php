@@ -23,7 +23,7 @@ $_arrayCustomer = array(
     "customerCity" => "$_customerCity",
     "customerState" => "$_customerState",
     "customerZipCode" => "$_customerZipCode",
-    "customerPhoneNumber" => "$_customerPhoneNumber",
+    "customerPhoneNumber" => "+1$_customerPhoneNumber",
 );
 
 $_userController=new userController();

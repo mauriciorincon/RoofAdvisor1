@@ -2033,23 +2033,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div><!-- /cierro modal -->
 
 
-<div class="modal fade" id="myMensaje" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textMessage"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonMessage"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 
 <div class="modal fade" id="myInvoiceInfo" role="dialog">
@@ -3024,8 +3008,27 @@ if(!empty($_actual_company['postCardValue'])){
                 </div>
             </div>
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer('Company')">Update Info</button> 
+                <button type="button" class="btn-primary btn-sm" onclick="updateDataCustomerFromCompany()">Update Info</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

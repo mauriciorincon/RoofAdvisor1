@@ -32,6 +32,7 @@ $_string="";
         $_Email =isset($customer['Email']) ? $customer['Email'] : '';
         $_Phone =isset($customer['Phone']) ? $customer['Phone'] : '';
 
+        $_Phone=str_replace("+1","",$_Phone);
         
         $_actions='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '.
             'href="#myRegisterUpdateCustomerCompany" '.

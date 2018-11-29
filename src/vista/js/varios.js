@@ -743,15 +743,50 @@ function updateDataCustomerFromCompany(){
     var customerState = $("select#customerStateCompanyU").val();
     var customerZipCode = $("input#customerZipCodeCompanyU").val();
     var customerPhoneNumber = $("input#customerPhoneNumberCompanyU").val();
+    var msg = "";
+    if(customerID=="" || customerID==undefined || customerID==null){
+        msg+="Customer id is invalid \n";
+    }
+    if(firstCustomerName=="" || firstCustomerName==undefined || firstCustomerName==null ){
+        msg+="First Name is invalid \n";
+    }
+    if(lastCustomerName=="" || lastCustomerName==undefined || lastCustomerName==null  ){
+        msg+="Last Name is invalid \n";
+    }
+    if(emailValidation=="" || emailValidation==undefined || emailValidation==null  ){
+        msg+="Email is invalid \n";
+    }
+    if(customerAddress=="" || customerAddress==undefined || customerAddress==null  ){
+        msg+="Address is invalid \n";
+    }
+    if(customerCity=="" || customerCity==undefined || customerCity==null  ){
+        msg+="City is invalid \n";
+    }
+    if(customerState=="" || customerState==undefined || customerState==null  ){
+        msg+="State is invalid \n";
+    }
+    if(customerZipCode=="" || customerZipCode==undefined || customerZipCode==null  ){
+        msg+="Zipcode is invalid \n";
+    }
+    if(customerPhoneNumber=="" || customerPhoneNumber==undefined  || customerPhoneNumber==null ){
+        msg+="Zipcode is invalid \n";
+    }
 
-    customerObj = { "customerID":customerID, "firstCustomerName":firstCustomerName,
+    if(msg==""){
+        customerObj = { "customerID":customerID, "firstCustomerName":firstCustomerName,
                     "lastCustomerName":lastCustomerName,"emailValidation":emailValidation,
                     "customerAddress":customerAddress,"customerCity":customerCity,
                     "customerState":customerState,"customerZipCode":customerZipCode,
                     "customerPhoneNumber":customerPhoneNumber};
-    
+
+        updateDataCustomer(customerObj);
+    }else{
+        $('#myMensaje div.modal-body').html(msg);
+        $(document).ready(function(){$("#myMensaje").modal("show"); });
+    }
 }
-function updateDataCustomer(customerID){
+
+function updateDataCustomerFromCustomer(customerID){
     var firstCustomerName = $("input#firstCustomerNameProfile").val();
     var lastCustomerName = $("input#lastCustomerNameProfile").val();
     var emailValidation = $("input#emailValidationProfile").val();
@@ -760,11 +795,20 @@ function updateDataCustomer(customerID){
     var customerState = $("select#customerStateProfile").val();
     var customerZipCode = $("input#customerZipCodeProfile").val();
     var customerPhoneNumber = $("input#customerPhoneNumberProfile").val();
-    
+
+    customerObj = { "customerID":customerID, "firstCustomerName":firstCustomerName,
+                    "lastCustomerName":lastCustomerName,"emailValidation":emailValidation,
+                    "customerAddress":customerAddress,"customerCity":customerCity,
+                    "customerState":customerState,"customerZipCode":customerZipCode,
+                    "customerPhoneNumber":customerPhoneNumber};
+
+    updateDataCustomer(customerObj);
+}
+function updateDataCustomer(customerObj){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerID,"firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,
-                                                    "emailValidation":emailValidation,"customerAddress":customerAddress,"customerCity":customerCity,
-                                                    "customerState":customerState,"customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber}
+    $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerObj.customerID,"firstCustomerName" : customerObj.firstCustomerName,"lastCustomerName": customerObj.lastCustomerName,
+                                                    "emailValidation":customerObj.emailValidation,"customerAddress":customerObj.customerAddress,"customerCity":customerObj.customerCity,
+                                                    "customerState":customerObj.customerState,"customerZipCode":customerObj.customerZipCode,"customerPhoneNumber":customerObj.customerPhoneNumber}
                                                     , null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
@@ -3646,6 +3690,7 @@ function getCustomerInfo(customerID){
 }
 
 function getCustomerInfoTable(customerID){
+    $('#customerIdCompanyU').val("");
     $('#firstCustomerNameCompanyU').val("");
     $('#lastCustomerNameCompanyU').val("");
     $('#emailValidationCustomerCompanyU').val("");
@@ -3661,7 +3706,7 @@ function getCustomerInfoTable(customerID){
             var n = data.indexOf("Error");
             if(n==-1){
                 customer=jQuery.parseJSON(data);
-                $('#customerIdCompanyU').val(customerID);
+                $('#customerIdCompanyU').val(customer.FBID);
                 $('#firstCustomerNameCompanyU').val(customer.Fname);
                 $('#lastCustomerNameCompanyU').val(customer.Lname);
                 $('#emailValidationCustomerCompanyU').val(customer.Email);
