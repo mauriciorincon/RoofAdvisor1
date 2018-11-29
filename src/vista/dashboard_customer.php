@@ -1190,7 +1190,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						echo $_data;
 					?>"/>
                 </div>  
-                <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
+                <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomerFromCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
             </div>
 		</div>
 
@@ -2235,7 +2235,31 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 							<div class="well no-padding">
 								<div>
 									<ul class="nav nav-list nav-menu-list-style">
-										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Miami-Dade County
+
+										<?php 
+											$n=0;
+											$state="";
+											$city="";
+											while(isset($_array_urls[$n]['state'])){
+												if(strcmp($state,$_array_urls[$n]['state'])==0 and strcmp($city,$_array_urls[$n]['city'])==0){
+													echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+												}else{
+													if(!empty($state)){
+														echo '</ul></li>';
+													}
+													$state=$_array_urls[$n]['state'];
+													$city=$_array_urls[$n]['city'];
+													echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>'.$_array_urls[$n]['city']
+													.'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">';
+													
+												}
+												$n++;
+											}
+										//print_r($_array_urls);
+											echo '</ul></li>';
+										?>
+										<!--<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Miami-Dade County
 													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
 											<ul class="nav nav-list tree bullets">
 												<?php echo $_menu_urls; ?>
@@ -2261,7 +2285,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											<ul class="nav nav-list tree bullets">
 												<?php echo $_menu_urls3; ?>
 											</ul>
-										</li>
+										</li>-->
 									</ul>
 								</div>
 							</div>

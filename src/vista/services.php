@@ -24,6 +24,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+						<a href="index.php">
 						<div class="single-service text-center">
 							<div class="service-icon">
 								<i class="fa fa-sun-o"></i>
@@ -33,8 +34,10 @@
 							Roof ServiceNow’s same day service that connects roofing professionals with their clients real time who need repairs done right away
 							</p>
 						</div>
+						</a>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+						<a href="index.php">
 						<div class="single-service text-center ">
 							<div class="service-icon">
 								<i class="fa fa-book"></i>
@@ -44,8 +47,10 @@
 							With RoofServiceNow you can schedule a pre-screened service professional for the day and time that is convenient for you for an estimate or repair. 
 							</p>
 						</div>
+						</a>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+						<a href="index.php">
 						<div class="single-service text-center ">
 							<div class="service-icon">
 								<i class="fa fa-ticket"></i>
@@ -53,6 +58,7 @@
 							<h3>Order roof Report</h3>
 							<p>RoofServiceNow provides a detailed roof report for only $29. Get an accurate aerial roof measurements and diagrams you can send to insurance adjusters.</p>
 						</div>
+						</a>
 					</div>
 					
 				</div>

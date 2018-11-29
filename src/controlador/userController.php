@@ -518,6 +518,10 @@ class userController{
             $_menu_item=$this->getItemMenu();
             $_divs_info=$this->fillInformationMenu();
 
+            $_information=new usefullURLS();
+       
+
+            $_array_urls=$_information->fillInfoUrls();
             $_menu_urls=$this->getItemMenuURLS("Miami-Dade County");
             $_menu_urls1=$this->getItemMenuURLS("Broward County");
             $_menu_urls2=$this->getItemMenuURLS("Palm Beach County");
@@ -704,7 +708,11 @@ class userController{
         $this->_userModel->updateCustomer($_customerID.'/Timestamp',date("m-d-Y H:i:s"));
 
         return "The customer identify by ".$_customerID." was updated corretly";
-
+    }
+    public function updateCustomerByField($_customerID,$field,$value){
+        $this->_userModel=new userModel();      
+        $this->_userModel->updateCustomer($_customerID.'/'.$field,$value);                                  
+        return "The customer identify by ".$_customerID." was updated corretly";
     }
 
 
@@ -713,6 +721,7 @@ class userController{
         //$password = rand(1000,5000);
         //$password = "pass12345";
         //echo "password:".$password;
+        $number=str_replace("+1","",$number);
         $userProperties = [
             'email' => $mail,
             'emailVerified' => false,
@@ -1142,6 +1151,8 @@ class userController{
             if(strcmp($_uid_user,"undefined")==0){
                 return "Error ".$_responseU;
             }else{
+                $this->_userModel=new userModel();
+                $this->updateCustomerByField($_customer_data['FBID'],'uid',$_uid_user);
                 $_mail_body=$this->welcomeMail($_customer_data,$hashActivationCode,$_responseU);
             
                 $this->_sendMail=new emailController();
