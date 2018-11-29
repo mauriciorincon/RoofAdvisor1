@@ -50,7 +50,7 @@
 						</a>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
-						<a href="index.php">
+						<a href="index.php?step=2"  >
 						<div class="single-service text-center ">
 							<div class="service-icon">
 								<i class="fa fa-ticket"></i>

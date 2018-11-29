@@ -949,3 +949,12 @@
 		</div> 
 	</div>
 </div>
+<?php if(isset($_GET['step'])){?>
+
+	<script>
+		$(document).ready(function() {
+			nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
+			nextStepWizard.removeAttr('disabled').trigger('click');
+		});
+	</script>
+<?php } ?>

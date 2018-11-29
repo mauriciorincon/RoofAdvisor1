@@ -67,6 +67,7 @@ Use of cookies and other technologies to collect information. We use various tec
 
 <li><b>How we use the information we collect</b></li>
 
+<ol>
 <p>
 
 In general. We may use information that we collect about you to: 
@@ -92,10 +93,12 @@ In general. We may use information that we collect about you to:
 	<li>perform functions as otherwise described to you at the time of collection.</li>
 </ul>
 </p>
-<p><b>Payment and Financial information.</b> For Service Professionals, we may use financial information or payment method to process payment for any purchases made on our website, enroll you in the discount, rebate, and other programs in which you elect to participate, to pre-qualify you for credit card and other offers that you might find of interest, to pre-qualify Service Professionals to participate in our contractor network, to protect against or identify possible fraudulent transactions, and otherwise as needed to manage our business. For consumers, we may use credit card information to process payment for any payments made on our website.</p>
+</ol>
+<li><b>Payment and Financial information.</b> For Service Professionals, we may use financial information or payment method to process payment for any purchases made on our website, enroll you in the discount, rebate, and other programs in which you elect to participate, to pre-qualify you for credit card and other offers that you might find of interest, to pre-qualify Service Professionals to participate in our contractor network, to protect against or identify possible fraudulent transactions, and otherwise as needed to manage our business. For consumers, we may use credit card information to process payment for any payments made on our website.</li>
 
 
-
+<br>
+<br>
 <h4>Mobile Apps</h4>
 
 <p>If you install one of our apps on your mobile device, your use of the app is subject to the applicable app license agreement.</p>
@@ -138,7 +141,7 @@ Personal information. We do not share your personal information with others exce
 
 <li>
 
-Direct mail partners. From time to time we may share our postal mailing list with selected providers of goods and services that may be of interest to you.
+<b>Direct mail partners.</b> From time to time we may share our postal mailing list with selected providers of goods and services that may be of interest to you.
 
 Other Situations. We also may disclose your information: 
 

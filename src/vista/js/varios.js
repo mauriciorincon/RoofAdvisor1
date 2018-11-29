@@ -33,6 +33,11 @@ $(document).ready(function() {
       }
 
     );
+
+   
+
+    
+
     step0=$('.stepwizard-step:eq(0)');
     if(step0!=undefined){
         step0.hide();
@@ -735,6 +740,7 @@ function updateDataCompany(){
 
 function updateDataCustomerFromCompany(){
     var customerID = $("input#customerIdCompanyU").val();
+    var customerFBID =  $("input#customerIdCompanyFBIDU").val();
     var firstCustomerName = $("input#firstCustomerNameCompanyU").val();
     var lastCustomerName = $("input#lastCustomerNameCompanyU").val();
     var emailValidation = $("input#emailValidationCustomerCompanyU").val();
@@ -773,17 +779,47 @@ function updateDataCustomerFromCompany(){
     }
 
     if(msg==""){
-        customerObj = { "customerID":customerID, "firstCustomerName":firstCustomerName,
+        customerObj = { "customerID":customerFBID, "firstCustomerName":firstCustomerName,
                     "lastCustomerName":lastCustomerName,"emailValidation":emailValidation,
                     "customerAddress":customerAddress,"customerCity":customerCity,
                     "customerState":customerState,"customerZipCode":customerZipCode,
                     "customerPhoneNumber":customerPhoneNumber};
 
         updateDataCustomer(customerObj);
+        index=validateExist('table_list_customer_by_company',customerID);
+        if(index!=-1){
+            var value = customerID;
+            var t = $('#table_list_customer_by_company').DataTable();
+            var row=t.rows( function ( idx, data, node ) {
+                return data[0] === value;
+            } ).indexes();
+
+            var $row = t.row(row);
+            $row.cell($row, 1).data(firstCustomerName+' '+lastCustomerName).draw();
+            $row.cell($row, 2).data(customerAddress).draw();
+            $row.cell($row, 3).data(customerCity).draw();
+            $row.cell($row, 4).data(customerState).draw();
+            $row.cell($row, 5).data(customerZipCode).draw();
+            $row.cell($row, 6).data(emailValidation).draw();
+            $row.cell($row, 7).data(customerPhoneNumber).draw();
+
+        }
     }else{
         $('#myMensaje div.modal-body').html(msg);
         $(document).ready(function(){$("#myMensaje").modal("show"); });
     }
+}
+
+function validateExist(table,id_search){
+    var t = $('#'+table).DataTable();
+    var data = t.rows().data();
+    var indice=-1;
+    var row = data.each(function (value, index) {
+        if (value[0] === id_search){
+            indice=index;
+            }
+    });	
+    return indice;
 }
 
 function updateDataCustomerFromCustomer(customerID){
@@ -804,6 +840,7 @@ function updateDataCustomerFromCustomer(customerID){
 
     updateDataCustomer(customerObj);
 }
+
 function updateDataCustomer(customerObj){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCustomer.php", { "customerID" : customerObj.customerID,"firstCustomerName" : customerObj.firstCustomerName,"lastCustomerName": customerObj.lastCustomerName,
@@ -1469,6 +1506,8 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
+
+
 function getListContractor(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
@@ -2102,6 +2141,7 @@ function getListCustomer(tableName,companyID,force){
                 $('[data-toggle1="tooltip"]').tooltip(); 
                 console.log( "La solicitud se ha completado correctamente."+jqXHR+textStatus);
             }
+            $('#'+tableName).DataTable();
             jsRemoveWindowLoad('');
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -3691,6 +3731,7 @@ function getCustomerInfo(customerID){
 
 function getCustomerInfoTable(customerID){
     $('#customerIdCompanyU').val("");
+    $('#customerIdCompanyFBIDU').val("");
     $('#firstCustomerNameCompanyU').val("");
     $('#lastCustomerNameCompanyU').val("");
     $('#emailValidationCustomerCompanyU').val("");
@@ -3706,7 +3747,8 @@ function getCustomerInfoTable(customerID){
             var n = data.indexOf("Error");
             if(n==-1){
                 customer=jQuery.parseJSON(data);
-                $('#customerIdCompanyU').val(customer.FBID);
+                $('#customerIdCompanyFBIDU').val(customer.FBID);
+                $('#customerIdCompanyU').val(customer.CustomerID);
                 $('#firstCustomerNameCompanyU').val(customer.Fname);
                 $('#lastCustomerNameCompanyU').val(customer.Lname);
                 $('#emailValidationCustomerCompanyU').val(customer.Email);
@@ -4355,3 +4397,8 @@ $('.tree-toggle').click(function () {	$(this).parent().children('ul.tree').toggl
 $(function(){
 $('.tree-toggle').parent().children('ul.tree').toggle(200);
 })
+
+function setToSelectService(){
+    window.location.href = "index.php";
+    //$(location).attr('href', 'index.php');
+}

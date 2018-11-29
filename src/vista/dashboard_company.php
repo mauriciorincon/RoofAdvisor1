@@ -31,7 +31,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
         </div>
 </div>
 
@@ -652,31 +652,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 });	
                 return indice;
                 
-                    /*var value = orderID;
-                    var flag=false;
-                    var count=-1;
-                    $("#table_orders_company tr").each(function(index) {
-                        
-                        if (index !== 0) {
-                            count++;
-                            $row = $(this);
-
-                            var id = $row.find("td:eq(0)").text();
-
-                            if (id.indexOf(value) !== 0) {
-                                flag=false;
-                            }
-                            else {
-                                flag=true;
-                                return false;
-                            }
-                        }
-                    });
-
-                if(flag==false){
-                    count=-1;
-                }*/
-                //return count;
+              
 
             }
 
@@ -2954,6 +2930,7 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
             <div class="modal-body" id="textRegisterUpdateCustomer">
                 <div class="list-group1" id="myCustomerListGroup">
+                        <input type="hidden" id="customerIdCompanyFBIDU" name="customerIdCompanyFBIDU" />
                         <input type="hidden" id="customerIdCompanyU" name="customerIdCompanyU" />
                         <div class="form-group">
                             <label class="control-label">First Name</label>
