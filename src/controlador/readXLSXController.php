@@ -7,25 +7,32 @@ require $_SESSION['library_path_autoload'];
 class read_excel{
 
 
-    function read_file_excel($file_path){
+    function read_file_excel($file_path,$_id_company="CO000000"){
         
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
         $spreadsheet = $reader->load($file_path);
 
         $sheet = $spreadsheet->getActiveSheet();
-        $cellValue = $sheet->getCell('A1')->getValue();
-        /*$_string='<ol>';
-        foreach ($spreadsheet as $worksheet) {
-            $_string.='<li>'. $worksheet['worksheetName']. '<br />';
-            $_string.='Rows: '. $worksheet['totalRows'].
-                ' Columns: '. $worksheet['totalColumns']. '<br />';
-                $_string.='Cell Range: A1:'.
-            $worksheet['lastColumnLetter']. $worksheet['totalRows'];
-            $_string.='</li>';
+        $n=2;
+        $_array_new_customer=array();
+        while(!empty($sheet->getCell('A'.$n)->getValue())){
+            $_array_row=array(
+                "firstCustomerName"=>$sheet->getCell('A'.$n)->getValue(),
+                "lastCustomerName"=>$sheet->getCell('B'.$n)->getValue(),
+                "emailValidation"=>$sheet->getCell('C'.$n)->getValue(),
+                "customerPhoneNumber"=>$sheet->getCell('D'.$n)->getValue(),
+                "customerAddress"=>$sheet->getCell('E'.$n)->getValue(),
+                "customerState"=>$sheet->getCell('F'.$n)->getValue(),
+                "customerCity"=>$sheet->getCell('G'.$n)->getValue(),
+                "customerZipCode"=>$sheet->getCell('H'.$n)->getValue(),
+                "password"=>"",
+                "CompanyID"=>$_id_company,
+            );
+            array_push($_array_new_customer,$_array_row);
+            $n++;
         }
-        $_string.='</ol>';*/
-        return $cellValue;
+        return $_array_new_customer;
     }
 
 }

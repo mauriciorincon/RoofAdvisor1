@@ -2028,10 +2028,10 @@ function getListCompany(tableName){
     }   
 }
 
-function getListCustomer(tableName,companyID){
+function getListCustomer(tableName,companyID,force){
     data=$('#'+tableName+' tbody').html();
     data=data.trim();
-    if (data==""){
+    if (data=="" || force==true){
         jsShowWindowLoad('');
         $.post( "controlador/ajax/getListCustomerTable.php", {"field":"CompanyID","value":companyID}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
@@ -3324,6 +3324,37 @@ function disableEnableCompany(companyID,action){
 
 }
 
+function disableEnableCustomer(customerID,action){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/enable_disable_customer.php", { "customerID" : customerID,"action" : action}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje div.modal-body').html(data);
+                
+                 jsRemoveWindowLoad('');
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+}
+
 function filterCompany(nameType,nameStatus,tableName){
     var serviceTypeSelected=$('input[name="'+nameType+'"]:checked');
     var serviceStatusSelected=$('input[name="'+nameStatus+'"]:checked');
@@ -3430,7 +3461,7 @@ function uploadAjax(fileName){
         success : function(json) {
             console.log(json);
             data=jQuery.parseJSON(json);
-            alert(data.msg);
+            alert(data.msg+'\n'+data.extmsg);
             $("#myUploadReportN").modal("hide");  
             $("#myUploadReport").modal("hide");  
         },
@@ -3458,6 +3489,7 @@ function uploadAjaxXls(fileName,id_parent_file){
     data.append('id_parent',id_parent_file);
     data.append('extension',fileExt);
     
+    jsShowWindowLoad('');
     $.ajax({
         url:url,
         type:'POST',
@@ -3466,17 +3498,22 @@ function uploadAjaxXls(fileName,id_parent_file){
         processData:false,    
         cache:false,
         success : function(json) {
+            jsRemoveWindowLoad('');
             console.log(json);
-            data=jQuery.parseJSON(json);
-            alert(data.msg);
+            data=JSON.parse(json);
+            alert(data.msg+'\n'+data.extmsg);
             $("#myUploadReportN").modal("hide");  
             $("#myUploadReport").modal("hide");  
-            $("#myUploadReport").modal("hide");
+            $("#myUploadListCustomer").modal("hide");
+            
+            getListCustomer('table_list_customer_by_company',id_parent_file,true);
         },
         error : function(xhr, status) {
+            jsRemoveWindowLoad('');
             alert('An error occurred when uploading the file. It could not be saved.');
         },
         complete : function(xhr, status) {
+            jsRemoveWindowLoad('');
             //alert('The operation end correctly');
         }
     });
@@ -3572,6 +3609,50 @@ function getCustomerInfo(customerID){
                 $('#customerInfoRRR').val("Address: "+customer.Address+'\n'+"City: "+customer.City+'\n'+"Email: "+customer.Email+'\n'+"Name: "+customer.Fname+' '+customer.Lname+'\n'+"Phone: "+customer.Phone);
                 $('#customButton').show();
             }else{
+                $('#headerTextAnswerOrder').html('Roof Report response');
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function getCustomerInfoTable(customerID){
+    $('#firstCustomerNameCompanyU').val("");
+    $('#lastCustomerNameCompanyU').val("");
+    $('#emailValidationCustomerCompanyU').val("");
+    $('#customerAddressCompanyU').val("");
+    $('#customerCityCompanyU').val("");
+    $('#customerStateCompanyU').val("");
+    $('#customerZipCodeCompanyU').val("");
+    $('#customerPhoneNumberCompanyU').val("");
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/getDataCustomer.php", { "customerID" : customerID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                customer=jQuery.parseJSON(data);
+                $('#firstCustomerNameCompanyU').val(customer.Fname);
+                $('#lastCustomerNameCompanyU').val(customer.Lname);
+                $('#emailValidationCustomerCompanyU').val(customer.Email);
+                $('#customerAddressCompanyU').val(customer.Address);
+                $('#customerCityCompanyU').val(customer.City);
+                $('#customerStateCompanyU').val(customer.State);
+                $('#customerZipCodeCompanyU').val(customer.ZIP);
+                $('#customerPhoneNumberCompanyU').val(customer.Phone);
+            }else{
+
                 $('#headerTextAnswerOrder').html('Roof Report response');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
