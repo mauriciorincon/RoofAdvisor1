@@ -2970,6 +2970,7 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
             <div class="modal-body" id="textRegisterUpdateCustomer">
                 <div class="list-group1" id="myCustomerListGroup">
+                        <input type="hidden" id="customerIdCompanyU" name="customerIdCompanyU" />
                         <div class="form-group">
                             <label class="control-label">First Name</label>
                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerNameCompanyU" name="firstCustomerNameCompanyU"  />

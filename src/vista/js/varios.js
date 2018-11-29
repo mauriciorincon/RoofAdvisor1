@@ -733,6 +733,24 @@ function updateDataCompany(){
     });
 }
 
+function updateDataCustomerFromCompany(){
+    var customerID = $("input#customerIdCompanyU").val();
+    var firstCustomerName = $("input#firstCustomerNameCompanyU").val();
+    var lastCustomerName = $("input#lastCustomerNameCompanyU").val();
+    var emailValidation = $("input#emailValidationCustomerCompanyU").val();
+    var customerAddress = $("input#customerAddressCompanyU").val();
+    var customerCity = $("input#customerCityCompanyU").val();
+    var customerState = $("select#customerStateCompanyU").val();
+    var customerZipCode = $("input#customerZipCodeCompanyU").val();
+    var customerPhoneNumber = $("input#customerPhoneNumberCompanyU").val();
+
+    customerObj = { "customerID":customerID, "firstCustomerName":firstCustomerName,
+                    "lastCustomerName":lastCustomerName,"emailValidation":emailValidation,
+                    "customerAddress":customerAddress,"customerCity":customerCity,
+                    "customerState":customerState,"customerZipCode":customerZipCode,
+                    "customerPhoneNumber":customerPhoneNumber};
+    
+}
 function updateDataCustomer(customerID){
     var firstCustomerName = $("input#firstCustomerNameProfile").val();
     var lastCustomerName = $("input#lastCustomerNameProfile").val();
@@ -3643,6 +3661,7 @@ function getCustomerInfoTable(customerID){
             var n = data.indexOf("Error");
             if(n==-1){
                 customer=jQuery.parseJSON(data);
+                $('#customerIdCompanyU').val(customerID);
                 $('#firstCustomerNameCompanyU').val(customer.Fname);
                 $('#lastCustomerNameCompanyU').val(customer.Lname);
                 $('#emailValidationCustomerCompanyU').val(customer.Email);
