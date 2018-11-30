@@ -31,7 +31,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
         </div>
 </div>
 
@@ -652,31 +652,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 });	
                 return indice;
                 
-                    /*var value = orderID;
-                    var flag=false;
-                    var count=-1;
-                    $("#table_orders_company tr").each(function(index) {
-                        
-                        if (index !== 0) {
-                            count++;
-                            $row = $(this);
-
-                            var id = $row.find("td:eq(0)").text();
-
-                            if (id.indexOf(value) !== 0) {
-                                flag=false;
-                            }
-                            else {
-                                flag=true;
-                                return false;
-                            }
-                        }
-                    });
-
-                if(flag==false){
-                    count=-1;
-                }*/
-                //return count;
+              
 
             }
 
@@ -2033,23 +2009,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div><!-- /cierro modal -->
 
 
-<div class="modal fade" id="myMensaje" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textMessage"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonMessage"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 
 <div class="modal fade" id="myInvoiceInfo" role="dialog">
@@ -2970,6 +2930,8 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
             <div class="modal-body" id="textRegisterUpdateCustomer">
                 <div class="list-group1" id="myCustomerListGroup">
+                        <input type="hidden" id="customerIdCompanyFBIDU" name="customerIdCompanyFBIDU" />
+                        <input type="hidden" id="customerIdCompanyU" name="customerIdCompanyU" />
                         <div class="form-group">
                             <label class="control-label">First Name</label>
                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerNameCompanyU" name="firstCustomerNameCompanyU"  />
@@ -3023,8 +2985,27 @@ if(!empty($_actual_company['postCardValue'])){
                 </div>
             </div>
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" onclick="validateInfoCustomer('Company')">Update Info</button> 
+                <button type="button" class="btn-primary btn-sm" onclick="updateDataCustomerFromCompany()">Update Info</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>

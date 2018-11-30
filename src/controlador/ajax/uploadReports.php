@@ -56,6 +56,11 @@
                 $_arrayFields=explode(",",$_updateFields);
                 $_orderController->updateOrder($_orderID,$_arrayFields);
             }
+            if($_order_data['Status']=='D' and $_order_data['RequestType']=='R'){
+                $_updateFields="Status,S";
+                $_arrayFields=explode(",",$_updateFields);
+                $_orderController->updateOrder($_orderID,$_arrayFields);
+            }
         }else if(isset($_POST['id_parent'])){
             
             $_readExcel=new read_excel();
