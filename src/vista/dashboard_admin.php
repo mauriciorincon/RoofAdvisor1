@@ -53,6 +53,9 @@ Welcome to RoofServicenow Admin
         var reportRepairCount=0;
         var postCardCount=0;
 
+        var closeService=0;
+        var openService=0;
+
         var openService=0;
         <?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
 
@@ -154,7 +157,7 @@ Welcome to RoofServicenow Admin
                 
                 row=validateExist(updateOrder.OrderNumber);
                 if(row==-1){
-                        addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+                        addOrderToTable(updateOrder,map,infowindow,iconBase);
                 }else{
                         updateOrderOnTable(updateOrder,row);
                 }
@@ -275,14 +278,14 @@ Welcome to RoofServicenow Admin
             });
         }
 
-        function addOrderToTable(dataOrder,companyID,map,infowindow,iconBase){
+        function addOrderToTable(dataOrder,map,infowindow,iconBase){
             var t = $('#table_orders_company').DataTable();
             var requestType=getRequestType(dataOrder.RequestType);
             var status=getStatus(dataOrder.Status);
             
             var dataCustomer="";
             var companyActions="";
-            
+            var dataContractor="";
                                 
 
             if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){

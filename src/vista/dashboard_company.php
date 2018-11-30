@@ -18,16 +18,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
-            <div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Metrics <span class="caret"></span></button>
-    			<ul class="dropdown-menu" role="menu">
-                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="emergencyRepair" class="badge badge-primary" style="background:black;">4</span>Emergency Repair</a></li>
-                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span></span><span  name="scheduleRepair" class="badge badge-primary" style="background:black;">4</span>Schedule Repair</a></li>
-                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="reportRepair" class="badge badge-primary" style="background:black;">4</span>Report Repair</a></li>
-                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a></li>
-                    <li><a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a></li>
-                </ul>
-			</div>    
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
@@ -2986,6 +2977,66 @@ if(!empty($_actual_company['postCardValue'])){
             </div>
 			<div class="modal-footer" id="buttonUploadReport"> 
                 <button type="button" class="btn-primary btn-sm" onclick="updateDataCustomerFromCompany()">Update Info</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="myUrls" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyUrls">Imformation </h4> 
+			</div> 
+			<div class="modal-body" id="textmyUrls"> 
+					<div class="container">
+						<div class="row">
+						<div class="col-md-3">
+							<div class="well no-padding">
+								<div>
+                                
+									<ul class="nav nav-list nav-menu-list-style">
+                                        <li><label class="tree-toggle nav-header">Florida</label>
+                                        <ul class="nav nav-list tree">
+										<?php 
+											$n=0;
+											$state="";
+											$city="";
+											while(isset($_array_urls[$n]['state'])){
+												if(strcmp($state,$_array_urls[$n]['state'])==0 and strcmp($city,$_array_urls[$n]['city'])==0){
+													echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+												}else{
+													if(!empty($state)){
+														echo '</ul></li>';
+													}
+													$state=$_array_urls[$n]['state'];
+													$city=$_array_urls[$n]['city'];
+													echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>'.$_array_urls[$n]['city']
+													.'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											<ul class="nav nav-list tree bullets">';
+													
+												}
+												$n++;
+											}
+										
+											echo '</ul></li>';
+										?>
+										</ul></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+			</div>
+
+			<div class="modal-footer" id="buttonmyUrls"> 
+                
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

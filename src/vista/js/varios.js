@@ -786,7 +786,7 @@ function updateDataCustomerFromCompany(){
                     "customerPhoneNumber":customerPhoneNumber};
 
         updateDataCustomer(customerObj);
-        index=validateExist('table_list_customer_by_company',customerID);
+        index=validateExistT('table_list_customer_by_company',customerID);
         if(index!=-1){
             var value = customerID;
             var t = $('#table_list_customer_by_company').DataTable();
@@ -810,7 +810,7 @@ function updateDataCustomerFromCompany(){
     }
 }
 
-function validateExist(table,id_search){
+function validateExistT(table,id_search){
     var t = $('#'+table).DataTable();
     var data = t.rows().data();
     var indice=-1;

@@ -519,13 +519,11 @@ class userController{
             $_divs_info=$this->fillInformationMenu();
 
             $_information=new usefullURLS();
-       
-
             $_array_urls=$_information->fillInfoUrls();
-            $_menu_urls=$this->getItemMenuURLS("Miami-Dade County");
-            $_menu_urls1=$this->getItemMenuURLS("Broward County");
-            $_menu_urls2=$this->getItemMenuURLS("Palm Beach County");
-            $_menu_urls3=$this->getItemMenuURLS("Monroe County");
+            //$_menu_urls=$this->getItemMenuURLS("Miami-Dade County");
+            //$_menu_urls1=$this->getItemMenuURLS("Broward County");
+            //$_menu_urls2=$this->getItemMenuURLS("Palm Beach County");
+            //$_menu_urls3=$this->getItemMenuURLS("Monroe County");
             
 
             require_once("vista/head.php");
@@ -568,6 +566,9 @@ class userController{
 
             $this->_otherController=new othersController();
             $_profileList=$this->_otherController->getParameterValue("Parameters/profile");
+
+            $_information=new usefullURLS();
+            $_array_urls=$_information->fillInfoUrls();
             
             require_once("vista/head.php");
             require_once("vista/dashboard_company.php");
