@@ -18,11 +18,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
         </div>
 </div>
 
@@ -2999,32 +2999,48 @@ if(!empty($_actual_company['postCardValue'])){
 						<div class="col-md-3">
 							<div class="well no-padding">
 								<div>
-                                
 									<ul class="nav nav-list nav-menu-list-style">
-                                        <li><label class="tree-toggle nav-header">Florida</label>
-                                        <ul class="nav nav-list tree">
 										<?php 
 											$n=0;
 											$state="";
 											$city="";
 											while(isset($_array_urls[$n]['state'])){
-												if(strcmp($state,$_array_urls[$n]['state'])==0 and strcmp($city,$_array_urls[$n]['city'])==0){
-													echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+												if(strcmp($state,$_array_urls[$n]['state'])==0){
+                                                    if(strcmp($city,$_array_urls[$n]['city'])==0){
+                                                        echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+                                                    }else{
+                                                        if(!empty($city)){
+                                                            echo '</ul></li>';
+                                                        }
+                                                        $city=$_array_urls[$n]['city'];
+                                                        echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'.
+                                                            '<span class="glyphicon glyphicon-folder-close m5"></span>'.$city
+													        .'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											            <ul class="nav nav-list tree bullets">';
+                                                        
+                                                        echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+                                                    }
+													
 												}else{
 													if(!empty($state)){
-														echo '</ul></li>';
+														echo '</ul></li></ul></li>';
 													}
-													$state=$_array_urls[$n]['state'];
-													$city=$_array_urls[$n]['city'];
-													echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>'.$_array_urls[$n]['city']
-													.'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">';
+                                                    $state=$_array_urls[$n]['state'];
+                                                    $city=$_array_urls[$n]['city'];
+                                                    echo '<li><label class="tree-toggle nav-header">'.$state.'</label><ul class="nav nav-list tree">';
+
+                                                    echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                                        .'<span class="glyphicon glyphicon-folder-close m5"></span>'.$city
+													    .'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                                        .'<ul class="nav nav-list tree bullets">';
+
+                                                    echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
 													
 												}
 												$n++;
 											}
 										
-											echo '</ul></li>';
+											echo '</ul></li></ul></li>';
 										?>
 										</ul></li>
 									</ul>

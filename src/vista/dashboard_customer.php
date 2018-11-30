@@ -2234,58 +2234,50 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<div class="col-md-3">
 							<div class="well no-padding">
 								<div>
-									<ul class="nav nav-list nav-menu-list-style">
-
+								<ul class="nav nav-list nav-menu-list-style">
 										<?php 
 											$n=0;
 											$state="";
 											$city="";
 											while(isset($_array_urls[$n]['state'])){
-												if(strcmp($state,$_array_urls[$n]['state'])==0 and strcmp($city,$_array_urls[$n]['city'])==0){
-													echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+												if(strcmp($state,$_array_urls[$n]['state'])==0){
+                                                    if(strcmp($city,$_array_urls[$n]['city'])==0){
+                                                        echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+                                                    }else{
+                                                        if(!empty($city)){
+                                                            echo '</ul></li>';
+                                                        }
+                                                        $city=$_array_urls[$n]['city'];
+                                                        echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'.
+                                                            '<span class="glyphicon glyphicon-folder-close m5"></span>'.$city
+													        .'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+											            <ul class="nav nav-list tree bullets">';
+                                                        
+                                                        echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
+                                                    }
+													
 												}else{
 													if(!empty($state)){
-														echo '</ul></li>';
+														echo '</ul></li></ul></li>';
 													}
-													$state=$_array_urls[$n]['state'];
-													$city=$_array_urls[$n]['city'];
-													echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>'.$_array_urls[$n]['city']
-													.'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">';
+                                                    $state=$_array_urls[$n]['state'];
+                                                    $city=$_array_urls[$n]['city'];
+                                                    echo '<li><label class="tree-toggle nav-header">'.$state.'</label><ul class="nav nav-list tree">';
+
+                                                    echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                                        .'<span class="glyphicon glyphicon-folder-close m5"></span>'.$city
+													    .'<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                                        .'<ul class="nav nav-list tree bullets">';
+
+                                                    echo '<li><a href="'.$_array_urls[$n]['url'].'" target="_blank">'.$_array_urls[$n]['place'].'</a></li>';
 													
 												}
 												$n++;
 											}
-										//print_r($_array_urls);
-											echo '</ul></li>';
+										
+											echo '</ul></li></ul></li>';
 										?>
-										<!--<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Miami-Dade County
-													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">
-												<?php echo $_menu_urls; ?>
-											</ul>
-										</li>
-										<li class="divider"></li>
-										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Broward County
-													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">
-												<?php echo $_menu_urls1; ?>
-											</ul>
-										</li>
-										<li class="divider"></li>
-										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Palm Beach County
-													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">
-												<?php echo $_menu_urls2; ?>
-											</ul>
-										</li>
-										<li class="divider"></li>
-										<li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Monroe County
-													<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
-											<ul class="nav nav-list tree bullets">
-												<?php echo $_menu_urls3; ?>
-											</ul>
-										</li>-->
+										</ul></li>
 									</ul>
 								</div>
 							</div>

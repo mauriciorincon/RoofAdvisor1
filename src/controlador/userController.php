@@ -851,9 +851,16 @@ class userController{
         }else{
             $_path1="http://" . $_SERVER['HTTP_HOST'];
         }
+
+        $_customerName="";
+        if(isset($_customerArray['firstCustomerName'])){
+            $_customerName=$_customerArray['firstCustomerName'];
+        }else{
+            $_customerName=$_customerArray['Fname'].' '.$_customerArray['Lname'];
+        }
         $_message='
         <table>
-            <tr><td>Dear '.$_customerArray['firstCustomerName'].'</td><td>Date:'.date('m-d-Y').'</td></tr>
+            <tr><td>Dear '.$_customerName.'</td><td>Date:'.date('m-d-Y').'</td></tr>
             <tr><td colspan="2">Thank you for registering at RoofServiceNow.com. Please take just one more step and verify your email address by clicking on the link below (or copy and paste the URL into your browser):</td><tr>
             <tr><td colspan="2"><a target="_blank" href="'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'">'.$_path1.'/vc/validateCode.php?u='.$_userData->uid.'&t=c&verify='.$_validation_code.'</td></tr>
             <tr><td colspan="2"><b>Your verification code is:</b>'.$_validation_code.'</td></tr>
@@ -1143,7 +1150,7 @@ class userController{
             return "Error ".$_msg;
         }else{
             $hashActivationCode = md5( rand(0,1000) );
-            $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$arrayCustomer['Fname'].' '.$arrayCustomer['Lname'],$hashActivationCode,'123456','customer');
+            $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$_customer_data['Fname'].' '.$_customer_data['Lname'],$hashActivationCode,'123456','customer');
             if(gettype($_responseU)=="object"){
                 $_uid_user=$_responseU->uid;
             }else{
@@ -1159,9 +1166,9 @@ class userController{
                 $this->_sendMail=new emailController();
                 $_mail_response=$this->_sendMail->sendMailSMTP($_customer_data['Email'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
                 if($_mail_response==false){
-                    return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
+                    return "Error ".$this->_sendMail->getMessageError();
                 }else{
-                    return "OK ".$_response."<br>".$_mail_response."<br>".$_uid_user;
+                    return "OK ".$_mail_response."<br>".$_uid_user;
                 }
             }
         }
@@ -1169,7 +1176,21 @@ class userController{
     }
 
     public function disableCustomer($_customerID){
-        
+        $_customer_data=$this->getCustomerById($_customerID);
+        if(strcmp($_customer_data['uid'],"undefined")==0){
+            $message="User not found";
+        }else{
+            $properties = [
+                'disabled' => true
+            ];
+            $_result_update=$this->_userModel->updateUserCustomer($_customer_data['uid'],$properties,"customer");
+            if(is_array($_result) or gettype($_result)=="object" ){
+                $message.="User disabled \n";
+            }else{
+                $message.=$_result_update;
+            }
+        }
+        return $message;
     }
 
     function is_valid_email($str)

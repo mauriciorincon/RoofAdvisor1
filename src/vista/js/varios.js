@@ -802,7 +802,7 @@ function updateDataCustomerFromCompany(){
             $row.cell($row, 5).data(customerZipCode).draw();
             $row.cell($row, 6).data(emailValidation).draw();
             $row.cell($row, 7).data(customerPhoneNumber).draw();
-
+            $(document).ready(function(){$("#myRegisterUpdateCustomerCompany").modal("hide"); });
         }
     }else{
         $('#myMensaje div.modal-body').html(msg);
@@ -815,7 +815,7 @@ function validateExistT(table,id_search){
     var data = t.rows().data();
     var indice=-1;
     var row = data.each(function (value, index) {
-        if (value[0] === id_search){
+        if (value[0] === id_search.toString()){
             indice=index;
             }
     });	
@@ -3436,6 +3436,52 @@ function disableEnableCustomer(customerID,action){
             if(n==-1){
                 $('#myMensaje div.modal-body').html(data);
                 
+                if(action=='Active'){
+                    index=validateExistT('table_list_customer_by_company',customerID);
+                    if(index!=-1){
+                        var value = customerID;
+                        var t = $('#table_list_customer_by_company').DataTable();
+                        var row=t.rows( function ( idx, data, node ) {
+                            return data[0] === value;
+                        } ).indexes();
+
+                        var $row = t.row(row);
+                        actions='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '+
+                                'href="#myRegisterUpdateCustomerCompany" '+
+                                'onClick="getCustomerInfoTable('+customerID+')"> ' +
+                                '<span class="glyphicon glyphicon-pencil"></span>'+
+                                '</a>';
+                        actions+='<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' +
+                                'id="inactivate-customer-button" name="inactivate-customer-button" ' +
+                                'data-toggle="tooltip" onclick="disableEnableCustomer('+customerID+',\'Inactive\')"> ' +
+                                '<span class="glyphicon glyphicon-trash"></span></a>';
+                        $row.cell($row, 8).data(actions).draw();
+
+                    }
+                }
+                if(action=='Inactive'){
+                    index=validateExistT('table_list_customer_by_company',customerID);
+                    if(index!=-1){
+                        var value = customerID;
+                        var t = $('#table_list_customer_by_company').DataTable();
+                        var row=t.rows( function ( idx, data, node ) {
+                            return data[0] === value;
+                        } ).indexes();
+
+                        var $row = t.row(row);
+                        actions='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '+
+                                'href="#myRegisterUpdateCustomerCompany" '+
+                                'onClick="getCustomerInfoTable('+customerID+')"> ' +
+                                '<span class="glyphicon glyphicon-pencil"></span>'+
+                                '</a>';
+                        actions+='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
+                                'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
+                                'data-toggle1="tooltip" onclick="disableEnableCustomer('+customerID+',\'Active\')"> ' +
+                                '<span class="glyphicon glyphicon-ok"></span></a>';
+                        $row.cell($row, 8).data(actions).draw();
+
+                    }
+                }
                  jsRemoveWindowLoad('');
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
 
@@ -3747,6 +3793,8 @@ function getCustomerInfoTable(customerID){
             var n = data.indexOf("Error");
             if(n==-1){
                 customer=jQuery.parseJSON(data);
+                
+                customer.Phone=customer.Phone.toString().replace('+1','');
                 $('#customerIdCompanyFBIDU').val(customer.FBID);
                 $('#customerIdCompanyU').val(customer.CustomerID);
                 $('#firstCustomerNameCompanyU').val(customer.Fname);
