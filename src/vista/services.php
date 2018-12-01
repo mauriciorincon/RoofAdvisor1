@@ -42,7 +42,7 @@
 							<div class="service-icon">
 								<i class="fa fa-book"></i>
 							</div>
-							<h3>schedule Rapair </h3>
+							<h3>schedule Repair </h3>
 							<p>
 							With RoofServiceNow you can schedule a pre-screened service professional for the day and time that is convenient for you for an estimate or repair. 
 							</p>
