@@ -63,6 +63,8 @@ if(!isset($_SESSION)) {
 		<script src="js/bootstrap.min.js"></script>	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	        <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->	
+
+			<script src="vista/js/orders.js"></script>
 		<style>
 .checked {
     color: orange;

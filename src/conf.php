@@ -10,9 +10,9 @@
     }
     //echo  $_SESSION['application_path'];
     
-    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
 
-    $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
+    //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
 
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';

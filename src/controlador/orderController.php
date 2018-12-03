@@ -91,10 +91,12 @@ class orderController{
                     $arrayDataOrder['CompanyID']="CO000000";
                 }
                 $arrayDataOrder['ContractorID']="";
-
                 break;
             case "P":
                 $_firstStatus="T";
+                break;
+            case "M":
+                $_firstStatus="A";
                 break;
         }
         $Order = array(
