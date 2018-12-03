@@ -3,8 +3,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
 <div id="db-cus-main">
 
-	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-		<div class="btn-group mr-2" role="group" aria-label="First group">
+	<div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
+		<div class="btn-group mr-2 btntool-maindash" role="group" aria-label="First group">
 			<button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#mapDashBoardOrder1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);setFirstStep()" >New Order</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Profile</button>
@@ -1192,7 +1192,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 </div>  
                 <button type="button" class="btn-primary btn-sm" onClick="updateDataCustomerFromCustomer('<?php echo $_actual_customer['FBID']?>')" >Update Info</button>
             </div>
-		</div>
 
 <div class="collapse container" id="scheduleCompany">
 
@@ -2295,6 +2294,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div>
 
 </div>
-
+</div>
 <br>
 <br>

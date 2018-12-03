@@ -1,7 +1,6 @@
-<
 		<!-- header-area end-->
 		<!-- breadcrum-area start-->
-		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
+		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity" style="display:none;">
 			<div class="container">
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
@@ -13,13 +12,13 @@
 		</div>
 		<!-- breadcrum-area end-->
 		<!--  service-area start  -->
-		<div class="service-area pt-80 pb-60">
+		<div class="service-area pt-50 pb-60">
 			<div class="container">
 				<div class="section-heading text-center">
-					<h2>Our Services </h2>
+					<h1>Our Services </h1>
 					<p>RoofServiceNow is the only on demand emergency roof repair services.</p>
 					<p>
-					This same day, on-demand service for hiring a pre-screened service professional to fix a leaky roof before the damage is done.  From fixing leaky pipes to repairing your heating system on a cold winter day, together with hundreds of other urgent projects, RoofServiceNow same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofServiceNow, you answer 5 questions about the repair through the RoofServiceNow app or website; and a pre-screened, local service professional will confirm they are on the way.
+					This same day, on-demand service for hiring a pre-screened service professional to fix a leaky roof before the damage is done. RoofServiceNow same day, on demand service you receive and approve the electronic estimate prior to work, receive before and after pictures of the repair, and online payment when the work is complete. RoofServiceNow is an easy, fast, and effective way to get a leaky roof repaired right away without even being at home.  With RoofServiceNow, you answer 5 questions about the repair through the RoofServiceNow app or website; and a pre-screened, local service professional will confirm they are on the way.
 					</p>
 				</div>
 				<div class="row">

@@ -155,13 +155,13 @@
         <script src="static/vendor/sweetalert2/sweetalert2.min.js"></script>
 	    <script src="js/lity.min.js"></script>
         <script src="js/all.js" ></script>
-		
+	                <script src="vista/js/slick.js"></script>
+	
 
 		<script src="vista/js/moment.min.js"></script>
 		<script src="vista/js/fullcalendar.js"></script>
 		<!--<script src="vista/js/fullcalendar.min.js"></script>-->
 		<script src="vista/js/locale/es-us.js"></script>
-		
 		
 	
 					<!--<script src="js/vendor/jquery-1.12.0.min.js"></script>-->

@@ -9,7 +9,7 @@
         <!-- Add your site or application content here -->
 		
 		<!-- breadcrum-area start-->
-		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
+		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity" style="display:none;">
 			<div class="container">
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
@@ -24,10 +24,10 @@
 		<div class="about-area ptb-80">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6">
+					<div style="margin-left:100px;" class="col-lg-6 col-md-6 col-sm-6">
 						<div class="about-text">
 							<h3>WELCOME TO RoofServiceNow </h3>
-							<p>RoofServiceNow provides homeowners via mobile app and online services the ability to order on demand emergency roof repair services. RoofServiceNow also provides homeowners the ability to book appointments, receive estimates, receive pictures, tracking via GPS, and electronic payments via mobile app and online with local, pre-screened service professionals.</p>
+							<p>Roof Service Now is a free digital marketplace for homeowners to connect with roof contractors for emergency services, scheduled repairs, estimates, and roof reports. Homeowners receive immediate responses from pre-screened roofing professionals at the same time we provide the roofing company with the tools to service their customers, manage their crews, and the essential business resources. We combine an innovative digital marketplace with a superior roofing software. All in one platform!</p>
 
 							<h3>Here’s How It Works</h3>
 							<ul>
@@ -38,7 +38,7 @@
 							<a class="btn-more" href="#">learn more</a>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="about-img">
 							<img src="img/about.png" alt="" />	
 						</div>
@@ -54,37 +54,37 @@
 					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
-								<i class="fa fa-trophy"></i>
-							</div>
-							<h4 class="counter">2000</h4>
-							<p>Project Done</p>
+							<i class="fas fa-hammer"></i>
+                                                        </div>
+							<h4 class="counter">21000</h4>
+							<p>Repairs Completed</p>
 						</div>
 					</div>
 					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
-								<i class="fa fa-coffee"></i>
-							</div>
-							<h4 class="counter">1960</h4>
+							<i class="fas fa-users"></i>
+                                                        </div>
+							<h4 class="counter">11960</h4>
 							<p>Happy Clients</p>
 						</div>
 					</div>
 					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
-								<i class="fa fa-suitcase"></i>
-							</div>
+                                                        <i class="fas fa-user-alt"></i>
+                                                          </div>
 							<h4 class="counter">2280</h4>
-							<p>Exprience </p>
+							<p>Contractors</p>
 						</div>
 					</div>
 					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
-								<i class="fa fa-users"></i>
+								<i class="fas fa-globe-americas"></i>
 							</div>
-							<h4 class="counter">45</h4>
-							<p>Business Partners</p>
+							<h4 class="counter">2</h4>
+							<p>States we are in!</p>
 						</div>
 					</div>
 				</div>
@@ -93,29 +93,22 @@
 		<!-- counter-area end -->
 		
 		<!-- testimonial-area start -->
-		<div class="testimonial-area bg-img-2 pt-200 pb-150">
-			<div class="container">
-				<div class="testimonial-active abouttxt-bg">
-					<div class="single-testimonial">
-						<div class="testimonial-text">
-							<p class="abouttxt1">Roof Service Now is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away. </p>
-						</div>
-						
-					</div>
-					<div class="single-testimonial">
-						<div class="testimonial-text">
-							<p class="abouttxt1">	Roof Service Now provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is pnline, on break, repair locations, view invoices, customer feedback on service provided daily/weekly, monthly invoice totals by repair crew, and have a master console of work schedule, and much more.</p>
-						</div>
-						
-					</div>
-					<div class="single-testimonial">
-						<div class="testimonial-text">
-							<p class="abouttxt1">Repair crews have their own Roof Service Now driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.</p>
-						</div>
-						
-					</div>
-				</div>	
-			</div>
-		</div>
-		<!-- testimonial-area end -->
+                        <div class="slickaboutwrapper">
+                        <div class="slickbout1container">
+                                <div class="aboutinfo1 slickbout1content">
+  <div>
+        Roof Service Now is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away.
+  </div>
+  <div>
+        Roof Service Now provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is online, on break, repair locations, view invoices, customer feedback on service provided daily/weekly, monthly invoice totals by repair crew, and have a master console of work schedule, and much more.
+  </div>
+  <div>
+        Repair crews have their own Roof Service Now driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.
+  </div>
+</div>
+                               </div>
+                        </div>
+                </div>
+</div>
+                <!-- testimonial-area end -->
 	

@@ -68,6 +68,30 @@ class emailController{
             
         }
     }
+ public function sendMail3($subject,$body){
+        $mail = new PHPMailer;
+        //$mail = new PHPMailer;
+        $mail->From = "sales@roofservicenow.com";
+        $mail->FromName = "Roof Service Now";
+
+        $mail->addAddress("sales@roofservicenow.com", "Recipient Name");
+
+        //Provide file path and name of the attachments
+
+        $mail->isHTML(true);
+
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->AltBody = "Nothing to see here";
+
+        if(!$mail->send()){
+            $this->_message_error="Mailer Error: " . $mail->ErrorInfo;
+            return false;
+        }else{
+            return "Message has been sent successfully";
+
+        }
+    }
 
     public function sendMailSMTP($toAddress,$subject,$body,$attachmentPath,$putLogo=""){
         

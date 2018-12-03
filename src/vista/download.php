@@ -1,7 +1,6 @@
-<
 		<!-- header-area end-->
 		<!-- breadcrum-area start-->
-		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
+		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity " style="display:none;">
 			<div class="container">
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
@@ -21,16 +20,16 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 custom-width mb-20">
-						<div class="single-service text-center">
+						<div class="single-service text-center" style="height:269px;">
 							<h3>Andriod </h3>
-							<p><img src="img/download/AndroidApp.png" alt="" /></p>
+							<p><img src="img/download/AndroidApp.png" style="width:450px;"  alt="" /></p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 custom-width mb-20">
 						<div class="single-service text-center ">
 							
 							<h3>Iphone </h3>
-							<p><img src="img/download/app_store.png" alt="" /></p>
+							<p><img src="img/download/app_store.png" style="width:440px;" alt="" /></p>
 						</div>
 					</div>
 					

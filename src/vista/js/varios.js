@@ -13,6 +13,13 @@ $(document).ready(function() {
         }
       }
     );*/
+$('.aboutinfo1').slick({
+            dots: true,
+  infinite: true,
+  speed: 500,
+  fade: true,
+  cssEase: 'linear'
+        });
     $("#myMessagePostCardsPay").modal("show");
     
     $('[data-toggle1="tooltip"]').tooltip(); 

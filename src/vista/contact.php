@@ -1,7 +1,7 @@
 
 	
 		<!-- breadcrum-area start-->
-		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
+		<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity" style="display:none;">
 			<div class="container">
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
@@ -15,6 +15,10 @@
 		<!-- contact-area start-->
 		<div class="contact-area pt-80 pb-60">
 			<div class="container">
+                               <div class="section-heading text-center">
+                                        <h2>Contact us </h2>
+                                        <p>Got a question? need some help signing up? Do not hesitate to reach out.</p>
+                                </div>
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
 						<div class="contact-wrapper text-center">
@@ -22,7 +26,7 @@
 								<i class="fa fa-map-marker"></i>
 							</div>
 							<div class="contact-text">
-								<p>30 NEWBURY ST<br>BOSTON, MA</p>
+								<p>Location Near You</p>
                             </div>
 						</div>
 					</div>
@@ -52,7 +56,7 @@
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<div class="contact-text">
-								<p>Always open</p>
+								<p>Emergency services are available 24/7</p>
                             </div>
 						</div>
 					</div>
@@ -66,15 +70,15 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
-							<form action="#">
+							<form action="../controlador/ajax/sendcontactemail.php"  method="post">
 								<label>your name<span class="required">*</span></label>
-									<input type="text" placeholder="" />
+									<input type="text" id="name" name="name"  placeholder="Name" />
 								<label>your email<span class="required">*</span></label>
-									<input type="text" placeholder="" />
+									<input type="text" id="email" name="email" placeholder="Email" />
 								<label>subject<span class="required">*</span></label>
-									<input type="text" placeholder="" />
+									<input type="text" id="subject" name="subject" placeholder="Subject" />
 								<label>Your Message<span class="required">*</span></label>	
-									<textarea name="message" placeholder=""></textarea>	
+									<textarea name="message" id="message" placeholder="Message"></textarea>	
 								<button>Send Message</button>
 							</form>
 						</div>

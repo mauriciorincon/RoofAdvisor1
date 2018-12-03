@@ -26,7 +26,6 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		
 		
-		
         <link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/all.css">
         <link rel="stylesheet" href="css/owl.carousel.css">
@@ -44,7 +43,8 @@ if(!isset($_SESSION)) {
 		<!--<link rel="stylesheet" href="vista/css/fontawesome.css">
 		<link rel="stylesheet" href="vista/css/font-awesome.min.css">-->
 		
-		
+	        <link rel="stylesheet" href="vista/css/slick.css">
+                <link rel="stylesheet" href="vista/css/slick-theme.css">
 		<link rel="stylesheet" href="vista/css/fullcalendar.css">
 		
 		<link rel="stylesheet" href="vista/timepicker/stylesheets/wickedpicker.css">
@@ -62,7 +62,7 @@ if(!isset($_SESSION)) {
 				
 		<script src="js/bootstrap.min.js"></script>	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
+	        <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->	
 		<style>
 .checked {
     color: orange;
