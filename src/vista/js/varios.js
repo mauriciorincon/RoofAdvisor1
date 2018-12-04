@@ -2539,34 +2539,35 @@ function setOrderId(orderID,RequestType){
     $('#orderIDWork').val(orderID);
     $('#orderIDWorkText').html(orderID);
     $('#orderTypeTakeWork').val(RequestType);
+    
+    jsShowWindowLoad('Searching Info');
+    $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderID,"fieldSearch":"FBID"}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                order=jQuery.parseJSON(data);
+                $('input#numberPostCard').val(order.postCardValue);
+                $('#dateWork').val(order.SchDate);
+                $('#timeWork').val(order.SchTime);
+            }else{
+                $('input#numberPostCard').val(0);
+            }
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            jsRemoveWindowLoad('');
+        }
+    });
 
     if(RequestType=='P'){
         $('#amountPostCard').show();
         $('#amountPostCardLabel').show();
         $('#numberPostCardLabel').show();
         $('#numberPostCard').show();
-
-        jsShowWindowLoad('Searching Info');
-        $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderID,"fieldSearch":"FBID"}, null, "text" )
-        .done(function( data, textStatus, jqXHR ) {
-            if ( console && console.log ) {
-                var n = data.indexOf("Error");
-                if(n==-1){
-                    order=jQuery.parseJSON(data);
-                    $('input#numberPostCard').val(order.postCardValue);
-                }else{
-                    $('input#numberPostCard').val(0);
-                }
-                jsRemoveWindowLoad('');
-            }
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                jsRemoveWindowLoad('');
-            }
-        });
-
     }else{
         $('#amountPostCard').hide();
         $('#amountPostCardLabel').hide();

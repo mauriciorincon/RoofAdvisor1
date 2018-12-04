@@ -647,27 +647,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
             }
 
-            function getRequestType(requestType){
-                var RequestType="";
-                switch (requestType) {
-                    case "E":
-                        RequestType = "Emergency";
-                        break;
-                    case "S":
-                        RequestType = "Schedule";
-                        break;
-                    case "R":
-                        RequestType = "RoofReport";
-                        break;
-                    case "P":
-                        RequestType = "PostCard";
-                        break;
-                    default:
-                        RequestType = "No value found";
-                }
-                return RequestType;
-            }
-
            
             function addMarketContractor(data,fila){
                 var image="contractor.png";
@@ -738,79 +717,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     }
                 })                
             }*/
-
-
-            function getStatus(status){
-                var orderStatus="";
-                switch (status) {
-                    case "A":
-							orderStatus = "Order Open";
-							break;
-						case "C":
-							orderStatus = "Acepted Order";
-							break;
-						case "D":
-							orderStatus = "Order Assigned";
-							break;
-						case "E":
-							orderStatus = "Contractor Just Arrived";
-							break;
-						case "F":
-							orderStatus = "Estimate Sent";
-							break;
-						case "G":
-							orderStatus = "Estimate Approved";
-							break;
-						case "H":
-							orderStatus = "Work In Progress";
-							break;
-						case "I":
-							orderStatus = "Work Completed";
-							break;
-						case "J":
-							orderStatus = "Final Bill";
-							break;
-						case "K":
-							orderStatus = "Order Completed Paid";
-							break;
-						case "Z":
-							orderStatus = "Cancel work";
-							break;
-						case "P":
-							orderStatus = "Report In Progress";
-							break;
-						case "R":
-							orderStatus = "Report In Progress";
-							break;
-						case "S":
-							orderStatus = "Report Complete";
-                            break;
-                        case "T":
-							orderStatus = "Orden In Progress";
-                            break;
-                        case "U":
-							orderStatus = "Orden Asigned";
-                            break;
-                        case "M":
-							orderStatus = "Mailed";
-                            break;
-						default:
-							orderStatus = "Undefined";
-                }
-                return orderStatus;
-			}
-
-            /*function getCustomerName(customerFBID){
-				var firstName="";
-				var lastName="";
-				var ref = firebase.database().ref("Customers/"+customerFBID);
-					ref.once('value').then(function(snapshot) {
-							data=snapshot.val();
-							return data.Fname+' '+data.Lname;
-						});
-				ref=null;
-					
-			}*/
 
             function getCustomerName(customerFBID) {
                 return new Promise(function (resolve, reject) {
@@ -931,82 +837,15 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
                                 ?></td>
                             <td><?php 
-                                    switch ($order['RequestType']) {
-                                        case "E":
-                                            echo "Emergency";
-                                            break;
-                                        case "S":
-                                            echo "Schedule";
-                                            break;
-                                        case "R":
-                                            echo "RoofReport";
-                                            break;
-                                        case "P":
-                                            echo "PostCard";
-                                            break;
-                                        default:
-                                            echo "Undefined";
-                                            break;
-                                    }
+                                    echo '<script type="text/javascript">',
+                                        'document.write(getRequestType(\''.$order['RequestType'].'\'));',
+                                    '</script>';
                                 ?>
                             </td>
                             <td><?php 
-                                switch ($order['Status']) {
-                                    case "A":
-                                        echo "Order Open";
-                                        break;
-                                    case "C":
-                                        echo "Acepted Order";
-                                        break;
-                                    case "D":
-                                        echo "Order Assigned";
-                                        break;
-                                    case "E":
-                                        echo "Contractor Just Arrived";
-                                        break;
-                                    case "F":
-                                        echo "Estimate Sent";
-                                        break;
-                                    case "G":
-                                        echo "Estimate Approved";
-                                        break;
-                                    case "H":
-                                        echo "Work In Progress";
-                                        break;
-                                    case "I":
-                                        echo "Work Completed";
-                                        break;
-                                    case "J":
-                                        echo "Final Bill";
-                                        break;
-                                    case "K":
-                                        echo "Order Completed Paid";
-                                        break;
-                                    case "Z":
-                                        echo "Cancel work";
-                                        break;
-                                    case "P":
-                                        echo "Report In Progress";
-                                        break;
-                                    case "R":
-                                        echo "Report In Progress";
-                                        break;
-                                    case "S":
-                                        echo "Report Complete";
-                                        break;
-                                    case "T":
-                                        echo "Orden In Progress";
-                                        break;
-                                    case "U":
-                                        echo "Orden Asigned";
-                                        break;
-                                    case "M":
-                                        echo "Orden Asigned";
-                                        break;
-                                    default:
-                                        echo "Undefined";
-                                        break;
-                                }
+                                    echo '<script type="text/javascript">',
+                                        'document.write(getStatus(\''.$order['Status'].'\'));',
+                                    '</script>';	
                                 ?>
                             </td>                            
 
@@ -1845,26 +1684,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 
             }
 
-            function getRequestType(requestType){
-                            var RequestType="";
-                            switch (requestType) {
-                                case "E":
-                                    RequestType = "Emergency";
-                                    break;
-                                case "S":
-                                    RequestType = "Schedule";
-                                    break;
-                                case "R":
-                                    RequestType = "RoofReport";
-                                    break;
-                                case "P":
-                                    RequestType = "PostCard";
-                                    break;
-                                default:
-                                    RequestType = "No value found";
-                            }
-                            return RequestType;
-                        }
+            
 
             function getRequestColor(requestType){
                 var colorType="";
@@ -1887,65 +1707,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                 return colorType;
             }
 
-            function getStatus(status){
-                            var orderStatus="";
-                            switch (status) {
-                                case "A":
-                                        orderStatus = "Order Open";
-                                        break;
-                                    case "C":
-                                        orderStatus = "Acepted Order";
-                                        break;
-                                    case "D":
-                                        orderStatus = "Order Assigned";
-                                        break;
-                                    case "E":
-                                        orderStatus = "Contractor Just Arrived";
-                                        break;
-                                    case "F":
-                                        orderStatus = "Estimate Sent";
-                                        break;
-                                    case "G":
-                                        orderStatus = "Estimate Approved";
-                                        break;
-                                    case "H":
-                                        orderStatus = "Work In Progress";
-                                        break;
-                                    case "I":
-                                        orderStatus = "Work Completed";
-                                        break;
-                                    case "J":
-                                        orderStatus = "Final Bill";
-                                        break;
-                                    case "K":
-                                        orderStatus = "Order Completed Paid";
-                                        break;
-                                    case "Z":
-                                        orderStatus = "Cancel work";
-                                        break;
-                                    case "P":
-                                        orderStatus = "Report In Progress";
-                                        break;
-                                    case "R":
-                                        orderStatus = "Report In Progress";
-                                        break;
-                                    case "S":
-                                        orderStatus = "Report Complete";
-                                        break;
-                                    case "T":
-                                        orderStatus = "Orden In Progress";
-                                        break;
-                                    case "U":
-                                        orderStatus = "Orden Asigned";
-                                        break;
-                                    case "M":
-                                        orderStatus = "Mailed";
-                                        break;
-                                    default:
-                                        orderStatus = "Undefined";
-                            }
-                            return orderStatus;
-                        }
         </script>
 
 
@@ -1971,19 +1732,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             </div>
             <div class="form-group">
                 <label for="timeWork">Time for the work</label>
-                <select name="timeWork" id="timeWork" class="form-control" required>
-                    <option value="9:00 am">9:00 am</option>
-                    <option value="10:00 am">10:00 am</option>
-                    <option value="11:00 am">11:00 am</option>
-                    <option value="12:00 pm">12:00 pm</option>
-                    <option value="1:00 pm">1:00 pm</option>
-                    <option value="2:00 pm">2:00 pm</option>
-                    <option value="3:00 pm">3:00 pm</option>
-                    <option value="4:00 pm">4:00 pm</option>
-                    <option value="5:00 pm">5:00 pm</option>
-                </select>
-                
+                <input type="text" name="timeWork" id="timeWork" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;position:absolute"/>
             </div>
+            <br>
+            <br>
+            <br>
             <div class="form-group">
                 <label for="driverWork">Driver for the work</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>

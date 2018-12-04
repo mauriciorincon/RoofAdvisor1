@@ -842,26 +842,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											echo '<script type="text/javascript">',
 												'document.write(getRequestType(\''.$order['RequestType'].'\'));',
 											'</script>';
-											/*echo '<script type="text/javascript">',
-												'document.write(\'Hello World\');',
-											'</script>';*/
-										/*switch ($order['RequestType']) {
-											case "E":
-												echo "Emergency";
-												break;
-											case "S":
-												echo "Schedule";
-												break;
-											case "R":
-												echo "RoofReport";
-												break;
-											case "P":
-												echo "PostCard";
-												break;
-											default:
-												echo "Undefined";
-												break;
-										}*/
+											
 									?>
 								</td>
 								<td><?php echo $order['RepAddress']." ".$order['RepCity']." ".$order['RepState'] ?></td>
@@ -869,63 +850,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<td><?php 
 										echo '<script type="text/javascript">',
 											'document.write(getStatus(\''.$order['Status'].'\'));',
-										'</script>';
-										/*switch ($order['Status']) {
-											case "A":
-												echo "Order Open";
-												break;
-											case "C":
-												echo "Acepted Order";
-												break;
-											case "D":
-												echo "Order Assigned";
-												break;
-											case "E":
-												echo "Contractor Just Arrived";
-												break;
-											case "F":
-												echo "Estimate Sent";
-												break;
-											case "G":
-												echo "Estimate Approved";
-												break;
-											case "H":
-												echo "Work In Progress";
-												break;
-											case "I":
-												echo "Work Completed";
-												break;
-											case "J":
-												echo "Final Bill";
-												break;
-											case "K":
-												echo "Order Completed Paid";
-												break;
-											case "Z":
-												echo "Cancel work";
-												break;
-											case "P":
-												echo "Report In Progress";
-												break;
-											case "R":
-												echo "Report In Progress";
-												break;
-											case "S":
-												echo "Report Complete";
-												break;
-											case "T":
-												echo "Orden In Progress";
-												break;
-											case "U":
-												echo "Orden Asigned";
-												break;
-											case "M":
-												echo "Orden Asigned";
-												break;
-											default:
-												echo "Undefined";
-												break;
-										}*/
+										'</script>';	
 									?>
 								</td> 
 								<td><?php 
