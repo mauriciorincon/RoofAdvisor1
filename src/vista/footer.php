@@ -155,7 +155,7 @@
         <script src="static/vendor/sweetalert2/sweetalert2.min.js"></script>
 	    <script src="js/lity.min.js"></script>
         <script src="js/all.js" ></script>
-	                <script src="vista/js/slick.js"></script>
+	    <script src="vista/js/slick.js"></script>
 	
 
 		<script src="vista/js/moment.min.js"></script>
@@ -170,6 +170,7 @@
 				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
 <script src="vista/js/varios.js"></script>
+
 <script src="vista/timepicker/src/wickedpicker.js"></script>
 
 

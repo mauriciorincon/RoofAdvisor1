@@ -1678,6 +1678,8 @@ function insertOrderCustomer(idStripeCharge,amountValue){
         RequestType='S'
     }else if(RequestType=='roofreport'){
         RequestType='R'
+    }else if(RequestType=='reroofnew'){
+        RequestType='M'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     if(CompanyID==undefined){
@@ -2356,6 +2358,15 @@ function showHideSteps(typeService){
         //step5.show();
         step8.hide();
         $('#step-6 h1').html('<font size="41"><strong>Review Scheduled Repair Order Details</strong></font>');
+    }else if(typeService=='reroofnew'){
+        step4=$('.stepwizard-step:eq(4)');
+        step5=$('.stepwizard-step:eq(5)');
+        step8=$('.stepwizard-step:eq(8)');
+
+        //step4.show();
+        //step5.show();
+        step8.hide();
+        $('#step-6 h1').html('<font size="41"><strong>Review Re-roof or new Repair Order Details</strong></font>');
     }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
@@ -3931,6 +3942,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
         RequestType='S'
     }else if(RequestType=='roofreport'){
         RequestType='R'
+    }else if(RequestType=='reroofnew'){
+        RequestType='M'
     }
     
     if(CompanyID==undefined){
@@ -4058,6 +4071,8 @@ function insertOrderPostCard(){
         RequestType='R'
     }else if(RequestType=='postcard'){
         RequestType='P'
+    }else if(RequestType=='reroofnew'){
+        RequestType='M'
     }
     
     if(CompanyID==undefined){

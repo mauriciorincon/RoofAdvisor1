@@ -240,6 +240,24 @@
 					</a>
 
 					<a href="#" class="list-group-item" name="linkServiceType">
+						<input type="hidden" value="reroofnew" name="typeServiceOrder">
+						<table>
+							<tr>
+								<td style="padding: 12px 12px 12px 12px;">
+									<button class=" btn-success   btn-lg" type="button" style="width:160px">Re-roof or new Roof</button>
+								</td>
+								<td style="padding: 12px 12px 12px 12px;">
+								<h4>A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.</h4>
+								</td>
+							</tr>
+						</table>
+						<div class="d-flex w-100 justify-content-between">
+						
+						<span></span>
+							
+						</div>
+					</a>
+					<a href="#" class="list-group-item" name="linkServiceType">
 						<input type="hidden" value="roofreport" name="typeServiceOrder">
 						<table>
 							<tr>
