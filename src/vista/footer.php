@@ -32,7 +32,7 @@
 			<div style="margin-left:17%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-3 col-md-3  col-sm-6 mb-20">
+						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -100px;">
 							<div class="footer-widget">
 								<div class="footer-logo">
 								   <img src="img/logo-white.png" alt="" />
@@ -54,9 +54,9 @@
 								</ul>
 						    </div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
+						<div class="col-lg-5 col-md-6 col-sm-6 mb-20" style="margin-left: 50px;">
 							<div class="footer-widget">
-								<h3 class="widget-title">Site Map</h3>
+								<h3 class="widget-title"    style="margin-top: 100px;">Site Map</h3>
 								<ul class="footer-menu">
 									<li><a href="index.php">home</a></li>
 									<li><a href="?controller=aboutus&accion=showinfo">about us</a></li>

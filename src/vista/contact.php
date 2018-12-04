@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6">
 						<div class="contact-form">
-							<form action="../controlador/ajax/sendcontactemail.php"  method="post">
+							<form id="rsncform1" action=""  method="post">
 								<label>your name<span class="required">*</span></label>
 									<input type="text" id="name" name="name"  placeholder="Name" />
 								<label>your email<span class="required">*</span></label>
@@ -79,7 +79,7 @@
 									<input type="text" id="subject" name="subject" placeholder="Subject" />
 								<label>Your Message<span class="required">*</span></label>	
 									<textarea name="message" id="message" placeholder="Message"></textarea>	
-								<button>Send Message</button>
+								<button id='contactsub' type="button">Send Message</button>
 							</form>
 						</div>
 					</div>
@@ -113,82 +113,53 @@
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
-				styles: [
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#f2f2f2"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
+				styles: 
+[
     {
         "featureType": "road.highway",
-        "elementType": "all",
+        "elementType": "geometry.fill",
         "stylers": [
+            {
+                "color": "#fa511a"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#005678"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station.airport",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#eb5c00"
+            },
             {
                 "visibility": "simplified"
             }
         ]
     },
     {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
+        "featureType": "water",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
+                "color": "#005678"
             }
         ]
     },
     {
         "featureType": "water",
-        "elementType": "all",
+        "elementType": "labels",
         "stylers": [
             {
-                "color": "#46bcec"
-            },
-            {
-                "visibility": "on"
+                "color": "#ffffff"
             }
         ]
     }
@@ -209,4 +180,73 @@
                     title: 'Snazzy!'
                 });
             }
-		</script>
+
+
+function sendcontactemail(id){
+            var data = $('#'+id).serialize();
+           //alert(data);
+             $.ajax({
+                type: 'POST',
+                url: "../controlador/ajax/sendcontactemail.php",
+                data: data,
+                 success: function(data) {
+                     $('#cform1').html(data);
+let timerInterval
+swal({
+  type:'success',
+  title: 'Thanks for reaching out!',
+  html: 'A RoofServiceNow Specialist should be reaching out to you within the next 24hrs </br></br></br> Autoclose in <strong></strong>',
+  timer: 5000,
+  width:700,
+  imageUrl:'../img/logo.png',  
+imageWidth: 250,
+  imageHeight: 250,
+onOpen: () => {
+    swal.showLoading()
+    timerInterval = setInterval(() => {
+      swal.getContent().querySelector('strong')
+        .textContent = swal.getTimerLeft()
+    }, 100)
+  },
+  onClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (
+    // Read more about handling dismissals
+    result.dismiss === swal.DismissReason.timer
+  ) {
+    console.log('contact email successful');
+  }
+})
+var myBtn = document.getElementById('contactsub');
+ myBtn.addEventListener('click', function(event)
+{
+   sendcontactemail('rsncform1');
+
+$('#rsncform1').submit(function(event) {
+    event.preventDefault();
+
+});
+
+});
+                      },
+                  error: function(data) { // if error occured
+                   sweetAlert("Oops...", "Something went wrong!", "error");
+
+                    },
+                            }); }
+
+ var myBtn = document.getElementById('contactsub');
+ myBtn.addEventListener('click', function(event)
+{
+   sendcontactemail('rsncform1');
+
+$('#rsncform1').submit(function(event) {
+    event.preventDefault();
+alert('noob');
+});
+ });
+
+		
+</script>

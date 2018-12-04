@@ -666,6 +666,8 @@ margin-right:100px;
 .footer-menu{margin-top:20px}
 .footer-menu li {
   margin-bottom: 10px;
+    display: inline;
+    margin-right: 26px;
 }
 .footer-menu li a {
   color: #fff;
@@ -820,7 +822,7 @@ margin-right:100px;
     width: 70px;
 }
 .contact-icon i:hover{
-   background-color: rgb(243, 188, 22);
+   background-color: rgb(250, 81, 26);
    color: rgb(255, 255, 255);
 }
 .contact-text p{
@@ -1366,17 +1368,17 @@ position: relative;
 font-size: 144px;
 }
 #appand1{
-    width: 30%;
+    width: 20%;
     position: relative;
     bottom: 149px;
-    margin-left: 17%;
+    margin-left: 28%;
     z-index: 100
 }
 #appand2{
-    width: 26%;
+    width: 18%;
     position: relative;
     bottom: 151px;
-    margin-left: 165px;
+    margin-left: 45px;
     z-index: 100
 }
 #appphone1{
