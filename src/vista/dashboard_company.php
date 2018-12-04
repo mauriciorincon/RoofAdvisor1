@@ -11,8 +11,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
     </div>
 <?php } ?>-->
-
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+<div id="db-cus-main" style="margin-bottom:-5px !important;">
+<div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
@@ -964,7 +964,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             </table>
         </div> 
 </div>
-
 
 
 
@@ -2829,4 +2828,5 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
 		</div> 
 	</div>
+</div>
 </div>

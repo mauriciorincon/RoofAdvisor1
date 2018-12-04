@@ -86,4 +86,7 @@
 	</div>
 		</div>
         <!--  service-area end  -->			
-	<script src="vista/js/faq-main.js"></script>	
+<div>
+<img src="../img/faq-sheet1.png" style="    margin: auto;display: block;width: 50%;">
+</div>	
+<script src="vista/js/faq-main.js"></script>	
