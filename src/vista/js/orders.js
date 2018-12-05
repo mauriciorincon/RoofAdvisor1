@@ -82,6 +82,39 @@ function getStatus(status){
     return orderStatus;
 }
 
+function getImageType(Status){
+    var image="";
+    if(Status==='A'){
+        image="open_service.png";
+    }else if(Status=='D'){
+        image="open_service_d.png";
+    }else if(Status=='E'){
+        image="open_service_e.png";
+    }else if(Status=='F'){
+        image="open_service_f.png";
+    }else if(Status=='G'){
+        image="open_service_g.png";
+    }else if(Status=='H'){
+        image="open_service_h.png";
+    }else if(Status=='I'){
+        image="open_service_i.png";
+    }else if(Status=='J'){
+        image="open_service_j.png";
+    }else if(Status=='K'){
+        image="open_service_k.png";
+    }else if(Status=='C'){
+        image="open_service_c.png";
+    }else if(Status=='P'){
+        image="open_service_p.png";
+    }else if(Status=='R'){
+        image="open_service_r.png";
+    }else if(Status=='S'){
+        image="open_service_s.png";
+    }else{
+        image="if_sign-error_299045.png";
+    }
+    return image;
+}
 /*echo '<script type="text/javascript">',
 												'document.write(\'Hello World\');',
 											'</script>';*/
