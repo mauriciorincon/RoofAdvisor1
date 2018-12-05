@@ -180,36 +180,47 @@ function actionsCustomer(dataOrder){
 function actionsCompany(dataOrder,companyStatus){
     
         actions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
-                                    'href="#" '+ 
+                                    'href="" '+ 
                                     'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
                                     '<span class="glyphicon glyphicon-list-alt"></span>'+
                                 '</a>';
-        if(companyStatus!="Active"){    
-            actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
-                        'href="" '+
-                        'onClick="alert(\'You can not create comment until the company is active\')"> '+
-                        '<span class="glyphicon glyphicon-comment"></span>'+
-                        '</a>';
-        }else{ 
-            if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                'href="" '+
-                                'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                '<span class="glyphicon glyphicon-comment"></span>'+
-                            '</a>';
+        if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
+            if(companyStatus!="Active"){  
+                actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
+                    'href="" '+
+                    'onClick="alert(\'You can not create comment until the company is active\')"> '+
+                    '<span class="glyphicon glyphicon-comment"></span>'+
+                    '</a>';
+                actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                    'href="#" ' +
+                    'onClick="alert(\'You can not upload files until the company is active\')"> '+
+                    '<span class="glyphicon glyphicon-upload"></span>'+
+                '</a>';
             }else{
-                actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                'href="" '+
-                                'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                '<span class="glyphicon glyphicon-comment"></span>'+
-                            '</a>';    
-            }
-            actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
-                            'href="#" ' +
-                            'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
-                            '<span class="glyphicon glyphicon-upload"></span>'+
+                actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                            'href="" '+
+                            'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
+                            '<span class="glyphicon glyphicon-comment"></span>'+
                         '</a>';
-        }
+                actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                        'href="" ' +
+                        'onClick="alert(\'You can not upload files to an order that you have not taken\')"> '+
+                        '<span class="glyphicon glyphicon-upload"></span>'+
+                    '</a>';
+            } 
+            
+        }else{
+            actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
+                            'href="" '+
+                            'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
+                            '<span class="glyphicon glyphicon-comment"></span>'+
+                        '</a>';    
+            actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
+                        'href="" ' +
+                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
+                        '<span class="glyphicon glyphicon-upload"></span>'+
+                    '</a>';
+        }   
     return actions;
 }
 
@@ -226,7 +237,7 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
                 if(companyStatus=='Active'){
                     dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
                                 'href="#myModalGetWork" '+
-                                'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+dataOrder.RequestType+'\')" > '+
+                                'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+dataOrder.RequestType+'\',\''+getTypePricing(dataOrder)+'\')" > '+
                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
                 }else{
                         dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
@@ -237,14 +248,78 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
         }
         
     }else{
-        dataContractor=contractorName; 
+        var nextStatus="";
+        var nextStatusTitle="";
+        switch (dataOrder.Status) {
+            case "D":
+                nextStatusTitle= "Arrived";
+                nextStatus = "E";
+                break;
+            case "E":
+                nextStatusTitle= "Send Estimate";
+                nextStatus = "F";
+                break;
+            default:
+                nextStatus = "";
+                nextStatusTitle= "";
+                break;
+        }
+        if(nextStatus==""){
+            dataContractor=contractorName;
+        }else{
+            if(nextStatus=="F"){
+                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
+                'href="#myEstimateAmount" '+
+                'onClick="setOrder(\''+dataOrder.FBID+'\',\'orderID\')" > '+
+                '<span class="glyphicon glyphicon-check"></span>'+contractorName+' '+nextStatusTitle+'</a>';
+            }else{
+                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
+                'href="" '+
+                'onClick="updateOrder(\''+dataOrder.FBID+'\',\'Status,'+nextStatus+'\')" > '+
+                '<span class="glyphicon glyphicon-check"></span>'+contractorName+' '+nextStatusTitle+'</a>';
+            }
+            
+        }
     }
     
     return dataContractor;
 }
 
-function getOrderInfo(){
-
+function getTypePricing(dataOrder){
+    var option='L';
+    switch(dataOrder.RequestType){
+        case "S":
+            option += "R";
+            break;
+        case "M":
+            option += "N";
+            break;
+        default:
+            option = "";
+    }
+    switch(dataOrder.Rtype){
+        case "Flat":
+            option += "F";
+            break;
+        case "Asphalt":
+            option += "A";
+            break;
+        case "Wood Shake/Composite":
+            option += "W";
+            break;
+        case "Metal":
+            option += "M";
+            break;
+        case "Tile":
+            option += "T";
+            break;
+        case "Do not know":
+            option += "A";
+            break;
+        default:
+            option = "";
+    }
+    return option;
 }
 /*echo '<script type="text/javascript">',
 												'document.write(\'Hello World\');',
