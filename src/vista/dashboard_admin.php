@@ -195,7 +195,7 @@ Welcome to RoofServicenow Admin
 
         function addMarket(data,fila,infowindow){
             var image="";
-                image=getImageType(fila.Status);
+                image=getIconImage(fila.Status)
                 var oMarket= new google.maps.Marker({
                     position: new google.maps.LatLng(data.lat,data.lng),
                     map:mapObject,
