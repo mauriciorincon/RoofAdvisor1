@@ -236,35 +236,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 				function addMarket(data,fila,infowindow){
 					var image="";
-					if(fila.Status==='A'){
-						image="open_service.png";
-					}else if(fila.Status=='D'){
-						image="open_service_d.png";
-					}else if(fila.Status=='E'){
-						image="open_service_e.png";
-					}else if(fila.Status=='F'){
-						image="open_service_f.png";
-					}else if(fila.Status=='G'){
-						image="open_service_g.png";
-					}else if(fila.Status=='H'){
-						image="open_service_h.png";
-					}else if(fila.Status=='I'){
-						image="open_service_i.png";
-					}else if(fila.Status=='J'){
-						image="open_service_j.png";
-					}else if(fila.Status=='K'){
-						image="open_service_k.png";
-					}else if(fila.Status=='C'){
-						image="open_service_c.png";
-					}else if(fila.Status=='P'){
-						image="open_service_p.png";
-					}else if(fila.Status=='R'){
-						image="open_service_r.png";
-					}else if(fila.Status=='S'){
-						image="open_service_s.png";
-					}else{
-						image="if_sign-error_299045.png";
-					}
+					image=getIconImage(fila.Status)
 					var oMarket= new google.maps.Marker({
 						position: new google.maps.LatLng(data.lat,data.lng),
 						map:mapObject,
@@ -355,55 +327,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 					
-					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F") && dataOrder.RequestType!="R"){
-						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
-								'href="" '+
-								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
-								'<span class="glyphicon glyphicon-trash"></span> '+
-							'</a>';
-					}else{
-						actions='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
-									'href="" '+
-									'onClick="alert(\'Order cant be cancel\')">'+
-									'<span class="glyphicon glyphicon-trash"></span> '+
-								'</a>';
-					}
-					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P") && dataOrder.RequestType!="R"){
-						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
-								'href="#myScheduleChange" '+
-								'onClick="getOrderScheduleDateTime(\''+dataOrder.FBID+'\')"> '+ 
-								'<span class="glyphicon glyphicon-calendar"></span> '+
-							'</a>';
-					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
-								'href="" '+
-								'onClick="alert(\'the schedule can not be readjusted\')">'+
-								'<span class="glyphicon glyphicon-calendar"></span> '+
-							'</a>';
-					}
-					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
-						actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
-									'href="#myRatingScore" '+
-									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
-									'<span class="glyphicon glyphicon-star"></span>'+
-								'</a>';
-					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
-									'href="" '+
-									'onClick="alert(\'Order must be complete to make rating\')">'+ 
-									'<span class="glyphicon glyphicon-star-empty"></span>'+
-								'</a>';
-					}
-					actions+='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '+
-								'href="" '+
-								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
-								'<span class="glyphicon glyphicon-list-alt"></span>'+
-							'</a>';
-					actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                        'href="" '+
-                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
+					actions=actionsCustomer(dataOrder);
+
 					if(dataOrder.RequestType=='E'){
 						dateValue=dataOrder.ETA.substring(0,10);
 						timeValue=dataOrder.ETA.substring(11,20);
@@ -465,66 +390,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					var finalAmount='';
 					var valorTotal=0;
 					var actions="";
-					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F") && dataOrder.RequestType!="R"){
-						actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
-								'href="" '+
-								'onClick="cancelService(\''+dataOrder.FBID+'\',\'Status,Z\')">'+
-								'<span class="glyphicon glyphicon-trash"></span> '+
-							'</a>';
-					}else{
-						actions='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service"  '+  
-									'href="" '+
-									'onClick="alert(\'Order cant be cancel\')">'+
-									'<span class="glyphicon glyphicon-trash"></span> '+
-								'</a>';
-					}
-					/*actions+='<a class="btn-success btn-sm" data-toggle="modal" '+ 
-								'href="#myPayment" '+
-								'onClick="showChargePayment(\''+dataOrder.StripeID+'\')"> '+  
-								'<span class="glyphicon glyphicon-usd"></span> '+
-							'</a>';*/
-					if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="C" || dataOrder.Status=="P") && dataOrder.RequestType!="R"){
-						actions+='<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
-								'href="#myScheduleChange" '+
-								'onClick="getOrderScheduleDateTime(\''+dataOrder.FBID+'\')"> '+ 
-								'<span class="glyphicon glyphicon-calendar"></span> '+
-							'</a>';
-					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Change Schedule" '+
-								'href="" '+
-								'onClick="alert(\'The schedule can not be readjusted\')">'+
-								'<span class="glyphicon glyphicon-calendar"></span> '+
-							'</a>';
-					}
 					
-					if(dataOrder.Status=="S" || dataOrder.Status=="K"){
-						actions+='<a class="btn-warning btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Rating Service" '+
-									'href="#myRatingScore" '+
-									'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
-									'<span class="glyphicon glyphicon-star"></span>'+
-								'</a>';
-					}else{
-						actions+='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Rating Service"  '+
-									'href="" '+
-									'onClick="alert(\'Order must be complete to make rating\')">'+ 
-									'<span class="glyphicon glyphicon-star-empty"></span>'+
-								'</a>';
-					}
-					actions+='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '+
-								'href="" '+
-								'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
-								'<span class="glyphicon glyphicon-list-alt"></span>'+
-							'</a>';
-					actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  '+
-								'href="#" '+
-								'onClick="getCommentary(\''+dataOrder.FBID+'\')"> '+
-								'<span class="glyphicon glyphicon-comment"></span>'+
-							'</a>';
-					actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  '+
-								'href="#" '+
-								'onClick="getListReportFile(\''+dataOrder.FBID+'\')"> '+
-								'<span class="glyphicon glyphicon-download-alt"></span>'+
-							'</a>';
+					actions=actionsCustomer(dataOrder)
 
 					valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
 					valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
@@ -562,54 +429,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount = finalAmount ? finalAmount : '$0';
 					}
 
-					/*$("#table_orders_customer tr").each(function(index) {
-							
-							if (index !== 0) {
-								$row = $(this);
-								var id = $row.find("td:eq(0)").text();
-								if (id.indexOf(orderID) !== 0) {
-									
-								}
-								else {
-									$row.find("td:eq(1)").text(requestType);
-									$row.find("td:eq(2)").text(dataOrder.RepAddress);
-									$row.find("td:eq(3)").text(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water);
-									$row.find("td:eq(4)").text(status);
-									if(dataOrder.RequestType=='E'){
-										$row.find("td:eq(5)").text(dataOrder.ETA.substring(0,10));
-										$row.find("td:eq(6)").text(dataOrder.ETA.substring(11,20));
-									}else{
-										$row.find("td:eq(5)").text(dataOrder.SchDate);	
-										$row.find("td:eq(6)").text(dataOrder.SchTime);
-									}
-									estimateAmount = estimateAmount ? estimateAmount : '$0';
-									$row.find("td:eq(7)").text(estimateAmount);
-									finalAmount = finalAmount ? finalAmount : '$0';
-									$row.find("td:eq(8)").text(finalAmount);
-									var companyName="";
-									var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
-									ref.on('value', function(snapshot) {
-										companyName=snapshot.val();
-										//console.log(companyName);
-										$row.find("td:eq(9)").text(companyName);
-									});
-									
-									var firstName="";
-									var lastName="";
-									//Contractors/CN0008/ContNameFirst
-									//var path="Contractors/"+dataOrder.ContractorID+"/ContNameFirst";
-									var path="Contractors/"+dataOrder.ContractorID;
-									var ref = firebase.database().ref(path);
-										ref.on('value', function(snapshot) {
-											data=snapshot.val();
-											$row.find("td:eq(10)").text(data.ContNameFirst+' '+data.ContNameLast);
-										});
-									
-									$row.find("td:eq(11)").text(actions);
-									return false;
-								}
-							}
-						});*/
+					
 
 					
 					
@@ -688,34 +508,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 							}
 					});	
 					return indice;
-					
-
-						/*var value = orderID;
-						var flag=false;
-						var count=-1;
-						$("#table_orders_customer tr").each(function(index) {
-							
-							if (index !== 0) {
-								count++;
-								$row = $(this);
-
-								var id = $row.find("td:eq(0)").text();
-
-								if (id.indexOf(value) !== 0) {
-									flag=false;
-								}
-								else {
-									flag=true;
-									return false;
-								}
-							}
-						});
-
-					if(flag==false){
-						count=-1;
-					}
-					return count;*/
-
 				}
 
 				
@@ -930,69 +722,12 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											echo "";
 										}
 									?></td>
-								<td>
-									<?php if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0) and strcmp($order['RequestType'],"R")!=0){?>
-
-										<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service" 
-											href="" 
-											onClick="<?php echo "cancelService('".$order['FBID']."','Status,Z')"; ?>" > 
-											<span class="glyphicon glyphicon-trash"></span>
-										</a>
-									<?php }else{ ?>
-										<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"   title="Cancel service" 
-											href="" 
-											onClick="alert('Order can\'t be cancel')" > 
-											<span class="glyphicon glyphicon-trash"></span>
-										</a>
-									<?php } ?>
-									<!--<a class="btn-success btn-sm" data-toggle="modal"  
-										href="#myPayment" 
-										onClick="" > 
-										<span class="glyphicon glyphicon-usd"></span>
-									</a>-->
-									
-								<?php if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"C")==0 or strcmp($order['Status'],"P")==0) and strcmp($order['RequestType'],"R")!=0){?>
-									<a class="btn-primary btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
-												href="#myScheduleChange" 
-												onClick="<?php echo "getOrderScheduleDateTime('".$order['FBID']."')" ?>"> 
-												<span class="glyphicon glyphicon-calendar"></span>
-									</a>
-								<?php }else{ ?>
-									<a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
-												href="" 
-												onClick="alert('The schedule can not be readjusted')"> 
-												<span class="glyphicon glyphicon-calendar"></span>
-									</a>
-								<?php } ?>
-									<?php if(strcmp($order['Status'],"S")==0 or strcmp($order['Status'],"K")==0){ ?>
-										<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating service"  
-													href="#myRatingScore" 
-													onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
-													<span class="glyphicon glyphicon-star"></span>
-										</a>
-									<?php }else{ ?>
-										<a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Rating service"  
-													href="" 
-													onClick="alert('Order must be complete to make rating')" > 
-													<span class="glyphicon glyphicon-star-empty"></span>
-										</a>
-									<?php } ?>
-								
-
-										<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-													href="#" 
-													onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-													<span class="glyphicon glyphicon-list-alt"></span>
-										</a>
-										<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                        href="#" 
-                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-										<span class="glyphicon glyphicon-comment"></span>
-										<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  
-											href="#" 
-											onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
-											<span class="glyphicon glyphicon-download-alt"></span>
-										</a>
+								<td>	
+									<?php 
+										echo '<script type="text/javascript">',
+											'document.write(actionsCustomer('.json_encode($order,JSON_FORCE_OBJECT).'));',
+											'</script>';	
+									?>
 								</td>
 							</tr>
 						<?php } ?>

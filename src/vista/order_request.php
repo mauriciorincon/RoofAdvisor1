@@ -247,7 +247,7 @@
 									<button class=" btn-success   btn-lg" type="button" style="width:160px">Re-roof or new Roof</button>
 								</td>
 								<td style="padding: 12px 12px 12px 12px;">
-								<h4>A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.</h4>
+								<h4>Reroof or new roof estimates are scheduled a week in advance. Choose the qualified, pre-screened service professional from a list or allow the first top rated professional to choose your work order. You can chat and track your order. That easy!</h4>
 								</td>
 							</tr>
 						</table>

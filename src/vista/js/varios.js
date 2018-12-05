@@ -2550,6 +2550,10 @@ function setOrderId(orderID,RequestType){
                 $('input#numberPostCard').val(order.postCardValue);
                 $('#dateWork').val(order.SchDate);
                 $('#timeWork').val(order.SchTime);
+                if(RequestType=='S' || RequestType=='M'){
+                    $('#dateWork').prop('readonly', true);
+                    $('#timeWork').prop('readonly', true);
+                }
             }else{
                 $('input#numberPostCard').val(0);
             }
@@ -2580,7 +2584,7 @@ function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
     var companyID=$('input:hidden#companyIDWork').val();
     var dateWork=$('input#dateWork').val();
-    var timeWork=$('select#timeWork').val();
+    var timeWork=$('#timeWork').val();
     var driverID=$('select#driverWork').val();
     var amountPostCard=$('input#amountPostCard').val();
     var orderType=$('#orderTypeTakeWork').val();
@@ -2619,9 +2623,9 @@ function takeWork(){
         return;
     }
     if(orderType=="P"){
-        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+companyID+",ContractorID,"+",CompanyID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
     }else{
-        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
     }
     
     updateOrder(orderID,arrayChanges)

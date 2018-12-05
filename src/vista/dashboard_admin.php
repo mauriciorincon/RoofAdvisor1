@@ -195,35 +195,7 @@ Welcome to RoofServicenow Admin
 
         function addMarket(data,fila,infowindow){
             var image="";
-                if(fila.Status==='A'){
-                    image="open_service.png";
-                }else if(fila.Status=='D'){
-                    image="open_service_d.png";
-                }else if(fila.Status=='E'){
-                    image="open_service_e.png";
-                }else if(fila.Status=='F'){
-                    image="open_service_f.png";
-                }else if(fila.Status=='G'){
-                    image="open_service_g.png";
-                }else if(fila.Status=='H'){
-                    image="open_service_h.png";
-                }else if(fila.Status=='I'){
-                    image="open_service_i.png";
-                }else if(fila.Status=='J'){
-                    image="open_service_j.png";
-                }else if(fila.Status=='K'){
-                    image="open_service_k.png";
-                }else if(fila.Status=='C'){
-                    image="open_service_c.png";
-                }else if(fila.Status=='P'){
-                    image="open_service_p.png";
-                }else if(fila.Status=='R'){
-                    image="open_service_r.png";
-                }else if(fila.Status=='S'){
-                    image="open_service_s.png";
-                }else{
-                    image="if_sign-error_299045.png";
-                }
+                image=getIconImage(fila.Status)
                 var oMarket= new google.maps.Marker({
                     position: new google.maps.LatLng(data.lat,data.lng),
                     map:mapObject,
