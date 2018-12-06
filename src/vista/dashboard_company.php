@@ -2696,23 +2696,7 @@ if(!empty($_actual_company['postCardValue'])){
 </div>
 
 
-<div class="modal fade" id="myMensaje" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textMessage"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonMessage"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myEstimateAmount" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -2758,7 +2742,7 @@ if(!empty($_actual_company['postCardValue'])){
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Anticipated Amount Material</td>
+												<td>Deposit</td>
 												<td class="text-center"><input type="text" id="estMatAntCompany" name="estMatAntCompany" class="form-control input-sm"/></td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
@@ -2793,6 +2777,24 @@ if(!empty($_actual_company['postCardValue'])){
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 			</div> 
             
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textMessage"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
 		</div> 
 	</div>
 </div>
