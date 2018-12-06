@@ -2672,9 +2672,9 @@ function takeWorkPayed(stripeID,amount){
     var driverID=$('select#driverWork').val();
 
 
-    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
+    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,PaymentType,Online,StripeID,"+stripeID+",amount,"+amount;
+    $(document).ready(function(){$("#myModalGetWork").modal("hide"); });
     updateOrder(orderID,arrayChanges)
-    $("#myModalGetWork").modal("hide");
 }
 
 function vefifyInvoice(orderID){
