@@ -36,6 +36,8 @@ $('.aboutinfo1').slick({
     $('#table_orders_company').DataTable({
         "columnDefs": [
           { className: "text-right", "targets": [7,8] },
+          { "width": "200", "targets": 10 },
+          { "width": "120", "targets": 11 },
         ]
       }
 

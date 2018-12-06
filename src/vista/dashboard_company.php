@@ -275,12 +275,21 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         var customerName="";
                         var contractorName="";
                         getContractorName(fila.ContractorID).then(function(contractorName){
-                            getCustomerName(fila.CustomerFBID).then(function(customerName) {  
-                            infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
+                            getCustomerName(fila.CustomerFBID).then(function(customerName) {
+                            if(fila.CustomerFBID==""){
+                                infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>XXXXXX XXXXXX XXXXXX'+
+                                                        '</b><br><b>Status:</b>'+getStatus(fila.Status)+
+                                                        '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
+                                                        '<br><b>Customer:</b>XXXXXXX XXXXXXXX'+
+                                                        '<br><b>Contractor:</b>XXXXXXX XXXXXXX</p>');
+                            }else{
+                                infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>'+fila.RepAddress+' '+fila.RepCity+' '+fila.RepState+
                                                         '</b><br><b>Status:</b>'+getStatus(fila.Status)+
                                                         '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
                                                         '<br><b>Customer:</b>'+customerName+
                                                         '<br><b>Contractor:</b>'+contractorName+'</p>');
+                            }
+                            
                                 infowindow.open(map, oMarket); 
                             });    
                         }); 
