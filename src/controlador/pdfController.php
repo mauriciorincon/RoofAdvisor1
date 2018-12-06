@@ -356,7 +356,12 @@ class pdfController{
             $_hour_value=0;
             $_total_invoice=$_actual_value;
         }
-        
+        if($_total_invoice=0 or empty($_total_invoice)){
+            $_actual_value=$_amount;
+            $_total_invoice=$_amount;
+            $_actual_time=0;
+            $_hour_value=0;
+        }
 
         $_hmtl='
         <table>
