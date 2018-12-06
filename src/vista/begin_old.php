@@ -147,11 +147,11 @@
 				<div class ="col-md-5">
 					</div>
 					<div class ="col-md-1">
-							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Composite">
+							<input class="form-check-input" type="radio" name="estep3Option" id="estep3Option3" value="Wood Shake/Slate">
 						</div>
 						<div class="col-md-6">
 							<label class="form-check-label" for="estep3Option3">
-							Wood Shake/Composite
+							Wood Shake/Slate
 							</label>
 						</div>
 					

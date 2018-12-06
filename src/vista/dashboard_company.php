@@ -1988,7 +1988,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     <select name="question1" id="question1" class="form-control">
                         <option value="Flat">Flat</option>
                         <option value="Asphalt">Asphalt</option>
-                        <option value="Wood Shake/Composite">Wood Shake/Composite</option>
+                        <option value="Wood Shake/Slate">Wood Shake/Slate</option>
                         <option value="Metal">Metal</option>
                         <option value="Tile">Tile</option>
                         <option value="Do not know">Do not know</option>
