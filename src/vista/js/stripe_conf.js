@@ -42,6 +42,9 @@ var handler = StripeCheckout.configure({
                         }else if(action_type=="pay_postcard_service"){
                             jsRemoveWindowLoad('');
                             payOnlineInvocePostCard(objStripe.id,(amount_value));
+                        }else if(action_type=="pay_take_service"){
+                            jsRemoveWindowLoad('');
+                            takeWorkPayed(objStripe.id,(amount_value))
                         }
                         
                     }else{

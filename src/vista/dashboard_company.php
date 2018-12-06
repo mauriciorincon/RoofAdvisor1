@@ -261,35 +261,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
             function addMarket(data,fila,infowindow){
                     var image="";
-					if(fila.Status==='A'){
-						image="open_service.png";
-					}else if(fila.Status=='D'){
-						image="open_service_d.png";
-					}else if(fila.Status=='E'){
-						image="open_service_e.png";
-					}else if(fila.Status=='F'){
-						image="open_service_f.png";
-					}else if(fila.Status=='G'){
-						image="open_service_g.png";
-					}else if(fila.Status=='H'){
-						image="open_service_h.png";
-					}else if(fila.Status=='I'){
-						image="open_service_i.png";
-					}else if(fila.Status=='J'){
-						image="open_service_j.png";
-					}else if(fila.Status=='K'){
-						image="open_service_k.png";
-					}else if(fila.Status=='C'){
-						image="open_service_c.png";
-					}else if(fila.Status=='P'){
-						image="open_service_p.png";
-					}else if(fila.Status=='R'){
-						image="open_service_r.png";
-					}else if(fila.Status=='S'){
-						image="open_service_s.png";
-					}else{
-						image="if_sign-error_299045.png";
-					}
+					image=getIconImage(fila.Status)
 					var oMarket= new google.maps.Marker({
 						position: new google.maps.LatLng(data.lat,data.lng),
 						map:mapObject,
@@ -299,10 +271,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         status:fila.Status
 					});
 
-                    
-                    
-                            
-                        
 					oMarket.addListener('click', function() {
                         var customerName="";
                         var contractorName="";
@@ -315,13 +283,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                                         '<br><b>Contractor:</b>'+contractorName+'</p>');
                                 infowindow.open(map, oMarket); 
                             });    
-                        });
-                        
-                            
-                        
+                        }); 
                     });
-                    
-					
 					return oMarket;
                 }
 
@@ -393,71 +356,21 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
                     finalAmount = finalAmount ? '$'+finalAmount : '$0';
                 }
-                
-                if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                    if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
-                        dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                'href="" '+
-                                'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
-                                '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-
-                    }else{
-                        getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                            if(companyStatus=='Acive'){
-                                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                            'href="#myModalGetWork" '+
-                                            'onClick="setOrderId(\''+dataOrder.FBID+'\')" > '+
-                                            '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
-                            }else{
-                                    dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                        'href="" '+
-                                        'onClick="alert(\'You can not take the job until the company is active\')"> '+
-                                        '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                            } 
-                        });
-                    }
-                    
-                }else{
-                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                                dataContractor=contractorName; 
-                        });
-                }
-
-                companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
-                                'href="#" '+ 
-                                'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
-                                '<span class="glyphicon glyphicon-list-alt"></span>'+
-                            '</a>';
-                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
-                    dataCustomer=customerDataX;
-                });
                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                    if(companyStatus!="Active"){    
-                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
-                                    'href="" '+
-                                    'onClick="alert(\'You can not create comment until the company is active\')"> '+
-                                    '<span class="glyphicon glyphicon-comment"></span>'+
-                                    '</a>';
-                    }else{ 
-                        if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                            companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                            'href="" '+
-                                            'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                            '<span class="glyphicon glyphicon-comment"></span>'+
-                                        '</a>';
-                        }else{
-                            companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                            'href="" '+
-                                            'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                            '<span class="glyphicon glyphicon-comment"></span>'+
-                                        '</a>';    
-                        }
-                        companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
-                                        'href="#" ' +
-                                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-upload"></span>'+
-                                    '</a>';
-                    }
+                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                        dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
+                    });
+                });
+                if(dataOrder.CompanyID==""){
+                    dataCustomer="XXXXX XXXXX XXXXX XXXXX";
+                }else{
+                    getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
+                        dataCustomer=customerDataX;
+                    });
+                }
+                
+                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                    companyActions=actionsCompany(dataOrder,companyStatus);
                     
                 });
                             
@@ -493,9 +406,90 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
             }
 
-            function updateOrderOnTable(dataOrder){
+            function updateOrderOnTable(dataOrder,row){
                 var value = dataOrder.OrderNumber;
-                $("#table_orders_company tr").each(function(index) {
+                
+                $row=$("#table_orders_company").find('tr:eq('+(row+1)+')');
+
+                var requestType=getRequestType(dataOrder.RequestType);
+                            var status=getStatus(dataOrder.Status);
+                            var dataCustomer="";
+
+                            if(dataOrder.CompanyID!=""){
+                                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                                        dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
+                                        
+                                            $row.find("td:eq(10)").html(dataContractor);
+                                            return;    
+                                        
+                                    });
+                                });
+                            }
+                            
+                            
+                            if(dataOrder.CompanyID==""){
+                                customerData="XXXXX XXXXX XXXXX XXXXX";
+                                $row.find("td:eq(3)").html(customerData);
+                            }else{
+                                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
+                                    $row.find("td:eq(3)").html(customerData);
+                                });
+                            }
+                            
+
+                            
+                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                                actionC=actionsCompany(dataOrder,companyStatus);
+                                    $row.find("td:eq(11)").html(actionC);
+                                
+                            });
+
+                            valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+                            valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+                            valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+                            valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+
+                            if(dataOrder.Status=="F" && dataOrder.RequestType=="P"){
+                                valorTotal=(parseInt(valueMat)+parseInt(valueTime));
+                                estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
+                                                    'href="#myEstimateAmount" '+
+                                                    'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                '</a>';
+                            }else{
+
+                                estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+                                estimateAmount = estimateAmount ? estimateAmount : '$0';
+                            }
+                            if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
+                                valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
+                                finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+                                                    'href="#myFinalAmount" '+
+                                                    'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
+                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                '</a>';
+                            }else{
+                                finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
+                                finalAmount = finalAmount ? '$'+finalAmount : '$0';
+                            }
+                            $row.find("td:eq(1)").html(dataOrder.SchDate);
+                            $row.find("td:eq(2)").html(dataOrder.SchTime);
+                            if(dataOrder.RequestType=='P'){
+                                description='Number of Postcard: '+dataOrder.postCardValue;
+                            }else{
+                                description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                            }
+
+                            $row.find("td:eq(4)").html(description);
+                            $row.find("td:eq(5)").html(requestType);
+                            $row.find("td:eq(6)").html(status);
+                            $row.find("td:eq(7)").html(estimateAmount);
+                            $row.find("td:eq(8)").html(finalAmount);
+                            $row.find("td:eq(9)").html(dataOrder.PaymentType);
+
+                /*$("#table_orders_company tr").each(function(index) {
                     if (index !== 0) {
 
                         $row = $(this);
@@ -506,71 +500,28 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             var status=getStatus(dataOrder.Status);
                             var dataCustomer="";
 
-                            if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
-                                if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
-                                    dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                            'href="" '+
-                                            'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
-                                            '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                }else{
-                                    getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                                        if(companyStatus=='Acive'){
-                                            dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                                        'href="#myModalGetWork" '+
-                                                        'onClick="setOrderId(\''+dataOrder.FBID+'\')" > '+
-                                                        '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
-                                        }else{
-                                                dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
-                                                    'href="" '+
-                                                    'onClick="alert(\'You can not take the job until the company is active\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Take work</a>';
-                                        } 
-                                    });
-                                }
-                                $row.find("td:eq(10)").html(dataContractor);
-                            }else{
+                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                                 getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                                        $row.find("td:eq(10)").html(contractorName);
-                                    });
-                            }
-
-                            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
-                                $row.find("td:eq(3)").html(customerData);
+                                    dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
+                                    $row.find("td:eq(10)").html(dataContractor);
+                                });
                             });
+                            
+                            
+                            if(dataOrder.CompanyID==""){
+                                customerData="XXXXX XXXXX XXXXX XXXXX";
+                                $row.find("td:eq(3)").html(customerData);
+                            }else{
+                                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
+                                    $row.find("td:eq(3)").html(customerData);
+                                });
+                            }
+                            
 
                             
                             getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                                companyActions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
-                                    'href="#" '+ 
-                                    'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
-                                    '<span class="glyphicon glyphicon-list-alt"></span>'+
-                                '</a>';
-                                if(companyStatus!="Active"){    
-                                companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+ 
-                                                'href="" '+
-                                                'onClick="alert(\'You can not create comment until the company is active\')"> '+
-                                                '<span class="glyphicon glyphicon-comment"></span>'+
-                                                '</a>';
-                                }else{ 
-                                    if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
-                                        companyActions+='<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                                        'href="" '+
-                                                        'onClick="alert(\'You can not create comments to an order that you have not taken\')"> '+
-                                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                                    '</a>';
-                                    }else{
-                                        companyActions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
-                                                        'href="" '+
-                                                        'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
-                                                        '<span class="glyphicon glyphicon-comment"></span>'+
-                                                    '</a>';    
-                                    }
-                                    companyActions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
-                                        'href="#" ' +
-                                        'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
-                                        '<span class="glyphicon glyphicon-upload"></span>'+
-                                    '</a>';
-                                } 
+                                companyActions=actionsCompany(dataOrder,companyStatus);
+                                 
                                 $row.find("td:eq(11)").html(companyActions);
                             });
 
@@ -619,7 +570,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             $row.find("td:eq(9)").html(dataOrder.PaymentType);
                         }
                     }
-                });
+                });*/
             }
 
             function removeOrderOnTable(dataOrder){
@@ -691,33 +642,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         contractorMarker.splice(i, 1);
                     }
                 }
-                /*contractorMarker.map(function(marker) {
-                    if(marker.id===idContractor){
-                        marker.setVisible(false);
-                        contractorMarker.splice( marketrs.indexOf(marker), 1 );
-                    }
-                })*/
+                
             }
-            /*function hideShowMarketByTypeService(listTypeService){
-                marketrs.map(function(marker) {
-                    if(listTypeService.indexOf(marker.typeService)>-1){
-                        marker.setVisible(true);
-                    }else{
-                        marker.setVisible(false);
-                    }
-                })                
-            }
-
-            function hideShowMarketByStatus(listTypeStatus){
-                marketrs.map(function(marker) {
-                    if(listTypeStatus.indexOf(marker.status)>-1){
-                        marker.setVisible(true);
-                    }else{
-                        marker.setVisible(false);
-                    }
-                })                
-            }*/
-
+            
             function getCustomerName(customerFBID) {
                 return new Promise(function (resolve, reject) {
                    
@@ -818,13 +745,18 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             <td><?php echo $order['OrderNumber']?></td>
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
-                            <td><?php  
-                                    $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');
-                                    $_customerName.=" ".$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Lname');
+                            <td><?php
+                                    if(empty($order['CompanyID'])){
+                                        echo "XXXXX XXXXX XXXXX XXXXX";
+                                    }else{
+                                        $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');
+                                        $_customerName.=" ".$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Lname');
 
-                                    $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
-                                    $_phone_number=str_replace("+1","",$_phone_number);
-                                    echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
+                                        $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
+                                        $_phone_number=str_replace("+1","",$_phone_number);
+                                        echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
+                                    }
+                                    
                                 ?></td>
                             
                             <td><?php 
@@ -888,73 +820,21 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             </td>
                             <td><?php echo $order['PaymentType']?></td>
                             <td><?php 
-                                    if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
-                                        ?>
-                                        <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                            href="" 
-                                            onClick="alert('Only RoofServiceNow can take this type of service')"> 
-                                            <span class="glyphicon glyphicon-check"></span>Take work
-                                        </a>
-                                    <?php }else{
-                                        if(!isset($order['ContractorID']) or empty($order['ContractorID'])){
-                                            if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
-                                            ?>
-                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                                    href="" 
-                                                    onClick="alert('You can not take the job until the company is active')"> 
-                                                    <span class="glyphicon glyphicon-check"></span>Take work
-                                                </a>
-                                    <?php   }else{ ?>
-                                            <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                                    href="#myModalGetWork" 
-                                                    onClick="setOrderId('<?php echo $order['FBID']?>')"> 
-                                                    <span class="glyphicon glyphicon-check"></span>Take work
-                                                </a>
-                                       <?php }
-                                        }else{
-                                            $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
-                                            $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-    
-                                            echo $_contractorName;
-                                        } 
-                                    } 
+                                    $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                    $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+                                     echo '<script type="text/javascript">',
+                                     'document.write(takeJobCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\',\''.$_contractorName.'\'));',
+                                     '</script>';
                                     ?>
                                     
                                     
                             </td>
                             <td>
-                            <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-                                href="" 
-                                onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                            </a>
-                            <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
-                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                    href="" 
-                                    onClick="alert('You can not create comment until the company is active')"> 
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                </a>
-                            <?php }else{ 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                ?>
-                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                        href="" 
-                                        onClick="alert('You can not create comments to an order that you have not taken')"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                                    <?php }else{ ?>
-                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                        href="" 
-                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                            <?php 
-                            }} ?>
-                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files"  
-                                href="#" 
-                                onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
-                                <span class="glyphicon glyphicon-upload"></span>
-                            </a>
+                                <?php 
+										echo '<script type="text/javascript">',
+											'document.write(actionsCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\'));',
+											'</script>';	
+								?>
                             </td>
                            
                            
@@ -1744,7 +1624,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     <?php } ?>
                 </select>
             </div>
-            <button type="button" class="btn-primary btn-sm" onClick="takeWork()" >Save</button>
+            <div class="form-group">
+                <label for="pricingWork">Pricing for take the work</label>
+                <input type="text" name="pricingWork" id="pricingWork" readonly/>
+            </div>
+            <button type="button" class="btn-primary btn-sm" onClick="takeWork()" >Confirm</button>
             <button  type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
     </div><!-- /cierro contenedor -->
@@ -2829,4 +2713,88 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myEstimateAmount" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content" > 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
+			</div> 
+			<div class="modal-body" id="textEstimateAmount" style="position:relative;right:0px;top:45px;"> 
+				<input type="hidden" value="" id="orderID" />
+				
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>Order Summary</strong></h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-condensed" id="estimatedAmountTable">
+										<thead>
+											<tr>
+												<td><strong>Item</strong></td>
+												<td class="text-center"><strong>Price</strong></td>
+												<td class="text-center"><strong>Quantity</strong></td>
+												<td class="text-right"><strong>Totals</strong></td>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- foreach ($order->lineItems as $line) or some such thing here -->
+											<tr>
+												<td>Estimate Amount Materials</td>
+												<td class="text-center"><input type="text" id="estMatCompany" name="estMatCompany" class="form-control input-sm"  onfocusout="calculateEstAmount()"/></td>
+												<td class="text-center"><input type="text" id="estMatCntCompany" name="estMatCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Estimate Amount Time</td>
+												<td class="text-center"><input type="text" id="estHourCompany" name="estHourCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
+												<td class="text-center"><input type="text" id="estHourCntCompany" name="estHourCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Anticipated Amount Material</td>
+												<td class="text-center"><input type="text" id="estMatAntCompany" name="estMatAntCompany" class="form-control input-sm"/></td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="thick-line"></td>
+												<td class="thick-line"></td>
+												<td class="thick-line text-center"><strong>Subtotal</strong></td>
+												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td class="no-line"></td>
+												<td class="no-line"></td>
+												<td class="no-line text-center"><strong>Total</strong></td>
+												<td class="no-line text-right">$00.00</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div> 
+            <br>
+            <br>
+			<div class="modal-footer" id="buttonEstimateAmount"> 
+				<button type="button" class="btn-primary btn-sm" onClick="sendEstimateAmount()" >Comfirm</button>
+            
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
+			</div> 
+            
+		</div> 
+	</div>
+</div>
+
 </div>

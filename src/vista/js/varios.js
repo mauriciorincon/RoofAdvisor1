@@ -2535,7 +2535,7 @@ function getOrderScheduleDateTime(orderId){
     
 }
 
-function setOrderId(orderID,RequestType){
+function setOrderId(orderID,RequestType,typePricing){
     $('#orderIDWork').val(orderID);
     $('#orderIDWorkText').html(orderID);
     $('#orderTypeTakeWork').val(RequestType);
@@ -2550,6 +2550,30 @@ function setOrderId(orderID,RequestType){
                 $('input#numberPostCard').val(order.postCardValue);
                 $('#dateWork').val(order.SchDate);
                 $('#timeWork').val(order.SchTime);
+                if(RequestType=='S' || RequestType=='M'){
+                    $('#dateWork').prop('readonly', true);
+                    $('#timeWork').prop('readonly', true);
+                    $.post( "controlador/ajax/getParameter.php", { "table" : "Parameters","field":typePricing}, null, "text" )
+                    .done(function( data, textStatus, jqXHR ) {
+                        if ( console && console.log ) {
+                            var n = data.indexOf("Error");
+                            if(n==-1){
+                                $('#pricingWork').val(data/100);
+                                amount_value=data;
+                            }else{
+                                $('#pricingWork').val(0);
+                            }
+                            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                            jsRemoveWindowLoad('');
+                        }
+                    })
+                    .fail(function( jqXHR, textStatus, errorThrown ) {
+                        if ( console && console.log ) {
+                            console.log( "La solicitud a fallado: " +  textStatus);
+                        }
+                    });
+
+                }
             }else{
                 $('input#numberPostCard').val(0);
             }
@@ -2580,7 +2604,7 @@ function takeWork(){
     var orderID=$('input:hidden#orderIDWork').val();
     var companyID=$('input:hidden#companyIDWork').val();
     var dateWork=$('input#dateWork').val();
-    var timeWork=$('select#timeWork').val();
+    var timeWork=$('#timeWork').val();
     var driverID=$('select#driverWork').val();
     var amountPostCard=$('input#amountPostCard').val();
     var orderType=$('#orderTypeTakeWork').val();
@@ -2618,12 +2642,37 @@ function takeWork(){
         $("#myMensaje").modal("show");
         return;
     }
-    if(orderType=="P"){
-        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+    if(orderType=="S" || orderType=="M"){
+        action_type="pay_take_service";
+        if(typeof handler !== undefined){
+            handler.open({
+                name: 'RoofServiceNow',
+                description: 'pay your service',
+                amount: parseInt(amount_value),
+                email:userMailCompany
+            });
+        }
     }else{
-        arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",CompanyID,"+companyID+",ContractorID,"+driverID+",Status,D";
+        if(orderType=="P"){
+            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+companyID+",ContractorID,"+",CompanyID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+        }else{
+            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
+        }
+        updateOrder(orderID,arrayChanges)
+        $("#myModalGetWork").modal("hide");
     }
     
+}
+
+function takeWorkPayed(stripeID,amount){
+    var orderID=$('input:hidden#orderIDWork').val();
+    var companyID=$('input:hidden#companyIDWork').val();
+    var dateWork=$('input#dateWork').val();
+    var timeWork=$('#timeWork').val();
+    var driverID=$('select#driverWork').val();
+
+
+    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
     updateOrder(orderID,arrayChanges)
     $("#myModalGetWork").modal("hide");
 }
@@ -4472,4 +4521,62 @@ $('.tree-toggle').parent().children('ul.tree').toggle(200);
 function setToSelectService(){
     window.location.href = "index.php";
     //$(location).attr('href', 'index.php');
+}
+
+
+function calculateEstAmount(){
+    var matAmount=$('#estMatCompany').val();
+    var matCntAmount=$('#estMatCntCompany').val();
+    var hourAmount=$('#estHourCompany').val();
+    var houtCntAmount=$('#estHourCntCompany').val();
+
+    $row=$("#estimatedAmountTable").find('tr:eq(1)');
+    $row.find("td:eq(3)").html('$'+(matAmount*matCntAmount)+'.00');
+
+    $row=$("#estimatedAmountTable").find('tr:eq(2)');
+    $row.find("td:eq(3)").html('$'+(hourAmount*houtCntAmount)+'.00');
+
+    $row=$("#estimatedAmountTable").find('tr:eq(4)');
+    $row.find("td:eq(3)").html('$'+((hourAmount*houtCntAmount)+(matAmount*matCntAmount))+'.00');
+
+    $row=$("#estimatedAmountTable").find('tr:eq(5)');
+    $row.find("td:eq(3)").html('$'+((hourAmount*houtCntAmount)+(matAmount*matCntAmount))+'.00');
+}
+
+function sendEstimateAmount(){
+    var matAmount=$('#estMatCompany').val();
+    var matCntAmount=$('#estMatCntCompany').val();
+    var hourAmount=$('#estHourCompany').val();
+    var houtCntAmount=$('#estHourCntCompany').val();
+    var antAmountMat=$('#estMatAntCompany').val();
+
+    var orderID=$('#orderID').val();
+
+    var msg="";
+    if(matAmount=="" || matAmount==undefined || matAmount==null){
+        msg+="Please type amount for materials \n";
+    }
+    if(matCntAmount=="" || matCntAmount==undefined || matCntAmount==null){
+        msg+="Please type quantity for materials \n";
+    }
+    if(hourAmount=="" || hourAmount==undefined || hourAmount==null){
+        msg+="Please type amount per hour \n";
+    }
+    if(houtCntAmount=="" || houtCntAmount==undefined || houtCntAmount==null){
+        msg+="Please type quantity of hours \n";
+    }
+    if(orderID=="" || orderID==undefined || orderID==null){
+        msg+="Please define the order \n";
+    }
+    if(msg!=""){
+        alert(msg);
+        return;
+    }
+    arrayChanges="Status,F,EstAmtMat,"+matAmount+",EstAmtTime,"+(hourAmount*houtCntAmount)+",EstTime,"+houtCntAmount,",antAmountMat,"+antAmountMat;
+    updateOrder(orderID,arrayChanges);
+
+}
+
+function setOrder(orderID,field){
+    $('#'+field).val(orderID);
 }
