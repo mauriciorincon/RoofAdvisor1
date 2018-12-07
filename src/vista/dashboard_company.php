@@ -418,7 +418,14 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
             function updateOrderOnTable(dataOrder,row){
                 var value = dataOrder.OrderNumber;
                 
-                $row=$("#table_orders_company").find('tr:eq('+(row+1)+')');
+                
+					var t = $('#table_orders_company').DataTable();
+					var row=t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} ).indexes();
+
+                var $row = t.row(row);
+                //$row=$("#table_orders_company").find('tr:eq('+(row+1)+')');
 
                 var requestType=getRequestType(dataOrder.RequestType);
                             var status=getStatus(dataOrder.Status);
@@ -428,8 +435,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                                         dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
-                                        
-                                            $row.find("td:eq(10)").html(dataContractor);
+                                            $row.cell($row, 10).data(dataContractor).draw(false);
+                                            //$row.find("td:eq(10)").html(dataContractor);
                                             return;    
                                         
                                     });
@@ -439,10 +446,12 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             
                             if(dataOrder.CompanyID==""){
                                 customerData="XXXXX XXXXX XXXXX XXXXX";
-                                $row.find("td:eq(3)").html(customerData);
+                                $row.cell($row, 3).data(customerData).draw(false);
+                                //$row.find("td:eq(3)").html(customerData);
                             }else{
                                 getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
-                                    $row.find("td:eq(3)").html(customerData);
+                                    $row.cell($row, 3).data(customerData).draw(false);
+                                    //$row.find("td:eq(3)").html(customerData);
                                 });
                             }
                             
@@ -450,7 +459,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             
                             getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
                                 actionC=actionsCompany(dataOrder,companyStatus);
-                                    $row.find("td:eq(11)").html(actionC);
+                                    $row.cell($row, 11).data(actionC).draw(false);
+                                    //$row.find("td:eq(11)").html(actionC);
                                 
                             });
 
@@ -483,20 +493,29 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                                 finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
                                 finalAmount = finalAmount ? '$'+finalAmount : '$0';
                             }
-                            $row.find("td:eq(1)").html(dataOrder.SchDate);
-                            $row.find("td:eq(2)").html(dataOrder.SchTime);
+                            $row.cell($row, 1).data(dataOrder.SchDate).draw(false);
+                            //$row.find("td:eq(1)").html(dataOrder.SchDate);
+                            $row.cell($row, 2).data(dataOrder.SchTime).draw(false);
+                            //$row.find("td:eq(2)").html(dataOrder.SchTime);
                             if(dataOrder.RequestType=='P'){
                                 description='Number of Postcard: '+dataOrder.postCardValue;
                             }else{
                                 description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
                             }
 
-                            $row.find("td:eq(4)").html(description);
-                            $row.find("td:eq(5)").html(requestType);
-                            $row.find("td:eq(6)").html(status);
-                            $row.find("td:eq(7)").html(estimateAmount);
-                            $row.find("td:eq(8)").html(finalAmount);
-                            $row.find("td:eq(9)").html(dataOrder.PaymentType);
+                            //$row.find("td:eq(4)").html(description);
+                            //$row.find("td:eq(5)").html(requestType);
+                            //$row.find("td:eq(6)").html(status);
+                            //$row.find("td:eq(7)").html(estimateAmount);
+                            //$row.find("td:eq(8)").html(finalAmount);
+                            //$row.find("td:eq(9)").html(dataOrder.PaymentType);
+
+                            $row.cell($row, 4).data(description).draw(false);
+                            $row.cell($row, 5).data(requestType).draw(false);
+                            $row.cell($row, 6).data(status).draw(false);
+                            $row.cell($row, 7).data(estimateAmount).draw(false);
+                            $row.cell($row, 8).data(finalAmount).draw(false);
+                            $row.cell($row, 9).data(dataOrder.PaymentType).draw(false);
 
                 /*$("#table_orders_company tr").each(function(index) {
                     if (index !== 0) {
