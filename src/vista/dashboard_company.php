@@ -365,53 +365,58 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
                     finalAmount = finalAmount ? '$'+finalAmount : '$0';
                 }
-                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                        dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
-                    });
-                });
-                if(dataOrder.CompanyID==""){
-                    dataCustomer="XXXXX XXXXX XXXXX XXXXX";
-                }else{
-                    getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
-                        dataCustomer=customerDataX;
-                    });
-                }
-                
-                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                    companyActions=actionsCompany(dataOrder,companyStatus);
-                    
-                });
-                            
                 if(dataOrder.RequestType=='P'){
                     description='Number of Postcard: '+dataOrder.postCardValue;
                 }else{
                     description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
                 }
 
-                t.row.add( [
-                        dataOrder.OrderNumber,
-                        dataOrder.SchDate,
-                        dataOrder.SchTime,
-                        dataCustomer,
-                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
-                        requestType,
-                        status,
-                        estimateAmount,
-                        finalAmount,
-                        dataOrder.PaymentType,
-                        dataContractor,
-                        companyActions,
-                    ] ).draw( false );
+                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                        dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
+
+                        if(dataOrder.CompanyID==""){
+                            dataCustomer="XXXXX XXXXX XXXXX XXXXX";
+                        }else{
+                            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
+                                dataCustomer=customerDataX;
+                            });
+                        }
+                        
+                        getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                            companyActions=actionsCompany(dataOrder,companyStatus);
+                            
+                        });
+                                    
+                        
+
+                        t.row.add( [
+                                dataOrder.OrderNumber,
+                                dataOrder.SchDate,
+                                dataOrder.SchTime,
+                                dataCustomer,
+                                dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                                requestType,
+                                status,
+                                estimateAmount,
+                                finalAmount,
+                                dataOrder.PaymentType,
+                                dataContractor,
+                                companyActions,
+                            ] ).draw( false );
+                        
+                        var marker={
+                            lat: parseFloat(dataOrder.Latitude),
+                            lng: parseFloat(dataOrder.Longitude),
+                            icon: iconBase+'library_maps.png',
+                            text: dataOrder.SchDate
+                        };
+                        var oMarket=addMarket(marker,dataOrder,infowindow);
+                        marketrs.push(oMarket);
+
+                    });
+                });
                 
-                var marker={
-                    lat: parseFloat(dataOrder.Latitude),
-                    lng: parseFloat(dataOrder.Longitude),
-                    icon: iconBase+'library_maps.png',
-                    text: dataOrder.SchDate
-                };
-                var oMarket=addMarket(marker,dataOrder,infowindow);
-                marketrs.push(oMarket);
 
             }
 
