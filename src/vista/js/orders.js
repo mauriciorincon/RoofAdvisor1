@@ -259,6 +259,18 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
                 nextStatusTitle= "Send Estimate";
                 nextStatus = "F";
                 break;
+            case "G":
+                nextStatusTitle= "Work In Progress";
+                nextStatus = "H";
+                break;
+            case "H":
+                nextStatusTitle= "Work Completed";
+                nextStatus = "I";
+                break;
+            case "I":
+                nextStatusTitle= "Final Bill";
+                nextStatus = "J";
+                break;
             default:
                 nextStatus = "";
                 nextStatusTitle= "";
@@ -268,9 +280,14 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
             dataContractor=contractorName;
         }else{
             if(nextStatus=="F"){
-                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
+                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Estimate Amount"'+
                 'href="#myEstimateAmount" '+
                 'onClick="setOrder(\''+dataOrder.FBID+'\',\'orderID\')" > '+
+                '<span class="glyphicon glyphicon-check"></span>'+contractorName+' '+nextStatusTitle+'</a>';
+            }else if (nextStatus=="J"){
+                dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Final Amount"'+
+                'href="#myFinalAmount" '+
+                'onClick="setOrder(\''+dataOrder.FBID+'\',\'orderIDFinal\')" > '+
                 '<span class="glyphicon glyphicon-check"></span>'+contractorName+' '+nextStatusTitle+'</a>';
             }else{
                 dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+

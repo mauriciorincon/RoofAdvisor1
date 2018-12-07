@@ -2379,7 +2379,7 @@ if(!empty($_actual_company['postCardValue'])){
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headermyFinalAmount">Confirm Final Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textSchedule"> 
+			<div class="modal-body" id="textSchedule" style="position:relative;right:0px;top:55px;"> 
 				<input type="hidden" value="" id="orderIDFinal" />
 				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
@@ -2399,8 +2399,7 @@ if(!empty($_actual_company['postCardValue'])){
 									<table class="table table-condensed" id="totalAmountTable">
 										<thead>
 											<tr>
-												<td><strong>Item</strong></td>
-												<td class="text-center"><strong>Price</strong></td>
+                                                <td class="text-center"><strong>Price</strong></td>
 												<td class="text-center"><strong>Quantity</strong></td>
 												<td class="text-right"><strong>Totals</strong></td>
 											</tr>
@@ -2409,14 +2408,14 @@ if(!empty($_actual_company['postCardValue'])){
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
 												<td>Final Amount Materials</td>
-												<td class="text-center">$00.00</td>
-												<td class="text-center">1</td>
+												<td class="text-center"><input type="text" id="estMatCompanyF" name="estMatCompanyF" class="form-control input-sm"  onfocusout="calculateFinalAmount()"/></td>
+												<td class="text-center"><input type="text" id="estMatCntCompanyF" name="estMatCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
 												<td>Final Amount Time</td>
-												<td class="text-center">$00.00</td>
-												<td class="text-center">1</td>
+												<td class="text-center"><input type="text" id="estHourCompanyF" name="estHourCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
+												<td class="text-center"><input type="text" id="estHourCntCompanyF" name="estHourCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											
@@ -2425,6 +2424,12 @@ if(!empty($_actual_company['postCardValue'])){
 												<td class="thick-line"></td>
 												<td class="thick-line text-center"><strong>Subtotal</strong></td>
 												<td class="thick-line text-right">$00.00</td>
+											</tr>
+                                            <tr>
+												<td>Deposit</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
 												<td class="no-line"></td>
@@ -2440,10 +2445,12 @@ if(!empty($_actual_company['postCardValue'])){
 					</div>
 				</div>
 
-			</div> 
+			</div>
+            <br>
+            <br> 
 			<div class="modal-footer" id="buttonmyFinalAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
-				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
+				<button type="button" class="btn-primary btn-sm" onClick="sendFinalAmount()" >Accept</button>
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 				
 			</div> 
 		</div> 

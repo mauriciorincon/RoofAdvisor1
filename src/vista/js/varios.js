@@ -29,6 +29,9 @@ $('.aboutinfo1').slick({
     var table = $('#table_orders_customer').DataTable({
         "columnDefs": [
           { className: "text-right", "targets": [7,8] },
+          { "width": "150", "targets": 7 },
+          { "width": "150", "targets": 8 },
+          { "width": "200", "targets": 11 },
         ]
       });
     
@@ -2397,13 +2400,16 @@ function setFirstStep(){
     //$firstStep.trigger('click');
 }
 
-function updateOrder(orderID,arrayChanges){
+function updateOrder(orderID,arrayChanges,closeWindow){
         jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
                 var n = data.indexOf("Error");
                 if(n==-1){
+                    if(closeWindow!=undefined){
+                        $(document).ready(function(){$("#"+closeWindow).modal("hide"); });
+                    }
                     $('#headerTextAnswerOrder').html('Order Detail');
                     $('#myMensaje div.modal-body').html(data);
                     $(document).ready(function(){$("#myMensaje").modal("show"); });
@@ -2676,7 +2682,7 @@ function takeWorkPayed(stripeID,amount){
 
     arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,PaymentType,Online,StripeID,"+stripeID+",amount,"+amount;
     $(document).ready(function(){$("#myModalGetWork").modal("hide"); });
-    updateOrder(orderID,arrayChanges)
+    updateOrder(orderID,arrayChanges);
 }
 
 function vefifyInvoice(orderID){
@@ -2803,11 +2809,18 @@ function getEstimateAmount(orderId){
                 $row.find("td:eq(2)").html(order.EstTime);
                 $row.find("td:eq(3)").html('$'+order.EstAmtTime+'.00');
 
+                
+
                 $row=$('#estimatedAmountTable tr').eq(3);
                 $total=parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime);
                 $row.find("td:eq(3)").html('$'+$total+'.00');
 
                 $row=$('#estimatedAmountTable tr').eq(4);
+                valorHour=order.EstAmtTime/order.EstTime;
+                $row.find("td:eq(1)").html('$'+order.Deposit+'.00');
+                $row.find("td:eq(3)").html('$'+order.Deposit+'.00');
+
+                $row=$('#estimatedAmountTable tr').eq(5);
                 $total=parseInt(order.EstAmtMat)+parseInt(order.EstAmtTime);
                 $row.find("td:eq(3)").html('$'+$total+'.00');
 
@@ -2833,14 +2846,43 @@ function getEstimateAmount(orderId){
 function acceptEstimateAmount(){
     var orderID=$('#myEstimateAmount  #orderID').val();
     var status='G';
-    
-    //if(confirm("are you sure you want to accept the Estimate Amount?")){
+    var valueDeposit=0;
+
+    $row=$('#estimatedAmountTable tr').eq(4);
+    valueDeposit=$row.find("td:eq(1)").html();
+    valueDeposit=valueDeposit.replace("$", "");
+    valueDeposit=valueDeposit.replace(".00", "");
+
+    if(parseInt(valueDeposit)>0){
+        amount_value=parseInt(valueDeposit)*100;
+        action_type="pay_deposit_service";
+        if(typeof handler !== undefined){
+            handler.open({
+                name: 'RoofServiceNow',
+                description: 'pay your service',
+                amount: parseInt(amount_value),
+                email:userMailCompany
+            });
+        }
+    }else{
+        //if(confirm("are you sure you want to accept the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
         updateOrder(orderID,"Status,"+status);
-        
-    //}else{
-    //    return false;
-    //}
+            
+        //}else{
+        //    return false;
+        //}
+    }
+    
+}
+
+function estimateAmountPayed(stripeID,amount){
+    var orderID=$('#myEstimateAmount  #orderID').val();
+    var status='G';
+
+
+    arrayChanges="Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount;
+    updateOrder(orderID,arrayChanges,"myEstimateAmount");
 }
 
 function refuseEstimateAmount(){
@@ -2904,6 +2946,15 @@ function getFinalAmount(orderId){
                     $row.find("td:eq(3)").html('$'+$total+'.00');
 
                     $row=$('#totalAmountTable tr').eq(4);
+                    if(order.Deposit==undefined){
+                        deposit=0;
+                    }else{
+                        deposit=order.Deposit;
+                    }
+                    $row.find("td:eq(1)").html('$'+deposit+'.00');
+                    $row.find("td:eq(3)").html('$'+deposit+'.00');
+
+                    $row=$('#totalAmountTable tr').eq(5);
                     $total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
                     $total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
                     $total=$total+$total1;
@@ -2967,10 +3018,16 @@ function selectPaymentType(){
         updateOrder(orderID,"Status,"+status+",PaymentType,"+paymentType);
     }else if(paymentType=="online"){
         row=$('#totalAmountTable tr').eq(4);
+        depositValue=row.find("td:eq(3)").html();
+        depositValue=depositValue.replace("$", "");
+        depositValue=depositValue.replace(".00", "");
+
+        row=$('#totalAmountTable tr').eq(5);
         totalValue=row.find("td:eq(3)").html();
         totalValue=totalValue.replace("$", "");
         totalValue=totalValue.replace(".00", "");
-        amount_value=totalValue*100;
+        
+        amount_value=(totalValue-depositValue)*100;
         action_type="pay_invoice_service";
         if(typeof handler !== undefined){
             handler.open({
@@ -4545,12 +4602,31 @@ function calculateEstAmount(){
     $row.find("td:eq(3)").html('$'+((hourAmount*houtCntAmount)+(matAmount*matCntAmount))+'.00');
 }
 
+function calculateFinalAmount(){
+    var matAmount=$('#estMatCompanyF').val();
+    var matCntAmount=$('#estMatCntCompanyF').val();
+    var hourAmount=$('#estHourCompanyF').val();
+    var houtCntAmount=$('#estHourCntCompanyF').val();
+
+    $row=$("#myFinalAmount").find('tr:eq(1)');
+    $row.find("td:eq(3)").html('$'+(matAmount*matCntAmount)+'.00');
+
+    $row=$("#myFinalAmount").find('tr:eq(2)');
+    $row.find("td:eq(3)").html('$'+(hourAmount*houtCntAmount)+'.00');
+
+    $row=$("#myFinalAmount").find('tr:eq(3)');
+    $row.find("td:eq(3)").html('$'+((hourAmount*houtCntAmount)+(matAmount*matCntAmount))+'.00');
+
+    $row=$("#myFinalAmount").find('tr:eq(5)');
+    $row.find("td:eq(3)").html('$'+((hourAmount*houtCntAmount)+(matAmount*matCntAmount))+'.00');
+}
+
 function sendEstimateAmount(){
     var matAmount=$('#estMatCompany').val();
     var matCntAmount=$('#estMatCntCompany').val();
     var hourAmount=$('#estHourCompany').val();
     var houtCntAmount=$('#estHourCntCompany').val();
-    var antAmountMat=$('#estMatAntCompany').val();
+    var deposit=$('#estMatAntCompany').val();
 
     var orderID=$('#orderID').val();
 
@@ -4574,11 +4650,100 @@ function sendEstimateAmount(){
         alert(msg);
         return;
     }
-    arrayChanges="Status,F,EstAmtMat,"+matAmount+",EstAmtTime,"+(hourAmount*houtCntAmount)+",EstTime,"+houtCntAmount,",antAmountMat,"+antAmountMat;
-    updateOrder(orderID,arrayChanges);
+    arrayChanges="Status,F,EstAmtMat,"+matAmount+",EstAmtTime,"+(hourAmount*houtCntAmount)+",EstTime,"+houtCntAmount+",Deposit,"+deposit;
+    updateOrder(orderID,arrayChanges,"myEstimateAmount");
+
+}
+
+function sendFinalAmount(){
+    var matAmount=$('#estMatCompanyF').val();
+    var matCntAmount=$('#estMatCntCompanyF').val();
+    var hourAmount=$('#estHourCompanyF').val();
+    var houtCntAmount=$('#estHourCntCompanyF').val();
+    
+    var orderID=$('#orderIDFinal').val();
+
+    var msg="";
+    if(matAmount=="" || matAmount==undefined || matAmount==null){
+        msg+="Please type amount for materials \n";
+    }
+    if(matCntAmount=="" || matCntAmount==undefined || matCntAmount==null){
+        msg+="Please type quantity for materials \n";
+    }
+    if(hourAmount=="" || hourAmount==undefined || hourAmount==null){
+        msg+="Please type amount per hour \n";
+    }
+    if(houtCntAmount=="" || houtCntAmount==undefined || houtCntAmount==null){
+        msg+="Please type quantity of hours \n";
+    }
+    if(orderID=="" || orderID==undefined || orderID==null){
+        msg+="Please define the order \n";
+    }
+    if(msg!=""){
+        alert(msg);
+        return;
+    }
+    arrayChanges="Status,J,ActAmtMat,"+matAmount+",ActAmtTime,"+(hourAmount*houtCntAmount)+",ActTime,"+houtCntAmount;
+    updateOrder(orderID,arrayChanges,"myFinalAmount");
 
 }
 
 function setOrder(orderID,field){
     $('#'+field).val(orderID);
+
+    if(field=="orderID"){
+        $('#estMatCompany').val('');
+        $('#estMatCntCompany').val('');
+
+        $('#estHourCompany').val('');
+        $('#estHourCntCompany').val('');
+
+        $('#estMatAntCompany').val('');
+    }else if(field=="orderIDFinal"){
+        $('#estMatCompanyF').val('');
+        $('#estMatCntCompanyF').val('');
+
+        $('#estHourCompanyF').val('');
+        $('#estHourCntCompanyF').val('');
+
+        jsShowWindowLoad('Get Order Info');
+        $.post( "controlador/ajax/getDataOrder.php", { "orderId" : orderID}, null, "text" )
+        .done(function( data, textStatus, jqXHR ) {
+            if ( console && console.log ) {
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    order=jQuery.parseJSON(data);
+                    
+                    $('#estMatCompanyF').val(order.EstAmtMat);
+                    $('#estMatCntCompanyF').val('1');
+                    valorHour=order.EstAmtTime/order.EstTime;
+                    $('#estHourCompanyF').val(valorHour);
+                    $('#estHourCntCompanyF').val(order.EstTime);
+
+                    $row=$("#myFinalAmount").find('tr:eq(4)');
+                    if(order.Deposit==undefined){
+                        $row.find("td:eq(1)").html('$00.00');
+                        $row.find("td:eq(3)").html('$00.00');
+                    }else{
+                        $row.find("td:eq(1)").html('$'+order.Deposit+'.00');
+                        $row.find("td:eq(3)").html('$'+order.Deposit+'.00');
+                    }
+                    
+                    calculateFinalAmount();
+                    
+
+                }
+                
+                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                jsRemoveWindowLoad('');
+            }
+        });
+    }
+    
 }

@@ -1300,11 +1300,18 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 												<td class="text-right">$00.00</td>
 											</tr>
 											
+											
 											<tr>
 												<td class="thick-line"></td>
 												<td class="thick-line"></td>
 												<td class="thick-line text-center"><strong>Subtotal</strong></td>
 												<td class="thick-line text-right">$00.00</td>
+											</tr>
+											<tr>
+												<td>Deposit</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
 												<td class="no-line"></td>
@@ -1322,6 +1329,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 
 			</div> 
+			<br>
+			<br>
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptEstimateAmount()" >Accept</button>
 				<button type="button" class="btn-danger btn-sm"  onClick="refuseEstimateAmount()">Decline</button>
@@ -1339,7 +1348,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerEstimateAmount">Confirm Final Amount</h4> 
 			</div> 
-			<div class="modal-body" id="textSchedule" style="position:relative;right:0px;top:45px;"> 
+			<div class="modal-body" id="textSchedule" style="position:relative;right:0px;top:60px;"> 
 				<input type="hidden" value="" id="orderIDFinal" />
 				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
@@ -1387,6 +1396,12 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 												<td class="thick-line text-right">$00.00</td>
 											</tr>
 											<tr>
+												<td>Deposit</td>
+												<td class="text-center">$00.00</td>
+												<td class="text-center">1</td>
+												<td class="text-right">$00.00</td>
+											</tr>
+											<tr>
 												<td class="no-line"></td>
 												<td class="no-line"></td>
 												<td class="no-line text-center"><strong>Total</strong></td>
@@ -1400,7 +1415,9 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					</div>
 				</div>
 
-			</div> 
+			</div>
+			<br>
+			<br> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
 				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
 				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>

@@ -250,6 +250,7 @@ class connection{
     }
 
     public function updateDataTable($table,$updateNode,$data){
+        //echo $table.'/'.$updateNode."/".$data."<br>";
         try{
             $updates = [
                 $table.'/'.$updateNode => $data,
