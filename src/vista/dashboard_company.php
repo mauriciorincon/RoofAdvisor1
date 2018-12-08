@@ -1,11 +1,13 @@
 <input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
 ?>
 <!--<?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
     <div class="alert alert-danger">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
     </div>
+    echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 <?php }else{ ?>
     <div class="alert alert-success">
         <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
@@ -276,7 +278,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         var contractorName="";
                         getContractorName(fila.ContractorID).then(function(contractorName){
                             getCustomerName(fila.CustomerFBID).then(function(customerName) {
-                            if(fila.CustomerFBID==""){
+                            if(fila.ContractorID==""){
                                 infowindow.setContent('<p><b>Order #:</b>'+fila.OrderNumber+'  <br><b>Address:</b>XXXXXX XXXXXX XXXXXX'+
                                                         '</b><br><b>Status:</b>'+getStatus(fila.Status)+
                                                         '<br><b>Date:</b>'+fila.SchDate+' '+fila.SchTime+
@@ -371,9 +373,10 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                     description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
                 }
 
-                getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
+                actualCompanyId=$('#companyIDhidden').val();
+                //getCompanyStatus(actualCompanyId).then(function(companyStatus){
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                        dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
+                        dataContractor=takeJobCompany(dataOrder,actualCompanyStatus,contractorName);
 
                         if(dataOrder.CompanyID==""){
                             dataCustomer="XXXXX XXXXX XXXXX XXXXX";
@@ -383,10 +386,10 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                             });
                         }
                         
-                        getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                            companyActions=actionsCompany(dataOrder,companyStatus);
+                        //getCompanyStatus(actualCompanyId).then(function(companyStatus){
+                            companyActions=actionsCompany(dataOrder,actualCompanyStatus);
                             
-                        });
+                        //});
                                     
                         
 
@@ -415,7 +418,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         marketrs.push(oMarket);
 
                     });
-                });
+                //});
                 
 
             }
