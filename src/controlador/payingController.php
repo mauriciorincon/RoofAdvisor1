@@ -31,6 +31,7 @@ class payingController{
             
             $obj = $this->json_validate($_POST['param']);
             if(is_string($obj)){
+                
                 echo "Error, ".$obj."<br> string is:".$_POST['param'];
             }else{
                 $token  = $obj->stripeToken;
