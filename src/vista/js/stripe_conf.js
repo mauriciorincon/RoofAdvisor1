@@ -32,22 +32,22 @@ var handler = StripeCheckout.configure({
                     if(objStripe.message=='Payment complete.'){
                         if(action_type=="pay_emergency_service"){
                             jsRemoveWindowLoad('');
-                            insertOrderCustomer(objStripe.id,(amount_value));
+                            insertOrderCustomer(objStripe.id,(amount_value),action_type);
                         }else if(action_type=="pay_company_roofreport"){
                             jsRemoveWindowLoad('');
-                            insertOrderRoofReport(objStripe.id,(amount_value));
+                            insertOrderRoofReport(objStripe.id,(amount_value),action_type);
                         }else if(action_type=="pay_invoice_service"){
                             jsRemoveWindowLoad('');
-                            payOnlineInvoce(objStripe.id,(amount_value));
+                            payOnlineInvoce(objStripe.id,(amount_value),action_type);
                         }else if(action_type=="pay_postcard_service"){
                             jsRemoveWindowLoad('');
-                            payOnlineInvocePostCard(objStripe.id,(amount_value));
+                            payOnlineInvocePostCard(objStripe.id,(amount_value),action_type);
                         }else if(action_type=="pay_take_service"){
                             jsRemoveWindowLoad('');
-                            takeWorkPayed(objStripe.id,(amount_value))
+                            takeWorkPayed(objStripe.id,(amount_value),action_type)
                         }else if(action_type=="pay_deposit_service"){
                             jsRemoveWindowLoad('');
-                            estimateAmountPayed(objStripe.id,(amount_value))
+                            estimateAmountPayed(objStripe.id,(amount_value),action_type)
                         }
                         
                     }else{
