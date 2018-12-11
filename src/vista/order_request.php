@@ -128,7 +128,7 @@
 
 <div id="welcome-txt">
     <span>
-    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
+    Need a <strong style="color:#fa511a">Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
     </span>
     </div>
 <div id="appwiz" class="container">
@@ -1001,4 +1001,8 @@
 			nextStepWizard.removeAttr('disabled').trigger('click');
 		});
 	</script>
+<<<<<<< HEAD
 <?php } ?>-->
+=======
+<?php } ?>
+>>>>>>> 8a853495091f6a63aa8bc2d4e0eea9a5b4e0e8ae

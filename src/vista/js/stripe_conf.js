@@ -51,9 +51,14 @@ var handler = StripeCheckout.configure({
                         }
                         
                     }else{
+                        $('#myMensaje div.modal-body').html(http.responseText);
+                        $(document).ready(function(){$("#myMensaje").modal("show"); });
+                
                         console.log(http.responseText);
                     }
                 } catch (error) {
+                    $('#myMensaje div.modal-body').html(http.responseText);
+                    $(document).ready(function(){$("#myMensaje").modal("show"); });
                     console.log(http.responseText);
                 }
                 
