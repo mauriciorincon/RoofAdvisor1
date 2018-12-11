@@ -56,32 +56,59 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </div>
 </form>-->
 </div>
-<div id='cmapp1' class="container bg-flhouse">
+
+     <div id='cmapp1' class=" bg-flhouse">
 <!-- <div id='cmapp3'>
   <img src='img/florida-house.png'>
  </div>-->
- <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='cmappimg2' src='img/bquote.png'>
+        <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='' src='img/bquote.png'>
+        </div>
+      </div>
+
+      
+
+<div id='appdl1' class="container">
+       
+
+ <div id='appdl2'>
+   <span id='aphtxt1'><strong>Get Our App</strong></span>
+   <p id='aphtxt2' align="center">Customers and service professionals stay connected together with our app. Send pictures, receive estimates, see the work status in progress and online secure payment.</p>
+   <img id="appphone1" src="img/mobile-new.png">
  </div>
 </div>
-<div id='appdl1' class="container">
- <div id='appdl2'>
-  <span id='aphtxt1'><strong>Get Our App</strong></span>
-  <p id='aphtxt2' align="center">Customers and service professionals stay connected together with our app. Send pictures, receive estimates, see the work status in progress and online secure payment.</p>
-  <img id="appphone1" src="img/mobile-new.png">
+
+<div id='' class="container">
+
+ <div id='appdl3' >
+  <div class="row"> 
+   <div id='appdiv1' class="col-md-6">
+    <span id='appdl3-tx1'>Download</br>for</span>
+   </div>
+     
+   <div id='' class="col-md-6">
+    <span id='appdl3-tx2'><strong>FREE!</strong></span>
+   </div>
+  </div> 
+ <div>  
+  <div class="row">
+   <div class="col-md-6">
+    <img id='appand1' src='img/PlayStore.png'>
+   </div>
+   <div class="col-md-6">   
+    <img id='appand2' src='img/AppleStore.png'>
+   </div>
+  </div>
+ </div>    
  </div>
 
- <div id='appdl3'>
-  <div id='appdiv1'>
-   <span id='appdl3-tx1'>Download</br>for</span>
-  </div>
-  <div id='appdiv2'>
-   <span id='appdl3-tx2'><strong>FREE!</strong></span>
-  </div><div style="margin-top:-50px;">
-  <img id='appand1' src='img/PlayStore.png'>
-  <img id='appand2' src='img/AppleStore.png'>
-  </div>
-  </div>
+</div>
+     
+
+
+
+
+
 </div>
 
 

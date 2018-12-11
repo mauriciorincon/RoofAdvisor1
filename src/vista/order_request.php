@@ -128,7 +128,7 @@
 
 <div id="welcome-txt">
     <span>
-    Need a <strong>Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
+    Need a <strong style="color:#fa511a">Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
     </span>
     </div>
 <div id="appwiz" class="container">
