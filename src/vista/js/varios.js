@@ -1648,7 +1648,7 @@ function login_customer_order_request(){
     
 }
 
-function insertOrderCustomer(idStripeCharge,amountValue){
+function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     if(idStripeCharge== undefined){
         idStripeCharge="";
     }
@@ -1698,7 +1698,7 @@ function insertOrderCustomer(idStripeCharge,amountValue){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -2672,7 +2672,7 @@ function takeWork(){
     
 }
 
-function takeWorkPayed(stripeID,amount){
+function takeWorkPayed(stripeID,amount,action_type){
     var orderID=$('input:hidden#orderIDWork').val();
     var companyID=$('input:hidden#companyIDWork').val();
     var dateWork=$('input#dateWork').val();
@@ -2680,7 +2680,7 @@ function takeWorkPayed(stripeID,amount){
     var driverID=$('select#driverWork').val();
 
 
-    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,PaymentType,Online,StripeID,"+stripeID+",amount,"+amount;
+    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",action_type,"+action_type;
     $(document).ready(function(){$("#myModalGetWork").modal("hide"); });
     updateOrder(orderID,arrayChanges);
 }
@@ -2876,12 +2876,12 @@ function acceptEstimateAmount(){
     
 }
 
-function estimateAmountPayed(stripeID,amount){
+function estimateAmountPayed(stripeID,amount,action_type){
     var orderID=$('#myEstimateAmount  #orderID').val();
     var status='G';
 
 
-    arrayChanges="Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount;
+    arrayChanges="Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",action_type,"+action_type;
     updateOrder(orderID,arrayChanges,"myEstimateAmount");
 }
 
@@ -3040,18 +3040,18 @@ function selectPaymentType(){
     }
 }
 
-function payOnlineInvoce(stripeID,amount){
+function payOnlineInvoce(stripeID,amount,action_type){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
     var status='K';
     
     $('#myPaymentType').modal('hide');
     $('#myFinalAmount').modal('hide');
     
-    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount);
+    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",action_type,"+action_type+",action_type,"+action_type);
 
 }
 
-function payOnlineInvocePostCard(stripeID,amount){
+function payOnlineInvocePostCard(stripeID,amount,action_typ){
     var companyID=$('#companyIDhidden').val();
     
     $('#myMessagePostCardsPay').modal('hide');
@@ -4025,7 +4025,7 @@ function closeMapSelect(textBoxInfo){
 }
 
 
-function insertOrderRoofReport(idStripeCharge,amountValue){
+function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     var RepZIP=$('#step5ZipCode').val();
     var RequestType="roofreport";
     
@@ -4065,7 +4065,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             

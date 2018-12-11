@@ -241,7 +241,7 @@ class pdfController{
         
     }
 
-    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
+    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType="",$_actio_type=""){
         
         if($_amount>0){
             $_amount=$_amount/100; 
@@ -363,6 +363,55 @@ class pdfController{
             $_hour_value=0;
         }
 
+        switch($_actio_type){
+            case "pay_emergency_service":
+            $summary_text='<tr>
+            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
+        </tr>
+        <tr>
+            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
+        </tr>';
+                break;
+            case "pay_company_roofreport":
+            $summary_text='<tr>
+            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
+        </tr>
+        <tr>
+            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
+        </tr>';
+                break;
+            case "pay_invoice_service":
+            $summary_text='<tr>
+            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
+        </tr>
+        <tr>
+            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
+        </tr>';
+                break;
+            case "pay_postcard_service":
+            $summary_text='<tr>
+            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
+        </tr>
+        <tr>
+            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
+        </tr>';
+                break;
+            case "pay_take_service":
+                $summary_text='<tr><td>Take Service</td><td></td><td></td><td>--</td><td> $'.$_amount.'</td><td align="rigth"> $'.$_amount.'.00</td></tr>';
+                break;
+            case "pay_deposit_service":
+                $summary_text='<tr><td>Material Deposit</td><td></td><td></td><td>--</td><td> $'.$_amount.'</td><td align="rigth"> $'.$_amount.'.00</td></tr>';
+                break;
+            default:
+            $summary_text='<tr>
+            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
+        </tr>
+        <tr>
+            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
+        </tr>';
+        break;
+        }
+
         $_hmtl='
         <table>
             <tr>
@@ -412,14 +461,9 @@ class pdfController{
             </tr>
             <tr>
                 <td><b>Summary</b></td><td></td><td></td><td>Hour</td><td>Rate</td><td></td>
-            </tr>
-            <tr>
-                <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-            </tr>
-            <tr>
-                <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-            </tr>
-            <tr>
+            </tr>'    
+        .$summary_text.
+            '<tr>
                 <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.'.00</b></td>
             </tr>
             <tr>

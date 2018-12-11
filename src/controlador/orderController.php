@@ -185,6 +185,7 @@ class orderController{
         $stripeID="";
         $amount="";
         $paymentType="";
+        $actionType="";
 
         $this->_orderModel=new orderModel();
         
@@ -209,11 +210,14 @@ class orderController{
             if(strcmp($arrayFields[$n],"PaymentType")==0){
                 $paymentType=$arrayFields[$n+1];
             }
+            if(strcmp($arrayFields[$n],"action_type")==0){
+                $actionType=$arrayFields[$n+1];
+            }
 
         }
         if(!empty($paymentType)){
             $_objPDF=new pdfController();
-            $_result_invoice=$_objPDF->paymentConfirmation2($orderID,null,$amount,$stripeID,$paymentType);
+            $_result_invoice=$_objPDF->paymentConfirmation2($orderID,null,$amount,$stripeID,$paymentType,$actionType);
         }
         if(is_bool($_result)){
             if(!empty($paymentType)){
