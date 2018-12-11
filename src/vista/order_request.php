@@ -189,7 +189,32 @@
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button" id="firstNextBegin" name="firstNextBegin">Next</button>
                 
             </div>
+
+			<div class="panel-body" align="left">
+				<div class="list-group" id="step3OtypeService">
+					<a href="#" class="list-group-item" name="linkServiceType" onClick="">
+						<input type="hidden" value="roofreport" name="typeServiceOrder">
+						<table>
+							<tr>
+								<td style="padding: 12px 12px 12px 12px;">
+									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
+								</td>
+								<td style="padding: 12px 12px 12px 12px;">
+								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
+								</td>
+							</tr>
+						</table>
+						<div class="d-flex w-100 justify-content-between">
+						
+						<span></span>
+							
+						</div>
+					</a>
+				</div>
+			</div>
         </div>
+
+		
     </div>
     <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
@@ -257,7 +282,7 @@
 							
 						</div>
 					</a>
-					<a href="#" class="list-group-item" name="linkServiceType">
+					<!--<a href="#" class="list-group-item" name="linkServiceType">
 						<input type="hidden" value="roofreport" name="typeServiceOrder">
 						<table>
 							<tr>
@@ -274,7 +299,7 @@
 						<span></span>
 							
 						</div>
-					</a>
+					</a>-->
 					
 				</div>
 					
@@ -955,19 +980,20 @@
 		<!-- Modal content--> 
 		<div class="modal-content"> 
 			<div class="modal-header"> 
-				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerOrder"> 
 				<p >Some text in the modal.</p> 
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">GO!</button> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<!--<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Close</button> -->
 			</div> 
 		</div> 
 	</div>
 </div>
-<?php if(isset($_GET['step'])){?>
+<!--<?php if(isset($_GET['step'])){?>
 
 	<script>
 		$(document).ready(function() {
@@ -975,4 +1001,4 @@
 			nextStepWizard.removeAttr('disabled').trigger('click');
 		});
 	</script>
-<?php } ?>
+<?php } ?>-->

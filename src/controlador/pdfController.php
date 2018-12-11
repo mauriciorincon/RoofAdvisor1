@@ -252,6 +252,8 @@ class pdfController{
         $_card_data="";
         $_exp_date="";
         $_order_type="";
+        $summary_text="";
+        $head_text="";
         $this->_otherController=new othersController();
         $this->_orderController=new orderController();
         if(isset($object_order)){
@@ -365,51 +367,39 @@ class pdfController{
 
         switch($_actio_type){
             case "pay_emergency_service":
-            $summary_text='<tr>
-            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-        </tr>
-        <tr>
-            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-        </tr>';
+                $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
+                $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
+                            <tr><td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td></tr>';
+                
                 break;
             case "pay_company_roofreport":
-            $summary_text='<tr>
-            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-        </tr>
-        <tr>
-            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-        </tr>';
+            $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
+                $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
+                            <tr><td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td></tr>';
                 break;
             case "pay_invoice_service":
-            $summary_text='<tr>
-            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-        </tr>
-        <tr>
-            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-        </tr>';
+            $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
+                $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
+                            <tr><td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td></tr>';
                 break;
             case "pay_postcard_service":
-            $summary_text='<tr>
-            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-        </tr>
-        <tr>
-            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-        </tr>';
+                $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
+                $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
+                            <tr><td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td></tr>';
                 break;
             case "pay_take_service":
-                $summary_text='<tr><td>Take Service</td><td></td><td></td><td>--</td><td> $'.$_amount.'</td><td align="rigth"> $'.$_amount.'.00</td></tr>';
+                $head_text='<tr><td colspan="5">Thank you taking the lead for the '.$_order_type.'. Good Luck.</td></tr>';
+                $summary_text='<tr><td>Lead Service</td><td></td><td></td><td>--</td><td> $'.$_amount.'</td><td align="rigth"> $'.$_amount.'.00</td></tr>';
                 break;
             case "pay_deposit_service":
+                $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
                 $summary_text='<tr><td>Material Deposit</td><td></td><td></td><td>--</td><td> $'.$_amount.'</td><td align="rigth"> $'.$_amount.'.00</td></tr>';
                 break;
             default:
-            $summary_text='<tr>
-            <td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td>
-        </tr>
-        <tr>
-            <td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td>
-        </tr>';
-        break;
+                $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
+                $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
+                            <tr><td>Materials</td><td></td><td></td><td></td><td></td><td align="rigth"> $'.$_order['ActAmtMat'].'.00</td></tr>';
+                break;
         }
 
         $_hmtl='

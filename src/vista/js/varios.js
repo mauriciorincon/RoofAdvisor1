@@ -1238,6 +1238,22 @@ $('#step2OtypeService').on('click', 'a', function(){
    return false;
 });
 
+$('#step3OtypeService').on('click', 'a', function(){
+    $("#step3OtypeService a").removeClass("active");
+    $(this).addClass("active");
+    var type=$(this).find('input:hidden').val();
+    showHideSteps(type);
+    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $(this).find('button').removeClass("btn-primary").addClass("btn-success");
+    getValueService();
+    showHideElementByService();
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+    curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+    nextStepWizard.removeAttr('disabled').trigger('click');
+    curStepWizard.attr('disabled', 'disabled');
+    
+   return false;
+});
 
 function getValueService(){
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
@@ -1261,6 +1277,13 @@ function getValueService(){
                     }else{
                         amount_value=0;
                     }
+                    if(RequestType=="roofreport"){
+                        nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+                        curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+                        nextStepWizard.removeAttr('disabled').trigger('click');
+                        curStepWizard.attr('disabled', 'disabled');
+                    }
+                    
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                     jsRemoveWindowLoad('');
                 }
@@ -1655,6 +1678,19 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     if(amountValue== undefined){
         amountValue="";
     }
+    if(action_type==undefined){
+        action_type="";
+        createdBy="CO000000";
+        createdTo="";
+    }else{
+        if(action_type=="create_by_company"){
+            createdBy=$('#companyIDhidden').val();
+            createdTo=$('#activeCustomerIDhidden').val();
+        }else{
+            createdBy="CO000000";
+            createdTo="";
+        }
+    }
     var RepZIP=$('#zipCodeBegin').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -1698,7 +1734,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,"createdBy":createdBy,"createdTo":createdTo}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1707,15 +1743,15 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
 
             if(n==-1){
                 jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
-                    window.location.href = "index.php?controller=user&accion=dashboardCustomer";
-                    /*$('#textAnswerOrder').html(data+'');
-                    $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+email+','+password+',datos)">Continue to Customer Area</button><br><br>');
+                if(action_type=="create_by_company"){
+                    $(document).ready(function(){$("#myOrderByCustomer").modal("hide"); });
+                    $('#textAnswerOrder').html("Order Created");
+                    $('#headerTextAnswerOrder').html(data);
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
 
-                    $('#headerTextAnswerOrder').html('Success');
-                  
-                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#lastFinishButtonOrder').show();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});*/
+                }else{
+                    window.location.href = "index.php?controller=user&accion=dashboardCustomer";
+                }
             }else{
                     $('#headerTextAnswerOrder').html('Error validating User Account');
                     $('#textAnswerOrder').html(data+'<br><br>Please try again');
@@ -1742,68 +1778,59 @@ function validateIsLoggedIn(){
     $.post( "controlador/ajax/validateLoggedIn.php", {}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
-                
-                var n = data.indexOf("Error");
+                data=jQuery.parseJSON(data);
+
+                var n = data.message.indexOf("Error");
                 
 
                 if(n==-1){
 
-                    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
-                    //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-                    if(RequestType=='emergency' || RequestType=='roofreport'){
-                        $('#userLoguedIn').val(true);
-                        nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
-                        curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
+                    if(data.profile=='customer'){
+                        var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                        if(RequestType=='emergency' || RequestType=='roofreport'){
+                            $('#userLoguedIn').val(true);
+                            nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
+                            curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
 
-                        nextStepWizard.removeAttr('disabled').trigger('click');
-                        curStepWizard.attr('disabled', 'disabled');
-                        if(typeof handler !== undefined){
-                                  // $('#login-modal').style.display = "none";
-                                let timerInterval; 
-                                      swal({ 
-                                            title: 'You have successfully logged in!',
-                                            type: 'success', 
-                                            html: 'You will be automatically redirected in <strong></strong> seconds.', 
-                                            timer: 1, 
-                                            onOpen: () => { 
-                                                swal.showLoading() 
-                                               }, 
-                                             onClose: () => { 
-                                                clearInterval(timerInterval) 
-                                                } 
-                                               }).then((result) => { 
-                                                if ( // Read more about handling dismissals 
-                                               result.dismiss === swal.DismissReason.timer 
-                                                ) { 
-                                                console.log('login has been completed successfully') }
-                                                  $("#login-modal").removeClass('fade').modal('hide');
-                                                  });
+                            nextStepWizard.removeAttr('disabled').trigger('click');
+                            curStepWizard.attr('disabled', 'disabled');
+                            if(typeof handler !== undefined){
+                                    // $('#login-modal').style.display = "none";
+                                    let timerInterval; 
+                                        swal({ 
+                                                title: 'You have successfully logged in!',
+                                                type: 'success', 
+                                                html: 'You will be automatically redirected in <strong></strong> seconds.', 
+                                                timer: 1, 
+                                                onOpen: () => { 
+                                                    swal.showLoading() 
+                                                }, 
+                                                onClose: () => { 
+                                                    clearInterval(timerInterval) 
+                                                    } 
+                                                }).then((result) => { 
+                                                    if ( // Read more about handling dismissals 
+                                                result.dismiss === swal.DismissReason.timer 
+                                                    ) { 
+                                                    console.log('login has been completed successfully') }
+                                                    $("#login-modal").removeClass('fade').modal('hide');
+                                                    });
+                            }
+                        }else{
+                            jsRemoveWindowLoad('');
+                            insertOrderCustomer();
                         }
-                    }else{
+                    }else if(data.profile=='company'){
                         jsRemoveWindowLoad('');
-                        insertOrderCustomer();
-                        
-                        /*$('#textAnswerOrder').html(data+'');
-                        $('#buttonAnswerOrder').html('<br><br><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertOrderCustomer()">Finish</button><br><br>');
-
-                        $('#headerTextAnswerOrder').html('Success');
-                  
-                        $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                        $('#lastFinishButtonOrder').show();
-                        $('#myModalRespuesta').modal({backdrop: 'static'});*/
+                        insertOrderCustomer("","","create_by_company");
                     }
-                    
+                    console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+                    jsRemoveWindowLoad('');
+                    $('html,body').scrollTop(0);
                 }else{
-                    //$('#textAnswerOrder').html('You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.');
-                    //$('#headerTextAnswerOrder').html('User validation');
-                    //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+'You are not logged in. Please log in or, if new to RoofServiceNow, register as a new user.'+'</strong></div>');
-                    //$('#lastFinishButtonOrder').hide();
-                    //$('#login-modal').modal({backdrop: 'static'});
-                    
+                    jsRemoveWindowLoad('');
                 }
-                console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                jsRemoveWindowLoad('');
-                $('html,body').scrollTop(0);
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -3628,6 +3655,11 @@ function disableEnableCustomer(customerID,action){
                 return result1;
             }
         });
+}
+
+function newOrderByCompany(CustomerID){
+    $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
+    $('#activeCustomerIDhidden').val(CustomerID);
 }
 
 function filterCompany(nameType,nameStatus,tableName){

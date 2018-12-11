@@ -1,4 +1,5 @@
 <input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
+<input type="hidden" value="" id="activeCustomerIDhidden">
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
@@ -24,7 +25,9 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
+            
+            
         </div>
 </div>
 
@@ -46,7 +49,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
             function initialization(){
 					
 					initMap();
-					initMapOrder();
+                    initMapOrder();
+                    initMap1();
 					
 				}
             var marketrs=[];
@@ -2040,7 +2044,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
 					<div class="list-group">
 					
-							<input id="pac-input" class="controls" type="text"
+							<input id="pac-inputC" class="controls" type="text"
 								placeholder="Enter a location" >
                             
                                 <style>
@@ -2077,7 +2081,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 								/////////////////////////////////////
 
 								var input = /** @type {!HTMLInputElement} */(
-									document.getElementById('pac-input'));
+									document.getElementById('pac-inputC'));
 
 								var types = document.getElementById('type-selector');
 								map_.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -2359,7 +2363,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				<h4 class="modal-title" id="headermyPostCardServiceP">Postcard Info</h4> 
 			</div> 
             <div class="modal-body" id="textmyPostCardServiceP">
-            <embed src="rsndocs/PostcardsService.pdf" type="application/pdf" width="900" height="600"></embed>
+            <embed src="<?php echo  $_SESSION['rsn_documents_path']."PostcardsService.pdf"; ?> type="application/pdf" width="900" height="600"></embed>
             </div>
 			<div class="modal-footer" id="buttonmyPostCardServiceP"> 
                 
@@ -2548,23 +2552,7 @@ if(!empty($_actual_company['postCardValue'])){
     <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="">New Client</button>
 </div>         
 
-<div class="modal fade" id="myModalRespuesta" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				
-				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myUploadListCustomer" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -2576,7 +2564,7 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
 			<div class="modal-body" id="textUploadListCustomer"> 
                 <div class="alert alert-danger">
-                    You can upload the list of clients, for such purpose please use the template provided by clicking <a href="rsndocs/curstomer_format.xlsx">here</a>, after completing it please use the upload button. 
+                    You can upload the list of clients, for such purpose please use the template provided by clicking <a href="<?php echo  $_SESSION['rsn_documents_path']."curstomer_format.xlsx"; ?>" >here</a>, after completing it please use the upload button. 
                 </div>
                 <input id="uploadFile" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="uploadFile" />
 			</div>
@@ -2670,7 +2658,7 @@ if(!empty($_actual_company['postCardValue'])){
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headermyUrls">Imformation </h4> 
+				<h4 class="modal-title" id="headermyUrls">Resources</h4> 
 			</div> 
 			<div class="modal-body" id="textmyUrls"> 
 					<div class="container">
@@ -2679,7 +2667,21 @@ if(!empty($_actual_company['postCardValue'])){
 							<div class="well no-padding">
 								<div>
 									<ul class="nav nav-list nav-menu-list-style">
-										<?php 
+                                        
+                                        <?php 
+                                            echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                            .'<span class="glyphicon glyphicon-folder-close m5"></span>Articles
+                                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                            .'<ul class="nav nav-list tree bullets">';
+                                            echo '<li><a href="'.$_SESSION['rsn_documents_path'].'Help_Your_Crews_Be_Respectful_of_Homeowners.pdf" target="_blank">Help Your Crews....</a></li>';
+                                            echo '<li><a href="'.$_SESSION['rsn_documents_path'].'StrategiestoImproveRatingsandReferrals.pdf" target="_blank">Strategies to Improve....</a></li>';
+                                            echo '</ul></li>';
+
+                                            echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                            .'<span class="glyphicon glyphicon-folder-close m5"></span>Building and Permits
+                                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                            .'<ul class="nav nav-list tree bullets">';
+
 											$n=0;
 											$state="";
 											$city="";
@@ -2719,7 +2721,7 @@ if(!empty($_actual_company['postCardValue'])){
 												$n++;
 											}
 										
-											echo '</ul></li></ul></li>';
+											echo '</ul></li></ul></li></ul></li>';
 										?>
 										</ul></li>
 									</ul>
@@ -2824,6 +2826,28 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
+<div class="modal fade" id="myOrderByCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyOrderByCustomer">Create Order</h4> 
+			</div> 
+			<div class="modal-body" id="textmyOrderByCustomer"> 
+                <?php
+                    $_otherModel=new othersController();
+	                $_array_state=$_otherModel->getParameterValue('Parameters/state');
+                    include_once('vista/order_request.php'); 
+                ?>
+			</div> 
+			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
 <div class="modal fade" id="myMensaje" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -2836,6 +2860,24 @@ if(!empty($_actual_company['postCardValue'])){
 				<p >Some text in the modal.</p> 
 			</div> 
 			<div class="modal-footer" id="buttonMessage"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

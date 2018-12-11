@@ -433,28 +433,28 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 					
 					
-					$row.cell($row, 1).data(requestType).draw();
-					$row.cell($row, 2).data(dataOrder.RepAddress +' '+dataOrder.RepCity+' '+dataOrder.RepState).draw();
-					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw();
-					$row.cell($row, 4).data(status).draw();
+					$row.cell($row, 1).data(requestType).draw(false);
+					$row.cell($row, 2).data(dataOrder.RepAddress +' '+dataOrder.RepCity+' '+dataOrder.RepState).draw(false);
+					$row.cell($row, 3).data(dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water).draw(false);
+					$row.cell($row, 4).data(status).draw(false);
 					if(dataOrder.RequestType=='E'){
-						$row.cell($row, 5).data(dataOrder.ETA.substring(0,10)).draw();
-						$row.cell($row, 6).data(dataOrder.ETA.substring(11,20)).draw();
+						$row.cell($row, 5).data(dataOrder.ETA.substring(0,10)).draw(false);
+						$row.cell($row, 6).data(dataOrder.ETA.substring(11,20)).draw(false);
 					}else{
-						$row.cell($row, 5).data(dataOrder.SchDate).draw();	
-						$row.cell($row, 6).data(dataOrder.SchTime).draw();
+						$row.cell($row, 5).data(dataOrder.SchDate).draw(false);	
+						$row.cell($row, 6).data(dataOrder.SchTime).draw(false);
 					}
 					estimateAmount = estimateAmount ? estimateAmount : '$0';
-					$row.cell($row, 7).data(estimateAmount).draw();
+					$row.cell($row, 7).data(estimateAmount).draw(false);
 					finalAmount = finalAmount ? finalAmount : '$0';
-					$row.cell($row, 8).data(finalAmount).draw();
+					$row.cell($row, 8).data(finalAmount).draw(false);
 					var companyName="";
 					var ref = firebase.database().ref("Company/"+dataOrder.CompanyID);
 					ref.on('value', function(snapshot) {
 						company=snapshot.val();
 						//console.log(companyName);
 						companyData= '<a href="#" data-toggle1="tooltip"  title="Tel number: '+company.CompanyPhone+'  Mail:'+company.CompanyEmail+'">'+company.CompanyName+'</a>';
-						$row.cell($row, 9).data(companyData).draw();
+						$row.cell($row, 9).data(companyData).draw(false);
 					});
 					/*var ref = firebase.database().ref("Company/"+dataOrder.CompanyID+"/CompanyName");
 					ref.on('value', function(snapshot) {
@@ -473,11 +473,11 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					var ref = firebase.database().ref(path);
 						ref.on('value', function(snapshot) {
 							data=snapshot.val();
-							$row.cell($row, 10).data(data.ContNameFirst+' '+data.ContNameLast).draw();
+							$row.cell($row, 10).data(data.ContNameFirst+' '+data.ContNameLast).draw(false);
 						});
 					
 					//$row.cell($row, 10).data(contractorName).draw();
-					$row.cell($row, 11).data(actions).draw();
+					$row.cell($row, 11).data(actions).draw(false);
 
 					$('[data-toggle1="tooltip"]').tooltip(); 
 					
