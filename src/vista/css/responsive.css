@@ -34,7 +34,7 @@ font-size: 45px;}
 
 /* small mobile :320px. */
 @media (max-width: 767px) {
-.container {width:300px}
+.container {}
  .social-icon {text-align:center}
  .email-address{display:none}
  .logo {

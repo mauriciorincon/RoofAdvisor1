@@ -1347,9 +1347,9 @@ position: relative;
     margin-right: auto;
 }
 #appdiv1{
-margin-right: 52%;
 text-align:right;
 padding-top:43px;
+margin-left:-12px;
 }
 #appdl3-tx1{
 font-family: 'Poppins';
@@ -1368,18 +1368,13 @@ position: relative;
 font-size: 144px;
 }
 #appand1{
-    width: 20%;
-    position: relative;
-    bottom: 149px;
-    margin-left: 28%;
-    z-index: 100
+    float: right;
+    width: 41%;
+    margin-top: -25px;
 }
 #appand2{
-    width: 18%;
-    position: relative;
-    bottom: 151px;
-    margin-left: 45px;
-    z-index: 100
+    float: left;
+    width: 35%;
 }
 #appphone1{
 display: block;
@@ -1883,5 +1878,28 @@ height: 1150px;
     display: block;
     margin-top: 500px;
     position: relative;
+}
+#logoimg{
+margin-left: 40px;
+    margin-top: 37px;
+    width: 85%;
+}
+#appdl3-tx2 {
+    font-size: 60px;
+}
+.dolph1{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 45px;
+}
+.mobile-menu-area{
+display:none !important;
+}
+#menu-head{
+display:none;
+}
+#welcome-txt {
+    font-size: 25px;
 }
 }
