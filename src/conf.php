@@ -8,10 +8,11 @@
     if(!isset($_SESSION['application_path'])){
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
-    //echo  $_SESSION['application_path'];
+    //echo  $_SERVER['DOCUMENT_ROOT'];
     
-    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow1'.'/vendor/';
+    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
 
+    //echo $_SESSION['library_path'];
     $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
 
     //define library path autoload

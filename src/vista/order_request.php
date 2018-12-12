@@ -1001,8 +1001,4 @@
 			nextStepWizard.removeAttr('disabled').trigger('click');
 		});
 	</script>
-<<<<<<< HEAD
-<?php } ?>-->
-=======
 <?php } ?>
->>>>>>> 8a853495091f6a63aa8bc2d4e0eea9a5b4e0e8ae
