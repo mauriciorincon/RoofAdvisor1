@@ -36,7 +36,7 @@
         $_path2="/".substr($_dir,$pos1+1,$pos2-1);
         $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST'].$_path2."/src/rsndocs/";
     }else{
-        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST']."/src/rsndocs/";
+        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST']."/rsndocs/";
     }
     
     //define report path
