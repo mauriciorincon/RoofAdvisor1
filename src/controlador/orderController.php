@@ -43,13 +43,19 @@ class orderController{
         return $_orders;
     }
 
-    public function insertOrder($arrayDataOrder){
+    public function insertOrder($arrayDataOrder,$emailCustomer=""){
         $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
         if(strcmp($arrayDataOrder['RequestType'],"P")!=0){
-            $_customer=$this->_userController->getCustomer($_SESSION['email']);
-            $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+            if(empty($emailCustomer)){
+                $_customer=$this->_userController->getCustomer($_SESSION['email']);
+                $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
+            }else{
+                $_customer=$this->_userController->getCustomer($emailCustomer);
+                $_customerK=$this->_userController->getCustomerK($emailCustomer);
+            }
+            
         }else{
             $_customer=array(
                 "CustomerID"=>"",
@@ -137,6 +143,7 @@ class orderController{
             "Water" => $arrayDataOrder['Water'],
             "StripeID"=>$arrayDataOrder['id_stripe'],
             "postCardValue"=>$arrayDataOrder['postCardValue'],
+            "CreateBy"=>$arrayDataOrder['CreateBy'],
         );
        // print_r($Order);
         $_result=$this->_orderModel->insertOrder("FBID",$Order);

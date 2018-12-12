@@ -10,10 +10,19 @@
     
 
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-        echo "Please Mr/Mrs ".$_SESSION['username']." please press finish button to save the order.";
+        $_message=array(
+            'message'=>"Please Mr/Mrs ".$_SESSION['username']." please press finish button to save the order.",
+            'profile'=>$_SESSION['profile'],
+        );
+        echo json_encode($_message);
+        
         //$_objPay->showPayingWindow1();
         
     }else{
-        echo "Error not logged in";
+        $_message=array(
+            'message'=>"Error not logged in",
+            'profile'=>"",
+        );
+        echo json_encode($_message);
     }
 ?>

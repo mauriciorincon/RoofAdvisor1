@@ -6,21 +6,37 @@ if(!isset($_SESSION)) {
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 
+$_userController=new userController();
 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-}else{
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    
-    $_userController=new userController();
-    $_result=$_userController->loginCustomerOrden($email,$password);
-    
-    if(strpos($_result,'Error')>-1){
-        echo $_result;
-        return;
+$_createdBy="";
+$_createdTo="";
+$_customerMail="";
+if(isset($_POST['action_type'])){
+    if(strcmp($_POST['action_type'],"create_by_company")==0){
+        $_createdBy=$_POST['createdBy'];
+        $_user=$_userController->getCustomerById($_POST['createdTo']);
+        $_customerMail=$_user['Email'];
+    }else{
+        $_createdBy="CO000000";    
     }
-    
+}else{
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+        $_customerMail=$_SESSION['email'];
+    }else{
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+        
+        
+        $_result=$_userController->loginCustomerOrden($email,$password);
+        
+        if(strpos($_result,'Error')>-1){
+            echo $_result;
+            return;
+        }
+    }
+    $_createdBy="CO000000";
 }
+
 //$_date=$_POST['ActAmtTime'];
 $_companyID="";
 if(isset($_POST['CompanyID'])){
@@ -62,10 +78,11 @@ $_array=array(
     "Authorized"=>$_POST['Authorized'],
     "postCardValue"=>$_amount_valueP,
     "amount_value"=>$_amount_value,
+    "CreateBy"=>$_createdBy,
 );
 
 $_orderController=new orderController();
-$_id_order=$_orderController->insertOrder($_array);
+$_id_order=$_orderController->insertOrder($_array,$_customerMail);
 if (is_null($_id_order)){
     echo "Error, an error ocurred traing to save Order, try again";
 }else{

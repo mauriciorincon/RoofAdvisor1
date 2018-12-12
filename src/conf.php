@@ -24,7 +24,19 @@
     $_SESSION['image_path']=$_SESSION['application_path'].'/img/';
 
     //define roofservice documents
-    $_SESSION['rsn_documents_path']=$_SESSION['application_path'].'/rsndocs/';
+    //$_SESSION['rsn_documents_path']=$_SESSION['application_path'].'/rsndocs/';
+
+    //define roofservice documents
+    if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+        $_dir=$_SERVER['REQUEST_URI'];
+        $pos1 = strpos($_dir,"/");
+        $pos2 = strpos($_dir,"/", $pos1 + 1);
+        //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+        $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST'].$_path2."/src/rsndocs/";
+    }else{
+        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST']."/src/rsndocs/";
+    }
     
     //define report path
     $_SESSION['report_path']=$_SESSION['application_path'].'/roofreport/';
