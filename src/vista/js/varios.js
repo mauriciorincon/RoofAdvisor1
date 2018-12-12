@@ -1423,13 +1423,44 @@ $(document).ready(function () {
         if(curStepBtn=="step-4"  && isValid==true ){
             var fecha=$('input[name=step6date]').val();
             var hora=$('input[name=step6time]').val();
+            var customerID=$('#activeCustomerIDhidden').val();
             if(fecha=="" || hora==""){
                 $('#headerTextAnswerOrder').html('Step 4');
                 $('#textAnswerOrder').html('Plese select the date and time for the service');
                 $('#myModalRespuesta').modal({backdrop: 'static'});
                 isValid=false;
             }else{
-                getListContractor(); 
+                if(customerID==undefined || customerID=='' || customerID==null){
+                    getListContractor(); 
+                }else{
+                    var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+                    var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+                    var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+                    var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+
+                    var valStep6=$('input[name=step6date]').val();
+                    var valStep6t=$('input[name=step6time]').val();
+                    var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
+                    var valStep5long=$('input:hidden[name=step5Logintud]').val();
+                    var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+                    var valStep5Address=$('input:hidden[name=step5Address]').val();
+                    var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+                    
+                    if(valStep7==""){
+                        valStep7="Pending";
+                    }
+                    $('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+', Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
+                    $('#step8Schedule').html(valStep6);
+                    $('#step8Time').html(valStep6t);
+                    $('#step8CompanyName').html(valStep7);
+                    $('#step8Longitude').html(valStep5long);
+                    $('#step8Latitude').html(valStep5lat);
+                    $('#step8Address').html(valStep5Address);
+                    $('#step8ZipCode').html(valStep5ZipCode);
+
+                    nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
+                }
+                
             }
             
         }
@@ -1520,8 +1551,13 @@ $(document).ready(function () {
 
         if (curStepBtn=="step-6"){
             var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+            var customerID=$('#activeCustomerIDhidden').val();
             if(RequestType=='emergency' || RequestType=='roofreport'){
                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-4"]').parent().prev().children("a");
+            }
+            if(customerID==undefined || customerID=='' || customerID==null){   
+            }else{
+                nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().prev().children("a");
             }
         }
         if (curStepBtn=="step-8"){
@@ -1742,12 +1778,15 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
             
 
             if(n==-1){
-                jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
                 if(action_type=="create_by_company"){
-                    $(document).ready(function(){$("#myOrderByCustomer").modal("hide"); });
-                    $('#textAnswerOrder').html("Order Created");
-                    $('#headerTextAnswerOrder').html(data);
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    jsRemoveWindowLoad('');
+                    $("#myOrderByCustomer").modal("hide");
+                    $("#orderButtonCompany").trigger('click');
+                    alert('Order Created');
+
+                    //$('#textAnswerOrder').html("Order Created");
+                    //$('#headerTextAnswerOrder').html(data);
+                    //$('#myModalRespuesta').modal({backdrop: 'static'});
 
                 }else{
                     window.location.href = "index.php?controller=user&accion=dashboardCustomer";
@@ -3657,9 +3696,14 @@ function disableEnableCustomer(customerID,action){
         });
 }
 
-function newOrderByCompany(CustomerID){
+function newOrderByCompany(CustomerID,Address){
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().prev().children("a")
+    nextStepWizard.removeAttr('disabled').trigger('click');
     $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
     $('#activeCustomerIDhidden').val(CustomerID);
+    $('#activeCustomerAddress').val(Address);
+    $('#pac-input').val(Address);
+
 }
 
 function filterCompany(nameType,nameStatus,tableName){

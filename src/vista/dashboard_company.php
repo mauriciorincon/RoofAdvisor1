@@ -1,5 +1,6 @@
 <input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
 <input type="hidden" value="" id="activeCustomerIDhidden">
+<input type="hidden" value="" id="activeCustomerAddress">
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
@@ -17,7 +18,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
 <div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
+            <button type="button" class="btn btn-primary active" id="orderButtonCompany"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
@@ -55,6 +56,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				}
             var marketrs=[];
             var contractorMarker=[];
+            var pendingOrders=[];
             var mapObject;
             var infowindow;
             var orderOpenContractor=[];
@@ -160,7 +162,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 
                 
                 // Retrieve new orders as they are added to our database
-                ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
+                /*ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
                     var newOrder = snapshot.val();
                     if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
                         row=validateExist(newOrder.OrderNumber)
@@ -170,15 +172,25 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     }
                     console.log("Data: " + newOrder);
                     
-                });
+                });*/
 
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
+                    
                     var updateOrder = snapshot.val();
+                    console.log(updateOrder);
                     if(updateOrder.CompanyID==companyID || updateOrder.CompanyID=='' ){
                         row=validateExist(updateOrder.OrderNumber);
 						if(row==-1 || row==undefined){
-								addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+                                if (pendingOrders.includes(updateOrder.OrderNumber)){
+                                    
+                                }else{
+                                    pendingOrders.push(updateOrder.OrderNumber);    
+                                    addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+                                }
+                                
+                                
+								
 						}else{
 								updateOrderOnTable(updateOrder,row);
 						}
@@ -224,7 +236,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                         }
 					}
                     console.log("Data: " + updateOrder.OrderNumber);
-                    
+                    return false;
                 });
 
                 // Remove orders that are deleted from database
@@ -378,49 +390,83 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 }
 
                 actualCompanyId=$('#companyIDhidden').val();
+
+                
                 //getCompanyStatus(actualCompanyId).then(function(companyStatus){
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                         dataContractor=takeJobCompany(dataOrder,actualCompanyStatus,contractorName);
 
                         if(dataOrder.CompanyID==""){
                             dataCustomer="XXXXX XXXXX XXXXX XXXXX";
+                            companyActions=actionsCompany(dataOrder,actualCompanyStatus);
+                                t.row.add( [
+                                        dataOrder.OrderNumber,
+                                        dataOrder.SchDate,
+                                        dataOrder.SchTime,
+                                        dataCustomer,
+                                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                                        requestType,
+                                        status,
+                                        estimateAmount,
+                                        finalAmount,
+                                        dataOrder.PaymentType,
+                                        dataContractor,
+                                        companyActions,
+                                    ] ).draw( false );
+                                
+                                var marker={
+                                    lat: parseFloat(dataOrder.Latitude),
+                                    lng: parseFloat(dataOrder.Longitude),
+                                    icon: iconBase+'library_maps.png',
+                                    text: dataOrder.SchDate
+                                };
+                                var oMarket=addMarket(marker,dataOrder,infowindow);
+                                marketrs.push(oMarket);
+
+                                for( var i = 0; i < pendingOrders.length-1; i++){ 
+                                    if ( pendingOrders[i] === dataOrder.OrderNumber) {
+                                        pendingOrders.splice(i, 1); 
+                                    }
+                                }
                         }else{
                             getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
                                 dataCustomer=customerDataX;
+
+                                companyActions=actionsCompany(dataOrder,actualCompanyStatus);
+                                t.row.add( [
+                                        dataOrder.OrderNumber,
+                                        dataOrder.SchDate,
+                                        dataOrder.SchTime,
+                                        dataCustomer,
+                                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                                        requestType,
+                                        status,
+                                        estimateAmount,
+                                        finalAmount,
+                                        dataOrder.PaymentType,
+                                        dataContractor,
+                                        companyActions,
+                                    ] ).draw( false );
+                                
+                                var marker={
+                                    lat: parseFloat(dataOrder.Latitude),
+                                    lng: parseFloat(dataOrder.Longitude),
+                                    icon: iconBase+'library_maps.png',
+                                    text: dataOrder.SchDate
+                                };
+                                var oMarket=addMarket(marker,dataOrder,infowindow);
+                                marketrs.push(oMarket);
+
+                                for( var i = 0; i < pendingOrders.length-1; i++){ 
+                                    if ( pendingOrders[i] === dataOrder.OrderNumber) {
+                                        pendingOrders.splice(i, 1); 
+                                    }
+                                }
                             });
                         }
                         
-                        //getCompanyStatus(actualCompanyId).then(function(companyStatus){
-                            companyActions=actionsCompany(dataOrder,actualCompanyStatus);
-                            
-                        //});
-                                    
                         
-
-                        t.row.add( [
-                                dataOrder.OrderNumber,
-                                dataOrder.SchDate,
-                                dataOrder.SchTime,
-                                dataCustomer,
-                                dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
-                                requestType,
-                                status,
-                                estimateAmount,
-                                finalAmount,
-                                dataOrder.PaymentType,
-                                dataContractor,
-                                companyActions,
-                            ] ).draw( false );
                         
-                        var marker={
-                            lat: parseFloat(dataOrder.Latitude),
-                            lng: parseFloat(dataOrder.Longitude),
-                            icon: iconBase+'library_maps.png',
-                            text: dataOrder.SchDate
-                        };
-                        var oMarket=addMarket(marker,dataOrder,infowindow);
-                        marketrs.push(oMarket);
-
                     });
                 //});
                 
@@ -2363,7 +2409,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				<h4 class="modal-title" id="headermyPostCardServiceP">Postcard Info</h4> 
 			</div> 
             <div class="modal-body" id="textmyPostCardServiceP">
-            <embed src="<?php echo  $_SESSION['rsn_documents_path']."PostcardsService.pdf"; ?> type="application/pdf" width="900" height="600"></embed>
+            <embed src="<?php echo  $_SESSION['rsn_documents_path']."PostcardsService.pdf"; ?>" type="application/pdf" width="900" height="600"></embed>
             </div>
 			<div class="modal-footer" id="buttonmyPostCardServiceP"> 
                 
@@ -2857,7 +2903,7 @@ if(!empty($_actual_company['postCardValue'])){
 				<h4 class="modal-title" id="headerMessage">Modal Header</h4> 
 			</div> 
 			<div class="modal-body" id="textMessage"> 
-				<p >Some text in the modal.</p> 
+				<p >Some text in the modal. myMensaje</p> 
 			</div> 
 			<div class="modal-footer" id="buttonMessage"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
@@ -2875,7 +2921,7 @@ if(!empty($_actual_company['postCardValue'])){
 				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
 			</div> 
 			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
+				<p >Some text in the modal. myModalRespuesta</p> 
 			</div> 
 			<div class="modal-footer" id="buttonAnswerOrder"> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 

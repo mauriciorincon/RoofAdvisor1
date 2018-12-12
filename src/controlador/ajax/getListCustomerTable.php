@@ -60,7 +60,7 @@ $_string="";
         }
         $_actions.='<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' .
                 'id="inactivate-customer-button" name="inactivate-customer-button"  ' .
-                'data-toggle1="tooltip" onclick="newOrderByCompany('.$customer['CustomerID'].',\'Active\')"> ' .
+                'data-toggle1="tooltip" onclick="newOrderByCompany('.$customer['CustomerID'].',\''.$customer['Address'].'\')"> ' .
                 '<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>';
         $_string.="<tr>".
                     "<td>".$_customer_id."</td>".

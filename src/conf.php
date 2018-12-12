@@ -8,11 +8,12 @@
     if(!isset($_SESSION['application_path'])){
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
-    //echo  $_SESSION['application_path'];
+    //echo  $_SERVER['DOCUMENT_ROOT'];
     
-    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow1'.'/vendor/';
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
 
-    $_SESSION['library_path']=$_SESSION['application_path'].'/vendor/';
+    //echo $_SESSION['library_path'];
+    //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
 
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';
@@ -35,7 +36,7 @@
         $_path2="/".substr($_dir,$pos1+1,$pos2-1);
         $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST'].$_path2."/src/rsndocs/";
     }else{
-        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST']."/src/rsndocs/";
+        $_SESSION['rsn_documents_path']="http://" . $_SERVER['HTTP_HOST']."/rsndocs/";
     }
     
     //define report path

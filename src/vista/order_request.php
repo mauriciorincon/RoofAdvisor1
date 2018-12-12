@@ -181,6 +181,7 @@
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
+					<label class="control-label text-center h1">If you need an Emergency Repait, Schedule Repair or Reroof/New Roof</label>
                     <label class="control-label text-center h1"><big>ZIP CODE</big></label>
                     <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
@@ -993,16 +994,3 @@
 		</div> 
 	</div>
 </div>
-<!--<?php if(isset($_GET['step'])){?>
-
-	<script>
-		$(document).ready(function() {
-			nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
-			nextStepWizard.removeAttr('disabled').trigger('click');
-		});
-	</script>
-<<<<<<< HEAD
-<?php } ?>-->
-=======
-<?php } ?>
->>>>>>> 8a853495091f6a63aa8bc2d4e0eea9a5b4e0e8ae

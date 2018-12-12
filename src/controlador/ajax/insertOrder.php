@@ -11,9 +11,15 @@ $_userController=new userController();
 $_createdBy="";
 $_createdTo="";
 $_customerMail="";
+
+$_companyID="";
+if(isset($_POST['CompanyID'])){
+    $_companyID=$_POST['CompanyID'];
+}
 if(isset($_POST['action_type'])){
     if(strcmp($_POST['action_type'],"create_by_company")==0){
         $_createdBy=$_POST['createdBy'];
+        $_companyID=$_POST['createdBy'];
         $_user=$_userController->getCustomerById($_POST['createdTo']);
         $_customerMail=$_user['Email'];
     }else{
@@ -38,10 +44,7 @@ if(isset($_POST['action_type'])){
 }
 
 //$_date=$_POST['ActAmtTime'];
-$_companyID="";
-if(isset($_POST['CompanyID'])){
-    $_companyID=$_POST['CompanyID'];
-}
+
 
 if(isset($_POST['stripeCharge'])){
     $_stripe_chargue=$_POST['stripeCharge'];
