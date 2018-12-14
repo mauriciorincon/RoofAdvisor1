@@ -181,7 +181,7 @@
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
-					<label class="control-label text-center h1">If you need an Emergency Repait, Schedule Repair or Reroof/New Roof</label>
+					<label class="control-label text-center h1">If you need an Emergency Repair, Schedule Repair or Reroof/New Roof</label>
                     <label class="control-label text-center h1"><big>ZIP CODE</big></label>
                     <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
