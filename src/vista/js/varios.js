@@ -2624,7 +2624,7 @@ function setOrderId(orderID,RequestType,typePricing){
                 $('input#numberPostCard').val(order.postCardValue);
                 $('#dateWork').val(order.SchDate);
                 $('#timeWork').val(order.SchTime);
-                if(RequestType=='S' || RequestType=='M'){
+                if((RequestType=='S' || RequestType=='M') && typePricing!=''){
                     $('#dateWork').prop('readonly', true);
                     $('#timeWork').prop('readonly', true);
                     $.post( "controlador/ajax/getParameter.php", { "table" : "Parameters","field":typePricing}, null, "text" )
@@ -2647,6 +2647,8 @@ function setOrderId(orderID,RequestType,typePricing){
                         }
                     });
 
+                }else{
+                    $('#pricingWork').val(0);
                 }
             }else{
                 $('input#numberPostCard').val(0);
@@ -2682,6 +2684,7 @@ function takeWork(){
     var driverID=$('select#driverWork').val();
     var amountPostCard=$('input#amountPostCard').val();
     var orderType=$('#orderTypeTakeWork').val();
+    var pricingWork=$('#pricingWork').val();
 
     var message="";
 
@@ -2716,7 +2719,7 @@ function takeWork(){
         $("#myMensaje").modal("show");
         return;
     }
-    if(orderType=="S" || orderType=="M"){
+    if((orderType=="S" || orderType=="M") && pricingWork>0 ){
         action_type="pay_take_service";
         if(typeof handler !== undefined){
             handler.open({

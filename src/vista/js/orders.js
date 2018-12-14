@@ -227,7 +227,7 @@ function actionsCompany(dataOrder,companyStatus){
 function takeJobCompany(dataOrder,companyStatus,contractorName){
     if(dataOrder.ContractorID=="" || dataOrder.ContractorID==null){
         if(dataOrder.RequestType=='R' || dataOrder.RequestType=='P'){
-            dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+            dataContractor='<a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
                     'href="" '+
                     'onClick="alert(\'Only RoofServiceNow can take this type of service\')"> '+
                     '<span class="glyphicon glyphicon-check"></span>Take work</a>';
@@ -235,12 +235,12 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
         }else{
             
                 if(companyStatus=='Active'){
-                    dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                    dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
                                 'href="#myModalGetWork" '+
                                 'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+dataOrder.RequestType+'\',\''+getTypePricing(dataOrder)+'\')" > '+
                                 '<span class="glyphicon glyphicon-check"></span>Take work</a>';        
                 }else{
-                        dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"'+
+                        dataContractor='<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
                             'href="" '+
                             'onClick="alert(\'You can not take the job until the company is active\')"> '+
                             '<span class="glyphicon glyphicon-check"></span>Take work</a>';
@@ -303,39 +303,44 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
 }
 
 function getTypePricing(dataOrder){
-    var option='L';
-    switch(dataOrder.RequestType){
-        case "S":
-            option += "R";
-            break;
-        case "M":
-            option += "N";
-            break;
-        default:
-            option = "";
+    if (dataOrder.CompanyID=='' || dataOrder.CompanyID==null || dataOrder.CompanyID==undefined){
+        var option='L';
+        switch(dataOrder.RequestType){
+            case "S":
+                option += "R";
+                break;
+            case "M":
+                option += "N";
+                break;
+            default:
+                option = "";
+        }
+        switch(dataOrder.Rtype){
+            case "Flat":
+                option += "F";
+                break;
+            case "Asphalt":
+                option += "A";
+                break;
+            case "Wood Shake/Composite":
+                option += "W";
+                break;
+            case "Metal":
+                option += "M";
+                break;
+            case "Tile":
+                option += "T";
+                break;
+            case "Do not know":
+                option += "A";
+                break;
+            default:
+                option = "";
+        }
+    }else{
+        option = "";
     }
-    switch(dataOrder.Rtype){
-        case "Flat":
-            option += "F";
-            break;
-        case "Asphalt":
-            option += "A";
-            break;
-        case "Wood Shake/Composite":
-            option += "W";
-            break;
-        case "Metal":
-            option += "M";
-            break;
-        case "Tile":
-            option += "T";
-            break;
-        case "Do not know":
-            option += "A";
-            break;
-        default:
-            option = "";
-    }
+    
     return option;
 }
 /*echo '<script type="text/javascript">',
