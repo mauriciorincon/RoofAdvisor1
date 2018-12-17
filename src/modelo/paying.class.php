@@ -155,5 +155,69 @@ class paying_stripe  extends connection{
         return $result;
     }
 
+    public function createAccount($email){
+        $this->_error_message="";
+        try{
+            $acct = \Stripe\Account::create([
+                "country" => "US",
+                "type" => "custom",
+                "email" =>$email,
+            ]);
+        } catch(\Stripe\Error\Card $e) {
+            $acct="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $acct="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $acct="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $acct="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $acct="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $acct="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $acct;
+    }
+
+    public function getAccount($stripeID){
+        $this->_error_message="";
+        try{
+            $acct = \Stripe\Account::retrieve($stripeID);
+        } catch(\Stripe\Error\Card $e) {
+            $acct="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $acct="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $acct="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $acct="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $acct="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $acct="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $acct;
+    }
+
 }
 ?>

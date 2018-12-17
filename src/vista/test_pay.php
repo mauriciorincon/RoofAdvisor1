@@ -22,13 +22,20 @@
     echo $_SESSION['application_path']."declare user controller";
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
-    //$_objPay=new payingController();
+    $_objPay=new payingController();
+
+    //$_result=$_objPay->createAccount('mauricio.rincon@gmail.com');
+    //echo "<br>Resultado Creacion Usuario<br>";
+    var_dump($_result);
 
     //$_objPay->showPayingWindow1();
 
-    //$_userModel=new userModel();
-    //$_lastCustomerID=$_userModel->getLastNodeCustomer("Customers","CustomerID");
-    //echo $_lastCustomerID;*/
+    $_userModel=new userController();
+    //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
+    //echo $_result;
+    var_dump($_userModel->getAccount('acct_1DiBU7B2zQatABj9'));
+    echo "<br><br>";
+    var_dump($_userModel->getValidateAccount('acct_1DiBU7B2zQatABj9'));
 
     //$_oCalendar=new calendar();
 
@@ -70,7 +77,7 @@
         echo $_information::number_3;
         echo $_information::number_4;*/
 
-        $_userModel=new userModel();
+        /*$_userModel=new userModel();
         $_result=$_userModel->validateCompany('support@roofservicenow.com','123456');
 
         $properties = [
@@ -78,7 +85,8 @@
             'disabled' => false,
             'photoURL' => ''
         ];
-        $_result_update=$_userModel->updateUserCustomer($_result->uid,$properties,'company');
+        $_result_update=$_userModel->updateUserCustomer($_result->uid,$properties,'company');*/
+
 
 
 

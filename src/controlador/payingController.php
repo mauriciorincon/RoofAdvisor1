@@ -313,5 +313,23 @@ class payingController{
         }
         return $_emergency_value;
     }
+
+    function createAccount($email){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->createAccount($email);
+
+        return $_result;
+    }
+
+    function getAccount($stripeID){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->getAccount($stripeID);
+
+        return $_result;
+    }
 }
 ?>
