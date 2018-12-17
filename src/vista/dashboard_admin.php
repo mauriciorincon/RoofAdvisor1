@@ -267,7 +267,7 @@ Welcome to RoofServicenow Admin
                     dataContractor='<a class="btn-primary btn-sm" data-toggle="modal"'+
                                 'href="#myModalGetWork" '+
                                 'onClick="setOrderId(\''+dataOrder.FBID+'\',\''+ dataOrder.RequestType+'\')"> '+
-                                '<span class="glyphicon glyphicon-check"></span>Take work</a>';
+                                '<span class="glyphicon glyphicon-check"></span>TalTake work</a>';
                 }
             }else{
                 getContractorName(dataOrder.ContractorID).then(function(contractorName){
@@ -681,7 +681,7 @@ Welcome to RoofServicenow Admin
                 <thead>
                 <tr>
                     <th>CompanyID</th>
-                    <th>ComapnyLicNum</th>
+                    <th>CompanyLicNum</th>
                     <th>Address</th>
                     <th>CompanyEmail</th>
                     <th>CompanyName</th>
@@ -1197,7 +1197,7 @@ Welcome to RoofServicenow Admin
 					<table class="table table-condensed" id="invoiceInfo">
 						<thead>
 							<tr>
-								<td><strong>Invoice Numbre</strong></td>
+								<td><strong>Invoice Number</strong></td>
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>

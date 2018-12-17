@@ -698,8 +698,8 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											}
 											$_company_name=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyName');
 											$_company_phone=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyPhone');
-											$_comapny_mail=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyEmail');
-											echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_comapny_mail.'">'.$_company_name.'</a>';
+											$_company_mail=$this->_userModel->getNode('Company/'.$order['CompanyID'].'/CompanyEmail');
+											echo '<a href="#" data-toggle1="tooltip"  title="Tel number: '.$_company_phone.'  Mail:'.$_company_mail.'">'.$_company_name.'</a>';
 										}else{
 										echo '';
 
@@ -850,7 +850,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			
 		  </div>
 		  <div class="modal-footer">
-			<button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+			<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		  </div>
 		</form>
@@ -884,7 +884,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="title" class="col-sm-2 control-label">Comapny</label>
+				<label for="title" class="col-sm-2 control-label">Company</label>
 				<div class="col-sm-10">
 					<input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
 				</div>
@@ -904,7 +904,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<input type="hidden" name="id" class="form-control" id="id">
 		  </div>
 		  <div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			<!--<button type="submit" class="btn btn-primary">Guardar</button>-->
 		  </div>
 		</form>
@@ -1262,7 +1262,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		<div class="modal-content" > 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Send Estimate</h4> 
 			</div> 
 			<div class="modal-body" id="textEstimateAmount" style="position:relative;right:0px;top:45px;"> 
 				<input type="hidden" value="" id="orderID" />
@@ -1419,7 +1419,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<br>
 			<br> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
+				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Send</button>
 				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
 				
 			</div> 
@@ -1554,7 +1554,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<table class="table table-condensed" id="invoiceInfo">
 						<thead>
 							<tr>
-								<td><strong>Invoice Numbre</strong></td>
+								<td><strong>Invoice Number</strong></td>
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>
@@ -1738,7 +1738,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <!-- <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> -->
+                <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1753,7 +1753,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headermyUrls">Imformation </h4> 
+				<h4 class="modal-title" id="headermyUrls">Resources</h4> 
 			</div> 
 			<div class="modal-body" id="textmyUrls"> 
 					<div class="container">
@@ -1761,8 +1761,22 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<div class="col-md-3">
 							<div class="well no-padding">
 								<div>
-								<ul class="nav nav-list nav-menu-list-style">
-										<?php 
+									<ul class="nav nav-list nav-menu-list-style">
+                                        
+                                        <?php 
+                                            echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                            .'<span class="glyphicon glyphicon-folder-close m5"></span>Articles
+                                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                            .'<ul class="nav nav-list tree bullets">';
+                                            echo '<li><a href="'.$_SESSION['rsn_documents_path'].'Help_Your_Crews_Be_Respectful_of_Homeowners.pdf" target="_blank">Help Your Crews....</a></li>';
+                                            echo '<li><a href="'.$_SESSION['rsn_documents_path'].'StrategiestoImproveRatingsandReferrals.pdf" target="_blank">Strategies to Improve....</a></li>';
+                                            echo '</ul></li>';
+
+                                            echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+                                            .'<span class="glyphicon glyphicon-folder-close m5"></span>Building and Permits
+                                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+                                            .'<ul class="nav nav-list tree bullets">';
+
 											$n=0;
 											$state="";
 											$city="";
@@ -1802,7 +1816,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 												$n++;
 											}
 										
-											echo '</ul></li></ul></li>';
+											echo '</ul></li></ul></li></ul></li>';
 										?>
 										</ul></li>
 									</ul>
@@ -1814,12 +1828,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonmyUrls"> 
-                <!-- <button type="button" class="btn-primary btn-sm" onclick="uploadAjax('uploadImage')">Upload</button> -->
+                
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
 	</div>
 </div>
+
 
 </div>
 </div>

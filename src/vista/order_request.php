@@ -879,7 +879,7 @@
 						<div class ="col-md-3">&nbsp;
 						</div>
 					<div class ="col-md-12">
-						<label class="control-label text-center h1 h1white"><big>To initiate the emergency repair process, click on the “Agree to Initiate Service” button.</big></label>
+						<label class="control-label text-center h1 h1white" name="procedeText" id="procedeText"><big>To initiate the emergency repair process, click on the “Agree to Initiate Service” button.</big></label>
 						<?php
 							if(!isset($_SESSION)) { 
 								session_start(); 
