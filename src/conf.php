@@ -10,7 +10,7 @@
     }
     //echo  $_SERVER['DOCUMENT_ROOT'];
     
-    //git $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
 
     //echo $_SESSION['library_path'];
     $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';

@@ -535,7 +535,7 @@ $(document).ready(function () {
         if(password!=Repassword){
             $('input:password#inputPassword').addClass("has-error").removeClass("has-success");;
             $('input:password#inputPasswordConfirm').addClass("has-error").removeClass("has-success");;
-            $('#answerRePasswordValidateStep6').html('The comfirmation password are different');
+            $('#answerRePasswordValidateStep6').html('The confirmation password are different');
             isValid = false;
         }
 

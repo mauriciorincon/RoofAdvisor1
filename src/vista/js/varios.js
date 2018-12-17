@@ -2118,7 +2118,7 @@ $( function() {
 //Date picker order
 $( function() {
     $.datepicker.setDefaults($.datepicker.regional['en']);
-    $( ".datepickers" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 1 });
+    $( ".datepickers" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 0 });
 } );
 
   
@@ -2429,6 +2429,7 @@ function showHideSteps(typeService){
         //step5.show();
         step8.hide();
         $('#step-6 h1').html('<font size="41"><strong>Review Scheduled Repair Order Details</strong></font>');
+        $('#procedeText').html('<big>To initiate the schedule repair process, click on the “Agree to Initiate Service” button.</big>');
     }else if(typeService=='reroofnew'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
@@ -2438,6 +2439,7 @@ function showHideSteps(typeService){
         //step5.show();
         step8.hide();
         $('#step-6 h1').html('<font size="41"><strong>Review Re-roof or new Repair Order Details</strong></font>');
+        $('#procedeText').html('<big>To initiate the sRe-roof or new Repair process, click on the “Agree to Initiate Service” button.</big>');
     }else if(typeService=='emergency' || typeService=='roofreport'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
@@ -2449,10 +2451,12 @@ function showHideSteps(typeService){
             $('#step-6 h1').html('<font size="41"><strong>Review Emergency Repair Order Details</strong></font>');
             $('#divEmergencyService').show();
             $('#divRoofService').hide();
+            $('#procedeText').html('<big>To initiate the Emergency Repair process, click on the “Agree to Initiate Service” button.</big>');X
         }else{
             $('#step-6 h1').html('<font size="41"><strong>Review Roof Report Order Details</strong></font>');
             $('#divEmergencyService').hide();
             $('#divRoofService').show();
+            $('#procedeText').html('<big>To initiate the Roof Report process, click on the “Agree to Initiate Service” button.</big>');X
         }
         
     }

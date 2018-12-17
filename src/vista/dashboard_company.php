@@ -938,182 +938,232 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
-			</div> 
-			<div class="modal-body" id="textProfileCompany"> 
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#profile">Basic</a></li>
-                    <li><a data-toggle="tab" href="#paying">Paying</a></li>
-                    <li><a data-toggle="tab" href="#others">Others</a></li>
-                </ul>
+            </div> 
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="modal-body" id="textProfileCompany"> 
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#profile">Basic</a></li>
+                            <li><a data-toggle="tab" href="#stripeData">Stripe</a></li>
+                            <li><a data-toggle="tab" href="#paying">Paying</a></li>
+                            <li><a data-toggle="tab" href="#others">Others</a></li>
+                        </ul>
 
-                <div class="tab-content">
-                    <!--Div profile-->
-                    <div id="profile" class="tab-pane fade in active">
-                        
-                        <form role="form">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="control-label ">Company ID</label>
-                                    <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="<?php echo $_actual_company['CompanyID'] ?>" />
-                                </div>
+                        <div class="tab-content">
+                            <!--Div profile-->
+                            <div id="profile" class="tab-pane fade in active">
+                                
+                                <form role="form">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="control-label ">Company ID</label>
+                                            <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="<?php echo $_actual_company['CompanyID'] ?>" />
+                                        </div>
 
-                                <div class="form-group">
-                                    <label class="control-label">Company Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
-                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Company Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
+                                        </div>
 
-                                <div class="form-group">
-                                    <label class="control-label">First Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCompanyName" name="firstCompanyName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Last Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
-                                </div>  
-                                <div class="form-group">
-                                    <label class="control-label ">Email</label>
-                                    <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="control-label">Address</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">City</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress2" name="companyAddress2" value="<?php echo $_actual_company['CompanyAdd2'] ?>"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Zip Code</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
-                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label">First Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCompanyName" name="firstCompanyName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Last Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                        </div>  
+                                        <div class="form-group">
+                                            <label class="control-label ">Email</label>
+                                            <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
+                                        </div> 
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">City</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress2" name="companyAddress2" value="<?php echo $_actual_company['CompanyAdd2'] ?>"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Zip Code</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
+                                        </div>
 
-                                <div class="form-group">
-                                    <label class="control-label">Phone number</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
-                                </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Phone number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
+                                        </div>
 
-                                <div class="form-group">
-                                    <label class="control-label">Company Type</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
-                                </div> 
+                                        <div class="form-group">
+                                            <label class="control-label">Company Type</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
+                                        </div> 
+                                            
+                                    </div>
                                     
+                                </form>
                             </div>
-                            
-                        </form>
-                    </div>
 
-                    <!--Div paying-->
-                    <div id="paying" class="tab-pane fade">
-                        
-                        <form role="form">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="control-label">Billing Address</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
-                                </div>
-                                <div class="form-group">
+                            <div id="stripeData" class="tab-pane fade">
+                            array(9) { [0]=> string(16) "external_account" [1]=> string(20) "legal_entity.dob.day" [2]=> string(22) "legal_entity.dob.month" [3]=> string(21) "legal_entity.dob.year" [4]=> string(23) "legal_entity.first_name" [5]=> string(22) "legal_entity.last_name" [6]=> string(17) "legal_entity.type" [7]=> string(19) "tos_acceptance.date" [8]=> string(17) "tos_acceptance.ip" } 
+                                <form role="form">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="control-label">external_account</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter external_account" id="compamnyexternal_account" name="compamnyexternal_account" value="" />
+                                        </div>
+                                        <div class="form-group">
 
-                                    <label class="control-label">Billing Address 2</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+                                            <label class="control-label">legal_entity.dob.day</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.day" id="compamnylegal_entity.dob.day" name="compamnylegal_entity.dob.day" value="" />
 
-                                    <label class="control-label">Billing Address (Con't)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+                                            <label class="control-label">legal_entity.dob.month</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.month" id="compamnylegal_entity.dob.month" name="compamnylegal_entity.dob.month" value="" />
 
-                                    <label class="control-label">Billing Address (Con't)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+                                            <label class="control-label">legal_entity.dob.year</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.year" id="compamnylegal_entity.dob.year" name="compamnylegal_entity.dob.year" value="" />
 
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">City</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">State</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Zip Code</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Credit Card Expiration Month (MM)</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">legal_entity.first_name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity.first_name" name="compamnylegal_entity.first_name" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">legal_entity.type</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.type" id="compamnylegal_entity.type" name="compamnylegal_entity.type" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">tos_acceptance.date</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter tos_acceptance.date" id="compamnytos_acceptance.date" name="compamnytos_acceptance.date" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">tos_acceptance.ip</label>
 
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">PayInfoCredit Card Number</label>
-
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Credit Card Expiration Year (YYYY)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Credit Card Number</label>
-
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Credit Card CSV</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Name on Cred Card</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">First Name on Credit Card</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Last Name on Credit Card</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
-                                </div>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter tos_acceptance.ip" id="compamnytos_acceptance.ip" name="compamnytos_acceptance.ip" value="" />
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
 
-                    <!--Div orders-->
-                    <div id="others" class="tab-pane fade">
-                        <form role="form">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="control-label">Company Insurance Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Insurance Name" id="compamnyAgencyName" name="compamnyAgencyName" value="<?php echo $_actual_company['InsLiabilityAgencyName'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Insurance Agent's Name</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Name" id="compamnyAgtName" name="compamnyAgtName" value="<?php echo $_actual_company['InsLiabilityAgtName'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Insurance Agent's Phone Number</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Phone Number" id="compamnyAgtNum" name="compamnyAgtNum" value="<?php echo $_actual_company['InsLiabilityAgtNum'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Insurance Policy Number</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Policy Number" id="compamnyPolNum" name="compamnyPolNum" value="<?php echo $_actual_company['InsLiabilityPolNum'] ?>" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Company Rating</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
-                                </div>
-                            
+                            <!--Div paying-->
+                            <div id="paying" class="tab-pane fade">
+                                
+                                <form role="form">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="control-label">Billing Address</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+
+                                            <label class="control-label">Billing Address 2</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                            <label class="control-label">Billing Address (Con't)</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                            <label class="control-label">Billing Address (Con't)</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">City</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">State</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Zip Code</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Credit Card Expiration Month (MM)</label>
+
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">PayInfoCredit Card Number</label>
+
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Credit Card Expiration Year (YYYY)</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Credit Card Number</label>
+
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Credit Card CSV</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Name on Cred Card</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">First Name on Credit Card</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Last Name on Credit Card</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
 
-                </div> 
-            
-                <button type="button" class="btn-primary btn-sm" onClick="updateDataCompany()" >Update Info</button>        
-                <div class="modal-footer" id="buttonrating"> 
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-                </div> 
-            </div>
+                            <!--Div orders-->
+                            <div id="others" class="tab-pane fade">
+                                <form role="form">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="control-label">Company Insurance Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Insurance Name" id="compamnyAgencyName" name="compamnyAgencyName" value="<?php echo $_actual_company['InsLiabilityAgencyName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Agent's Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Name" id="compamnyAgtName" name="compamnyAgtName" value="<?php echo $_actual_company['InsLiabilityAgtName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Agent's Phone Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Phone Number" id="compamnyAgtNum" name="compamnyAgtNum" value="<?php echo $_actual_company['InsLiabilityAgtNum'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Policy Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Policy Number" id="compamnyPolNum" name="compamnyPolNum" value="<?php echo $_actual_company['InsLiabilityPolNum'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Company Rating</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
+                                        </div>
+                                    
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div> 
+                    
+                        <button type="button" class="btn-primary btn-sm" onClick="updateDataCompany()" >Update Info</button>        
+                       
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div>
+                        Wallet Balance<br>
+                        <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                    </div>
+                </div>
+            </div>                         
 </div> 
 
 
@@ -1412,7 +1462,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			  </div>
 			</form>
@@ -1446,7 +1496,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">Comapny</label>
+                    <label for="title" class="col-sm-2 control-label">Company</label>
                     <div class="col-sm-10">
                         <input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
                     </div>
@@ -1466,7 +1516,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 <input type="hidden" name="id" class="form-control" id="id">
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				<!--<button type="submit" class="btn btn-primary">Guardar</button>-->
 			  </div>
 			</form>
@@ -1685,7 +1735,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Take work</h4>
+        <h4 class="modal-title">Take Lead</h4>
       </div>
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
@@ -1703,7 +1753,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
             <br>
             <br>
             <div class="form-group">
-                <label for="driverWork">Driver for the work</label>
+                <label for="driverWork">Assign Crew</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>
                     <?php foreach ($_array_contractors_to_show as $key => $contractor) {?>
                         <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>
@@ -1738,7 +1788,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 					<table class="table table-condensed" id="invoiceInfo">
 						<thead>
 							<tr>
-								<td><strong>Invoice Numbre</strong></td>
+								<td><strong>Invoice Number</strong></td>
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>
@@ -2526,7 +2576,7 @@ if(!empty($_actual_company['postCardValue'])){
             <br>
             <br> 
 			<div class="modal-footer" id="buttonmyFinalAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="sendFinalAmount()" >Accept</button>
+				<button type="button" class="btn-primary btn-sm" onClick="sendFinalAmount()" >Send</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 				
 			</div> 
@@ -2795,7 +2845,7 @@ if(!empty($_actual_company['postCardValue'])){
 		<div class="modal-content" > 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Send Estimate</h4> 
 			</div> 
 			<div class="modal-body" id="textEstimateAmount" style="position:relative;right:0px;top:45px;"> 
 				<input type="hidden" value="" id="orderID" />
@@ -2863,7 +2913,7 @@ if(!empty($_actual_company['postCardValue'])){
             <br>
             <br>
 			<div class="modal-footer" id="buttonEstimateAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="sendEstimateAmount()" >Comfirm</button>
+				<button type="button" class="btn-primary btn-sm" onClick="sendEstimateAmount()" >Confirm</button>
             
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 			</div> 

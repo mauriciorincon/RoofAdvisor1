@@ -166,7 +166,7 @@ function actionsCustomer(dataOrder){
                         'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
                         '<span class="glyphicon glyphicon-comment"></span>'+
                     '</a>';
-    actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  '+
+    actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Doc Share"  '+
                     'href="#" '+
                     'onClick="getListReportFile(\''+dataOrder.FBID+'\')"> '+
                     '<span class="glyphicon glyphicon-download-alt"></span>'+
@@ -474,7 +474,7 @@ function getTypePricing(dataOrder){
                                                 href="#" 
                                                 onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
                                                 <span class="glyphicon glyphicon-comment"></span>
-                                                <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="View Report"  
+                                                <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Doc Share"  
                                                     href="#" 
                                                     onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
                                                     <span class="glyphicon glyphicon-download-alt"></span>
