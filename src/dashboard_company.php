@@ -147,8 +147,8 @@ Welcome to Roof Service Now, <?php echo $_actual_company['CompanyID']." - ".$_ac
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
                             <td><?php  
-                                $_comapny=$this->_userModel->getCompanyByID($order['CompanyID']); 
-                                echo $_comapny['CompanyName'];
+                                $_company=$this->_userModel->getCompanyByID($order['CompanyID']); 
+                                echo $_company['CompanyName'];
                                 ?></td>
                             
                             <td><?php echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water']?></td>

@@ -1412,7 +1412,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			  </div>
 			</form>
@@ -1446,7 +1446,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">Comapny</label>
+                    <label for="title" class="col-sm-2 control-label">Company</label>
                     <div class="col-sm-10">
                         <input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
                     </div>
@@ -1466,7 +1466,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 <input type="hidden" name="id" class="form-control" id="id">
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				<!--<button type="submit" class="btn btn-primary">Guardar</button>-->
 			  </div>
 			</form>
@@ -1685,7 +1685,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Take work</h4>
+        <h4 class="modal-title">Take Lead</h4>
       </div>
         <div class="modal-body"  id="myModalGetWorkBody">
             <input type="hidden" value="<?php echo $_actual_company['CompanyID'] ?>" id="companyIDWork" />
@@ -1703,7 +1703,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
             <br>
             <br>
             <div class="form-group">
-                <label for="driverWork">Driver for the work</label>
+                <label for="driverWork">Assign Crew</label>
                 <select name="driverWork" id="driverWork" class="form-control" required>
                     <?php foreach ($_array_contractors_to_show as $key => $contractor) {?>
                         <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>
@@ -1738,7 +1738,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 					<table class="table table-condensed" id="invoiceInfo">
 						<thead>
 							<tr>
-								<td><strong>Invoice Numbre</strong></td>
+								<td><strong>Invoice Number</strong></td>
 								<td class="text-center"><strong>Price</strong></td>
 								<td class="text-center"><strong>Date</strong></td>
 								<td class="text-center"><strong>Payment Type</strong></td>
@@ -2526,7 +2526,7 @@ if(!empty($_actual_company['postCardValue'])){
             <br>
             <br> 
 			<div class="modal-footer" id="buttonmyFinalAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="sendFinalAmount()" >Accept</button>
+				<button type="button" class="btn-primary btn-sm" onClick="sendFinalAmount()" >Send</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 				
 			</div> 
@@ -2795,7 +2795,7 @@ if(!empty($_actual_company['postCardValue'])){
 		<div class="modal-content" > 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerEstimateAmount">Confirm Estimate Amount</h4> 
+				<h4 class="modal-title" id="headerEstimateAmount">Send Estimate</h4> 
 			</div> 
 			<div class="modal-body" id="textEstimateAmount" style="position:relative;right:0px;top:45px;"> 
 				<input type="hidden" value="" id="orderID" />
@@ -2863,7 +2863,7 @@ if(!empty($_actual_company['postCardValue'])){
             <br>
             <br>
 			<div class="modal-footer" id="buttonEstimateAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="sendEstimateAmount()" >Comfirm</button>
+				<button type="button" class="btn-primary btn-sm" onClick="sendEstimateAmount()" >Confirm</button>
             
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Cancel</button> 
 			</div> 

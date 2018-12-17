@@ -9,6 +9,7 @@ require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
+require_once($_SESSION['application_path']."/controlador/payingController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 require_once($_SESSION['application_path']."/vista/usefull_urls.php");
 
@@ -1215,6 +1216,36 @@ class userController{
         require_once("vista/head.php");
         require_once("vista/test_calendar.php");
         require_once("vista/footer.php");
+    }
+
+    public function createAccount($_companyID,$email){
+        $_objPay=new payingController();
+        $_result=$_objPay->createAccount($email);
+
+        if(is_array($_result) or gettype($_result)=="object" ){
+            $this->_userModel=new userModel();                                        
+            $this->_userModel->updateContractor($_companyID.'/stripeAccount',$_result['id']);
+            return "Account created correctry";
+        }else{
+            return $_result;
+        }
+    }
+
+    public function getAccount($stripeID){
+        $_objPay=new payingController();
+        return $_objPay->getAccount($stripeID);
+    }
+
+    public function getValidateAccount($stripeID){
+        $objStripeAccount=$this->getAccount($stripeID);
+        
+        if(count($objStripeAccount->verification->fields_needed)==0){
+            return "User validate correctly";
+        }else{
+            
+            return $objStripeAccount->verification->fields_needed;
+        }
+
     }
 }
 ?>

@@ -232,7 +232,7 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_result_mail=$_mailController->sendMailSMTP($_customer['Email'],"Roofadvizor Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
+        $_result_mail=$_mailController->sendMailSMTP($_customer['Email'],"RoofSerivceNow Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
         if($_result_mail==false){
             return $_mailController->getMessageError();
         }else{
@@ -521,7 +521,7 @@ class pdfController{
 
         $_mailController = new emailController();
 
-        $_result_mail=$_mailController->sendMailSMTP($_user_mail_send,"Roofadvizor Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
+        $_result_mail=$_mailController->sendMailSMTP($_user_mail_send,"RoofSerivceNow Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
         if($_result_mail==false){
             return $_mailController->getMessageError();
         }else{

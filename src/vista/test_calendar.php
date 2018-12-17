@@ -119,7 +119,7 @@
 					</div>
           </div>
           <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Comapny</label>
+					<label for="title" class="col-sm-2 control-label">Company</label>
 					<div class="col-sm-10">
 					  <input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
 					</div>
