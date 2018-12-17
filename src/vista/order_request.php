@@ -127,10 +127,15 @@
 </div>-->
 
 <div id="welcome-txt">
-    <span>
+<div class="mobiletxt1">   
+<span>
     Need a <strong style="color:#fa511a">Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
     </span>
-    </div>
+</div>
+</div>
+<div class="btnvidmobilediv1" style="display:none;">
+<button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+</div>
 <div id="appwiz" class="container">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
@@ -181,8 +186,8 @@
             </div>
             <div class="panel-body pbody-white">
                 <div class="form-group">
-					<label class="control-label text-center h1">If you need an Emergency Repait, Schedule Repair or Reroof/New Roof</label>
-                    <label class="control-label text-center h1"><big>ZIP CODE</big></label>
+					<label class="control-label text-center h4">If you need an Emergency Repair, Scheduled Repair or Reroof/New Roof</label>
+                    <label class="control-label text-center h3"><big>ZIP CODE</big></label>
                     <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
 					<label class="control-label text-center h1" id="answerZipCode"><big></big></label>
                 </div>

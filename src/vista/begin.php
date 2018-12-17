@@ -18,12 +18,14 @@
 ?>
 
 <!-- Detail for roofservicenow -->
-<div id='srvapp1' class="container">
+<div id='srvapp1' class="">
 <div id='srvapps'>
 <!--<div id='srvmapp1'>
 <img src='img/roof-build.jpg'>
 </div>-->
-<span style="font-size:34px;"> <strong>Emergency Roof Repair? Schedule an Appointment? Need a Roof Report?</strong> </span>
+<div class="txtcentr1">
+<span class="mobiletxthd1" style="font-size:34px;"> <strong><span class="hdtxtorng1">Emergency</span> Roof Repair? </br>Schedule an <span class="hdtxtorng1" >Appointment?</span> </br>Need a <span class="hdtxtorng1">Roof Report</span>?</strong> </span>
+</div>
 </br></br>
 <p class='srvappph1'>
 This is a same day, on-demand service for hiring pre-screened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
@@ -46,6 +48,12 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </br>
 <img  id="hworks" src="img/howitworks.png">
 </div>
+</div>
+<div id="hworks-mobile" style="display:none;">
+ <span class="mobiletxthd1 hdworkshd1">
+  <strong>How It Works?</strong>
+ </span>
+</div>
 <!--<form role='form'>
  <div id='srvappsrch1'>
    <input maxlength="100" type="text" required="required" class="form-control input-md" placeholder="Enter your phone number" id="PhoneBegin" name="PhoneBegin">
@@ -55,9 +63,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
 <span id='srvbtnsrch'>SEARCH</span>
 </div>
 </form>-->
-</div>
-
-     <div id='cmapp1' class=" bg-flhouse">
+<div id='cmapp1' class=" bg-flhouse">
 <!-- <div id='cmapp3'>
   <img src='img/florida-house.png'>
  </div>-->
