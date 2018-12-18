@@ -1270,7 +1270,7 @@ padding-bottom: 26px;
     padding-top: 100px;
 }
 #srvapp1{
-padding-bottom:i150px;
+padding-bottom:150px;
 height:620px;
 }
 #srvapps{
@@ -1494,8 +1494,8 @@ border-color:#fff !important;
     position: absolute;
     z-index: 400;
     color: #005678;
-    font-size: 60px;
-    margin-top: 20px;
+    font-size: 45px;
+    margin-top: 30px;
     text-shadow:1px 1px 1px #717171;
     text-align:center;
     width:100%;
@@ -1711,6 +1711,9 @@ margin-left: 400px;
 #soctop1{
 width:90%
 }
+.hdtxtorng1{
+color:#fa511a;
+}
 .btntool-maindash{
 margin-bottom:20px;
 }
@@ -1735,6 +1738,12 @@ padding-top:70px !important;
 }
 .slick-next{
 padding-top:70px !important;
+}
+.panel-title{
+    font-size:24px !important;
+}
+.txtcentr1{
+    text-align:center;
 }
 @media (min-width:1700px){
 .main-menu ul li a{
@@ -1777,6 +1786,11 @@ font-size:16px;
 }
 .main-menu{
 margin-right:150px;
+}
+}
+@media (min-width:1440px){
+  .txtcentr1{
+  margin-right:85px !important;
 }
 }
 @media (max-width:1400px){
@@ -1876,13 +1890,14 @@ display:none;
 #srvapp1{
 height: 1150px;
     display: block;
-    margin-top: 500px;
+    margin-top: 30px;
     position: relative;
 }
 #logoimg{
-margin-left: 40px;
-    margin-top: 37px;
+    margin-left: 23px;
+    margin-top: 65px;
     width: 85%;
+    position: absolute;
 }
 #appdl3-tx2 {
     font-size: 60px;
@@ -1892,6 +1907,7 @@ margin-left: 40px;
     bottom: 0px;
     width: 100%;
     height: 45px;
+    z-index: 999999;
 }
 .mobile-menu-area{
 display:none !important;
@@ -1900,6 +1916,75 @@ display:none !important;
 display:none;
 }
 #welcome-txt {
-    font-size: 25px;
+font-size: 25px;
+    background-image: url(img/mobile-roof.png);
+    height: 840px;
+    margin-top: -160px;
+    z-index: -1;
+    position: relative;
+    background-size: 135%;
+}
+.mobiletxt1{
+margin-top: 414px !important;
+    position: absolute;
+}
+.social-icon a {
+font-size:20px;
+
+}
+.mobileplaybtn1{
+    display: block !important;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #f34e19;
+    border: 1px solid #fff;
+}
+.btnvidmobilediv1{
+display: block !important;
+    position: absolute;
+    margin-top: -70%;
+    right: 20%;
+}
+.mobiletxthd1{
+    font-size:22px !important;
+}
+.srvappph1 {
+font-size:14px;
+padding-right: 25px;
+}
+#rhlist{
+      font-size: 14px;
+    margin-left: 65px;
+  padding-right: 70px;
+    list-style:none;
+}
+#rhlist li::before {
+  content: "•"; color: red;
+  display: inline-block; width: 1em;
+  margin-left: -1em;
+  font-size: 30px;
+  vertical-align: middle;
+  margin-bottom: -25px;
+}
+#rhlist li{
+margin-bottom: 20px;
+}
+#easyli{
+    padding: 91px 0px 9px 0px;
+    background: url(img/finger-mobile.png) no-repeat center top;
+    background-position-y: -1px;
+}
+#calendarli{
+padding: 91px 0px 9px 0px;
+    background: url(img/calendar.png) no-repeat center top;
+    background-position-y: -1px;
+}
+#reportli{
+padding: 91px 0px 9px 0px;
+    background: url(img/reports.png) no-repeat center top;
+    background-position-y: -1px;
+}
+#hworks{
+display:none;
 }
 }
