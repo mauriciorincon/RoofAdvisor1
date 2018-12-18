@@ -2451,12 +2451,12 @@ function showHideSteps(typeService){
             $('#step-6 h1').html('<font size="41"><strong>Review Emergency Repair Order Details</strong></font>');
             $('#divEmergencyService').show();
             $('#divRoofService').hide();
-            $('#procedeText').html('<big>To initiate the Emergency Repair process, click on the “Agree to Initiate Service” button.</big>');X
+            $('#procedeText').html('<big>To initiate the Emergency Repair process, click on the “Agree to Initiate Service” button.</big>');
         }else{
             $('#step-6 h1').html('<font size="41"><strong>Review Roof Report Order Details</strong></font>');
             $('#divEmergencyService').hide();
             $('#divRoofService').show();
-            $('#procedeText').html('<big>To initiate the Roof Report process, click on the “Agree to Initiate Service” button.</big>');X
+            $('#procedeText').html('<big>To initiate the Roof Report process, click on the “Agree to Initiate Service” button.</big>');
         }
         
     }
@@ -2470,17 +2470,22 @@ function setFirstStep(){
     //$firstStep.trigger('click');
 }
 
-function updateOrder(orderID,arrayChanges,closeWindow){
+function updateOrder(orderID,arrayChanges,closeWindow,headText){
         jsShowWindowLoad('One second as we send you an invoice for the payment and create your order.');
         $.post( "controlador/ajax/updateOrder.php", { "orderId" : orderID,"arrayChanges":arrayChanges}, null, "text" )
         .done(function( data, textStatus, jqXHR ) {
             if ( console && console.log ) {
                 var n = data.indexOf("Error");
                 if(n==-1){
-                    if(closeWindow!=undefined){
+                    if(closeWindow!=undefined && closeWindow!=''){
                         $(document).ready(function(){$("#"+closeWindow).modal("hide"); });
                     }
-                    $('#headerTextAnswerOrder').html('Order Detail');
+                    if(headText!=undefined && headText!=''){
+                        $('#headerMessageMessage').html(headText);
+                    }else{
+                        $('#headerMessageMessage').html('Order Detail');
+                    }
+                    
                     $('#myMensaje div.modal-body').html(data);
                     $(document).ready(function(){$("#myMensaje").modal("show"); });
                 }else{
@@ -2640,6 +2645,8 @@ function setOrderId(orderID,RequestType,typePricing){
                                 amount_value=data;
                             }else{
                                 $('#pricingWork').val(0);
+                                $('#pricingWork').hide();
+                                $('label[for=pricingWork]').hide()
                             }
                             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                             jsRemoveWindowLoad('');
@@ -2653,6 +2660,8 @@ function setOrderId(orderID,RequestType,typePricing){
 
                 }else{
                     $('#pricingWork').val(0);
+                    $('#pricingWork').hide();
+                    $('label[for=pricingWork]').hide()
                 }
             }else{
                 $('input#numberPostCard').val(0);
@@ -2739,7 +2748,7 @@ function takeWork(){
         }else{
             arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
         }
-        updateOrder(orderID,arrayChanges)
+        updateOrder(orderID,arrayChanges,'','Lead Confirmed');
         $("#myModalGetWork").modal("hide");
     }
     
@@ -3089,7 +3098,7 @@ function selectPaymentType(){
         $('#myPaymentType').modal('hide');
         $('#myFinalAmount').modal('hide');
         updateOrder(orderID,"Status,"+status+",PaymentType,"+paymentType);
-    }else if(paymentType=="online"){
+    }else if(paymentType=="Online"){
         row=$('#totalAmountTable tr').eq(4);
         depositValue=row.find("td:eq(3)").html();
         depositValue=depositValue.replace("$", "");

@@ -1272,7 +1272,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Order Summary</strong></h3>
+								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -1361,7 +1361,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Order summary</strong></h3>
+								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -1446,14 +1446,14 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
 					</div>
 					<div class="radio disabled">
-						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="online">Online</label>
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="Online">Online</label>
 					</div>
 
 					
 					<!--<select id="selectPaymnetType" class="form-control" name="selectPaymnetType">
 						<option value="cash">Cash</option>
 						<option value="check">Check</option>
-						<option value="online">Online</option>
+						<option value="Online">Online</option>
 					</select>-->
 				</div>
 				
@@ -1602,6 +1602,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         <tr><td>Emergency Repair</td><td><input class="form-check-input" type="checkbox" value="E" name="defaultCheckType" checked></td></tr>
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
 						<tr><td>Postcard</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckType" checked></td></tr>
+						<tr><td>New or Reroof</td><td><input class="form-check-input" type="checkbox" value="M" name="defaultCheckType" checked></td></tr>
                         <tr><td scope="col"><b>Order Status<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
@@ -1727,7 +1728,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerMyUploadReportN">New Roof Report </h4> 
+				<h4 class="modal-title" id="headerMyUploadReportN">New Doc Share </h4> 
 			</div> 
 			<div class="modal-body" id="textMyUploadReportN"> 
                 <div class="form-group">        

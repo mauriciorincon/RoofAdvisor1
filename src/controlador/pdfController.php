@@ -724,7 +724,7 @@ class pdfController{
         }
     }
 
-    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="online",$_source_payment="order"){
+    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="Online",$_source_payment="order"){
         $_path='/invoice/invoice_'.$_orderID.'.pdf';
         $_path2="";
         if(is_null($this->_otherController)){

@@ -253,27 +253,33 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
         switch (dataOrder.Status) {
             case "D":
                 nextStatusTitle= "Arrived";
+                titleMessage="Arrived";
                 nextStatus = "E";
                 break;
             case "E":
                 nextStatusTitle= "Send Estimate";
+                titleMessage="Estimate Sent";
                 nextStatus = "F";
                 break;
             case "G":
                 nextStatusTitle= "Work In Progress";
+                titleMessage="Work in Progress";
                 nextStatus = "H";
                 break;
             case "H":
                 nextStatusTitle= "Work Completed";
+                titleMessage="Work Completed";
                 nextStatus = "I";
                 break;
             case "I":
                 nextStatusTitle= "Final Bill";
+                titleMessage="Final Bill";
                 nextStatus = "J";
                 break;
             default:
                 nextStatus = "";
                 nextStatusTitle= "";
+                titleMessage="";
                 break;
         }
         if(nextStatus==""){
@@ -292,7 +298,7 @@ function takeJobCompany(dataOrder,companyStatus,contractorName){
             }else{
                 dataContractor='<a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the work"'+
                 'href="" '+
-                'onClick="updateOrder(\''+dataOrder.FBID+'\',\'Status,'+nextStatus+'\')" > '+
+                'onClick="updateOrder(\''+dataOrder.FBID+'\',\'Status,'+nextStatus+'\',\'\',\''+titleMessage+'\')" > '+
                 '<span class="glyphicon glyphicon-check"></span>'+contractorName+' '+nextStatusTitle+'</a>';
             }
             
