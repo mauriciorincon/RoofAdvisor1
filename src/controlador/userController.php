@@ -1247,5 +1247,11 @@ class userController{
         }
 
     }
+
+    public function upateAccount($stripeID,$field,$value){
+        $objStripeAccount=$this->getAccount($stripeID);
+        $objStripeAccount[$field]=$value;
+        $objStripeAccount->save();
+    }
 }
 ?>

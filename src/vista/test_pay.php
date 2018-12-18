@@ -33,7 +33,31 @@
     $_userModel=new userController();
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
-    var_dump($_userModel->getAccount('acct_1DiBU7B2zQatABj9'));
+    $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
+    var_dump($var_usr);
+
+    echo "<br><br>";
+    //array(9) { [0]=> string(16) "external_account" [1]=> string(20) "legal_entity.dob.day" [2]=> string(22) "legal_entity.dob.month" [3]=> string(21) "legal_entity.dob.year" [4]=> string(23) "legal_entity.first_name" [5]=> string(22) "legal_entity.last_name" [6]=> string(17) "legal_entity.type" [7]=> string(19) "tos_acceptance.date" [8]=> string(17) "tos_acceptance.ip" } 
+    //$var_usr['external_account']='hola';
+
+    $var_usr->legal_entity->dob->day=18;
+    $var_usr->legal_entity->dob->month=9;
+    $var_usr->legal_entity->dob->year=1980;
+    $var_usr->legal_entity->first_name='mauricio';
+    $var_usr->legal_entity->last_name='rincon';
+    //individual
+    //company
+    $var_usr->legal_entity->type='individual';
+    $var_usr->tos_acceptance->date=time();
+    $var_usr->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
+    $var_usr->legal_entity->address->city='Miami';
+    $var_usr->legal_entity->address->line1='St 4588';
+    $var_usr->legal_entity->address->postal_code=33101;
+    $var_usr->legal_entity->address->state='FLORIDA';
+    $var_usr->legal_entity->ssn_last_4=7845;
+
+
+    $var_usr->save();
     echo "<br><br>";
     var_dump($_userModel->getValidateAccount('acct_1DiBU7B2zQatABj9'));
 
