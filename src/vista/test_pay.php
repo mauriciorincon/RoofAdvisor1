@@ -26,25 +26,37 @@
 
     //$_result=$_objPay->createAccount('mauricio.rincon@gmail.com');
     //echo "<br>Resultado Creacion Usuario<br>";
-    var_dump($_result);
+    //var_dump($_result);
 
     //$_objPay->showPayingWindow1();
 
     $_userModel=new userController();
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
+
+    $_result=$_objPay->createTransfer(100,"usd","acct_1DiBU7B2zQatABj9");
+    var_dump($_result);
+
+    echo "<br><br>";
     $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
     var_dump($var_usr);
 
     echo "<br><br>";
 
-    $_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
-    var_dump($_response);
+    //$_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
+    //var_dump($_response);
+    echo "<br><br>";
+
+    $var_usr=$_userModel->get_token_bank_account('btok_1DjBC8AuRAPDfvKLluIyeFLg');
+    var_dump($var_usr);
+    echo "<br><br>";
+    print_r($var_usr->bank_account->routing_number);
+    print_r($var_usr->bank_account->account_holder_name);
     echo "<br><br>";
     //array(9) { [0]=> string(16) "external_account" [1]=> string(20) "legal_entity.dob.day" [2]=> string(22) "legal_entity.dob.month" [3]=> string(21) "legal_entity.dob.year" [4]=> string(23) "legal_entity.first_name" [5]=> string(22) "legal_entity.last_name" [6]=> string(17) "legal_entity.type" [7]=> string(19) "tos_acceptance.date" [8]=> string(17) "tos_acceptance.ip" } 
     //$var_usr['external_account']='hola';
 
-    $var_usr->external_accounts->create(array("external_account" => $_response['id']));
+    //$var_usr->external_accounts->create(array("external_account" => $_response['id']));
     
     $var_usr->legal_entity->dob->day=18;
     $var_usr->legal_entity->dob->month=9;
@@ -70,7 +82,7 @@
     $var_usr->legal_entity->verification->document=$_response['id'];
 
 
-    $var_usr->save();
+    //$var_usr->save();
     echo "<br><br>";
     var_dump($_userModel->getValidateAccount('acct_1DiBU7B2zQatABj9'));
 

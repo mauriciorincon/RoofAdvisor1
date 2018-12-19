@@ -551,6 +551,10 @@ class userController{
             //print_r($_actual_company);
             $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
             
+            $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);
+            $_array_stripe_info_bank=$this->get_token_bank_account($_actual_company['stripeBankAccount']);
+            
+
             $_array_orders_to_show=array();
 
             
@@ -1289,6 +1293,11 @@ class userController{
     public function upload_file($file_name){
         $_objPay=new payingController();
         return $_objPay->update_file_stripe($file_name);
+    }
+
+    function get_token_bank_account($stripeID){
+        $_objPay=new payingController();
+        return $_objPay->get_token_bank_account($stripeID);
     }
 }
 ?>

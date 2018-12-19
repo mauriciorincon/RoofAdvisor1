@@ -1006,41 +1006,73 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                             </div>
 
                             <div id="stripeData" class="tab-pane fade">
-                            array(9) { [0]=> string(16) "external_account" [1]=> string(20) "legal_entity.dob.day" [2]=> string(22) "legal_entity.dob.month" [3]=> string(21) "legal_entity.dob.year" [4]=> string(23) "legal_entity.first_name" [5]=> string(22) "legal_entity.last_name" [6]=> string(17) "legal_entity.type" [7]=> string(19) "tos_acceptance.date" [8]=> string(17) "tos_acceptance.ip" } 
                                 <form role="form">
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <label class="control-label">external_account</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter external_account" id="compamnyexternal_account" name="compamnyexternal_account" value="" />
+                                            <label class="control-label">First Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php echo $_array_stripe_info->legal_entity->first_name ?>" />
                                         </div>
                                         <div class="form-group">
-
-                                            <label class="control-label">legal_entity.dob.day</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.day" id="compamnylegal_entity.dob.day" name="compamnylegal_entity.dob.day" value="" />
-
-                                            <label class="control-label">legal_entity.dob.month</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.month" id="compamnylegal_entity.dob.month" name="compamnylegal_entity.dob.month" value="" />
-
-                                            <label class="control-label">legal_entity.dob.year</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.dob.year" id="compamnylegal_entity.dob.year" name="compamnylegal_entity.dob.year" value="" />
-
+                                            <label class="control-label">Last Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php echo $_array_stripe_info->legal_entity->last_name ?>" />
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">legal_entity.first_name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity.first_name" name="compamnylegal_entity.first_name" value="" />
+                                            <label class="control-label">Birthday</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity Birthday" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php echo $_array_stripe_info->legal_entity->dob->year."-".$_array_stripe_info->legal_entity->dob->month."-".$_array_stripe_info->legal_entity->dob->day ?>" />
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">legal_entity.type</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.type" id="compamnylegal_entity.type" name="compamnylegal_entity.type" value="" />
+                                            <label class="control-label">Type</label>
+                                            <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
+                                                <option value="individual">Individual</option>
+                                                <option value="company">Company</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">tos_acceptance.date</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter tos_acceptance.date" id="compamnytos_acceptance.date" name="compamnytos_acceptance.date" value="" />
+                                            <label class="control-label">State</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php echo $_array_stripe_info->legal_entity->address->state ?>" />
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">tos_acceptance.ip</label>
-
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter tos_acceptance.ip" id="compamnytos_acceptance.ip" name="compamnytos_acceptance.ip" value="" />
+                                            <label class="control-label">City</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php echo $_array_stripe_info->legal_entity->address->city ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Zipcode</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php echo $_array_stripe_info->legal_entity->address->postal_code ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Address</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php echo $_array_stripe_info->legal_entity->address->line1 ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Social security number last 4</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php echo $_array_stripe_info->legal_entity->ssn_last_4 ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Personal Id</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php echo $_array_stripe_info->legal_entity->personal_id_number ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Routing Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter routing_number" id="compamnyrouting_number" name="compamnyrouting_number" value="<?php echo $_array_stripe_info_bank->bank_account->routing_number ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Account Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter account_number" id="compamnyaccount_number" name="compamnyaccount_number" value="<?php echo $_array_stripe_info_bank->bank_account->last4 ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Account Holder Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter account_holder_name" id="compamnyaccount_holder_name" name="compamnyaccount_holder_name" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_name ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Account Holder Type</label>
+                                            <select id="compamnyaccount_holder_typee" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
+                                                <option value="individual">Individual</option>
+                                                <option value="company">Company</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Image</label>
+                                            <input id="stripeImage" type="file" accept="image/x-png,image/gif,image/jpeg" name="stripeImage" />
                                         </div>
                                     </div>
                                 </form>

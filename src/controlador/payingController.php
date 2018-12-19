@@ -349,5 +349,23 @@ class payingController{
 
         return $_result;
     }
+
+    function get_token_bank_account($stripeID){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_token_bank_account($stripeID);
+
+        return $_result;
+    }
+
+    public function createTransfer($amount,$currency,$connectAcount){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->createTransfer($amount,$currency,$connectAcount);
+
+        return $_result;
+    }
 }
 ?>

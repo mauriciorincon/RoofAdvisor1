@@ -55,11 +55,10 @@ class paying_stripe  extends connection{
         }else{
             $this->_error_message=$_customer;
             return false;
-        }
-        
-
-        
+        }        
     }
+
+   
 
     public function createCustomer($email,$token){
         $this->_error_message="";
@@ -128,6 +127,41 @@ class paying_stripe  extends connection{
             $charge="Something else happened, completely unrelated to Stripe ".$e->getMessage();
         }
         return $charge;
+    }
+
+    public function createTransfer($amount,$currency,$connectAcount){
+        $this->_error_message="";
+        try{
+            $transfer = \Stripe\Transfer::create(array(
+                'amount'   => $amount,
+                'currency' => $currency,
+                "destination" => $connectAcount,
+                "transfer_group" => "{ORDER10}",
+            ));
+        } catch(\Stripe\Error\Card $e) {
+            $transfer="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $transfer="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $transfer="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $transfer="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $transfer="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $transfer="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $transfer="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $transfer;
     }
 
     public function getPublishKey(){
@@ -259,6 +293,37 @@ class paying_stripe  extends connection{
         }
         return $b_acct;
     }
+
+    function get_token_bank_account($stripeID){
+        $this->_error_message="";
+        try{
+            $b_acct= \Stripe\Token::retrieve($stripeID);
+        } catch(\Stripe\Error\Card $e) {
+            $b_acct="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $b_acct="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $b_acct="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $b_acct="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $b_acct="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $b_acct="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $b_acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $b_acct;
+    }
+    
 
     function update_file_stripe($file_name){
         $this->_error_message="";
