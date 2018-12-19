@@ -219,5 +219,80 @@ class paying_stripe  extends connection{
         return $acct;
     }
 
+    public function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){
+        $this->_error_message="";
+        try{
+            $b_acct = \Stripe\Token::create(
+                array(
+                    "bank_account" => array(
+                        "country" => "US",
+                        "currency" => "usd",
+                        "routing_number" => $routing_number,
+                        "account_number" => $account_number,
+                        "account_holder_name" => $account_holder_name,
+                        "account_holder_type" => $account_holder_type,
+                    )
+                )
+            );
+        } catch(\Stripe\Error\Card $e) {
+            $b_acct="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $b_acct="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $b_acct="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $b_acct="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $b_acct="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $b_acct="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $b_acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $b_acct;
+    }
+
+    function update_file_stripe($file_name){
+        $this->_error_message="";
+        try{
+            $fp = fopen($file_name, 'r');
+            echo "<br><br>abrir archivo";
+            $_file_response = \Stripe\FileUpload::create(array(
+                'purpose' => 'identity_document',
+                'file' => $fp
+            ));
+        } catch(\Stripe\Error\Card $e) {
+            $_file_response="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $_file_response="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $_file_response="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $_file_response="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $_file_response="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $_file_response="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $_file_response="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $_file_response;
+    }
 }
 ?>

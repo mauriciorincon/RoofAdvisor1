@@ -331,5 +331,23 @@ class payingController{
 
         return $_result;
     }
+
+    function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
+
+        return $_result;
+    }
+
+    function update_file_stripe($file_name){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->update_file_stripe($file_name);
+
+        return $_result;
+    }
 }
 ?>

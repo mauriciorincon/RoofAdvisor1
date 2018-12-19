@@ -1248,10 +1248,47 @@ class userController{
 
     }
 
-    public function upateAccount($stripeID,$field,$value){
+    public function upateAccount($stripeID,$routing_number,$account_number,$account_holder_name,$account_holder_type,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file){
         $objStripeAccount=$this->getAccount($stripeID);
-        $objStripeAccount[$field]=$value;
+        /*for($n=0;$n<count($arrayFields);$n++){
+            $objStripeAccount[$arrayFields[$n]]=$arrayValues[$n];
+        }*/
+        $_response=$_userModel->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
+        $objStripeAccount->external_accounts->create(array("external_account" => $_response['id']));
+
+        $objStripeAccount->legal_entity->dob->day=substr($birth_day, 8,2);
+        $objStripeAccount->legal_entity->dob->month=substr($birth_day, 5,2);
+        $objStripeAccount->legal_entity->dob->year=substr($birth_day, 0,4);
+        $objStripeAccount->legal_entity->first_name=$first_name;
+        $objStripeAccount->legal_entity->last_name=$last_name;
+        //individual
+        //company
+        $objStripeAccount->legal_entity->type=$type;
+        $objStripeAccount->legal_entity->address->city=$city;
+        $objStripeAccount->legal_entity->address->line1=$line1;
+        $objStripeAccount->legal_entity->address->postal_code=$zipcode;
+        $objStripeAccount->legal_entity->address->state=$state;
+        $objStripeAccount->legal_entity->ssn_last_4=$last4;
+        $objStripeAccount->legal_entity->personal_id_number=$personalid;
+
+        $file=$path_file;
+        $_response=$_userModel->upload_file($file);
+        $objStripeAccount->legal_entity->verification->document=$_response['id'];
+       
+        $objStripeAccount->tos_acceptance->date=time();
+        $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
+
         $objStripeAccount->save();
+    }
+
+    public function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){
+        $_objPay=new payingController();
+        return $_objPay->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
+    }
+
+    public function upload_file($file_name){
+        $_objPay=new payingController();
+        return $_objPay->update_file_stripe($file_name);
     }
 }
 ?>

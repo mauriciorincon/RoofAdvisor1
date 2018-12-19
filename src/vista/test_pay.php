@@ -37,9 +37,15 @@
     var_dump($var_usr);
 
     echo "<br><br>";
+
+    $_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
+    var_dump($_response);
+    echo "<br><br>";
     //array(9) { [0]=> string(16) "external_account" [1]=> string(20) "legal_entity.dob.day" [2]=> string(22) "legal_entity.dob.month" [3]=> string(21) "legal_entity.dob.year" [4]=> string(23) "legal_entity.first_name" [5]=> string(22) "legal_entity.last_name" [6]=> string(17) "legal_entity.type" [7]=> string(19) "tos_acceptance.date" [8]=> string(17) "tos_acceptance.ip" } 
     //$var_usr['external_account']='hola';
 
+    $var_usr->external_accounts->create(array("external_account" => $_response['id']));
+    
     $var_usr->legal_entity->dob->day=18;
     $var_usr->legal_entity->dob->month=9;
     $var_usr->legal_entity->dob->year=1980;
@@ -55,6 +61,13 @@
     $var_usr->legal_entity->address->postal_code=33101;
     $var_usr->legal_entity->address->state='FLORIDA';
     $var_usr->legal_entity->ssn_last_4=7845;
+    $var_usr->legal_entity->personal_id_number=123457845;
+
+    $file="/tmp/IMG_0029.jpeg";
+    $_response=$_userModel->upload_file($file);
+    echo "<br><br>";
+    var_dump($_response);
+    $var_usr->legal_entity->verification->document=$_response['id'];
 
 
     $var_usr->save();
