@@ -34,7 +34,7 @@
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
 
-    $_result=$_objPay->createTransfer(100,"usd","acct_1DiBU7B2zQatABj9");
+    $_result=$_objPay->createTransfer(5000,"usd","acct_1DiBU7B2zQatABj9");
     var_dump($_result);
 
     echo "<br><br>";
