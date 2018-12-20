@@ -29,7 +29,17 @@
     //var_dump($_result);
 
     //$_objPay->showPayingWindow1();
+    //$_token=$_objPay->create_token_for_charge("mauricio@gmail.com","4242424242424242",12,20,123);
+    //print_r($_token);
+    echo "<br><br>";
+    //$_customer=$_objPay->createCustomer("text@gmail.com",$_token);
+    //print_r($_customer);
+    $_objPago=$_objPay->createChargeOtherFee(null,19600,"usd","acct_1DiBU7B2zQatABj9",1000);
+    //$_objPago=$_objPay->createChargeOther(null,15000,"usd","acct_1DiBU7B2zQatABj9");
 
+    echo "<br><br>";
+    print_r($_objPago);
+    return;
     $_userModel=new userController();
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
