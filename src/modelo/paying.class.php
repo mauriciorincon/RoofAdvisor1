@@ -94,6 +94,7 @@ class paying_stripe  extends connection{
         return $customer;
     }
 
+    //direct to the platform
     public function createCharge($customer,$amount,$currency){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
@@ -103,6 +104,104 @@ class paying_stripe  extends connection{
                 'amount'   => $amount,
                 'currency' => $currency
             ));
+        } catch(\Stripe\Error\Card $e) {
+            $charge="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $charge="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $charge="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $charge="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $charge="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $charge="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $charge="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $charge;
+    }
+
+    //direct to the platform to other account with fee
+    public function createChargeOther($token,$amount,$currency,$account,$fee=0){
+        //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
+        $this->_error_message="";
+        try{
+            if($fee==0){
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => $amount,
+                    "currency" => $currency,
+                    "source" => "tok_visa",
+                ), ["stripe_account" => $account]);
+            }else{
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => $amount,
+                    "currency" => $currency,
+                    "source" => "tok_visa",
+                    "application_fee" => $fee,
+                ), ["stripe_account" => $account]);
+            }
+            
+        } catch(\Stripe\Error\Card $e) {
+            $charge="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $charge="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $charge="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $charge="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $charge="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $charge="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $charge="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $charge;
+    }
+
+    //direct to the platform
+    public function createChargeDestination($token,$amount,$currency,$account,$fee=0){
+        //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
+        $this->_error_message="";
+        try{
+            if($fee==0){
+                $charge = \Stripe\Charge::create(array(
+                    'amount' => $amount,
+                    'currency' => $currency,
+                    'source' => "tok_visa",
+                    "destination" => [
+                        "account" => $account,
+                      ],
+                ));
+            }else{
+                $charge = \Stripe\Charge::create(array(
+                    'amount' => $amount,
+                    'currency' => $currency,
+                    'source' => "tok_visa",
+                    "destination" => [
+                        "amount" => $amount-$fee,
+                        "account" => $account,
+                      ],
+                ));
+            }
+            
         } catch(\Stripe\Error\Card $e) {
             $charge="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -359,5 +458,45 @@ class paying_stripe  extends connection{
         }
         return $_file_response;
     }
+
+    public function create_token_for_charge($name,$card_number,$month,$year,$cvc_number){
+        $this->_error_message="";
+        try{
+            $_token= \Stripe\Token::create(array(
+                "card" => array(
+                "name" => $name,
+                "number" => $card_number,
+                "exp_month" => $month,
+                "exp_year" => $year,
+                "cvc" => $cvc_number,
+                )
+            ));
+        } catch(\Stripe\Error\Card $e) {
+            $_token="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $_token="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $_token="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $_token="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $_token="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $_token="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $_token="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $_token;
+    }
+
+  
 }
 ?>

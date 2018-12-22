@@ -24,7 +24,7 @@
 <img src='img/roof-build.jpg'>
 </div>-->
 <div class="txtcentr1">
-<span class="mobiletxthd1" style="font-size:34px;"> <strong><span class="hdtxtorng1">Emergency</span> Roof Repair? </br>Schedule an <span class="hdtxtorng1" >Appointment?</span> </br>Need a <span class="hdtxtorng1">Roof Report</span>?</strong> </span>
+<span class="mobiletxthd1" style="font-size:34px;"> <strong><span class="hdtxtorng1">Emergency</span> Roof Repair? </br>Schedule an <span class="hdtxtorng1" >Appointment?</span> </br>Need a <span class="hdtxtorng1">Roof Report</span>?</br>New or Reroof <span class="hdtxtorng1">Estimates</span>?</strong> </span>
 </div>
 </br></br>
 <p class='srvappph1'>
