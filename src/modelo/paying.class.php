@@ -130,16 +130,26 @@ class paying_stripe  extends connection{
         return $charge;
     }
 
-    //direct to the platform to othe account
-    public function createChargeOther($token,$amount,$currency,$account){
+    //direct to the platform to other account with fee
+    public function createChargeOther($token,$amount,$currency,$account,$fee=0){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
         try{
-            $charge = \Stripe\Charge::create(array(
-                "amount" => $amount,
-                "currency" => $currency,
-                "source" => "tok_visa",
-            ), ["stripe_account" => $account]);
+            if($fee==0){
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => $amount,
+                    "currency" => $currency,
+                    "source" => "tok_visa",
+                ), ["stripe_account" => $account]);
+            }else{
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => $amount,
+                    "currency" => $currency,
+                    "source" => "tok_visa",
+                    "application_fee" => $fee,
+                ), ["stripe_account" => $account]);
+            }
+            
         } catch(\Stripe\Error\Card $e) {
             $charge="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -166,17 +176,32 @@ class paying_stripe  extends connection{
         return $charge;
     }
 
-    //direct to the platform to other account with fee
-    public function createChargeOtherFee($token,$amount,$currency,$account,$fee){
+    //direct to the platform
+    public function createChargeDestination($token,$amount,$currency,$account,$fee=0){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
         try{
-            $charge = \Stripe\Charge::create(array(
-                "amount" => $amount,
-                "currency" => $currency,
-                "source" => "tok_visa",
-                "application_fee" => $fee,
-            ), ["stripe_account" => $account]);
+            if($fee==0){
+                $charge = \Stripe\Charge::create(array(
+                    'amount' => $amount,
+                    'currency' => $currency,
+                    'source' => "tok_visa",
+                    "destination" => [
+                        "account" => $account,
+                      ],
+                ));
+            }else{
+                $charge = \Stripe\Charge::create(array(
+                    'amount' => $amount,
+                    'currency' => $currency,
+                    'source' => "tok_visa",
+                    "destination" => [
+                        "amount" => $amount-$fee,
+                        "account" => $account,
+                      ],
+                ));
+            }
+            
         } catch(\Stripe\Error\Card $e) {
             $charge="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -202,6 +227,7 @@ class paying_stripe  extends connection{
         }
         return $charge;
     }
+
     public function createTransfer($amount,$currency,$connectAcount){
         $this->_error_message="";
         try{

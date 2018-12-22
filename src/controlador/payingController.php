@@ -376,22 +376,22 @@ class payingController{
         return $_result;
     }
 
-    public function createChargeOther($token,$amount,$currency,$account){
+    public function createChargeOther($token,$amount,$currency,$account,$fee=0){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_result=$this->_payingModel->createChargeOther($token,$amount,$currency,$account);
+        $_result=$this->_payingModel->createChargeOther($token,$amount,$currency,$account,$fee);
 
         return $_result;
     }
 
-    public function createChargeOtherFee($token,$amount,$currency,$account,$fee){
-            if(is_null($this->_payingModel)){
-                $this->_payingModel= new paying_stripe();
-            }
-            $_result=$this->_payingModel->createChargeOtherFee($token,$amount,$currency,$account,$fee);
-    
-            return $_result;
+    public function createChargeDestination($token,$amount,$currency,$account,$fee=0){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->createChargeOtherFee($token,$amount,$currency,$account,$fee);
+
+        return $_result;
     }
 
     public function create_token_for_charge($name,$card_number,$month,$year,$cvc_number){
@@ -402,6 +402,7 @@ class payingController{
 
         return $_result;
     }
+
 
     
 }

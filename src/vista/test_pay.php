@@ -34,7 +34,8 @@
     echo "<br><br>";
     //$_customer=$_objPay->createCustomer("text@gmail.com",$_token);
     //print_r($_customer);
-    $_objPago=$_objPay->createChargeOtherFee(null,19600,"usd","acct_1DiBU7B2zQatABj9",1000);
+    //$_objPago=$_objPay->createChargeOtherFee(null,19600,"usd","acct_1DiBU7B2zQatABj9",1000);
+    $_objPago=$_objPay->createChargeDestination(null,5000,"usd","acct_1DiBU7B2zQatABj9",300);
     //$_objPago=$_objPay->createChargeOther(null,15000,"usd","acct_1DiBU7B2zQatABj9");
 
     echo "<br><br>";
