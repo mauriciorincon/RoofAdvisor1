@@ -1270,8 +1270,6 @@ padding-bottom: 26px;
     padding-top: 100px;
 }
 #srvapp1{
-padding-bottom:150px;
-height:620px;
 }
 #srvapps{
 margin-left:5%;
@@ -1403,7 +1401,7 @@ display:block;
 background-color:#fa511a;
 color:#fff;
 height:400px;
-margin-top: 600px;
+margin-top: 50px;
 background-image: url(img/florida-house.png);
     background-repeat: no-repeat;
     background-position: right bottom;
@@ -1513,7 +1511,6 @@ border-color:#fff !important;
 }
 #hworks{
     width:100%;
-    margin-top: 20px;
 }
 #rhlist{
 list-style-type: circle;
