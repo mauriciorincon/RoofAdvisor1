@@ -1258,6 +1258,20 @@ $('#step3OtypeService').on('click', 'a', function(){
 function getValueService(){
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     var fieldValue="";
+    switch(RequestType){
+        case 'emergency':
+            order_type_request_val='E';
+            break;
+        case 'schedule':
+            order_type_request_val='S';
+            break;
+        case 'reroofnew':
+            order_type_request_val='M';
+            break;
+        case 'roofreport':
+            order_type_request_val='R';
+            break;
+    }
     if(RequestType=='emergency' || RequestType=='roofreport'){
         switch(RequestType){
             case "emergency":
@@ -2734,6 +2748,7 @@ function takeWork(){
     }
     if((orderType=="S" || orderType=="M") && pricingWork>0 ){
         action_type="pay_take_service";
+        order_type_request_val=orderType;
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
@@ -2938,6 +2953,7 @@ function acceptEstimateAmount(){
     if(parseInt(valueDeposit)>0){
         amount_value=parseInt(valueDeposit)*100;
         action_type="pay_deposit_service";
+        order_type_request_val='deposit';
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
@@ -2990,11 +3006,14 @@ function getFinalAmount(orderId){
                 order=jQuery.parseJSON(data);
                 if(order.RequestType=='P'){
                     $('#myFinalAmount  #orderIDFinal').val(order.FBID);
+                    $('#myFinalAmount  #orderTypeServiceFinal').val(order.RequestType);
                     total=isNaN(parseInt(order.ActAmtMat)) ? 0 : parseInt(order.ActAmtMat);
                     total1=isNaN(parseInt(order.ActAmtTime)) ? 0 : parseInt(order.ActAmtTime);
                     total=total+total1;
                     amount_value=total*100;
                     action_type="pay_invoice_service";
+                    order_fbid=order.FBID;
+                    order_type_request_val=order.RequestType;
                     if(typeof handler !== undefined){
                         handler.open({
                             name: 'RoofServiceNow',
@@ -3005,7 +3024,9 @@ function getFinalAmount(orderId){
                     }
                 }else{
                     $('#myFinalAmount  #orderIDFinal').val(order.FBID);
+                    $('#myFinalAmount  #orderTypeServiceFinal').val(order.RequestType);
                
+                    order_fbid=order.FBID;
                     $row=$('#totalAmountTable tr').eq(1);
                     $row.find("td:eq(1)").html('$'+order.ActAmtMat+'.00');
                     $row.find("td:eq(3)").html('$'+order.ActAmtMat+'.00');
@@ -3090,6 +3111,7 @@ function refuseFinalAmount(){
 
 function selectPaymentType(){
     var orderID=$('#myFinalAmount  #orderIDFinal').val();
+    var orderType=$("#myFinalAmount #orderTypeServiceFinal").val();
     var status='K';
     //var paymentType=$('#myPaymentType  #selectPaymnetType').val();
     var paymentType=$("input:radio[name='selectPaymnetType']:checked").val();    
@@ -3111,6 +3133,9 @@ function selectPaymentType(){
         
         amount_value=(totalValue-depositValue)*100;
         action_type="pay_invoice_service";
+        order_type_service=orderType;
+        order_fbid=orderID;
+        order_type_request_val=orderType;
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
@@ -4498,7 +4523,6 @@ function showPayWindow(){
             if(validateInfoCustomer()==false){
                 return false;
             }else{
-                //action_type="pay_invoice_service";
                 if(typeof handler !== undefined){
                     handler.open({
                         name: 'RoofServiceNow',
@@ -4613,6 +4637,7 @@ function chargePostCardCompany(){
 function showPayPostCards(totalValue){
     amount_value=totalValue;
     action_type="pay_postcard_service";
+    order_type_request_val='P';
     if(typeof handler !== undefined){
         handler.open({
             name: 'RoofServiceNow',

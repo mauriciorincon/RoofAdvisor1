@@ -13,7 +13,7 @@ var handler = StripeCheckout.configure({
         //var url = "http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying";
 
 
-        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value});
+        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value,orderFBID:order_fbid,order_type_request:order_type_request_val});
         //var params = "stripeToken="+token.id+"&"+"stripeEmail="+token.email;
         
         http.open("POST", url, true);
@@ -80,7 +80,7 @@ var handler = StripeCheckout.configure({
       name: 'RoofServicenow',
       description: 'Agree to Initiate Service',
       amount: amount_value,
-      email: email_user_logued
+      email: email_user_logued,
     });
     e.preventDefault();
   });
