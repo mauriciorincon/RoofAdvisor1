@@ -13,7 +13,7 @@ var handler = StripeCheckout.configure({
         //var url = "http://localhost/RoofAdvisor1/index.php?controller=paying&accion=setPaying";
 
 
-        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value,orderFBID:order_fbid,order_type_request:order_type_request_val});
+        var params = JSON.stringify({ stripeToken : token.id,stripeEmail:token.email,totalAmount: amount_value,orderFBID:order_fbid,order_type_request:order_type_request_val,action_type:action_type});
         //var params = "stripeToken="+token.id+"&"+"stripeEmail="+token.email;
         
         http.open("POST", url, true);

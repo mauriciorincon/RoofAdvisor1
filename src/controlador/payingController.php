@@ -18,6 +18,9 @@ class payingController{
     }
 
     public function setPaying(){
+        $_payingModel=null;
+        $_orderController=null;
+        $_userController=null;
         if(!isset($_SESSION['application_path'])){
             $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
             //echo "entro aca variable";
@@ -40,12 +43,16 @@ class payingController{
             }else{
 
                 $this->$_orderController=new orderController();
-                if(empty($obj->orderFBID)){
-                    $_order=null;    
+                if(strcmp($obj->action_type,'pay_take_service')==0){
+                    $_order=null;
+                    $obj->order_type_request='TS';    
                 }else{
-                    $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                    if(empty($obj->orderFBID)){
+                        $_order=null;    
+                    }else{
+                        $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                    }
                 }
-                
                 //if($_order==null){
                 //    echo "Error, the order [".$orderFBID."] do not exists";
                 //}else{
@@ -54,12 +61,13 @@ class payingController{
                     $amount = intval($obj->totalAmount);
                     $currency='usd';
                     $order_type=$obj->order_type_request;
+                    
 
                     $_result=$this->selectPaying($email,$token,$amount,$currency,$_order,$order_type);
                     echo "llego aca y el resultado es: ".$_result." tipo".$order_type;
                     print_r($_order);
-                    if($_result==true){
-                        $_objCharge=$this->_payingModel->getCharge();
+                    if(is_object($_result) or is_array($_result)) {
+                        $_objCharge=$_result;
                         $array_data=$this->getPayingStatus($_objCharge->id);
                         $a=array(
                             "id"=>$_objCharge->id,
@@ -425,7 +433,11 @@ class payingController{
     }
 
     public function selectPaying($email,$token,$amount,$currency,$_order,$order_type){
-        $_fee=round($amount*10/100,2);
+        $_payingModel=null;
+        $_orderController=null;
+        $_userController=null;
+        $_stripe_fee=round($amount*2.9/100,2)+(30);
+        $_fee=round($amount*2/100,2)+$_stripe_fee;
         $_ordet_type_selected='';
         if(empty($_order)){
             $_ordet_type_selected=$order_type;
@@ -460,6 +472,8 @@ class payingController{
             case 'P':
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Post-card request Order number.');
                 break;
+            case 'TS':
+                $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Taking service');
             default:
                 $_result="Error, order type do not exists [".$_ordet_type_selected."]";
                 break;
