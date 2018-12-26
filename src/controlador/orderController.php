@@ -7,6 +7,7 @@ if(!isset($_SESSION)) {
 require_once($_SESSION['application_path']."/modelo/order.class.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/pdfController.php");
+require_once($_SESSION['application_path']."/controlador/payingController.php");
 
 
 class orderController{
@@ -193,20 +194,34 @@ class orderController{
         $amount="";
         $paymentType="";
         $actionType="";
+        $companySelected="";
 
         $this->_orderModel=new orderModel();
         
 
         for($n=0;$n<count($arrayFields);$n+=2){
            
-            if(strcmp($arrayFields[$n],"CompanyID")==0){
-                $_orderInfo=$this->_orderModel->getOrderByID($orderID);
-                if(empty($_orderInfo['CompanyID'])){
-                    $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+            if(strcmp($arrayFields[$n],"pay_to_company")==0){
+                if(strcmp($arrayFields[$n+1],"1")==0){
+                    $_order=$this->getOrderByID($orderID);
+                    $_payingController=new payingController();
+                    $_order['RequestType']='TSE';
+                    //$_order['CompanyID']=$companySelected;
+                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","","20000","usd",$_order,"TSE");
+                    //$_payingController->createTransfer("20000","usd",$connectAcount,$description)
                 }
             }else{
-                $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+                if(strcmp($arrayFields[$n],"CompanyID")==0){
+                    $_orderInfo=$this->_orderModel->getOrderByID($orderID);
+                    if(empty($_orderInfo['CompanyID'])){
+                        $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+                    }
+                    //$companySelected=$arrayFields[$n+1];
+                }else{
+                    $_result=$this->_orderModel->updateOrder($orderID.'/'.$arrayFields[$n],$arrayFields[$n+1]);
+                }
             }
+            
             
             if(strcmp($arrayFields[$n],"StripeID")==0){
                 $stripeID=$arrayFields[$n+1];
@@ -230,7 +245,7 @@ class orderController{
             if(!empty($paymentType)){
                 return "Thank you for your payment. An invoice has been sent to your email. Please remenber to rate your contractor and service.";
             }else{
-                return "The order was update correctly";
+                return "The order was update correctly.";
             }
             
         }else{

@@ -2758,8 +2758,11 @@ function takeWork(){
             });
         }
     }else{
+        
         if(orderType=="P"){
             arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+companyID+",ContractorID,"+",CompanyID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+        }else if(orderType=="E") {
+            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,pay_to_company,1";
         }else{
             arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
         }

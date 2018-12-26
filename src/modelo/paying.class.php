@@ -234,14 +234,15 @@ class paying_stripe  extends connection{
         return $charge;
     }
 
-    public function createTransfer($amount,$currency,$connectAcount){
+    public function createTransfer($amount,$currency,$connectAcount,$description){
         $this->_error_message="";
         try{
             $transfer = \Stripe\Transfer::create(array(
                 'amount'   => $amount,
                 'currency' => $currency,
                 "destination" => $connectAcount,
-                "transfer_group" => "{ORDER10}",
+                "transfer_group" => $description,
+                'description' =>$description,
             ));
         } catch(\Stripe\Error\Card $e) {
             $transfer="Card error";

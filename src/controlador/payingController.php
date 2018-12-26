@@ -44,8 +44,15 @@ class payingController{
 
                 $this->$_orderController=new orderController();
                 if(strcmp($obj->action_type,'pay_take_service')==0){
-                    $_order=null;
-                    $obj->order_type_request='TS';    
+                    
+                    if(strcmp($obj->order_type_request,'E')==0){
+                        //$obj->order_type_request='TSE';
+                        $_order['RequestType']='TSE';
+                    }else{
+                        $_order=null;
+                        $obj->order_type_request='TS';
+                    }
+                        
                 }else{
                     if(empty($obj->orderFBID)){
                         $_order=null;    
@@ -396,11 +403,11 @@ class payingController{
         return $_result;
     }
 
-    public function createTransfer($amount,$currency,$connectAcount){
+    public function createTransfer($amount,$currency,$connectAcount,$description){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_result=$this->_payingModel->createTransfer($amount,$currency,$connectAcount);
+        $_result=$this->_payingModel->createTransfer($amount,$currency,$connectAcount,$description);
 
         return $_result;
     }
@@ -439,6 +446,9 @@ class payingController{
         $_stripe_fee=round($amount*2.9/100,2)+(30);
         $_fee=round($amount*2/100,2)+$_stripe_fee;
         $_ordet_type_selected='';
+        $this->$_userController=new userController();
+        $this->_payingModel=new paying_stripe();
+        //print_r($_order);
         if(empty($_order)){
             $_ordet_type_selected=$order_type;
         }else{
@@ -447,7 +457,7 @@ class payingController{
         switch($_ordet_type_selected){
             case 'S':
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
-                $this->$_userController=new userController();
+                
                 $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
                 break;
@@ -455,7 +465,7 @@ class payingController{
                 if($_order==null){
                     $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Emergency request Order number.');
                 }else{
-                    $this->$_userController=new userController();
+        
                     $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
                     $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
                 }
@@ -465,7 +475,7 @@ class payingController{
                 break;
             case 'M':
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
-                $this->$_userController=new userController();
+        
                 $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
                 break;
@@ -474,6 +484,11 @@ class payingController{
                 break;
             case 'TS':
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Taking service');
+                break;
+            case 'TSE':
+                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createTransfer($amount,$currency,$_company['stripeAccount'],'Pay for taking an Emergency Service order id ['.$_order['OrderNumber'].']');
+                break;
             default:
                 $_result="Error, order type do not exists [".$_ordet_type_selected."]";
                 break;
