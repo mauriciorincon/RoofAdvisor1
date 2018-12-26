@@ -46,8 +46,10 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </br>
 </ul>
 </br>
-<img  id="hworks" src="img/howitworks.png">
 </div>
+</div>
+<div>
+<img  id="hworks" src="img/howitworks.png">
 </div>
 <div id="hworks-mobile" style="display:none;">
  <span class="mobiletxthd1 hdworkshd1">
