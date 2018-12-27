@@ -5,15 +5,22 @@ if(!isset($_SESSION)) {
 
 
 require_once($_SESSION['application_path']."/modelo/paying.class.php");
+require_once($_SESSION['application_path']."/controlador/orderController.php");
+require_once($_SESSION['application_path']."/controlador/userController.php");
 
 class payingController{
     private $_payingModel=null;
+    private $_orderController=null;
+    private $_userController=null;
 
     function __construct()
 	{		
     }
 
     public function setPaying(){
+        $_payingModel=null;
+        $_orderController=null;
+        $_userController=null;
         if(!isset($_SESSION['application_path'])){
             $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
             //echo "entro aca variable";
@@ -34,25 +41,52 @@ class payingController{
                 
                 echo "Error, ".$obj."<br> string is:".$_POST['param'];
             }else{
-                $token  = $obj->stripeToken;
-                $email  = $obj->stripeEmail;
-                $amount = intval($obj->totalAmount);
-                $currency='usd';
 
-                $_result=$this->_payingModel->setPaying($email,$token,$amount,$currency);
-                //echo "llego aca y el resultado es:".$_result;
-                if($_result==true){
-                    $_objCharge=$this->_payingModel->getCharge();
-                    $array_data=$this->getPayingStatus($_objCharge->id);
-                    $a=array(
-                        "id"=>$_objCharge->id,
-                        "message"=>$array_data->seller_message,
-                    );
-                    echo json_encode($a);
-                    //echo $array_data->seller_message;
+                $this->$_orderController=new orderController();
+                if(strcmp($obj->action_type,'pay_take_service')==0){
+                    
+                    if(strcmp($obj->order_type_request,'E')==0){
+                        //$obj->order_type_request='TSE';
+                        $_order['RequestType']='TSE';
+                    }else{
+                        $_order=null;
+                        $obj->order_type_request='TS';
+                    }
+                        
                 }else{
-                    echo "Error, the charge don't do.".$this->_payingModel->getError();;
+                    if(empty($obj->orderFBID)){
+                        $_order=null;    
+                    }else{
+                        $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                    }
                 }
+                //if($_order==null){
+                //    echo "Error, the order [".$orderFBID."] do not exists";
+                //}else{
+                    $token  = $obj->stripeToken;
+                    $email  = $obj->stripeEmail;
+                    $amount = intval($obj->totalAmount);
+                    $currency='usd';
+                    $order_type=$obj->order_type_request;
+                    
+
+                    $_result=$this->selectPaying($email,$token,$amount,$currency,$_order,$order_type);
+                    echo "llego aca y el resultado es: ".$_result." tipo".$order_type;
+                    print_r($_order);
+                    if(is_object($_result) or is_array($_result)) {
+                        $_objCharge=$_result;
+                        $array_data=$this->getPayingStatus($_objCharge->id);
+                        $a=array(
+                            "id"=>$_objCharge->id,
+                            "message"=>$array_data->seller_message,
+                        );
+                        echo json_encode($a);
+                        //echo $array_data->seller_message;
+                    }else{
+                        echo "Error, the charge don't do.".$this->_payingModel->getError();;
+                    }
+                //}
+                
             }
             //print_r($_POST["param"]);
             $obj = json_decode($_POST["param"], false);
@@ -134,6 +168,8 @@ class payingController{
             var public_key=\''.$_key.'\';
             var action_type=\''.$typePaying.'\';
             var email_user_logued=\''.$_email.'\';
+            var order_fbid=\''.'\';
+            var order_type_request_val=\''.'\';
         </script>
         <script src="vista/js/stripe_conf.js"></script>';
 
@@ -367,11 +403,11 @@ class payingController{
         return $_result;
     }
 
-    public function createTransfer($amount,$currency,$connectAcount){
+    public function createTransfer($amount,$currency,$connectAcount,$description){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_result=$this->_payingModel->createTransfer($amount,$currency,$connectAcount);
+        $_result=$this->_payingModel->createTransfer($amount,$currency,$connectAcount,$description);
 
         return $_result;
     }
@@ -403,7 +439,64 @@ class payingController{
         return $_result;
     }
 
-
+    public function selectPaying($email,$token,$amount,$currency,$_order,$order_type){
+        $_payingModel=null;
+        $_orderController=null;
+        $_userController=null;
+        $_stripe_fee=round($amount*2.9/100,2)+(30);
+        $_fee=round($amount*2/100,2)+$_stripe_fee;
+        $_ordet_type_selected='';
+        $this->$_userController=new userController();
+        $this->_payingModel=new paying_stripe();
+        //print_r($_order);
+        if(empty($_order)){
+            $_ordet_type_selected=$order_type;
+        }else{
+            $_ordet_type_selected=$_order['RequestType'];
+        }
+        switch($_ordet_type_selected){
+            case 'S':
+                //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
+                
+                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                break;
+            case 'E':
+                if($_order==null){
+                    $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Emergency request Order number.');
+                }else{
+        
+                    $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                    $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                }
+                break;
+            case 'R':
+                $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Roofreport request Order number.');
+                break;
+            case 'M':
+                //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
+        
+                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                break;
+            case 'P':
+                $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Post-card request Order number.');
+                break;
+            case 'TS':
+                $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Taking service');
+                break;
+            case 'TSE':
+                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createTransfer($amount,$currency,$_company['stripeAccount'],'Pay for taking an Emergency Service order id ['.$_order['OrderNumber'].']');
+                break;
+            default:
+                $_result="Error, order type do not exists [".$_ordet_type_selected."]";
+                break;
+        }
+        
+        //$_result=$this->_payingModel->setPaying($email,$token,$amount,$currency,$_order);
+        return $_result;
+    }
     
 }
 ?>

@@ -38,11 +38,12 @@ class paying_stripe  extends connection{
           \Stripe\Stripe::setApiKey($this->stripe['secret_key']);
     }
 
-    public function setPaying($customerID,$token,$amount,$currency){
+    public function setPaying($customerID,$token,$amount,$currency,$order){
         //echo "entro a setpaying ".$customerID." ".$token." ".$amount." ".$currency;
         $_customer=$this->createCustomer($customerID,$token);
         //echo "el resultado de customer es:".$_customer;
         if(is_object($_customer)){
+            
             $_charge=$this->createCharge($_customer,$amount,$currency);
             if(is_object($_charge)){
                 $this->_last_charge=$_charge;
@@ -95,14 +96,15 @@ class paying_stripe  extends connection{
     }
 
     //direct to the platform
-    public function createCharge($customer,$amount,$currency){
+    public function createCharge($token,$amount,$currency,$description){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
         try{
             $charge = \Stripe\Charge::create(array(
-                'customer' => $customer->id,
+                'source' => $token,
                 'amount'   => $amount,
-                'currency' => $currency
+                'currency' => $currency,
+                'description' =>$description,
             ));
         } catch(\Stripe\Error\Card $e) {
             $charge="Card error";
@@ -180,23 +182,27 @@ class paying_stripe  extends connection{
     public function createChargeDestination($token,$amount,$currency,$account,$fee=0){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
+        echo "entro aca";
         try{
             if($fee==0){
                 $charge = \Stripe\Charge::create(array(
                     'amount' => $amount,
                     'currency' => $currency,
-                    'source' => "tok_visa",
+                    'source' => $token,
+                    'description' =>'Paying order without fee',
                     "destination" => [
                         "account" => $account,
                       ],
                 ));
             }else{
+                $_total_without_fee=$amount-$fee;
                 $charge = \Stripe\Charge::create(array(
                     'amount' => $amount,
                     'currency' => $currency,
-                    'source' => "tok_visa",
+                    'source' => $token,
+                    'description' =>'Paying order with fee ['.$fee.'] ['.$_total_without_fee.']',
                     "destination" => [
-                        "amount" => $amount-$fee,
+                        "amount" => $_total_without_fee,
                         "account" => $account,
                       ],
                 ));
@@ -228,14 +234,15 @@ class paying_stripe  extends connection{
         return $charge;
     }
 
-    public function createTransfer($amount,$currency,$connectAcount){
+    public function createTransfer($amount,$currency,$connectAcount,$description){
         $this->_error_message="";
         try{
             $transfer = \Stripe\Transfer::create(array(
                 'amount'   => $amount,
                 'currency' => $currency,
                 "destination" => $connectAcount,
-                "transfer_group" => "{ORDER10}",
+                "transfer_group" => $description,
+                'description' =>$description,
             ));
         } catch(\Stripe\Error\Card $e) {
             $transfer="Card error";
