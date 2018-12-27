@@ -1362,7 +1362,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Final Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -1420,7 +1420,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			<br>
 			<br> 
 			<div class="modal-footer" id="buttonEstimateAmount"> 
-				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Send</button>
+				<button type="button" class="btn-primary btn-sm" onClick="acceptFinalAmount()" >Accept</button>
 				<button type="button" class="btn-danger btn-sm"  onClick="refuseFinalAmount()">Decline</button>
 				
 			</div> 

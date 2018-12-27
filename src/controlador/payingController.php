@@ -448,8 +448,8 @@ class payingController{
        
         $_orderController=null;
         
-        $_stripe_fee=round($amount*2.9/100,2)+(30);
-        $_fee=round($amount*2/100,2)+$_stripe_fee;
+        $_stripe_fee=round($amount*2.9/100,0)+(30);
+        $_fee=round($amount*2/100,0)+$_stripe_fee;
         $_ordet_type_selected='';
         $this->_userController=new userController();
         $this->_payingModel=new paying_stripe();

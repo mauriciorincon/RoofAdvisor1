@@ -1263,6 +1263,7 @@ function getValueService(){
     switch(RequestType){
         case 'emergency':
             order_type_request_val='E';
+            action_type='pay_emergency_service';
             break;
         case 'schedule':
             order_type_request_val='S';
@@ -1272,6 +1273,7 @@ function getValueService(){
             break;
         case 'roofreport':
             order_type_request_val='R';
+            action_type='pay_postcard_service';
             break;
     }
     if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -4826,6 +4828,17 @@ function setOrder(orderID,field){
         $('#estHourCntCompany').val('');
 
         $('#estMatAntCompany').val('');
+        $row=$("#estimatedAmountTable").find('tr:eq(1)');
+        $row.find("td:eq(3)").html('$0.00');
+
+        $row=$("#estimatedAmountTable").find('tr:eq(2)');
+        $row.find("td:eq(3)").html('$0.00');
+
+        $row=$("#estimatedAmountTable").find('tr:eq(4)');
+        $row.find("td:eq(3)").html('$0.00');
+
+        $row=$("#estimatedAmountTable").find('tr:eq(5)');
+        $row.find("td:eq(3)").html('$0.00');
     }else if(field=="orderIDFinal"){
         $('#estMatCompanyF').val('');
         $('#estMatCntCompanyF').val('');
