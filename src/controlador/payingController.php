@@ -42,9 +42,14 @@ class payingController{
                 echo "Error, ".$obj."<br> string is:".$_POST['param'];
             }else{
 
+                $token  = $obj->stripeToken;
+                $email  = $obj->stripeEmail;
+                $amount = intval($obj->totalAmount);
+                $currency='usd';
+                $order_type=$obj->order_type_request;
+
                 $this->$_orderController=new orderController();
                 if(strcmp($obj->action_type,'pay_take_service')==0){
-                    
                     if(strcmp($obj->order_type_request,'E')==0){
                         //$obj->order_type_request='TSE';
                         $_order['RequestType']='TSE';
@@ -52,7 +57,14 @@ class payingController{
                         $_order=null;
                         $obj->order_type_request='TS';
                     }
-                        
+                }else if(strcmp($obj->action_type,'pay_deposit_service')==0){
+                    if(empty($obj->orderFBID)){
+                        $_order=null;    
+                    }else{
+                        $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                        $_order['RequestType']='DEP';
+                        $order_type='DEP';
+                    }
                 }else{
                     if(empty($obj->orderFBID)){
                         $_order=null;    
@@ -60,33 +72,24 @@ class payingController{
                         $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
                     }
                 }
-                //if($_order==null){
-                //    echo "Error, the order [".$orderFBID."] do not exists";
-                //}else{
-                    $token  = $obj->stripeToken;
-                    $email  = $obj->stripeEmail;
-                    $amount = intval($obj->totalAmount);
-                    $currency='usd';
-                    $order_type=$obj->order_type_request;
-                    
-
-                    $_result=$this->selectPaying($email,$token,$amount,$currency,$_order,$order_type);
-                    echo "llego aca y el resultado es: ".$_result." tipo".$order_type;
-                    print_r($_order);
-                    if(is_object($_result) or is_array($_result)) {
-                        $_objCharge=$_result;
-                        $array_data=$this->getPayingStatus($_objCharge->id);
-                        $a=array(
-                            "id"=>$_objCharge->id,
-                            "message"=>$array_data->seller_message,
-                        );
-                        echo json_encode($a);
-                        //echo $array_data->seller_message;
-                    }else{
-                        echo "Error, the charge don't do.".$this->_payingModel->getError();;
-                    }
-                //}
                 
+                
+                
+                $_result=$this->selectPaying($email,$token,$amount,$currency,$_order,$order_type);
+                echo "llego aca y el resultado es: ".$_result." tipo: ".$order_type." order: ".$obj->orderFBID;
+                print_r($_order);
+                if(is_object($_result) or is_array($_result)) {
+                    $_objCharge=$_result;
+                    $array_data=$this->getPayingStatus($_objCharge->id);
+                    $a=array(
+                        "id"=>$_objCharge->id,
+                        "message"=>$array_data->seller_message,
+                    );
+                    echo json_encode($a);
+                    //echo $array_data->seller_message;
+                }else{
+                    echo "Error, the charge don't do.".$this->_payingModel->getError();;
+                }
             }
             //print_r($_POST["param"]);
             $obj = json_decode($_POST["param"], false);
@@ -459,7 +462,7 @@ class payingController{
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
                 
                 $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
-                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Schedule order [".$_order['OrderNumber']."]");
                 break;
             case 'E':
                 if($_order==null){
@@ -467,7 +470,7 @@ class payingController{
                 }else{
         
                     $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
-                    $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                    $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Emergency order [".$_order['OrderNumber']."]");
                 }
                 break;
             case 'R':
@@ -477,7 +480,7 @@ class payingController{
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
         
                 $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
-                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to New/Reeroof order [".$_order['OrderNumber']."]");
                 break;
             case 'P':
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Post-card request Order number.');
@@ -488,6 +491,10 @@ class payingController{
             case 'TSE':
                 $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createTransfer($amount,$currency,$_company['stripeAccount'],'Pay for taking an Emergency Service order id ['.$_order['OrderNumber'].']');
+                break;
+            case 'DEP':
+                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Deposit to  order [".$_order['OrderNumber']."]");
                 break;
             default:
                 $_result="Error, order type do not exists [".$_ordet_type_selected."]";

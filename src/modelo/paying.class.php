@@ -179,7 +179,7 @@ class paying_stripe  extends connection{
     }
 
     //direct to the platform
-    public function createChargeDestination($token,$amount,$currency,$account,$fee=0){
+    public function createChargeDestination($token,$amount,$currency,$account,$fee=0,$description){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
         echo "entro aca";
@@ -189,7 +189,7 @@ class paying_stripe  extends connection{
                     'amount' => $amount,
                     'currency' => $currency,
                     'source' => $token,
-                    'description' =>'Paying order without fee',
+                    'description' =>$description,
                     "destination" => [
                         "account" => $account,
                       ],
@@ -200,7 +200,7 @@ class paying_stripe  extends connection{
                     'amount' => $amount,
                     'currency' => $currency,
                     'source' => $token,
-                    'description' =>'Paying order with fee ['.$fee.'] ['.$_total_without_fee.']',
+                    'description' =>$description,
                     "destination" => [
                         "amount" => $_total_without_fee,
                         "account" => $account,

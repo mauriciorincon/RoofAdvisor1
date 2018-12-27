@@ -2957,6 +2957,7 @@ function acceptEstimateAmount(){
         amount_value=parseInt(valueDeposit)*100;
         action_type="pay_deposit_service";
         order_type_request_val='deposit';
+        order_fbid=orderID;
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
