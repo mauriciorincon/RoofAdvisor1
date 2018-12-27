@@ -66,8 +66,9 @@ if(!isset($_SESSION)) {
 
 		<script src="vista/js/orders.js"></script>
                 <link rel="stylesheet" href="vista/css/jquery.progresstracker.css">
-                <script src="vista/js/jquery.progresstracker.min.js.js"></script>	
-	<style>
+                <script src="vista/js/jquery.progresstracker.min.js"></script>
+
+<style>
 .checked {
     color: orange;
 }
