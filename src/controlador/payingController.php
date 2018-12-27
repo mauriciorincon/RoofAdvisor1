@@ -48,7 +48,7 @@ class payingController{
                 $currency='usd';
                 
 
-                $this->$_orderController=new orderController();
+                $this->_orderController=new orderController();
                 if(strcmp($obj->action_type,'pay_take_service')==0){
                     if(strcmp($obj->order_type_request,'E')==0){
                         //$obj->order_type_request='TSE';
@@ -62,7 +62,7 @@ class payingController{
                     if(empty($obj->orderFBID)){
                         $_order=null;    
                     }else{
-                        $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                        $_order=$this->_orderController->getOrderByID($obj->orderFBID);
                         $_order['RequestType']='DEP';
                         $order_type='DEP';
                     }
@@ -70,7 +70,7 @@ class payingController{
                     if(empty($obj->orderFBID)){
                         $_order=null;    
                     }else{
-                        $_order=$this->$_orderController->getOrderByID($obj->orderFBID);
+                        $_order=$this->_orderController->getOrderByID($obj->orderFBID);
                     }
                 }
                 $order_type=$obj->order_type_request;
@@ -445,13 +445,13 @@ class payingController{
     }
 
     public function selectPaying($email,$token,$amount,$currency,$_order,$order_type){
-        $_payingModel=null;
+       
         $_orderController=null;
-        $_userController=null;
+        
         $_stripe_fee=round($amount*2.9/100,2)+(30);
         $_fee=round($amount*2/100,2)+$_stripe_fee;
         $_ordet_type_selected='';
-        $this->$_userController=new userController();
+        $this->_userController=new userController();
         $this->_payingModel=new paying_stripe();
         //print_r($_order);
         if(empty($_order)){
@@ -463,7 +463,7 @@ class payingController{
             case 'S':
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
                 
-                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Schedule order [".$_order['OrderNumber']."]");
                 break;
             case 'E':
@@ -471,7 +471,7 @@ class payingController{
                     $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Emergency request Order number.');
                 }else{
         
-                    $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                    $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                     $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Emergency order [".$_order['OrderNumber']."]");
                 }
                 break;
@@ -481,7 +481,7 @@ class payingController{
             case 'M':
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
         
-                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to New/Reeroof order [".$_order['OrderNumber']."]");
                 break;
             case 'P':
@@ -491,11 +491,11 @@ class payingController{
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Taking service');
                 break;
             case 'TSE':
-                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createTransfer($amount,$currency,$_company['stripeAccount'],'Pay for taking an Emergency Service order id ['.$_order['OrderNumber'].']');
                 break;
             case 'DEP':
-                $_company=$this->$_userController->getCompanyById($_order['CompanyID']);
+                $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue for Deposit to  order [".$_order['OrderNumber']."]");
                 break;
             default:
