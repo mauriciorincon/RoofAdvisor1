@@ -1350,6 +1350,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div> 
 			<div class="modal-body" id="textSchedule" style="position:relative;right:0px;top:60px;"> 
 				<input type="hidden" value="" id="orderIDFinal" />
+				<input type="hidden" value="" id="orderTypeServiceFinal" />
 				<!--<table>
 					<tr><td>Order ID</td><td><input type="text" value="" id="finalAmountOrderID" readonly></td></tr>
 					<tr><td>Final Amount Materials</td><td><input type="text" value="" id="finalAmountMaterials" readonly></td></tr>

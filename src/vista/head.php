@@ -64,8 +64,11 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	        <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->	
 
-			<script src="vista/js/orders.js"></script>
-		<style>
+		<script src="vista/js/orders.js"></script>
+                <link rel="stylesheet" href="vista/css/jquery.progresstracker.css">
+                <script src="vista/js/jquery.progresstracker.min.js"></script>
+
+<style>
 .checked {
     color: orange;
 }

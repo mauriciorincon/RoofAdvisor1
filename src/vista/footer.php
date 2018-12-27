@@ -104,7 +104,7 @@
 							</div>
 						</div>		
 						<div class="col-lg-3 col-md-3 col-sm-6 mb-20">
-							<div class="footer-widget">
+							<div id="appmob3" class="footer-widget">
 								<h3 class="widget-title">REQUEST A DEMO</h3>
 								<p>Please provide your email to request a demo.</p>
 								<div class="footer-form">
@@ -142,7 +142,6 @@
 				<script src="js/jquery.meanmenu.js"></script>
 				
 		
-		<script src="js/waypoints.min.js"></script>
 		<script src="js/wow.min.js"></script>
         <script src="js/plugins.js"></script>
 		<script src="js/main.js"></script>
@@ -188,5 +187,19 @@
      $('#loading5').fadeOut(500);
   });
 </script>
+<script>
+
+(function() {
+                $('TrackScrollProgress').progressTracker({
+            linking : true,
+            tooltip : "constant",
+            negativeTolerance : 0,
+            positiveTolerance : 0,
+            displayWhenActive : true,
+            disableBelow : 600
+        });
+    })();
+</script>
+
 </body>
 </html>
