@@ -76,8 +76,8 @@ class payingController{
                 
                 
                 $_result=$this->selectPaying($email,$token,$amount,$currency,$_order,$order_type);
-                echo "llego aca y el resultado es: ".$_result." tipo: ".$order_type." order: ".$obj->orderFBID;
-                print_r($_order);
+                //echo "llego aca y el resultado es: ".$_result." tipo: ".$order_type." order: ".$obj->orderFBID;
+                //print_r($_order);
                 if(is_object($_result) or is_array($_result)) {
                     $_objCharge=$_result;
                     $array_data=$this->getPayingStatus($_objCharge->id);
