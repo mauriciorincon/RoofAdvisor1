@@ -182,7 +182,7 @@ class paying_stripe  extends connection{
     public function createChargeDestination($token,$amount,$currency,$account,$fee=0,$description){
         //echo "Customer:".$customer->id." amount:".$amount." currency:".$currency;
         $this->_error_message="";
-        echo "entro aca";
+        //echo "entro aca";
         try{
             if($fee==0){
                 $charge = \Stripe\Charge::create(array(

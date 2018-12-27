@@ -1247,6 +1247,7 @@ $('#step3OtypeService').on('click', 'a', function(){
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService();
     showHideElementByService();
+    action_type="pay_emergency_service";
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
@@ -1258,6 +1259,7 @@ $('#step3OtypeService').on('click', 'a', function(){
 function getValueService(){
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     var fieldValue="";
+    order_fbid="";
     switch(RequestType){
         case 'emergency':
             order_type_request_val='E';
@@ -2657,6 +2659,8 @@ function setOrderId(orderID,RequestType,typePricing){
                             if(n==-1){
                                 $('#pricingWork').val(data/100);
                                 amount_value=data;
+                                $('#pricingWork').show();
+                                $('label[for=pricingWork]').show()
                             }else{
                                 $('#pricingWork').val(0);
                                 $('#pricingWork').hide();
@@ -2749,6 +2753,7 @@ function takeWork(){
     if((orderType=="S" || orderType=="M") && pricingWork>0 ){
         action_type="pay_take_service";
         order_type_request_val=orderType;
+        order_fbid=orderID;
         if(typeof handler !== undefined){
             handler.open({
                 name: 'RoofServiceNow',
@@ -3158,7 +3163,7 @@ function payOnlineInvoce(stripeID,amount,action_type){
     $('#myPaymentType').modal('hide');
     $('#myFinalAmount').modal('hide');
     
-    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",action_type,"+action_type+",action_type,"+action_type);
+    updateOrder(orderID,"Status,"+status+",PaymentType,Online,StripeID,"+stripeID+",amount,"+amount+",action_type,"+action_type);
 
 }
 
@@ -4642,6 +4647,7 @@ function showPayPostCards(totalValue){
     amount_value=totalValue;
     action_type="pay_postcard_service";
     order_type_request_val='P';
+    
     if(typeof handler !== undefined){
         handler.open({
             name: 'RoofServiceNow',

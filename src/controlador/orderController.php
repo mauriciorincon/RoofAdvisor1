@@ -207,7 +207,7 @@ class orderController{
                     $_payingController=new payingController();
                     $_order['RequestType']='TSE';
                     //$_order['CompanyID']=$companySelected;
-                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","","20000","usd",$_order,"TSE");
+                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","","12500","usd",$_order,"TSE");
                     //$_payingController->createTransfer("20000","usd",$connectAcount,$description)
                 }
             }else{
