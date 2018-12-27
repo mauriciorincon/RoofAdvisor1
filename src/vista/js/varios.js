@@ -1223,10 +1223,12 @@ $('#step7ListCompany').on('click', 'a', function(){
 //Select type order
 $('#step2OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active");
+    $("#step3OtypeService a").removeClass("active");
     $(this).addClass("active");
     var type=$(this).find('input:hidden').val();
     showHideSteps(type);
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService();
     showHideElementByService();
@@ -1240,9 +1242,11 @@ $('#step2OtypeService').on('click', 'a', function(){
 
 $('#step3OtypeService').on('click', 'a', function(){
     $("#step3OtypeService a").removeClass("active");
+    $("#step2OtypeService a").removeClass("active");
     $(this).addClass("active");
     var type=$(this).find('input:hidden').val();
     showHideSteps(type);
+    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService();
