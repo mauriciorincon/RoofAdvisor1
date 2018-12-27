@@ -51,10 +51,60 @@ This is a same day, on-demand service for hiring pre-screened service profession
 <div>
 <img  id="hworks" src="img/howitworks.png">
 </div>
-<div id="hworks-mobile" style="display:none;">
+<div id="hworks-mobile" style="display:none;" class="hworkm1">
+<div  style="margin-bottom:20px;">
  <span class="mobiletxthd1 hdworkshd1">
-  <strong>How It Works?</strong>
+  <strong style="color:#007e8e;font-size: 35px;">How It Works?</strong>
  </span>
+</div>
+
+<div id="TrackScrollProgress"  >
+  <div class="pt-section" data-name="Section One" id="ptsection-one">
+    <div class="hworkslist1">
+       <span class="hworkspan"> Step 1 | <strong class="hworkstrong">Service</strong></span>
+      <ul>
+       <li>Emergency Repair</li>
+       <li>Roof Report</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pt-section" data-name="Section Two" id="ptsection-two">
+<div class="hworkslist1">
+       <span class="hworkspan"> Step 2 | <strong class="hworkstrong">Interaction</strong></span>
+      <ul>
+       <li>Contractor arrives, provides</li>
+       <li>you with an estimate prior.</li>
+      </ul>
+    </div>
+  </div>
+ <div class="pt-section" data-name="Section Three" id="ptsection-three">   
+ <div class="hworkslist1">
+       <span class="hworkspan"> Step 3 | <strong class="hworkstrong">Repair</strong></span>
+      <ul>
+       <li>The contractor works &</li>
+       <li>Repairs your leak.</li>
+      </ul>
+    </div>
+  </div>
+   <div class="pt-section" data-name="Section Four" id="ptsection-four">  	 
+<div class="hworkslist1">
+       <span class="hworkspan"> Step 4 | <strong class="hworkstrong">Payment</strong></span>
+      <ul>
+       <li>You pay the contractor</li>
+       <li>for the work.</li>
+      </ul>
+    </div>
+  </div>
+<div class="pt-section" data-name="Section Five" id="ptsection-five">    
+<div class="hworkslist1">
+       <span class="hworkspan"> Step 5 | <strong class="hworkstrong">Feedback</strong></span>
+      <ul>
+       <li>Write a review please,</li>
+       <li>spread the good. <strong style="color:#fa511a">Thanks!</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
 </div>
 <!--<form role='form'>
  <div id='srvappsrch1'>
@@ -83,10 +133,11 @@ This app saved the day and is so easy to use. I had water leaking into the house
    <span id='aphtxt1'><strong>Get Our App</strong></span>
    <p id='aphtxt2' align="center">Customers and service professionals stay connected together with our app. Send pictures, receive estimates, see the work status in progress and online secure payment.</p>
    <img id="appphone1" src="img/mobile-new.png">
- </div>
+   <img id="appmob1" src="img/mobile-phone.png"> 
+</div>
 </div>
 
-<div id='' class="container">
+<div id='mbldit25' class="container">
 
  <div id='appdl3' >
   <div class="row"> 
@@ -94,12 +145,12 @@ This app saved the day and is so easy to use. I had water leaking into the house
     <span id='appdl3-tx1'>Download</br>for</span>
    </div>
      
-   <div id='' class="col-md-6">
+   <div id='appmob2' class="col-md-6">
     <span id='appdl3-tx2'><strong>FREE!</strong></span>
    </div>
   </div> 
  <div>  
-  <div class="row">
+  <div class="row mobiletop1">
    <div class="col-md-6">
     <img id='appand1' src='img/PlayStore.png'>
    </div>
