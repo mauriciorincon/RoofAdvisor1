@@ -1745,7 +1745,7 @@ padding-top:70px !important;
 .hworkm1{
 text-align: center;
     height: 500px;
-    margin-top: 90px;
+    margin-top: 120px;
 }
 .hworkspan{
 font-size: 20px;
@@ -1761,6 +1761,24 @@ display:block;
 #appmob1{
 display:none;
 }
+.progress-tracker {
+display:none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1962,12 +1980,13 @@ font-size:20px;
     border-radius: 15px;
     background-color: #f34e19;
     border: 1px solid #fff;
+    margin: 0 auto;
 }
 .btnvidmobilediv1{
 display: block !important;
     position: absolute;
-    margin-top: -70%;
-    right: 20%;
+    margin-top: -80px;
+    width: 100%;
 }
 .mobiletxthd1{
     font-size:22px !important;
@@ -2088,5 +2107,25 @@ display:none;
 display:block;
 margin-left: -50px;
     margin-top: -35px;
+}
+.progress-tracker {
+display:block !important;
+}
+.progress-tracker.hide{
+right:0 !important;
+}
+.mobicworks1{
+    margin-left: 16px;
+    position: absolute;
+       color: #005678;
+}
+.mobicworks2{
+    color: #fa511a;
+}
+#TrackScrollProgress{
+margin-left: 15px;
+}
+#appdl1{
+margin-top: 30px;
 }
 }

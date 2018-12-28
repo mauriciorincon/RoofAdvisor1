@@ -61,7 +61,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
 <div id="TrackScrollProgress"  >
   <div class="pt-section" data-name="Section One" id="ptsection-one">
     <div class="hworkslist1">
-       <span class="hworkspan"> Step 1 | <strong class="hworkstrong">Service</strong></span>
+      <i id="mobservice1" style="margin-left: 26px !important;"class="fas fa-clipboard-list fa-3x mobicworks1"></i> <span class="hworkspan"> Step 1 | <strong class="hworkstrong">Service</strong></span>
       <ul>
        <li>Emergency Repair</li>
        <li>Roof Report</li>
@@ -70,7 +70,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
   </div>
   <div class="pt-section" data-name="Section Two" id="ptsection-two">
 <div class="hworkslist1">
-       <span class="hworkspan"> Step 2 | <strong class="hworkstrong">Interaction</strong></span>
+     <i id="mobhandshake1" class="far fa-handshake fa-3x mobicworks1"></i>  <span class="hworkspan"> Step 2 | <strong class="hworkstrong">Interaction</strong></span>
       <ul>
        <li>Contractor arrives, provides</li>
        <li>you with an estimate prior.</li>
@@ -79,7 +79,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
   </div>
  <div class="pt-section" data-name="Section Three" id="ptsection-three">   
  <div class="hworkslist1">
-       <span class="hworkspan"> Step 3 | <strong class="hworkstrong">Repair</strong></span>
+       <i id="mobtools1" class="fas fa-hammer fa-3x mobicworks1"></i><span class="hworkspan"> Step 3 | <strong class="hworkstrong">Repair</strong></span>
       <ul>
        <li>The contractor works &</li>
        <li>Repairs your leak.</li>
@@ -88,7 +88,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
   </div>
    <div class="pt-section" data-name="Section Four" id="ptsection-four">  	 
 <div class="hworkslist1">
-       <span class="hworkspan"> Step 4 | <strong class="hworkstrong">Payment</strong></span>
+       <i id="mobpay1" class="fas fa-credit-card fa-3x mobicworks1"></i><span class="hworkspan"> Step 4 | <strong class="hworkstrong">Payment</strong></span>
       <ul>
        <li>You pay the contractor</li>
        <li>for the work.</li>
@@ -97,7 +97,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
   </div>
 <div class="pt-section" data-name="Section Five" id="ptsection-five">    
 <div class="hworkslist1">
-       <span class="hworkspan"> Step 5 | <strong class="hworkstrong">Feedback</strong></span>
+       <i id="mobfeedback1" class="fas fa-comments fa-3x mobicworks1"></i><span class="hworkspan"> Step 5 | <strong class="hworkstrong">Feedback</strong></span>
       <ul>
        <li>Write a review please,</li>
        <li>spread the good. <strong style="color:#fa511a">Thanks!</strong></li>
