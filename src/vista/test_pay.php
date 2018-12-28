@@ -35,25 +35,31 @@
     //$_customer=$_objPay->createCustomer("text@gmail.com",$_token);
     //print_r($_customer);
     //$_objPago=$_objPay->createChargeOtherFee(null,19600,"usd","acct_1DiBU7B2zQatABj9",1000);
-    $_objPago=$_objPay->createChargeDestination(null,5000,"usd","acct_1DiBU7B2zQatABj9",300);
+    //$_objPago=$_objPay->createChargeDestination(null,5000,"usd","acct_1DiBU7B2zQatABj9",300);
     //$_objPago=$_objPay->createChargeOther(null,15000,"usd","acct_1DiBU7B2zQatABj9");
 
     echo "<br><br>";
-    print_r($_objPago);
-    return;
+    //print_r($_objPago);
+    
     $_userModel=new userController();
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
 
-    $_result=$_objPay->createTransfer(5000,"usd","acct_1DiBU7B2zQatABj9");
-    var_dump($_result);
+    //$_result=$_objPay->createTransfer(5000,"usd","acct_1DiBU7B2zQatABj9");
+    //var_dump($_result);
 
     echo "<br><br>";
     $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
-    var_dump($var_usr);
+    print_r($var_usr->external_accounts);
+    echo count($var_usr->external_accounts);
+    print_r($var_usr->external_accounts->data);
+    foreach($var_usr->external_accounts->data as $clave=>$bank){
+        echo "Bank <br><br>";
+        print_r($bank);
+    }
 
     echo "<br><br>";
-
+    return;
     //$_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
     //var_dump($_response);
     echo "<br><br>";

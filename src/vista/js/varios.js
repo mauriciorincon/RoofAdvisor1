@@ -707,6 +707,25 @@ function updateDataCompany(){
     var InsLiabilityPolNum=$("input#compamnyPolNum").val();
     var Status_Rating=$("input#compamnyStatusRating").val();
 
+    //stripe
+    var compamnylegal_entity_first_name=$("input#compamnylegal_entity_first_name").val();
+    var compamnylegal_entity_last_name=$("input#compamnylegal_entity_last_name").val();
+    var compamnylegal_entity_dob=$("input#compamnylegal_entity_dob").val();
+    var compamnylegal_entity_type=$("select#compamnylegal_entity_type").val();
+    var compamnylegal_entity_State=$("input#compamnylegal_entity_State").val();
+    var compamnylegal_entity_City=$("input#compamnylegal_entity_City").val();
+    var compamnylegal_entity_Zipcode=$("input#compamnylegal_entity_Zipcode").val();
+
+    var compamnylegal_entity_Address=$("input#compamnylegal_entity_Address").val();
+    var compamnylegal_entity_last4=$("input#compamnylegal_entity_last4").val();
+    var compamnylegal_entity_personal_id=$("input#compamnylegal_entity_personal_id").val();
+    var compamnyrouting_number=$("input#compamnyrouting_number").val();
+    var compamnyaccount_number=$("input#compamnyaccount_number").val();
+
+    var compamnyaccount_holder_name=$("input#compamnyaccount_holder_name").val();
+    var compamnyaccount_holder_type=$("select#compamnyaccount_holder_type").val();
+
+    
 
     if( typeof companyAddress2 === 'undefined' || companyAddress2 === null ){
         companyAddress2="";
@@ -723,7 +742,13 @@ function updateDataCompany(){
     "PayInfoCCExpYr":PayInfoCCExpYr,"PayInfoCCNum":PayInfoCCNum,"PayInfoCCSecCode":PayInfoCCSecCode,"PayInfoName":PayInfoName,
     "PrimaryFName":PrimaryFName,"PrimaryLName":PrimaryLName,"InsLiabilityAgencyName":InsLiabilityAgencyName,
     "InsLiabilityAgtName":InsLiabilityAgtName,"InsLiabilityAgtNum":InsLiabilityAgtNum,"InsLiabilityPolNum":InsLiabilityPolNum,
-    "Status_Rating":Status_Rating}, null, "text" )
+    "Status_Rating":Status_Rating,"compamnylegal_entity_first_name":compamnylegal_entity_first_name,"compamnylegal_entity_last_name":compamnylegal_entity_last_name,
+    "compamnylegal_entity_dob":compamnylegal_entity_dob,"compamnylegal_entity_type":compamnylegal_entity_type,
+    "compamnylegal_entity_State":compamnylegal_entity_State,"compamnylegal_entity_City":compamnylegal_entity_City,
+    "compamnylegal_entity_Zipcode":compamnylegal_entity_Zipcode,"compamnylegal_entity_Address":compamnylegal_entity_Address,
+    "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,
+    "compamnyrouting_number":compamnyrouting_number,"compamnyaccount_number":compamnyaccount_number,
+    "compamnyaccount_holder_name":compamnyaccount_holder_name,"compamnyaccount_holder_type":compamnyaccount_holder_type}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
