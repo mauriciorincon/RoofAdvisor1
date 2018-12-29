@@ -408,6 +408,15 @@ class payingController{
         return $_result;
     }
 
+    function get_bank_for_account($stripeID){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_token_bank_account($stripeID);
+
+        return $_result;
+    }
+
     public function createTransfer($amount,$currency,$connectAcount,$description){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();

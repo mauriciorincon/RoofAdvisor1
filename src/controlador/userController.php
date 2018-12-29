@@ -552,7 +552,7 @@ class userController{
             $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
             
             $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);
-            $_array_stripe_info_bank=$this->get_token_bank_account($_actual_company['stripeBankAccount']);
+            $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
             
 
             $_array_orders_to_show=array();
@@ -670,6 +670,35 @@ class userController{
             $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
         }
         return "The employee identify by ".$_companyID." was updated corretly".$_aditional_message;
+
+    }
+
+    public function updateInfoCompanyStripe($_companyID,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
+    $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
+    $_compamnylegal_entity_State,$_compamnylegal_entity_City,
+    $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
+    $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,
+    $_compamnyrouting_number,$_compamnyaccount_number,
+    $_compamnyaccount_holder_name,$_compamnyaccount_holder_type){
+        $_company_data=$this->getCompanyById($_companyID);
+        if($_company_data==null){
+            return "Fail to update info company for stripe, company not found [$_companyID]";
+        }else{
+            if(isset($_company_data['stripeAccount'])){
+                $_account_id=$_company_data['stripeAccount'];
+            }else{
+                $result=$this->createAccount($_companyID,$_company_data['CompanyEmail']);
+                $_account_id=$_result['id'];
+            }
+            $_result=$this->upateAccount($_account_id,$_compamnyrouting_number,$_compamnyaccount_number,$_compamnyaccount_holder_name,$_compamnyaccount_holder_type,
+                        $_compamnylegal_entity_dob,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
+                        $_compamnylegal_entity_type,$_compamnylegal_entity_City,$_compamnylegal_entity_Address,$_compamnylegal_entity_Zipcode,
+                        $_compamnylegal_entity_State,$_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,'');
+
+        }
+
+        
+        
 
     }
 
@@ -1229,7 +1258,7 @@ class userController{
         if(is_array($_result) or gettype($_result)=="object" ){
             $this->_userModel=new userModel();                                        
             $this->_userModel->updateContractor($_companyID.'/stripeAccount',$_result['id']);
-            return "Account created correctry";
+            return $_result;
         }else{
             return $_result;
         }
@@ -1257,7 +1286,7 @@ class userController{
         /*for($n=0;$n<count($arrayFields);$n++){
             $objStripeAccount[$arrayFields[$n]]=$arrayValues[$n];
         }*/
-        $_response=$_userModel->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
+        $_response=$this->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
         $objStripeAccount->external_accounts->create(array("external_account" => $_response['id']));
 
         $objStripeAccount->legal_entity->dob->day=substr($birth_day, 8,2);
@@ -1276,13 +1305,14 @@ class userController{
         $objStripeAccount->legal_entity->personal_id_number=$personalid;
 
         $file=$path_file;
-        $_response=$_userModel->upload_file($file);
+        $_response=$this->_userModel->upload_file($file);
         $objStripeAccount->legal_entity->verification->document=$_response['id'];
        
         $objStripeAccount->tos_acceptance->date=time();
         $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
 
         $objStripeAccount->save();
+        return "update Account Correctly";
     }
 
     public function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){
@@ -1296,6 +1326,11 @@ class userController{
     }
 
     function get_token_bank_account($stripeID){
+        $_objPay=new payingController();
+        return $_objPay->get_token_bank_account($stripeID);
+    }
+
+    function get_bank_for_account($stripeID){
         $_objPay=new payingController();
         return $_objPay->get_token_bank_account($stripeID);
     }

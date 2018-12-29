@@ -23,7 +23,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
@@ -1065,7 +1064,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Account Holder Type</label>
-                                            <select id="compamnyaccount_holder_typee" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
+                                            <select id="compamnyaccount_holder_type" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
                                                 <option value="individual">Individual</option>
                                                 <option value="company">Company</option>
                                             </select>
@@ -1073,6 +1072,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <div class="form-group">
                                             <label class="control-label">Image</label>
                                             <input id="stripeImage" type="file" accept="image/x-png,image/gif,image/jpeg" name="stripeImage" />
+                                        </div>
+                                        <div>
+                                            <label>
+                                            Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
+                                            </label>
                                         </div>
                                     </div>
                                 </form>
@@ -1193,6 +1197,32 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     <div>
                         Wallet Balance<br>
                         <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td>id</td>
+                                <td>Holder  Name</td>
+                                <td>Holder  Type</td>
+                                <td>Bank Name</td>
+                                <td>Country</td>
+                                <td>Currency</td>
+                                <td>Last4</td>
+                                <td>Routing Number</td>
+                            </tr>
+                            <?php
+                                foreach($_array_stripe_bank as $clave=>$bank){
+                                   echo "<tr>".
+                                            "<td>".$bank->id."</td>".
+                                            "<td>".$bank->account_holder_name."</td>".
+                                            "<td>".$bank->account_holder_type."</td>".
+                                            "<td>".$bank->bank_name."</td>".
+                                            "<td>".$bank->country."</td>".
+                                            "<td>".$bank->currency."</td>".
+                                            "<td>".$bank->last4."</td>".
+                                            "<td>".$bank->routing_number."</td>".
+                                        "</tr>";
+                                }
+                            ?>
+                        </table>
                     </div>
                 </div>
             </div>                         

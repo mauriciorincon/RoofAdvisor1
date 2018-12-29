@@ -34,6 +34,23 @@ $_InsLiabilityAgtNum=$_POST["InsLiabilityAgtNum"];
 $_InsLiabilityPolNum=$_POST["InsLiabilityPolNum"];
 $_Status_Rating=$_POST["Status_Rating"];
 
+$_compamnylegal_entity_first_name=$_POST["compamnylegal_entity_first_name"];
+$_compamnylegal_entity_last_name=$_POST["compamnylegal_entity_last_name"];
+$_compamnylegal_entity_dob=$_POST["compamnylegal_entity_dob"];
+$_compamnylegal_entity_type=$_POST["compamnylegal_entity_type"];
+$_compamnylegal_entity_State=$_POST["compamnylegal_entity_State"];
+$_compamnylegal_entity_City=$_POST["compamnylegal_entity_City"];
+$_compamnylegal_entity_Zipcode=$_POST["compamnylegal_entity_Zipcode"];
+
+$_compamnylegal_entity_Address=$_POST["compamnylegal_entity_Address"];
+$_compamnylegal_entity_last4=$_POST["compamnylegal_entity_last4"];
+$_compamnylegal_entity_personal_id=$_POST["compamnylegal_entity_personal_id"];
+$_compamnyrouting_number=$_POST["compamnyrouting_number"];
+$_compamnyaccount_number=$_POST["compamnyaccount_number"];
+
+$_compamnyaccount_holder_name=$_POST["compamnyaccount_holder_name"];
+$_compamnyaccount_holder_type=$_POST["compamnyaccount_holder_type"];
+
 
 $_userController=new userController();
 
@@ -44,6 +61,14 @@ $result=$_userController->updateCompany($_companyID,$_compamnyName,$_firstCompan
                                         $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
                                         $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
                                         $_InsLiabilityPolNum,$_Status_Rating);
-echo $result;
+$_result1=$_userController->updateInfoCompanyStripe($_companyID,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
+                                                    $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
+                                                    $_compamnylegal_entity_State,$_compamnylegal_entity_City,
+                                                    $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
+                                                    $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,
+                                                    $_compamnyrouting_number,$_compamnyaccount_number,
+                                                    $_compamnyaccount_holder_name,$_compamnyaccount_holder_type);
+                                    
+echo $result." ".$_result1;
 
 ?>
