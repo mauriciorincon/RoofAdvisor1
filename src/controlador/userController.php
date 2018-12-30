@@ -553,6 +553,10 @@ class userController{
             
             $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);
             $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
+
+            $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
+
+            $_array_stripe_transaction=$this->get_transaction_account($get_transaction_account['stripeAccount']);
             
 
             $_array_orders_to_show=array();
@@ -1269,6 +1273,16 @@ class userController{
         return $_objPay->getAccount($stripeID);
     }
 
+    public function getBalanceAccount($account){
+        $_objPay=new payingController();
+        return $_objPay->get_balance_account($account);
+    }
+
+    public function get_transaction_account($account){
+        $_objPay=new payingController();
+        return $_objPay->get_transaction_account($account);
+    }
+
     public function getValidateAccount($stripeID){
         $objStripeAccount=$this->getAccount($stripeID);
         
@@ -1286,8 +1300,7 @@ class userController{
         /*for($n=0;$n<count($arrayFields);$n++){
             $objStripeAccount[$arrayFields[$n]]=$arrayValues[$n];
         }*/
-        $_response=$this->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
-        $objStripeAccount->external_accounts->create(array("external_account" => $_response['id']));
+        
 
         $objStripeAccount->legal_entity->dob->day=substr($birth_day, 8,2);
         $objStripeAccount->legal_entity->dob->month=substr($birth_day, 5,2);

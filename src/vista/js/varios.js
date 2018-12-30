@@ -4897,12 +4897,8 @@ function setOrder(orderID,field){
                         $row.find("td:eq(1)").html('$'+order.Deposit+'.00');
                         $row.find("td:eq(3)").html('$'+order.Deposit+'.00');
                     }
-                    
                     calculateFinalAmount();
-                    
-
-                }
-                
+                }                
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
             }
@@ -4915,4 +4911,93 @@ function setOrder(orderID,field){
         });
     }
     
+}
+
+function prepareCreateBank(account_id){
+    $('input#myProfileBankAccountId').val(account_id);
+    $('input#myProfileBankCountry').val('US');
+    $('input#myProfileBankCurrency').val('usd');
+    $('input#myProfileBankaccount_holder_name').val('');
+    $('select#myProfileBankaccount_holder_type').val('individual');
+    $('input#myProfileBankrouting_number').val('110000000');
+    $('input#myProfileBankaccount_number').val('');
+}
+
+function actionWithBank(action,account_id,bank_id){
+    
+    if(action=='insert'){
+        var account_id=$('input#myProfileBankAccountId').val();
+    }
+    var myProfileBankCountry=$('input#myProfileBankCountry').val();
+    var myProfileBankCurrency=$('input#myProfileBankCurrency').val();
+    var myProfileBankaccount_holder_name=$('input#myProfileBankaccount_holder_name').val();
+    var myProfileBankaccount_holder_type=$('select#myProfileBankaccount_holder_type').val();
+    var myProfileBankrouting_number=$('input#myProfileBankrouting_number').val();
+    var myProfileBankaccount_number=$('input#myProfileBankaccount_number').val();
+    var _bank_id="";
+
+    if(bank_id=="" || bank_id==undefined || bank_id==null){
+        _bank_id="";
+    }else{
+        _bank_id=bank_id;
+    }
+    var msg="";
+    if(action=='insert'){
+        if(myProfileBankCountry=="" || myProfileBankCountry==undefined || myProfileBankCountry==null){
+            msg+="Please type bank country \n";
+        }
+        if(myProfileBankCurrency=="" || myProfileBankCurrency==undefined || myProfileBankCurrency==null){
+            msg+="Please type bank currency \n";
+        }
+        if(myProfileBankaccount_holder_name=="" || myProfileBankaccount_holder_name==undefined || myProfileBankaccount_holder_name==null){
+            msg+="Please type acocunt holder name \n";
+        }
+        if(myProfileBankaccount_holder_type=="" || myProfileBankaccount_holder_type==undefined || myProfileBankaccount_holder_type==null){
+            msg+="Please type acocunt holder type \n";
+        }
+        if(myProfileBankrouting_number=="" || myProfileBankrouting_number==undefined || myProfileBankrouting_number==null){
+            msg+="Please type acocunt routing number \n";
+        }
+        if(myProfileBankaccount_number=="" || myProfileBankaccount_number==undefined || myProfileBankaccount_number==null){
+            msg+="Please type acocunt routing number \n";
+        }
+    }
+
+    if(msg!=""){
+        alert(msg);
+        return;
+    }
+    jsShowWindowLoad('Processing bank request');
+    $.post( "controlador/ajax/bankOperations.php", { "action" : action,"account_id":account_id,
+                                                    "myProfileBankCountry":myProfileBankCountry,
+                                                    "myProfileBankCurrency":myProfileBankCurrency,
+                                                    "myProfileBankaccount_holder_name":myProfileBankaccount_holder_name,
+                                                    "myProfileBankaccount_holder_type":myProfileBankaccount_holder_type,
+                                                    "myProfileBankrouting_number":myProfileBankrouting_number,
+                                                    "myProfileBankaccount_number":myProfileBankaccount_number,
+                                                    "bank_id":_bank_id}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $(document).ready(function(){$("#myProfileBank").modal("hide"); });
+                $('#textAnswerOrder').html(data);
+                $('#headerTextAnswerOrder').html("Procession Correct");
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                $(document).ready(function(){$("#myProfileBank").modal("hide"); });
+                $('#textAnswerOrder').html(data);
+                $('#headerTextAnswerOrder').html("Processing error");
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }                
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            jsRemoveWindowLoad('');
+        }
+    });
 }

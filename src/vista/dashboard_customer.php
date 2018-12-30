@@ -1,6 +1,7 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 ?>
+
 <div id="db-cus-main">
 
 	<div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
