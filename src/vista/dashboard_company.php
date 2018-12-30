@@ -1197,6 +1197,10 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     <div>
                         Wallet Balance<br>
                         <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+
+                        <div class="alert alert-primary" role="alert">
+                        External accounts
+                        </div>
                         <table class="table table-bordered" >
                             <tr>
                                 <td>id</td>
@@ -1207,11 +1211,13 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 <td>Currency</td>
                                 <td>Last4</td>
                                 <td>Routing Number</td>
+                                <td>Action</td>
                             </tr>
                             <?php
+                                $n=1;
                                 foreach($_array_stripe_bank as $clave=>$bank){
                                    echo "<tr>".
-                                            "<td>".$bank->id."</td>".
+                                            "<td>".$n."</td>".
                                             "<td>".$bank->account_holder_name."</td>".
                                             "<td>".$bank->account_holder_type."</td>".
                                             "<td>".$bank->bank_name."</td>".
@@ -1219,10 +1225,21 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             "<td>".$bank->currency."</td>".
                                             "<td>".$bank->last4."</td>".
                                             "<td>".$bank->routing_number."</td>".
+                                            '<td><a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Edit"'.
+                                            'href="#" '.
+                                            'onClick="'.$bank->id.'" > '.
+                                            '<span class="glyphicon glyphicon-pencil"></span></a></td>'.
                                         "</tr>";
+                                    $n++;
                                 }
                             ?>
                         </table>
+                        <a class="btn-primary btn-sm" data-toggle="modal"  
+                                            href="#myModalInsertContractor" 
+                                            onClick="emptyTextNewDriver()"> 
+                                            <span class="glyphicon glyphicon-bitcoin"></span>
+                                            New Bank
+                        </a>
                     </div>
                 </div>
             </div>                         
