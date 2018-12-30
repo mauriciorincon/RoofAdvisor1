@@ -189,16 +189,31 @@
 </script>
 <script>
 
-(function() {
-                $('TrackScrollProgress').progressTracker({
-            linking : true,
-            tooltip : "constant",
-            negativeTolerance : 0,
-            positiveTolerance : 0,
-            displayWhenActive : true,
-            disableBelow : 600
-        });
-    })();
+$(window).scroll(function() {
+
+function hworkclr($hparam, $hworkint){
+
+   var hT = $hparam.offset().top,
+       hH = $hparam.outerHeight(),
+       wH = $(window).height(),
+       wS = $(this).scrollTop();
+   if (wS > (hT+hH-wH) && (hT > wS) && (wS+wH > hT+hH)){
+     setTimeout(function() {  $hparam.addClass('mobicworks2')},$hworkint);
+console-log($hworkint);
+   } else {
+      $hparam.removeClass('mobicworks2')
+   }
+
+
+}
+
+hworkclr($('#mobservice1'),$('15000'));
+hworkclr($('#mobhandshake1'),$('28000'));
+hworkclr($('#mobtools1'),$('38000'));
+hworkclr($('#mobpay1'),$('48000'));
+hworkclr($('#mobfeedback1'),$('58000'));
+});
+
 </script>
 
 </body>
