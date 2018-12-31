@@ -4980,18 +4980,17 @@ function actionWithBank(action,account_id,bank_id){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $(document).ready(function(){$("#myProfileBank").modal("hide"); });
+                $("#myProfileBank").modal("hide");
                 $('#textAnswerOrder').html(data);
                 $('#headerTextAnswerOrder').html("Procession Correct");
-                $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
-                $(document).ready(function(){$("#myProfileBank").modal("hide"); });
+                $("#myProfileBank").modal("hide");
                 $('#textAnswerOrder').html(data);
                 $('#headerTextAnswerOrder').html("Processing error");
-                $('#myModalRespuesta').modal({backdrop: 'static'});
             }                
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             jsRemoveWindowLoad('');
+            $('#myModalRespuesta').modal({backdrop: 'static'});
         }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {

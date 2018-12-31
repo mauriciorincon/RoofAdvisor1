@@ -7,7 +7,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 ?>
 
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
-<div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary active" id="orderButtonCompany"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
@@ -18,7 +18,13 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
         </div>
-</div>
+    </div>
+
+    <?php echo '<script> 
+        var iconBase =\''. $_SESSION['image_path'].'\';
+        var address =\''.  $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'].'\';
+        var companyID =\''. $_actual_company['CompanyID'].'\';
+    </script>'?>
 
 <div id="mapDashBoard1" class="collapse in">
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
@@ -32,24 +38,24 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
         </style>
 
         <div id="map"></div>
-
+        
+        
         <script>
-            function initialization(){
-					
+        
+            function initialization(){	
 					initMap();
                     initMapOrder();
                     initMap1();
-					
-			}
+            }
+            
             var marketrs=[];
             var contractorMarker=[];
             var pendingOrders=[];
             var mapObject;
             var infowindow;
             var orderOpenContractor=[];
+        
             
-            <?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
-
             var scheduleRepairCount=0;
             var emergencyRepairCount=0;
             var reportRepairCount=0;
@@ -74,7 +80,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                
 
-                <?php echo 'var address = "'. $_actual_company['CompanyAdd1']." ".$_actual_company['CompanyAdd2'].'"';?>
+                
 
                 var geocoder = new google.maps.Geocoder();
                 
@@ -83,7 +89,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     geocodeAddress(geocoder,map,address,iconBase);
                 }
                 
-                <?php echo 'var companyID = "'. $_actual_company['CompanyID'].'"';?>
+                
 
                 var ref = firebase.database().ref("Orders");
                 ref.orderByChild("CompanyID").equalTo("<?php echo $_actual_company['CompanyID'] ?>").once("value", function(snapshot) {
@@ -675,9 +681,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
         </script>
 
-        <script>
-            <?php echo $_SESSION['firebase_path_javascript']; ?>
-            
+        <?php echo '<script>'.$_SESSION['firebase_path_javascript'].'</script>'; ?>
+        <script>    
             firebase.initializeApp(config);
         </script>
 
@@ -817,14 +822,16 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
 
 		<!-- Modal content--> 
-<div class="collapse container" id="companyDashProfile1"> 
+
+
+        <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
             </div> 
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-                    <div class="modal-body" id="textProfileCompany"> 
+             
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#profile">Basic</a></li>
                             <li><a data-toggle="tab" href="#stripeData">Stripe</a></li>
@@ -1076,8 +1083,10 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                         <button type="button" class="btn-primary btn-sm" onClick="updateDataCompany()" >Update Info</button>        
                        
                     </div>
-                </div>
+                
                 <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                                            
                     <div>
                         Wallet Balance<br>
                         <a href="">+ Add funds to your RoofServiceNow Wallet</a>
@@ -1221,12 +1230,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             <span class="glyphicon glyphicon-bitcoin"></span>
                                             New Bank
                         </a>
+
                     </div>
                 </div>
             </div>                         
 </div> 
-
-
 
 
 		<!-- Modal content--> 

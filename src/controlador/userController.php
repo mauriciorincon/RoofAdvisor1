@@ -556,7 +556,7 @@ class userController{
 
             $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
 
-            $_array_stripe_transaction=$this->get_transaction_account($get_transaction_account['stripeAccount']);
+            $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount']);
             
 
             $_array_orders_to_show=array();
