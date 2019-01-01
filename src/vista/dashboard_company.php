@@ -5,16 +5,7 @@
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
 ?>
-<!--<?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){?>
-    <div class="alert alert-danger">
-        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>  -  <strong>Attention!</strong> Your company in not Active, please finish filling out the profile
-    </div>
-    echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
-<?php }else{ ?>
-    <div class="alert alert-success">
-        <strong>Welcome to RoofServicenow,</strong>  <?php echo $_actual_company['CompanyID']." - ".$_actual_company['CompanyName']; ?>
-    </div>
-<?php } ?>-->
+
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
 <div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
@@ -23,15 +14,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myRoofReportRequest" onclick="changeSelection()">Roof Report</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
-            
-            
         </div>
 </div>
-
 
 <div id="mapDashBoard1" class="collapse in">
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
@@ -53,13 +40,14 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     initMapOrder();
                     initMap1();
 					
-				}
+			}
             var marketrs=[];
             var contractorMarker=[];
             var pendingOrders=[];
             var mapObject;
             var infowindow;
             var orderOpenContractor=[];
+            
             <?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
 
             var scheduleRepairCount=0;
@@ -159,21 +147,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 
                 });
                 
-                
-                
-                // Retrieve new orders as they are added to our database
-                /*ref.limitToLast(1).on("child_added", function(snapshot, prevChildKey) {
-                    var newOrder = snapshot.val();
-                    if(newOrder.Status=='A' || newOrder.CompanyID==companyID || newOrder.CompanyID=="" || newOrder.CompanyID==null){
-                        row=validateExist(newOrder.OrderNumber)
-						if(row==-1 || row==undefined){
-                                addOrderToTable(newOrder,companyID,map,infowindow,iconBase);
-						}                        
-                    }
-                    console.log("Data: " + newOrder);
-                    
-                });*/
-
                 // Retrieve new orders as they are added to our database
                 ref.on("child_changed", function(snapshot, prevChildKey) {
                     
@@ -392,7 +365,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 actualCompanyId=$('#companyIDhidden').val();
 
                 
-                //getCompanyStatus(actualCompanyId).then(function(companyStatus){
+                
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                         dataContractor=takeJobCompany(dataOrder,actualCompanyStatus,contractorName);
 
@@ -463,14 +436,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     }
                                 }
                             });
-                        }
-                        
-                        
-                        
+                        } 
                     });
-                //});
-                
-
             }
 
             function updateOrderOnTable(dataOrder,row){
@@ -575,88 +542,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                             $row.cell($row, 8).data(finalAmount).draw(false);
                             $row.cell($row, 9).data(dataOrder.PaymentType).draw(false);
 
-                /*$("#table_orders_company tr").each(function(index) {
-                    if (index !== 0) {
-
-                        $row = $(this);
-
-                        var id = $row.find("td:eq(0)").text();
-                        if (id.indexOf(value) === 0) {
-                            var requestType=getRequestType(dataOrder.RequestType);
-                            var status=getStatus(dataOrder.Status);
-                            var dataCustomer="";
-
-                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                                getContractorName(dataOrder.ContractorID).then(function(contractorName){
-                                    dataContractor=takeJobCompany(dataOrder,companyStatus,contractorName);
-                                    $row.find("td:eq(10)").html(dataContractor);
-                                });
-                            });
-                            
-                            
-                            if(dataOrder.CompanyID==""){
-                                customerData="XXXXX XXXXX XXXXX XXXXX";
-                                $row.find("td:eq(3)").html(customerData);
-                            }else{
-                                getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerData) {  
-                                    $row.find("td:eq(3)").html(customerData);
-                                });
-                            }
-                            
-
-                            
-                            getCompanyStatus(dataOrder.CompanyID).then(function(companyStatus){
-                                companyActions=actionsCompany(dataOrder,companyStatus);
-                                 
-                                $row.find("td:eq(11)").html(companyActions);
-                            });
-
-                            valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
-                            valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
-
-                            valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
-                            valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
-
-                            if(dataOrder.Status=="F" && dataOrder.RequestType=="P"){
-                                valorTotal=(parseInt(valueMat)+parseInt(valueTime));
-                                estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
-                                                    'href="#myEstimateAmount" '+
-                                                    'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
-                                                '</a>';
-                            }else{
-
-                                estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
-                                estimateAmount = estimateAmount ? estimateAmount : '$0';
-                            }
-                            if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
-                                valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
-                                finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
-                                                    'href="#myFinalAmount" '+
-                                                    'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
-                                                '</a>';
-                            }else{
-                                finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
-                                finalAmount = finalAmount ? '$'+finalAmount : '$0';
-                            }
-                            $row.find("td:eq(1)").html(dataOrder.SchDate);
-                            $row.find("td:eq(2)").html(dataOrder.SchTime);
-                            if(dataOrder.RequestType=='P'){
-                                description='Number of Postcard: '+dataOrder.postCardValue;
-                            }else{
-                                description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
-                            }
-
-                            $row.find("td:eq(4)").html(description);
-                            $row.find("td:eq(5)").html(requestType);
-                            $row.find("td:eq(6)").html(status);
-                            $row.find("td:eq(7)").html(estimateAmount);
-                            $row.find("td:eq(8)").html(finalAmount);
-                            $row.find("td:eq(9)").html(dataOrder.PaymentType);
-                        }
-                    }
-                });*/
             }
 
             function removeOrderOnTable(dataOrder){
@@ -786,7 +671,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     });
                 
             }
-
 
 
         </script>
@@ -932,7 +816,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 </div>
 
 
-
 		<!-- Modal content--> 
 <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
@@ -1065,7 +948,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Account Holder Type</label>
-                                            <select id="compamnyaccount_holder_typee" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
+                                            <select id="compamnyaccount_holder_type" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
                                                 <option value="individual">Individual</option>
                                                 <option value="company">Company</option>
                                             </select>
@@ -1073,6 +956,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <div class="form-group">
                                             <label class="control-label">Image</label>
                                             <input id="stripeImage" type="file" accept="image/x-png,image/gif,image/jpeg" name="stripeImage" />
+                                        </div>
+                                        <div>
+                                            <label>
+                                            Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
+                                            </label>
                                         </div>
                                     </div>
                                 </form>
@@ -1193,6 +1081,146 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                     <div>
                         Wallet Balance<br>
                         <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+
+                        <div class="alert alert-primary" role="alert">
+                        Balance
+                        </div>
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td>id</td>
+                                <td>Type</td>
+                                <td>Amount</td>
+                                <td>Currency</td>
+                                <td>bank_account</td>
+                                <td>bitcoin_receiver</td>
+                                <td>card</td>
+                            </tr> 
+                            <?php
+                                $n=1;
+                                foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                   echo "<tr>".
+                                            "<td>".$n."</td>".
+                                            "<td>Available</td>".
+                                            "<td>".$trancs->amount."</td>".
+                                            "<td>".$trancs->currency."</td>".
+                                            "<td>".$trancs->source_types->bank_account."</td>".
+                                            "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                            "<td>".$trancs->source_types->card."</td>".
+                                        "</tr>";
+                                    $n++;
+                                }
+                                if(isset($_array_stripe_balance->connect_reserved)){
+                                    foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                    echo "<tr>".
+                                                "<td>".$n."</td>".
+                                                "<td>connect_reserved</td>".
+                                                "<td>".$trancs->amount."</td>".
+                                                "<td>".$trancs->currency."</td>".
+                                                "<td>".""."</td>".
+                                                "<td>".""."</td>".
+                                                "<td>".""."</td>".
+                                            "</tr>";
+                                        $n++;
+                                    }
+                                }
+                                foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                    echo "<tr>".
+                                             "<td>".$n."</td>".
+                                             "<td>Pending</td>".
+                                             "<td>".$trancs->amount."</td>".
+                                             "<td>".$trancs->currency."</td>".
+                                             "<td>".$trancs->source_types->bank_account."</td>".
+                                             "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                             "<td>".$trancs->source_types->card."</td>".
+                                         "</tr>";
+                                     $n++;
+                                 }
+                            ?>     
+                        </table>
+                        <div class="alert alert-primary" role="alert">
+                        Transactions
+                        </div>
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td>id</td>
+                                <td>amount</td>
+                                <td>available_on</td>
+                                <td>created</td>
+                                <td>currency</td>
+                                <td>description</td>
+                                <td>fee</td>
+                                <td>net</td>
+                                <td>status</td>
+                                <td>type</td>
+                            </tr>
+                            <?php
+                                $n=1;
+                                
+                                foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                   echo "<tr>".
+                                            "<td>".$trancs->id."</td>".
+                                            "<td>".$trancs->amount."</td>".
+                                            "<td>".$trancs->available_on."</td>".
+                                            "<td>".$trancs->created."</td>".
+                                            "<td>".$trancs->currency."</td>".
+                                            "<td>".$trancs->description."</td>".
+                                            "<td>".$trancs->fee."</td>".
+                                            "<td>".$trancs->net."</td>".
+                                            "<td>".$trancs->status."</td>".
+                                            "<td>".$trancs->type."</td>".
+                                        "</tr>";
+                                    $n++;
+                                }
+                            ?>
+                        </table>
+                        <div class="alert alert-primary" role="alert">
+                        External accounts
+                        </div>
+                        <table class="table table-bordered" >
+                            <tr>
+                                <td>id</td>
+                                <td>Holder  Name</td>
+                                <td>Holder  Type</td>
+                                <td>Bank Name</td>
+                                <td>Country</td>
+                                <td>Currency</td>
+                                <td>Last4</td>
+                                <td>Routing Number</td>
+                                <td>Action</td>
+                            </tr>
+                            <?php
+                                $n=1;
+                                foreach($_array_stripe_bank as $clave=>$bank){
+                                   echo "<tr>".
+                                            "<td>".$n."</td>".
+                                            "<td>".$bank->account_holder_name."</td>".
+                                            "<td>".$bank->account_holder_type."</td>".
+                                            "<td>".$bank->bank_name."</td>".
+                                            "<td>".$bank->country."</td>".
+                                            "<td>".$bank->currency."</td>".
+                                            "<td>".$bank->last4."</td>".
+                                            "<td>".$bank->routing_number."</td>".
+                                            '<td>
+                                                <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                'href="#" '.
+                                                'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                '<span class="glyphicon glyphicon-pencil"></span></a>
+                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                'href="#" '.
+                                                'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                '<span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>'.
+                                        "</tr>";
+                                    $n++;
+                                }
+                            ?>
+                        </table>
+                        <a class="btn-primary btn-sm" data-toggle="modal"  
+                                            href="#myProfileBank" 
+                                            onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
+                                            <span class="glyphicon glyphicon-bitcoin"></span>
+                                            New Bank
+                        </a>
                     </div>
                 </div>
             </div>                         
@@ -2972,6 +3000,52 @@ if(!empty($_actual_company['postCardValue'])){
                 ?>
 			</div> 
 			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myProfileBank" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyProfileBank">New Bank</h4> 
+			</div> 
+            <div class="modal-body" id="textmyProfileBank"> 
+                <input type="hidden" id="myProfileBankAccountId" value="">
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankCountry">Country</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter bank country" id="myProfileBankCountry" name="myProfileBankCountry" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankCurrency">Currency</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter bank Currency" id="myProfileBankCurrency" name="myProfileBankCurrency" readonly/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankaccount_holder_name">Account Holder Name</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter bank Currency" id="myProfileBankaccount_holder_name" name="myProfileBankaccount_holder_name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankaccount_holder_name">Account Holder Type</label>
+                    <select id="myProfileBankaccount_holder_type" name="myProfileBankaccount_holder_type">
+                        <option value="individual">Individual</option>
+                        <option value="company">Company</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankaccount_holder_name">Routing Number</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter bank Currency" id="myProfileBankrouting_number" name="myProfileBankrouting_number" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="myProfileBankaccount_number">Account Number</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter bank Currency" id="myProfileBankaccount_number" name="myProfileBankaccount_number" />
+                </div>
+			</div> 
+            <div class="modal-footer" id="buttonmyProfileBank"> 
+                <button type="button" class="btn btn-default" onclick="actionWithBank('insert')">Save</button> 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

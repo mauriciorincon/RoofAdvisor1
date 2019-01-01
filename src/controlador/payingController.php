@@ -381,12 +381,57 @@ class payingController{
         return $_result;
     }
 
-    function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){
+    function validate_bank_account($stripeID,$account_number){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_result=$this->_payingModel->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type);
+        $_account_info=$this->_payingModel->getAccount($stripeID);
+        $_array_stripe_bank=$_account_info->external_accounts->data;
+        foreach($_array_stripe_bank as $clave=>$bank){
+            if(strcmp(substr($account_number,-4),$bank->last4)==0){
+                return true;
+            }
+        }
+        return false;
 
+    }
+    function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type,$country,$currency){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type,$country,$currency);
+
+        return $_result;
+    }
+
+    function link_bank_to_account($account,$bank_token){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->link_bank_to_account($account,$bank_token);
+        return $_result;
+    }
+
+    function delete_bank_account($account,$bank_id){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->delete_bank_account($account,$bank_id);
+        return $_result;
+    }
+
+    function get_balance_account($account){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_balance_account($account);
+        return $_result;
+    }
+    function get_transaction_account($account){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_transaction_account($account);
         return $_result;
     }
 
@@ -400,6 +445,15 @@ class payingController{
     }
 
     function get_token_bank_account($stripeID){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_token_bank_account($stripeID);
+
+        return $_result;
+    }
+
+    function get_bank_for_account($stripeID){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
