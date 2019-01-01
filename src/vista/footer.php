@@ -171,6 +171,7 @@
 <script src="vista/js/varios.js"></script>
 
 <script src="vista/timepicker/src/wickedpicker.js"></script>
+<script src="vista/js/jquery.smartWizard.js"></script>
 
 
 <?php
@@ -199,7 +200,6 @@ function hworkclr($hparam, $hworkint){
        wS = $(this).scrollTop();
    if (wS > (hT+hH-wH) && (hT > wS) && (wS+wH > hT+hH)){
      setTimeout(function() {  $hparam.addClass('mobicworks2')},$hworkint);
-console-log($hworkint);
    } else {
       $hparam.removeClass('mobicworks2')
    }
@@ -212,6 +212,52 @@ hworkclr($('#mobhandshake1'),$('28000'));
 hworkclr($('#mobtools1'),$('38000'));
 hworkclr($('#mobpay1'),$('48000'));
 hworkclr($('#mobfeedback1'),$('58000'));
+});
+
+$(function(){
+function mobwizpower($id, $sts){
+  function mobwizpoweron($id){
+    setTimeout(function() {  $id.addClass('mobpower1')},100);
+    }
+  function mobwizpoweroff($id){
+    setTimeout(function() {  $id.removeClass('mobpower1')},100);
+    }
+
+
+if( $sts === 'on' ){
+mobwizpoweron($id);
+}
+
+if( $sts === 'off' ){
+mobwizpoweroff($id);
+}
+
+
+}
+
+$('#mobilewizbtn1').click(function(){
+//alert('noob');
+   mobwizpower($('#mobwizard'),'on');
+
+});
+
+$('#mobwizclose').click(function(){
+//alert('noob');
+   mobwizpower($('#mobwizard'),'off');
+
+});
+
+
+});
+
+$(document).ready(function(){
+
+    $('#mobilewizardmaster').smartWizard(
+     {
+        theme:'dots',
+        autoAdjustHeight:true
+});
+
 });
 
 </script>
