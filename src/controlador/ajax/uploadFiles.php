@@ -15,11 +15,14 @@
 
 
     $_path_report=$_SESSION['temporal_path'];
-    $file_name=$action."_".$tmp_file;
+    $file_name=$tmp_file;
     
     $upload_folder = $_path_report;
 
     $_pos=strrpos($tmp_file, '/', -1);
+    if($_pos==false){
+        $_pos=strrpos($tmp_file, '\\', -1);
+    }
     $_path=substr($tmp_file,$_pos+1,strlen($tmp_file)-$_pos);
     $_path2="";
     
@@ -43,7 +46,12 @@
                     $_account=$_payingController->getAccount($_company['stripeAccount']);
                     if(is_object($_account) or is_array($_account)){
                         $_result=$_payingController->update_file_stripe_validation($archivador,$_action,$_company['stripeAccount']);
-                        $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$archivador."]",'extmsg'=>$_ext_msg);
+                        if(is_object($_result) or is_array($_result)){
+                            $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$archivador."]",'extmsg'=>"OK");
+                        }else{
+                            $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$archivador."]",'extmsg'=>$_result);
+                        }
+                        
                     }else{
                         $return = Array('ok'=>"FALSE",'msg' => "Error, the account do not exist. account name [".$_company['stripeAccount']."]",'extmsg'=>$_ext_msg);
                     }
@@ -52,7 +60,24 @@
                 }
                 break;
             case "documentIDBack":
-
+                $_userController= new userController();
+                $_payingController= new payingController();
+                $_company=$_userController->getCompanyById($_id_action);
+                if(is_object($_company) or is_array($_company)){
+                    $_account=$_payingController->getAccount($_company['stripeAccount']);
+                    if(is_object($_account) or is_array($_account)){
+                        $_result=$_payingController->update_file_stripe_validation($archivador,$_action,$_company['stripeAccount']);
+                        if(is_object($_result) or is_array($_result)){
+                            $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$archivador."]",'extmsg'=>"OK");
+                        }else{
+                            $return = Array('ok'=>"FALSE",'msg' => "Error, uploading file. name [".$archivador."]",'extmsg'=>$_result);
+                        }
+                    }else{
+                        $return = Array('ok'=>"FALSE",'msg' => "Error, the account do not exist. account name [".$_company['stripeAccount']."]",'extmsg'=>$_account);
+                    }
+                }else{
+                    $return = Array('ok'=>"FALSE",'msg' => "Error, the company do not exist. name [".$_id_action."]",'extmsg'=>$_ext_msg);
+                }
                 break;
             default:
                 $return = Array('ok'=>"TRUE",'msg' => "The file was uploaded correctly. name [".$file_name."]",'extmsg'=>$_ext_msg);

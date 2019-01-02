@@ -918,47 +918,47 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_business_name">Business Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php echo $_array_stripe_info->legal_entity->business_name ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php if(isset($_array_stripe_info->legal_entity->business_name)){ echo $_array_stripe_info->legal_entity->business_name;}  ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_business_tax_id">Business tax id</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php echo $_array_stripe_info->legal_entity->business_tax_id_provided ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php if(isset($_array_stripe_info->legal_entity->business_tax_id_provided)){echo $_array_stripe_info->legal_entity->business_tax_id_provided;} ?>" />
                                             </div> 
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_State">State</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php echo $_array_stripe_info->legal_entity->address->state ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php if(isset($_array_stripe_info->legal_entity->address->state)){echo $_array_stripe_info->legal_entity->address->state;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_City">City</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php echo $_array_stripe_info->legal_entity->address->city ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php if(isset($_array_stripe_info->legal_entity->address->city)){echo $_array_stripe_info->legal_entity->address->city;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_Zipcode">Zipcode</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php echo $_array_stripe_info->legal_entity->address->postal_code ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php if(isset($_array_stripe_info->legal_entity->address->postal_code)){echo $_array_stripe_info->legal_entity->address->postal_code;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_Address">Address</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php echo $_array_stripe_info->legal_entity->address->line1 ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php if(isset($_array_stripe_info->legal_entity->address->line1)){echo $_array_stripe_info->legal_entity->address->line1;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_first_name">First Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php echo $_array_stripe_info->legal_entity->first_name ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php if(isset($_array_stripe_info->legal_entity->first_name)){echo $_array_stripe_info->legal_entity->first_name;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_last_name">Last Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php echo $_array_stripe_info->legal_entity->last_name ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php if(isset($_array_stripe_info->legal_entity->last_name)){echo $_array_stripe_info->legal_entity->last_name;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
-                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year?>" />
+                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year;}?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php echo $_array_stripe_info->legal_entity->ssn_last_4_provided ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php if(isset($_array_stripe_info->legal_entity->ssn_last_4_provided)){echo $_array_stripe_info->legal_entity->ssn_last_4_provided;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php echo $_array_stripe_info->legal_entity->personal_id_number ?>" />
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="stripeImage">Document ID Front</label>
@@ -1004,7 +1004,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 <div class="form-group">
 
                                     <label class="control-label">Billing Address 2</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
 
                                     <label class="control-label">Billing Address (Con't)</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
@@ -3101,7 +3101,7 @@ if(!empty($_actual_company['postCardValue'])){
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDFrontImage','documentIDFront','<?php echo $_actual_company['CompanyID']?>')">Upload</button> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDFrontImage','documentIDFront','<?php echo $_actual_company['CompanyID']?>','myDocumentIDFront')">Upload</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -3127,7 +3127,7 @@ if(!empty($_actual_company['postCardValue'])){
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDBackImage','documentIDBack','<?php echo $_actual_company['CompanyID']?>')">Upload</button>
+                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDBackImage','documentIDBack','<?php echo $_actual_company['CompanyID']?>','myDocumentIDBack')">Upload</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

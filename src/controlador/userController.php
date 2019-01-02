@@ -557,12 +557,19 @@ class userController{
                     if (strlen($_array_stripe_info->legal_entity->dob->month)==1){
                         $_array_stripe_info->legal_entity->dob->month="0".$_array_stripe_info->legal_entity->dob->month;
                     }
+                    if (strlen($_array_stripe_info->legal_entity->dob->day)==1){
+                        $_array_stripe_info->legal_entity->dob->day="0".$_array_stripe_info->legal_entity->dob->day;
+                    }
                     if ($_array_stripe_info->legal_entity->business_tax_id_provided==1){
                         $_array_stripe_info->legal_entity->business_tax_id_provided ="Provided";
                     }
                     if ($_array_stripe_info->legal_entity->ssn_last_4_provided==1){
                         $_array_stripe_info->legal_entity->ssn_last_4_provided ="Provided";
                     }
+                    if ($_array_stripe_info->legal_entity->personal_id_number_provided==1){
+                        $_array_stripe_info->legal_entity->personal_id_number_provided ="Provided";
+                    }
+                    
                 }
                 $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
                 $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
@@ -697,7 +704,7 @@ class userController{
         }else{
             $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
         }
-        return "The employee identify by ".$_companyID." was updated corretly".$_aditional_message;
+        return "The company identify by ".$_companyID." was updated corretly".$_aditional_message;
 
     }
 
@@ -707,7 +714,7 @@ class userController{
                                             $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
                                             $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$path_file,
                                             $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id){
-
+        $_account_id="";
         $_company_data=$this->getCompanyById($_companyID);
         if($_company_data==null){
             return "Fail to update info company for stripe, company not found [$_companyID]";
@@ -716,13 +723,19 @@ class userController{
                 $_account_id=$_company_data['stripeAccount'];
             }else{
                 $result=$this->createAccount($_companyID,$_company_data['CompanyEmail']);
-                $_account_id=$_result['id'];
+                if(is_object($result) or is_array($result)){
+                    $_account_id=$result['id'];
+                }
+                
             }
-            $_result=$this->updateAccount($_account_id,$_compamnyrouting_number,$_compamnyaccount_number,$_compamnyaccount_holder_name,$_compamnyaccount_holder_type,
+            if(!empty($_account_id)){
+                $_result=$this->updateAccount($_account_id,
                                             $_compamnylegal_entity_dob,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
                                             $_compamnylegal_entity_type,$_compamnylegal_entity_City,$_compamnylegal_entity_Address,$_compamnylegal_entity_Zipcode,
                                             $_compamnylegal_entity_State,$_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$path_file,
                                             $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id);
+            }
+            
 
         }
         return $_result;
@@ -1310,7 +1323,7 @@ class userController{
         return $_objPay->getValidateAccount($account);
     }
 
-    public function updateAccount($stripeID,$routing_number,$account_number,$account_holder_name,$account_holder_type,
+    public function updateAccount($stripeID,
                                     $birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,
                                     $path_file,$business_name,$business_tax_id){
         $_objPay=new payingController();

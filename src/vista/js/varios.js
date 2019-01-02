@@ -727,7 +727,7 @@ function updateDataCompany(){
     
     var compamnylegal_entity_business_name=$("input#compamnylegal_entity_business_name").val();
     var compamnylegal_entity_business_tax_id=$("input#compamnylegal_entity_business_tax_id").val();
-    var inputFileImage = document.getElementById('stripeImage');
+    
     
     msg="";
     if(compamnylegal_entity_first_name=="" ||  compamnylegal_entity_first_name==null || compamnylegal_entity_first_name==undefined){
@@ -5114,7 +5114,7 @@ function validate_fields_stripe_account(){
     }
 }
 
-function uploadFileAjax(fileName,action,id_action){
+function uploadFileAjax(fileName,action,id_action,screen_to_hide){
     var inputFileImage = document.getElementById(fileName);
     var file = inputFileImage.files[0];
     var data = new FormData();
@@ -5122,6 +5122,7 @@ function uploadFileAjax(fileName,action,id_action){
     var url = 'controlador/ajax/uploadFiles.php';
     data.append('action',action);
     data.append('id_action',id_action);
+    //jsShowWindowLoad('Uploading File');
     $.ajax({
         url:url,
         type:'POST',
@@ -5133,12 +5134,18 @@ function uploadFileAjax(fileName,action,id_action){
             console.log(json);
             data=jQuery.parseJSON(json);
             alert(data.msg+'\n'+data.extmsg);
+            var n = data.msg.indexOf("Error");
+            if(n>-1){
+            }else{
+                $('#'+screen_to_hide).modal("hide");
+            }
         },
         error : function(xhr, status) {
             alert('An error occurred when uploading the file. It could not be saved.');
         },
         complete : function(xhr, status) {
             //alert('The operation end correctly');
+            //jsRemoveWindowLoad('');
         }
     });
 }

@@ -363,8 +363,8 @@ class paying_stripe  extends connection{
         $this->_error_message="";
         try{
             $objStripeAccount=$this->getAccount($account);
-    
-            echo substr($birth_day, 3,2)."<br>";
+            
+            /*echo substr($birth_day, 3,2)."<br>";
             echo substr($birth_day, 0,2)."<br>";
             echo substr($birth_day, 6,4)."<br>";
             echo $first_name."<br>";
@@ -375,9 +375,9 @@ class paying_stripe  extends connection{
             echo $zipcode."<br>";
             echo $state."<br>";
             echo $last4."<br>";
-            echo $personalid."<br>";
+            echo $personalid."<br>";*/
 
-            if(strcmp($type,"individual")==0){
+            if(is_object($objStripeAccount) or is_array($objStripeAccount)){
                 if(!empty($birth_day)){
                     $objStripeAccount->legal_entity->dob->day=substr($birth_day, 3,2);
                 }
@@ -387,65 +387,52 @@ class paying_stripe  extends connection{
                 if(!empty($birth_day)){
                 $objStripeAccount->legal_entity->dob->year=substr($birth_day, 6,4);
                 }
-            }else{
-                $objStripeAccount->legal_entity->business_name=$business_name;
-                if(strcmp($business_tax_id,"Provided")!=0){
-                    $objStripeAccount->legal_entity->business_tax_id=$business_tax_id;
+                if(strcmp($type,"individual")==0){
+                    
+                }else{
+                    $objStripeAccount->legal_entity->business_name=$business_name;
+                    if(strcmp($business_tax_id,"Provided")!=0){
+                        $objStripeAccount->legal_entity->business_tax_id=$business_tax_id;
+                    }
                 }
-            }
-            
-            //individual
-            //company
-            if(!empty($type)){
-                $objStripeAccount->legal_entity->type=$type;
-            }
-            if(!empty($city)){
-                $objStripeAccount->legal_entity->address->city=$city;
-            }
-            if(!empty($line1)){
-                $objStripeAccount->legal_entity->address->line1=$line1;
-            }
-            if(!empty($zipcode)){
-                $objStripeAccount->legal_entity->address->postal_code=$zipcode;
-            }
-            if(!empty($state)){
-                $objStripeAccount->legal_entity->address->state=$state;
-            }
-            
-            
-            //echo "<br>".$this->getValidateAccount($account)."<br>";
-            $_result=$this->getValidateAccount($account);
-
-            if(is_array($_result)){
-                $objStripeAccount->legal_entity->first_name=$first_name;
-                $objStripeAccount->legal_entity->last_name=$last_name;
-                $objStripeAccount->legal_entity->personal_id_number=$personalid;
-                if(strcmp($last4,"Provided")!=0){
-                    $objStripeAccount->legal_entity->ssn_last_4=$last4;
+                
+                //individual
+                //company
+                if(!empty($type)){
+                    $objStripeAccount->legal_entity->type=$type;
+                }
+                if(!empty($city)){
+                    $objStripeAccount->legal_entity->address->city=$city;
+                }
+                if(!empty($line1)){
+                    $objStripeAccount->legal_entity->address->line1=$line1;
+                }
+                if(!empty($zipcode)){
+                    $objStripeAccount->legal_entity->address->postal_code=$zipcode;
+                }
+                if(!empty($state)){
+                    $objStripeAccount->legal_entity->address->state=$state;
                 }
                 
                 
-                    
-                    
-                
-                
-            }
-            
-            
-            if(!empty($path_file)){
-                $file=$path_file;
-                echo "llego aca".$path_file;
-                //$_response=$this->upload_file($file);
-                //$objStripeAccount->legal_entity->verification->document=$_response['id'];
-            }
-            
-        
-            $objStripeAccount->tos_acceptance->date=time();
-            $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
-
-            $_result=$objStripeAccount->save();
-
-            //$_result="update Account Correctly";
+                //echo "<br>".$this->getValidateAccount($account)."<br>";
+                $_result=$this->getValidateAccount($account);
+    
+                if(is_array($_result)){
+                    $objStripeAccount->legal_entity->first_name=$first_name;
+                    $objStripeAccount->legal_entity->last_name=$last_name;
+                    if(strcmp($personalid,"Provided")!=0 and $objStripeAccount->legal_entity->personal_id_number_provided!=1){
+                        $objStripeAccount->legal_entity->personal_id_number=$personalid;
+                    }
+                    if(strcmp($last4,"Provided")!=0 and $objStripeAccount->legal_entity->ssn_last_4_provided!=1){
+                        $objStripeAccount->legal_entity->ssn_last_4=$last4;
+                    }
+                }
+                $objStripeAccount->tos_acceptance->date=time();
+                $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
+    
+                $_result=$objStripeAccount->save();
+            }            
         } catch(\Stripe\Error\Card $e) {
             $_result="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -682,7 +669,7 @@ class paying_stripe  extends connection{
         $this->_error_message="";
         try{
             $fp = fopen($file_name, 'r');
-            echo "<br><br>abrir archivo";
+            //echo "<br><br>abrir archivo";
             $_file_response = \Stripe\FileUpload::create(array(
                 'purpose' => 'identity_document',
                 'file' => $fp
@@ -716,7 +703,7 @@ class paying_stripe  extends connection{
         $this->_error_message="";
         try{
             $fp = fopen($file_name, 'r');
-            echo "<br><br>abrir archivo";
+            //echo "<br><br>abrir archivo";
             $_file_response = \Stripe\FileUpload::create(array(
                 'purpose' => 'identity_document',
                 'file' => $fp

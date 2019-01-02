@@ -478,13 +478,62 @@ class payingController{
             if(is_object($_result) or is_array($_result)){
                 switch($type_file){
                     case "documentIDFront":
-                        $_account->legal_entity->verification->document=$_result['id'];
-                        $_account->save();
-
+                        try{
+                            $_account->legal_entity->verification->document=$_result['id'];
+                            $_account->save();
+                            $_result=$_account;
+                        } catch(\Stripe\Error\Card $e) {
+                            $_file_response="Card error";
+                        } catch (\Stripe\Error\RateLimit $e) {
+                            // Too many requests made to the API too quickly
+                            $_result="Too many requests made to the API too quickly ".$e->getMessage();
+                        } catch (\Stripe\Error\InvalidRequest $e) {
+                            // Invalid parameters were supplied to Stripe's API
+                            $_result="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+                        } catch (\Stripe\Error\Authentication $e) {
+                            // Authentication with Stripe's API failed
+                            // (maybe you changed API keys recently)
+                            $_result="Authentication with Stripe's API failed ".$e->getMessage();
+                        } catch (\Stripe\Error\ApiConnection $e) {
+                            // Network communication with Stripe failed
+                            $_result="Network communication with Stripe failed ".$e->getMessage();
+                        } catch (\Stripe\Error\Base $e) {
+                            // Display a very generic error to the user, and maybe send
+                            // yourself an email
+                            $_result="Display a very generic error to the user, and maybe send ".$e->getMessage();
+                        } catch (Exception $e) {
+                            // Something else happened, completely unrelated to Stripe
+                            $_result="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+                        }
                         break;
                     case "documentIDBack":
-                        $_account->legal_entity->verification->document=$_result['id'];
-                        $_account->save();
+                        try{
+                            $_account->legal_entity->verification->document_back=$_result['id'];
+                            $_account->save();
+                            $_result=$_account;
+                        } catch(\Stripe\Error\Card $e) {
+                            $_result="Card error";
+                        } catch (\Stripe\Error\RateLimit $e) {
+                            // Too many requests made to the API too quickly
+                            $_result="Too many requests made to the API too quickly ".$e->getMessage();
+                        } catch (\Stripe\Error\InvalidRequest $e) {
+                            // Invalid parameters were supplied to Stripe's API
+                            $_result="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+                        } catch (\Stripe\Error\Authentication $e) {
+                            // Authentication with Stripe's API failed
+                            // (maybe you changed API keys recently)
+                            $_result="Authentication with Stripe's API failed ".$e->getMessage();
+                        } catch (\Stripe\Error\ApiConnection $e) {
+                            // Network communication with Stripe failed
+                            $_result="Network communication with Stripe failed ".$e->getMessage();
+                        } catch (\Stripe\Error\Base $e) {
+                            // Display a very generic error to the user, and maybe send
+                            // yourself an email
+                            $_result="Display a very generic error to the user, and maybe send ".$e->getMessage();
+                        } catch (Exception $e) {
+                            // Something else happened, completely unrelated to Stripe
+                            $_result="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+                        }
                         break;
                     default:
                         break;
