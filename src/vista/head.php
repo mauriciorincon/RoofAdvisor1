@@ -65,8 +65,11 @@ if(!isset($_SESSION)) {
 	        <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->	
 
 		<script src="vista/js/orders.js"></script>
-                <link rel="stylesheet" href="vista/css/jquery.progresstracker.css">
-                <script src="vista/js/jquery.progresstracker.min.js"></script>
+      
+                <link rel="stylesheet" href="vista/css/smart_wizard.css">
+                <link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
+
+
 
 <style>
 .checked {
@@ -76,12 +79,18 @@ if(!isset($_SESSION)) {
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126810340-1"></script>
-	<script>
+
+<script>
+
+
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
 	gtag('config', 'UA-126810340-1');
-	</script>
+	
+
+
+</script>
     </head>
     <body>
     <div id="loading5">

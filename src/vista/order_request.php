@@ -1,3 +1,18 @@
+<script type="text/javascript">
+    // URL to open
+    // set URL depending on screen size
+ if ( $(window).innerWidth() <= 767 ) {        
+ var wizurl = 'vista/mob-wiz.php';//change url to myUrl
+  // load appropriate script into contentsDiv div
+   $.ajax({
+            url: wizurl,
+            cache: false,
+            success: function(html) {
+                $('#mobwizmain').html(html);
+}
+});
+}
+</script>
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width:1200px" role="document">
     <div class="modal-content logmodal">
@@ -125,13 +140,20 @@
     </div>
   </div>
 </div>-->
-
+<div id="mobwizard" class="mobwizbg" style="display:none;">
+<div style="display:block;width:100%;text-align:right;"> <i id="mobwizclose" style="padding:10px;color: #fff;" class="fas fa-power-off fa-2x"></i></div>
+<div id="mobwizmain">
+</div>
+</div>
 <div id="welcome-txt">
 <div class="mobiletxt1">   
 <span>
     Need a <strong style="color:#fa511a">Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
     </span>
 </div>
+</div>
+<div class="btnwizmobilediv1" style="display:none;">
+<button id="mobilewizbtn1" class="mobilewizbtn1" >START <i style="" class="fas fa-fingerprint"></i> HERE</button>
 </div>
 <div class="btnvidmobilediv1" style="display:none;">
 <button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
