@@ -1,8 +1,11 @@
 <?php
 
-    if(!isset($_SESSION)) { 
+    if (session_status() == PHP_SESSION_NONE) {
         session_start(); 
+        require '../conf.php';
     } 
+
+
     //if(!isset($_SESSION['application_path'])){
     $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     $_pos=strrpos($_SESSION['application_path'],"/");

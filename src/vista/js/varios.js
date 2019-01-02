@@ -154,6 +154,10 @@ $('.aboutinfo1').slick({
             $('span[name=repairDone]').text(closeService);
             $('span[name=repairOpen]').text(openService);
         }
+
+        
+        validate_fields_stripe_account();
+    
     
 } );
 
@@ -712,26 +716,68 @@ function updateDataCompany(){
     var compamnylegal_entity_last_name=$("input#compamnylegal_entity_last_name").val();
     var compamnylegal_entity_dob=$("input#compamnylegal_entity_dob").val();
     var compamnylegal_entity_type=$("select#compamnylegal_entity_type").val();
+
     var compamnylegal_entity_State=$("input#compamnylegal_entity_State").val();
     var compamnylegal_entity_City=$("input#compamnylegal_entity_City").val();
     var compamnylegal_entity_Zipcode=$("input#compamnylegal_entity_Zipcode").val();
-
     var compamnylegal_entity_Address=$("input#compamnylegal_entity_Address").val();
+
     var compamnylegal_entity_last4=$("input#compamnylegal_entity_last4").val();
     var compamnylegal_entity_personal_id=$("input#compamnylegal_entity_personal_id").val();
-    var compamnyrouting_number=$("input#compamnyrouting_number").val();
-    var compamnyaccount_number=$("input#compamnyaccount_number").val();
-
-    var compamnyaccount_holder_name=$("input#compamnyaccount_holder_name").val();
-    var compamnyaccount_holder_type=$("select#compamnyaccount_holder_type").val();
-
     
-
+    var compamnylegal_entity_business_name=$("input#compamnylegal_entity_business_name").val();
+    var compamnylegal_entity_business_tax_id=$("input#compamnylegal_entity_business_tax_id").val();
+    var inputFileImage = document.getElementById('stripeImage');
+    
+    msg="";
+    if(compamnylegal_entity_first_name=="" ||  compamnylegal_entity_first_name==null || compamnylegal_entity_first_name==undefined){
+        msg+="Please verify the first name \n";
+    }
+    if(compamnylegal_entity_last_name=="" ||  compamnylegal_entity_last_name==null || compamnylegal_entity_last_name==undefined){
+        msg+="Please verify the last name \n";
+    }
+    if(compamnylegal_entity_type=="" ||  compamnylegal_entity_type==null || compamnylegal_entity_type==undefined){
+        msg+="Please verify the type of user \n";
+    }
+    if(compamnylegal_entity_State=="" ||  compamnylegal_entity_State==null || compamnylegal_entity_State==undefined){
+        msg+="Please verify the state \n";
+    }
+    if(compamnylegal_entity_City=="" ||  compamnylegal_entity_City==null || compamnylegal_entity_City==undefined){
+        msg+="Please verify the city \n";
+    }
+    if(compamnylegal_entity_Zipcode=="" ||  compamnylegal_entity_Zipcode==null || compamnylegal_entity_Zipcode==undefined){
+        msg+="Please verify the zipcode \n";
+    }
+    if(compamnylegal_entity_Address=="" ||  compamnylegal_entity_Address==null || compamnylegal_entity_Address==undefined){
+        msg+="Please verify the address \n";
+    }
+    if(compamnylegal_entity_last4=="" ||  compamnylegal_entity_last4==null || compamnylegal_entity_last4!="Provided"){
+        if(compamnylegal_entity_last4.length!=4){
+            msg+="Please verify the Social Security Number, it must be four(4) digits \n";
+        }
+    }
+    if(compamnylegal_entity_personal_id=="" ||  compamnylegal_entity_personal_id==null || compamnylegal_entity_personal_id==undefined){
+        msg+="Please verify the Personal Id \n";
+    }
+    if(compamnylegal_entity_type=="individual"){
+        
+    }else if(compamnylegal_entity_type=="company"){
+        if(compamnylegal_entity_business_name=="" ||  compamnylegal_entity_business_name==null || compamnylegal_entity_business_name==undefined){
+            msg+="Please verify the business name \n";
+        }
+        if(compamnylegal_entity_business_tax_id=="" ||  compamnylegal_entity_business_tax_id==null || compamnylegal_entity_business_tax_id==undefined){
+            msg+="Please verify the business tax id \n";
+        }
+    }
     if( typeof companyAddress2 === 'undefined' || companyAddress2 === null ){
         companyAddress2="";
     }
     if( typeof companyAddress3 === 'undefined' || companyAddress3 === null ){
         companyAddress3="";
+    }
+    if(msg!=""){
+        alert(msg);
+        return;
     }
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCompany.php", { "companyID" : companyID,"compamnyName" : compamnyName,"firstCompanyName": firstCompanyName,
@@ -746,17 +792,18 @@ function updateDataCompany(){
     "compamnylegal_entity_dob":compamnylegal_entity_dob,"compamnylegal_entity_type":compamnylegal_entity_type,
     "compamnylegal_entity_State":compamnylegal_entity_State,"compamnylegal_entity_City":compamnylegal_entity_City,
     "compamnylegal_entity_Zipcode":compamnylegal_entity_Zipcode,"compamnylegal_entity_Address":compamnylegal_entity_Address,
-    "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,
-    "compamnyrouting_number":compamnyrouting_number,"compamnyaccount_number":compamnyaccount_number,
-    "compamnyaccount_holder_name":compamnyaccount_holder_name,"compamnyaccount_holder_type":compamnyaccount_holder_type}, null, "text" )
+    "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,"path_file":"",
+    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
             var n = data.indexOf("Error");
             if(n==-1){
+                $('#myMensaje div.modal-header h4').html("Update Company Info");
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }else{
+                $('#myMensaje div.modal-header h4').html("Update Company Info Error");
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }
@@ -2161,6 +2208,11 @@ $( function() {
         $.datepicker.setDefaults($.datepicker.regional['en']);
         $( ".datepicker" ).datepicker({ dateFormat: 'mm/dd/yy', minDate: 7  } );
   } );
+
+  $( function() {
+    $.datepicker.setDefaults($.datepicker.regional['en']);
+    $( ".datepickerdob" ).datepicker({ dateFormat: 'mm/dd/yy'} );
+} );
 
 //Date picker order
 $( function() {
@@ -4923,7 +4975,7 @@ function prepareCreateBank(account_id){
     $('input#myProfileBankaccount_number').val('');
 }
 
-function actionWithBank(action,account_id,bank_id){
+function actionWithBank(action,account_id,bank_id,row){
     
     if(action=='insert'){
         var account_id=$('input#myProfileBankAccountId').val();
@@ -4980,23 +5032,113 @@ function actionWithBank(action,account_id,bank_id){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $("#myProfileBank").modal("hide");
-                $('#textAnswerOrder').html(data);
-                $('#headerTextAnswerOrder').html("Procession Correct");
+                $('#headerTextAnswerCompany').html('Bank Actions');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show"); 
+                if(action=='delete'){
+                    $(row).parent().parent().remove();
+                } 
             }else{
-                $("#myProfileBank").modal("hide");
-                $('#textAnswerOrder').html(data);
-                $('#headerTextAnswerOrder').html("Processing error");
+                $('#headerTextAnswerCompany').html('Bank Actions');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show");  
             }                
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            //$("#myModalRespuesta").modal("show");
             jsRemoveWindowLoad('');
-            $('#myModalRespuesta').modal({backdrop: 'static'});
+           
+            
+            
         }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             jsRemoveWindowLoad('');
+        }
+    });
+}
+
+function query_valid_account_stripe(account){
+    
+    jsShowWindowLoad('Validating Company');
+    $.post( "controlador/ajax/getValidateAccount.php", { "account" : account}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            if(data.indexOf("null")>-1){
+                $('#headerTextAnswerCompany').html('Valitating Response');
+                $('#myModalRespuesta div.modal-body').html('the entered account does not exist') ;
+                $("#myModalRespuestaCompany").modal("show");
+            }else{
+                var n = data.indexOf("Error");
+                if(n==-1){
+                    $('#headerTextAnswerCompany').html('Valitating Response');
+                    $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                    $("#myModalRespuestaCompany").modal("show");  
+                }else{
+                    $('#headerTextAnswerCompany').html('Valitating Response');
+                    $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                    $("#myModalRespuestaCompany").modal("show");
+                }
+            }
+            
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
+}
+
+function validate_fields_stripe_account(){
+    var typePerson = $('#compamnylegal_entity_type').val();
+    if(typePerson=='company'){
+        $('label[for=compamnylegal_entity_business_name], input#compamnylegal_entity_business_name').show();
+        $('label[for=compamnylegal_entity_business_tax_id], input#compamnylegal_entity_business_tax_id').show();
+        $('label[for=compamnylegal_entity_dob], input#compamnylegal_entity_dob').show();
+        
+        //$('label[for=compamnylegal_entity_personal_id], input#compamnylegal_entity_personal_id').hide();
+        //$('label[for=stripeImage], input#stripeImage').hide();
+    }else{
+        $('label[for=compamnylegal_entity_business_name], input#compamnylegal_entity_business_name').hide();
+        $('label[for=compamnylegal_entity_business_tax_id], input#compamnylegal_entity_business_tax_id').hide();
+        $('label[for=compamnylegal_entity_dob], input#compamnylegal_entity_dob').show();
+        //$('label[for=compamnylegal_entity_personal_id], input#compamnylegal_entity_personal_id').show();
+        //$('label[for=stripeImage], input#stripeImage').show();
+    }
+}
+
+function uploadFileAjax(fileName,action,id_action){
+    var inputFileImage = document.getElementById(fileName);
+    var file = inputFileImage.files[0];
+    var data = new FormData();
+    data.append('file',file);
+    var url = 'controlador/ajax/uploadFiles.php';
+    data.append('action',action);
+    data.append('id_action',id_action);
+    $.ajax({
+        url:url,
+        type:'POST',
+        contentType:false,
+        data:data,
+        processData:false,    
+        cache:false,
+        success : function(json) {
+            console.log(json);
+            data=jQuery.parseJSON(json);
+            alert(data.msg+'\n'+data.extmsg);
+        },
+        error : function(xhr, status) {
+            alert('An error occurred when uploading the file. It could not be saved.');
+        },
+        complete : function(xhr, status) {
+            //alert('The operation end correctly');
         }
     });
 }

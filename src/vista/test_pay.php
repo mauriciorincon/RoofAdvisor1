@@ -50,17 +50,19 @@
     //var_dump($_result);
 
     echo "<br><br>";
-    $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
-    print_r($var_usr->external_accounts);
-    echo count($var_usr->external_accounts);
+    $var_usr=$_userModel->getAccount('acct_1DnybNLmUezEJ2Jl');
+    print_r($var_usr);
+    echo "<br><br>";
+    echo $var_usr->legal_entity->ssn_last_4 ;
+    /*echo count($var_usr->external_accounts);
     print_r($var_usr->external_accounts->data);
     foreach($var_usr->external_accounts->data as $clave=>$bank){
         echo "Bank <br><br>";
         print_r($bank);
-    }
+    }*/
 
     echo "<br><br>";
-    return;
+    //return;
     //$_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
     //var_dump($_response);
     //echo "<br><br>";
@@ -76,7 +78,7 @@
 
     //$var_usr->external_accounts->create(array("external_account" => $_response['id']));
     
-    $var_usr->legal_entity->dob->day=18;
+    /*$var_usr->legal_entity->dob->day=18;
     $var_usr->legal_entity->dob->month=9;
     $var_usr->legal_entity->dob->year=1980;
     $var_usr->legal_entity->first_name='Alex';
@@ -100,9 +102,9 @@
     $var_usr->legal_entity->verification->document=$_response['id'];
 
 
-    $var_usr->save();
+    $var_usr->save();*/
     echo "<br><br>";
-    var_dump($_userModel->getValidateAccount('acct_1DmBTWHmepHKG8Dk'));
+    var_dump($_userModel->getValidateAccount('acct_1DntFbD7z6TK2mJK'));
 
     //$_oCalendar=new calendar();
 

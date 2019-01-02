@@ -372,6 +372,15 @@ class payingController{
         return $_result;
     }
 
+    function updateAccount($stripeID,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file,$business_name,$business_tax_id){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->updateAccount($stripeID,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file,$business_name,$business_tax_id);
+
+        return $_result;
+    }
+
     function getAccount($stripeID){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
@@ -381,6 +390,14 @@ class payingController{
         return $_result;
     }
 
+    function getValidateAccount($account){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->getValidateAccount($account);
+
+        return $_result;
+    }
     function validate_bank_account($stripeID,$account_number){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
@@ -404,6 +421,13 @@ class payingController{
         return $_result;
     }
 
+    function update_bank_account($account,$bank_id,$field,$value){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->update_bank_account($account,$bank_id,$field,$value);
+        return $_result;
+    }
     function link_bank_to_account($account,$bank_token){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
@@ -440,6 +464,40 @@ class payingController{
             $this->_payingModel= new paying_stripe();
         }
         $_result=$this->_payingModel->update_file_stripe($file_name);
+
+        return $_result;
+    }
+
+    function update_file_stripe_validation($file_name,$type_file,$account){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_account=$this->getAccount($account);
+        if(is_object($_account) or is_array($_account)){
+            $_result=$this->_payingModel->update_file_stripe_validation($file_name);
+            if(is_object($_result) or is_array($_result)){
+                switch($type_file){
+                    case "documentIDFront":
+                        $_account->legal_entity->verification->document=$_result['id'];
+                        $_account->save();
+
+                        break;
+                    case "documentIDBack":
+                        $_account->legal_entity->verification->document=$_result['id'];
+                        $_account->save();
+                        break;
+                    default:
+                        break;
+                }
+
+            }else{
+                
+            }
+
+        }else{
+            $_result="Error, the account do not exist. name [".$account."]";
+        }
+        
 
         return $_result;
     }

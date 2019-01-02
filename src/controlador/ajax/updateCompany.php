@@ -41,17 +41,16 @@ $_compamnylegal_entity_type=$_POST["compamnylegal_entity_type"];
 $_compamnylegal_entity_State=$_POST["compamnylegal_entity_State"];
 $_compamnylegal_entity_City=$_POST["compamnylegal_entity_City"];
 $_compamnylegal_entity_Zipcode=$_POST["compamnylegal_entity_Zipcode"];
-
 $_compamnylegal_entity_Address=$_POST["compamnylegal_entity_Address"];
+
 $_compamnylegal_entity_last4=$_POST["compamnylegal_entity_last4"];
 $_compamnylegal_entity_personal_id=$_POST["compamnylegal_entity_personal_id"];
-$_compamnyrouting_number=$_POST["compamnyrouting_number"];
-$_compamnyaccount_number=$_POST["compamnyaccount_number"];
 
-$_compamnyaccount_holder_name=$_POST["compamnyaccount_holder_name"];
-$_compamnyaccount_holder_type=$_POST["compamnyaccount_holder_type"];
+$_compamnylegal_entity_business_name=$_POST["compamnylegal_entity_business_name"];
+$_compamnylegal_entity_business_tax_id=$_POST["compamnylegal_entity_business_tax_id"];
 
-
+//$_path_file=$_FILES['path_file']['tmp_name'];
+$_path_file=$_POST["path_file"];
 $_userController=new userController();
 
 $result=$_userController->updateCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
@@ -65,9 +64,8 @@ $_result1=$_userController->updateInfoCompanyStripe($_companyID,$_compamnylegal_
                                                     $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
                                                     $_compamnylegal_entity_State,$_compamnylegal_entity_City,
                                                     $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
-                                                    $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,
-                                                    $_compamnyrouting_number,$_compamnyaccount_number,
-                                                    $_compamnyaccount_holder_name,$_compamnyaccount_holder_type);
+                                                    $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$_path_file,
+                                                    $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id);
                                     
 echo $result." ".$_result1;
 

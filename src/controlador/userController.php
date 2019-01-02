@@ -551,12 +551,36 @@ class userController{
             //print_r($_actual_company);
             $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
             
-            $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);
-            $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
+            if(isset($_actual_company['stripeAccount'])){
+                $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);
+                if(is_object($_array_stripe_info) or is_array($_array_stripe_info)){
+                    if (strlen($_array_stripe_info->legal_entity->dob->month)==1){
+                        $_array_stripe_info->legal_entity->dob->month="0".$_array_stripe_info->legal_entity->dob->month;
+                    }
+                    if ($_array_stripe_info->legal_entity->business_tax_id_provided==1){
+                        $_array_stripe_info->legal_entity->business_tax_id_provided ="Provided";
+                    }
+                    if ($_array_stripe_info->legal_entity->ssn_last_4_provided==1){
+                        $_array_stripe_info->legal_entity->ssn_last_4_provided ="Provided";
+                    }
+                }
+                $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
+                $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
 
-            $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
+                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount']);
+            }else{
+                $_array_stripe_info=null;
+                $_array_stripe_bank=array();
+                $_array_stripe_balance=array();
+                $_array_stripe_transaction=array();
+            }
+            
 
-            $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount']);
+            
+
+            
+
+            
             
 
             $_array_orders_to_show=array();
@@ -678,12 +702,12 @@ class userController{
     }
 
     public function updateInfoCompanyStripe($_companyID,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
-    $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
-    $_compamnylegal_entity_State,$_compamnylegal_entity_City,
-    $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
-    $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,
-    $_compamnyrouting_number,$_compamnyaccount_number,
-    $_compamnyaccount_holder_name,$_compamnyaccount_holder_type){
+                                            $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
+                                            $_compamnylegal_entity_State,$_compamnylegal_entity_City,
+                                            $_compamnylegal_entity_Zipcode,$_compamnylegal_entity_Address,
+                                            $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$path_file,
+                                            $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id){
+
         $_company_data=$this->getCompanyById($_companyID);
         if($_company_data==null){
             return "Fail to update info company for stripe, company not found [$_companyID]";
@@ -694,16 +718,14 @@ class userController{
                 $result=$this->createAccount($_companyID,$_company_data['CompanyEmail']);
                 $_account_id=$_result['id'];
             }
-            $_result=$this->upateAccount($_account_id,$_compamnyrouting_number,$_compamnyaccount_number,$_compamnyaccount_holder_name,$_compamnyaccount_holder_type,
-                        $_compamnylegal_entity_dob,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
-                        $_compamnylegal_entity_type,$_compamnylegal_entity_City,$_compamnylegal_entity_Address,$_compamnylegal_entity_Zipcode,
-                        $_compamnylegal_entity_State,$_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,'');
+            $_result=$this->updateAccount($_account_id,$_compamnyrouting_number,$_compamnyaccount_number,$_compamnyaccount_holder_name,$_compamnyaccount_holder_type,
+                                            $_compamnylegal_entity_dob,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
+                                            $_compamnylegal_entity_type,$_compamnylegal_entity_City,$_compamnylegal_entity_Address,$_compamnylegal_entity_Zipcode,
+                                            $_compamnylegal_entity_State,$_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$path_file,
+                                            $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id);
 
         }
-
-        
-        
-
+        return $_result;
     }
 
     public function updateCompanyFields($companyID,$arrayFields){
@@ -1268,9 +1290,9 @@ class userController{
         }
     }
 
-    public function getAccount($stripeID){
+    public function getAccount($account){
         $_objPay=new payingController();
-        return $_objPay->getAccount($stripeID);
+        return $_objPay->getAccount($account);
     }
 
     public function getBalanceAccount($account){
@@ -1283,49 +1305,17 @@ class userController{
         return $_objPay->get_transaction_account($account);
     }
 
-    public function getValidateAccount($stripeID){
-        $objStripeAccount=$this->getAccount($stripeID);
-        
-        if(count($objStripeAccount->verification->fields_needed)==0){
-            return "User validate correctly";
-        }else{
-            
-            return $objStripeAccount->verification->fields_needed;
-        }
-
+    public function getValidateAccount($account){
+        $_objPay=new payingController();
+        return $_objPay->getValidateAccount($account);
     }
 
-    public function upateAccount($stripeID,$routing_number,$account_number,$account_holder_name,$account_holder_type,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file){
-        $objStripeAccount=$this->getAccount($stripeID);
-        /*for($n=0;$n<count($arrayFields);$n++){
-            $objStripeAccount[$arrayFields[$n]]=$arrayValues[$n];
-        }*/
-        
-
-        $objStripeAccount->legal_entity->dob->day=substr($birth_day, 8,2);
-        $objStripeAccount->legal_entity->dob->month=substr($birth_day, 5,2);
-        $objStripeAccount->legal_entity->dob->year=substr($birth_day, 0,4);
-        $objStripeAccount->legal_entity->first_name=$first_name;
-        $objStripeAccount->legal_entity->last_name=$last_name;
-        //individual
-        //company
-        $objStripeAccount->legal_entity->type=$type;
-        $objStripeAccount->legal_entity->address->city=$city;
-        $objStripeAccount->legal_entity->address->line1=$line1;
-        $objStripeAccount->legal_entity->address->postal_code=$zipcode;
-        $objStripeAccount->legal_entity->address->state=$state;
-        $objStripeAccount->legal_entity->ssn_last_4=$last4;
-        $objStripeAccount->legal_entity->personal_id_number=$personalid;
-
-        $file=$path_file;
-        $_response=$this->_userModel->upload_file($file);
-        $objStripeAccount->legal_entity->verification->document=$_response['id'];
-       
-        $objStripeAccount->tos_acceptance->date=time();
-        $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
-
-        $objStripeAccount->save();
-        return "update Account Correctly";
+    public function updateAccount($stripeID,$routing_number,$account_number,$account_holder_name,$account_holder_type,
+                                    $birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,
+                                    $path_file,$business_name,$business_tax_id){
+        $_objPay=new payingController();
+        $_result=$_objPay->updateAccount($stripeID,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file,$business_name,$business_tax_id);
+        return $_result;
     }
 
     public function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type){

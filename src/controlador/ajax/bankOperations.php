@@ -38,9 +38,17 @@ if(is_object($_account) or is_array($_account)){
             break;
         case 'delete':
             $_result_bank=$_paying_controller->delete_bank_account($_account,$bank_id);
+            if(is_object($_result_bank) or is_array($_result_bank)){
+                $_result_bank = "The bank account was deleted successfully";
+            }
             break;
         case 'setdefault':
-
+            $_result_bank=$_paying_controller->update_bank_account($_account,$bank_id,"default_for_currency","true");
+            if(is_object($_result_bank) or is_array($_result_bank)){
+                $_result_bank = "The bank selected was set to default for payouts";
+            }else{
+                $_result_bank = "Error, ".$_result_bank;
+            }
             break;
         default :
             break;

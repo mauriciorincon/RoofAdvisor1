@@ -329,10 +329,10 @@ class paying_stripe  extends connection{
         return $acct;
     }
 
-    public function getAccount($stripeID){
+    public function getAccount($account){
         $this->_error_message="";
         try{
-            $acct = \Stripe\Account::retrieve($stripeID);
+            $acct = \Stripe\Account::retrieve($account);
         } catch(\Stripe\Error\Card $e) {
             $acct="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -357,6 +357,129 @@ class paying_stripe  extends connection{
             $acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
         }
         return $acct;
+    }
+
+    public function updateAccount($account,$birth_day,$first_name,$last_name,$type,$city,$line1,$zipcode,$state,$last4,$personalid,$path_file,$business_name,$business_tax_id){
+        $this->_error_message="";
+        try{
+            $objStripeAccount=$this->getAccount($account);
+    
+            echo substr($birth_day, 3,2)."<br>";
+            echo substr($birth_day, 0,2)."<br>";
+            echo substr($birth_day, 6,4)."<br>";
+            echo $first_name."<br>";
+            echo $last_name."<br>";
+            echo $type."<br>";
+            echo $city."<br>";
+            echo $line1."<br>";
+            echo $zipcode."<br>";
+            echo $state."<br>";
+            echo $last4."<br>";
+            echo $personalid."<br>";
+
+            if(strcmp($type,"individual")==0){
+                if(!empty($birth_day)){
+                    $objStripeAccount->legal_entity->dob->day=substr($birth_day, 3,2);
+                }
+                if(!empty($birth_day)){
+                    $objStripeAccount->legal_entity->dob->month=substr($birth_day, 0,2);
+                }
+                if(!empty($birth_day)){
+                $objStripeAccount->legal_entity->dob->year=substr($birth_day, 6,4);
+                }
+            }else{
+                $objStripeAccount->legal_entity->business_name=$business_name;
+                if(strcmp($business_tax_id,"Provided")!=0){
+                    $objStripeAccount->legal_entity->business_tax_id=$business_tax_id;
+                }
+            }
+            
+            //individual
+            //company
+            if(!empty($type)){
+                $objStripeAccount->legal_entity->type=$type;
+            }
+            if(!empty($city)){
+                $objStripeAccount->legal_entity->address->city=$city;
+            }
+            if(!empty($line1)){
+                $objStripeAccount->legal_entity->address->line1=$line1;
+            }
+            if(!empty($zipcode)){
+                $objStripeAccount->legal_entity->address->postal_code=$zipcode;
+            }
+            if(!empty($state)){
+                $objStripeAccount->legal_entity->address->state=$state;
+            }
+            
+            
+            //echo "<br>".$this->getValidateAccount($account)."<br>";
+            $_result=$this->getValidateAccount($account);
+
+            if(is_array($_result)){
+                $objStripeAccount->legal_entity->first_name=$first_name;
+                $objStripeAccount->legal_entity->last_name=$last_name;
+                $objStripeAccount->legal_entity->personal_id_number=$personalid;
+                if(strcmp($last4,"Provided")!=0){
+                    $objStripeAccount->legal_entity->ssn_last_4=$last4;
+                }
+                
+                
+                    
+                    
+                
+                
+            }
+            
+            
+            if(!empty($path_file)){
+                $file=$path_file;
+                echo "llego aca".$path_file;
+                //$_response=$this->upload_file($file);
+                //$objStripeAccount->legal_entity->verification->document=$_response['id'];
+            }
+            
+        
+            $objStripeAccount->tos_acceptance->date=time();
+            $objStripeAccount->tos_acceptance->ip=$_SERVER['REMOTE_ADDR'];
+
+            $_result=$objStripeAccount->save();
+
+            //$_result="update Account Correctly";
+        } catch(\Stripe\Error\Card $e) {
+            $_result="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $_result="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $_result="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $_result="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $_result="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $_result="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $_result="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $_result;
+    }
+
+    function getValidateAccount($account){
+        $objStripeAccount=$this->getAccount($account);
+        
+        if(count($objStripeAccount->verification->fields_needed)==0){
+            return "all the necessary fields have been completed correctly. [".count($objStripeAccount->verification->fields_needed)."]";
+        }else{
+            return $objStripeAccount->verification->fields_needed;
+        }
     }
 
     public function create_bank_account($routing_number,$account_number,$account_holder_name,$account_holder_type,$country="US",$currency="usd"){
@@ -400,6 +523,37 @@ class paying_stripe  extends connection{
         return $b_acct;
     }
 
+    function update_bank_account($account,$bank_id,$field,$value){
+        $this->_error_message="";
+        try{
+            $b_acct=$account->external_accounts->retrieve($bank_id);
+            $b_acct -> $field =$value;
+            $b_acct->save();
+        } catch(\Stripe\Error\Card $e) {
+            $b_acct="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $b_acct="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $b_acct="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $b_acct="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $b_acct="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $b_acct="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $b_acct="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $b_acct;
+    }
     function delete_bank_account($account,$bank_id){
         $this->_error_message="";
         try{
@@ -525,6 +679,40 @@ class paying_stripe  extends connection{
     }
 
     function update_file_stripe($file_name){
+        $this->_error_message="";
+        try{
+            $fp = fopen($file_name, 'r');
+            echo "<br><br>abrir archivo";
+            $_file_response = \Stripe\FileUpload::create(array(
+                'purpose' => 'identity_document',
+                'file' => $fp
+            ));
+        } catch(\Stripe\Error\Card $e) {
+            $_file_response="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $_file_response="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $_file_response="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $_file_response="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $_file_response="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $_file_response="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $_file_response="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $_file_response;
+    }
+    function update_file_stripe_validation($file_name){
         $this->_error_message="";
         try{
             $fp = fopen($file_name, 'r');

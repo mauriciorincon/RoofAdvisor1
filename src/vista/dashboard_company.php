@@ -824,235 +824,262 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 		<!-- Modal content--> 
 
 
-        <div class="collapse container" id="companyDashProfile1"> 
+<div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
 				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
             </div> 
             <div class="row">
                 <div class="col-xs-12 col-md-6">
-             
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#profile">Basic</a></li>
-                            <li><a data-toggle="tab" href="#stripeData">Stripe</a></li>
-                            <li><a data-toggle="tab" href="#paying">Paying</a></li>
-                            <li><a data-toggle="tab" href="#others">Others</a></li>
-                        </ul>
+                    <div class="accordion" id="accordionExample">
 
-                        <div class="tab-content">
-                            <!--Div profile-->
-                            <div id="profile" class="tab-pane fade in active">
-                                
-                                <form role="form">
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <label class="control-label ">Company ID</label>
-                                            <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="<?php echo $_actual_company['CompanyID'] ?>" />
-                                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Basic Info
+                                    </button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Basic Info</button>
+                                </h2>
+                            </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">Company Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
-                                        </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="control-label ">Company ID</label>
+                                        <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="<?php echo $_actual_company['CompanyID'] ?>" />
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">First Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCompanyName" name="firstCompanyName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Last Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
-                                        </div>  
-                                        <div class="form-group">
-                                            <label class="control-label ">Email</label>
-                                            <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
-                                        </div> 
-                                        <div class="form-group">
-                                            <label class="control-label">Address</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">City</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress2" name="companyAddress2" value="<?php echo $_actual_company['CompanyAdd2'] ?>"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Zip Code</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Company Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">Phone number</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCompanyName" name="firstCompanyName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">Company Type</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
-                                        </div> 
-                                            
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                    </div>  
+
+                                    <div class="form-group">
+                                        <label class="control-label ">Email</label>
+                                        <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">City</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress2" name="companyAddress2" value="<?php echo $_actual_company['CompanyAdd2'] ?>"/>
                                     </div>
                                     
-                                </form>
-                            </div>
-
-                            <div id="stripeData" class="tab-pane fade">
-                                <form role="form">
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <label class="control-label">First Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php echo $_array_stripe_info->legal_entity->first_name ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Last Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php echo $_array_stripe_info->legal_entity->last_name ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Birthday</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity Birthday" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php echo $_array_stripe_info->legal_entity->dob->year."-".$_array_stripe_info->legal_entity->dob->month."-".$_array_stripe_info->legal_entity->dob->day ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Type</label>
-                                            <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
-                                                <option value="individual">Individual</option>
-                                                <option value="company">Company</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">State</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php echo $_array_stripe_info->legal_entity->address->state ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">City</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php echo $_array_stripe_info->legal_entity->address->city ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Zipcode</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php echo $_array_stripe_info->legal_entity->address->postal_code ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Address</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php echo $_array_stripe_info->legal_entity->address->line1 ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Social security number last 4</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php echo $_array_stripe_info->legal_entity->ssn_last_4 ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Personal Id</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php echo $_array_stripe_info->legal_entity->personal_id_number ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Routing Number</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter routing_number" id="compamnyrouting_number" name="compamnyrouting_number" value="<?php echo $_array_stripe_info_bank->bank_account->routing_number ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Account Number</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter account_number" id="compamnyaccount_number" name="compamnyaccount_number" value="<?php echo $_array_stripe_info_bank->bank_account->last4 ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Account Holder Name</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter account_holder_name" id="compamnyaccount_holder_name" name="compamnyaccount_holder_name" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_name ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Account Holder Type</label>
-                                            <select id="compamnyaccount_holder_type" name="compamnyaccount_holder_type" value="<?php echo $_array_stripe_info_bank->bank_account->account_holder_type ?>">
-                                                <option value="individual">Individual</option>
-                                                <option value="company">Company</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Image</label>
-                                            <input id="stripeImage" type="file" accept="image/x-png,image/gif,image/jpeg" name="stripeImage" />
-                                        </div>
-                                        <div>
-                                            <label>
-                                            Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
-                                            </label>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Zip Code</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
                                     </div>
-                                </form>
-                            </div>
 
-                            <!--Div paying-->
-                            <div id="paying" class="tab-pane fade">
-                                
-                                <form role="form">
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <label class="control-label">Billing Address</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-
-                                            <label class="control-label">Billing Address 2</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-
-                                            <label class="control-label">Billing Address (Con't)</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-
-                                            <label class="control-label">Billing Address (Con't)</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">City</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">State</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Zip Code</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Credit Card Expiration Month (MM)</label>
-
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">PayInfoCredit Card Number</label>
-
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Credit Card Expiration Year (YYYY)</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Credit Card Number</label>
-
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Credit Card CSV</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Name on Cred Card</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">First Name on Credit Card</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Last Name on Credit Card</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Phone number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
                                     </div>
-                                </form>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Company Type</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>Stripe Info
+                                    </button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Type</label>
+                                                <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" onchange="validate_fields_stripe_account()" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
+                                                    <option value="company">Company</option>
+                                                    <option value="individual">Individual</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_name">Business Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php echo $_array_stripe_info->legal_entity->business_name ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_tax_id">Business tax id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php echo $_array_stripe_info->legal_entity->business_tax_id_provided ?>" />
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_State">State</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php echo $_array_stripe_info->legal_entity->address->state ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_City">City</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php echo $_array_stripe_info->legal_entity->address->city ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Zipcode">Zipcode</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php echo $_array_stripe_info->legal_entity->address->postal_code ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Address">Address</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php echo $_array_stripe_info->legal_entity->address->line1 ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_first_name">First Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php echo $_array_stripe_info->legal_entity->first_name ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last_name">Last Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php echo $_array_stripe_info->legal_entity->last_name ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
+                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php echo $_array_stripe_info->legal_entity->ssn_last_4_provided ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php echo $_array_stripe_info->legal_entity->personal_id_number ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="stripeImage">Document ID Front</label>
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDFront" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Front
+                                                </a>
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="stripeImage">Document ID Back</label>
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDBack" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Back
+                                                </a>
+                                                
+                                            </div>
+                                            <div>
+                                                <label>
+                                                Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
+                                                </label>
+                                            </div>
+                                            <button type="button" class="btn-primary btn-sm" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Billing Address
+                                    </button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Billing Address</button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="form-group">
+
+                                    <label class="control-label">Billing Address 2</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                    <label class="control-label">Billing Address (Con't)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                    <label class="control-label">Billing Address (Con't)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">City</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">State</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Zip Code</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Credit Card Expiration Month (MM)</label>
+
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">PayInfoCredit Card Number</label>
+
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Credit Card Expiration Year (YYYY)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Credit Card Number</label>
+
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Credit Card CSV</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Name on Cred Card</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">First Name on Credit Card</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Last Name on Credit Card</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Others
+                                    </button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Others</button>
+                                </h2>
                             </div>
 
-                            <!--Div orders-->
-                            <div id="others" class="tab-pane fade">
-                                <form role="form">
-                                    <div class="panel-body">
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
                                         <div class="form-group">
                                             <label class="control-label">Company Insurance Name</label>
                                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Insurance Name" id="compamnyAgencyName" name="compamnyAgencyName" value="<?php echo $_actual_company['InsLiabilityAgencyName'] ?>" />
@@ -1073,164 +1100,166 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             <label class="control-label">Company Rating</label>
                                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
                                         </div>
-                                    
-                                    </div>
-                                </form>
+                                </div>
                             </div>
-
-                        </div> 
+                        </div>
+                    </div>    
                     
-                        <button type="button" class="btn-primary btn-sm" onClick="updateDataCompany()" >Update Info</button>        
-                       
-                    </div>
+                </div>
                 
                 <div class="col-xs-12 col-md-6">
-                <div class="form-group">
-                                            
-                    <div>
-                        Wallet Balance<br>
-                        <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                    <div class="form-group">
+                                                
+                        <div>
+                            Wallet Balance<br>
+                            <a href="">+ Add funds to your RoofServiceNow Wallet</a>
 
-                        <div class="alert alert-primary" role="alert">
-                        Balance
-                        </div>
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td>id</td>
-                                <td>Type</td>
-                                <td>Amount</td>
-                                <td>Currency</td>
-                                <td>bank_account</td>
-                                <td>bitcoin_receiver</td>
-                                <td>card</td>
-                            </tr> 
-                            <?php
-                                $n=1;
-                                foreach($_array_stripe_balance->available as $clave=>$trancs){
-                                   echo "<tr>".
-                                            "<td>".$n."</td>".
-                                            "<td>Available</td>".
-                                            "<td>".$trancs->amount."</td>".
-                                            "<td>".$trancs->currency."</td>".
-                                            "<td>".$trancs->source_types->bank_account."</td>".
-                                            "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                            "<td>".$trancs->source_types->card."</td>".
-                                        "</tr>";
-                                    $n++;
-                                }
-                                if(isset($_array_stripe_balance->connect_reserved)){
-                                    foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                            <div class="alert alert-primary" role="alert">
+                            Balance
+                            </div>
+                            <table class="table table-bordered" >
+                                <tr>
+                                    <td>id</td>
+                                    <td>Type</td>
+                                    <td>Amount</td>
+                                    <td>Currency</td>
+                                    <td>bank_account</td>
+                                    <td>bitcoin_receiver</td>
+                                    <td>card</td>
+                                </tr> 
+                                <?php
+                                    $n=1;
+                                    if(isset($_array_stripe_balance->available)){
+                                        foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                        echo "<tr>".
+                                                    "<td>".$n."</td>".
+                                                    "<td>Available</td>".
+                                                    "<td>".$trancs->amount."</td>".
+                                                    "<td>".$trancs->currency."</td>".
+                                                    "<td>".$trancs->source_types->bank_account."</td>".
+                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                    "<td>".$trancs->source_types->card."</td>".
+                                                "</tr>";
+                                            $n++;
+                                        }
+                                    }
+                                    if(isset($_array_stripe_balance->connect_reserved)){
+                                        foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                        echo "<tr>".
+                                                    "<td>".$n."</td>".
+                                                    "<td>connect_reserved</td>".
+                                                    "<td>".$trancs->amount."</td>".
+                                                    "<td>".$trancs->currency."</td>".
+                                                    "<td>".""."</td>".
+                                                    "<td>".""."</td>".
+                                                    "<td>".""."</td>".
+                                                "</tr>";
+                                            $n++;
+                                        }
+                                    }
+                                    if(isset($_array_stripe_balance->pending)){
+                                        foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                            echo "<tr>".
+                                                    "<td>".$n."</td>".
+                                                    "<td>Pending</td>".
+                                                    "<td>".$trancs->amount."</td>".
+                                                    "<td>".$trancs->currency."</td>".
+                                                    "<td>".$trancs->source_types->bank_account."</td>".
+                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                    "<td>".$trancs->source_types->card."</td>".
+                                                "</tr>";
+                                            $n++;
+                                        }
+                                    }
+                                ?>     
+                            </table>
+                            <div class="alert alert-primary" role="alert">
+                            Transactions
+                            </div>
+                            <table class="table table-bordered" >
+                                <tr>
+                                    <td>id</td>
+                                    <td>amount</td>
+                                    <td>available_on</td>
+                                    <td>created</td>
+                                    <td>currency</td>
+                                    <td>description</td>
+                                    <td>fee</td>
+                                    <td>net</td>
+                                    <td>status</td>
+                                    <td>type</td>
+                                </tr>
+                                <?php
+                                    $n=1;
+                                    if(isset($_array_stripe_transaction->data)){
+                                        foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                        echo "<tr>".
+                                                    "<td>".$trancs->id."</td>".
+                                                    "<td>".$trancs->amount."</td>".
+                                                    "<td>".$trancs->available_on."</td>".
+                                                    "<td>".$trancs->created."</td>".
+                                                    "<td>".$trancs->currency."</td>".
+                                                    "<td>".$trancs->description."</td>".
+                                                    "<td>".$trancs->fee."</td>".
+                                                    "<td>".$trancs->net."</td>".
+                                                    "<td>".$trancs->status."</td>".
+                                                    "<td>".$trancs->type."</td>".
+                                                "</tr>";
+                                            $n++;
+                                        }
+                                    }
+                                ?>
+                            </table>
+                            <div class="alert alert-primary" role="alert">
+                            External accounts
+                            </div>
+                            <table class="table table-bordered" >
+                                <tr>
+                                    <td>id</td>
+                                    <td>Holder  Name</td>
+                                    <td>Holder  Type</td>
+                                    <td>Bank Name</td>
+                                    <td>Country</td>
+                                    <td>Currency</td>
+                                    <td>Last4</td>
+                                    <td>Routing Number</td>
+                                    <td>Action</td>
+                                </tr>
+                                <?php
+                                    $n=1;
+                                    foreach($_array_stripe_bank as $clave=>$bank){
                                     echo "<tr>".
                                                 "<td>".$n."</td>".
-                                                "<td>connect_reserved</td>".
-                                                "<td>".$trancs->amount."</td>".
-                                                "<td>".$trancs->currency."</td>".
-                                                "<td>".""."</td>".
-                                                "<td>".""."</td>".
-                                                "<td>".""."</td>".
+                                                "<td>".$bank->account_holder_name."</td>".
+                                                "<td>".$bank->account_holder_type."</td>".
+                                                "<td>".$bank->bank_name."</td>".
+                                                "<td>".$bank->country."</td>".
+                                                "<td>".$bank->currency."</td>".
+                                                "<td>".$bank->last4."</td>".
+                                                "<td>".$bank->routing_number."</td>".
+                                                '<td>
+                                                    <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                    'href="#" '.
+                                                    'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                    '<span class="glyphicon glyphicon-star"></span></a>
+                                                    <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                    'href="#" '.
+                                                    'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                                                    '<span class="glyphicon glyphicon-trash"></span></a>
+                                                </td>'.
                                             "</tr>";
                                         $n++;
                                     }
-                                }
-                                foreach($_array_stripe_balance->pending as $clave=>$trancs){
-                                    echo "<tr>".
-                                             "<td>".$n."</td>".
-                                             "<td>Pending</td>".
-                                             "<td>".$trancs->amount."</td>".
-                                             "<td>".$trancs->currency."</td>".
-                                             "<td>".$trancs->source_types->bank_account."</td>".
-                                             "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                             "<td>".$trancs->source_types->card."</td>".
-                                         "</tr>";
-                                     $n++;
-                                 }
-                            ?>     
-                        </table>
-                        <div class="alert alert-primary" role="alert">
-                        Transactions
-                        </div>
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td>id</td>
-                                <td>amount</td>
-                                <td>available_on</td>
-                                <td>created</td>
-                                <td>currency</td>
-                                <td>description</td>
-                                <td>fee</td>
-                                <td>net</td>
-                                <td>status</td>
-                                <td>type</td>
-                            </tr>
-                            <?php
-                                $n=1;
-                                
-                                foreach($_array_stripe_transaction->data as $clave=>$trancs){
-                                   echo "<tr>".
-                                            "<td>".$trancs->id."</td>".
-                                            "<td>".$trancs->amount."</td>".
-                                            "<td>".$trancs->available_on."</td>".
-                                            "<td>".$trancs->created."</td>".
-                                            "<td>".$trancs->currency."</td>".
-                                            "<td>".$trancs->description."</td>".
-                                            "<td>".$trancs->fee."</td>".
-                                            "<td>".$trancs->net."</td>".
-                                            "<td>".$trancs->status."</td>".
-                                            "<td>".$trancs->type."</td>".
-                                        "</tr>";
-                                    $n++;
-                                }
-                            ?>
-                        </table>
-                        <div class="alert alert-primary" role="alert">
-                        External accounts
-                        </div>
-                        <table class="table table-bordered" >
-                            <tr>
-                                <td>id</td>
-                                <td>Holder  Name</td>
-                                <td>Holder  Type</td>
-                                <td>Bank Name</td>
-                                <td>Country</td>
-                                <td>Currency</td>
-                                <td>Last4</td>
-                                <td>Routing Number</td>
-                                <td>Action</td>
-                            </tr>
-                            <?php
-                                $n=1;
-                                foreach($_array_stripe_bank as $clave=>$bank){
-                                   echo "<tr>".
-                                            "<td>".$n."</td>".
-                                            "<td>".$bank->account_holder_name."</td>".
-                                            "<td>".$bank->account_holder_type."</td>".
-                                            "<td>".$bank->bank_name."</td>".
-                                            "<td>".$bank->country."</td>".
-                                            "<td>".$bank->currency."</td>".
-                                            "<td>".$bank->last4."</td>".
-                                            "<td>".$bank->routing_number."</td>".
-                                            '<td>
-                                                <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
-                                                'href="#" '.
-                                                'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
-                                                '<span class="glyphicon glyphicon-pencil"></span></a>
-                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
-                                                'href="#" '.
-                                                'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
-                                                '<span class="glyphicon glyphicon-trash"></span></a>
-                                            </td>'.
-                                        "</tr>";
-                                    $n++;
-                                }
-                            ?>
-                        </table>
-                        <a class="btn-primary btn-sm" data-toggle="modal"  
-                                            href="#myProfileBank" 
-                                            onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
-                                            <span class="glyphicon glyphicon-bitcoin"></span>
-                                            New Bank
-                        </a>
+                                ?>
+                            </table>
+                            <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                href="#myProfileBank" 
+                                                onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
+                                                <span class="glyphicon glyphicon-bitcoin"></span>
+                                                New Bank
+                            </a>
 
+                        </div>
                     </div>
                 </div>
             </div>                         
@@ -2377,8 +2406,6 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 	</div>
 </div>
 
-
-
 <div class="modal fade" id="myRegisterNewCustomer" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -2718,8 +2745,6 @@ if(!empty($_actual_company['postCardValue'])){
     <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="">New Client</button>
 </div>         
 
-
-
 <div class="modal fade" id="myUploadListCustomer" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -2742,7 +2767,6 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
-
 
 <div class="modal fade" id="myRegisterUpdateCustomerCompany" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -2815,8 +2839,6 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
-
-
 
 <div class="modal fade" id="myUrls" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -2905,8 +2927,6 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
-
-
 
 
 <div class="modal fade" id="myEstimateAmount" role="dialog">
@@ -3060,6 +3080,60 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
+<div class="modal fade" id="myDocumentIDFront" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyDocumentIDFront">Upload Document Front </h4> 
+            </div> 
+            
+			<div class="modal-body" id="textmyDocumentIDFront"> 
+            Requirements for ID verification
+            <ul>
+            <li>Acceptable documents vary by country, although a passport scan is always acceptable and preferred.</li>
+            <li>Scans of both the front and back are usually required for government-issued IDs and driver’s licenses.</li>
+            <li>Files need to be JPEGs or PNGs smaller than 5MB. We can’t verify PDFs.</li>
+            <li>Files should be in color, be rotated with the image right-side up, and have all information clearly legible.</li>
+            </ul>
+                <input id="myDocumentIDFrontImage" type="file" accept="image/*" name="myDocumentIDFrontImage" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDFrontImage','documentIDFront','<?php echo $_actual_company['CompanyID']?>')">Upload</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myDocumentIDBack" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyDocumentIDBack">Upload Document Back </h4> 
+            </div> 
+            
+			<div class="modal-body" id="textmyDocumentIDBack"> 
+            Requirements for ID verification
+            <ul>
+                <li>The document back is usually required for government-issued IDs and driver's licenses.</li>
+            
+            </ul>
+                <input id="myDocumentIDBackImage" type="file" accept="image/*" name="myDocumentIDFrontImage" />
+			</div>
+
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDBackImage','documentIDBack','<?php echo $_actual_company['CompanyID']?>')">Upload</button>
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
 <div class="modal fade" id="myMensaje" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -3096,4 +3170,21 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
+<div class="modal fade" id="myModalRespuestaCompany" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerCompany">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal. myModalRespuesta</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
 </div>
+
