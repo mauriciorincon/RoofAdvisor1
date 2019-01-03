@@ -668,8 +668,36 @@ class userController{
     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
     $_InsLiabilityPolNum,$_Status_Rating);
 
-        $this->_userModel=new userModel();                                        
-        $this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
+        $this->_userModel=new userModel(); 
+        $_array_update=[
+            'Company/'.$_companyID.'/CompanyName' => $_compamnyName,
+            'Company/'.$_companyID.'/PrimaryFName' => $_firstCompanyName,
+            'Company/'.$_companyID.'/PrimaryLName' => $_lastCompanyName,
+            'Company/'.$_companyID.'/CompanyAdd1' => $_companyAddress1,
+            'Company/'.$_companyID.'/CompanyAdd2' => $_companyAddress2,
+            'Company/'.$_companyID.'/CompanyAdd3' => $_companyAddress3,
+            'Company/'.$_companyID.'/CompanyPhone' => $_companyPhoneNumber,
+            'Company/'.$_companyID.'/CompanyType' => $_companyType,
+            'Company/'.$_companyID.'/PayInfoBillingAddress1' => $_PayInfoBillingAddress1,
+            'Company/'.$_companyID.'/PayInfoBillingAddress2' => $_PayInfoBillingAddress2,
+            'Company/'.$_companyID.'/PayInfoBillingCity' => $_PayInfoBillingCity,
+            'Company/'.$_companyID.'/PayInfoBillingST' => $_PayInfoBillingST,
+            'Company/'.$_companyID.'/PayInfoBillingZip' => $_PayInfoBillingZip,
+            'Company/'.$_companyID.'/PayInfoCCExpMon' => $_PayInfoCCExpMon,
+            'Company/'.$_companyID.'/PayInfoCCExpYr' => $_PayInfoCCExpYr,
+            'Company/'.$_companyID.'/PayInfoCCNum' => $_PayInfoCCNum,
+            'Company/'.$_companyID.'/PayInfoCCSecCode' => $_PayInfoCCSecCode,
+            'Company/'.$_companyID.'/PayInfoName' => $_PayInfoName,
+            'Company/'.$_companyID.'/PrimaryFName' => $_PrimaryFName,
+            'Company/'.$_companyID.'/PrimaryLName' => $_PrimaryLName,
+            'Company/'.$_companyID.'/InsLiabilityAgencyName' => $_InsLiabilityAgencyName,
+            'Company/'.$_companyID.'/InsLiabilityAgtName' => $_InsLiabilityAgtName,
+            'Company/'.$_companyID.'/InsLiabilityAgtNum' => $_InsLiabilityAgtNum,
+            'Company/'.$_companyID.'/InsLiabilityPolNum' => $_InsLiabilityPolNum,
+            'Company/'.$_companyID.'/Status_Rating' => $_Status_Rating,
+        ]; 
+        $_result=$this->_userModel->updateArray($_array_update);
+        /*$this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
         $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_firstCompanyName);
         $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_lastCompanyName);
         $this->_userModel->updateContractor($_companyID.'/CompanyAdd1',$_companyAddress1);
@@ -693,7 +721,7 @@ class userController{
         $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtName',$_InsLiabilityAgtName);
         $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtNum',$_InsLiabilityAgtNum);
         $this->_userModel->updateContractor($_companyID.'/InsLiabilityPolNum',$_InsLiabilityPolNum);
-        $this->_userModel->updateContractor($_companyID.'/Status_Rating',$_Status_Rating);
+        $this->_userModel->updateContractor($_companyID.'/Status_Rating',$_Status_Rating);*/
 
         if ($_result==true){
             $_actual_status=$this->_userModel->getNode("Company/".$_companyID."/CompanyStatus");

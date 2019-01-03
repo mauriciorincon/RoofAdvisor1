@@ -686,9 +686,9 @@ function updateDataCompany(){
     var firstCompanyName=$("input#firstCompanyName").val();
     var lastCompanyName=$("input#lastCompanyName").val();
     //var companyEmail=$("input#companyEmail").val();
-    var companyAddress1=$("input#companyAddress1").val();
-    var companyAddress2=$("input#companyAddress2").val();
-    var companyAddress3=$("input#companyAddress3").val();
+    var companyAddress1=$("input#compamnylegal_entity_Address").val();
+    var companyAddress2=$("input#compamnylegal_entity_City").val();
+    var companyAddress3=$("input#compamnylegal_entity_Zipcode").val();
     var companyPhoneNumber=$("input#companyPhoneNumber").val();
     var companyType=$("input#companyType").val();
 

@@ -267,7 +267,15 @@ class connection{
         //$this->_firebase->set($table . "/$updateNode", $data);
     }
 
-    
+    public function updateTableArray($array_nodes){
+        try{
+            $this->_firebase->getReference()
+                ->update($array_nodes);
+            return true;
+        }catch (Exception $e){
+                return "Error, ".$e->getMessage();
+        }
+    }
 
     public function createUserDatabse($_userProperties,$_profile){
         //print_r($_userProperties);

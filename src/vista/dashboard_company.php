@@ -852,7 +852,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                                     <div class="form-group">
                                         <label class="control-label">Company Name</label>
-                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
+                                        <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
                                     </div>
 
                                     <div class="form-group">
@@ -869,7 +869,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <label class="control-label ">Email</label>
                                         <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
                                     </div> 
-
+                                    <!--
                                     <div class="form-group">
                                         <label class="control-label">Address</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
@@ -884,7 +884,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <label class="control-label">Zip Code</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
                                     </div>
-
+                                    -->
                                     <div class="form-group">
                                         <label class="control-label">Phone number</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
@@ -902,7 +902,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                             <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span class="glyphicon glyphicon-plus-sign"></span>Stripe Info
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
                                     </button>
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
                                 </h2>

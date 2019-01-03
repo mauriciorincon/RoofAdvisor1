@@ -114,6 +114,9 @@ class userModel extends connection{
         $this->updateDataTable("Customers",$nodeName,$data); 
     }
 
+    public function updateArray($array_node){
+        return $this->updateTableArray($array_node);
+    }
 
     public function getCompany($user){
         $result=$this->getQueryEqual('Company','CompanyEmail',$user);
