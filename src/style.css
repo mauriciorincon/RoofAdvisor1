@@ -1745,7 +1745,6 @@ padding-top:70px !important;
 .hworkm1{
 text-align: center;
     height: 500px;
-    margin-top: 120px;
 }
 .hworkspan{
 font-size: 20px;
@@ -2167,7 +2166,7 @@ margin-bottom:25px;
     background: linear-gradient(to bottom, #008ced 0%,#2989d8 39%,#2989d8 39%,#207cca 49%,#004677 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008ced', endColorstr='#004677',GradientType=0 );
 }
-.mobwizmain{
+#mobwizmain{
 margin-top:20px;
 }
 }
