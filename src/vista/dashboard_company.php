@@ -2155,7 +2155,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						
 							$_objPay=new payingController();
 							//echo "<center>";
-							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
+							//$_objPay->showPayingWindow1('Request','pay_company_roofreport');
 							//echo "</center>";
 						?>
                         <button id="customButtonCancel" class="btn" onclick="showPayWindow()">Request</button>
@@ -2256,7 +2256,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 							<script>
 							// This example requires the Places library. Include the libraries=places
 							// parameter when you first load the API. For example:
-							// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+							
 
 							var map_ = null;
 
@@ -2386,10 +2386,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     z-index: 10000 !important;
                                 }
                             </style>
-						<script async defer
+						<!--
+                        <script async defer
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initialization">
 						</script>
-
+                        -->
 						
 					</div>
 			    </div>

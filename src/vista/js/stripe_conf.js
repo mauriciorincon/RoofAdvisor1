@@ -84,6 +84,7 @@ var handler = StripeCheckout.configure({
     });
     e.preventDefault();
   });
+
   
   // Close Checkout on page navigation:
   window.addEventListener('popstate', function() {
