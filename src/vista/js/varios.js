@@ -1415,7 +1415,7 @@ function showHideElementByService(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//funtions for register an order
+//funtions Wizard orders
 //
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -1961,8 +1961,14 @@ function validateIsLoggedIn(){
                             insertOrderCustomer();
                         }
                     }else if(data.profile=='company'){
-                        jsRemoveWindowLoad('');
-                        insertOrderCustomer("","","create_by_company");
+                        //jsRemoveWindowLoad('');
+                        var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        if(RequestType=='roofreport'){
+                            nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
+                            nextStepWizard.removeAttr('disabled').trigger('click');
+                        }else{
+                            insertOrderCustomer("","","create_by_company");
+                        }
                     }
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                     jsRemoveWindowLoad('');
