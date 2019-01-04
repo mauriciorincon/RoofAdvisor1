@@ -8,7 +8,7 @@
 
     <div>
         <div id="step-1" class="">
-            Step Content
+        <input maxlength="100" type="text" required="required" class="form-control input-lg" placeholder="Enter your zip code" id="mobzipCodeBegin" name="mobzipCodeBegin" />
         </div>
         <div id="step-2" class="">
             Step Content
