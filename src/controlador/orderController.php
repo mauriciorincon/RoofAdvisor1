@@ -8,12 +8,14 @@ require_once($_SESSION['application_path']."/modelo/order.class.php");
 require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/pdfController.php");
 require_once($_SESSION['application_path']."/controlador/payingController.php");
+require_once($_SESSION['application_path']."/controlador/othersController.php");
 
 
 class orderController{
 
     private $_orderModel=null;
     private $_userController=null;
+    private $_otherController=null;
 
     function __construct()
 	{		
@@ -207,7 +209,14 @@ class orderController{
                     $_payingController=new payingController();
                     $_order['RequestType']='TSE';
                     //$_order['CompanyID']=$companySelected;
-                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","","12500","usd",$_order,"TSE");
+                    if(!isset($this->_otherController)){
+                        $this->_otherController = new othersController();
+                    }
+                    $_roofReportValue=$this->_otherController->getParameterValue("Parameters/roofreportTakingRate");
+                    if(empty($_roofReportValue)){
+                        $_roofReportValue=12500;
+                    }
+                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","",$_roofReportValue,"usd",$_order,"TSE");
                     //$_payingController->createTransfer("20000","usd",$connectAcount,$description)
                 }
             }else{

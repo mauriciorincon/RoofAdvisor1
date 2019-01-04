@@ -692,6 +692,11 @@ function updateDataCompany(){
     var companyPhoneNumber=$("input#companyPhoneNumber").val();
     var companyType=$("input#companyType").val();
 
+    var licenseNumber=$('#companyLicenseNumber').val();
+    var businessSince=$('#companyBusinessSince').val();
+    var expirationDate=$('#companyExpirationDate').val();
+    var verifiedCompany=$('#companyVerified').val();
+
     var PayInfoBillingAddress1=$("input#compamnyPayAddress1").val();
     var PayInfoBillingAddress2=$("input#compamnyPayAddress2").val();
     var PayInfoBillingCity=$("input#compamnyPayCity").val();
@@ -793,7 +798,8 @@ function updateDataCompany(){
     "compamnylegal_entity_State":compamnylegal_entity_State,"compamnylegal_entity_City":compamnylegal_entity_City,
     "compamnylegal_entity_Zipcode":compamnylegal_entity_Zipcode,"compamnylegal_entity_Address":compamnylegal_entity_Address,
     "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,"path_file":"",
-    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id}, null, "text" )
+    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id,
+    "licenseNumber":licenseNumber,"businessSince":businessSince,"expirationDate":expirationDate,"verifiedCompany":verifiedCompany}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
