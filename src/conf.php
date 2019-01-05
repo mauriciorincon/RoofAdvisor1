@@ -10,7 +10,15 @@
     }
     //echo  $_SERVER['DOCUMENT_ROOT'];
     
+<<<<<<< HEAD
     $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+=======
+<<<<<<< HEAD
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+=======
+    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow1'.'/vendor/';
+>>>>>>> b23bc4fa8bb4f812e9744b1ad03f5610c0c806fa
+>>>>>>> 3270c8d5b93ddd6dc484a11c79440c5cf0a70288
 
     //echo $_SESSION['library_path'];
     //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';

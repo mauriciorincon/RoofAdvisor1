@@ -281,6 +281,9 @@ class userController{
                     "Status_Rating" => "5.0",
                     "uid" => $_responseU->uid,
                     "postCardValue" =>0,
+                    "InBusinessSince"=>'',
+                    "LicExpiration"=>'',
+                    "Verified"=>'',
             );
             $_resultUser="User created correctly <br>";
             $_resultCompany=$this->_userModel->insertContractor($_newCompanyId,$Company);
@@ -657,7 +660,7 @@ class userController{
                                     $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
                                     $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
                                     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-                                    $_InsLiabilityPolNum,$_Status_Rating){
+                                    $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany){
         
         $_aditional_message="";
     $_result=$this->validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
@@ -666,10 +669,11 @@ class userController{
     $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
     $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-    $_InsLiabilityPolNum,$_Status_Rating);
+    $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany);
 
         $this->_userModel=new userModel(); 
         $_array_update=[
+            'Company/'.$_companyID.'/ComapnyLicNum' => $_licenseNumber,
             'Company/'.$_companyID.'/CompanyName' => $_compamnyName,
             'Company/'.$_companyID.'/PrimaryFName' => $_firstCompanyName,
             'Company/'.$_companyID.'/PrimaryLName' => $_lastCompanyName,
@@ -695,6 +699,9 @@ class userController{
             'Company/'.$_companyID.'/InsLiabilityAgtNum' => $_InsLiabilityAgtNum,
             'Company/'.$_companyID.'/InsLiabilityPolNum' => $_InsLiabilityPolNum,
             'Company/'.$_companyID.'/Status_Rating' => $_Status_Rating,
+            'Company/'.$_companyID.'/InBusinessSince' => $_businessSince,
+            'Company/'.$_companyID.'/LicExpiration' => $_expirationDate,
+            'Company/'.$_companyID.'/Verified' => $_verifiedCompany,
         ]; 
         $_result=$this->_userModel->updateArray($_array_update);
         /*$this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
