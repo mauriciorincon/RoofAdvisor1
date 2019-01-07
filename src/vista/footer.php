@@ -169,7 +169,7 @@
 				<link rel="stylesheet" href="vista/css/dataTables.bootstrap.min.css">
 
 <script src="vista/js/varios.js"></script>
-
+<script src="vista/js/mob-wiz.js"></script>
 <script src="vista/timepicker/src/wickedpicker.js"></script>
 <script src="vista/js/jquery.smartWizard.js"></script>
 
