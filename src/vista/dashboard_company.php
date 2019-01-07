@@ -1193,6 +1193,35 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 ?>     
                             </table>
                             <div class="alert alert-primary" role="alert">
+                            Transfer
+                            </div>
+                            <table class="table table-bordered" >
+                                <tr>
+                                    <td>Id</td>
+                                    <td>Amount</td>
+                                    <td>Balance_Transaction</td>
+                                    <td>Created</td>
+                                    <td>Description</td>
+                                    <td>Destination_Payment</td>
+                                </tr>
+                                <?php
+                                    $n=1;
+                                    if(isset($_array_stripe_transfer->data)){
+                                        foreach($_array_stripe_transfer->data as $clave=>$trancs){
+                                        echo "<tr>".
+                                                    "<td>".$trancs->id."</td>".
+                                                    "<td>".$trancs->amount."</td>".
+                                                    "<td>".$trancs->balance_transaction."</td>".
+                                                    "<td>".$trancs->created."</td>".
+                                                    "<td>".$trancs->description."</td>".
+                                                    "<td>".$trancs->destination_payment."</td>".
+                                                "</tr>";
+                                            $n++;
+                                        }
+                                    }
+                                ?>
+                            </table>
+                            <div class="alert alert-primary" role="alert">
                             Transactions
                             </div>
                             <table class="table table-bordered" >

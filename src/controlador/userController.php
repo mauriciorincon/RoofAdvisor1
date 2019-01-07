@@ -577,7 +577,9 @@ class userController{
                 $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
                 $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
 
-                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount']);
+                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount'],$_actual_company['stripeSecretKey']);
+
+                $_array_stripe_transfer=$this->get_transfer_account($_actual_company['stripeAccount']);
             }else{
                 $_array_stripe_info=null;
                 $_array_stripe_bank=array();
@@ -1348,9 +1350,14 @@ class userController{
         return $_objPay->get_balance_account($account);
     }
 
-    public function get_transaction_account($account){
+    public function get_transaction_account($account,$secretKey){
         $_objPay=new payingController();
-        return $_objPay->get_transaction_account($account);
+        return $_objPay->get_transaction_account($account,$secretKey);
+    }
+
+    public function get_transfer_account($account){
+        $_objPay=new payingController();
+        return $_objPay->get_transfer_account($account);
     }
 
     public function getValidateAccount($account){

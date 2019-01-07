@@ -50,8 +50,8 @@
     //var_dump($_result);
 
     echo "<br><br>";
-    $var_usr=$_userModel->getAccount('acct_1DnybNLmUezEJ2Jl');
-    print_r($var_usr);
+    $var_usr=$_userModel->getAccount('acct_1DoiMaBv4mexJpsX');
+    print_r($var_usr->keys);
     echo "<br><br>";
     echo $var_usr->legal_entity->ssn_last_4 ;
     /*echo count($var_usr->external_accounts);
@@ -62,11 +62,20 @@
     }*/
 
     echo "<br><br>";
+    $_result=$_userModel->get_transaction_account('acct_1DoiMaBv4mexJpsX');
+    print_r($_result);
+    echo "<br><br>";
+
+    $_result=$_objPay->get_transfer_account('acct_1DoiMaBv4mexJpsX');
+    print_r($_result);
     //return;
     //$_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
     //var_dump($_response);
     //echo "<br><br>";
-    echo "<br>Banco<br>";
+    echo "<br>Info<br>";
+    $_result=$_objPay->get_transaction_account('acct_1Dq4DvERqpFpJXVH');
+    echo "<br>Trnasacciones<br>";
+    print_r($_result);
     //$var_bank=$_userModel->get_token_bank_account('btok_1DjBC8AuRAPDfvKLluIyeFLg');
     //var_dump($var_usr);
     echo "<br><br>";
