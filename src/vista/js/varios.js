@@ -240,7 +240,15 @@ $(document).ready(function () {
         
     
         if (curStepBtn=="step-1" && isValid==true ){
-            saveContractorData();
+            var answer = $("input[name='termsServiceAgree']:checked").val();    
+            
+            if(answer!=undefined){
+                saveContractorData();
+            }else{
+                alert("Please accept the terms to create the company account");
+                return;
+            }
+            
         }
     
         /*if (curStepBtn=="step-3" && isValid==true ){
