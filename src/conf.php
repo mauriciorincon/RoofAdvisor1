@@ -9,8 +9,13 @@
         $_SESSION['application_path']=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
     }
     //echo  $_SERVER['DOCUMENT_ROOT'];
+<<<<<<< HEAD
 
     $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+=======
+    
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow1'.'/vendor/';
+>>>>>>> 05df1cb4e6da8fa249c36c5ef52d64b32ad9cdc6
 
     //echo $_SESSION['library_path'];
     //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
