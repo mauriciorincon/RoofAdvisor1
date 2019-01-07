@@ -835,7 +835,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Basic Info
                                     </button>
@@ -916,10 +916,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
                                     </button>
+                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
                                 </h2>
                             </div>
@@ -996,19 +997,21 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 </a>
                                                 
                                             </div>
+                                            <br>
                                             <div>
+                                                <h3>Payment processing services Terms</h3>
                                                 <label>
                                                 Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
                                                 </label>
                                             </div>
-                                            <button type="button" class="btn-primary btn-sm" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
+                                            
                                 </div>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-header" id="headingThree">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Billing
                                     </button>
@@ -1086,7 +1089,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingFour">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Others
                                     </button>
@@ -1229,7 +1232,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                             <div class="alert alert-primary" role="alert">
                             External accounts
                             </div>
-                            <table class="table table-bordered" >
+                            <table class="table table-bordered" id="listBankCompany">
                                 <tr>
                                     <td>id</td>
                                     <td>Holder  Name</td>

@@ -5049,7 +5049,12 @@ function actionWithBank(action,account_id,bank_id,row){
                 $("#myModalRespuestaCompany").modal("show"); 
                 if(action=='delete'){
                     $(row).parent().parent().remove();
-                } 
+                }else if(action=='insert'){
+                    $("#listBankCompany").append('<tr><td>'+'0'+'</td><td>'+myProfileBankaccount_holder_name+'</td><td>'+
+                                                myProfileBankaccount_holder_type+'</td><td>'+'STRIPE TEST BANK'+'</td><td>'+'US'+
+                                                '</td><td>'+'usd'+'</td><td>'+myProfileBankaccount_number+'</td><td>'+myProfileBankrouting_number+
+                                                '</td><td><a href="#" class="btn-danger form-control" role="button" data-title="johnny" id="deleteRowDriver" data-id="1">Delete</a></td></tr>');
+                }
             }else{
                 $('#headerTextAnswerCompany').html('Bank Actions');
                 $('#myModalRespuestaCompany div.modal-body').html(data) ;
