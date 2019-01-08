@@ -281,6 +281,9 @@ class userController{
                     "Status_Rating" => "5.0",
                     "uid" => $_responseU->uid,
                     "postCardValue" =>0,
+                    "InBusinessSince"=>'',
+                    "LicExpiration"=>'',
+                    "Verified"=>'',
             );
             $_resultUser="User created correctly <br>";
             $_resultCompany=$this->_userModel->insertContractor($_newCompanyId,$Company);
@@ -574,7 +577,9 @@ class userController{
                 $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
                 $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
 
-                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount']);
+                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount'],$_actual_company['stripeSecretKey']);
+
+                $_array_stripe_transfer=$this->get_transfer_account($_actual_company['stripeAccount']);
             }else{
                 $_array_stripe_info=null;
                 $_array_stripe_bank=array();
@@ -657,7 +662,7 @@ class userController{
                                     $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
                                     $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
                                     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-                                    $_InsLiabilityPolNum,$_Status_Rating){
+                                    $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany){
         
         $_aditional_message="";
     $_result=$this->validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
@@ -666,10 +671,11 @@ class userController{
     $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
     $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
     $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-    $_InsLiabilityPolNum,$_Status_Rating);
+    $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany);
 
         $this->_userModel=new userModel(); 
         $_array_update=[
+            'Company/'.$_companyID.'/ComapnyLicNum' => $_licenseNumber,
             'Company/'.$_companyID.'/CompanyName' => $_compamnyName,
             'Company/'.$_companyID.'/PrimaryFName' => $_firstCompanyName,
             'Company/'.$_companyID.'/PrimaryLName' => $_lastCompanyName,
@@ -695,6 +701,9 @@ class userController{
             'Company/'.$_companyID.'/InsLiabilityAgtNum' => $_InsLiabilityAgtNum,
             'Company/'.$_companyID.'/InsLiabilityPolNum' => $_InsLiabilityPolNum,
             'Company/'.$_companyID.'/Status_Rating' => $_Status_Rating,
+            'Company/'.$_companyID.'/InBusinessSince' => $_businessSince,
+            'Company/'.$_companyID.'/LicExpiration' => $_expirationDate,
+            'Company/'.$_companyID.'/Verified' => $_verifiedCompany,
         ]; 
         $_result=$this->_userModel->updateArray($_array_update);
         /*$this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
@@ -747,7 +756,7 @@ class userController{
         if($_company_data==null){
             return "Fail to update info company for stripe, company not found [$_companyID]";
         }else{
-            if(isset($_company_data['stripeAccount'])){
+            if(isset($_company_data['stripeAccount']) and !empty($_company_data['stripeAccount'])){
                 $_account_id=$_company_data['stripeAccount'];
             }else{
                 $result=$this->createAccount($_companyID,$_company_data['CompanyEmail']);
@@ -980,9 +989,11 @@ class userController{
             $pos2 = strpos($_dir,"/", $pos1 + 1);
             //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
             $_path2="/".substr($_dir,$pos1+1,$pos2-1);
-            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2.'/src';
+            echo "Entro opcion localhost";
         }else{
             $_path1="http://" . $_SERVER['HTTP_HOST'];
+            echo "Entro opcion otra";
         }
         $_message='
         <table>
@@ -1323,8 +1334,14 @@ class userController{
         $_result=$_objPay->createAccount($email);
 
         if(is_array($_result) or gettype($_result)=="object" ){
-            $this->_userModel=new userModel();                                        
-            $this->_userModel->updateContractor($_companyID.'/stripeAccount',$_result['id']);
+            $this->_userModel=new userModel();                                 
+            
+            $_array_update=[
+                'Company/'.$_companyID.'/stripeAccount' => $_result['id'],
+                'Company/'.$_companyID.'/stripePublicKey' => $_result->keys->secret,
+                'Company/'.$_companyID.'/stripeSecretKey' => $_result->keys->publishable,
+            ];
+            $this->_userModel->updateArray($_array_update);
             return $_result;
         }else{
             return $_result;
@@ -1341,9 +1358,14 @@ class userController{
         return $_objPay->get_balance_account($account);
     }
 
-    public function get_transaction_account($account){
+    public function get_transaction_account($account,$secretKey){
         $_objPay=new payingController();
-        return $_objPay->get_transaction_account($account);
+        return $_objPay->get_transaction_account($account,$secretKey);
+    }
+
+    public function get_transfer_account($account){
+        $_objPay=new payingController();
+        return $_objPay->get_transfer_account($account);
     }
 
     public function getValidateAccount($account){

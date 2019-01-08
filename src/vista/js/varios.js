@@ -240,7 +240,15 @@ $(document).ready(function () {
         
     
         if (curStepBtn=="step-1" && isValid==true ){
-            saveContractorData();
+            var answer = $("input[name='termsServiceAgree']:checked").val();    
+            
+            if(answer!=undefined){
+                saveContractorData();
+            }else{
+                alert("Please accept the terms to create the company account");
+                return;
+            }
+            
         }
     
         /*if (curStepBtn=="step-3" && isValid==true ){
@@ -692,6 +700,11 @@ function updateDataCompany(){
     var companyPhoneNumber=$("input#companyPhoneNumber").val();
     var companyType=$("input#companyType").val();
 
+    var licenseNumber=$('#companyLicenseNumber').val();
+    var businessSince=$('#companyBusinessSince').val();
+    var expirationDate=$('#companyExpirationDate').val();
+    var verifiedCompany=$('#companyVerified').val();
+
     var PayInfoBillingAddress1=$("input#compamnyPayAddress1").val();
     var PayInfoBillingAddress2=$("input#compamnyPayAddress2").val();
     var PayInfoBillingCity=$("input#compamnyPayCity").val();
@@ -793,7 +806,8 @@ function updateDataCompany(){
     "compamnylegal_entity_State":compamnylegal_entity_State,"compamnylegal_entity_City":compamnylegal_entity_City,
     "compamnylegal_entity_Zipcode":compamnylegal_entity_Zipcode,"compamnylegal_entity_Address":compamnylegal_entity_Address,
     "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,"path_file":"",
-    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id}, null, "text" )
+    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id,
+    "licenseNumber":licenseNumber,"businessSince":businessSince,"expirationDate":expirationDate,"verifiedCompany":verifiedCompany}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -5038,12 +5052,30 @@ function actionWithBank(action,account_id,bank_id,row){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#headerTextAnswerCompany').html('Bank Actions');
-                $('#myModalRespuestaCompany div.modal-body').html(data) ;
-                $("#myModalRespuestaCompany").modal("show"); 
+                
                 if(action=='delete'){
                     $(row).parent().parent().remove();
-                } 
+                    $('#headerTextAnswerCompany').html('Bank Actions');
+                    $('#myModalRespuestaCompany div.modal-body').html("The bank account was deleted correctly") ;
+                    $("#myModalRespuestaCompany").modal("show"); 
+                }else if(action=='insert'){
+                    $("#myProfileBank").modal("hide"); 
+                    $('#headerTextAnswerCompany').html('Bank Actions');
+                    $('#myModalRespuestaCompany div.modal-body').html("The bank account was created correctly") ;
+                    $("#myModalRespuestaCompany").modal("show"); 
+                    
+                    $("#listBankCompany").append('<tr><td>'+'0'+'</td><td>'+myProfileBankaccount_holder_name+'</td><td>'+
+                                                myProfileBankaccount_holder_type+'</td><td>'+'STRIPE TEST BANK'+'</td><td>'+'US'+
+                                                '</td><td>'+'usd'+'</td><td>'+myProfileBankaccount_number+'</td><td>'+myProfileBankrouting_number+
+                                                '</td><td><a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'+
+                                                'href="#" '+'onClick="actionWithBank(\'setdefault\',\''+account_id+'\',\''+_bank_id+'\')" > '+
+                                                '<span class="glyphicon glyphicon-star"></span></a>'+
+                                                '<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'+
+                                                'href="#" '+
+                                                'onClick="actionWithBank(\'delete\',\''+account_id+'\',\''+_bank_id+'\',this)" > '+
+                                                '<span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                    
+                }
             }else{
                 $('#headerTextAnswerCompany').html('Bank Actions');
                 $('#myModalRespuestaCompany div.modal-body').html(data) ;

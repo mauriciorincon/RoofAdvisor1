@@ -451,11 +451,19 @@ class payingController{
         $_result=$this->_payingModel->get_balance_account($account);
         return $_result;
     }
-    function get_transaction_account($account){
+    function get_transaction_account($account,$secretKey){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
         }
-        $_result=$this->_payingModel->get_transaction_account($account);
+        $_result=$this->_payingModel->get_transaction_account($account,$secretKey);
+        return $_result;
+    }
+
+    function get_transfer_account($account){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_transfer_account($account);
         return $_result;
     }
 
