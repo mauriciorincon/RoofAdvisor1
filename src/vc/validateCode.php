@@ -23,7 +23,7 @@
         $pos2 = strpos($_dir,"/", $pos1 + 1);
         //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
         $_path2="/".substr($_dir,$pos1+1,$pos2-1);
-        $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+        $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2."/src";
     }else{
         $_path1="http://" . $_SERVER['HTTP_HOST'];
     }

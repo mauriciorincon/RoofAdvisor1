@@ -756,7 +756,7 @@ class userController{
         if($_company_data==null){
             return "Fail to update info company for stripe, company not found [$_companyID]";
         }else{
-            if(isset($_company_data['stripeAccount'])){
+            if(isset($_company_data['stripeAccount']) and !empty($_company_data['stripeAccount'])){
                 $_account_id=$_company_data['stripeAccount'];
             }else{
                 $result=$this->createAccount($_companyID,$_company_data['CompanyEmail']);
@@ -989,9 +989,11 @@ class userController{
             $pos2 = strpos($_dir,"/", $pos1 + 1);
             //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
             $_path2="/".substr($_dir,$pos1+1,$pos2-1);
-            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2.'/src';
+            echo "Entro opcion localhost";
         }else{
             $_path1="http://" . $_SERVER['HTTP_HOST'];
+            echo "Entro opcion otra";
         }
         $_message='
         <table>
@@ -1332,8 +1334,14 @@ class userController{
         $_result=$_objPay->createAccount($email);
 
         if(is_array($_result) or gettype($_result)=="object" ){
-            $this->_userModel=new userModel();                                        
-            $this->_userModel->updateContractor($_companyID.'/stripeAccount',$_result['id']);
+            $this->_userModel=new userModel();                                 
+            
+            $_array_update=[
+                'Company/'.$_companyID.'/stripeAccount' => $_result['id'],
+                'Company/'.$_companyID.'/stripePublicKey' => $_result->keys->secret,
+                'Company/'.$_companyID.'/stripeSecretKey' => $_result->keys->publishable,
+            ];
+            $this->_userModel->updateArray($_array_update);
             return $_result;
         }else{
             return $_result;

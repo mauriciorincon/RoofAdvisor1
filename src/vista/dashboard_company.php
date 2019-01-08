@@ -977,26 +977,24 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
                                                 <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <label class="control-label" for="stripeImage">Document ID Front</label>
+                                            
                                                 <a class="btn-primary btn-sm" data-toggle="modal"  
                                                     href="#myDocumentIDFront" 
                                                     onClick=""> 
                                                     <span class="glyphicon glyphicon-upload"></span>
                                                     Upload Documento ID Front
                                                 </a>
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="stripeImage">Document ID Back</label>
                                                 <a class="btn-primary btn-sm" data-toggle="modal"  
                                                     href="#myDocumentIDBack" 
                                                     onClick=""> 
                                                     <span class="glyphicon glyphicon-upload"></span>
                                                     Upload Documento ID Back
                                                 </a>
-                                                
                                             </div>
+                                            
+                                            
                                             <br>
                                             <div>
                                                 <h3>Payment processing services Terms</h3>
@@ -1212,7 +1210,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                     "<td>".$trancs->id."</td>".
                                                     "<td>".$trancs->amount."</td>".
                                                     "<td>".$trancs->balance_transaction."</td>".
-                                                    "<td>".$trancs->created."</td>".
+                                                    "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
                                                     "<td>".$trancs->description."</td>".
                                                     "<td>".$trancs->destination_payment."</td>".
                                                 "</tr>";
@@ -1245,7 +1243,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                     "<td>".$trancs->id."</td>".
                                                     "<td>".$trancs->amount."</td>".
                                                     "<td>".$trancs->available_on."</td>".
-                                                    "<td>".$trancs->created."</td>".
+                                                    "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
                                                     "<td>".$trancs->currency."</td>".
                                                     "<td>".$trancs->description."</td>".
                                                     "<td>".$trancs->fee."</td>".
@@ -1275,28 +1273,30 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 </tr>
                                 <?php
                                     $n=1;
-                                    foreach($_array_stripe_bank as $clave=>$bank){
-                                    echo "<tr>".
-                                                "<td>".$n."</td>".
-                                                "<td>".$bank->account_holder_name."</td>".
-                                                "<td>".$bank->account_holder_type."</td>".
-                                                "<td>".$bank->bank_name."</td>".
-                                                "<td>".$bank->country."</td>".
-                                                "<td>".$bank->currency."</td>".
-                                                "<td>".$bank->last4."</td>".
-                                                "<td>".$bank->routing_number."</td>".
-                                                '<td>
-                                                    <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
-                                                    'href="#" '.
-                                                    'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
-                                                    '<span class="glyphicon glyphicon-star"></span></a>
-                                                    <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
-                                                    'href="#" '.
-                                                    'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
-                                                    '<span class="glyphicon glyphicon-trash"></span></a>
-                                                </td>'.
-                                            "</tr>";
-                                        $n++;
+                                    if(isset($_array_stripe_bank)){
+                                        foreach($_array_stripe_bank as $clave=>$bank){
+                                        echo "<tr>".
+                                                    "<td>".$n."</td>".
+                                                    "<td>".$bank->account_holder_name."</td>".
+                                                    "<td>".$bank->account_holder_type."</td>".
+                                                    "<td>".$bank->bank_name."</td>".
+                                                    "<td>".$bank->country."</td>".
+                                                    "<td>".$bank->currency."</td>".
+                                                    "<td>".$bank->last4."</td>".
+                                                    "<td>".$bank->routing_number."</td>".
+                                                    '<td>
+                                                        <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                        'href="#" '.
+                                                        'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                        '<span class="glyphicon glyphicon-star"></span></a>
+                                                        <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                        'href="#" '.
+                                                        'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                                                        '<span class="glyphicon glyphicon-trash"></span></a>
+                                                    </td>'.
+                                                "</tr>";
+                                            $n++;
+                                        }
                                     }
                                 ?>
                             </table>
