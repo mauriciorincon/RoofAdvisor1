@@ -827,7 +827,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
+				<!--<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> -->
             </div> 
             <div class="row">
                 <div class="col-xs-12 col-md-6">
@@ -1120,6 +1120,72 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> External Accounts
+                                    </button>
+                                    
+                                </h2>
+                            </div>
+
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="alert alert-primary" role="alert">
+                                        External accounts
+                                    </div>
+                                    <table class="table table-bordered" id="listBankCompany">
+                                        <tr>
+                                            <td>id</td>
+                                            <td>Holder  Name</td>
+                                            <td>Holder  Type</td>
+                                            <td>Bank Name</td>
+                                            <td>Country</td>
+                                            <td>Currency</td>
+                                            <td>Last4</td>
+                                            <td>Routing Number</td>
+                                            <td>Action</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_bank)){
+                                                foreach($_array_stripe_bank as $clave=>$bank){
+                                                echo "<tr>".
+                                                            "<td>".$n."</td>".
+                                                            "<td>".$bank->account_holder_name."</td>".
+                                                            "<td>".$bank->account_holder_type."</td>".
+                                                            "<td>".$bank->bank_name."</td>".
+                                                            "<td>".$bank->country."</td>".
+                                                            "<td>".$bank->currency."</td>".
+                                                            "<td>".$bank->last4."</td>".
+                                                            "<td>".$bank->routing_number."</td>".
+                                                            '<td>
+                                                                <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                                '<span class="glyphicon glyphicon-star"></span></a>
+                                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                                                                '<span class="glyphicon glyphicon-trash"></span></a>
+                                                            </td>'.
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                    <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                        href="#myProfileBank" 
+                                                        onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
+                                                        <span class="glyphicon glyphicon-bitcoin"></span>
+                                                        New Bank
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
                     </div>    
                     
                 </div>
@@ -1256,56 +1322,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     }
                                 ?>
                             </table>
-                            <div class="alert alert-primary" role="alert">
-                            External accounts
-                            </div>
-                            <table class="table table-bordered" id="listBankCompany">
-                                <tr>
-                                    <td>id</td>
-                                    <td>Holder  Name</td>
-                                    <td>Holder  Type</td>
-                                    <td>Bank Name</td>
-                                    <td>Country</td>
-                                    <td>Currency</td>
-                                    <td>Last4</td>
-                                    <td>Routing Number</td>
-                                    <td>Action</td>
-                                </tr>
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_bank)){
-                                        foreach($_array_stripe_bank as $clave=>$bank){
-                                        echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>".$bank->account_holder_name."</td>".
-                                                    "<td>".$bank->account_holder_type."</td>".
-                                                    "<td>".$bank->bank_name."</td>".
-                                                    "<td>".$bank->country."</td>".
-                                                    "<td>".$bank->currency."</td>".
-                                                    "<td>".$bank->last4."</td>".
-                                                    "<td>".$bank->routing_number."</td>".
-                                                    '<td>
-                                                        <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
-                                                        'href="#" '.
-                                                        'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
-                                                        '<span class="glyphicon glyphicon-star"></span></a>
-                                                        <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
-                                                        'href="#" '.
-                                                        'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
-                                                        '<span class="glyphicon glyphicon-trash"></span></a>
-                                                    </td>'.
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>
-                            </table>
-                            <a class="btn-primary btn-sm" data-toggle="modal"  
-                                                href="#myProfileBank" 
-                                                onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
-                                                <span class="glyphicon glyphicon-bitcoin"></span>
-                                                New Bank
-                            </a>
+                            
 
                         </div>
                     </div>

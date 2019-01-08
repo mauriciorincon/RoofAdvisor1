@@ -284,6 +284,8 @@ class userController{
                     "InBusinessSince"=>'',
                     "LicExpiration"=>'',
                     "Verified"=>'',
+                    "TermsDateAccept"=>date("m-d-Y H:i:s"),
+                    "TermsIpAccept"=>$_SERVER['REMOTE_ADDR'],
             );
             $_resultUser="User created correctly <br>";
             $_resultCompany=$this->_userModel->insertContractor($_newCompanyId,$Company);
@@ -365,6 +367,8 @@ class userController{
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
                 "uid" => $_uid_user,
                 "CompanyID"=>$arrayCustomer['CompanyID'],
+                "TermsDateAccept"=>date("m-d-Y H:i:s"),
+                "TermsIpAccept"=>$_SERVER['REMOTE_ADDR'],
             );
             
             $_response=$this->_userModel->insertCustomer('FBID',$Customer);
@@ -577,7 +581,12 @@ class userController{
                 $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
                 $_array_stripe_balance=$this->getBalanceAccount($_actual_company['stripeAccount']);
 
-                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount'],$_actual_company['stripeSecretKey']);
+                if(!isset($_actual_company['stripeSecretKey'])){
+                    $_stripe_secret_key='';
+                }else{
+                    $_stripe_secret_key=$_actual_company['stripeSecretKey'];
+                }
+                $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount'],$_stripe_secret_key);
 
                 $_array_stripe_transfer=$this->get_transfer_account($_actual_company['stripeAccount']);
             }else{
