@@ -15,7 +15,7 @@ $(document).ready(function(){
                             if (data.indexOf("Sorry")==-1){
                                 setLocation(map,zipcode);
 
-                                nextStepWizard = ;
+                                nextStepWizard = '';
                                 nextStepWizard.removeAttr('disabled').trigger('click');
                             }else{
                                 setLocation(map,zipcode);

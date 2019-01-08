@@ -119,8 +119,8 @@ This is a same day, on-demand service for hiring pre-screened service profession
 <!-- <div id='cmapp3'>
   <img src='img/florida-house.png'>
  </div>-->
-        <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='' src='img/bquote.png'>
+        <div id='cmapp2'><img id='cmappimg1' class='imgqut1' src='img/quote.png'></br><span >
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img class='imgqut1' style="float:right;" src='img/bquote.png'>
         </div>
       </div>
 
