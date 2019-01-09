@@ -106,7 +106,7 @@ if(!isset($_SESSION)) {
 		<!-- header-area start-->
 		<header>
 			<div class="header-top-area dolph1">
-				<div class="container">
+				<div class="container headcont1">
 					<div class="row">
 						<div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
 							<div class="call-to-action">
@@ -132,7 +132,7 @@ if(!isset($_SESSION)) {
 				</div>					
 						</div>
 			<div class="header-bottom-area">
-                          	<div class="container">
+                          	<div class="container headcont1">
 					<div class="row">
 						<div class="col-lg-3 col-md-2 col-sm-2">
 							<div id="logoimg" class="logo">
@@ -151,7 +151,6 @@ if(!isset($_SESSION)) {
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD&nbsp;&nbsp;</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 									</ul>
-					  			</nav>
 								<ul class="nav navbar-nav navbar-right">
                                 	<li class="dropdown">
                                     <!--<img id="login-img" src="img/login.png">-->
@@ -174,7 +173,7 @@ if(!isset($_SESSION)) {
                                                                         
                                             </ul>
                                     </li>
-                                </ul>			
+                                </ul>		</nav>	
 							</div>
 						</div>
 						<div class="mobile-menu-area visible-xs ">

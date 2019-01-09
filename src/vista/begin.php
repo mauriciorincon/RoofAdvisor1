@@ -27,6 +27,7 @@
 <span class="mobiletxthd1" style="font-size:34px;"> <strong><span class="hdtxtorng1">Emergency</span> Roof Repair? </br>Schedule an <span class="hdtxtorng1" >Appointment?</span> </br>Need a <span class="hdtxtorng1">Roof Report</span>?</br>New or Reroof <span class="hdtxtorng1">Estimates</span>?</strong> </span>
 </div>
 </br></br>
+<div class="infdivtxt1">
 <p class='srvappph1'>
 This is a same day, on-demand service for hiring pre-screened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
 </p>
@@ -46,6 +47,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </br>
 </ul>
 </br>
+</div>
 </div>
 </div>
 <div>
