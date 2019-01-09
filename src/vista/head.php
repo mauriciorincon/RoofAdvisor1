@@ -23,7 +23,7 @@ if(!isset($_SESSION)) {
       	// Notice how this gets configured before we load Font Awesome
       	window.FontAwesomeConfig = { autoReplaceSvg: false }
     	</script>
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" href="css/jquery-ui.css" />
 		
 		
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -58,7 +58,7 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="css/lity.min.css">
 		<script src="vista/js/jquery-3.3.1.js"></script>
 				
-		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script src="js/jquery-ui.js"></script>
 				
 		<script src="js/bootstrap.min.js"></script>	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -94,9 +94,9 @@ if(!isset($_SESSION)) {
     </head>
     <body>
     <div id="loading5">
-   <img id="loading-txt" src="img/pre-load.png" alt="Loading...." />
-  <img id="loading-image" src="img/load1.gif" alt="Loading..." />
-    </div>
+   <img id="loading-txt" src="img/pre-load.png" alt="This loading is taking quite some time isn't it?" />
+  <img id="loading-image" src="img/load1.gif" alt="Don't worry we can wait, we are here to help!" />
+     </div>
     <div class="" >
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -174,7 +174,7 @@ if(!isset($_SESSION)) {
                                                                         
                                             </ul>
                                     </li>
-                                </ul>				
+                                </ul>			
 							</div>
 						</div>
 						<div class="mobile-menu-area visible-xs ">
