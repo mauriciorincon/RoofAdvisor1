@@ -1076,22 +1076,35 @@ $(document).ready(function () {
                         if(n==-1){
                             data=jQuery.parseJSON(data);
                             $(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
-                            $('#textAnswerOrder').html(data.content);
-                            $('#headerTextAnswerOrder').html(data.title);
-                            $('#myModalRespuesta').modal({backdrop: 'static'});
+                            $('#textMessage').html(data.content);
+                            $('#headerMessageMessage').html(data.title);
+                            $('#myMensaje').modal('show');
 
                             $("#table_list_customer_by_company").append('<tr><td>'+data.customerID+
                                                             '</td><td>'+firstCustomerName+' '+lastCustomerName+'</td><td>'+customerAddress+
                                                             '</td><td>'+customerCity+'</td><td>'+customerState+
-                                                            '</td><td>'+customerZipCode+'</td><td>'+emailValidation+'</td><td>'+customerPhoneNumber+'</tr>');
+                                                            '</td><td>'+customerZipCode+'</td><td>'+emailValidation+'</td><td>'+customerPhoneNumber+
+                                                            '</td><td>'+'<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '+
+                                                            'href="#myRegisterUpdateCustomerCompany" '+'onClick="getCustomerInfoTable('+data.customerID+')"> '+'<span class="glyphicon glyphicon-pencil"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
+                                                            'id="inactivate-customer-button" name="inactivate-customer-button"  ' +'data-toggle1="tooltip" onclick="disableEnableCustomer('+data.customerID+',\'Active\')"> ' +
+                                                            '<span class="glyphicon glyphicon-ok"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' +
+                                                            'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
+                                                            'data-toggle1="tooltip" onclick="newOrderByCompany('+data.customerID+',\''+customerAddress+'\')"> '+'<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' +
+                                                            'id="list-orders-customer" name="list-orders-customer"  ' +
+                                                            'data-toggle1="tooltip" onclick="getListOrders('+data.customerID+')"> ' +
+                                                            '<span class="glyphicon glyphicon glyphicon-th-list"></span></a>'+
+                                                            '</td></tr>');
                         }else{
                             
-                            $('#textAnswerOrder').html(data);
-                            $('#headerTextAnswerOrder').html('Error registering customer');
+                            $('#textMessage').html(data);
+                            $('#headerMessageMessage').html('Error registering customer');
                             $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                             //$(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
                             
-                            $('#myModalRespuesta').modal({backdrop: 'static'});
+                            $('#myMensaje').modal('show');
                             result=false;
                         }
                         
@@ -5186,4 +5199,33 @@ function uploadFileAjax(fileName,action,id_action,screen_to_hide){
             //jsRemoveWindowLoad('');
         }
     });
+}
+
+function getListOrders(customerID){
+    jsShowWindowLoad('Retriving Customer Orders');
+    $.post( "controlador/ajax/getListOrders.php", { "field" : "CustomerID","value" : customerID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#table_list_orders_by_company tbody').html(data);
+                $("#myListOrderByCustomer").modal("show");  
+            }else{
+                $('#headerTextAnswerCompany').html('Valitating Response');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show");
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });    
+
 }
