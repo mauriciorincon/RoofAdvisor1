@@ -589,11 +589,15 @@ class userController{
                 $_array_stripe_transaction=$this->get_transaction_account($_actual_company['stripeAccount'],$_stripe_secret_key);
 
                 $_array_stripe_transfer=$this->get_transfer_account($_actual_company['stripeAccount']);
+
+                $_array_stripe_payout=$this->get_payout_account($_actual_company['stripeAccount'],$_stripe_secret_key);
             }else{
                 $_array_stripe_info=null;
                 $_array_stripe_bank=array();
                 $_array_stripe_balance=array();
                 $_array_stripe_transaction=array();
+                $_array_stripe_transfer=array();
+                $_array_stripe_payout=array();
             }
             
 

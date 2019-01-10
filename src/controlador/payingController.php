@@ -459,6 +459,14 @@ class payingController{
         return $_result;
     }
 
+    function get_payout_account($account,$secretKey){
+        if(is_null($this->_payingModel)){
+            $this->_payingModel= new paying_stripe();
+        }
+        $_result=$this->_payingModel->get_payout_account($account,$secretKey);
+        return $_result;
+    }
+    
     function get_transfer_account($account){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
