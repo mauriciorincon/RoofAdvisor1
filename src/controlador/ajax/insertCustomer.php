@@ -23,12 +23,13 @@ if(!isset($_POST['termsServiceAgree'])){
 }else{
     $_accept_terms=$_POST['termsServiceAgree'];
 }
-    
-if($_accept_terms==0){
-    $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Please you have to accept the terms, to create the customer account";
-    $_SESSION['post_info'] = $_POST;
-    header("Location: $_path");
-    return;
+if(strcmp("source_call","Customer_register")==0){
+    if($_accept_terms==0){
+        $_path="../../?controller=user&accion=showRegisterCustomer&aditionalMessage=Please you have to accept the terms, to create the customer account";
+        $_SESSION['post_info'] = $_POST;
+        header("Location: $_path");
+        return;
+    }
 }
 if(strcmp('Customer_register',$_source_call)==0){
     if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response']){

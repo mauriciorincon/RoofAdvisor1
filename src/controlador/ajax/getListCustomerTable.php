@@ -62,6 +62,10 @@ $_string="";
                 'id="inactivate-customer-button" name="inactivate-customer-button"  ' .
                 'data-toggle1="tooltip" onclick="newOrderByCompany('.$customer['CustomerID'].',\''.$customer['Address'].'\')"> ' .
                 '<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>';
+        $_actions.='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' .
+                'id="list-orders-customer" name="list-orders-customer"  ' .
+                'data-toggle1="tooltip" onclick="getListOrders('.$customer['CustomerID'].')"> ' .
+                '<span class="glyphicon glyphicon glyphicon-th-list"></span></a>';
         $_string.="<tr>".
                     "<td>".$_customer_id."</td>".
                     "<td>".$_Fname." ".$_Lname."</td>".

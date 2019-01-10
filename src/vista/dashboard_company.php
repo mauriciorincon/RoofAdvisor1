@@ -36,9 +36,10 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 width: 100%;  /* The width is the width of the web page */
             }
         </style>
-
-        <div id="map"></div>
-        
+        <a href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide/Show Map</a>
+        <div id="onlyMapCompanyDashboard" class="collapse in">
+            <div id="map"></div>
+        </div>
         
         <script>
         
@@ -69,7 +70,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 var uluru = {lat: 25.745693, lng: -80.375028};
                 // The map, centered at Uluru
                 mapObject = new google.maps.Map(
-				document.getElementById('map'), {zoom: 11, center: uluru});
+				document.getElementById('map'), {zoom: 11, center: uluru,streetViewControl: false,
+                                mapTypeControl: false});
 
                 // The marker, positioned at Uluru
                 //var marker = new google.maps.Marker({position: uluru, map: map});
@@ -1983,7 +1985,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerMessage">Filter Options</h4> 
 			</div> 
-			<div class="modal-body" id="textMessage"> 
+			<div class="modal-body" id="typeOfService"> 
                 <p>
                 <table class="table">
                     <thead>
@@ -3200,6 +3202,41 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
+<div class="modal fade" id="myListOrderByCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyListOrderByCustomer">Create Order</h4> 
+			</div> 
+			<div class="modal-body" id="textmyListOrderByCustomerr"> 
+                <div class="table-responsive">          
+                    <table class="table" id="table_list_orders_by_company">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Company ID</th>
+                            <th>Contractor ID</th>
+                            <th>Created By</th>
+                            <th>Create Date</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+			</div> 
+			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
 <div class="modal fade" id="myMensaje" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -3217,6 +3254,8 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
