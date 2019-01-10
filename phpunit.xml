@@ -28,9 +28,9 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php" >/home/fedora/roofz-web/src</directory>
+            <directory suffix=".php" >src</directory>
             <exclude >
-            	<directory >/home/fedora/roofz-web/src/vendor</directory>
+            	<directory >src/vendor</directory>
             </exclude>
         </whitelist>
     </filter>
