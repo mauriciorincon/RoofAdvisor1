@@ -1198,7 +1198,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                             Wallet Balance<br>
                             <a href="">+ Add funds to your RoofServiceNow Wallet</a>
                         </div>
-                        
+
                         <div class="accordion" id="accordionPayments">
                             <div class="card">
                                 <div class="card-header" id="headingOnep">
@@ -1213,7 +1213,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                                 <div id="collapseOnep" class="collapse" aria-labelledby="headingOnep" data-parent="#accordionPayments">
                                     <div class="card-body">
-                                        <table class="table table-bordered" >
+                                        <table class="table table-bordered" id="tableCompanyBalance" >
                                             <tr>
                                                 <td>id</td>
                                                 <td>Type</td>
@@ -1293,7 +1293,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     </h2>
                                 </div>
                                 <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
-                                    <table class="table table-bordered" >
+                                    <table class="table table-bordered" id="tableCompanyTransfer" >
                                         <tr>
                                             <td>Id</td>
                                             <td>Amount</td>
@@ -1334,7 +1334,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     </h2>
                                 </div>
                                 <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
-                                    <table class="table table-bordered" >
+                                    <table class="table table-bordered" id="tableCompanyTransactions" >
                                         <tr>
                                             <td>id</td>
                                             <td>amount</td>
