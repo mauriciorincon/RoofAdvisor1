@@ -29,7 +29,7 @@
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
-			<div style="margin-left:17%" class="footer-top pt-20 pb-10">
+			<div style="margin-left:12%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -100px;">
@@ -39,6 +39,7 @@
 								</div>
 								<p>Roof Service Now takes the stress out of finding, selecting, and paying for a roofing contractor</p>
 								<ul class="widget-contact">
+                                                                          </br>
 									<li>
 										<!--<i class="fa fa-map-marker"></i>
 										<span>30 NEWBURY ST,BOSTON, MA.</span>-->
@@ -54,7 +55,7 @@
 								</ul>
 						    </div>
 						</div>
-						<div class="col-lg-5 col-md-6 col-sm-6 mb-20" style="margin-left: 50px;">
+						<div class="col-lg-6 col-md-6 col-sm-6 mb-20" style="margin-left: 50px;">
 							<div class="footer-widget">
 								<h3 class="widget-title"    style="margin-top: 100px;">Site Map</h3>
 								<ul class="footer-menu">

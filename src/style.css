@@ -1368,18 +1368,18 @@ font-size: 144px;
 }
 #appand1{
     float: right;
-    width: 41%;
-    margin-top: -25px;
+    width: 40%;
 }
 #appand2{
     float: left;
-    width: 35%;
+    width: 40%;
 }
 #appphone1{
-display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -10px;
+    padding-right: 4%;
 }
 #aphtxt1{
 font-size:5em;
@@ -1771,8 +1771,9 @@ display:none !important;
 .mobpower1{
 display:block !important;
 }
-
-
+.storelogom1{
+margin-top:50px;
+}
 
 
 
