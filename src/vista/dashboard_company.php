@@ -1194,138 +1194,216 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 
                 <div class="col-xs-12 col-md-6">
                     <div class="form-group">
-                                                
                         <div>
                             Wallet Balance<br>
                             <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                        </div>
+                        
+                        <div class="accordion" id="accordionPayments">
+                            <div class="card">
+                                <div class="card-header" id="headingOnep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOnep" aria-expanded="true" aria-controls="collapseOnep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Balance
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
 
-                            <div class="alert alert-primary" role="alert">
-                            Balance
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>id</td>
-                                    <td>Type</td>
-                                    <td>Amount</td>
-                                    <td>Currency</td>
-                                    <td>bank_account</td>
-                                    <td>bitcoin_receiver</td>
-                                    <td>card</td>
-                                </tr> 
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_balance->available)){
-                                        foreach($_array_stripe_balance->available as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>Available</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->source_types->bank_account."</td>".
-                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                    "<td>".$trancs->source_types->card."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                    if(isset($_array_stripe_balance->connect_reserved)){
-                                        foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>connect_reserved</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".""."</td>".
-                                                    "<td>".""."</td>".
-                                                    "<td>".""."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                    if(isset($_array_stripe_balance->pending)){
-                                        foreach($_array_stripe_balance->pending as $clave=>$trancs){
-                                            echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>Pending</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->source_types->bank_account."</td>".
-                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                    "<td>".$trancs->source_types->card."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>     
-                            </table>
-                            <div class="alert alert-primary" role="alert">
-                            Transfer
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>Id</td>
-                                    <td>Amount</td>
-                                    <td>Balance_Transaction</td>
-                                    <td>Created</td>
-                                    <td>Description</td>
-                                    <td>Destination_Payment</td>
-                                </tr>
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_transfer->data)){
-                                        foreach($_array_stripe_transfer->data as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$trancs->id."</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->balance_transaction."</td>".
-                                                    "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
-                                                    "<td>".$trancs->description."</td>".
-                                                    "<td>".$trancs->destination_payment."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>
-                            </table>
-                            <div class="alert alert-primary" role="alert">
-                            Transactions
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>id</td>
-                                    <td>amount</td>
-                                    <td>available_on</td>
-                                    <td>created</td>
-                                    <td>currency</td>
-                                    <td>description</td>
-                                    <td>fee</td>
-                                    <td>net</td>
-                                    <td>status</td>
-                                    <td>type</td>
-                                </tr>
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_transaction->data)){
-                                        foreach($_array_stripe_transaction->data as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$trancs->id."</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->available_on."</td>".
-                                                    "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->description."</td>".
-                                                    "<td>".$trancs->fee."</td>".
-                                                    "<td>".$trancs->net."</td>".
-                                                    "<td>".$trancs->status."</td>".
-                                                    "<td>".$trancs->type."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>
-                            </table>
+                                <div id="collapseOnep" class="collapse" aria-labelledby="headingOnep" data-parent="#accordionPayments">
+                                    <div class="card-body">
+                                        <table class="table table-bordered" >
+                                            <tr>
+                                                <td>id</td>
+                                                <td>Type</td>
+                                                <td>Amount</td>
+                                                <td>Currency</td>
+                                                <td>bank_account</td>
+                                                <td>bitcoin_receiver</td>
+                                                <td>card</td>
+                                            </tr> 
+                                            <?php
+                                                $n=1;
+                                                if(isset($_array_stripe_balance->available)){
+                                                    foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Available</td>".
+                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                                "<td>".$trancs->source_types->card."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->connect_reserved)){
+                                                    foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>connect_reserved</td>".
+                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".""."</td>".
+                                                                "<td>".""."</td>".
+                                                                "<td>".""."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->pending)){
+                                                    foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                                        echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Pending</td>".
+                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                                "<td>".$trancs->source_types->card."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                            ?>     
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                     
                             
 
+                        
+                            <div class="card">
+                                <div class="card-header" id="headingTwop">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseTwop" aria-expanded="true" aria-controls="collapseTwop">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transfer
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td>Id</td>
+                                            <td>Amount</td>
+                                            <td>Balance_Transaction</td>
+                                            <td>Created</td>
+                                            <td>Description</td>
+                                            <td>Destination_Payment</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transfer->data)){
+                                                foreach($_array_stripe_transfer->data as $clave=>$trancs){
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".$trancs->amount."</td>".
+                                                            "<td>".$trancs->balance_transaction."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->destination_payment."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
+                               
+                            <div class="card">
+                                <div class="card-header" id="headingThreep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseThreep" aria-expanded="true" aria-controls="collapseThreep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transactions
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td>id</td>
+                                            <td>amount</td>
+                                            <td>available_on</td>
+                                            <td>created</td>
+                                            <td>currency</td>
+                                            <td>description</td>
+                                            <td>fee</td>
+                                            <td>net</td>
+                                            <td>status</td>
+                                            <td>type</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transaction->data)){
+                                                foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".$trancs->amount."</td>".
+                                                            "<td>".$trancs->available_on."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->currency."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->fee."</td>".
+                                                            "<td>".$trancs->net."</td>".
+                                                            "<td>".$trancs->status."</td>".
+                                                            "<td>".$trancs->type."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>     
+                                </div>
+                            </div>
+                                
+                            <div class="card">
+                                <div class="card-header" id="headingFourp">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseFourp" aria-expanded="true" aria-controls="collapseFourp">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Pay outs
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFourp" class="collapse" aria-labelledby="headingFourp" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td>id</td>
+                                            <td>amount</td>
+                                            <td>created</td>
+                                            <td>arrival_date</td>
+                                            <td>currency</td>
+                                            <td>description</td>
+                                            <td>destination</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_payout->data)){
+                                                foreach($_array_stripe_payout->data as $clave=>$payout){
+                                                echo "<tr>".
+                                                            "<td>".$payout->id."</td>".
+                                                            "<td>".$payout->amount."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->created)."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->arrival_date)."</td>".
+                                                            "<td>".$payout->currency."</td>".
+                                                            "<td>".$payout->description."</td>".
+                                                            "<td>".$payout->destination."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
+
+                                
+                                
+                            
                         </div>
                     </div>
                 </div>

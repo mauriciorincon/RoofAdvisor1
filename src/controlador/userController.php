@@ -591,6 +591,7 @@ class userController{
                 $_array_stripe_transfer=$this->get_transfer_account($_actual_company['stripeAccount']);
 
                 $_array_stripe_payout=$this->get_payout_account($_actual_company['stripeAccount'],$_stripe_secret_key);
+                //print_r($_array_stripe_payout);
             }else{
                 $_array_stripe_info=null;
                 $_array_stripe_bank=array();
@@ -1379,6 +1380,11 @@ class userController{
     public function get_transfer_account($account){
         $_objPay=new payingController();
         return $_objPay->get_transfer_account($account);
+    }
+
+    public function get_payout_account($account,$secretKey){
+        $_objPay=new payingController();
+        return $_objPay->get_payout_account($account,$secretKey);
     }
 
     public function getValidateAccount($account){

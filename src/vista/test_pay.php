@@ -26,8 +26,9 @@
     echo $_SESSION['application_path']."declare user controller";
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
-    /*$_objPay=new payingController();
+    $_objPay=new payingController();
 
+    /*
     //create account
     $_result=$_objPay->createAccount('supo7@yahoo.com');
     echo "<br><br>";
@@ -84,6 +85,10 @@
     //$var_bank=$_userModel->get_token_bank_account('btok_1DjBC8AuRAPDfvKLluIyeFLg');
     //var_dump($var_usr);
     echo "<br><br>";
+    echo "<br>Payout<br>";
+    $_result=$_objPay->get_payout_account('acct_1Dq9PsEZ7uDDF7Yq','sk_test_v9B44D8b2rz96Kx3DMSQWxv9');
+    print_r($_result);
+    //$_result=$_objPay->get_payout_account('','');
     //print_r($var_bank->bank_account->routing_number);
     //print_r($var_bank->bank_account->account_holder_name);
     echo "<br><br>";
