@@ -208,15 +208,18 @@ class orderController{
                     $_order=$this->getOrderByID($orderID);
                     $_payingController=new payingController();
                     $_order['RequestType']='TSE';
-                    //$_order['CompanyID']=$companySelected;
-                    if(!isset($this->_otherController)){
-                        $this->_otherController = new othersController();
+                    
+                    if(strcmp($_order['CreateBy'],"CO000000")==0){
+                        if(!isset($this->_otherController)){
+                            $this->_otherController = new othersController();
+                        }
+                        $_roofReportValue=$this->_otherController->getParameterValue("Parameters/roofreportTakingRate");
+                        if(empty($_roofReportValue)){
+                            $_roofReportValue=12500;
+                        }
+                        $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","",$_roofReportValue,"usd",$_order,"TSE");
                     }
-                    $_roofReportValue=$this->_otherController->getParameterValue("Parameters/roofreportTakingRate");
-                    if(empty($_roofReportValue)){
-                        $_roofReportValue=12500;
-                    }
-                    $_response_transfer=$_payingController->selectPaying("info@roofservicenow.com","",$_roofReportValue,"usd",$_order,"TSE");
+                    
                     //$_payingController->createTransfer("20000","usd",$connectAcount,$description)
                 }
             }else{

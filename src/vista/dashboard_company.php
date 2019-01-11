@@ -1206,6 +1206,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOnep" aria-expanded="true" aria-controls="collapseOnep">
                                         <span class="glyphicon glyphicon-plus-sign"></span> Balance
                                         </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-refresh"></span></button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
                                     </h2>
                                 </div>
@@ -1226,10 +1227,14 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 $n=1;
                                                 if(isset($_array_stripe_balance->available)){
                                                     foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
                                                     echo "<tr>".
                                                                 "<td>".$n."</td>".
                                                                 "<td>Available</td>".
-                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                                 "<td>".$trancs->currency."</td>".
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
                                                                 "<td>".$trancs->source_types->bitcoin_receiver."</td>".
@@ -1240,10 +1245,12 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 }
                                                 if(isset($_array_stripe_balance->connect_reserved)){
                                                     foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
                                                     echo "<tr>".
                                                                 "<td>".$n."</td>".
                                                                 "<td>connect_reserved</td>".
-                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                                 "<td>".$trancs->currency."</td>".
                                                                 "<td>".""."</td>".
                                                                 "<td>".""."</td>".
@@ -1254,10 +1261,12 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 }
                                                 if(isset($_array_stripe_balance->pending)){
                                                     foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
                                                         echo "<tr>".
                                                                 "<td>".$n."</td>".
                                                                 "<td>Pending</td>".
-                                                                "<td>".$trancs->amount."</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                                 "<td>".$trancs->currency."</td>".
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
                                                                 "<td>".$trancs->source_types->bitcoin_receiver."</td>".
@@ -1297,9 +1306,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             $n=1;
                                             if(isset($_array_stripe_transfer->data)){
                                                 foreach($_array_stripe_transfer->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=round($trancs->amount/100,2);}
                                                 echo "<tr>".
                                                             "<td>".$trancs->id."</td>".
-                                                            "<td>".$trancs->amount."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                             "<td>".$trancs->balance_transaction."</td>".
                                                             "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
                                                             "<td>".$trancs->description."</td>".
@@ -1340,15 +1351,19 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             $n=1;
                                             if(isset($_array_stripe_transaction->data)){
                                                 foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                    $_amount_1=0;
+                                                    if($trancs->net==0){$_amount_1=0;}else{$_amount_1=$trancs->net/100;}
                                                 echo "<tr>".
                                                             "<td>".$trancs->id."</td>".
-                                                            "<td>".$trancs->amount."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                             "<td>".$trancs->available_on."</td>".
                                                             "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
                                                             "<td>".$trancs->currency."</td>".
                                                             "<td>".$trancs->description."</td>".
                                                             "<td>".$trancs->fee."</td>".
-                                                            "<td>".$trancs->net."</td>".
+                                                            "<td>".number_format($_amount_1, 2, '.', '')."</td>".
                                                             "<td>".$trancs->status."</td>".
                                                             "<td>".$trancs->type."</td>".
                                                         "</tr>";
@@ -1384,9 +1399,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                             $n=1;
                                             if(isset($_array_stripe_payout->data)){
                                                 foreach($_array_stripe_payout->data as $clave=>$payout){
+                                                    $_amount=0;
+                                                    if($payout->amount==0){$_amount=0;}else{$_amount=$payout->amount/100;}
                                                 echo "<tr>".
                                                             "<td>".$payout->id."</td>".
-                                                            "<td>".$payout->amount."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
                                                             "<td>".date("F j, Y, g:i a",$payout->created)."</td>".
                                                             "<td>".date("F j, Y, g:i a",$payout->arrival_date)."</td>".
                                                             "<td>".$payout->currency."</td>".
@@ -2777,13 +2794,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Final Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompanyF" name="estMatCompanyF" class="form-control input-sm"  onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompanyF" name="estMatCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Final Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center"><input type="text" id="estHourCompanyF" name="estHourCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompanyF" name="estHourCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
@@ -3107,13 +3124,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Estimate Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompany" name="estMatCompany" class="form-control input-sm"  onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompany" name="estMatCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Estimate Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center"><input type="text" id="estHourCompany" name="estHourCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompany" name="estHourCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
