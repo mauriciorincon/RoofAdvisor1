@@ -25,14 +25,13 @@
   </div>
 </div>
 <!-- END Message Area-->
-
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
 			<div style="margin-left:12%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -100px;">
+						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -125px;">
 							<div class="footer-widget">
 								<div class="footer-logo">
 								   <img src="img/logo-white.png" alt="" />
@@ -173,7 +172,7 @@
 <script src="vista/js/mob-wiz.js"></script>
 <script src="vista/timepicker/src/wickedpicker.js"></script>
 <script src="vista/js/jquery.smartWizard.js"></script>
-
+<script src="vista/js/jquery.slidereveal.min.js"></script>
 
 <?php
         if(isset($_GET['aditionalMessage'])){?>
@@ -258,7 +257,9 @@ $(document).ready(function(){
         theme:'dots',
         autoAdjustHeight:true
 });
-
+$('#mobslider').slideReveal({
+  trigger: $("#mobtrigger")
+});
 });
 
 </script>

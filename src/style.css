@@ -673,8 +673,7 @@ margin-right:100px;
 .footer-menu li a {
   color: #fff;
   text-transform:capitalize;
-  line-height:22px;
-  font-size:14px;
+  font-size:1.1vw;
   font-weight:300;
 }
 .footer-menu li a:hover {padding-left:5px;color:rgb(243, 188, 22)}
@@ -1871,6 +1870,12 @@ padding-bottom:20px !important;
 }
 }
 @media (max-width:1290px){
+#appand1{
+width:50%;
+}
+#appand2{
+width:50%;
+}
 .inpwiz2{
 right:0;
 }
@@ -1953,7 +1958,6 @@ display:none;
     margin-right: auto;
 }
 #srvapp1{
-height: 1150px;
     display: block;
     margin-top: 30px;
     position: relative;
@@ -1975,7 +1979,6 @@ height: 1150px;
     z-index: 999999;
 }
 .mobile-menu-area{
-display:none !important;
 }
 #menu-head{
 display:none;
@@ -2130,7 +2133,8 @@ margin-right: auto;
     margin-left: auto;
     display: block;
 float:none;
-width:75%;
+width:66%;
+margin-bottom:10px;
 }
 #appand2{
 margin-right: auto;
