@@ -1206,7 +1206,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOnep" aria-expanded="true" aria-controls="collapseOnep">
                                         <span class="glyphicon glyphicon-plus-sign"></span> Balance
                                         </button>
-                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-refresh"></span></button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('balance','tableCompanyBalance','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
                                     </h2>
                                 </div>
@@ -1214,15 +1214,18 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 <div id="collapseOnep" class="collapse" aria-labelledby="headingOnep" data-parent="#accordionPayments">
                                     <div class="card-body">
                                         <table class="table table-bordered" id="tableCompanyBalance" >
-                                            <tr>
-                                                <td>id</td>
-                                                <td>Type</td>
-                                                <td>Amount</td>
-                                                <td>Currency</td>
-                                                <td>bank_account</td>
-                                                <td>bitcoin_receiver</td>
-                                                <td>card</td>
-                                            </tr> 
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Type</th>
+                                                    <th>Amount</th>
+                                                    <th>Currency</th>
+                                                    <th>bank_account</th>
+                                                    <th>bitcoin_receiver</th>
+                                                    <th>card</th>
+                                                </tr> 
+                                            <thead>
+                                            <tbody>
                                             <?php
                                                 $n=1;
                                                 if(isset($_array_stripe_balance->available)){
@@ -1238,7 +1241,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                                 "<td>".$trancs->currency."</td>".
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
                                                                 "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                                "<td>".$trancs->source_types->card."</td>".
+                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
                                                             "</tr>";
                                                         $n++;
                                                     }
@@ -1263,6 +1266,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                     foreach($_array_stripe_balance->pending as $clave=>$trancs){
                                                         $_amount=0;
                                                         if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
                                                         echo "<tr>".
                                                                 "<td>".$n."</td>".
                                                                 "<td>Pending</td>".
@@ -1270,12 +1275,13 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                                 "<td>".$trancs->currency."</td>".
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
                                                                 "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                                "<td>".$trancs->source_types->card."</td>".
+                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
                                                             "</tr>";
                                                         $n++;
                                                     }
                                                 }
-                                            ?>     
+                                            ?>  
+                                            </tbody>   
                                         </table>
                                     </div>
                                 </div>
@@ -1289,19 +1295,23 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseTwop" aria-expanded="true" aria-controls="collapseTwop">
                                         <span class="glyphicon glyphicon-plus-sign"></span> Transfer
                                         </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transfer','tableCompanyTransfer','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
                                     </h2>
                                 </div>
                                 <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
                                     <table class="table table-bordered" id="tableCompanyTransfer" >
-                                        <tr>
-                                            <td>Id</td>
-                                            <td>Amount</td>
-                                            <td>Balance_Transaction</td>
-                                            <td>Created</td>
-                                            <td>Description</td>
-                                            <td>Destination_Payment</td>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Amount</th>
+                                                <th>Balance_Transaction</th>
+                                                <th>Created</th>
+                                                <th>Description</th>
+                                                <th>Destination_Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php
                                             $n=1;
                                             if(isset($_array_stripe_transfer->data)){
@@ -1320,6 +1330,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 }
                                             }
                                         ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -1330,23 +1341,27 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseThreep" aria-expanded="true" aria-controls="collapseThreep">
                                         <span class="glyphicon glyphicon-plus-sign"></span> Transactions
                                         </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transaction','tableCompanyTransactions','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
                                     </h2>
                                 </div>
                                 <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
                                     <table class="table table-bordered" id="tableCompanyTransactions" >
-                                        <tr>
-                                            <td>id</td>
-                                            <td>amount</td>
-                                            <td>available_on</td>
-                                            <td>created</td>
-                                            <td>currency</td>
-                                            <td>description</td>
-                                            <td>fee</td>
-                                            <td>net</td>
-                                            <td>status</td>
-                                            <td>type</td>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>available_on</th>
+                                                <th>created</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>fee</th>
+                                                <th>net</th>
+                                                <th>status</th>
+                                                <th>type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php
                                             $n=1;
                                             if(isset($_array_stripe_transaction->data)){
@@ -1371,6 +1386,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 }
                                             }
                                         ?>
+                                        </tbody>
                                     </table>     
                                 </div>
                             </div>
@@ -1381,20 +1397,24 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseFourp" aria-expanded="true" aria-controls="collapseFourp">
                                         <span class="glyphicon glyphicon-plus-sign"></span> Pay outs
                                         </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('payout','tableCompanyPayouts','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
                                     </h2>
                                 </div>
                                 <div id="collapseFourp" class="collapse" aria-labelledby="headingFourp" data-parent="#accordionPayments">
-                                    <table class="table table-bordered" >
-                                        <tr>
-                                            <td>id</td>
-                                            <td>amount</td>
-                                            <td>created</td>
-                                            <td>arrival_date</td>
-                                            <td>currency</td>
-                                            <td>description</td>
-                                            <td>destination</td>
-                                        </tr>
+                                    <table class="table table-bordered" id="tableCompanyPayouts">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>created</th>
+                                                <th>arrival_date</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php
                                             $n=1;
                                             if(isset($_array_stripe_payout->data)){
@@ -1414,6 +1434,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 }
                                             }
                                         ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
