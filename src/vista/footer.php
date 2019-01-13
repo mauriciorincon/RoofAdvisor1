@@ -257,9 +257,41 @@ $(document).ready(function(){
         theme:'dots',
         autoAdjustHeight:true
 });
+
+
+
+
+if (window.location.href.indexOf("controller=aboutus") > -1) {
+$('#mobnavtxt ul li a[href*="aboutus"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=services") > -1) {
+$('#mobnavtxt ul li a[href*="services"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=faq") > -1) {
+$('#mobnavtxt ul li a[href*="faq"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=download") > -1) {
+$('#mobnavtxt ul li a[href*="download"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=contact") > -1) {
+$('#mobnavtxt ul li a[href*="contact"]').parent().addClass('active').siblings().removeClass('active');
+
+}
+
+
 $('#mobslider').slideReveal({
   trigger: $("#mobtrigger")
 });
+$("#mobnavtxt ul li.active a:first").addClass('mobactivea');
+
+$("#mobnavtxt ul li a").click(function() {
+     $(this).addClass('mobactivea');
+     $("#mobnavtxt ul li.active a:first").removeClass('mobactivea');
+         $(this).parent().addClass('active').siblings().removeClass('active');
+
+ });
+
+
 });
 
 </script>

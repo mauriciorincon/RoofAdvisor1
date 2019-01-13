@@ -1773,6 +1773,9 @@ display:block !important;
 .storelogom1{
 margin-top:50px;
 }
+#mobtrigger{
+display:none !important;
+}
 
 
 
@@ -1913,7 +1916,7 @@ margin-left:450px !important;
 #welcome-txt{
 }
 .main-menu ul li a {
-    font-size: 11px;
+    font-size: 14px;
 }
 #login-txt {
 font-size:10px;
@@ -2116,8 +2119,7 @@ text-align:center;
 }
 #appdiv1{
     display: inline-block;
-    margin-left: 50px;
-    margin-right: -30px;
+        margin-top: -27px;
 }
 #appdl3-tx1{
 font-size: 20px;
@@ -2194,5 +2196,46 @@ margin-bottom:25px;
 }
 #mobwizmain{
 margin-top:20px;
+}
+.mobhead-area{
+      padding-top: 165px;
+}
+.faq-secmob::before{
+top:135px;
+}
+#mobtrigger{
+display:block !important;
+}
+.mobaboutus1{
+margin-left:0px !important;
+}
+.mobaboutcounter1{
+margin-top:25px;
+}
+.mobaboutcounter2{
+margin-top:-168px;
+}
+.slick-prev, .slick-next {
+top:25%;
+}
+.mobtxtsz1{
+font-size:14px !important;
+}
+.aboutinfo1{
+ line-height:1;
+  margin-top: -100px;
+}
+.slickbout1container{
+height:545px;
+}
+.slick-dots{
+text-align:left !important;
+margin-left:45px !important;
+}
+.slick-prev{
+padding-top:0px !important;
+}
+.slick-next{
+padding-top:0px !important;
 }
 }
