@@ -368,6 +368,9 @@ function saveContractorData(){
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
     var Repassword=$('input:password#inputPasswordConfirm').val();
+    var inBussinessSince = $("input#inBusinessSinceCompany").val();
+    var licenseNumber = $("input#licenseNumberCompany").val();
+    var expirationDate = $("input#expirationDateCompany").val();
 
     var driver=[];
 
@@ -401,7 +404,8 @@ function saveContractorData(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
                                                     "phoneContactCompany":phoneContactField,"emailValidation":emailField,"typeCompany":typeCompanyField,
-                                                "password":password,"arrayDrivers":driver}, null, "text" )
+                                                "password":password,"arrayDrivers":driver,"inBussinessSince":inBussinessSince,
+                                                "licenseNumber":licenseNumber,"expirationDate":expirationDate}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
                     //$("#answerEmailValidate").html(data);
@@ -2614,16 +2618,16 @@ function updateOrder(orderID,arrayChanges,closeWindow,headText){
                         $(document).ready(function(){$("#"+closeWindow).modal("hide"); });
                     }
                     if(headText!=undefined && headText!=''){
-                        $('#headerMessageMessage').html(headText);
+                        $('#headerTextAnswerOrderC').html(headText);
                     }else{
-                        $('#headerMessageMessage').html('Order Detail');
+                        $('#headerTextAnswerOrderC').html('Order Detail');
                     }
                     
-                    $('#myMensaje div.modal-body').html(data);
-                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                    $('#myMensajeCustomer div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensajeCustomer").modal("show"); });
                 }else{
-                    $('#myMensaje div.modal-body').html(data);
-                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                    $('#myMensajeCustomer div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensajeCustomer").modal("show"); });
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
@@ -3091,7 +3095,7 @@ function acceptEstimateAmount(){
     }else{
         //if(confirm("are you sure you want to accept the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
-        updateOrder(orderID,"Status,"+status);
+        updateOrder(orderID,"Status,"+status,'','Estimate Accepted');
             
         //}else{
         //    return false;
@@ -3493,9 +3497,9 @@ function insertOrderRating(){
     });
 }
 
-function getInvoices(orderID){
+function getInvoices(orderID,profile){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID}, null, "text" )
+    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID,"profile":profile}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");

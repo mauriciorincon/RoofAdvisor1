@@ -346,7 +346,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 
@@ -358,7 +358,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
                 }else{
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
@@ -508,7 +508,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
                                                     'href="#myEstimateAmount" '+
                                                     'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                    '<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
                                                 '</a>';
                             }else{
 
@@ -520,7 +520,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
                                                     'href="#myFinalAmount" '+
                                                     'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                    '<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
                                                 '</a>';
                             }else{
                                 finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
@@ -764,7 +764,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <a class="btn-warning btn-sm" data-toggle="modal"  
                                             href="#myEstimateAmount" 
                                             onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
                                         </a>
                                 <?php
                                     }else{
@@ -779,7 +779,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     <a class="btn-success btn-sm" data-toggle="modal"  
                                             href="#myFinalAmount" 
                                             onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
                                         </a>
                                 <?php 
                                     }else if ( $order['RequestType']=='P' ){
@@ -787,7 +787,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     <a class="btn-success btn-sm" data-toggle="modal"  
                                             href="#" 
                                             onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
                                         </a>
                                 <?php
                                     }else{
@@ -879,6 +879,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <label class="control-label ">In Business Since</label>
                                         <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter In Business Since" id="companyBusinessSince" name="companyBusinessSince" value="<?php if(isset($_actual_company['InBusinessSince'])){ echo $_actual_company['InBusinessSince'];} ?>"/>
                                     </div>
+                                   
                                     <div class="form-group">
                                         <label class="control-label ">Expiration date</label>
                                         <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter Expiration date" id="companyExpirationDate" name="companyExpirationDate" value="<?php if(isset($_actual_company['LicExpiration'])){ echo $_actual_company['LicExpiration'];}?>"/>
@@ -1722,7 +1723,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						  <option style="color:#FFD700;" value="#FFD700">&#9724; Amarillo</option>
 						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
-						  <option style="color:#000;" value="#000">&#9724; Negro</option>
+						  <option style="color:#000;"    value="#000">&#9724; Negro</option>
 						  
 						</select>
 					</div>
@@ -1896,7 +1897,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                         var end1=start[2]+"-"+start[0]+"-"+start[1];
 
                         var typeR=getRequestType(data.RequestType);
-                        var color=getRequestColor(data.RequestType);
+                        var color=getRequestColor(data.RequestType,data.Status);
                         var status=getStatus(data.Status);
 
                         valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
@@ -1981,24 +1982,29 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
             
 
-            function getRequestColor(requestType){
+            function getRequestColor(requestType,status){
                 var colorType="";
-                switch (requestType) {
-                    case "E":
-                        colorType = "#FF0000";
-                        break;
-                    case "S":
-                        colorType = "#0071c5";
-                        break;
-                    case "R":
-                        colorType = "#FFD700";
-                        break;
-                    case "P":
-                        colorType = "#40E0D0";
-                        break;
-                    default:
-                        colorType = "#000";
+                if(status=='K'){
+                    colorType = "#008000";
+                }else{
+                    switch (requestType) {
+                        case "E":
+                            colorType = "#FF0000";
+                            break;
+                        case "S":
+                            colorType = "#0071c5";
+                            break;
+                        case "R":
+                            colorType = "#FFD700";
+                            break;
+                        case "P":
+                            colorType = "#40E0D0";
+                            break;
+                        default:
+                            colorType = "#000";
+                    }
                 }
+                
                 return colorType;
             }
 
@@ -2800,7 +2806,7 @@ if(!empty($_actual_company['postCardValue'])){
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Confirm Final Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -3314,6 +3320,79 @@ if(!empty($_actual_company['postCardValue'])){
                 <button type="button" class="btn-primary btn-sm" onclick="uploadFileAjax('myDocumentIDBackImage','documentIDBack','<?php echo $_actual_company['CompanyID']?>','myDocumentIDBack')">Upload</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myRatingScore" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+				
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDRating" />
+				<input type="hidden" value="" id="orderFBID" />
+				<div class="form-group">
+					<label for="ratingQuestion">Would you like to recommend the service company?</label>
+					<div class="radio">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="Yes" >Yes</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="No">No</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service company?</label>
+						<div class="votable hide">
+							<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						</div>
+					<div class="voted">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<i><label id="ratingCompany">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service professional?</label>
+					<div class="votable1 hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					
+					<div class="voted1">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<i><label id="ratingProfessional">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">What else would you like others to know?</label>
+					<input type="text" class="form-control" id="ratingObservation" placeholder="What else would you like others to know?"/>
+				</div>
+				<div class="modal-footer" id="buttonPaymentType"> 
+					<!--<button type="button" class="btn-primary btn-sm" id="buttonRating" onClick="insertOrderRating()" >Rating</button>-->
+					<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				</div> 
+			</div>
 		</div> 
 	</div>
 </div>

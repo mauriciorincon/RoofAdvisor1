@@ -70,6 +70,20 @@
                     </select>
                     <!--<input maxlength="100" type="text" required="required" class="form-control" placeholder="Company Type" />-->
                 </div>
+                <div class="form-group">
+                    <label class="control-label labeltwht">In business since</label>
+                    <input maxlength="100" type="text" required="required" class="form-control datepickerdob" placeholder="Enter In business since" id="inBusinessSinceCompany" name="inBusinessSinceCompany"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label labeltwht">License Number</label>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter License Number" id="licenseNumberCompany" name="licenseNumberCompany"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label labeltwht">Expiration Date</label>
+                    <input maxlength="100" type="text" required="required" class="form-control datepickerdob" placeholder="Enter Expiration Date" id="expirationDateCompany" name="expirationDateCompany"/>
+                </div>
+                
+
                 <div  class="form-group">
                         <input type="checkbox" name="termsServiceAgree" id="termsServiceAgree" value="1"><span style="color:white">I agree with the RoofServiceNow</span> <a href="#termsServiceWindow" data-toggle="modal"> Terms and Conditions</a>
                     </div>

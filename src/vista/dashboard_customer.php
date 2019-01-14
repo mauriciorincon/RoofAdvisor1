@@ -13,12 +13,6 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
 
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
-    			<ul class="dropdown-menu" role="menu">
-					<?php echo $_menu_item; ?>
-				</ul>
-			</div>
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
 			
 		</div>
@@ -304,7 +298,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -320,7 +314,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -407,7 +401,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -421,7 +415,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -670,7 +664,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											<a class="btn-warning btn-sm" data-toggle="modal"  
 												href="#myEstimateAmount" 
 												onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+												<span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
@@ -685,7 +679,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										<a class="btn-success btn-sm" data-toggle="modal"  
 												href="#myFinalAmount" 
 												onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+												<span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
@@ -1193,23 +1187,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div><!-- /cierro modal -->
 
 
-<div class="modal fade" id="myMensaje" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerTextAnswerOrder">Order Updated</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myPayment" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -1289,13 +1267,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Estimate Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Estimate Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
@@ -1448,7 +1426,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
 					</div>
 					<div class="radio disabled">
-						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="Online">Online</label>
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="Online">Online (Visa, Mastercard, Discover, Amex, Credit, Debit)</label>
 					</div>
 
 					
@@ -1581,7 +1559,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
-<?php echo $_divs_info; ?>
+
 
 
 
@@ -1660,7 +1638,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonCommentary"> 
-                <!-- <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> -->
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1696,7 +1674,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+				<h4 class="modal-title" id="headerUploadReport">Roof Docs</h4> 
 			</div> 
 			<div class="modal-body" id="textUploadReport"> 
                 <input type="hidden" value="" id="UploadReportIDOrder" />
@@ -1717,7 +1695,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1766,7 +1744,14 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<div>
 									<ul class="nav nav-list nav-menu-list-style">
                                         
-                                        <?php 
+										<?php
+											echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+											.'<span class="glyphicon glyphicon-folder-close m5"></span>Resources
+											<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+											.'<ul class="nav nav-list tree bullets">';
+											echo $_menu_item;
+											echo '</ul></li>'; 
+
                                             echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
                                             .'<span class="glyphicon glyphicon-folder-close m5"></span>Articles
                                             <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
@@ -1838,7 +1823,43 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+<?php echo $_divs_info; ?>
 
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Order Updated</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myMensajeCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrderC">Order Updated</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrderC"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 </div>
 </div>
 <br>

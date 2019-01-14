@@ -250,8 +250,11 @@ class userController{
         $_responseU=$this->insertUserDatabase($arrayContractor['emailValidation'],$arrayContractor['phoneContactCompany'],$arrayContractor['companyName'],$hashActivationCode,$arrayContractor['password'],'company');
         
         if(is_array($_responseU) or gettype($_responseU)=="object"){
+            
+    
+    
             $Company = array(
-                    "ComapnyLicNum" => "",
+                    "ComapnyLicNum" => $arrayContractor['ComapnyLicNum'],
                     "CompanyAdd1" => "",
                     "CompanyAdd2" => "",
                     "CompanyAdd3" => "",
@@ -281,8 +284,8 @@ class userController{
                     "Status_Rating" => "5.0",
                     "uid" => $_responseU->uid,
                     "postCardValue" =>0,
-                    "InBusinessSince"=>'',
-                    "LicExpiration"=>'',
+                    "InBusinessSince"=>$arrayContractor['InBusinessSince'],
+                    "LicExpiration"=>$arrayContractor['LicExpiration'],
                     "Verified"=>'',
                     "TermsDateAccept"=>date("m-d-Y H:i:s"),
                     "TermsIpAccept"=>$_SERVER['REMOTE_ADDR'],

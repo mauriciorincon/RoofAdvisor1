@@ -466,7 +466,7 @@ class payingController{
         $_result=$this->_payingModel->get_payout_account($account,$secretKey);
         return $_result;
     }
-    
+
     function get_transfer_account($account){
         if(is_null($this->_payingModel)){
             $this->_payingModel= new paying_stripe();
@@ -641,7 +641,7 @@ class payingController{
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
                 
                 $_company=$this->_userController->getCompanyById($_order['CompanyID']);
-                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Schedule order [".$_order['OrderNumber']."]");
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge to Schedule order [".$_order['OrderNumber']."]");
                 break;
             case 'E':
                 if($_order==null){
@@ -649,7 +649,7 @@ class payingController{
                 }else{
         
                     $_company=$this->_userController->getCompanyById($_order['CompanyID']);
-                    $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to Emergency order [".$_order['OrderNumber']."]");
+                    $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge to Emergency order [".$_order['OrderNumber']."]");
                 }
                 break;
             case 'R':
@@ -659,7 +659,7 @@ class payingController{
                 //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
         
                 $_company=$this->_userController->getCompanyById($_order['CompanyID']);
-                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue to New/Reeroof order [".$_order['OrderNumber']."]");
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge to New/Reeroof order [".$_order['OrderNumber']."]");
                 break;
             case 'P':
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Post-card request Order number.');
@@ -673,7 +673,7 @@ class payingController{
                 break;
             case 'DEP':
                 $_company=$this->_userController->getCompanyById($_order['CompanyID']);
-                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Chargue for Deposit to  order [".$_order['OrderNumber']."]");
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge for Deposit to  order [".$_order['OrderNumber']."]");
                 break;
             default:
                 $_result="Error, order type do not exists [".$_ordet_type_selected."]";
