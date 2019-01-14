@@ -673,8 +673,7 @@ margin-right:100px;
 .footer-menu li a {
   color: #fff;
   text-transform:capitalize;
-  line-height:22px;
-  font-size:14px;
+  font-size:1.1vw;
   font-weight:300;
 }
 .footer-menu li a:hover {padding-left:5px;color:rgb(243, 188, 22)}
@@ -1774,6 +1773,72 @@ display:block !important;
 .storelogom1{
 margin-top:50px;
 }
+#mobtrigger{
+display:none !important;
+}
+.headcont1{
+width:95%;
+}
+.dbpanelcontractor1{
+    margin-top: -40px;
+    color: #fff;
+}
+.modal-header{
+background-color: #005678;
+    color: #fff;
+}
+table.dataTable thead{
+background-color: #22bddf;
+    color: #fff;
+}
+.dataTables_length label{
+color:#fff;
+padding-left:20px;
+}
+.dataTables_filter label{
+color:#fff;
+text-align:right !important;
+padding-right:20px;
+}
+div.table-responsive>div.dataTables_wrapper>div.row:first-child{
+    background-color: #005678;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1871,6 +1936,12 @@ padding-bottom:20px !important;
 }
 }
 @media (max-width:1290px){
+#appand1{
+width:50%;
+}
+#appand2{
+width:50%;
+}
 .inpwiz2{
 right:0;
 }
@@ -1908,7 +1979,7 @@ margin-left:450px !important;
 #welcome-txt{
 }
 .main-menu ul li a {
-    font-size: 11px;
+    font-size: 14px;
 }
 #login-txt {
 font-size:10px;
@@ -1953,7 +2024,6 @@ display:none;
     margin-right: auto;
 }
 #srvapp1{
-height: 1150px;
     display: block;
     margin-top: 30px;
     position: relative;
@@ -1975,7 +2045,6 @@ height: 1150px;
     z-index: 999999;
 }
 .mobile-menu-area{
-display:none !important;
 }
 #menu-head{
 display:none;
@@ -2113,8 +2182,7 @@ text-align:center;
 }
 #appdiv1{
     display: inline-block;
-    margin-left: 50px;
-    margin-right: -30px;
+        margin-top: -27px;
 }
 #appdl3-tx1{
 font-size: 20px;
@@ -2130,7 +2198,8 @@ margin-right: auto;
     margin-left: auto;
     display: block;
 float:none;
-width:75%;
+width:66%;
+margin-bottom:10px;
 }
 #appand2{
 margin-right: auto;
@@ -2190,5 +2259,56 @@ margin-bottom:25px;
 }
 #mobwizmain{
 margin-top:20px;
+}
+.mobhead-area{
+      padding-top: 165px;
+}
+.faq-secmob::before{
+top:135px;
+}
+#mobtrigger{
+display:block !important;
+}
+.mobaboutus1{
+margin-left:0px !important;
+}
+.mobaboutcounter1{
+margin-top:25px;
+}
+.mobaboutcounter2{
+margin-top:-168px;
+}
+.slick-prev, .slick-next {
+top:25%;
+}
+.mobtxtsz1{
+font-size:14px !important;
+}
+.aboutinfo1{
+ line-height:1;
+  margin-top: -100px;
+}
+.slickbout1container{
+height:545px;
+}
+.slick-dots{
+text-align:left !important;
+margin-left:45px !important;
+}
+.slick-prev{
+padding-top:0px !important;
+}
+.slick-next{
+padding-top:0px !important;
+}
+.mobhead-area-reg {
+    padding-top: 110px;
+}
+.mobterms{
+    margin-top: 165px;
+}
+.contact-form h1{
+font-size: 25px;
+    margin-bottom: 37px;
 }
 }

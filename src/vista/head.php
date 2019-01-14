@@ -68,8 +68,9 @@ if(!isset($_SESSION)) {
       
                 <link rel="stylesheet" href="vista/css/smart_wizard.css">
                 <link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
+                <link rel="stylesheet" href="vista/css/mobmenu.css">
 
-
+             
 
 <style>
 .checked {
@@ -97,7 +98,7 @@ if(!isset($_SESSION)) {
    <img id="loading-txt" src="img/pre-load.png" alt="This loading is taking quite some time isn't it?" />
   <img id="loading-image" src="img/load1.gif" alt="Don't worry we can wait, we are here to help!" />
      </div>
-    <div class="" >
+    <div  >
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -173,42 +174,62 @@ if(!isset($_SESSION)) {
                                                                         
                                             </ul>
                                     </li>
-                                </ul>		</nav>	
-							</div>
-						</div>
-						<div class="mobile-menu-area visible-xs ">
-							<div class="col-md-12">
-								<div class="mobile-menu">
-									<nav id="mobile-menu">
-										<ul>
-										<li class="dropdown">
+                                 </ul>		</nav>	
+	                     						</div>
+			 			</div>
+                  
+                                      <div id='mobslider'>
+                                       <div id='mobgreet'>
+                                         <span id="labelUserLoggedIn" name="labelUserLoggedIn">
+                                                                                        <?php if(isset($_SESSION['username'])){
+                                                                                                        echo $_SESSION['username'];
+                                                                                                        } else{
+                                                                                                        echo "Welcome!";
+                                                                                        }?>
+                                                                                </span>
+
+                                            </div>
+                                        <nav id="mobnavtxt">
+                                                                        <ul>
+                                                                                <li class="active"><a href="index.php">HOME&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=aboutus&accion=showinfo">ABOUT US&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=services&accion=showinfo">SERVICE&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=faq&accion=showinfo">FAQ&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=download&accion=showinfo">DOWNLOAD&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
+                                                                        </ul></nav><nav id="mobnavtxt2">
+                                                                <ul id="moblogin1" class="nav navbar-nav">
+                                        <li class="dropdown">
+                                      <span class="mobline"></span>
                                     <!--<img id="login-img" src="img/login.png">-->
-                                    <a id="login-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
-										<span id="labelUserLoggedIn" name="labelUserLoggedIn"><?php if(isset($_SESSION['username'])){
-											echo $_SESSION['username'];
-													} else{
-													echo "Log In";
-																	}?>
-										</span>
-                                                                <b class="caret"></b></a>
-                                                                <ul id="logindrop" class="dropdown-menu">
+                                    <a id="moblogin-txt" href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-user"></i> &nbsp;&nbsp;
+                                                                                <span id="labelUserLoggedIn" name="labelUserLoggedIn">
+                                                                                        <?php if(isset($_SESSION['username'])){
+                                                                                                        echo "<a href='?controller=user&accion=logout'>Log Out</a>";
+                                                                                                        } else{
+                                                                                                        echo "Log In";
+                                                                                        }?>
+                                                                                </span>
+                                                <b class="caret"></b></a>
+                                                <ul id="logindrop" class="dropdown-menu">
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Homeowner</a></li>
+                                                                        <li class="divider"></li> 
                                                                         <li><a href="?controller=user&accion=dashboardCompany">ContractPro</a></li>
-																		<li class="divider"></li>
-																		<?php if(isset($_SESSION['username'])){
-																			echo '<li><a href="?controller=user&accion=logout">Log Out</a></li>';
+                                                                                                                                                <li class="divider"></li>
+                                                                                                                                                <?php if(isset($_SESSION['username'])){
+                                                                                                                                                        echo '<li><a href="?controller=user&accion=logout">Log Out</a></li>';
                                                 } ?>
-                                                                        
+
                                             </ul>
                                     </li>
-										</ul>
-									</nav>
-								</div>
-							</div>
-						</div>	
-					</div>
+                                 </ul>          </nav>
+
+                                      </div>
+                                   <div id="mobtrigger"><i class="fas fa-bars fa-2x"></i> </div>
+                   </div>
                 </div>					
-            </div>
+            
+        </div>
         </header>
 		<!-- header-area end-->	
 

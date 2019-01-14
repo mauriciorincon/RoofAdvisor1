@@ -143,11 +143,11 @@ This app saved the day and is so easy to use. I had water leaking into the house
 
  <div id='appdl3' >
   <div class="row"> 
-   <div id='appdiv1' class="col-md-6">
+   <div id='appdiv1' class="col-xs-6">
     <span id='appdl3-tx1'>Download</br>for</span>
    </div>
      
-   <div id='appmob2' class="col-md-6">
+   <div id='appmob2' class="col-xs-6">
     <span id='appdl3-tx2'><strong>FREE!</strong></span>
    </div>
   </div> 

@@ -2,7 +2,7 @@
 <br>
 <br>
 		<!-- map-area start-->
-		<div class="contact-widget pb-80">
+		<div class="mobhead-area-reg contact-widget pb-80">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12" align="center">

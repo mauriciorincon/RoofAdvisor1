@@ -698,8 +698,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
          
         <div class="table-responsive">          
-            <table class="table table-striped table-bordered" id="table_orders_company">
-                <thead>
+            <table class="table table-striped " id="table_orders_company">
+                <thead class="">
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
@@ -2804,7 +2804,7 @@ if(!empty($_actual_company['postCardValue'])){
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="dbpanelcontractor1">
 							<div class="panel-heading">
 								<h3 class="panel-title"><strong>Confirm Final Amount</strong></h3>
 							</div>
@@ -3133,7 +3133,7 @@ if(!empty($_actual_company['postCardValue'])){
 				
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="dbpanelcontractor1">
 							<div class="panel-heading">
 								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
 							</div>

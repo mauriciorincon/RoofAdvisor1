@@ -1,5 +1,16 @@
+<script type="text/javascript">
+var LHCChatOptions = {};
+LHCChatOptions.opt = {widget_height:340,widget_width:300,popup_height:520,popup_width:500};
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+var referrer = (document.referrer) ? encodeURIComponent(document.referrer.substr(document.referrer.indexOf('://')+1)) : '';
+var location  = (document.location) ? encodeURIComponent(window.location.href.substring(window.location.protocol.length)) : '';
+po.src = '//roofchat.roofservicenow.com/index.php/chat/getstatus/(click)/internal/(position)/bottom_left/(ma)/br/(top)/350/(units)/pixels/(leaveamessage)/true?r='+referrer+'&l='+location;
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
 <div id="loading"></div>
-
+<div id="lhc_status_container_page" ></div>
  <!-- Message Area-->
 <div class="modal fade" id="myMensaje" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -25,14 +36,13 @@
   </div>
 </div>
 <!-- END Message Area-->
-
 <!--  blog-area end  -->		
 		<!-- footer-area start -->
 		<footer class="footer-bg">
 			<div style="margin-left:12%" class="footer-top pt-20 pb-10">
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -100px;">
+						<div class="col-lg-3 col-md-3  col-sm-6 mb-20" style="    margin-left: -125px;">
 							<div class="footer-widget">
 								<div class="footer-logo">
 								   <img src="img/logo-white.png" alt="" />
@@ -173,7 +183,7 @@
 <script src="vista/js/mob-wiz.js"></script>
 <script src="vista/timepicker/src/wickedpicker.js"></script>
 <script src="vista/js/jquery.smartWizard.js"></script>
-
+<script src="vista/js/jquery.slidereveal.min.js"></script>
 
 <?php
         if(isset($_GET['aditionalMessage'])){?>
@@ -259,9 +269,41 @@ $(document).ready(function(){
         autoAdjustHeight:true
 });
 
+
+
+
+if (window.location.href.indexOf("controller=aboutus") > -1) {
+$('#mobnavtxt ul li a[href*="aboutus"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=services") > -1) {
+$('#mobnavtxt ul li a[href*="services"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=faq") > -1) {
+$('#mobnavtxt ul li a[href*="faq"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=download") > -1) {
+$('#mobnavtxt ul li a[href*="download"]').parent().addClass('active').siblings().removeClass('active');
+
+}else if(window.location.href.indexOf("controller=contact") > -1) {
+$('#mobnavtxt ul li a[href*="contact"]').parent().addClass('active').siblings().removeClass('active');
+
+}
+
+
+$('#mobslider').slideReveal({
+  trigger: $("#mobtrigger")
+});
+$("#mobnavtxt ul li.active a:first").addClass('mobactivea');
+
+$("#mobnavtxt ul li a").click(function() {
+     $(this).addClass('mobactivea');
+     $("#mobnavtxt ul li.active a:first").removeClass('mobactivea');
+         $(this).parent().addClass('active').siblings().removeClass('active');
+
+ });
+
 });
 
 </script>
-
 </body>
 </html>

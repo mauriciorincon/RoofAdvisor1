@@ -1,0 +1,68 @@
+#mobtrigger{
+    color: #005678;
+    margin-left: -40px;
+}
+#mobslider{
+    background-color:#005678;
+}
+#moblogin1{
+    margin-top: 130px;
+    color:#fff;
+}
+#moblogin1 .open>a, .nav .open>a:focus, .nav .open>a:hover{
+background:#1a919c;
+}
+#mobnavtxt{
+padding-left: 60px;
+    font-size: 20px;
+    padding-top: 40px;
+}
+#mobgreet{
+    font-size: 25px;
+    text-align: center;
+    color: #fff;
+    background-color: #fa511a;
+    padding: 15px;
+    box-shadow: -1px 3px 2px #383838;
+}
+#mobnavtxt ul li a{
+color:#fff;
+font-weight:400;
+}
+#mobnavtxt ul li{
+padding:12px;
+}
+#mobnavtxt ul li.active{
+background-color: #fff;
+    border-radius: 10px 0px 0px 10px;
+}
+.mobactivea{
+color: #fa511a !important;
+
+}
+#logindrop li .divider{
+    height: 1px;
+    margin: 9px 15px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.mobline{
+    display: block;
+    border: none;
+    color: white;
+    height: 1px;
+    background: white;
+    background: -webkit-gradient(radial, 85% 85%, 0, 85% 85%, 350, from(#fff), to(#1565c0));
+    margin-right: 50px;
+
+}
+#mobnavtxt2{
+padding-left: 60px;
+    font-size: 20px;
+    padding-top: 40px;
+}
+#mobnavtxt2 ul li a{
+color:#fff;
+font-weight:400;
+}
+

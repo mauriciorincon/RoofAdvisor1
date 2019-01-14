@@ -21,10 +21,10 @@
 		</div>
 		<!-- breadcrum-area end-->
 		<!-- about-area start-->
-		<div class="about-area ptb-80">
+		<div class="about-area mobhead-area ptb-80">
 			<div class="container">
 				<div class="row">
-					<div style="margin-left:100px;" class="col-lg-6 col-md-6 col-sm-6">
+					<div style="margin-left:100px;" class="mobaboutus1 col-lg-6 col-md-6 col-sm-6">
 						<div class="about-text">
 							<h3>WELCOME TO RoofServiceNow </h3>
 							<p>Roof Service Now is a free digital marketplace for homeowners to connect with roof contractors for emergency services, scheduled repairs, estimates, and roof reports. Homeowners receive immediate responses from pre-screened roofing professionals at the same time we provide the roofing company with the tools to service their customers, manage their crews, and the essential business resources. We combine an innovative digital marketplace with a superior roofing software. All in one platform!</p>
@@ -69,7 +69,7 @@
 							<p>Happy Clients</p>
 						</div>
 					</div>
-					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
+					<div class="mobaboutcounter1 col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
                                                         <i class="fas fa-user-alt"></i>
@@ -78,7 +78,7 @@
 							<p>Contractors</p>
 						</div>
 					</div>
-					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
+					<div class="mobaboutcounter2 col-lg-3  col-md-3 col-sm-6 col-xs-6 mb-20">
 						<div class="single-counter text-center text-white">
 							<div class="counter-icon">
 								<i class="fas fa-globe-americas"></i>
@@ -95,16 +95,16 @@
 		<!-- testimonial-area start -->
                         <div class="slickaboutwrapper">
                         <div class="slickbout1container">
-                                <div class="aboutinfo1 slickbout1content">
+                                <div  class="aboutinfo1 slickbout1content">
   <div>
-        Roof Service Now is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away.
-  </div>
+        <span class="mobtxtsz1">Roof Service Now is the only same day, on demand service tool that connects roofing professionals with their clients realtime who need repairs done right away.
+  </span></div>
   <div>
-        Roof Service Now provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is online, on break, repair locations, view invoices, customer feedback on service provided daily/weekly, monthly invoice totals by repair crew, and have a master console of work schedule, and much more.
-  </div>
+        <span class="mobtxtsz1">Roof Service Now provides realtime map console to track their fleet of service professional as they provide service to customers. Know who is online, on break, repair locations, view invoices, customer feedback on service provided daily/weekly, monthly invoice totals by repair crew, and have a master console of work schedule, and much more.
+  </span></div>
   <div>
-        Repair crews have their own Roof Service Now driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.
-  </div>
+       <span class="mobtxtsz1"> Repair crews have their own Roof Service Now driver app where they can easily accept orders, choose when they’re available, provide estimates to homeowners,  and add them to their calendar, all while on the go.
+ </span> </div>
 </div>
                                </div>
                         </div>
