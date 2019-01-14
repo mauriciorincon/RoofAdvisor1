@@ -1776,6 +1776,69 @@ margin-top:50px;
 #mobtrigger{
 display:none !important;
 }
+.headcont1{
+width:95%;
+}
+.dbpanelcontractor1{
+    margin-top: -40px;
+    color: #fff;
+}
+.modal-header{
+background-color: #005678;
+    color: #fff;
+}
+table.dataTable thead{
+background-color: #22bddf;
+    color: #fff;
+}
+.dataTables_length label{
+color:#fff;
+padding-left:20px;
+}
+.dataTables_filter label{
+color:#fff;
+text-align:right !important;
+padding-right:20px;
+}
+div.table-responsive>div.dataTables_wrapper>div.row:first-child{
+    background-color: #005678;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2237,5 +2300,15 @@ padding-top:0px !important;
 }
 .slick-next{
 padding-top:0px !important;
+}
+.mobhead-area-reg {
+    padding-top: 110px;
+}
+.mobterms{
+    margin-top: 165px;
+}
+.contact-form h1{
+font-size: 25px;
+    margin-bottom: 37px;
 }
 }

@@ -1,5 +1,16 @@
+<script type="text/javascript">
+var LHCChatOptions = {};
+LHCChatOptions.opt = {widget_height:340,widget_width:300,popup_height:520,popup_width:500};
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+var referrer = (document.referrer) ? encodeURIComponent(document.referrer.substr(document.referrer.indexOf('://')+1)) : '';
+var location  = (document.location) ? encodeURIComponent(window.location.href.substring(window.location.protocol.length)) : '';
+po.src = '//roofchat.roofservicenow.com/index.php/chat/getstatus/(click)/internal/(position)/bottom_left/(ma)/br/(top)/350/(units)/pixels/(leaveamessage)/true?r='+referrer+'&l='+location;
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
 <div id="loading"></div>
-
+<div id="lhc_status_container_page" ></div>
  <!-- Message Area-->
 <div class="modal fade" id="myMensaje" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -291,10 +302,8 @@ $("#mobnavtxt ul li a").click(function() {
 
  });
 
-
 });
 
 </script>
-
 </body>
 </html>

@@ -70,7 +70,7 @@ if(!isset($_SESSION)) {
                 <link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
                 <link rel="stylesheet" href="vista/css/mobmenu.css">
 
-
+             
 
 <style>
 .checked {

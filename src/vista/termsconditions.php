@@ -20,7 +20,7 @@
 
 	<!-- breadcrum-area start-->
 
-	<div class="breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
+	<div class="mobterms breadcrum-area pt-120 pb-100 bg-img-2 bg-opacity">
 
 		<div class="container">
 
