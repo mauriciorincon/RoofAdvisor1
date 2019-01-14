@@ -4,6 +4,8 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
+echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
+
 ?>
 
 <div id="db-cus-main" style="margin-bottom:-5px !important;">

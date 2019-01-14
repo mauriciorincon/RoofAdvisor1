@@ -17,6 +17,8 @@
 	//echo $order_request
 ?>
 
+<script>var userProfileLogin=''; </script>;
+
 <!-- Detail for roofservicenow -->
 <div id='srvapp1' class="">
 <div id='srvapps'>

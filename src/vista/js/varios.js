@@ -1455,6 +1455,8 @@ $(document).ready(function () {
     
     allWells.hide();
     
+    hideShowOptionsTypeRequest();
+
     navListItems.click(function (e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
@@ -1703,6 +1705,29 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
+function hideShowOptionsTypeRequest(){
+    if(userProfileLogin==undefined){
+        $('#typeServiceCompany').hide();
+        $("#linkServiceTypeemergency").show();
+        $("#linkServiceTypeschedule").show();
+        $("#linkServiceTypereroof").show();
+        
+    }else{    
+        if(userProfileLogin=='company'){
+            $('#typeServiceCompany').show();
+            $("#linkServiceTypeemergency").hide();
+            $("#linkServiceTypeschedule").hide();
+            $("#linkServiceTypereroof").hide();
+            nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().prev().children("a")
+            nextStepWizard.removeAttr('disabled').trigger('click');
+        }else{
+            $('#typeServiceCompany').hide();
+            $("#linkServiceTypeemergency").show();
+            $("#linkServiceTypeschedule").show();
+            $("#linkServiceTypereroof").show();
+        }
+    }
+}
 
 
 function getListContractor(){
@@ -3868,7 +3893,7 @@ function disableEnableCustomer(customerID,action){
 }
 
 function newOrderByCompany(CustomerID,Address){
-    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().prev().children("a")
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
     nextStepWizard.removeAttr('disabled').trigger('click');
     $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
     $('#activeCustomerIDhidden').val(CustomerID);

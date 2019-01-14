@@ -16,6 +16,9 @@ function getRequestType(requestType){
         case "M":
             RequestType = "Re-roof or New";
             break;
+        case "G":
+            RequestType = "Generic";
+            break;
         default:
             RequestType = "No value found";
     }

@@ -1,5 +1,6 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 ?>
 
 <div id="db-cus-main">
