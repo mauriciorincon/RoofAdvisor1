@@ -14,7 +14,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
 
-			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
 			
 		</div>
 
@@ -39,8 +39,10 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 			}
 			</style>
 
-			<div id="map"></div>
-
+			<a href="#" data-toggle="collapse" data-target="#onlyMapCustomerDashboard">Hide/Show Map</a>
+        	<div id="onlyMapCustomerDashboard" class="collapse in">
+				<div id="map"></div>
+			</div>
 			<script>
 				function initialization(){
 					
@@ -1255,7 +1257,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">

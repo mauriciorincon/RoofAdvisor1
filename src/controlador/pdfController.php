@@ -365,7 +365,7 @@ class pdfController{
             $_hour_value=0;
         }
 
-        switch($_actio_type){
+        switch($_action_type){
             case "pay_emergency_service":
                 $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
                 $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>

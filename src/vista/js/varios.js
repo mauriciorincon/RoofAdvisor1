@@ -1901,7 +1901,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         }
     }
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
     var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
@@ -1921,7 +1922,9 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
     
-
+    if(RequestType==undefined || RequestType==''){
+        RequestType=$('select#typeServiceCompany').val();
+    }
     if(RequestType=='emergency'){
         RequestType='E'
     }else if(RequestType=='schedule'){
@@ -1930,6 +1933,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         RequestType='R'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     if(CompanyID==undefined){
@@ -2033,6 +2038,7 @@ function validateIsLoggedIn(){
                             jsRemoveWindowLoad('');
                             insertOrderCustomer();
                         }
+                        jsRemoveWindowLoad('');
                     }else if(data.profile=='company'){
                         //jsRemoveWindowLoad('');
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
@@ -2044,7 +2050,7 @@ function validateIsLoggedIn(){
                         }
                     }
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                    jsRemoveWindowLoad('');
+                    
                     $('html,body').scrollTop(0);
                 }else{
                     jsRemoveWindowLoad('');
@@ -2604,7 +2610,7 @@ $("#menu-toggle").click(function(e) {
 });
 
 function showHideSteps(typeService){
-    if(typeService=='schedule'){
+    if(typeService=='schedule' || typeService=='generic'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
         step8=$('.stepwizard-step:eq(8)');
@@ -4347,6 +4353,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
         RequestType='R'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     
     if(CompanyID==undefined){
@@ -4476,6 +4484,8 @@ function insertOrderPostCard(){
         RequestType='P'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     
     if(CompanyID==undefined){

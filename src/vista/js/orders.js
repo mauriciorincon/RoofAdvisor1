@@ -336,7 +336,7 @@ function getTypePricing(dataOrder){
             case "Asphalt":
                 option += "A";
                 break;
-            case "Wood Shake/Composite":
+            case "Wood Shake/Slate":
                 option += "W";
                 break;
             case "Metal":

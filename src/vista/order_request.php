@@ -257,13 +257,13 @@
 				</div>
 				<div class="list-group" id="step2OtypeService">
 					<div class="form-group">						
-						<select id="typeServiceCompany" name="typeServiceCompany" onchange="setServiceType()">
+						<select id="typeServiceCompany" name="typeServiceCompany" onchange="setServiceType()" class="form-control">
 							<option value="NA">---------------</option>
 							<option value="emergency">Emergency</option>
 							<option value="schedule">Schedule</option>
 							<option value="roofreport">RoofReport</option>
 							<option value="reroofnew">Re-roof or New</option>
-							<option value="">Generic</option>
+							<option value="generic">Generic</option>
 						</select>
 					</div>
 					<a href="#" class="list-group-item " name="linkServiceType" id="linkServiceTypeemergency">

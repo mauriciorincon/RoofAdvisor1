@@ -38,8 +38,10 @@ Welcome to RoofServicenow Admin
     }
     </style>
 
-    <div id="map"></div>
-
+    <a href="#" data-toggle="collapse" data-target="#onlyMapAdminDashboard">Hide/Show Map</a>
+    <div id="onlyMapAdminDashboard" class="collapse in">
+        <div id="map"></div>
+    </div>
     <script>
 
         var marketrs=[];

@@ -3137,7 +3137,7 @@ if(!empty($_actual_company['postCardValue'])){
 					<div class="col-md-12">
 						<div class="dbpanelcontractor1">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">

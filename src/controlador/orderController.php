@@ -94,6 +94,9 @@ class orderController{
             case "S":
                 $_firstStatus="A";
                 break;
+            case "G":
+                $_firstStatus="A";
+                break;
             case "R":
                 $_firstStatus="P";
                 if(empty($arrayDataOrder['CompanyID'])){
