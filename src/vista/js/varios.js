@@ -1334,8 +1334,8 @@ $('#step2OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
-    getValueService();
-    showHideElementByService();
+    getValueService(type);
+    showHideElementByService(type);
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
@@ -1353,8 +1353,8 @@ $('#step3OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
-    getValueService();
-    showHideElementByService();
+    getValueService(type);
+    showHideElementByService(type);
     action_type="pay_emergency_service";
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
@@ -1364,8 +1364,27 @@ $('#step3OtypeService').on('click', 'a', function(){
    return false;
 });
 
-function getValueService(){
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+function setServiceType(){
+    $("#step2OtypeService a").removeClass("active");
+    $("#step3OtypeService a").removeClass("active");
+    //$(this).addClass("active");
+    var type=$('select#typeServiceCompany').val();
+    showHideSteps(type);
+    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    //$(this).find('button').removeClass("btn-primary").addClass("btn-success");
+    getValueService(type);
+    showHideElementByService(type);
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+    curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+    nextStepWizard.removeAttr('disabled').trigger('click');
+    curStepWizard.attr('disabled', 'disabled');
+    
+   return false;
+}
+
+function getValueService(RequestType){
+    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     var fieldValue="";
     order_fbid="";
     switch(RequestType){
@@ -1382,6 +1401,9 @@ function getValueService(){
         case 'roofreport':
             order_type_request_val='R';
             action_type='pay_postcard_service';
+            break;
+        case 'generic':
+            order_type_request_val='G';
             break;
     }
     if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -1426,8 +1448,8 @@ function getValueService(){
 
 }
 
-function showHideElementByService(){
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+function showHideElementByService(RequestType){
+    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     switch(RequestType){
         case "roofreport":
             $('#step8CompanyName').parents('div').eq(1).hide()
