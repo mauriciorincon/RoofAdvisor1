@@ -661,6 +661,12 @@ class payingController{
                 $_company=$this->_userController->getCompanyById($_order['CompanyID']);
                 $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge to New/Reeroof order [".$_order['OrderNumber']."]");
                 break;
+            case 'G':
+                //$_result=$this->_payingModel->createCharge($token,$amount,$currency,);
+                
+                $_company=$this->_userController->getCompanyById($_order['CompanyID']);
+                $_result=$this->_payingModel->createChargeDestination($token,$amount,$currency,$_company['stripeAccount'],$_fee,"Charge to generic order [".$_order['OrderNumber']."]");
+                break;
             case 'P':
                 $_result=$this->_payingModel->createCharge($token,$amount,$currency,'Post-card request Order number.');
                 break;

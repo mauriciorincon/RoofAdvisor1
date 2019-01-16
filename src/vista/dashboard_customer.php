@@ -1589,6 +1589,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
 						<tr><td>Postcard</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckType" checked></td></tr>
 						<tr><td>New or Reroof</td><td><input class="form-check-input" type="checkbox" value="M" name="defaultCheckType" checked></td></tr>
+						<tr><td>Generic</td><td><input class="form-check-input" type="checkbox" value="G" name="defaultCheckType" checked></td></tr>
                         <tr><td scope="col"><b>Order Status<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>

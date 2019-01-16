@@ -3634,13 +3634,13 @@ function insertCommentary(){
             if(n==-1){
                 $("#myCommentaryInfo").modal("hide");
                 $("#myCommentaryInfoN").modal("hide");
-                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#myMensaje h4.modal-title').html('Create Comment');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }else{
                 $("#myCommentaryInfo").modal("hide");
                 $("#myCommentaryInfoN").modal("hide");
-                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#headerTextAnswerOrder').html('Create Comment');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }
