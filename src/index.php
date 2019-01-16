@@ -27,6 +27,8 @@ if(!isset($_GET['controller']))
     require_once("vista/head.php");
     require_once("vista/begin.php");
     require_once("vista/footer.php");
+
+    
 }
 else
 {
