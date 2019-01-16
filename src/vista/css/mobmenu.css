@@ -65,4 +65,8 @@ padding-left: 60px;
 color:#fff;
 font-weight:400;
 }
-
+@media (max-width: 500px){
+#mobtrigger{
+  margin-left:0px;
+}
+}

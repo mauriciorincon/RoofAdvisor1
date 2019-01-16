@@ -1817,7 +1817,6 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
     
     <script>
         $(document).ready(function() {
-        
         var date = new Date();
         var yyyy = date.getFullYear().toString();
         var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
@@ -1827,6 +1826,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
     
 
             $('#calendar').fullCalendar({
+                themeSystem: 'bootstrap4',
                 locale: 'en',
                 header: {
                     left: 'prev,next today',
@@ -1839,7 +1839,6 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
                 selectHelper: true,
-                height: 2000,
                 select: function(start, end) {
                     
                     $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
