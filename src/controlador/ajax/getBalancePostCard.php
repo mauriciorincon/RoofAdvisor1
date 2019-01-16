@@ -11,6 +11,7 @@ $_result=$_contractorController->getCompanyById($_companyID);
 if(is_array($_result)){
     
     if(isset($_result['postCardQuantity'])){
+        
         $_array=array(
             'postCardQuantity'=>  $_result['postCardQuantity'],
             'postCardValue'=>  $_result['postCardValue'],
@@ -21,6 +22,7 @@ if(is_array($_result)){
             'postCardQuantity'=>  0,
             'postCardValue'=>  0,
         );
+        echo json_encode($_array);
     }
 }else{
     echo "Error, Company not found";

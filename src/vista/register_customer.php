@@ -97,6 +97,12 @@
                     <div  class="form-group">
                         <div class="g-recaptcha" data-sitekey="6LeiZnkUAAAAAA6gqLw6IFIMuchbHXyiRRYyTC1n"></div>
                     </div>
+                    <div  class="form-group">
+                        
+                        <label class="control-label labeltwht ">PLEASE READ THE TERMS THOROUGHLY AND CAREFULLY. BY USING THE PLATFORM, YOU AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU MAY NOT ACCESS OR USE THE PLATFORM</label>
+                        <input type="checkbox" name="termsServiceAgree" id="termsServiceAgree" value="1"><span style="color:white">I agree with the RoofServiceNow</span> <a href="?controller=termsconditions&accion=showinfo" data-toggle="modal" target="_blank"> Terms and Conditions</a>
+                    </div>
+                    
                 <center><button class="btn btn-primary" type="submit" id="firstNextValidation" name="firstNextValidation">Register</button></center>
                 <!--<center><button class="btn btn-primary nextBtnCustomer" type="submit" id="firstNextValidation" name="firstNextValidation">Register</button></center>-->
             </div>
@@ -121,6 +127,9 @@
     </form>
     
 </div>
+
+
+
 
 <?php
 if(isset($_SESSION['post_info'])){

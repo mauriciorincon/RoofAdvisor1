@@ -241,7 +241,7 @@ class pdfController{
         
     }
 
-    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType="",$_actio_type=""){
+    function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType="",$_action_type=""){
         
         if($_amount>0){
             $_amount=$_amount/100; 
@@ -365,7 +365,7 @@ class pdfController{
             $_hour_value=0;
         }
 
-        switch($_actio_type){
+        switch($_action_type){
             case "pay_emergency_service":
                 $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
                 $summary_text='<tr><td>Time</td><td></td><td></td><td>'.$_order['ActTime'].' hrs</td><td> $'.$_hour_value.'</td><td align="rigth"> $'.$_order['ActAmtTime'].'.00</td></tr>
@@ -515,7 +515,8 @@ class pdfController{
         if($_amount==0){
             $_amount=$_total_invoice;
         }
-        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,$_paymentType);
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,$_paymentType,'',$_action_type);
+                        
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
 
@@ -529,7 +530,7 @@ class pdfController{
         }
     }
 
-    function paymentConfirmation3($_companyID,$object_order,$_amount=0,$_stripe_id="",$_paymentType=""){
+    function paymentConfirmation3($_companyID,$object_order,$_amount=0,$_stripe_id="",$_paymentType="",$_actionType=""){
 
         if($_amount>0){
             $_amount=$_amount/100; 
@@ -709,7 +710,8 @@ class pdfController{
         if($_amount==0){
             $_amount=$_total_invoice;
         }
-        $_result=$this->registerPathInvoice($_invoice_number,$_company['CompanyID'],$_amount,$_stripe_id,$_paymentType,"company");
+        $_result=$this->registerPathInvoice($_invoice_number,$_company['CompanyID'],$_amount,$_stripe_id,$_paymentType,"company",$_actionType);
+                        
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
 
@@ -724,7 +726,7 @@ class pdfController{
         }
     }
 
-    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="Online",$_source_payment="order"){
+    public function registerPathInvoice($_orderID,$firebaseOrderID,$_invioce_value,$_stripe_id,$_paymentType="Online",$_source_payment="order",$_action_type=""){
         $_path='/invoice/invoice_'.$_orderID.'.pdf';
         $_path2="";
         if(is_null($this->_otherController)){
@@ -750,6 +752,7 @@ class pdfController{
             'invoice_date' => date('m-d-Y'),
             'stripe_id'=>$_stripe_id,
             'payment_type'=>$_paymentType,
+            'action_type'=>$_action_type,
         ];
         //$_invoice_data='{"'.$_orderID.'":{"path":"'.$_path.'","invoice_num":"'.$_orderID.'","orderFBID":"'.$firebaseOrderID.'"}}';
         $this->_otherController=new othersController();

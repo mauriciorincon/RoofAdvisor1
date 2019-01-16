@@ -141,11 +141,11 @@
   </div>
 </div>-->
 <div id="mobwizard" class="mobwizbg" style="display:none;">
-<div style="display:block;width:100%;text-align:right;"> <i id="mobwizclose" style="padding:10px;color: #fff;" class="fas fa-power-off fa-2x"></i></div>
-<div id="mobwizmain">
-</div>
-</div>
-<div id="welcome-txt">
+	<div style="display:block;width:100%;text-align:right;"> <i id="mobwizclose" style="padding:10px;color: #fff;" class="fas fa-power-off fa-2x"></i></div>
+		<div id="mobwizmain">
+		</div>
+	</div>
+	<div id="welcome-txt">
 <div class="mobiletxt1">   
 <span>
     Need a <strong style="color:#fa511a">Roofer?</strong> Fast<strong style="color:#fa511a;"> same day</strong> service!
@@ -220,7 +220,7 @@
 
 			<div class="panel-body" align="left">
 				<div class="list-group" id="step3OtypeService">
-					<a href="#" class="list-group-item" name="linkServiceType" onClick="">
+					<a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
 						<input type="hidden" value="roofreport" name="typeServiceOrder">
 						<table>
 							<tr>
@@ -249,13 +249,25 @@
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>
+			
             <div class="panel-body" align="left">
+				
 				<div class="list-group-item ">
 				<font size="5">&#9312;</font><font size="5"><strong>What type of service?</strong></font>
 				</div>
 				<div class="list-group" id="step2OtypeService">
-				<a href="#" class="list-group-item " name="linkServiceType">
-					<input type="hidden" value="emergency" name="typeServiceOrder">
+					<div class="form-group">						
+						<select id="typeServiceCompany" name="typeServiceCompany" onchange="setServiceType()" class="form-control">
+							<option value="NA">---------------</option>
+							<option value="emergency">Emergency</option>
+							<option value="schedule">Schedule</option>
+							<option value="roofreport">RoofReport</option>
+							<option value="reroofnew">Re-roof or New</option>
+							<option value="generic">Generic</option>
+						</select>
+					</div>
+					<a href="#" class="list-group-item " name="linkServiceType" id="linkServiceTypeemergency">
+						<input type="hidden" value="emergency" name="typeServiceOrder">
 						<table>
 							<tr>
 								<td style="padding: 12px 12px 12px 12px;">
@@ -273,7 +285,7 @@
 						</div>
 					</a>
 
-					<a href="#" class="list-group-item" name="linkServiceType">
+					<a href="#" class="list-group-item" name="linkServiceType" id="linkServiceTypeschedule">
 						<input type="hidden" value="schedule" name="typeServiceOrder">
 						<table>
 							<tr>
@@ -292,7 +304,7 @@
 						</div>
 					</a>
 
-					<a href="#" class="list-group-item" name="linkServiceType">
+					<a href="#" class="list-group-item" name="linkServiceType" id="linkServiceTypereroof">
 						<input type="hidden" value="reroofnew" name="typeServiceOrder">
 						<table>
 							<tr>

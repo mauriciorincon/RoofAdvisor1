@@ -15,11 +15,20 @@ font-size: 45px;}
     font-size: 10px;
 }
 #welcome-txt {
-    font-size: 2.6em;
 }
 #login-txt {
-    right: 22px !important;
-    width:100px;
+}
+#appwiz{
+width:99%
+}
+#navtxt{
+padding-right:0%;
+}
+#soctop1 {     
+width: 100%; 
+}
+.headcont1{
+width:100%;
 }
 #labelUserLoggedIn{
 font-size:9px;

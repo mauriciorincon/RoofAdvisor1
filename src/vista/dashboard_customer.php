@@ -1,11 +1,12 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
+echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 ?>
 
 <div id="db-cus-main">
 
 	<div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups">
-		<div class="btn-group mr-2 btntool-maindash" role="group" aria-label="First group">
+		<div class="mobdbmenu1 btn-group mr-2 btntool-maindash" role="group" aria-label="First group">
 			<button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Orders</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#mapDashBoardOrder1" onclick="hideShowDivs('customerDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);setFirstStep()" >New Order</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#customerDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('mapDashBoardOrder1');setActiveItemMenu(this);">Profile</button>
@@ -13,16 +14,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			
 			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
 
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></button>
-    			<ul class="dropdown-menu" role="menu">
-					<?php echo $_menu_item; ?>
-				</ul>
-			</div>
-			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Urls</button>
+			<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
 			
 		</div>
-		
+
+    <!-- The Nav Menu -->
+    <nav class="nav">
+    </nav>	
 		  
 		
 
@@ -41,8 +39,10 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			}
 			</style>
 
-			<div id="map"></div>
-
+			<a href="#" data-toggle="collapse" data-target="#onlyMapCustomerDashboard">Hide/Show Map</a>
+        	<div id="onlyMapCustomerDashboard" class="collapse in">
+				<div id="map"></div>
+			</div>
 			<script>
 				function initialization(){
 					
@@ -304,7 +304,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -320,7 +320,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -407,7 +407,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -421,7 +421,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 						
@@ -610,7 +610,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 
 			<br>
 			<div class="table-responsive">          
-				<table class="table table-striped table-bordered" id="table_orders_customer">
+				<table class="table table-striped " id="table_orders_customer">
 					<thead>
 					<tr>
 						<th>ID</th>
@@ -670,7 +670,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 											<a class="btn-warning btn-sm" data-toggle="modal"  
 												href="#myEstimateAmount" 
 												onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+												<span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
@@ -685,7 +685,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										<a class="btn-success btn-sm" data-toggle="modal"  
 												href="#myFinalAmount" 
 												onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-												<span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+												<span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
 											</a>
 									<?php
 										}else{
@@ -1193,23 +1193,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 </div><!-- /cierro modal -->
 
 
-<div class="modal fade" id="myMensaje" role="dialog">
-	<div class="modal-dialog modal-dialog-centered"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerTextAnswerOrder">Order Updated</h4> 
-			</div> 
-			<div class="modal-body" id="textAnswerOrder"> 
-				<p >Some text in the modal.</p> 
-			</div> 
-			<div class="modal-footer" id="buttonAnswerOrder"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
+
 
 <div class="modal fade" id="myPayment" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -1273,7 +1257,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 					<div class="col-md-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -1289,13 +1273,13 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Estimate Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Estimate Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
@@ -1448,7 +1432,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="check" >Check</label>
 					</div>
 					<div class="radio disabled">
-						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="Online">Online</label>
+						<label><input type="radio" name="selectPaymnetType" id="selectPaymnetType" value="Online">Online (Visa, Mastercard, Discover, Amex, Credit, Debit)</label>
 					</div>
 
 					
@@ -1581,7 +1565,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
-<?php echo $_divs_info; ?>
+
 
 
 
@@ -1605,6 +1589,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
 						<tr><td>Postcard</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckType" checked></td></tr>
 						<tr><td>New or Reroof</td><td><input class="form-check-input" type="checkbox" value="M" name="defaultCheckType" checked></td></tr>
+						<tr><td>Generic</td><td><input class="form-check-input" type="checkbox" value="G" name="defaultCheckType" checked></td></tr>
                         <tr><td scope="col"><b>Order Status<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
@@ -1660,7 +1645,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonCommentary"> 
-                <!-- <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button> -->
+                <button type="button" class="btn-primary btn-sm" data-target="#myCommentaryInfoN" data-toggle="modal">New Comment</button>
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1696,7 +1681,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 		<div class="modal-content"> 
 			<div class="modal-header"> 
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headerUploadReport">Roof Reports</h4> 
+				<h4 class="modal-title" id="headerUploadReport">Roof Docs</h4> 
 			</div> 
 			<div class="modal-body" id="textUploadReport"> 
                 <input type="hidden" value="" id="UploadReportIDOrder" />
@@ -1717,7 +1702,7 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 			</div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New Report</button> 
+                <button type="button" class="btn-primary btn-sm" data-target="#myUploadReportN" data-toggle="modal">New</button> 
 				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 
@@ -1766,7 +1751,14 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 								<div>
 									<ul class="nav nav-list nav-menu-list-style">
                                         
-                                        <?php 
+										<?php
+											echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
+											.'<span class="glyphicon glyphicon-folder-close m5"></span>Resources
+											<span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
+											.'<ul class="nav nav-list tree bullets">';
+											echo $_menu_item;
+											echo '</ul></li>'; 
+
                                             echo '<li><label class="tree-toggle nav-header glyphicon-icon-rpad">'
                                             .'<span class="glyphicon glyphicon-folder-close m5"></span>Articles
                                             <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>'
@@ -1838,7 +1830,43 @@ echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 	</div>
 </div>
 
+<?php echo $_divs_info; ?>
 
+<div class="modal fade" id="myMensaje" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Order Updated</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myMensajeCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrderC">Order Updated</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrderC"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 </div>
 </div>
 <br>

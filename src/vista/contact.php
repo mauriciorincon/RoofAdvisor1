@@ -13,7 +13,7 @@
 		</div>
 		<!-- breadcrum-area end-->
 		<!-- contact-area start-->
-		<div class="contact-area pt-80 pb-60">
+		<div class="contact-area mobhead-area pt-80 pb-60">
 			<div class="container">
                                <div class="section-heading text-center">
                                         <h2>Contact us </h2>

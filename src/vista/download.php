@@ -12,7 +12,7 @@
 		</div>
 		<!-- breadcrum-area end-->
 		<!--  service-area start  -->
-		<div class="service-area pt-80 pb-60">
+		<div class="service-area mobhead-area pt-80 pb-60">
 			<div class="container">
 				<div class="section-heading text-center">
 					<h2>Download </h2>

@@ -15,6 +15,9 @@ $_emailField = $_POST['emailValidation'];
 $_typeCompanyField = $_POST['typeCompany'];
 $_password= $_POST["password"];
 $_arrayDivers = $_POST['arrayDrivers'];
+$_inBussinessSince = $_POST['inBussinessSince'];
+$_licenseNumber = $_POST['licenseNumber'];
+$_expirationDate = $_POST['expirationDate'];
 
 
 $_arrayCompany = array(
@@ -25,6 +28,9 @@ $_arrayCompany = array(
     "emailValidation" => "$_emailField",
     "typeCompany" => "$_typeCompanyField",
     "password" => "$_password",
+    "InBusinessSince" => "$_inBussinessSince",
+    "ComapnyLicNum" => "$_licenseNumber",
+    "LicExpiration" => "$_expirationDate",
 );
 
 $_array_drivers=array();

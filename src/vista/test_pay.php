@@ -7,6 +7,10 @@
     echo "http://" . $_SERVER['HTTP_HOST']."<br>";
     echo $_SERVER['REQUEST_URI']."<br><br>";
     
+    echo "root:".$_SERVER['DOCUMENT_ROOT'];
+    echo "<br><br>";
+    echo "ppp_self:".dirname($_SERVER['PHP_SELF']);
+    echo "<br><br>";
 
     //require_once($_SESSION['application_path']."/controlador/calendarController.php");
     require_once($_SESSION['application_path']."/controlador/payingController.php");
@@ -24,8 +28,14 @@
 
     $_objPay=new payingController();
 
+    /*
     //create account
-    //$_result=$_objPay->createAccount('supo7@yahoo.com');
+    $_result=$_objPay->createAccount('supo7@yahoo.com');
+    echo "<br><br>";
+    echo $_result->keys->secret;
+    echo "<br><br>";
+    echo $_result->keys->publishable;
+    echo "<br><br>";
     //echo "<br>Resultado Creacion Usuario<br>";
     var_dump($_result);
 
@@ -41,8 +51,12 @@
 
     echo "<br><br>";
     //print_r($_objPago);
-    
+    */
     $_userModel=new userController();
+    $_companyArray=$_userModel->getCompanyById('CO000008');
+    $_validation_code='34dsidherhfh';
+    $_userData='4errerrer';
+    echo $_userModel->welcomeMailCompany($_companyArray,$_validation_code,$_userData);
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
 
@@ -50,8 +64,8 @@
     //var_dump($_result);
 
     echo "<br><br>";
-    $var_usr=$_userModel->getAccount('acct_1DnybNLmUezEJ2Jl');
-    print_r($var_usr);
+    $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
+    print_r($var_usr->keys);
     echo "<br><br>";
     echo $var_usr->legal_entity->ssn_last_4 ;
     /*echo count($var_usr->external_accounts);
@@ -60,16 +74,21 @@
         echo "Bank <br><br>";
         print_r($bank);
     }*/
-
-    echo "<br><br>";
     //return;
     //$_response=$_userModel->create_bank_account('110000000','000123456789','1234','individual');
     //var_dump($_response);
     //echo "<br><br>";
-    echo "<br>Banco<br>";
+    echo "<br>Info<br>";
+    $_result=$_objPay->get_transaction_account('acct_1Dq4DvERqpFpJXVH','sk_test_IrHCvop3TQyomitAeThf5CKQ');
+    echo "<br>Trnasacciones<br>";
+    print_r($_result);
     //$var_bank=$_userModel->get_token_bank_account('btok_1DjBC8AuRAPDfvKLluIyeFLg');
     //var_dump($var_usr);
     echo "<br><br>";
+    echo "<br>Payout<br>";
+    $_result=$_objPay->get_payout_account('acct_1Dq9PsEZ7uDDF7Yq','sk_test_v9B44D8b2rz96Kx3DMSQWxv9');
+    print_r($_result);
+    //$_result=$_objPay->get_payout_account('','');
     //print_r($var_bank->bank_account->routing_number);
     //print_r($var_bank->bank_account->account_holder_name);
     echo "<br><br>";

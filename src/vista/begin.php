@@ -17,6 +17,8 @@
 	//echo $order_request
 ?>
 
+<script>var userProfileLogin=''; </script>;
+
 <!-- Detail for roofservicenow -->
 <div id='srvapp1' class="">
 <div id='srvapps'>
@@ -27,6 +29,7 @@
 <span class="mobiletxthd1" style="font-size:34px;"> <strong><span class="hdtxtorng1">Emergency</span> Roof Repair? </br>Schedule an <span class="hdtxtorng1" >Appointment?</span> </br>Need a <span class="hdtxtorng1">Roof Report</span>?</br>New or Reroof <span class="hdtxtorng1">Estimates</span>?</strong> </span>
 </div>
 </br></br>
+<div class="infdivtxt1  container">
 <p class='srvappph1'>
 This is a same day, on-demand service for hiring pre-screened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
 </p>
@@ -46,6 +49,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </br>
 </ul>
 </br>
+</div>
 </div>
 </div>
 <div>
@@ -119,8 +123,8 @@ This is a same day, on-demand service for hiring pre-screened service profession
 <!-- <div id='cmapp3'>
   <img src='img/florida-house.png'>
  </div>-->
-        <div id='cmapp2'><img id='cmappimg1' src='img/quote.png'></br><span>
-This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img id='' src='img/bquote.png'>
+        <div id='cmapp2'><img id='cmappimg1' class='imgqut1' src='img/quote.png'></br><span >
+This app saved the day and is so easy to use. I had water leaking into the house and needed a roofer asap. With a couples of clicks, the roof contractor was on his way. He provided me with an estimate for the work. I approved it via the app. He was very quick to arrive, very professional and stopped the leak. Great service overall</span></br><img class='imgqut1' style="float:right;" src='img/bquote.png'>
         </div>
       </div>
 
@@ -141,16 +145,16 @@ This app saved the day and is so easy to use. I had water leaking into the house
 
  <div id='appdl3' >
   <div class="row"> 
-   <div id='appdiv1' class="col-md-6">
+   <div id='appdiv1' class="col-xs-6">
     <span id='appdl3-tx1'>Download</br>for</span>
    </div>
      
-   <div id='appmob2' class="col-md-6">
+   <div id='appmob2' class="col-xs-6">
     <span id='appdl3-tx2'><strong>FREE!</strong></span>
    </div>
   </div> 
  <div>  
-  <div class="row mobiletop1">
+  <div class="row mobiletop1 storelogom1">
    <div class="col-md-6">
     <img id='appand1' src='img/PlayStore.png'>
    </div>

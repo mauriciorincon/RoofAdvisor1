@@ -240,7 +240,15 @@ $(document).ready(function () {
         
     
         if (curStepBtn=="step-1" && isValid==true ){
-            saveContractorData();
+            var answer = $("input[name='termsServiceAgree']:checked").val();    
+            
+            if(answer!=undefined){
+                saveContractorData();
+            }else{
+                alert("Please accept the terms to create the company account");
+                return;
+            }
+            
         }
     
         /*if (curStepBtn=="step-3" && isValid==true ){
@@ -360,6 +368,9 @@ function saveContractorData(){
     var typeCompanyField = $("select#typeCompany").val();
     var password=$('input:password#inputPassword').val();
     var Repassword=$('input:password#inputPasswordConfirm').val();
+    var inBussinessSince = $("input#inBusinessSinceCompany").val();
+    var licenseNumber = $("input#licenseNumberCompany").val();
+    var expirationDate = $("input#expirationDateCompany").val();
 
     var driver=[];
 
@@ -393,7 +404,8 @@ function saveContractorData(){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/insertContract.php", { "companyName" : companyNameField,"firstNameCompany": firstNameField,"lastNameCompany":lastNameField,
                                                     "phoneContactCompany":phoneContactField,"emailValidation":emailField,"typeCompany":typeCompanyField,
-                                                "password":password,"arrayDrivers":driver}, null, "text" )
+                                                "password":password,"arrayDrivers":driver,"inBussinessSince":inBussinessSince,
+                                                "licenseNumber":licenseNumber,"expirationDate":expirationDate}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
                     //$("#answerEmailValidate").html(data);
@@ -650,6 +662,7 @@ function insertDriver(){
                                                             consecutivo+'\','+'\'Active\''+')"><span class="glyphicon glyphicon-ok"></span></a></td></tr>');
                 //$('#selectDriverFilterDashboard').append('<option value="'+consecutivo+'">'+contractorFirstName+contractorLastName+'</option>');
                 $("#selectDriverFilterDashboard option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
+                $("#driverWork option:last").after($('<option value="'+consecutivo+'">'+contractorFirstName+' '+contractorLastName+'</option>'));
                 //$('#selectDriverFilterDashboard').append($('<option>', {value:consecutivo, text:contractorFirstName+contractorLastName}));
                 
             }else{
@@ -691,6 +704,11 @@ function updateDataCompany(){
     var companyAddress3=$("input#compamnylegal_entity_Zipcode").val();
     var companyPhoneNumber=$("input#companyPhoneNumber").val();
     var companyType=$("input#companyType").val();
+
+    var licenseNumber=$('#companyLicenseNumber').val();
+    var businessSince=$('#companyBusinessSince').val();
+    var expirationDate=$('#companyExpirationDate').val();
+    var verifiedCompany=$('#companyVerified').val();
 
     var PayInfoBillingAddress1=$("input#compamnyPayAddress1").val();
     var PayInfoBillingAddress2=$("input#compamnyPayAddress2").val();
@@ -793,7 +811,8 @@ function updateDataCompany(){
     "compamnylegal_entity_State":compamnylegal_entity_State,"compamnylegal_entity_City":compamnylegal_entity_City,
     "compamnylegal_entity_Zipcode":compamnylegal_entity_Zipcode,"compamnylegal_entity_Address":compamnylegal_entity_Address,
     "compamnylegal_entity_last4":compamnylegal_entity_last4,"compamnylegal_entity_personal_id":compamnylegal_entity_personal_id,"path_file":"",
-    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id}, null, "text" )
+    "compamnylegal_entity_business_name":compamnylegal_entity_business_name,"compamnylegal_entity_business_tax_id":compamnylegal_entity_business_tax_id,
+    "licenseNumber":licenseNumber,"businessSince":businessSince,"expirationDate":expirationDate,"verifiedCompany":verifiedCompany}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -1062,22 +1081,35 @@ $(document).ready(function () {
                         if(n==-1){
                             data=jQuery.parseJSON(data);
                             $(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
-                            $('#textAnswerOrder').html(data.content);
-                            $('#headerTextAnswerOrder').html(data.title);
-                            $('#myModalRespuesta').modal({backdrop: 'static'});
+                            $('#textMessage').html(data.content);
+                            $('#headerMessageMessage').html(data.title);
+                            $('#myMensaje').modal('show');
 
                             $("#table_list_customer_by_company").append('<tr><td>'+data.customerID+
                                                             '</td><td>'+firstCustomerName+' '+lastCustomerName+'</td><td>'+customerAddress+
                                                             '</td><td>'+customerCity+'</td><td>'+customerState+
-                                                            '</td><td>'+customerZipCode+'</td><td>'+emailValidation+'</td><td>'+customerPhoneNumber+'</tr>');
+                                                            '</td><td>'+customerZipCode+'</td><td>'+emailValidation+'</td><td>'+customerPhoneNumber+
+                                                            '</td><td>'+'<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" '+
+                                                            'href="#myRegisterUpdateCustomerCompany" '+'onClick="getCustomerInfoTable('+data.customerID+')"> '+'<span class="glyphicon glyphicon-pencil"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
+                                                            'id="inactivate-customer-button" name="inactivate-customer-button"  ' +'data-toggle1="tooltip" onclick="disableEnableCustomer('+data.customerID+',\'Active\')"> ' +
+                                                            '<span class="glyphicon glyphicon-ok"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' +
+                                                            'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
+                                                            'data-toggle1="tooltip" onclick="newOrderByCompany('+data.customerID+',\''+customerAddress+'\')"> '+'<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>'+
+                                                            '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' +
+                                                            'id="list-orders-customer" name="list-orders-customer"  ' +
+                                                            'data-toggle1="tooltip" onclick="getListOrders('+data.customerID+')"> ' +
+                                                            '<span class="glyphicon glyphicon glyphicon-th-list"></span></a>'+
+                                                            '</td></tr>');
                         }else{
                             
-                            $('#textAnswerOrder').html(data);
-                            $('#headerTextAnswerOrder').html('Error registering customer');
+                            $('#textMessage').html(data);
+                            $('#headerMessageMessage').html('Error registering customer');
                             $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
                             //$(document).ready(function(){$("#myRegisterNewCustomerCompany").modal("hide"); });
                             
-                            $('#myModalRespuesta').modal({backdrop: 'static'});
+                            $('#myMensaje').modal('show');
                             result=false;
                         }
                         
@@ -1302,8 +1334,8 @@ $('#step2OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
-    getValueService();
-    showHideElementByService();
+    getValueService(type);
+    showHideElementByService(type);
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
@@ -1321,8 +1353,8 @@ $('#step3OtypeService').on('click', 'a', function(){
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
-    getValueService();
-    showHideElementByService();
+    getValueService(type);
+    showHideElementByService(type);
     action_type="pay_emergency_service";
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
@@ -1332,8 +1364,27 @@ $('#step3OtypeService').on('click', 'a', function(){
    return false;
 });
 
-function getValueService(){
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+function setServiceType(){
+    $("#step2OtypeService a").removeClass("active");
+    $("#step3OtypeService a").removeClass("active");
+    //$(this).addClass("active");
+    var type=$('select#typeServiceCompany').val();
+    showHideSteps(type);
+    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    //$(this).find('button').removeClass("btn-primary").addClass("btn-success");
+    getValueService(type);
+    showHideElementByService(type);
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+    curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+    nextStepWizard.removeAttr('disabled').trigger('click');
+    curStepWizard.attr('disabled', 'disabled');
+    
+   return false;
+}
+
+function getValueService(RequestType){
+    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
     var fieldValue="";
     order_fbid="";
     switch(RequestType){
@@ -1350,6 +1401,9 @@ function getValueService(){
         case 'roofreport':
             order_type_request_val='R';
             action_type='pay_postcard_service';
+            break;
+        case 'generic':
+            order_type_request_val='G';
             break;
     }
     if(RequestType=='emergency' || RequestType=='roofreport'){
@@ -1394,8 +1448,8 @@ function getValueService(){
 
 }
 
-function showHideElementByService(){
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+function showHideElementByService(RequestType){
+    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     switch(RequestType){
         case "roofreport":
             $('#step8CompanyName').parents('div').eq(1).hide()
@@ -1423,6 +1477,8 @@ $(document).ready(function () {
     
     allWells.hide();
     
+    hideShowOptionsTypeRequest();
+
     navListItems.click(function (e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
@@ -1671,6 +1727,29 @@ $(document).ready(function () {
  
 /////////////////////////////////////////////////////////////////////////////
 
+function hideShowOptionsTypeRequest(){
+    if(userProfileLogin==undefined){
+        $('#typeServiceCompany').hide();
+        $("#linkServiceTypeemergency").show();
+        $("#linkServiceTypeschedule").show();
+        $("#linkServiceTypereroof").show();
+        
+    }else{    
+        if(userProfileLogin=='company'){
+            $('#typeServiceCompany').show();
+            $("#linkServiceTypeemergency").hide();
+            $("#linkServiceTypeschedule").hide();
+            $("#linkServiceTypereroof").hide();
+            nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().prev().children("a")
+            nextStepWizard.removeAttr('disabled').trigger('click');
+        }else{
+            $('#typeServiceCompany').hide();
+            $("#linkServiceTypeemergency").show();
+            $("#linkServiceTypeschedule").show();
+            $("#linkServiceTypereroof").show();
+        }
+    }
+}
 
 
 function getListContractor(){
@@ -1822,7 +1901,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         }
     }
     var RepZIP=$('#zipCodeBegin').val();
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
     var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
@@ -1842,7 +1922,9 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
     
-
+    if(RequestType==undefined || RequestType==''){
+        RequestType=$('select#typeServiceCompany').val();
+    }
     if(RequestType=='emergency'){
         RequestType='E'
     }else if(RequestType=='schedule'){
@@ -1851,6 +1933,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         RequestType='R'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
     if(CompanyID==undefined){
@@ -1954,6 +2038,7 @@ function validateIsLoggedIn(){
                             jsRemoveWindowLoad('');
                             insertOrderCustomer();
                         }
+                        jsRemoveWindowLoad('');
                     }else if(data.profile=='company'){
                         //jsRemoveWindowLoad('');
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
@@ -1965,7 +2050,7 @@ function validateIsLoggedIn(){
                         }
                     }
                     console.log( "La solicitud se ha completado correctamente."+data+textStatus);
-                    jsRemoveWindowLoad('');
+                    
                     $('html,body').scrollTop(0);
                 }else{
                     jsRemoveWindowLoad('');
@@ -2525,7 +2610,7 @@ $("#menu-toggle").click(function(e) {
 });
 
 function showHideSteps(typeService){
-    if(typeService=='schedule'){
+    if(typeService=='schedule' || typeService=='generic'){
         step4=$('.stepwizard-step:eq(4)');
         step5=$('.stepwizard-step:eq(5)');
         step8=$('.stepwizard-step:eq(8)');
@@ -2586,16 +2671,16 @@ function updateOrder(orderID,arrayChanges,closeWindow,headText){
                         $(document).ready(function(){$("#"+closeWindow).modal("hide"); });
                     }
                     if(headText!=undefined && headText!=''){
-                        $('#headerMessageMessage').html(headText);
+                        $('#headerTextAnswerOrderC').html(headText);
                     }else{
-                        $('#headerMessageMessage').html('Order Detail');
+                        $('#headerTextAnswerOrderC').html('Order Detail');
                     }
                     
-                    $('#myMensaje div.modal-body').html(data);
-                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                    $('#myMensajeCustomer div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensajeCustomer").modal("show"); });
                 }else{
-                    $('#myMensaje div.modal-body').html(data);
-                    $(document).ready(function(){$("#myMensaje").modal("show"); });
+                    $('#myMensajeCustomer div.modal-body').html(data);
+                    $(document).ready(function(){$("#myMensajeCustomer").modal("show"); });
                 }
                 console.log( "La solicitud se ha completado correctamente."+data+textStatus);
                 jsRemoveWindowLoad('');
@@ -3063,7 +3148,7 @@ function acceptEstimateAmount(){
     }else{
         //if(confirm("are you sure you want to accept the Estimate Amount?")){
         $('#myEstimateAmount').modal('hide');
-        updateOrder(orderID,"Status,"+status);
+        updateOrder(orderID,"Status,"+status,'','Estimate Accepted');
             
         //}else{
         //    return false;
@@ -3465,9 +3550,9 @@ function insertOrderRating(){
     });
 }
 
-function getInvoices(orderID){
+function getInvoices(orderID,profile){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID}, null, "text" )
+    $.post( "controlador/ajax/getListInvoice.php", { "orderID" : orderID,"profile":profile}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             var n = data.indexOf("Error");
@@ -3549,13 +3634,13 @@ function insertCommentary(){
             if(n==-1){
                 $("#myCommentaryInfo").modal("hide");
                 $("#myCommentaryInfoN").modal("hide");
-                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#myMensaje h4.modal-title').html('Create Comment');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }else{
                 $("#myCommentaryInfo").modal("hide");
                 $("#myCommentaryInfoN").modal("hide");
-                $('#headerTextAnswerOrder').html('Commentary response');
+                $('#headerTextAnswerOrder').html('Create Comment');
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });
             }
@@ -3836,7 +3921,7 @@ function disableEnableCustomer(customerID,action){
 }
 
 function newOrderByCompany(CustomerID,Address){
-    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().prev().children("a")
+    nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
     nextStepWizard.removeAttr('disabled').trigger('click');
     $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
     $('#activeCustomerIDhidden').val(CustomerID);
@@ -4268,6 +4353,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
         RequestType='R'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     
     if(CompanyID==undefined){
@@ -4397,6 +4484,8 @@ function insertOrderPostCard(){
         RequestType='P'
     }else if(RequestType=='reroofnew'){
         RequestType='M'
+    }else if(RequestType=='generic'){
+        RequestType='G'
     }
     
     if(CompanyID==undefined){
@@ -5038,12 +5127,30 @@ function actionWithBank(action,account_id,bank_id,row){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#headerTextAnswerCompany').html('Bank Actions');
-                $('#myModalRespuestaCompany div.modal-body').html(data) ;
-                $("#myModalRespuestaCompany").modal("show"); 
+                
                 if(action=='delete'){
                     $(row).parent().parent().remove();
-                } 
+                    $('#headerTextAnswerCompany').html('Bank Actions');
+                    $('#myModalRespuestaCompany div.modal-body').html("The bank account was deleted correctly") ;
+                    $("#myModalRespuestaCompany").modal("show"); 
+                }else if(action=='insert'){
+                    $("#myProfileBank").modal("hide"); 
+                    $('#headerTextAnswerCompany').html('Bank Actions');
+                    $('#myModalRespuestaCompany div.modal-body').html("The bank account was created correctly") ;
+                    $("#myModalRespuestaCompany").modal("show"); 
+                    
+                    $("#listBankCompany").append('<tr><td>'+'0'+'</td><td>'+myProfileBankaccount_holder_name+'</td><td>'+
+                                                myProfileBankaccount_holder_type+'</td><td>'+'STRIPE TEST BANK'+'</td><td>'+'US'+
+                                                '</td><td>'+'usd'+'</td><td>'+myProfileBankaccount_number+'</td><td>'+myProfileBankrouting_number+
+                                                '</td><td><a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'+
+                                                'href="#" '+'onClick="actionWithBank(\'setdefault\',\''+account_id+'\',\''+_bank_id+'\')" > '+
+                                                '<span class="glyphicon glyphicon-star"></span></a>'+
+                                                '<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'+
+                                                'href="#" '+
+                                                'onClick="actionWithBank(\'delete\',\''+account_id+'\',\''+_bank_id+'\',this)" > '+
+                                                '<span class="glyphicon glyphicon-trash"></span></a></td></tr>');
+                    
+                }
             }else{
                 $('#headerTextAnswerCompany').html('Bank Actions');
                 $('#myModalRespuestaCompany div.modal-body').html(data) ;
@@ -5154,4 +5261,86 @@ function uploadFileAjax(fileName,action,id_action,screen_to_hide){
             //jsRemoveWindowLoad('');
         }
     });
+}
+
+function getListOrders(customerID){
+    jsShowWindowLoad('Retriving Customer Orders');
+    $.post( "controlador/ajax/getListOrders.php", { "field" : "CustomerID","value" : customerID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#table_list_orders_by_company tbody').html(data);
+                $("#myListOrderByCustomer").modal("show");  
+            }else{
+                $('#headerTextAnswerCompany').html('Valitating Response');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show");
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });    
+}
+
+function  getStripeInfo(type,table,companyID){
+    jsShowWindowLoad('Retriving information');
+    $.post( "controlador/ajax/getDataStripe.php", { "option" : type,"companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#'+table+' tbody').html(data);
+            }else{
+                $('#headerTextAnswerCompany').html('Error retriving info');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show");
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });    
+}
+
+function generateInfoExcel(){
+    jsShowWindowLoad('Retriving report');
+    $.post( "controlador/ajax/getDataStripe.php", { "option" : type,"companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#'+table+' tbody').html(data);
+            }else{
+                $('#headerTextAnswerCompany').html('Error retriving info');
+                $('#myModalRespuestaCompany div.modal-body').html(data) ;
+                $("#myModalRespuestaCompany").modal("show");
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    }); 
 }

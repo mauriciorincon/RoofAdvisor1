@@ -4,6 +4,8 @@
 <?php
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
+echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
+
 ?>
 
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
@@ -36,9 +38,10 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 width: 100%;  /* The width is the width of the web page */
             }
         </style>
-
-        <div id="map"></div>
-        
+        <a href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide/Show Map</a>
+        <div id="onlyMapCompanyDashboard" class="collapse in">
+            <div id="map"></div>
+        </div>
         
         <script>
         
@@ -69,7 +72,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                 var uluru = {lat: 25.745693, lng: -80.375028};
                 // The map, centered at Uluru
                 mapObject = new google.maps.Map(
-				document.getElementById('map'), {zoom: 11, center: uluru});
+				document.getElementById('map'), {zoom: 11, center: uluru,streetViewControl: false,
+                                mapTypeControl: false});
 
                 // The marker, positioned at Uluru
                 //var marker = new google.maps.Marker({position: uluru, map: map});
@@ -344,7 +348,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
 											'href="#myEstimateAmount" '+
 											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
 					}else{
 
@@ -356,7 +360,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
 											'href="#myFinalAmount" '+
 											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-											'<span class="glyphicon glyphicon-check"></span> Aprove Amount:'+valorTotal+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
 										'</a>';
                 }else{
                     finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
@@ -506,7 +510,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal" '+
                                                     'href="#myEstimateAmount" '+
                                                     'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                    '<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
                                                 '</a>';
                             }else{
 
@@ -518,7 +522,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
                                                     'href="#myFinalAmount" '+
                                                     'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
-                                                    '<span class="glyphicon glyphicon-check"></span>Aprove Amount:'+valorTotal+
+                                                    '<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
                                                 '</a>';
                             }else{
                                 finalAmount=(parseInt(valueMatA)+parseInt(valueTimeA));
@@ -696,8 +700,8 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
          
         <div class="table-responsive">          
-            <table class="table table-striped table-bordered" id="table_orders_company">
-                <thead>
+            <table class="table table-striped " id="table_orders_company">
+                <thead class="">
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
@@ -762,7 +766,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <a class="btn-warning btn-sm" data-toggle="modal"  
                                             href="#myEstimateAmount" 
                                             onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
                                         </a>
                                 <?php
                                     }else{
@@ -777,7 +781,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     <a class="btn-success btn-sm" data-toggle="modal"  
                                             href="#myFinalAmount" 
                                             onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
                                         </a>
                                 <?php 
                                     }else if ( $order['RequestType']=='P' ){
@@ -785,7 +789,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                     <a class="btn-success btn-sm" data-toggle="modal"  
                                             href="#" 
                                             onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
-                                            <span class="glyphicon glyphicon-check"></span> Aprove Amount: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
                                         </a>
                                 <?php
                                     }else{
@@ -827,7 +831,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 <div class="collapse container" id="companyDashProfile1"> 
 			<div class="modal-header"> 
 				<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
-				<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> 
+				<!--<h4 class="modal-title" id="headerTextProfileCompany">Company Profile</h4> -->
             </div> 
             <div class="row">
                 <div class="col-xs-12 col-md-6">
@@ -835,7 +839,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Basic Info
                                     </button>
@@ -869,6 +873,23 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                         <label class="control-label ">Email</label>
                                         <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
                                     </div> 
+                                    <div class="form-group">
+                                        <label class="control-label ">License Number</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter License Number" id="companyLicenseNumber" name="companyLicenseNumber" value="<?php if(isset($_actual_company['ComapnyLicNum'])){ echo $_actual_company['ComapnyLicNum'];}  ?>"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label ">In Business Since</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter In Business Since" id="companyBusinessSince" name="companyBusinessSince" value="<?php if(isset($_actual_company['InBusinessSince'])){ echo $_actual_company['InBusinessSince'];} ?>"/>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label class="control-label ">Expiration date</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter Expiration date" id="companyExpirationDate" name="companyExpirationDate" value="<?php if(isset($_actual_company['LicExpiration'])){ echo $_actual_company['LicExpiration'];}?>"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label ">Verified</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
+                                    </div>
                                     <!--
                                     <div class="form-group">
                                         <label class="control-label">Address</label>
@@ -900,10 +921,11 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
                                     </button>
+                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
                                 </h2>
                             </div>
@@ -960,41 +982,41 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                                 <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
                                                 <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <label class="control-label" for="stripeImage">Document ID Front</label>
+                                            
                                                 <a class="btn-primary btn-sm" data-toggle="modal"  
                                                     href="#myDocumentIDFront" 
                                                     onClick=""> 
                                                     <span class="glyphicon glyphicon-upload"></span>
                                                     Upload Documento ID Front
                                                 </a>
-                                                
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="stripeImage">Document ID Back</label>
                                                 <a class="btn-primary btn-sm" data-toggle="modal"  
                                                     href="#myDocumentIDBack" 
                                                     onClick=""> 
                                                     <span class="glyphicon glyphicon-upload"></span>
                                                     Upload Documento ID Back
                                                 </a>
-                                                
                                             </div>
+                                            
+                                            
+                                            <br>
                                             <div>
+                                                <h3>Payment processing services Terms</h3>
                                                 <label>
                                                 Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
                                                 </label>
                                             </div>
-                                            <button type="button" class="btn-primary btn-sm" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
+                                            
                                 </div>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-header" id="headingThree">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Billing Address
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Billing
                                     </button>
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Billing Address</button>
                                 </h2>
@@ -1070,7 +1092,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
                         <div class="card">
                             <div class="card-header" id="headingFour">
-                                <h2 class="mb-0">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Others
                                     </button>
@@ -1103,162 +1125,326 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> External Accounts
+                                    </button>
+                                    
+                                </h2>
+                            </div>
+
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="alert alert-primary" role="alert">
+                                        External accounts
+                                    </div>
+                                    <table class="table table-bordered" id="listBankCompany">
+                                        <tr>
+                                            <td>id</td>
+                                            <td>Holder  Name</td>
+                                            <td>Holder  Type</td>
+                                            <td>Bank Name</td>
+                                            <td>Country</td>
+                                            <td>Currency</td>
+                                            <td>Last4</td>
+                                            <td>Routing Number</td>
+                                            <td>Action</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_bank)){
+                                                foreach($_array_stripe_bank as $clave=>$bank){
+                                                echo "<tr>".
+                                                            "<td>".$n."</td>".
+                                                            "<td>".$bank->account_holder_name."</td>".
+                                                            "<td>".$bank->account_holder_type."</td>".
+                                                            "<td>".$bank->bank_name."</td>".
+                                                            "<td>".$bank->country."</td>".
+                                                            "<td>".$bank->currency."</td>".
+                                                            "<td>".$bank->last4."</td>".
+                                                            "<td>".$bank->routing_number."</td>".
+                                                            '<td>
+                                                                <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                                '<span class="glyphicon glyphicon-star"></span></a>
+                                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                                                                '<span class="glyphicon glyphicon-trash"></span></a>
+                                                            </td>'.
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                    <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                        href="#myProfileBank" 
+                                                        onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
+                                                        <span class="glyphicon glyphicon-bitcoin"></span>
+                                                        New Bank
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
                     </div>    
                     
                 </div>
                 
                 <div class="col-xs-12 col-md-6">
                     <div class="form-group">
-                                                
                         <div>
                             Wallet Balance<br>
                             <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                        </div>
 
-                            <div class="alert alert-primary" role="alert">
-                            Balance
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>id</td>
-                                    <td>Type</td>
-                                    <td>Amount</td>
-                                    <td>Currency</td>
-                                    <td>bank_account</td>
-                                    <td>bitcoin_receiver</td>
-                                    <td>card</td>
-                                </tr> 
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_balance->available)){
-                                        foreach($_array_stripe_balance->available as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>Available</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->source_types->bank_account."</td>".
-                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                    "<td>".$trancs->source_types->card."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                    if(isset($_array_stripe_balance->connect_reserved)){
-                                        foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>connect_reserved</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".""."</td>".
-                                                    "<td>".""."</td>".
-                                                    "<td>".""."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                    if(isset($_array_stripe_balance->pending)){
-                                        foreach($_array_stripe_balance->pending as $clave=>$trancs){
-                                            echo "<tr>".
-                                                    "<td>".$n."</td>".
-                                                    "<td>Pending</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->source_types->bank_account."</td>".
-                                                    "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                    "<td>".$trancs->source_types->card."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>     
-                            </table>
-                            <div class="alert alert-primary" role="alert">
-                            Transactions
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>id</td>
-                                    <td>amount</td>
-                                    <td>available_on</td>
-                                    <td>created</td>
-                                    <td>currency</td>
-                                    <td>description</td>
-                                    <td>fee</td>
-                                    <td>net</td>
-                                    <td>status</td>
-                                    <td>type</td>
-                                </tr>
-                                <?php
-                                    $n=1;
-                                    if(isset($_array_stripe_transaction->data)){
-                                        foreach($_array_stripe_transaction->data as $clave=>$trancs){
-                                        echo "<tr>".
-                                                    "<td>".$trancs->id."</td>".
-                                                    "<td>".$trancs->amount."</td>".
-                                                    "<td>".$trancs->available_on."</td>".
-                                                    "<td>".$trancs->created."</td>".
-                                                    "<td>".$trancs->currency."</td>".
-                                                    "<td>".$trancs->description."</td>".
-                                                    "<td>".$trancs->fee."</td>".
-                                                    "<td>".$trancs->net."</td>".
-                                                    "<td>".$trancs->status."</td>".
-                                                    "<td>".$trancs->type."</td>".
-                                                "</tr>";
-                                            $n++;
-                                        }
-                                    }
-                                ?>
-                            </table>
-                            <div class="alert alert-primary" role="alert">
-                            External accounts
-                            </div>
-                            <table class="table table-bordered" >
-                                <tr>
-                                    <td>id</td>
-                                    <td>Holder  Name</td>
-                                    <td>Holder  Type</td>
-                                    <td>Bank Name</td>
-                                    <td>Country</td>
-                                    <td>Currency</td>
-                                    <td>Last4</td>
-                                    <td>Routing Number</td>
-                                    <td>Action</td>
-                                </tr>
-                                <?php
-                                    $n=1;
-                                    foreach($_array_stripe_bank as $clave=>$bank){
-                                    echo "<tr>".
-                                                "<td>".$n."</td>".
-                                                "<td>".$bank->account_holder_name."</td>".
-                                                "<td>".$bank->account_holder_type."</td>".
-                                                "<td>".$bank->bank_name."</td>".
-                                                "<td>".$bank->country."</td>".
-                                                "<td>".$bank->currency."</td>".
-                                                "<td>".$bank->last4."</td>".
-                                                "<td>".$bank->routing_number."</td>".
-                                                '<td>
-                                                    <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
-                                                    'href="#" '.
-                                                    'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
-                                                    '<span class="glyphicon glyphicon-star"></span></a>
-                                                    <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
-                                                    'href="#" '.
-                                                    'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
-                                                    '<span class="glyphicon glyphicon-trash"></span></a>
-                                                </td>'.
-                                            "</tr>";
-                                        $n++;
-                                    }
-                                ?>
-                            </table>
-                            <a class="btn-primary btn-sm" data-toggle="modal"  
-                                                href="#myProfileBank" 
-                                                onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
-                                                <span class="glyphicon glyphicon-bitcoin"></span>
-                                                New Bank
-                            </a>
+                        <div class="accordion" id="accordionPayments">
+                            <div class="card">
+                                <div class="card-header" id="headingOnep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOnep" aria-expanded="true" aria-controls="collapseOnep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Balance
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('balance','tableCompanyBalance','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
 
+                                <div id="collapseOnep" class="collapse" aria-labelledby="headingOnep" data-parent="#accordionPayments">
+                                    <div class="card-body">
+                                        <table class="table table-bordered" id="tableCompanyBalance" >
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Type</th>
+                                                    <th>Amount</th>
+                                                    <th>Currency</th>
+                                                    <th>bank_account</th>
+                                                    <th>bitcoin_receiver</th>
+                                                    <th>card</th>
+                                                </tr> 
+                                            <thead>
+                                            <tbody>
+                                            <?php
+                                                $n=1;
+                                                if(isset($_array_stripe_balance->available)){
+                                                    foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Available</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->connect_reserved)){
+                                                    foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>connect_reserved</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".""."</td>".
+                                                                "<td>".""."</td>".
+                                                                "<td>".""."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->pending)){
+                                                    foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
+                                                        echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Pending</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                "<td>".$trancs->currency."</td>".
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
+                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                            ?>  
+                                            </tbody>   
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                     
+                            
+
+                        
+                            <div class="card">
+                                <div class="card-header" id="headingTwop">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseTwop" aria-expanded="true" aria-controls="collapseTwop">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transfer
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transfer','tableCompanyTransfer','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyTransfer" >
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Amount</th>
+                                                <th>Balance_Transaction</th>
+                                                <th>Created</th>
+                                                <th>Description</th>
+                                                <th>Destination_Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transfer->data)){
+                                                foreach($_array_stripe_transfer->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=round($trancs->amount/100,2);}
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".$trancs->balance_transaction."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->destination_payment."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                               
+                            <div class="card">
+                                <div class="card-header" id="headingThreep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseThreep" aria-expanded="true" aria-controls="collapseThreep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transactions
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transaction','tableCompanyTransactions','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyTransactions" >
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>available_on</th>
+                                                <th>created</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>fee</th>
+                                                <th>net</th>
+                                                <th>status</th>
+                                                <th>type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transaction->data)){
+                                                foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                    $_amount_1=0;
+                                                    if($trancs->net==0){$_amount_1=0;}else{$_amount_1=$trancs->net/100;}
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".$trancs->available_on."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->currency."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->fee."</td>".
+                                                            "<td>".number_format($_amount_1, 2, '.', '')."</td>".
+                                                            "<td>".$trancs->status."</td>".
+                                                            "<td>".$trancs->type."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>     
+                                </div>
+                            </div>
+                                
+                            <div class="card">
+                                <div class="card-header" id="headingFourp">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseFourp" aria-expanded="true" aria-controls="collapseFourp">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Pay outs
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('payout','tableCompanyPayouts','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFourp" class="collapse" aria-labelledby="headingFourp" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyPayouts">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>created</th>
+                                                <th>arrival_date</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_payout->data)){
+                                                foreach($_array_stripe_payout->data as $clave=>$payout){
+                                                    $_amount=0;
+                                                    if($payout->amount==0){$_amount=0;}else{$_amount=$payout->amount/100;}
+                                                echo "<tr>".
+                                                            "<td>".$payout->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->created)."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->arrival_date)."</td>".
+                                                            "<td>".$payout->currency."</td>".
+                                                            "<td>".$payout->description."</td>".
+                                                            "<td>".$payout->destination."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                                
+                                
+                            
                         </div>
                     </div>
                 </div>
@@ -1539,7 +1725,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 						  <option style="color:#FFD700;" value="#FFD700">&#9724; Amarillo</option>
 						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
 						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
-						  <option style="color:#000;" value="#000">&#9724; Negro</option>
+						  <option style="color:#000;"    value="#000">&#9724; Negro</option>
 						  
 						</select>
 					</div>
@@ -1713,7 +1899,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                         var end1=start[2]+"-"+start[0]+"-"+start[1];
 
                         var typeR=getRequestType(data.RequestType);
-                        var color=getRequestColor(data.RequestType);
+                        var color=getRequestColor(data.RequestType,data.Status);
                         var status=getStatus(data.Status);
 
                         valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
@@ -1798,24 +1984,29 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 
             
 
-            function getRequestColor(requestType){
+            function getRequestColor(requestType,status){
                 var colorType="";
-                switch (requestType) {
-                    case "E":
-                        colorType = "#FF0000";
-                        break;
-                    case "S":
-                        colorType = "#0071c5";
-                        break;
-                    case "R":
-                        colorType = "#FFD700";
-                        break;
-                    case "P":
-                        colorType = "#40E0D0";
-                        break;
-                    default:
-                        colorType = "#000";
+                if(status=='K'){
+                    colorType = "#008000";
+                }else{
+                    switch (requestType) {
+                        case "E":
+                            colorType = "#FF0000";
+                            break;
+                        case "S":
+                            colorType = "#0071c5";
+                            break;
+                        case "R":
+                            colorType = "#FFD700";
+                            break;
+                        case "P":
+                            colorType = "#40E0D0";
+                            break;
+                        default:
+                            colorType = "#000";
+                    }
                 }
+                
                 return colorType;
             }
 
@@ -1918,7 +2109,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" id="headerMessage">Filter Options</h4> 
 			</div> 
-			<div class="modal-body" id="textMessage"> 
+			<div class="modal-body" id="typeOfService"> 
                 <p>
                 <table class="table">
                     <thead>
@@ -1930,6 +2121,7 @@ echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\';
                         <tr><td>Report Repair</td><td><input class="form-check-input" type="checkbox" value="R" name="defaultCheckType" checked></td></tr>
                         <tr><td>Postcard</td><td><input class="form-check-input" type="checkbox" value="P" name="defaultCheckType" checked></td></tr>
                         <tr><td>New or Reroof</td><td><input class="form-check-input" type="checkbox" value="M" name="defaultCheckType" checked></td></tr>
+                        <tr><td>Generic</td><td><input class="form-check-input" type="checkbox" value="G" name="defaultCheckType" checked></td></tr>
                         <tr><td scope="col"><b>Service Type<b></td><td><input class="form-check-input" type="checkbox" value="S" name="selectAllStatus" checked onchange="selectUnselectCheck('defaultCheckStatus',this)"></td></tr>
                         <tr><td>Order Open</td><td><input class="form-check-input" type="checkbox" value="A" name="defaultCheckStatus" checked></td></tr>
                         <tr><td>Acepted Order</td><td><input class="form-check-input" type="checkbox" value="C" name="defaultCheckStatus" checked></td></tr>
@@ -2615,9 +2807,9 @@ if(!empty($_actual_company['postCardValue'])){
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="dbpanelcontractor1">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Confirm Final Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -2632,13 +2824,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Final Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompanyF" name="estMatCompanyF" class="form-control input-sm"  onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompanyF" name="estMatCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Final Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center"><input type="text" id="estHourCompanyF" name="estHourCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompanyF" name="estHourCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
@@ -2944,9 +3136,9 @@ if(!empty($_actual_company['postCardValue'])){
 				
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="dbpanelcontractor1">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Estimate Amount</strong></h3>
+								<h3 class="panel-title"><strong>Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -2962,13 +3154,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Estimate Amount Materials</td>
+												<td>Amount Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompany" name="estMatCompany" class="form-control input-sm"  onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompany" name="estMatCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Estimate Amount Time</td>
+												<td>Amount Time</td>
 												<td class="text-center"><input type="text" id="estHourCompany" name="estHourCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompany" name="estHourCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
@@ -3135,6 +3327,114 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
+<div class="modal fade" id="myRatingScore" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerPaymentType">Rate your overall experience Order <b><span id="orderRatingId"></span></b></h4> 
+				
+			</div> 
+			<div class="modal-body" id="PaymentType"> 
+				<input type="hidden" value="" id="orderIDRating" />
+				<input type="hidden" value="" id="orderFBID" />
+				<div class="form-group">
+					<label for="ratingQuestion">Would you like to recommend the service company?</label>
+					<div class="radio">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="Yes" >Yes</label>
+					</div>
+					<div class="radio disabled">
+						<label><input type="radio" name="ratingYesNo" id="ratingYesNo" value="No">No</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service company?</label>
+						<div class="votable hide">
+							<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+							<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						</div>
+					<div class="voted">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+						
+					</div>
+					<i><label id="ratingCompany">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">How would you rate the service professional?</label>
+					<div class="votable1 hide">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					
+					<div class="voted1">
+						<i class="fa fa-3x fa-star-o" data-vote-type="1"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="2"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="3"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="4"></i>
+						<i class="fa fa-3x fa-star-o" data-vote-type="5"></i>
+					</div>
+					<i><label id="ratingProfessional">Rating: 0</label></i>
+				</div> 
+				<div class="form-group">
+					<label for="ratingQuestion">What else would you like others to know?</label>
+					<input type="text" class="form-control" id="ratingObservation" placeholder="What else would you like others to know?"/>
+				</div>
+				<div class="modal-footer" id="buttonPaymentType"> 
+					<!--<button type="button" class="btn-primary btn-sm" id="buttonRating" onClick="insertOrderRating()" >Rating</button>-->
+					<button type="button" class="btn-danger btn-sm"  data-dismiss="modal">Close</button>
+				</div> 
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myListOrderByCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyListOrderByCustomer">Create Order</h4> 
+			</div> 
+			<div class="modal-body" id="textmyListOrderByCustomerr"> 
+                <div class="table-responsive">          
+                    <table class="table" id="table_list_orders_by_company">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Company ID</th>
+                            <th>Contractor ID</th>
+                            <th>Created By</th>
+                            <th>Create Date</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+			</div> 
+			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
 <div class="modal fade" id="myMensaje" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -3152,6 +3452,8 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 

@@ -632,13 +632,19 @@ class paying_stripe  extends connection{
         return $balance;
     }
 
-    function get_transaction_account($account){
+    function get_transaction_account($account,$secretKey){
         $this->_error_message="";
         try{
+            if(!empty($account)){
+                
+                \Stripe\Stripe::setApiKey($secretKey);
+            }else{
+                \Stripe\Stripe::setApiKey($this->stripe['secret_key']);    
+            }
             $transactions=\Stripe\BalanceTransaction::all(
-                ["limit" => 10,
-                "stripe_account" => $account]
+                ["limit" => 10]
             );
+            \Stripe\Stripe::setApiKey($this->stripe['secret_key']);
         } catch(\Stripe\Error\Card $e) {
             $transactions="Card error";
         } catch (\Stripe\Error\RateLimit $e) {
@@ -663,6 +669,77 @@ class paying_stripe  extends connection{
             $transactions="Something else happened, completely unrelated to Stripe ".$e->getMessage();
         }
         return $transactions;
+    }
+
+    function get_payout_account($account,$secretKey){
+        $this->_error_message="";
+        try{
+            if(!empty($account)){   
+                \Stripe\Stripe::setApiKey($secretKey);
+            }else{
+                \Stripe\Stripe::setApiKey($this->stripe['secret_key']);    
+            }
+            $payouts=\Stripe\Payout::all(
+                ["limit" => 10]
+            );
+            \Stripe\Stripe::setApiKey($this->stripe['secret_key']);
+        } catch(\Stripe\Error\Card $e) {
+            $payouts="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $payouts="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $payouts="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $payouts="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $payouts="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $payouts="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $payouts="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $payouts;
+    }
+
+    function get_transfer_account($account){
+        $this->_error_message="";
+        try{
+            $transfer=\Stripe\Transfer::all(
+                ["limit" => 10,
+                 "destination"=>$account,]
+            );
+        } catch(\Stripe\Error\Card $e) {
+            $transfer="Card error";
+        } catch (\Stripe\Error\RateLimit $e) {
+            // Too many requests made to the API too quickly
+            $transfer="Too many requests made to the API too quickly ".$e->getMessage();
+        } catch (\Stripe\Error\InvalidRequest $e) {
+            // Invalid parameters were supplied to Stripe's API
+            $transfer="Invalid parameters were supplied to Stripe's API -chargue ".$e->getMessage();
+        } catch (\Stripe\Error\Authentication $e) {
+            // Authentication with Stripe's API failed
+            // (maybe you changed API keys recently)
+            $transfer="Authentication with Stripe's API failed ".$e->getMessage();
+        } catch (\Stripe\Error\ApiConnection $e) {
+            // Network communication with Stripe failed
+            $transfer="Network communication with Stripe failed ".$e->getMessage();
+        } catch (\Stripe\Error\Base $e) {
+            // Display a very generic error to the user, and maybe send
+            // yourself an email
+            $transfer="Display a very generic error to the user, and maybe send ".$e->getMessage();
+        } catch (Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            $transfer="Something else happened, completely unrelated to Stripe ".$e->getMessage();
+        }
+        return $transfer;
     }
 
     function update_file_stripe($file_name){

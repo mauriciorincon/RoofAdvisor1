@@ -15,6 +15,11 @@ $_companyAddress3=$_POST["companyAddress3"];
 $_companyPhoneNumber=$_POST["companyPhoneNumber"];
 $_companyType=$_POST["companyType"];
 
+$_licenseNumber=$_POST['licenseNumber'];
+$_businessSince=$_POST['businessSince'];
+$_expirationDate=$_POST['expirationDate'];
+$_verifiedCompany=$_POST['verifiedCompany'];
+
 $_PayInfoBillingAddress1=$_POST["PayInfoBillingAddress1"];
 $_PayInfoBillingAddress2=$_POST["PayInfoBillingAddress2"];
 $_PayInfoBillingCity=$_POST["PayInfoBillingCity"];
@@ -59,7 +64,7 @@ $result=$_userController->updateCompany($_companyID,$_compamnyName,$_firstCompan
                                         $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
                                         $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
                                         $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-                                        $_InsLiabilityPolNum,$_Status_Rating);
+                                        $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany);
 $_result1=$_userController->updateInfoCompanyStripe($_companyID,$_compamnylegal_entity_first_name,$_compamnylegal_entity_last_name,
                                                     $_compamnylegal_entity_dob,$_compamnylegal_entity_type,
                                                     $_compamnylegal_entity_State,$_compamnylegal_entity_City,

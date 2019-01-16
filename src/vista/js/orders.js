@@ -16,6 +16,9 @@ function getRequestType(requestType){
         case "M":
             RequestType = "Re-roof or New";
             break;
+        case "G":
+            RequestType = "Generic";
+            break;
         default:
             RequestType = "No value found";
     }
@@ -158,7 +161,7 @@ function actionsCustomer(dataOrder){
     }
     actions+='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '+
                 'href="" '+
-                'onClick="getInvoices(\''+dataOrder.FBID+'\')"> '+
+                'onClick="getInvoices(\''+dataOrder.FBID+'\',\'customer\')"> '+
                 '<span class="glyphicon glyphicon-list-alt"></span>'+
             '</a>';
     actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments" '+
@@ -181,7 +184,7 @@ function actionsCompany(dataOrder,companyStatus){
     
         actions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                     'href="" '+ 
-                                    'onClick="getInvoices(\''+dataOrder.FBID+'\')">'+ 
+                                    'onClick="getInvoices(\''+dataOrder.FBID+'\',\'company\')">'+ 
                                     '<span class="glyphicon glyphicon-list-alt"></span>'+
                                 '</a>';
         if(dataOrder.ContractorID==null || dataOrder.ContractorID==""){ 
@@ -220,7 +223,12 @@ function actionsCompany(dataOrder,companyStatus){
                         'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 
                         '<span class="glyphicon glyphicon-upload"></span>'+
                     '</a>';
-        }   
+        }
+        actions+='<a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating Service" '+
+        'href="#myRatingScore" '+
+        'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
+        '<span class="glyphicon glyphicon-star"></span>'+
+        '</a>';   
     return actions;
 }
 
@@ -328,7 +336,7 @@ function getTypePricing(dataOrder){
             case "Asphalt":
                 option += "A";
                 break;
-            case "Wood Shake/Composite":
+            case "Wood Shake/Slate":
                 option += "W";
                 break;
             case "Metal":
@@ -349,203 +357,3 @@ function getTypePricing(dataOrder){
     
     return option;
 }
-/*echo '<script type="text/javascript">',
-												'document.write(\'Hello World\');',
-											'</script>';*/
-										/*switch ($order['RequestType']) {
-											case "E":
-												echo "Emergency";
-												break;
-											case "S":
-												echo "Schedule";
-												break;
-											case "R":
-												echo "RoofReport";
-												break;
-											case "P":
-												echo "PostCard";
-												break;
-											default:
-												echo "Undefined";
-												break;
-                                        }*/
-                                        
-/*switch ($order['Status']) {
-											case "A":
-												echo "Order Open";
-												break;
-											case "C":
-												echo "Acepted Order";
-												break;
-											case "D":
-												echo "Order Assigned";
-												break;
-											case "E":
-												echo "Contractor Just Arrived";
-												break;
-											case "F":
-												echo "Estimate Sent";
-												break;
-											case "G":
-												echo "Estimate Approved";
-												break;
-											case "H":
-												echo "Work In Progress";
-												break;
-											case "I":
-												echo "Work Completed";
-												break;
-											case "J":
-												echo "Final Bill";
-												break;
-											case "K":
-												echo "Order Completed Paid";
-												break;
-											case "Z":
-												echo "Cancel work";
-												break;
-											case "P":
-												echo "Report In Progress";
-												break;
-											case "R":
-												echo "Report In Progress";
-												break;
-											case "S":
-												echo "Report Complete";
-												break;
-											case "T":
-												echo "Orden In Progress";
-												break;
-											case "U":
-												echo "Orden Asigned";
-												break;
-											case "M":
-												echo "Orden Asigned";
-												break;
-											default:
-												echo "Undefined";
-												break;
-                                        }*/
-                                        
-
-                                      /*  
-                                      <?php if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"E")==0 or strcmp($order['Status'],"F")==0) and strcmp($order['RequestType'],"R")!=0){?>
-
-										<a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Cancel service" 
-											href="" 
-											onClick="<?php echo "cancelService('".$order['FBID']."','Status,Z')"; ?>" > 
-											<span class="glyphicon glyphicon-trash"></span>
-										</a>
-									<?php }else{ ?>
-										<a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"   title="Cancel service" 
-											href="" 
-											onClick="alert('Order can\'t be cancel')" > 
-											<span class="glyphicon glyphicon-trash"></span>
-										</a>
-									<?php } ?>
-                                      if((strcmp($order['Status'],"A")==0 or strcmp($order['Status'],"D")==0 or strcmp($order['Status'],"C")==0 or strcmp($order['Status'],"P")==0) and strcmp($order['RequestType'],"R")!=0){?>
-                                            <a class="btn-primary btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
-                                                        href="#myScheduleChange" 
-                                                        onClick="<?php echo "getOrderScheduleDateTime('".$order['FBID']."')" ?>"> 
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                            </a>
-                                        <?php }else{ ?>
-                                            <a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Change Schedule" 
-                                                        href="" 
-                                                        onClick="alert('The schedule can not be readjusted')"> 
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                            </a>
-                                        <?php } ?>
-                                            <?php if(strcmp($order['Status'],"S")==0 or strcmp($order['Status'],"K")==0){ ?>
-                                                <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Rating service"  
-                                                            href="#myRatingScore" 
-                                                            onClick="<?php echo "setOrderSelected('".$order['OrderNumber']."','".$order['FBID']."')" ?>"> 
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                </a>
-                                            <?php }else{ ?>
-                                                <a class="btn-default btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Rating service"  
-                                                            href="" 
-                                                            onClick="alert('Order must be complete to make rating')" > 
-                                                            <span class="glyphicon glyphicon-star-empty"></span>
-                                                </a>
-                                            <?php } ?>
-                                        
-        
-                                                <a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-                                                            href="#" 
-                                                            onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-                                                            <span class="glyphicon glyphicon-list-alt"></span>
-                                                </a>
-                                                <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                                href="#" 
-                                                onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                                <span class="glyphicon glyphicon-comment"></span>
-                                                <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Doc Share"  
-                                                    href="#" 
-                                                    onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
-                                                    <span class="glyphicon glyphicon-download-alt"></span>
-                                                </a>*/
-
-/*<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info"  
-                                href="" 
-                                onClick="<?php echo "getInvoices('".$order['FBID']."')" ?>"> 
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                            </a>
-                            <?php if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){ ?>
-                                <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                    href="" 
-                                    onClick="alert('You can not create comment until the company is active')"> 
-                                    <span class="glyphicon glyphicon-comment"></span>
-                                </a>
-                            <?php }else{ 
-                                    if(!isset($order['ContractorID']) or empty($order['ContractorID'])){ 
-                                ?>
-                                    <a class="btn-default btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                        href="" 
-                                        onClick="alert('You can not create comments to an order that you have not taken')"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                                    <?php }else{ ?>
-                                        <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Comments"  
-                                        href="" 
-                                        onClick="<?php echo "getCommentary('".$order['FBID']."')" ?>"> 
-                                        <span class="glyphicon glyphicon-comment"></span>
-                                    </a>
-                            <?php 
-                            }} ?>
-                            <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files"  
-                                href="#" 
-                                onClick="<?php echo "getListReportFile('".$order['FBID']."')" ?>"> 
-                                <span class="glyphicon glyphicon-upload"></span>
-                            </a>*/
-
-/*if(strcmp($order['RequestType'],"R")==0 or strcmp($order['RequestType'],"P")==0){
-                                        ?>
-                                        <a class="btn-default btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                            href="" 
-                                            onClick="alert('Only RoofServiceNow can take this type of service')"> 
-                                            <span class="glyphicon glyphicon-check"></span>Take work
-                                        </a>
-                                    <?php }else{
-                                        if(!isset($order['ContractorID']) or empty($order['ContractorID'])){
-                                            if(strcmp($_actual_company['CompanyStatus'],'Active')!==0){
-                                            ?>
-                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                                    href="" 
-                                                    onClick="alert('You can not take the job until the company is active')"> 
-                                                    <span class="glyphicon glyphicon-check"></span>Take work
-                                                </a>
-                                    <?php   }else{ ?>
-                                            <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Take the job"  
-                                                    href="#myModalGetWork" 
-                                                    onClick="setOrderId('<?php echo $order['FBID']?>')"> 
-                                                    <span class="glyphicon glyphicon-check"></span>Take work
-                                                </a>
-                                       <?php }
-                                        }else{
-                                            $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
-                                            $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
-    
-                                            echo $_contractorName;
-                                        } 
-                                    }*/

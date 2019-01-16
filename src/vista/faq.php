@@ -13,9 +13,9 @@
 		</div>
 		<!-- breadcrum-area end-->
 		<!--  service-area start  -->
-		<div class="service-area pt-80 pb-60">
+		<div class="service-area mobhead-area pt-80 pb-60">
 			<div class="container">
-				<div class="section-heading text-center">
+				<div class="faq-secmob section-heading text-center">
 					<h1 >Frequently Asked Questions </h1>
                                       <p>RoofServiceNow is a free digital marketplace for homeowners to connect with roof contractors for fast emergency roof services, scheduled repairs, and roof reports. Homeowners receive immediate responses from reliable pre-screened roofing professionals at the same time we provide the roofing company with the tools to service their customers, manage their crews, and the essential roofer resources. We combine an innovative digital marketplace with a superior roofing software. All in one platform!
                     </p>
@@ -87,6 +87,6 @@
 		</div>
         <!--  service-area end  -->			
 <div>
-<img src="../img/faq-sheet1.png" style="    margin: auto;display: block;width: 50%;">
+<!--<img src="../img/faq-sheet1.png" style="    margin: auto;display: block;width: 50%;">-->
 </div>	
 <script src="vista/js/faq-main.js"></script>	
