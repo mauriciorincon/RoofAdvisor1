@@ -1384,7 +1384,7 @@ function setServiceType(){
 }
 
 function getValueService(RequestType){
-    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    
     var fieldValue="";
     order_fbid="";
     switch(RequestType){
@@ -1400,7 +1400,7 @@ function getValueService(RequestType){
             break;
         case 'roofreport':
             order_type_request_val='R';
-            action_type='pay_postcard_service';
+            action_type='pay_company_roofreport';
             break;
         case 'generic':
             order_type_request_val='G';
@@ -1449,7 +1449,7 @@ function getValueService(RequestType){
 }
 
 function showHideElementByService(RequestType){
-    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    
     switch(RequestType){
         case "roofreport":
             $('#step8CompanyName').parents('div').eq(1).hide()
@@ -1538,6 +1538,9 @@ $(document).ready(function () {
             }else{
                 //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                 var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                if(RequestType==undefined || RequestType==''){
+                    RequestType=$('select#typeServiceCompany').val();
+                }
                 if(RequestType=='emergency' || RequestType=='roofreport'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
@@ -1701,6 +1704,9 @@ $(document).ready(function () {
 
         if (curStepBtn=="step-6"){
             var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+            if(RequestType==undefined || RequestType==''){
+                RequestType=$('select#typeServiceCompany').val();
+            }
             var customerID=$('#activeCustomerIDhidden').val();
             if(RequestType=='emergency' || RequestType=='roofreport'){
                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-4"]').parent().prev().children("a");
@@ -1902,7 +1908,9 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     }
     var RepZIP=$('input:hidden[name=step5ZipCode]').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
-    
+    if(RequestType==undefined || RequestType==''){
+        RequestType=$('select#typeServiceCompany').val();
+    }
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
     var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
@@ -2008,7 +2016,7 @@ function validateIsLoggedIn(){
 
                     if(data.profile=='customer'){
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
-                        //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                        
                         if(RequestType=='emergency' || RequestType=='roofreport'){
                             $('#userLoguedIn').val(true);
                             nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
@@ -2044,11 +2052,15 @@ function validateIsLoggedIn(){
                         }
                         jsRemoveWindowLoad('');
                     }else if(data.profile=='company'){
-                        //jsRemoveWindowLoad('');
+                        
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        if(RequestType==undefined || RequestType==''){
+                            RequestType=$('select#typeServiceCompany').val();
+                        }
                         if(RequestType=='roofreport'){
                             nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                             nextStepWizard.removeAttr('disabled').trigger('click');
+                            jsRemoveWindowLoad('');
                         }else{
                             insertOrderCustomer("","","create_by_company");
                         }
@@ -3927,6 +3939,8 @@ function disableEnableCustomer(customerID,action){
 function newOrderByCompany(CustomerID,Address){
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
     nextStepWizard.removeAttr('disabled').trigger('click');
+    $('#typeServiceCompany').val('');
+    $("#typeServiceCompany option[text='---------------']").attr("selected","selected");
     $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
     $('#activeCustomerIDhidden').val(CustomerID);
     $('#activeCustomerAddress').val(Address);
@@ -4403,7 +4417,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                     var dataSplit=data.split(",");
                     var orderIDSplit=dataSplit[2].split("/");
                     var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
-                    if (selectionType=="newCustomer"){
+                    /*if (selectionType=="newCustomer"){
                         var firstCustomerName = $("input#firstCustomerName").val();
                         var lastCustomerName = $("input#lastCustomerName").val();
                         var emailValidation = $("input#emailValidationCustomer").val();
@@ -4434,12 +4448,10 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                                 
                             }
                         });
-                    }
-                     $(document).ready(function(){$("#myRoofReportRequest").modal("hide"); });
+                    }*/
+                     $("#myOrderByCustomer").modal("hide");
 
                     $('#textAnswerOrder').html(data+'');
-                    
-
                     $('#headerTextAnswerOrder').html('Success');
                   
                     $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');

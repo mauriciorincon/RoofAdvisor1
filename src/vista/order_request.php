@@ -1037,3 +1037,22 @@
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myModalRespuestaOrder" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<!--<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Close</button> -->
+			</div> 
+		</div> 
+	</div>
+</div>
