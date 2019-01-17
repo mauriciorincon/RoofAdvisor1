@@ -1826,10 +1826,24 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
     
 
             $('#calendar').fullCalendar({
-                themeSystem: 'bootstrap4',
+                customButtons: {
+                    myCustomButton: {
+                    text: 'Refresh Calendar',
+                        click: function() {
+                            refreshCalendarV2();
+                            alert('the calendar was updated correctly');
+                        }
+                    },
+                    myCustomButtonF:{
+                        text: 'Filter by employee',
+                        click: function() {
+                            $('#myModalEmployeeList').modal('show');
+                        }
+                    }
+                },
                 locale: 'en',
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev,next today myCustomButton myCustomButtonF',
                     center: 'title',
                     right: 'month,basicWeek,basicDay',
 
@@ -1886,37 +1900,71 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
                 var month2=moment($('#calendar').fullCalendar('getView').intervalEnd).format('MM');
                 var date = new Date($('#calendar').fullCalendar('getDate'));
                 var month_int = date.getMonth();
+                var employeeSelected=$('#dashBoardCompanyListEmployee').val();
                 ref.orderByChild("SchDate").endAt(year).once("value", function(snapshot) {
 
                     datos=snapshot.val();
                     for(r in datos){
-                        
                         data=datos[r];
-                        if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
-                        var start = data.SchDate.split("/");
-                        var start1=start[2]+"-"+start[0]+"-"+start[1];
-                        var end1=start[2]+"-"+start[0]+"-"+start[1];
+                        if(data.CompanyID==companyID || data.CompanyID=='' || data.CompanyID==null){
+                            if(employeeSelected==''){
+                                if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
+                                    var start = data.SchDate.split("/");
+                                    var start1=start[2]+"-"+start[0]+"-"+start[1];
+                                    var end1=start[2]+"-"+start[0]+"-"+start[1];
 
-                        var typeR=getRequestType(data.RequestType);
-                        var color=getRequestColor(data.RequestType,data.Status);
-                        var status=getStatus(data.Status);
+                                    var typeR=getRequestType(data.RequestType);
+                                    var color=getRequestColor(data.RequestType,data.Status);
+                                    var status=getStatus(data.Status);
 
-                        valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
-                        valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
+                                    valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
+                                    valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
 
-                        events.push({
-                            id: data.OrderNumber,
-                            title: data.OrderNumber+' - '+typeR+' - '+status,
-                            start: start1,
-                            end: end1,
-                            color: color,
-                            company: data.CompanyID,
-                            customer: data.CustomerFBID,
-                            status: status,
-                            date_register: data.DateTime,
-                            total_value: valueMatA+valueTimeA,
-                        });
-            
+                                    events.push({
+                                        id: data.OrderNumber,
+                                        title: data.OrderNumber+' - '+typeR+' - '+status,
+                                        start: start1,
+                                        end: end1,
+                                        color: color,
+                                        company: data.CompanyID,
+                                        customer: data.CustomerFBID,
+                                        status: status,
+                                        date_register: data.DateTime,
+                                        total_value: valueMatA+valueTimeA,
+                                    });
+                    
+                                }
+                            }else{
+                                if(data.ContractorID==employeeSelected){
+                                    if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
+                                        var start = data.SchDate.split("/");
+                                        var start1=start[2]+"-"+start[0]+"-"+start[1];
+                                        var end1=start[2]+"-"+start[0]+"-"+start[1];
+
+                                        var typeR=getRequestType(data.RequestType);
+                                        var color=getRequestColor(data.RequestType,data.Status);
+                                        var status=getStatus(data.Status);
+
+                                        valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
+                                        valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
+
+                                        events.push({
+                                            id: data.OrderNumber,
+                                            title: data.OrderNumber+' - '+typeR+' - '+status,
+                                            start: start1,
+                                            end: end1,
+                                            color: color,
+                                            company: data.CompanyID,
+                                            customer: data.CustomerFBID,
+                                            status: status,
+                                            date_register: data.DateTime,
+                                            total_value: valueMatA+valueTimeA,
+                                        });
+                        
+                                    }
+                                }
+                            }
+                            
                         }
                     }
                     callback(events);
@@ -3452,7 +3500,29 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
-
+<div class="modal fade" id="myModalEmployeeList" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Employee List</h4> 
+			</div> 
+			<div class="modal-body" id="myModalEmployeeListBody"> 
+				<select id="dashBoardCompanyListEmployee" name="dashBoardCompanyListEmployee" class="form-control" required>
+                    <option value="">All</option>
+                    <?php foreach ($_array_contractors_to_show as $key => $contractor) {?>
+                        <option value="<?php echo $contractor['ContractorID']?>"><?php echo $contractor['ContNameFirst']." ".$contractor['ContNameLast']?></option>
+                    <?php } ?>
+                </select> 
+			</div> 
+			<div class="modal-footer" id="myModalEmployeeListButtons"> 
+                <button type="button" class="btn-primary" onclick="refreshCalendarV2();$('#myModalEmployeeList').modal('hide');">Filter</button> 
+				<button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 

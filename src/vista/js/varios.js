@@ -1900,7 +1900,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
             createdTo="";
         }
     }
-    var RepZIP=$('#zipCodeBegin').val();
+    var RepZIP=$('#step8ZipCode').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -3959,7 +3959,15 @@ function filterCompany(nameType,nameStatus,tableName){
     var table = $('#'+tableName).DataTable();
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            return listTypeServiceName.indexOf(data[5])>-1 || listTypeStatusName.indexOf(data[6])>-1 ? true : false;
+            pos=data[5].indexOf(";");
+            if (pos>=0){
+                compService = data[5].substring(pos+1);
+            }
+            pos1=data[6].indexOf(";");
+            if (pos1>=0){
+                compStatus = data[6].substring(pos1+1);
+            }
+            return listTypeServiceName.indexOf(compService)>-1 || listTypeStatusName.indexOf(compStatus)>-1 ? true : false;
         }     
     );
     table.draw();
@@ -3995,7 +4003,15 @@ function filterCustomer(nameType,nameStatus,tableName){
     var table = $('#'+tableName).DataTable();
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            return listTypeServiceName.indexOf(data[1])>-1 || listTypeStatusName.indexOf(data[4])>-1 ? true : false;
+            pos=data[1].indexOf(";");
+            if (pos>=0){
+                compService = data[1].substring(pos+1);
+            }
+            pos1=data[4].indexOf(";");
+            if (pos1>=0){
+                compStatus = data[4].substring(pos1+1);
+            }
+            return listTypeServiceName.indexOf(compService)>-1 || listTypeStatusName.indexOf(compStatus)>-1 ? true : false;
         }     
     );
     table.draw();
@@ -5343,4 +5359,13 @@ function generateInfoExcel(){
             return result1;
         }
     }); 
+}
+
+function refreshCalendarV2(){
+    
+    $('#calendar').fullCalendar('refetchEvents')
+}
+
+function refreshCalendarV2Employee(){
+    
 }
