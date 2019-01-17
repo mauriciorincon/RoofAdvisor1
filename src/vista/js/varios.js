@@ -1900,7 +1900,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
             createdTo="";
         }
     }
-    var RepZIP=$('#step8ZipCode').val();
+    var RepZIP=$('input:hidden[name=step5ZipCode]').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
@@ -1921,7 +1921,10 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
     
+                                        
     if(RequestType==undefined || RequestType==''){
         RequestType=$('select#typeServiceCompany').val();
     }
@@ -1948,7 +1951,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,"createdBy":createdBy,"createdTo":createdTo}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,"createdBy":createdBy,"createdTo":createdTo,
+                                                "RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -4356,6 +4360,10 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
 
@@ -4383,7 +4391,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,
+                                                "RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -4473,6 +4482,9 @@ function insertOrderPostCard(){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
+    
     var RepZIP=$('#step5ZipCode').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
@@ -4514,7 +4526,7 @@ function insertOrderPostCard(){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"postCardValue":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"postCardValue":amountValue,"RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
