@@ -1900,7 +1900,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
             createdTo="";
         }
     }
-    var RepZIP=$('#zipCodeBegin').val();
+    var RepZIP=$('#step8ZipCode').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
