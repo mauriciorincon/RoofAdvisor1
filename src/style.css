@@ -958,6 +958,7 @@ a#scrollUp {
     text-align: center;
     width: 45px;
     z-index: 999;
+    margin-bottom:45px;
 }
 a#scrollUp:hover{ background-color: rgba(0, 0, 0, 0);
     border: 1px solid;
@@ -1806,11 +1807,11 @@ div.table-responsive>div.dataTables_wrapper>div.row:first-child{
     border-radius: 20px 20px 0 0;
 
 }
-
-
-
-
-
+.btn-group-sm>.btn, .btn-sm {
+margin-left: 5px !important;     
+display: inline-block !important;
+padding:3px 6px !important;
+}
 
 
 
