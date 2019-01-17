@@ -82,6 +82,8 @@ $_array=array(
     "postCardValue"=>$_amount_valueP,
     "amount_value"=>$_amount_value,
     "CreateBy"=>$_createdBy,
+    "RepCity"=>$_POST['RepCity'],
+    "RepState"=>$_POST['RepState'],
 );
 
 $_orderController=new orderController();

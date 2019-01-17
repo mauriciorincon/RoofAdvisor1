@@ -612,6 +612,8 @@
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
+					<input type="hidden" id="step5State" name="step5State"/>
+					<input type="hidden" id="step5City" name="step5City"/>
                     <div class="list-group">
 							
                        
@@ -719,6 +721,8 @@
 										].join(' ');
 										$('#step5Address').val(address);
 										$('#step5ZipCode').val(place.address_components[7].short_name);
+										$('#step5State').val(place.address_components[5].long_name+' ('+place.address_components[5].short_name+')');
+										$('#step5City').val(place.address_components[4].long_name);
 									}
 									
 
