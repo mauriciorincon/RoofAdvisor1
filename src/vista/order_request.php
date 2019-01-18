@@ -158,7 +158,7 @@
 <div class="btnvidmobilediv1" style="display:none;">
 <button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
 </div>
-<div id="appwiz" class="container">
+<div id="appwiz" class="">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
@@ -200,7 +200,7 @@
         </div>
     </div>
     <div id="appfrm1" align="center">
-    <form role="form" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 100%; height: 800px; background-size: 100% 100%;">
+    <form role="form" align="left">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
