@@ -43,6 +43,8 @@
         $table="Customers";
     }else if(strcmp($table,"co")==0){
         $table="Company";
+    }else if(strcmp($table,"con")==0){
+        $table="Contractors";
     }
     $_userController=new userController();
     $_result=$_userController->validateCode($email,$code,$table);

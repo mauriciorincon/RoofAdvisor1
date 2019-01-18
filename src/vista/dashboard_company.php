@@ -5,15 +5,17 @@
 echo '<script>var userMailCompany=\''.$_SESSION['email'].'\'; </script>';
 echo '<script>var actualCompanyStatus=\''.$_actual_company['CompanyStatus'].'\'; </script>';
 echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
-
+echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'; </script>';
 ?>
 
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
     <div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary active" id="orderButtonCompany"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
-			<button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
-			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
+            <?php if($_SESSION['profile-employee']=='Admin'){ ?>
+                <button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
+            <?php } ?>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>

@@ -23,11 +23,27 @@
 
 
     require_once($_SESSION['application_path']."/controlador/userController.php");
-    echo $_SESSION['application_path']."declare user controller";
+    //echo $_SESSION['application_path']."declare user controller";
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
-    $_objPay=new payingController();
+    /*$_objPay=new payingController();
 
+    $_objUser = new userModel();
+
+    $properties = [
+        'emailVerified' => true,
+        'disabled' => false,
+        'photoURL' => ''
+    ];
+    $userId = "nbzguSDBqvaCCX8TagjI4AC3gFb2";
+    $profile = "driver";
+    $_result = $_objUser->updateUserContractor($userId,$properties,$profile);
+    print_r($_result);*/
+
+    $_objMail=new emailController();
+    $_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
+    echo $_result;
+    return;
     /*
     //create account
     $_result=$_objPay->createAccount('supo7@yahoo.com');
@@ -141,7 +157,7 @@
     //echo "Order id: ".$_lastOrderNumber;
 
     //Send Mail
-    //$_objMail=new emailController();
+    
 
 
     //$_result=$_objMail->sendMailSMTP();

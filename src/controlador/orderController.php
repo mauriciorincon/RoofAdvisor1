@@ -183,6 +183,7 @@ class orderController{
                 $Order['FBID']=$_result->getKey();
                 //create invoce for customer
                 $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe'],$action_type);
+                
             }
         }
         return $_result." - ".$_result_invoice;

@@ -206,6 +206,7 @@ class userController{
                             $this->dashboardAdmin($this->_user);
                         }else{
                             $_SESSION['profile'] = 'company';
+                            $_SESSION['profile-employee'] = 'Admin';
                             $this->dashboardCompany($this->_user);
                         }
                         
@@ -219,6 +220,7 @@ class userController{
                 }
             }elseif(is_string($_result)){
                 $_result=$this->_userModel->validateEmployee($this->_user,$this->_pass);
+                
                 if(is_array($_result) or gettype($_result)=="object"){
                     if($_result->emailVerified==1){
                         $_employee=$this->_userModel->getContractor($this->_user);
@@ -230,6 +232,7 @@ class userController{
                             $_SESSION['start'] = time();
                             $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                             $_SESSION['email'] = $_data_company['CompanyEmail'];
+
                             
                             if(strcmp($_data_company['CompanyID'],"CO000000")==0){
                                 $_SESSION['profile'] = 'admin';
@@ -241,6 +244,7 @@ class userController{
                                 $this->dashboardAdmin($this->_user);
                             }else{
                                 $_SESSION['profile'] = 'company';
+                                $_SESSION['profile-employee'] = $_employee['ContractorProfile'];
                                 $this->dashboardCompany($_data_company['CompanyEmail']);
                             }
                         }else{
@@ -468,32 +472,24 @@ class userController{
                 
                 return "Error, the user company was no found";
             }
-
-
-
             $this->_userModel=new userModel();
             $_result=$this->_userModel->validateCustomerByID($user);
             if(is_array($_customer)){
                 //print_r($_customer);
                 if(strcmp($_customer['ComapnyLicNum'],$code)==0){
-                    $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
-                    
+                    $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');  
                     return "The code is correct";
                 }else{
                     return "Error, the code is incorrect";    
                 }
             }else{
-                
                 return "Error, the user was no found";
             }
         }else if(strcmp($table,'Customers')==0){
             $this->_userModel=new userModel();
             $_result=$this->_userModel->validateCustomerByID($user);
-            
             if(is_array($_result) or gettype($_result)=="object" ){
-                //print_r($_result);
                 if(strcmp($_result->photoUrl,$code)==0){
-                    
                     $properties = [
                         'emailVerified' => true,
                         'disabled' => false,
@@ -505,23 +501,37 @@ class userController{
                         return $_message;
                     }else{
                         $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
-
                         return $_message;
-                        
                     }
-                    
                 }else{
                     $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
                     return $_message;
                 }
             }else{
-                
                 return "Error, the user was no found";
             }
 
+        }else if(strcmp($table,'Contractors')==0){
+            $this->_userModel=new userModel();
+            $_result=$this->_userModel->validateContractorByID($user);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                if(strcmp($_result->photoUrl,$code)==0){
+                    $properties = [
+                        'emailVerified' => true,
+                        'disabled' => false,
+                        'photoURL' => ''
+                    ];
+                    $_result_update=$this->_userModel->updateUserContractor($user,$properties,'driver');
+                    if(is_array($_result_update) or gettype($_result_update)=="object" ){
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        return $_message;
+                    }else{
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+                        return $_message;
+                    }
+                }
+            }
         }
-        
-
     }
 
     public function getCompany($companyID){

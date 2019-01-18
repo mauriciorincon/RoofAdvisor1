@@ -131,6 +131,7 @@ class emailController{
             return "<br>Message has been sent successfully<br>";
             
         }
+        
     }
     public function getMessageError(){
         return $this->_message_error;

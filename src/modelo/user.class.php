@@ -14,6 +14,11 @@ class userModel extends connection{
         return $result;
     }
 
+    public function updateUserContractor($userId,$userProperties,$profile){
+        $result=$this->updateUser($userId,$userProperties,$profile);
+        return $result;
+    }
+
     public function changeUserPassword($_userId,$_password,$_profile){
         return $this->changeUserPass($_userId,$_password,$_profile);
     }
@@ -39,6 +44,16 @@ class userModel extends connection{
 
     public function validateCompanyByID($userId){
         $result=$this->validateUserByID($userId,'company');
+        if(is_array($result) or gettype($result)=="object" ){
+            return $result;
+        }else{
+            return "Error ".$result;
+        }
+        return "Error";
+    }
+
+    public function validateContractorByID($userId){
+        $result=$this->validateUserByID($userId,'driver');
         if(is_array($result) or gettype($result)=="object" ){
             return $result;
         }else{
