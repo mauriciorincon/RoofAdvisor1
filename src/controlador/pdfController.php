@@ -21,7 +21,7 @@ class pdfController{
         
     }
 
-    function paymentConfirmation1($_orderID,$object_order,$_amount=0,$_stripe_id=""){
+    function paymentConfirmation1($_orderID,$object_order,$_amount=0,$_stripe_id="",$_action_type){
         
         if($_amount>0){
             $_amount=$_amount/100; 
@@ -226,9 +226,10 @@ class pdfController{
 
         $pdf->Output($_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf','F'); 
 
-        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,'Online','order',$_action_type);
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+        
 
         $_mailController = new emailController();
 
