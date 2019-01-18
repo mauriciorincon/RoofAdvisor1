@@ -1457,11 +1457,11 @@ color: #fff;
     font-weight: 500;
 }
 #appfrm1{
-    height: 800px;
-    margin-top: 10px;
-    /*background-image: url(img/roof.home.wiz.bg.png);*/
-    background-repeat: no-repeat;
-    background-size: 1900px 100%;
+    background-image: url(img/roof.home.wiz.bg.png);
+       margin-top: 10px;
+background-repeat: no-repeat;     
+padding-bottom: 40px; 
+   background-size:100%;
 }
 #step1contain{
     padding-top: 140px;
