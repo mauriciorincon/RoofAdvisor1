@@ -46,7 +46,7 @@ class orderController{
         return $_orders;
     }
 
-    public function insertOrder($arrayDataOrder,$emailCustomer=""){
+    public function insertOrder($arrayDataOrder,$emailCustomer="",$action_type){
         $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
@@ -182,7 +182,7 @@ class orderController{
                 $_objPDF=new pdfController();
                 $Order['FBID']=$_result->getKey();
                 //create invoce for customer
-                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe']);
+                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe'],$action_type);
             }
         }
         return $_result." - ".$_result_invoice;

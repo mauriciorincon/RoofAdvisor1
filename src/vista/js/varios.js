@@ -1355,7 +1355,7 @@ $('#step3OtypeService').on('click', 'a', function(){
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService(type);
     showHideElementByService(type);
-    action_type="pay_emergency_service";
+    action_type="pay_customer_roofreport";
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
@@ -4414,9 +4414,14 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
             
 
             if(n==-1){
-                    var dataSplit=data.split(",");
-                    var orderIDSplit=dataSplit[2].split("/");
-                    var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                var dataSplit="";
+                var orderIDSplit="";
+                var orderIDSplit1="";
+                if(data.length>0){
+                     dataSplit=data.split(",");
+                     orderIDSplit=dataSplit[2].split("/");
+                     orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                }
                     /*if (selectionType=="newCustomer"){
                         var firstCustomerName = $("input#firstCustomerName").val();
                         var lastCustomerName = $("input#lastCustomerName").val();
@@ -4451,12 +4456,10 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                     }*/
                      $("#myOrderByCustomer").modal("hide");
 
-                    $('#textAnswerOrder').html(data+'');
-                    $('#headerTextAnswerOrder').html('Success');
-                  
-                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#lastFinishButtonOrder').show();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    //$('#myModalRespuestaOrder div#textAnswerOrder').html(data+'');
+                    //$('#myModalRespuestaOrder div#headerTextAnswerOrder').html('Success');
+                    //$('#myModalRespuestaOrder').modal({backdrop: 'static'});
+                    alert('Order created successfuly');
             }else{
                     $('#headerTextAnswerOrder').html('Error validating User Account');
                     $('#textAnswerOrder').html(data+'<br><br>Please try again');
