@@ -4554,9 +4554,10 @@ function insertOrderPostCard(){
                     var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                     
                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
-                    $('#textAnswerOrder').html(data+'');
-                    $('#headerTextAnswerOrder').html('Success');
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    alert(data);
+                    //$('#textAnswerOrder').html(data+'');
+                    //$('#headerTextAnswerOrder').html('Success');
+                    //$('#myModalRespuesta').modal({backdrop: 'static'});
 
                     balance=parseInt(balance)-parseInt(amountValue);
                     var data="postCardValue,"+balance;

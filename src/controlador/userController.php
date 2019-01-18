@@ -218,7 +218,41 @@ class userController{
                     Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
                 }
             }elseif(is_string($_result)){
-                Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginContractor");
+                $_result=$this->_userModel->validateEmployee($this->_user,$this->_pass);
+                if(is_array($_result) or gettype($_result)=="object"){
+                    if($_result->emailVerified==1){
+                        $_employee=$this->_userModel->getContractor($this->_user);
+                        $_data_company=$this->_userModel->getCompanyByID($_employee['CompanyID']);
+                        if(!is_null($_data_company)){
+                            $this->cleanVariables();
+                            $_SESSION['loggedin'] = true;
+                            $_SESSION['username'] = $_data_company['CompanyName'];
+                            $_SESSION['start'] = time();
+                            $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                            $_SESSION['email'] = $_data_company['CompanyEmail'];
+                            
+                            if(strcmp($_data_company['CompanyID'],"CO000000")==0){
+                                $_SESSION['profile'] = 'admin';
+                                $_SESSION['loggedin'] = true;
+                                $_SESSION['username'] = $_data_company['CompanyName'];
+                                $_SESSION['start'] = time();
+                                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                                $_SESSION['email'] = $_data_company['CompanyEmail'];
+                                $this->dashboardAdmin($this->_user);
+                            }else{
+                                $_SESSION['profile'] = 'company';
+                                $this->dashboardCompany($_data_company['CompanyEmail']);
+                            }
+                        }else{
+                            Header("Location: ?aditionalMessage=User is not related to a company&controller=user&accion=showLoginContractor");
+                        }
+                    }else{
+                        Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
+                    }
+                }else{
+                    Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginContractor");
+                }
+                
             }
         }
         

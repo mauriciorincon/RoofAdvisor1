@@ -59,6 +59,19 @@ class userModel extends connection{
         return "Error";
     }
 
+    public function validateEmployee($user,$pass){
+        //echo "modelo company";
+         $result=$this->validateUser($user,$pass,'driver');
+         
+         if(is_array($result) or gettype($result)=="object" ){
+             return $result;
+         }else{
+             return "Error ".$result;
+         }
+         return "Error";
+     }
+
+
     public function validateEmail($table,$email){
         if(strcmp($table,'company')==0){
             $result=$this->getQueryEqual('Company','CompanyEmail',$email);

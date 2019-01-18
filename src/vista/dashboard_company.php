@@ -2636,7 +2636,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
             </div>
 
 			<div class="modal-footer" id="buttonUploadReport"> 
-                <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('question5')" id='buttonRoofReport'>Set Location</button>
+                
                 <button class="btn-primary btn-sm" type="button" onclick="closeMapSelect('placePostCard')" id='buttonPostCard'>Set Location</button>
                 
                 <button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button>
@@ -2821,7 +2821,8 @@ if(!empty($_actual_company['postCardValue'])){
                 </div> 
                 <div class="modal-body" id="textmyMessagePostCardsPay">
                     <p>
-                    We are very grateful for your choice, to be able to use the postcards please make the payment by clicking <a href="#" onclick="showPayPostCards('.($_actual_company['postCardValue']*100).')">here</a>
+                    We are very grateful for your choice, to be able to use the postcards please make the payment by clicking
+                    <button type="button" class="btn-primary btn-sm" onClick="showPayPostCards('.($_actual_company['postCardValue']*100).')">Here</button>
                     </p>              
                 </div>
                 <div class="modal-footer" id="buttonPaymentType"> 
