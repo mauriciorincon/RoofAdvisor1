@@ -6,6 +6,7 @@ require $_SESSION['library_path_autoload'];
 
 class read_excel{
 
+    
 
     function read_file_excel($file_path,$_id_company="CO000000"){
         
@@ -37,19 +38,48 @@ class read_excel{
 
     public function generateExcel()
     {
-        $spreadsheet = new Spreadsheet();
+       
+        $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+
+        
+        // CREATE A NEW SPREADSHEET + SET METADATA
+        //$spreadsheet = new Spreadsheet();
+        $spreadsheet->getProperties()
+        ->setCreator('YOUR NAME')
+        ->setLastModifiedBy('YOUR NAME')
+        ->setTitle('Demo Document')
+        ->setSubject('Demo Document')
+        ->setDescription('Demo Document')
+        ->setKeywords('demo php spreadsheet')
+        ->setCategory('demo php file');
+        
+        // NEW WORKSHEET
         $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Testing');
         $sheet->setCellValue('A1', 'Hello World !');
+        $sheet->setCellValue('A2', 'Goodbye World !');
+
+        // OUTPUT
+        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+
+        // THIS WILL SAVE TO A FILE ON THE SERVER
+        //$writer->save('test.xlsx');
+
+        // OR FORCE DOWNLOAD
         
-        $writer = new Xlsx($spreadsheet);
- 
-        $filename = 'name-of-the-generated-file';
- 
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        //header('Content-Type: application/excel');
+        header('Content-Disposition: attachment;filename="demo.xlsx"');
         header('Cache-Control: max-age=0');
+        header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer->save('php://output');
+
         
-        $writer->save('php://output'); // download file 
+        
  
     }
 
