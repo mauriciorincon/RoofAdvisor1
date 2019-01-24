@@ -123,6 +123,59 @@ class read_excel{
         
     }
 
+    public function generateExcelDataM($data)
+    {
+       try {
+            $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+            // CREATE A NEW SPREADSHEET + SET METADATA
+            
+            $spreadsheet->getProperties()
+            ->setCreator('YOUR NAME')
+            ->setLastModifiedBy('YOUR NAME')
+            ->setTitle('Demo Document')
+            ->setSubject('Demo Document')
+            ->setDescription('Demo Document')
+            ->setKeywords('demo php spreadsheet')
+            ->setCategory('demo php file');
+            
+            // NEW WORKSHEET
+            $sheet = $spreadsheet->getActiveSheet();
+            $n=0;
+            foreach($data as $sheetInfo=>$sheetA){
+                if($n==0){
+                    $sheet->setTitle($sheetA[0]);
+                    $sheet->fromArray($sheetA[1],null,'A1');
+                }else{
+                    $spreadsheet->createSheet($n);
+                    $spreadsheet->setActiveSheetIndex($n);
+                    $sheet = $spreadsheet->getActiveSheet();
+                    echo $sheetA[0];
+                    $title=$sheetA[0];
+                    //$sheet->setTitle($title);
+                    $sheet->setTitle("hola");
+                    $sheet->fromArray($sheetA[1],null,'A1');
+                }
+                $n++;
+            }
+            
+
+            // OUTPUT
+            $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+
+            $_file_name = $this->generateRandomString();
+            // THIS WILL SAVE TO A FILE ON THE SERVER
+            $writer->save($_SESSION['temporal_path'].$_file_name.'.xlsx');
+
+            
+            return '<a class="btn-primary" href="'.$_SESSION['tmp_documents_path'].$_file_name.'.xlsx'.'"> download link ['.$_file_name.']</a>';
+       } catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
+            return 'Error loading file: '.$e->getMessage();
+       }catch(\PhpOffice\PhpSpreadsheet\Writer\Exception $e){
+            return 'Error loading file: '.$e->getMessage();
+    }
+        
+    }
+
     public function generateRandomString($length = 10) {
         return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
     }

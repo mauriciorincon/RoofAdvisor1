@@ -5399,7 +5399,12 @@ function refreshCalendarV2(){
 }
 
 function generateReportFile(){
-    var optionChecked = $('input[id="reportCheckOption"]:checked').val();
+    //var optionChecked = $('input[id="reportCheckOption"]:checked').val();
+    var optionChecked = '';
+
+    $('input[id="reportCheckOption"]:checked').each(function() {
+        optionChecked+=this.value+','; 
+    });
     jsShowWindowLoad('Generating report');
     $.post( "controlador/ajax/generateXLSReport.php", { "report_type" : optionChecked,"companyID" : companyID}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
