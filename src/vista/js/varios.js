@@ -5428,3 +5428,9 @@ function generateReportFile(){
         }
     }); 
 }
+
+
+function fire_next_step(){
+    stepsWizard=$('#smartwizard');
+    stepsWizard.steps("next");
+}

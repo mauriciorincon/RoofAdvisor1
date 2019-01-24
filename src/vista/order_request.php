@@ -131,10 +131,10 @@
 </div>
 </div>
 <div class="btnwizmobilediv1" style="display:none;">
-<button id="mobilewizbtn1" class="mobilewizbtn1" >START <i style="" class="fas fa-fingerprint"></i> HERE</button>
+	<button id="mobilewizbtn1" class="mobilewizbtn1" >START <i style="" class="fas fa-fingerprint"></i> HERE</button>
 </div>
 <div class="btnvidmobilediv1" style="display:none;">
-<button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+	<button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
 </div>
 <div id="appwiz" class="">
     <div class="stepwizard">
@@ -219,11 +219,9 @@
 				</div>
 			</div>
         </div>
-
-		
     </div>
     <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
-         <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
+        <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>

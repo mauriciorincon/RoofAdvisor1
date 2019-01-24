@@ -149,10 +149,10 @@ class read_excel{
                     $spreadsheet->createSheet($n);
                     $spreadsheet->setActiveSheetIndex($n);
                     $sheet = $spreadsheet->getActiveSheet();
-                    echo $sheetA[0];
+                    //echo $sheetA[0];
                     $title=$sheetA[0];
-                    //$sheet->setTitle($title);
-                    $sheet->setTitle("hola");
+                    $sheet->setTitle("$title");
+                    //$sheet->setTitle("hola");
                     $sheet->fromArray($sheetA[1],null,'A1');
                 }
                 $n++;

@@ -252,38 +252,36 @@ $('#mobwizclose').click(function(){
 
 });
 
-$(document).ready(function(){
+$(document).ready(function(){	
 
-    $('#mobilewizardmaster').smartWizard(
+    $('#smartwizard').smartWizard(
      {
+		selected: 0, 
         theme:'dots',
-        autoAdjustHeight:true
-});
+		autoAdjustHeight:true,
+		
+	 });
 
 
 
 
 if (window.location.href.indexOf("controller=aboutus") > -1) {
-$('#mobnavtxt ul li a[href*="aboutus"]').parent().addClass('active').siblings().removeClass('active');
-
+	$('#mobnavtxt ul li a[href*="aboutus"]').parent().addClass('active').siblings().removeClass('active');
 }else if(window.location.href.indexOf("controller=services") > -1) {
-$('#mobnavtxt ul li a[href*="services"]').parent().addClass('active').siblings().removeClass('active');
-
+	$('#mobnavtxt ul li a[href*="services"]').parent().addClass('active').siblings().removeClass('active');
 }else if(window.location.href.indexOf("controller=faq") > -1) {
-$('#mobnavtxt ul li a[href*="faq"]').parent().addClass('active').siblings().removeClass('active');
-
+	$('#mobnavtxt ul li a[href*="faq"]').parent().addClass('active').siblings().removeClass('active');
 }else if(window.location.href.indexOf("controller=download") > -1) {
-$('#mobnavtxt ul li a[href*="download"]').parent().addClass('active').siblings().removeClass('active');
-
+	$('#mobnavtxt ul li a[href*="download"]').parent().addClass('active').siblings().removeClass('active');
 }else if(window.location.href.indexOf("controller=contact") > -1) {
-$('#mobnavtxt ul li a[href*="contact"]').parent().addClass('active').siblings().removeClass('active');
-
+	$('#mobnavtxt ul li a[href*="contact"]').parent().addClass('active').siblings().removeClass('active');
 }
 
 
 $('#mobslider').slideReveal({
   trigger: $("#mobtrigger")
 });
+
 $("#mobnavtxt ul li.active a:first").addClass('mobactivea');
 
 $("#mobnavtxt ul li a").click(function() {
@@ -291,7 +289,34 @@ $("#mobnavtxt ul li a").click(function() {
      $("#mobnavtxt ul li.active a:first").removeClass('mobactivea');
          $(this).parent().addClass('active').siblings().removeClass('active');
 
- });
+});
+
+ 	// Initialize the leaveStep event
+ 	$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+		 alert("You are on step "+stepNumber+" now"); 
+		 return true;
+         //return confirm("Do you want to leave the step "+stepNumber+"?");
+      });
+      
+      // Initialize the showStep event
+      $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+         alert("You are on step "+stepNumber+" now");
+      });
+ 
+      // Initialize the beginReset event
+      $("#smartwizard").on("beginReset", function(e) {
+	 return confirm("Do you want to reset the wizard?");
+      });
+            
+      // Initialize the endReset event
+      $("#smartwizard").on("endReset", function(e) {
+	 alert("endReset called");
+      });  
+            
+      // Initialize the themeChanged event
+      $("#smartwizard").on("themeChanged", function(e, theme) {
+	 alert("Theme changed. New theme name: " + theme);
+      });
 
 });
 

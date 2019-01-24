@@ -67,7 +67,7 @@
                     $_array_info=array();
                     $_array_stripe_transfer=$_paying_controller->get_transfer_account($_actual_company['stripeAccount']);
                     if(isset($_array_stripe_transfer->data)){
-                        $array_data=["ID","AMOUNT","CREATED","DESCRIPTION","DESTINATION_PAYMENT",];
+                        $array_data=["Id","AMOUNT","CREATED","DESCRIPTION","DESTINATION_PAYMENT",];
                         array_push($_array_info,$array_data);
                         foreach($_array_stripe_transfer->data as $clave=>$trancs){
                             $_amount=0;
@@ -79,8 +79,35 @@
                     //$_text_url = $_excelGenerate->generateExcelData($_array_options[$n],$_array_info,"");
                     break;
                 case "Transactions":
+                    $_array_info=array();
+                    $_array_stripe_transaction=$_paying_controller->get_transaction_account($_actual_company['stripeAccount'],$_stripe_secret_key);
+                    if(isset($_array_stripe_transaction->data)){
+                        $array_data=["ID","AMOUNT","AVAILABLE_ON","CREATED","CURRENCY","DESCRIPTION","FEE","NET","STATUS","TYPE",];
+                        array_push($_array_info,$array_data);
+                        foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                            $_amount=0;
+                            if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                            $_amount_1=0;
+                            if($trancs->net==0){$_amount_1=0;}else{$_amount_1=$trancs->net/100;}
+                            $array_data=[$trancs->id,number_format($_amount, 2, '.', ''),$trancs->available_on,date("F j, Y, g:i a",$trancs->created),$trancs->currency,$trancs->description,$trancs->fee,number_format($_amount_1, 2, '.', ''),$trancs->status,$trancs->type,];
+                            array_push($_array_info,$array_data);
+                        }
+                    }
+
                     break;
                 case "Pay outs":
+                    $_array_info=array();
+                    $_array_stripe_payout=$_paying_controller->get_payout_account($_actual_company['stripeAccount'],$_stripe_secret_key);
+                    if(isset($_array_stripe_payout->data)){
+                        $array_data=["ID","AMOUNT","CREATED","ARRIVAL_DATE","CURRENCY","DESCRIPTION","DESTINATION",];
+                        array_push($_array_info,$array_data);
+                        foreach($_array_stripe_payout->data as $clave=>$payout){
+                            $_amount=0;
+                            if($payout->amount==0){$_amount=0;}else{$_amount=$payout->amount/100;}
+                            $array_data=[$payout->id,number_format($_amount, 2, '.', ''),date("F j, Y, g:i a",$payout->created),date("F j, Y, g:i a",$payout->arrival_date),$payout->currency,$payout->description,$payout->destination,];
+                            array_push($_array_info,$array_data);
+                        }
+                    }
                     break;
             }
             if(!empty($_array_options[$n])){
