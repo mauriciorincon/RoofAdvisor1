@@ -708,14 +708,14 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                         <th>ID</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Name/Addr/Phone</th>
-                        <th>Description</th>
-                        <th>Req Type</th>
+                        <th>Customer Info</th>
+                        <th>Roof Desc</th>
+                        <th>Job Type</th>
                         <th>Status</th>
                         <th>Est. Amt</th>
-                        <th>Final. Amt</th>
+                        <th>Final Amt</th>
                         <th>Payment</th>
-                        <th>Contractor</th>
+                        <th>Pro</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -843,7 +843,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Basic Info
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Info
                                     </button>
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Basic Info</button>
                                 </h2>
@@ -876,21 +876,18 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
                                     </div> 
                                     <div class="form-group">
-                                        <label class="control-label ">License Number</label>
+                                        <label class="control-label ">Contractor License Number</label>
                                         <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter License Number" id="companyLicenseNumber" name="companyLicenseNumber" value="<?php if(isset($_actual_company['ComapnyLicNum'])){ echo $_actual_company['ComapnyLicNum'];}  ?>"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label ">In Business Since</label>
-                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter In Business Since" id="companyBusinessSince" name="companyBusinessSince" value="<?php if(isset($_actual_company['InBusinessSince'])){ echo $_actual_company['InBusinessSince'];} ?>"/>
-                                    </div>
+                                   
                                    
                                     <div class="form-group">
-                                        <label class="control-label ">Expiration date</label>
+                                        <label class="control-label ">License Expiration Date</label>
                                         <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter Expiration date" id="companyExpirationDate" name="companyExpirationDate" value="<?php if(isset($_actual_company['LicExpiration'])){ echo $_actual_company['LicExpiration'];}?>"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label ">Verified</label>
-                                        <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
+                                        <label class="control-label ">License Verified</label>
+                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
                                     </div>
                                     <!--
                                     <div class="form-group">
@@ -917,6 +914,10 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <label class="control-label">Company Type</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
                                     </div> 
+                                    <div class="form-group">
+                                        <label class="control-label ">In Business Since</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter In Business Since" id="companyBusinessSince" name="companyBusinessSince" value="<?php if(isset($_actual_company['InBusinessSince'])){ echo $_actual_company['InBusinessSince'];} ?>"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -927,7 +928,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
                                     </button>
-                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info for recibe payments</button>           
+                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info to Receive Payments</button>           
                                     <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
                                 </h2>
                             </div>
@@ -1018,76 +1019,74 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <div class="card-header" id="headingThree">
                                 <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Billing
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Billing
                                     </button>
-                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Billing Address</button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Billing Info</button>
                                 </h2>
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="form-group">
 
-                                    <label class="control-label">Billing Address 2</label>
+                                    <label class="control-label">Billing Address</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
 
                                     <label class="control-label">Billing Address (Con't)</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-
-                                    <label class="control-label">Billing Address (Con't)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
-
                                     </div>
                                     <div class="form-group">
                                     <label class="control-label">City</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">State</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
+                                        <label class="control-label">State</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">Zip Code</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
+                                        <label class="control-label">Zip Code</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label">PayInfoCredit Card Number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card Expiration Year (YYYY)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                    </div>
+                                    -->
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card Number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">Credit Card Expiration Month (MM)</label>
-
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                        <label class="control-label">Credit Card CSV</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                        <label class="control-label">Credit Card Expiration Month (MM)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">PayInfoCredit Card Number</label>
-
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
-                                    </div>
-                                    <div class="form-group">
-                                    <label class="control-label">Credit Card Expiration Year (YYYY)</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
-                                    </div>
-                                    <div class="form-group">
-                                    <label class="control-label">Credit Card Number</label>
-
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
-                                    </div>
-                                    <div class="form-group">
-                                    <label class="control-label">Credit Card CSV</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
+                                        <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
                                     </div>
                                     <div class="form-group">
                                     <label class="control-label">Name on Cred Card</label>
                                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
                                     </div>
+                                    <!--
                                     <div class="form-group">
-                                    <label class="control-label">First Name on Credit Card</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                        <label class="control-label">First Name on Credit Card</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
                                     </div>
                                     <div class="form-group">
-                                    <label class="control-label">Last Name on Credit Card</label>
-                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                        <label class="control-label">Last Name on Credit Card</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -1096,9 +1095,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <div class="card-header" id="headingFour">
                                 <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Others
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Insurance
                                     </button>
-                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Others</button>
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Info</button>
                                 </h2>
                             </div>
 
@@ -1132,7 +1131,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <div class="card-header" id="headingFour">
                                 <h2 class="mb-0" style="background-color: gainsboro;">
                                     <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> External Accounts
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Deposit Accounts
                                     </button>
                                     
                                 </h2>
@@ -1141,7 +1140,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <div class="alert alert-primary" role="alert">
-                                        External accounts
+                                        <h2><b>Accounts</b></h2>
                                     </div>
                                     <table class="table table-bordered" id="listBankCompany">
                                         <tr>
@@ -1149,8 +1148,10 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                             <td>Holder  Name</td>
                                             <td>Holder  Type</td>
                                             <td>Bank Name</td>
+                                            <!--
                                             <td>Country</td>
                                             <td>Currency</td>
+                                            -->
                                             <td>Last4</td>
                                             <td>Routing Number</td>
                                             <td>Action</td>
@@ -1164,8 +1165,6 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                             "<td>".$bank->account_holder_name."</td>".
                                                             "<td>".$bank->account_holder_type."</td>".
                                                             "<td>".$bank->bank_name."</td>".
-                                                            "<td>".$bank->country."</td>".
-                                                            "<td>".$bank->currency."</td>".
                                                             "<td>".$bank->last4."</td>".
                                                             "<td>".$bank->routing_number."</td>".
                                                             '<td>
@@ -1203,6 +1202,15 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             Wallet Balance<br>
                             <a href="">+ Add funds to your RoofServiceNow Wallet</a>
                         </div>
+                        <div>
+                            <a class="btn-primary btn-sm" data-toggle="modal"  
+                                href="#myExportInfoWindow" 
+                                onClick=""> 
+                                <span class="glyphicon glyphicon-save"></span>
+                                Export Info
+                            </a> 
+                            
+                        </div>
 
                         <div class="accordion" id="accordionPayments">
                             <div class="card">
@@ -1212,7 +1220,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <span class="glyphicon glyphicon-plus-sign"></span> Balance
                                         </button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('balance','tableCompanyBalance','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
-                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                        
                                     </h2>
                                 </div>
 
@@ -1224,10 +1232,14 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                     <th>id</th>
                                                     <th>Type</th>
                                                     <th>Amount</th>
+                                                    <!--
                                                     <th>Currency</th>
+                                                    -->
                                                     <th>bank_account</th>
+                                                    <!--
                                                     <th>bitcoin_receiver</th>
                                                     <th>card</th>
+                                                    -->
                                                 </tr> 
                                             <thead>
                                             <tbody>
@@ -1243,10 +1255,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                                 "<td>".$n."</td>".
                                                                 "<td>Available</td>".
                                                                 "<td>".number_format($_amount, 2, '.', '')."</td>".
-                                                                "<td>".$trancs->currency."</td>".
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
-                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
                                                             "</tr>";
                                                         $n++;
                                                     }
@@ -1259,10 +1268,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                                 "<td>".$n."</td>".
                                                                 "<td>connect_reserved</td>".
                                                                 "<td>".number_format($_amount, 2, '.', '')."</td>".
-                                                                "<td>".$trancs->currency."</td>".
+                                                                
                                                                 "<td>".""."</td>".
-                                                                "<td>".""."</td>".
-                                                                "<td>".""."</td>".
+                                                                
                                                             "</tr>";
                                                         $n++;
                                                     }
@@ -1277,10 +1285,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                                 "<td>".$n."</td>".
                                                                 "<td>Pending</td>".
                                                                 "<td>".number_format($_amount, 2, '.', '')."</td>".
-                                                                "<td>".$trancs->currency."</td>".
+                                                                
                                                                 "<td>".$trancs->source_types->bank_account."</td>".
-                                                                "<td>".$trancs->source_types->bitcoin_receiver."</td>".
-                                                                "<td>".number_format($_amount1, 2, '.', '')."</td>".
+                                                                
                                                             "</tr>";
                                                         $n++;
                                                     }
@@ -1301,7 +1308,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <span class="glyphicon glyphicon-plus-sign"></span> Transfer
                                         </button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transfer','tableCompanyTransfer','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
-                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                        
                                     </h2>
                                 </div>
                                 <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
@@ -1310,7 +1317,6 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Amount</th>
-                                                <th>Balance_Transaction</th>
                                                 <th>Created</th>
                                                 <th>Description</th>
                                                 <th>Destination_Payment</th>
@@ -1326,7 +1332,6 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                                 echo "<tr>".
                                                             "<td>".$trancs->id."</td>".
                                                             "<td>".number_format($_amount, 2, '.', '')."</td>".
-                                                            "<td>".$trancs->balance_transaction."</td>".
                                                             "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
                                                             "<td>".$trancs->description."</td>".
                                                             "<td>".$trancs->destination_payment."</td>".
@@ -1347,7 +1352,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <span class="glyphicon glyphicon-plus-sign"></span> Transactions
                                         </button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transaction','tableCompanyTransactions','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
-                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                        
                                     </h2>
                                 </div>
                                 <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
@@ -1403,7 +1408,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <span class="glyphicon glyphicon-plus-sign"></span> Pay outs
                                         </button>
                                         <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('payout','tableCompanyPayouts','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
-                                        <button class="btn-primary btn-sm" style="float: right;" onClick=""><span class="glyphicon glyphicon-save"></span>Export Info</button>
+                                        
                                     </h2>
                                 </div>
                                 <div id="collapseFourp" class="collapse" aria-labelledby="headingFourp" data-parent="#accordionPayments">
@@ -3526,6 +3531,42 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+<div class="modal fade" id="myExportInfoWindow" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="myExportInfoWindowheaderText">Employee List</h4> 
+			</div> 
+			<div class="modal-body" id="myExportInfoWindowBody"> 
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Balance</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Transfer</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Transactions</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">Pay outs</label>
+                </div>
+			</div> 
+			<div class="modal-footer" id="myModalEmployeeListButtons"> 
+                <button type="button" class="btn-primary" onclick="">Generate File</button> 
+				<button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+
 
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
