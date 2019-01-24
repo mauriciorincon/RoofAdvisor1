@@ -96,7 +96,7 @@ class emailController{
         
 
         $email_user = "donotreply@roofservicenow.com";
-        $email_password = "P@ssw0rd26";
+        $email_password = "7&aF&gbH";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = $toAddress;
         $from_name = "RoofServiceNow";
@@ -105,12 +105,13 @@ class emailController{
         $phpmailer->Username = $email_user;
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
-        //$phpmailer->SMTPDebug = 2;
+        $phpmailer->SMTPDebug = 2;
         $phpmailer->SMTPSecure = 'tls';
         $phpmailer->Host = "smtp-relay.gmail.com"; // GMail
         $phpmailer->Port = 587;
         $phpmailer->IsSMTP(); // use SMTP
         $phpmailer->SMTPAuth = true;
+        
 
         $phpmailer->setFrom($phpmailer->Username,$from_name);
         $phpmailer->AddAddress($address_to); // recipients email
@@ -139,3 +140,5 @@ class emailController{
 }
 
 ?>
+
+

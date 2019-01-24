@@ -22,15 +22,15 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory suffix=".php" >tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory suffix=".php" >/home/fedora/roofz-web/src</directory>
+            <directory suffix=".php" >src</directory>
             <exclude >
-            	<directory >/home/fedora/roofz-web/src/vendor</directory>
+            	<directory >src/vendor</directory>
             </exclude>
         </whitelist>
     </filter>

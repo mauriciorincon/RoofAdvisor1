@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="name-of-project" default="full-build">
+<property name="php_bin"  value="/usr/local/opt/php@7.2/bin/php"/>
  <!-- By default, we assume all tools to be on the $PATH 
  <property name="pdepend" value="pdepend"/>
  <property name="phpcpd"  value="phpcpd"/>
@@ -185,7 +186,7 @@
  <target name="lint"
          unless="lint.done"
          description="Perform syntax check of sourcecode files">
-  <apply executable="php" taskname="lint">
+  <apply executable="${php_bin}" taskname="lint">
    <arg value="-l" />
 
    <fileset dir="${basedir}/src">
@@ -331,7 +332,8 @@
          unless="phpunit.done"
          depends="prepare"
          description="Run unit tests with PHPUnit">
-  <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
+  <exec executable="${php_bin}" resultproperty="result.phpunit" taskname="phpunit">
+   <arg value="${phpunit}"/>
    <arg value="--configuration"/>
    <!-- arg path="${basedir}/build/phpunit.xml"/ -->
    <arg path="${basedir}/phpunit.xml"/>
