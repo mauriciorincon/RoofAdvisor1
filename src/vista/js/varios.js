@@ -1139,6 +1139,7 @@ $(document).ready(function () {
         var customerPhoneNumber = $("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
         var Repassword=$('input:password#inputPasswordConfirm').val();
+        var termsServiceAgree=$("#termsServiceAgree").is(':checked');
 
         customerAddress = "";
         customerState = "";
@@ -1174,6 +1175,9 @@ $(document).ready(function () {
             }
             if(validateFormatMail(emailValidation)==false){
                 flagMensaje+="Please verify the email field.\n";
+            }
+            if(termsServiceAgree!=1){
+                flagMensaje+="Please you have to accept the terms to register.\n";
             }
             /*if(customerAddress.length==0){
                 flagMensaje+="Please fill the customer address.\n";

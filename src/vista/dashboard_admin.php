@@ -574,14 +574,14 @@ Welcome to RoofServicenow Admin
                     <th>ID</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Name/Addr/Phone</th>
-                    <th>Description</th>
-                    <th>Req Type</th>
+                    <th>Customer Info</th>
+                    <th>Roof Desc</th>
+                    <th>Job Type</th>
                     <th>Status</th>
                     <th>Est Amt</th>
                     <th>Final Amt</th>
                     <th>Payment</th>
-                    <th>Contractor</th>
+                    <th>Pro</th>
                     <th>Actions</th>
                 </tr>
             </thead>

@@ -614,16 +614,16 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 					<thead>
 					<tr>
 						<th>ID</th>
-						<th>Order Type</th>
-						<th>Address</th>
-						<th>Description</th>
+						<th>Order</th>
+						<th>Service Addr</th>
+						<th>Roof Desc</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
 						<th>Est Amt</th>
                     	<th>Tot Amt</th>
 						<th>Company</th>
-						<th>Driver</th>
+						<th>Pro</th>
 						<th>Actions</th>
 					</tr>
 					</thead>

@@ -13,6 +13,7 @@
 });
 }
 </script>
+
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width:1200px" role="document">
     <div class="modal-content logmodal">
@@ -23,76 +24,53 @@
         </button>
       </div>
      
-	  <div class="modal-body" style="height:175px;">
-				<div class="list-group">
-						<div  class="list-group-item login-list1">
-								<div class="d-flex w-100 ">
-										<div class="form-row" id="step6RegisterCustomerOrder">
-											<div class="form-group col-md-4">
-												<label class="control-label">First Name</label>
-												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="firstCustomerName" name="firstCustomerName"  />
-												
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label">Last Name</label>
-												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-												
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Email</label>
-												<input maxlength=""  type="text" required="required" class="colorStandarInpur"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-												<small  class="form-text text-muted" id="answerEmailValidate" name="answerEmailValidate">Answer</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Password</label>
-												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-												<small  class="form-text text-muted" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Confirm Password</label>
-												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<!--<div class="form-group col-md-4">
-												<label class="control-label">Address</label>
-												<input maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label">City</label>
-												<input maxlength="100" type="text" required="required" class="colorStandarInpur" placeholder="Enter city" id="customerCity" name="customerCity" />
-												
-											</div>
-											
-											<div class="form-group col-md-4">
-												<label class="control-label">Zip code</label>
-												<input maxlength="5" type="text" required="required" class="colorStandarInpur"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-												
-											</div>-->
-											<div class="form-group col-md-4">
-												<label class="control-label">Phone number</label>
-												<input maxlength="10" type="text" required="required" class="colorStandarInpur"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-												
-											</div>
-											<!--<div class="form-group col-md-4">
-												<label class="control-label">State</label>
-												<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
-													<?php foreach ($_array_state as $key => $value1) { ?>
-															<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
-													<?php } ?>
-												</select>
-
-											</div>-->
-										</div>
-								</div>
-						</div>
-				</div>
-		</div>
-		<!--<center><button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button></center>-->
-      <div class="modal-footer" style="border-top:0;">
-	  		<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>
-        
-      </div>
+	  
+            <input type="hidden" value="Customer_register" id="source_call" name="source_call" />
+            <div class="panel-body">
+                    
+                    <div class="form-group">
+                        <label class="control-label labeltwht" for="firstCustomerName">First Name</label>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" oninvalid="this.setCustomValidity('Please Enter First Name')" oninput="setCustomValidity('')" value="<?php if(isset($_SESSION['post_info']['firstCustomerName'])){echo $_SESSION['post_info']['firstCustomerName']; } ?>"/>                        
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht">Last Name</label>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName" oninvalid="this.setCustomValidity('Please Enter Last Name')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['lastCustomerName'])){echo $_SESSION['post_info']['lastCustomerName']; } ?>" />
+                        
+                    </div>  
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Email</label>
+                        <input maxlength="100"  type="email" required="required" class="form-control" placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')" oninvalid="this.setCustomValidity('Please Enter Email')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['emailValidation'])){echo $_SESSION['post_info']['emailValidation']; } ?>" />
+                        <label class="control-label labeltwht" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  oninvalid="this.setCustomValidity('Please Enter Password')" oninput="setCustomValidity('')"/>
+                        <div class="help-block labeltwht">Minimum of 6 characters</div>
+                        <label class="control-label labeltwht" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Confirm Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()"  oninvalid="this.setCustomValidity('Please Enter Confirm Password')" oninput="setCustomValidity('')" />
+                        <label class="control-label labeltwht" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                    </div> 
+                    <div class="form-group">
+                        <label class="control-label labeltwht">Phone number</label>
+                        <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerPhoneNumber'])){echo $_SESSION['post_info']['customerPhoneNumber']; } ?>"/>
+                    </div>    
+                    <div  class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LeiZnkUAAAAAA6gqLw6IFIMuchbHXyiRRYyTC1n"></div>
+                    </div>
+                    <div  class="form-group">
+                        <label class="control-label labeltwht ">PLEASE READ THE TERMS THOROUGHLY AND CAREFULLY. BY USING THE PLATFORM, YOU AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU MAY NOT ACCESS OR USE THE PLATFORM</label>
+                        <input type="checkbox" name="termsServiceAgree" id="termsServiceAgree" value="1"><span style="color:white">I agree with the RoofServiceNow</span> <a href="?controller=termsconditions&accion=showinfo" data-toggle="modal" target="_blank"> Terms and Conditions</a>
+                    </div>
+					<center><button class="btn btn-primary" type="button" id="firstNextValidation" name="firstNextValidation" onclick="saveCustomerData('Order')">Register</button></center>
+					<!--<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>-->
+            </div>
+      
     </div>
   </div>
 </div>
@@ -794,10 +772,10 @@
                                                 <center><h4 class="h1white"><b>Please Note:&nbsp; Repair service are schedule a week in advance.</b></h4></center>
                                         </div>
 
-					<div class="col-sm-6 inpwiz1">
+					<div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 inpwiz1">
 						<span class="h1white"><h4><b>Select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
-					<div class="col-sm-6 inpwiz2">
+					<div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 inpwiz2">
 						<span class="h1white"><h4><b>Select the time of service. </b></h4></span>
 						<input type="text" name="step6time" id="step6time" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;"/>
 						<!--<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />-->
