@@ -62,13 +62,14 @@ class read_excel{
         // OUTPUT
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
+        $_file_name = $this->generateRandomString();
         // THIS WILL SAVE TO A FILE ON THE SERVER
-        //$writer->save('test.xlsx');
+        $writer->save($_SESSION['temporal_path'].$_file_name.'.xlsx');
 
         // OR FORCE DOWNLOAD
         
         
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         //header('Content-Type: application/excel');
         header('Content-Disposition: attachment;filename="demo.xlsx"');
         header('Cache-Control: max-age=0');
@@ -76,11 +77,15 @@ class read_excel{
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: cache, must-revalidate');
         header('Pragma: public');
-        $writer->save('php://output');
+        $writer->save('php://output');*/
+        //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        //header('Content-Disposition: attachment; filename="file.xlsx"');
+        //$writer->save("php://output");
+        echo '<a href="'.$_SESSION['tmp_documents_path'].$_file_name.'.xlsx'.'"> download link</a>';
+    }
 
-        
-        
- 
+    public function generateRandomString($length = 10) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
     }
 
 }

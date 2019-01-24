@@ -10,10 +10,10 @@
     }
     //echo  $_SERVER['DOCUMENT_ROOT'];
     
-    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
+    $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow1'.'/vendor/';
 
     //echo $_SESSION['library_path'];
-    $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
+    //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
 
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';
@@ -60,5 +60,16 @@
 
     //define path temporal
     $_SESSION['temporal_path']=$_SESSION['application_path']."/tmp/";
+
+    if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
+        $_dir=$_SERVER['REQUEST_URI'];
+        $pos1 = strpos($_dir,"/");
+        $pos2 = strpos($_dir,"/", $pos1 + 1);
+        //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
+        $_path2="/".substr($_dir,$pos1+1,$pos2-1);
+        $_SESSION['tmp_documents_path']="http://" . $_SERVER['HTTP_HOST'].$_path2."/src/tmp/";
+    }else{
+        $_SESSION['tmp_documents_path']="https://" . $_SERVER['HTTP_HOST']."/tmp/";
+    }
 
 ?>
