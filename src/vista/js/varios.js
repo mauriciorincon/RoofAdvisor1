@@ -5398,6 +5398,28 @@ function refreshCalendarV2(){
     $('#calendar').fullCalendar('refetchEvents')
 }
 
-function refreshCalendarV2Employee(){
-    
+function generateReportFile(){
+    var optionChecked = $('input[id="reportCheckOption"]:checked').val();
+    jsShowWindowLoad('Generating report');
+    $.post( "controlador/ajax/generateXLSReport.php", { "report_type" : optionChecked,"companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myExportInfoWindow #linkDownload').html(data);
+            }else{
+                $('#myExportInfoWindow #linkDownload').html(data);
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    }); 
 }

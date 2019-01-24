@@ -3538,30 +3538,32 @@ if(!empty($_actual_company['postCardValue'])){
 		<div class="modal-content"> 
 			<div class="modal-header"> 
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="myExportInfoWindowheaderText">Employee List</h4> 
+				<h4 class="modal-title" id="myExportInfoWindowheaderText">Export Options</h4> 
 			</div> 
 			<div class="modal-body" id="myExportInfoWindowBody"> 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">Balance</label>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="Balance" id="reportCheckOption">Balance</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">Transfer</label>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="Transfer" id="reportCheckOption">Transfer</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">Transactions</label>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="Transactions"  id="reportCheckOption">Transactions</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">Pay outs</label>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="Pay outs" id="reportCheckOption">Pay outs</label>
+                </div>
+                <div id="linkDownload">
+                    <!--<a href="#" onclick="" class="btn-primary">Download File</a>-->
                 </div>
 			</div> 
 			<div class="modal-footer" id="myModalEmployeeListButtons"> 
-                <button type="button" class="btn-primary" onclick="">Generate File</button> 
-				<button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
-			</div> 
+                <button type="button" class="btn-primary" onclick="generateReportFile()">Generate File</button> 
+                <button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
+                <br>
+                
+            </div> 
+            
 		</div> 
 	</div>
 </div>

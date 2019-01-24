@@ -38,50 +38,89 @@ class read_excel{
 
     public function generateExcel()
     {
-       
-        $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+       try {
+            $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
 
-        
-        // CREATE A NEW SPREADSHEET + SET METADATA
-        //$spreadsheet = new Spreadsheet();
-        $spreadsheet->getProperties()
-        ->setCreator('YOUR NAME')
-        ->setLastModifiedBy('YOUR NAME')
-        ->setTitle('Demo Document')
-        ->setSubject('Demo Document')
-        ->setDescription('Demo Document')
-        ->setKeywords('demo php spreadsheet')
-        ->setCategory('demo php file');
-        
-        // NEW WORKSHEET
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setTitle('Testing');
-        $sheet->setCellValue('A1', 'Hello World !');
-        $sheet->setCellValue('A2', 'Goodbye World !');
+            
+            // CREATE A NEW SPREADSHEET + SET METADATA
+            //$spreadsheet = new Spreadsheet();
+            $spreadsheet->getProperties()
+            ->setCreator('YOUR NAME')
+            ->setLastModifiedBy('YOUR NAME')
+            ->setTitle('Demo Document')
+            ->setSubject('Demo Document')
+            ->setDescription('Demo Document')
+            ->setKeywords('demo php spreadsheet')
+            ->setCategory('demo php file');
+            
+            // NEW WORKSHEET
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setTitle('Testing');
+            $sheet->setCellValue('A1', 'Hello World !');
+            $sheet->setCellValue('A2', 'Goodbye World !');
 
-        // OUTPUT
-        $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+            // OUTPUT
+            $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
-        $_file_name = $this->generateRandomString();
-        // THIS WILL SAVE TO A FILE ON THE SERVER
-        $writer->save($_SESSION['temporal_path'].$_file_name.'.xlsx');
+            $_file_name = $this->generateRandomString();
+            // THIS WILL SAVE TO A FILE ON THE SERVER
+            $writer->save($_SESSION['temporal_path'].$_file_name.'.xlsx');
 
-        // OR FORCE DOWNLOAD
+            // OR FORCE DOWNLOAD
+            
+            
+            /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            //header('Content-Type: application/excel');
+            header('Content-Disposition: attachment;filename="demo.xlsx"');
+            header('Cache-Control: max-age=0');
+            header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+            header('Cache-Control: cache, must-revalidate');
+            header('Pragma: public');
+            $writer->save('php://output');*/
+            //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            //header('Content-Disposition: attachment; filename="file.xlsx"');
+            //$writer->save("php://output");
+            return '<a class="btn-primary" href="'.$_SESSION['tmp_documents_path'].$_file_name.'.xlsx'.'"> download link ['.$_file_name.']</a>';
+       } catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
+            return 'Error loading file: '.$e->getMessage();
+       }
         
+    }
+
+    public function generateExcelData($sheet_name,$data,$colums)
+    {
+       try {
+            $spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+            // CREATE A NEW SPREADSHEET + SET METADATA
+            
+            $spreadsheet->getProperties()
+            ->setCreator('YOUR NAME')
+            ->setLastModifiedBy('YOUR NAME')
+            ->setTitle('Demo Document')
+            ->setSubject('Demo Document')
+            ->setDescription('Demo Document')
+            ->setKeywords('demo php spreadsheet')
+            ->setCategory('demo php file');
+            
+            // NEW WORKSHEET
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setTitle($sheet_name);
+            $sheet->fromArray($data,null,'A1');
+
+            // OUTPUT
+            $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+
+            $_file_name = $this->generateRandomString();
+            // THIS WILL SAVE TO A FILE ON THE SERVER
+            $writer->save($_SESSION['temporal_path'].$_file_name.'.xlsx');
+
+            
+            return '<a class="btn-primary" href="'.$_SESSION['tmp_documents_path'].$_file_name.'.xlsx'.'"> download link ['.$_file_name.']</a>';
+       } catch(\PhpOffice\PhpSpreadsheet\Reader\Exception $e){
+            return 'Error loading file: '.$e->getMessage();
+       }
         
-        /*header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        //header('Content-Type: application/excel');
-        header('Content-Disposition: attachment;filename="demo.xlsx"');
-        header('Cache-Control: max-age=0');
-        header('Expires: Fri, 11 Nov 2011 11:11:11 GMT');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-        header('Cache-Control: cache, must-revalidate');
-        header('Pragma: public');
-        $writer->save('php://output');*/
-        //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        //header('Content-Disposition: attachment; filename="file.xlsx"');
-        //$writer->save("php://output");
-        echo '<a href="'.$_SESSION['tmp_documents_path'].$_file_name.'.xlsx'.'"> download link</a>';
     }
 
     public function generateRandomString($length = 10) {
