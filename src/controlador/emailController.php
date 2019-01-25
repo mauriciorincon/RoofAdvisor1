@@ -106,7 +106,7 @@ class emailController{
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
         $phpmailer->SMTPDebug = 2;
-        $phpmailer->SMTPSecure = 'tls';
+        $phpmailer->SMTPSecure = 'tslgit p';
         $phpmailer->Host = "smtp-relay.gmail.com"; // GMail
         $phpmailer->Port = 587;
         $phpmailer->IsSMTP(); // use SMTP
