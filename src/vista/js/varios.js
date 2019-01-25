@@ -5435,4 +5435,5 @@ function generateReportFile(){
 
 function fire_next_step(){
     $( ".sw-btn-next" ).trigger( "click" );
+    $( ".sw-btn-next" ).trigger( "click" );
 }
