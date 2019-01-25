@@ -220,13 +220,8 @@
 			</div>
         </div>
     </div>
-<<<<<<< HEAD
-    <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
-        <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
-=======
     <button id="mainplaybtn1" class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
->>>>>>> c051c8a6b3076ce355a79e154333636dbb009878
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
             </div>

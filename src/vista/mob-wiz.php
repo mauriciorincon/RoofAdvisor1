@@ -25,7 +25,29 @@
             <a href="#" onclick="fire_next_step()">Hola</a>
         </div>
         <div id="step-2" class="">
-            Step Content 2
+            <div class="list-group" id="step2OtypeService">
+                <a href="#" class="list-group-item " name="linkServiceType" id="linkServiceTypeemergency">
+                    <input type="hidden" value="emergency" name="typeServiceOrder">
+                    <div class="row">
+                        <div class="col-sx-6"><button class=" btn-primary   btn-sx" type="button" style="width:160px">Emergency Repair</button></div>
+                        <div class="col-sx-6"><h>An emergency repair is a same day service. The first available rated service pro will choose your repair order and provide you with an ETA of when they will arrive at the repair location.  You will be able to review their ratings, communicate, send them pictures, and track their location. An estimate for your approval will be provided prior to start of work. </h6></div>
+                    </td>
+                </a>
+                <a href="#" class="list-group-item" name="linkServiceType" id="linkServiceTypeschedule">
+                    <input type="hidden" value="schedule" name="typeServiceOrder">
+                    <div class="row">
+                        <div class="col-sx-6"><button class=" btn-success   btn-sx" type="button" style="width:160px">Schedule Repair</button></div>
+                        <div class="col-sx-6"><h6>A scheduled repair is scheduled a week in advance. You will be able to choose the service pro or allow the first available rated service pro will choose your repair order.</h6></div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item" name="linkServiceType" id="linkServiceTypereroof">
+                    <input type="hidden" value="reroofnew" name="typeServiceOrder">
+                    <div class="row">
+                        <div class="col-sx-6"><button class=" btn-primary   btn-sx" type="button" style="width:160px">Re-roof or new Roof</button></div>
+                        <div class="col-sx-6"><h6>Reroof or new roof estimates are scheduled a week in advance. Choose the qualified, pre-screened service professional from a list or allow the first top rated professional to choose your work order. You can chat and track your order. That easy!</h6></div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div id="step-3" class="">
             Step Content 3
@@ -34,4 +56,4 @@
             Step Content 4
         </div>
     </div>
-</div>
+</div>  
