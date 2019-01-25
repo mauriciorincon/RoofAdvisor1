@@ -96,7 +96,7 @@ class emailController{
         
 
         $email_user = "donotreply@roofservicenow.com";
-        $email_password = "7&aF&gbH";
+        $email_password = "Indy!@#hide@$%^";
         $the_subject = "Phpmailer prueba by Evilnapsis.com";
         $address_to = $toAddress;
         $from_name = "RoofServiceNow";
