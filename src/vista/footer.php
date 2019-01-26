@@ -124,7 +124,7 @@
 			<div class="copyright-area">
 				<div class="container">
 					<div class="copyright-text text-center">
-						<p>Copyright © roofservicenow 2018. All rights reserved. Created by <a href="http://www.roofservicenow.com/">RoofServiceNow</a></p>
+						<p>Copyright © roofservicenow 2019. All rights reserved. Created by <a href="http://www.roofservicenow.com/">RoofServiceNow</a></p>
 						<p><a href='?controller=termsconditions&accion=showinfo'>Legal</a> | <a href='?controller=termsconditions&accion=privacyinfo'>Privacy Policy</a></p>
 					</div>
 				</div>

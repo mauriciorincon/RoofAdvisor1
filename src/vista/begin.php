@@ -45,7 +45,7 @@ This is a same day, on-demand service for hiring pre-screened service profession
 </br>
 <li id="calendarli">Not an emergency roof repair and want to schedule a repair or estimate? <strong style='color:#fa511a'>No problem!</strong> Just answer 5 questions and a pre-screened service professional will confirm your order for an appointment. </li>
 </br>
-<li id="reportli">Need a roof report? RoofServiceNow can provide in a couple of hours a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. <a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" >See sample</a></li>
+<li id="reportli">Need a roof report? RoofServiceNow can provide in a couple of hours a detailed roof report for only $29. We create accurate aerial roof measurements and diagrams you can use to estimate material cost to replace your roof. <a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" >See Sample</a></li>
 </br>
 </ul>
 </br>

@@ -1691,7 +1691,6 @@ color:#fff;
     border-radius: 10px;
 }
 .panel-mv1{
-margin-top:-160px;
 }
 .has-success .control-label{
 color: #3ee441 !important;
@@ -1819,7 +1818,10 @@ margin-left: 5px !important;
 display: inline-block !important;
 padding:3px 6px !important;
 }
-
+#step3OtypeService{
+    width: 700px;
+    margin: auto;
+}
 
 
 
@@ -2269,7 +2271,7 @@ margin-bottom:25px;
 margin-top:20px;
 }
 .mobhead-area{
-      padding-top: 165px;
+      padding-top: 220px;
 }
 .faq-secmob::before{
 top:135px;

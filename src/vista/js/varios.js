@@ -1259,7 +1259,10 @@ $(document).ready(function () {
     $(document).ready(function(){
     if($('#zipCodeBegin').css('display') != 'none'){
          $('#mainplaybtn1').show();
-    }
+        }
+ if($('#mainplaybtn1').css('display') != 'none'){
+         $('#roofreportbox1').show();
+       }
         $('#firstNextBegin').hide();
         $('#zipCodeBegin').keyup(function(e) {
             
@@ -1281,6 +1284,7 @@ $(document).ready(function () {
                                 $('#firstNextBegin').show();
                                 setLocation(map,zipcode);
                                 $('#mainplaybtn1').hide();
+                                $('#roofreportbox1').hide();
                                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
                                 nextStepWizard.removeAttr('disabled').trigger('click');
                             }else{
