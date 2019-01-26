@@ -41,12 +41,12 @@
     $_result = $_objUser->updateUserContractor($userId,$properties,$profile);
     print_r($_result);*/
 
-    //$_objMail=new emailController();
-    //$_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
-    //echo $_result;
+    $_objMail=new emailController();
+    $_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
+    echo $_result;
 
-    $_objExcel=new read_excel();
-    $_objExcel->generateExcel();
+    //$_objExcel=new read_excel();
+    //$_objExcel->generateExcel();
     return;
     /*
     //create account
