@@ -22,7 +22,7 @@
 					</p>
 				</div>
 				<div class="row">
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+					<div class="col-lg-3 col-md-3 col-sm-4 custom-width mb-20">
 						<a href="index.php">
 						<div class="single-service text-center">
 							<div class="service-icon">
@@ -35,7 +35,7 @@
 						</div>
 						</a>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+					<div class="col-lg-3 col-md-3 col-sm-4 custom-width mb-20">
 						<a href="index.php">
 						<div class="single-service text-center ">
 							<div class="service-icon">
@@ -48,17 +48,28 @@
 						</div>
 						</a>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-6 custom-width mb-20">
+					<div class="col-lg-3 col-md-3 col-sm-4 custom-width mb-20">
 						<a href="index.php?step=2"  >
 						<div class="single-service text-center ">
 							<div class="service-icon">
 								<i class="fa fa-ticket"></i>
 							</div>
-							<h3>Order roof Report</h3>
+							<h3>Roof Report</h3>
 							<p>RoofServiceNow provides a detailed roof report for only $29. Get an accurate aerial roof measurements and diagrams you can send to insurance adjusters.</p>
 						</div>
 						</a>
 					</div>
+                                        <div class="col-lg-3 col-md-3 col-sm-4 custom-width mb-20">
+                                                <a href="index.php?step=2"  >
+                                                <div class="single-service text-center ">
+                                                        <div class="service-icon">
+                                                                <i class="fa fa-ticket"></i>
+                                                        </div>
+                                                        <h3>Roof Estimate</h3>
+                                                        <p style="    font-size: 11px;">Reroof or new roof estimates are scheduled a week in advance. Choose the qualified, pre-screened service professional from a list or allow the first top rated professional to choose your job order. That easy!</p>
+                                                </div>
+                                                </a>
+                                        </div>
 					
 				</div>
 			</div>

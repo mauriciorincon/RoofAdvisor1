@@ -196,31 +196,33 @@
                 
             </div>
 
-			<div class="panel-body" align="left">
-				<div class="list-group" id="step3OtypeService">
-					<a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
-						<input type="hidden" value="roofreport" name="typeServiceOrder">
-						<table>
-							<tr>
-								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
-								</td>
-								<td style="padding: 12px 12px 12px 12px;">
-								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
-								</td>
-							</tr>
-						</table>
-						<div class="d-flex w-100 justify-content-between">
-						
-						<span></span>
-							
-						</div>
-					</a>
-				</div>
-			</div>
         </div>
     </div>
     <button id="mainplaybtn1" class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+     <div id="roofreportbox1" class="panel-body" align="left">
+                                <div class="list-group" id="step3OtypeService">
+ <div class="panel-heading wizhead" style="color: #fff;"><strong>If you need to order a roof report. Click Below!</strong></div>
+                                        <a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
+                                                <input type="hidden" value="roofreport" name="typeServiceOrder">
+                                                <table>
+                                                        <tr>
+                                                                <td style="padding: 12px 12px 12px 12px;">
+                                                                        <button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
+                                                                </td>
+                                                                <td style="padding: 12px 12px 12px 12px;">
+                                                                <h4 style="font-size:.8vw;text-align:justify;">Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.<a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" > See Sample below </a> </h4>
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                                <div class="d-flex w-100 justify-content-between">
+
+                                                <span></span>
+
+                                                </div>
+                                        </a>
+                                </div>
+                        </div>
+
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
