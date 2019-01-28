@@ -20,6 +20,11 @@ foreach ($_array_orders as $key => $order) {
     $_request_type = isset($order['RequestType']) ? getRequestType($order['RequestType']) : '';
     $_status = isset($order['Status']) ? getStatus($order['Status']) : '';
    
+    $_actions='<a class="btn-info btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Invoice Info"  '.
+    'href="" '.
+    'onClick="getInvoices(\''.$order['FBID'].'\',\'customer\')"> '.
+    '<span class="glyphicon glyphicon-list-alt"></span>'.
+    '</a>';
     $_string.="<tr>".
         "<td>".$_order_id."</td>".
         "<td>".$_company_id."</td>".
@@ -28,6 +33,7 @@ foreach ($_array_orders as $key => $order) {
         "<td>".$_created_date."</td>".
         "<td>".$_request_type."</td>".
         "<td>".$_status."</td>".
+        "<td>".$_actions."</td>".
     "</tr>";
 }
 echo $_string;

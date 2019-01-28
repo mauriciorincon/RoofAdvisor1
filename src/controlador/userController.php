@@ -566,7 +566,7 @@ class userController{
 
             
 
-            //print_r($_array_customer_to_show);
+            
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');
 
@@ -604,6 +604,7 @@ class userController{
             $_actual_company=$this->_userModel->getCompany($_userMail);
             //print_r($_actual_company);
             $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
+            $_array_customer_to_show=$this->_userModel->getListData('Customers','CompanyID',$_actual_company['CompanyID']);
             
             if(isset($_actual_company['stripeAccount'])){
                 $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);

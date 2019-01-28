@@ -113,7 +113,7 @@
 					</div>
           </div>
           <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Date Registration</label>
+					<label for="title" class="col-sm-2 control-label">Order Created</label>
 					<div class="col-sm-10">
 					  <input type="text" name="title" class="form-control" id="datetimeReg" placeholder="Titulo" readonly>
 					</div>

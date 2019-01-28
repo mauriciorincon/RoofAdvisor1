@@ -922,98 +922,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0" style="background-color: gainsboro;">
-                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
-                                    </button>
-                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info to Receive Payments</button>           
-                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
-                                </h2>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">
-                                            <div class="form-group">
-                                                <label class="control-label">Type</label>
-                                                <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" onchange="validate_fields_stripe_account()" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
-                                                    <option value="company">Company</option>
-                                                    <option value="individual">Individual</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_business_name">Business Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php if(isset($_array_stripe_info->legal_entity->business_name)){ echo $_array_stripe_info->legal_entity->business_name;}  ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_business_tax_id">Business tax id</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php if(isset($_array_stripe_info->legal_entity->business_tax_id_provided)){echo $_array_stripe_info->legal_entity->business_tax_id_provided;} ?>" />
-                                            </div> 
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_State">State</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php if(isset($_array_stripe_info->legal_entity->address->state)){echo $_array_stripe_info->legal_entity->address->state;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_City">City</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php if(isset($_array_stripe_info->legal_entity->address->city)){echo $_array_stripe_info->legal_entity->address->city;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_Zipcode">Zipcode</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php if(isset($_array_stripe_info->legal_entity->address->postal_code)){echo $_array_stripe_info->legal_entity->address->postal_code;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_Address">Address</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php if(isset($_array_stripe_info->legal_entity->address->line1)){echo $_array_stripe_info->legal_entity->address->line1;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_first_name">First Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php if(isset($_array_stripe_info->legal_entity->first_name)){echo $_array_stripe_info->legal_entity->first_name;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_last_name">Last Name</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php if(isset($_array_stripe_info->legal_entity->last_name)){echo $_array_stripe_info->legal_entity->last_name;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
-                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year;}?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php if(isset($_array_stripe_info->legal_entity->ssn_last_4_provided)){echo $_array_stripe_info->legal_entity->ssn_last_4_provided;} ?>" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
-                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                            
-                                                <a class="btn-primary btn-sm" data-toggle="modal"  
-                                                    href="#myDocumentIDFront" 
-                                                    onClick=""> 
-                                                    <span class="glyphicon glyphicon-upload"></span>
-                                                    Upload Documento ID Front
-                                                </a>
-                                                <a class="btn-primary btn-sm" data-toggle="modal"  
-                                                    href="#myDocumentIDBack" 
-                                                    onClick=""> 
-                                                    <span class="glyphicon glyphicon-upload"></span>
-                                                    Upload Documento ID Back
-                                                </a>
-                                            </div>
-                                            
-                                            
-                                            <br>
-                                            <div>
-                                                <h3>Payment processing services Terms</h3>
-                                                <label>
-                                                Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
-                                                </label>
-                                            </div>
-                                            
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="card">
                             <div class="card-header" id="headingThree">
@@ -1127,6 +1036,99 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             </div>
                         </div>
 
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
+                                    </button>
+                                    <button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info to Receive Payments</button>           
+                                    <button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Type</label>
+                                                <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" onchange="validate_fields_stripe_account()" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
+                                                    <option value="company">Company</option>
+                                                    <option value="individual">Individual</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_name">Business Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php if(isset($_array_stripe_info->legal_entity->business_name)){ echo $_array_stripe_info->legal_entity->business_name;}  ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_tax_id">Business tax id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php if(isset($_array_stripe_info->legal_entity->business_tax_id_provided)){echo $_array_stripe_info->legal_entity->business_tax_id_provided;} ?>" />
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_State">State</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php if(isset($_array_stripe_info->legal_entity->address->state)){echo $_array_stripe_info->legal_entity->address->state;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_City">City</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php if(isset($_array_stripe_info->legal_entity->address->city)){echo $_array_stripe_info->legal_entity->address->city;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Zipcode">Zipcode</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php if(isset($_array_stripe_info->legal_entity->address->postal_code)){echo $_array_stripe_info->legal_entity->address->postal_code;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Address">Address</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php if(isset($_array_stripe_info->legal_entity->address->line1)){echo $_array_stripe_info->legal_entity->address->line1;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_first_name">First Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php if(isset($_array_stripe_info->legal_entity->first_name)){echo $_array_stripe_info->legal_entity->first_name;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last_name">Last Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php if(isset($_array_stripe_info->legal_entity->last_name)){echo $_array_stripe_info->legal_entity->last_name;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
+                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year;}?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php if(isset($_array_stripe_info->legal_entity->ssn_last_4_provided)){echo $_array_stripe_info->legal_entity->ssn_last_4_provided;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                            
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDFront" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Front
+                                                </a>
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDBack" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Back
+                                                </a>
+                                            </div>
+                                            
+                                            
+                                            <br>
+                                            <div>
+                                                <h3>Payment processing services Terms</h3>
+                                                <label>
+                                                Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
+                                                </label>
+                                            </div>
+                                            
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="card">
                             <div class="card-header" id="headingFour">
                                 <h2 class="mb-0" style="background-color: gainsboro;">
@@ -1780,11 +1782,17 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 					</div>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">Date Registration</label>
+                    <label for="title" class="col-sm-2 control-label">Order Created</label>
                     <div class="col-sm-10">
                         <input type="text" name="title" class="form-control" id="datetimeReg" placeholder="Titulo" readonly>
                     </div>
                 </div>
+                <div class="form-group">
+				<label for="title" class="col-sm-2 control-label">Scheduled Date</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="datetimeSchedule" placeholder="Titulo" readonly>
+                    </div>
+			    </div>
                 <div class="form-group">
                     <label for="title" class="col-sm-2 control-label">Company</label>
                     <div class="col-sm-10">
@@ -1846,11 +1854,23 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                         click: function() {
                             $('#myModalEmployeeList').modal('show');
                         }
-                    }
+                    },
+                    myCustomButtonNCus:{
+                        text: 'Create Client',
+                        click: function() {
+                            $('#myRegisterNewCustomerCompany').modal('show');
+                        }
+                    },
+                    myCustomButtonNOrder:{
+                        text: 'Create Order',
+                        click: function() {
+                            $('#myModalCustomerList').modal('show');
+                        }
+                    },
                 },
                 locale: 'en',
                 header: {
-                    left: 'prev,next today myCustomButton myCustomButtonF',
+                    left: 'prev,next today myCustomButton myCustomButtonF myCustomButtonNCus myCustomButtonNOrder',
                     center: 'title',
                     right: 'month,basicWeek,basicDay',
 
@@ -1874,6 +1894,8 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                         $('#ModalEdit #companyID').val(event.company);
                         $('#ModalEdit #customerID').val(event.customer);
                         $('#ModalEdit #datetimeReg').val(event.date_register);
+                        $('#ModalEdit #datetimeSchedule').val(event.date_schedule);
+                        
                         $('#ModalEdit #totalValue').val(event.total_value);
                         
                         getCustomerName(event.customer).then(function(customerName) {  
@@ -1937,6 +1959,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         customer: data.CustomerFBID,
                                         status: status,
                                         date_register: data.DateTime,
+                                        date_schedule: data.SchDate,
                                         total_value: valueMatA+valueTimeA,
                                     });
                     
@@ -2114,6 +2137,41 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 </div><!-- /cierro modal -->
 
 
+<div class="modal fade" id="myListOrderByCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyListOrderByCustomer">Job Orders</h4> 
+			</div> 
+			<div class="modal-body" id="textmyListOrderByCustomerr"> 
+                <div class="table-responsive">          
+                    <table class="table" id="table_list_orders_by_company">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Company ID</th>
+                            <th>Contractor ID</th>
+                            <th>Created By</th>
+                            <th>Create Date</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+			</div> 
+			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
 
 
 
@@ -3455,40 +3513,6 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
-<div class="modal fade" id="myListOrderByCustomer" role="dialog">
-	<div class="modal-dialog modal-dialog-centered modal-lg"> 
-		<!-- Modal content--> 
-		<div class="modal-content"> 
-			<div class="modal-header"> 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" id="headermyListOrderByCustomer">Create Order</h4> 
-			</div> 
-			<div class="modal-body" id="textmyListOrderByCustomerr"> 
-                <div class="table-responsive">          
-                    <table class="table" id="table_list_orders_by_company">
-                        <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Company ID</th>
-                            <th>Contractor ID</th>
-                            <th>Created By</th>
-                            <th>Create Date</th>
-                            <th>Request Type</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-			</div> 
-			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-			</div> 
-		</div> 
-	</div>
-</div>
 
 <div class="modal fade" id="myMensaje" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -3526,6 +3550,31 @@ if(!empty($_actual_company['postCardValue'])){
 			</div> 
 			<div class="modal-footer" id="myModalEmployeeListButtons"> 
                 <button type="button" class="btn-primary" onclick="refreshCalendarV2();$('#myModalEmployeeList').modal('hide');">Filter</button> 
+				<button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalCustomerList" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Customer List</h4> 
+			</div> 
+			<div class="modal-body" id="myModalCustomerListBody"> 
+				<select id="myModalCustomerListSelect" name="myModalCustomerListSelect" class="form-control" required>
+                    <option value="">All</option>
+                    <?php foreach ($_array_customer_to_show as $key => $customer) {?>
+                        <option value="<?php echo $customer['CustomerID']?>"><?php echo $customer['Fname']." ".$customer['Lname']?></option>
+                        
+                    <?php } ?>
+                </select> 
+			</div> 
+			<div class="modal-footer" id="myModalCustomerListButtons"> 
+                <button type="button" class="btn-primary" onclick="newOrderByCompany();$('#myModalCustomerList').modal('hide');">Select</button> 
 				<button type="button" class="btn-danger" data-dismiss="modal">Close</button> 
 			</div> 
 		</div> 

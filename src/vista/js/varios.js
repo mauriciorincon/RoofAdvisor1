@@ -3944,6 +3944,9 @@ function disableEnableCustomer(customerID,action){
 }
 
 function newOrderByCompany(CustomerID,Address){
+    if(CustomerID=="" || CustomerID==undefined || CustomerID==null){
+        CustomerID=$('#myModalCustomerListSelect').val();
+    }
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
     nextStepWizard.removeAttr('disabled').trigger('click');
     $('#typeServiceCompany').val('');
