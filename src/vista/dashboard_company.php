@@ -1089,7 +1089,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
-                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year;}?>" />
+                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day."/".$_array_stripe_info->legal_entity->dob->year;}?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>

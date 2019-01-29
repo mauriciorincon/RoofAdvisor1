@@ -21,13 +21,20 @@ if(isset($_POST['action_type'])){
         $_createdBy=$_POST['createdBy'];
         $_companyID=$_POST['createdBy'];
         $_user=$_userController->getCustomerById($_POST['createdTo']);
+        $_createdTo=$_POST['createdTo'];
         $_customerMail=$_user['Email'];
     }else{
-        $_createdBy="CO000000";    
+        $_createdBy="CO000000";
+        if(strcmp($_POST['action_type'],"pay_company_roofreport")==0){
+            $_user=$_userController->getCustomerById($_POST['createdTo']);
+            $_customerMail=$_user['Email'];
+            $_createdTo=$_POST['createdTo'];
+        }
     }
 }else{
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
         $_customerMail=$_SESSION['email'];
+        $_createdTo="0";
     }else{
         $email=$_POST['email'];
         $password=$_POST['password'];
@@ -87,7 +94,7 @@ $_array=array(
 );
 
 $_orderController=new orderController();
-$_id_order=$_orderController->insertOrder($_array,$_customerMail,$_POST['action_type']);
+$_id_order=$_orderController->insertOrder($_array,$_customerMail,$_POST['action_type'],$_createdTo);
 if (is_null($_id_order)){
     echo "Error, an error ocurred traing to save Order, try again";
 }else{

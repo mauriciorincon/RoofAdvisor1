@@ -46,19 +46,24 @@ class orderController{
         return $_orders;
     }
 
-    public function insertOrder($arrayDataOrder,$emailCustomer="",$action_type){
+    public function insertOrder($arrayDataOrder,$emailCustomer="",$action_type,$createdTo="0"){
         $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
+        
         if(strcmp($arrayDataOrder['RequestType'],"P")!=0){
             if(empty($emailCustomer)){
                 $_customer=$this->_userController->getCustomer($_SESSION['email']);
                 $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
             }else{
-                $_customer=$this->_userController->getCustomer($emailCustomer);
-                $_customerK=$this->_userController->getCustomerK($emailCustomer);
+                if(strcmp($createdTo,"0")==0){
+                    $_customer=$this->_userController->getCustomer($emailCustomer);
+                    $_customerK=$this->_userController->getCustomerK($emailCustomer);
+                }else{
+                    $_customer=$this->_userController->getCustomerById($createdTo);
+                    $_customerK=$this->_userController->getCustomerKById($createdTo);
+                }
             }
-            
         }else{
             $_customer=array(
                 "CustomerID"=>"",

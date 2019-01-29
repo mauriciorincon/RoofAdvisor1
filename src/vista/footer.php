@@ -186,9 +186,9 @@
     ?>
 </div>    
 <script language="javascript" type="text/javascript">
-    $(window).on('load', function(){ 
-     $('#loading5').fadeOut(500);
-  });
+	$(window).on('load', function(){ 
+     	$('#loading5').fadeOut(500);
+  	});
 </script>
 <script>
 
@@ -262,7 +262,7 @@ $(document).ready(function(){
 		
 	 });
 
-
+	 
 
 
 if (window.location.href.indexOf("controller=aboutus") > -1) {
@@ -318,6 +318,7 @@ $("#mobnavtxt ul li a").click(function() {
 	 alert("Theme changed. New theme name: " + theme);
       });
 
+	  $('html,body').scrollTop(0);
 });
 
 </script>

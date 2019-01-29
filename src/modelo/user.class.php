@@ -181,6 +181,11 @@ class userModel extends connection{
         return $result;
     }
 
+    public function getCustomerKeyById($customerID){
+        $result=$this->getQueryEqualKey('Customers','CustomerID',$customerID);
+        return $result;
+    }
+
     public function getListCompany($table,$field,$searchValue){
         if(empty($field)){
             $result=$this->getDataTable($table);    

@@ -13,6 +13,7 @@ $(document).ready(function() {
         }
       }
     );*/
+
 $('.aboutinfo1').slick({
             dots: true,
   infinite: true,
@@ -44,6 +45,7 @@ $('.aboutinfo1').slick({
         ]
       }
 
+      
     );
 
    
@@ -158,7 +160,7 @@ $('.aboutinfo1').slick({
         
         validate_fields_stripe_account();
     
-    
+        
 } );
 
 
@@ -2497,6 +2499,19 @@ function getDataCompany(companyID){
                 $("input#compamnyPolNum").val(data.InsLiabilityPolNum);
                 $("input#compamnyStatusRating").val(data.Status_Rating);
                 
+                $("select#compamnylegal_entity_type").val(data.compamnylegal_entity_type);
+                $("input#compamnylegal_entity_business_name").val(data.compamnylegal_entity_business_name);
+                $("input#compamnylegal_entity_business_tax_id").val(data.compamnylegal_entity_business_tax_id);
+                $("input#compamnylegal_entity_State").val(data.compamnylegal_entity_State);
+                $("input#compamnylegal_entity_City").val(data.compamnylegal_entity_City);
+                $("input#compamnylegal_entity_Zipcode").val(data.compamnylegal_entity_Zipcode);
+                $("input#compamnylegal_entity_Address").val(data.compamnylegal_entity_Address);
+                $("input#compamnylegal_entity_first_name").val(data.compamnylegal_entity_first_name);
+                $("input#compamnylegal_entity_last_name").val(data.compamnylegal_entity_last_name);
+                $("input#compamnylegal_entity_dob").val(data.compamnylegal_entity_dob);
+                $("input#compamnylegal_entity_last4").val(data.compamnylegal_entity_last4);
+                $("input#compamnylegal_entity_personal_id").val(data.compamnylegal_entity_personal_id);
+                $("#tableCompanyBalance tbody").html(data.table_balance);
                 
             }else{
                 $('#myMensaje div.modal-body').html(data);
@@ -3963,6 +3978,7 @@ function newOrderByCompany(CustomerID,Address){
     $('#activeCustomerIDhidden').val(CustomerID);
     $('#activeCustomerAddress').val(Address);
     $('#pac-input').val(Address);
+    $('#roofreportbox1').hide();
 
 }
 
@@ -4399,6 +4415,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
 
+    createdTo=$('#activeCustomerIDhidden').val();
+
     var selectionType=$("#customerTypeRequest").find(":selected").val()
 
     if(RequestType=='emergency'){
@@ -4424,7 +4442,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
                                                 "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,
-                                                "RepCity":city,"RepState":state}, null, "text" )
+                                                "RepCity":city,"RepState":state,"createdTo":createdTo}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
