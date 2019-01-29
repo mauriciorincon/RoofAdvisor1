@@ -2473,6 +2473,10 @@ function getDataCompany(companyID){
                 $("input#companyAddress3").val(data.CompanyAdd3);
                 $("input#companyPhoneNumber").val(data.CompanyPhone);
                 $("input#companyType").val(data.CompanyType);
+                $("input#companyExpirationDate").val(data.LicExpiration);
+                $("input#companyVerified").val(data.Verified);
+                $("input#InBusinessSince").val(data.companyBusinessSince);
+                
 
                 $("input#compamnyPayAddress1").val(data.PayInfoBillingAddress1);
                 $("input#compamnyPayAddress2").val(data.PayInfoBillingAddress2);

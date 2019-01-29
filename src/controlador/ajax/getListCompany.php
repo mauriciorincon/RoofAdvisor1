@@ -40,7 +40,7 @@ $_string="";
 					"<td>".$_status."</td>".
                     '<td>
                     <a class="btn-info btn-sm" data-toggle="modal"   data-toggle1="tooltip"  title="Detail Company"
-                                            href="#myModalProfile" 
+                                            href="#myModalCompanyProfile" 
                                             onClick="getDataCompany('."'".$company['CompanyID']."'".')"> 
                                             <span class="glyphicon glyphicon-pencil"></span></a>';
                     if(strcmp($company['CompanyStatus'],"Active")==0){
