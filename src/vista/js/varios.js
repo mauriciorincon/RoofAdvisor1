@@ -2512,6 +2512,11 @@ function getDataCompany(companyID){
                 $("input#compamnylegal_entity_last4").val(data.compamnylegal_entity_last4);
                 $("input#compamnylegal_entity_personal_id").val(data.compamnylegal_entity_personal_id);
                 $("#tableCompanyBalance tbody").html(data.table_balance);
+                $("#tableCompanyTransactions tbody").html(data.table_transaction);
+                $("#tableCompanyTransfer tbody").html(data.table_transfer);
+                $("#tableCompanyPayouts tbody").html(data.table_payout);
+                $("#listBankCompany tbody").html(data.table_bank);
+                
                 
             }else{
                 $('#myMensaje div.modal-body').html(data);
