@@ -154,7 +154,7 @@ class emailController{
         $phpmailer->Username = $email_user;
         $phpmailer->Password = $email_password; 
         //-----------------------------------------------------------------------
-        $phpmailer->SMTPDebug = 2;
+        $phpmailer->SMTPDebug = 0;
         $phpmailer->SMTPSecure = 'tls';
         $phpmailer->Host = 'smtp.gmail.com';
         $phpmailer->Port = 587;
