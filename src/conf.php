@@ -14,7 +14,6 @@
 
     //echo $_SESSION['library_path'];
     $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
-
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';
     $_SESSION['library_path_autoload']=str_replace("//", "/", $_SESSION['library_path_autoload']);

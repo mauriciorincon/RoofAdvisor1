@@ -941,6 +941,11 @@ class userController{
         return $this->_userModel->getCustomerKey($user);  
     }
 
+    public function getCustomerKById($customerID){
+        $this->_userModel=new userModel();
+        return $this->_userModel->getCustomerKeyById($customerID);  
+    }
+
     public function getCustomerById($customerId){
         $this->_userModel=new userModel();
         return $this->_userModel->getCustomerById($customerId);
