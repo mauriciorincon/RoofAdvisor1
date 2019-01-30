@@ -31,7 +31,7 @@ if(isset($_result['stripeAccount'])){
     $_result['table_transaction']=getTransaction($_result['stripeAccount'],$_contractorController,$_stripe_secret_key);
     $_result['table_transfer']=getTransfer($_result['stripeAccount'],$_contractorController);    
     $_result['table_payout']=getPayout($_result['stripeAccount'],$_contractorController,$_stripe_secret_key);
-    $_result['table_bank']=getBank($_array_stripe_info);
+    $_result['table_bank']=getBank($_array_stripe_info,$_result['stripeAccount']);
 }
 //print_r($_result);
 if(is_array($_result)){
@@ -168,7 +168,7 @@ function getPayout($_stripeAccount,$_contractorController,$_stripe_secret_key){
     return $_string_table;
 }
 
-function getBank($_array_stripe_info){
+function getBank($_array_stripe_info,$_stripeAccount){
     $_array_stripe_bank=$_array_stripe_info->external_accounts->data;
     $_string_table="";
     $n=1;
@@ -184,11 +184,11 @@ function getBank($_array_stripe_info){
                     '<td>
                         <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
                         'href="#" '.
-                        'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                        'onClick="actionWithBank(\'setdefault\',\''.$_stripeAccount.'\',\''.$bank->id.'\')" > '.
                         '<span class="glyphicon glyphicon-star"></span></a>
                         <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
                         'href="#" '.
-                        'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                        'onClick="actionWithBank(\'delete\',\''.$_stripeAccount.'\',\''.$bank->id.'\',this)" > '.
                         '<span class="glyphicon glyphicon-trash"></span></a>
                     </td>'.
                 "</tr>";
