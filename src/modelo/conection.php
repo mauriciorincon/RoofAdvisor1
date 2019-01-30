@@ -317,30 +317,22 @@ class connection{
             if(strcmp($_profile,"customer")==0){
                 $auth = $this->_factory_firebase->getAuth();
             }else if(strcmp($_profile,"company")==0){
-                //echo "<br>entro a company";
+                
                 if(is_null($this->_factory_firebase_company)){
                     $this->companyConnection();
                 }
-                //echo "<br>creo objeto company";
+                
                 $auth = $this->_factory_firebase_company->getAuth();
-                //echo "<br>creo objeto autenticacion";
-                //$users = $auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
-                //foreach ($users as $user) {
-                //   print_r($user);
-                //}
+                
             }else if(strcmp($_profile,"driver")==0){
                 if(is_null($this->_factory_firebase_driver)){
                     $this->driverConnection();
                 }
                 $auth = $this->_factory_firebase_driver->getAuth();
             }
-            //print_r($auth);
-            //echo "<br>voy a validar usuario";
+            
             $user = $auth->verifyPassword($_user, $password);
-            //echo "<br>valido el usuario";
-
-            //print_r($user);
-            //echo "llego aca 2";
+            
             return $user;
         } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
             

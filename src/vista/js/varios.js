@@ -1139,6 +1139,7 @@ $(document).ready(function () {
         var customerPhoneNumber = $("input#customerPhoneNumber").val();
         var password=$('input:password#inputPassword').val();
         var Repassword=$('input:password#inputPasswordConfirm').val();
+        var termsServiceAgree=$("#termsServiceAgree").is(':checked');
 
         customerAddress = "";
         customerState = "";
@@ -1174,6 +1175,9 @@ $(document).ready(function () {
             }
             if(validateFormatMail(emailValidation)==false){
                 flagMensaje+="Please verify the email field.\n";
+            }
+            if(termsServiceAgree!=1){
+                flagMensaje+="Please you have to accept the terms to register.\n";
             }
             /*if(customerAddress.length==0){
                 flagMensaje+="Please fill the customer address.\n";
@@ -1253,6 +1257,12 @@ $(document).ready(function () {
     }
 
     $(document).ready(function(){
+    if($('#zipCodeBegin').css('display') != 'none'){
+         $('#mainplaybtn1').show();
+        }
+ if($('#mainplaybtn1').css('display') != 'none'){
+         $('#roofreportbox1').show();
+       }
         $('#firstNextBegin').hide();
         $('#zipCodeBegin').keyup(function(e) {
             
@@ -1273,7 +1283,8 @@ $(document).ready(function () {
                             if (data.indexOf("Sorry")==-1){
                                 $('#firstNextBegin').show();
                                 setLocation(map,zipcode);
-
+                                $('#mainplaybtn1').hide();
+                                $('#roofreportbox1').hide();
                                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
                                 nextStepWizard.removeAttr('disabled').trigger('click');
                             }else{
@@ -1355,7 +1366,7 @@ $('#step3OtypeService').on('click', 'a', function(){
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService(type);
     showHideElementByService(type);
-    action_type="pay_emergency_service";
+    action_type="pay_customer_roofreport";
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
@@ -1384,7 +1395,7 @@ function setServiceType(){
 }
 
 function getValueService(RequestType){
-    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+    
     var fieldValue="";
     order_fbid="";
     switch(RequestType){
@@ -1400,7 +1411,7 @@ function getValueService(RequestType){
             break;
         case 'roofreport':
             order_type_request_val='R';
-            action_type='pay_postcard_service';
+            action_type='pay_company_roofreport';
             break;
         case 'generic':
             order_type_request_val='G';
@@ -1449,7 +1460,7 @@ function getValueService(RequestType){
 }
 
 function showHideElementByService(RequestType){
-    //var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    
     switch(RequestType){
         case "roofreport":
             $('#step8CompanyName').parents('div').eq(1).hide()
@@ -1538,6 +1549,9 @@ $(document).ready(function () {
             }else{
                 //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
                 var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                if(RequestType==undefined || RequestType==''){
+                    RequestType=$('select#typeServiceCompany').val();
+                }
                 if(RequestType=='emergency' || RequestType=='roofreport'){
                     nextStepWizard = $('div.setup-panelOrder div a[href="#step-5"]').parent().next().children("a");
                     var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
@@ -1701,6 +1715,9 @@ $(document).ready(function () {
 
         if (curStepBtn=="step-6"){
             var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+            if(RequestType==undefined || RequestType==''){
+                RequestType=$('select#typeServiceCompany').val();
+            }
             var customerID=$('#activeCustomerIDhidden').val();
             if(RequestType=='emergency' || RequestType=='roofreport'){
                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-4"]').parent().prev().children("a");
@@ -1900,9 +1917,11 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
             createdTo="";
         }
     }
-    var RepZIP=$('#zipCodeBegin').val();
+    var RepZIP=$('input:hidden[name=step5ZipCode]').val();
     var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
-    
+    if(RequestType==undefined || RequestType==''){
+        RequestType=$('select#typeServiceCompany').val();
+    }
     //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
     var Rtype=$('input[name=estep3Option]:checked').attr('data-value');
     var Hlevels=$('input[name=estep5Option]:checked').attr('data-value');
@@ -1921,7 +1940,10 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
     
+                                        
     if(RequestType==undefined || RequestType==''){
         RequestType=$('select#typeServiceCompany').val();
     }
@@ -1948,7 +1970,8 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,"createdBy":createdBy,"createdTo":createdTo}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,"createdBy":createdBy,"createdTo":createdTo,
+                                                "RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -2004,7 +2027,7 @@ function validateIsLoggedIn(){
 
                     if(data.profile=='customer'){
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
-                        //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
+                        
                         if(RequestType=='emergency' || RequestType=='roofreport'){
                             $('#userLoguedIn').val(true);
                             nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
@@ -2040,11 +2063,15 @@ function validateIsLoggedIn(){
                         }
                         jsRemoveWindowLoad('');
                     }else if(data.profile=='company'){
-                        //jsRemoveWindowLoad('');
+                        
                         var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        if(RequestType==undefined || RequestType==''){
+                            RequestType=$('select#typeServiceCompany').val();
+                        }
                         if(RequestType=='roofreport'){
                             nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                             nextStepWizard.removeAttr('disabled').trigger('click');
+                            jsRemoveWindowLoad('');
                         }else{
                             insertOrderCustomer("","","create_by_company");
                         }
@@ -2446,6 +2473,10 @@ function getDataCompany(companyID){
                 $("input#companyAddress3").val(data.CompanyAdd3);
                 $("input#companyPhoneNumber").val(data.CompanyPhone);
                 $("input#companyType").val(data.CompanyType);
+                $("input#companyExpirationDate").val(data.LicExpiration);
+                $("input#companyVerified").val(data.Verified);
+                $("input#InBusinessSince").val(data.companyBusinessSince);
+                
 
                 $("input#compamnyPayAddress1").val(data.PayInfoBillingAddress1);
                 $("input#compamnyPayAddress2").val(data.PayInfoBillingAddress2);
@@ -3921,8 +3952,13 @@ function disableEnableCustomer(customerID,action){
 }
 
 function newOrderByCompany(CustomerID,Address){
+    if(CustomerID=="" || CustomerID==undefined || CustomerID==null){
+        CustomerID=$('#myModalCustomerListSelect').val();
+    }
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
     nextStepWizard.removeAttr('disabled').trigger('click');
+    $('#typeServiceCompany').val('');
+    $("#typeServiceCompany option[text='---------------']").attr("selected","selected");
     $(document).ready(function(){$("#myOrderByCustomer").modal("show"); });
     $('#activeCustomerIDhidden').val(CustomerID);
     $('#activeCustomerAddress').val(Address);
@@ -3959,7 +3995,15 @@ function filterCompany(nameType,nameStatus,tableName){
     var table = $('#'+tableName).DataTable();
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            return listTypeServiceName.indexOf(data[5])>-1 || listTypeStatusName.indexOf(data[6])>-1 ? true : false;
+            pos=data[5].indexOf(";");
+            if (pos>=0){
+                compService = data[5].substring(pos+1);
+            }
+            pos1=data[6].indexOf(";");
+            if (pos1>=0){
+                compStatus = data[6].substring(pos1+1);
+            }
+            return listTypeServiceName.indexOf(compService)>-1 || listTypeStatusName.indexOf(compStatus)>-1 ? true : false;
         }     
     );
     table.draw();
@@ -3995,7 +4039,15 @@ function filterCustomer(nameType,nameStatus,tableName){
     var table = $('#'+tableName).DataTable();
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
-            return listTypeServiceName.indexOf(data[1])>-1 || listTypeStatusName.indexOf(data[4])>-1 ? true : false;
+            pos=data[1].indexOf(";");
+            if (pos>=0){
+                compService = data[1].substring(pos+1);
+            }
+            pos1=data[4].indexOf(";");
+            if (pos1>=0){
+                compStatus = data[4].substring(pos1+1);
+            }
+            return listTypeServiceName.indexOf(compService)>-1 || listTypeStatusName.indexOf(compStatus)>-1 ? true : false;
         }     
     );
     table.draw();
@@ -4340,6 +4392,10 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
 
@@ -4367,7 +4423,8 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type}, null, "text" )
+                                                "Authorized":Authorized,"amount_value":amountValue,"action_type":action_type,
+                                                "RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -4375,10 +4432,15 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
             
 
             if(n==-1){
-                    var dataSplit=data.split(",");
-                    var orderIDSplit=dataSplit[2].split("/");
-                    var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
-                    if (selectionType=="newCustomer"){
+                var dataSplit="";
+                var orderIDSplit="";
+                var orderIDSplit1="";
+                if(data.length>0){
+                     dataSplit=data.split(",");
+                     orderIDSplit=dataSplit[2].split("/");
+                     orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
+                }
+                    /*if (selectionType=="newCustomer"){
                         var firstCustomerName = $("input#firstCustomerName").val();
                         var lastCustomerName = $("input#lastCustomerName").val();
                         var emailValidation = $("input#emailValidationCustomer").val();
@@ -4409,17 +4471,13 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                                 
                             }
                         });
-                    }
-                     $(document).ready(function(){$("#myRoofReportRequest").modal("hide"); });
+                    }*/
+                     $("#myOrderByCustomer").modal("hide");
 
-                    $('#textAnswerOrder').html(data+'');
-                    
-
-                    $('#headerTextAnswerOrder').html('Success');
-                  
-                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#lastFinishButtonOrder').show();
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    //$('#myModalRespuestaOrder div#textAnswerOrder').html(data+'');
+                    //$('#myModalRespuestaOrder div#headerTextAnswerOrder').html('Success');
+                    //$('#myModalRespuestaOrder').modal({backdrop: 'static'});
+                    alert('Order created successfuly');
             }else{
                     $('#headerTextAnswerOrder').html('Error validating User Account');
                     $('#textAnswerOrder').html(data+'<br><br>Please try again');
@@ -4457,6 +4515,9 @@ function insertOrderPostCard(){
     var latitude=$('input:hidden[name=step5Latitude]').val();
     var longitude=$('input:hidden[name=step5Logintud]').val();
     var address=$('input:hidden[name=step5Address]').val();
+    var city=$('input:hidden[name=step5City]').val();
+    var state=$('input:hidden[name=step5State]').val();
+    
     var RepZIP=$('#step5ZipCode').val();
     var SchDate=formatActualDate();
     var SchTime=formatActualTime(2);
@@ -4498,7 +4559,7 @@ function insertOrderPostCard(){
     $.post( "controlador/ajax/insertOrder.php", {"RepZIP":RepZIP,"RequestType":RequestType,"Rtype":Rtype,"Water":Water,"Hlevels":Hlevels,
                                                 "SchDate":SchDate,"SchTime":SchTime,"CompanyID":CompanyID,"email":email,
                                                 "password":password,"Latitude":latitude,"Longitude":longitude,"Address":address,"stripeCharge":idStripeCharge,
-                                                "Authorized":Authorized,"postCardValue":amountValue}, null, "text" )
+                                                "Authorized":Authorized,"postCardValue":amountValue,"RepCity":city,"RepState":state}, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
             
@@ -4511,9 +4572,10 @@ function insertOrderPostCard(){
                     var orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                     
                     $(document).ready(function(){$("#myPostCard").modal("hide"); });
-                    $('#textAnswerOrder').html(data+'');
-                    $('#headerTextAnswerOrder').html('Success');
-                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                    alert(data);
+                    //$('#textAnswerOrder').html(data+'');
+                    //$('#headerTextAnswerOrder').html('Success');
+                    //$('#myModalRespuesta').modal({backdrop: 'static'});
 
                     balance=parseInt(balance)-parseInt(amountValue);
                     var data="postCardValue,"+balance;
@@ -5343,4 +5405,45 @@ function generateInfoExcel(){
             return result1;
         }
     }); 
+}
+
+function refreshCalendarV2(){
+    
+    $('#calendar').fullCalendar('refetchEvents')
+}
+
+function generateReportFile(){
+    //var optionChecked = $('input[id="reportCheckOption"]:checked').val();
+    var optionChecked = '';
+
+    $('input[id="reportCheckOption"]:checked').each(function() {
+        optionChecked+=this.value+','; 
+    });
+    jsShowWindowLoad('Generating report');
+    $.post( "controlador/ajax/generateXLSReport.php", { "report_type" : optionChecked,"companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myExportInfoWindow #linkDownload').html(data);
+            }else{
+                $('#myExportInfoWindow #linkDownload').html(data);
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    }); 
+}
+
+
+function fire_next_step(){
+    $( ".sw-btn-next" ).trigger( "click" );
 }

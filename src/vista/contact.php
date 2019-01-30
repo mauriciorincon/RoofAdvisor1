@@ -36,7 +36,7 @@
 								<i class="fa fa-phone"></i>
 							</div>
 							<div class="contact-text">
-								<p>(877) 529 5995</p>
+								<p>(888) 400-5996 </p>
                             </div>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<div class="contact-text">
-								<p>Emergency services are available 24/7</p>
+								<p>Schedule a demo today!</p>
                             </div>
 						</div>
 					</div>

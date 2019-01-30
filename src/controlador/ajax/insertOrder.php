@@ -82,10 +82,12 @@ $_array=array(
     "postCardValue"=>$_amount_valueP,
     "amount_value"=>$_amount_value,
     "CreateBy"=>$_createdBy,
+    "RepCity"=>$_POST['RepCity'],
+    "RepState"=>$_POST['RepState'],
 );
 
 $_orderController=new orderController();
-$_id_order=$_orderController->insertOrder($_array,$_customerMail);
+$_id_order=$_orderController->insertOrder($_array,$_customerMail,$_POST['action_type']);
 if (is_null($_id_order)){
     echo "Error, an error ocurred traing to save Order, try again";
 }else{

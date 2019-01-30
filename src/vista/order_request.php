@@ -13,6 +13,7 @@
 });
 }
 </script>
+
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="width:1200px" role="document">
     <div class="modal-content logmodal">
@@ -23,76 +24,53 @@
         </button>
       </div>
      
-	  <div class="modal-body" style="height:175px;">
-				<div class="list-group">
-						<div  class="list-group-item login-list1">
-								<div class="d-flex w-100 ">
-										<div class="form-row" id="step6RegisterCustomerOrder">
-											<div class="form-group col-md-4">
-												<label class="control-label">First Name</label>
-												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="firstCustomerName" name="firstCustomerName"  />
-												
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label">Last Name</label>
-												<input  maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"  />
-												
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Email</label>
-												<input maxlength=""  type="text" required="required" class="colorStandarInpur"  placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')"/>
-												<small  class="form-text text-muted" id="answerEmailValidate" name="answerEmailValidate">Answer</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Password</label>
-												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-												<small  class="form-text text-muted" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label ">Confirm Password</label>
-												<input maxlength=""  type="password" required="required" class="colorStandarInpur"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<!--<div class="form-group col-md-4">
-												<label class="control-label">Address</label>
-												<input maxlength="100" type="text" required="required" class="colorStandarInpur"  placeholder="Enter address" id="customerAddress" name="customerAddress" />
-												<small  class="form-text text-muted" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6">Minimum of 6 characters</small>
-											</div>
-											<div class="form-group col-md-4">
-												<label class="control-label">City</label>
-												<input maxlength="100" type="text" required="required" class="colorStandarInpur" placeholder="Enter city" id="customerCity" name="customerCity" />
-												
-											</div>
-											
-											<div class="form-group col-md-4">
-												<label class="control-label">Zip code</label>
-												<input maxlength="5" type="text" required="required" class="colorStandarInpur"  placeholder="Enter zip code" id="customerZipCode" name="customerZipCode" />
-												
-											</div>-->
-											<div class="form-group col-md-4">
-												<label class="control-label">Phone number</label>
-												<input maxlength="10" type="text" required="required" class="colorStandarInpur"  placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  />
-												
-											</div>
-											<!--<div class="form-group col-md-4">
-												<label class="control-label">State</label>
-												<select id="customerState" name="customerState" required="required" class="form-control" placeholder="Select state">
-													<?php foreach ($_array_state as $key => $value1) { ?>
-															<option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
-													<?php } ?>
-												</select>
-
-											</div>-->
-										</div>
-								</div>
-						</div>
-				</div>
-		</div>
-		<!--<center><button style="float:right;margin-top:5px;" type="button" class="btn-lg btn-primary" data-dismiss="modal">Register</button></center>-->
-      <div class="modal-footer" style="border-top:0;">
-	  		<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>
-        
-      </div>
+	  
+            <input type="hidden" value="Customer_register" id="source_call" name="source_call" />
+            <div class="panel-body">
+                    
+                    <div class="form-group">
+                        <label class="control-label labeltwht" for="firstCustomerName">First Name</label>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName" oninvalid="this.setCustomValidity('Please Enter First Name')" oninput="setCustomValidity('')" value="<?php if(isset($_SESSION['post_info']['firstCustomerName'])){echo $_SESSION['post_info']['firstCustomerName']; } ?>"/>                        
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht">Last Name</label>
+                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName" oninvalid="this.setCustomValidity('Please Enter Last Name')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['lastCustomerName'])){echo $_SESSION['post_info']['lastCustomerName']; } ?>" />
+                        
+                    </div>  
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Email</label>
+                        <input maxlength="100"  type="email" required="required" class="form-control" placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer')" oninvalid="this.setCustomValidity('Please Enter Email')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['emailValidation'])){echo $_SESSION['post_info']['emailValidation']; } ?>" />
+                        <label class="control-label labeltwht" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  oninvalid="this.setCustomValidity('Please Enter Password')" oninput="setCustomValidity('')"/>
+                        <div class="help-block labeltwht">Minimum of 6 characters</div>
+                        <label class="control-label labeltwht" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label labeltwht ">Confirm Password</label>
+                        <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()"  oninvalid="this.setCustomValidity('Please Enter Confirm Password')" oninput="setCustomValidity('')" />
+                        <label class="control-label labeltwht" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                    </div> 
+                    <div class="form-group">
+                        <label class="control-label labeltwht">Phone number</label>
+                        <input maxlength="100" type="number" min="1111111111" max="9999999999" onkeypress="return isNumber(event)" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"  oninvalid="this.setCustomValidity('Please Enter Phone Number, Phone must be of 10 digits ')" oninput="setCustomValidity('')" 
+                        value="<?php if(isset($_SESSION['post_info']['customerPhoneNumber'])){echo $_SESSION['post_info']['customerPhoneNumber']; } ?>"/>
+                    </div>    
+                    <div  class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LeiZnkUAAAAAA6gqLw6IFIMuchbHXyiRRYyTC1n"></div>
+                    </div>
+                    <div  class="form-group">
+                        <label class="control-label labeltwht ">PLEASE READ THE TERMS THOROUGHLY AND CAREFULLY. BY USING THE PLATFORM, YOU AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU MAY NOT ACCESS OR USE THE PLATFORM</label>
+                        <input type="checkbox" name="termsServiceAgree" id="termsServiceAgree" value="1"><span style="color:white">I agree with the RoofServiceNow</span> <a href="?controller=termsconditions&accion=showinfo" data-toggle="modal" target="_blank"> Terms and Conditions</a>
+                    </div>
+					<center><button class="btn btn-primary" type="button" id="firstNextValidation" name="firstNextValidation" onclick="saveCustomerData('Order')">Register</button></center>
+					<!--<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>-->
+            </div>
+      
     </div>
   </div>
 </div>
@@ -153,12 +131,12 @@
 </div>
 </div>
 <div class="btnwizmobilediv1" style="display:none;">
-<button id="mobilewizbtn1" class="mobilewizbtn1" >START <i style="" class="fas fa-fingerprint"></i> HERE</button>
+	<button id="mobilewizbtn1" class="mobilewizbtn1" >START <i style="" class="fas fa-fingerprint"></i> HERE</button>
 </div>
 <div class="btnvidmobilediv1" style="display:none;">
-<button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+	<button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
 </div>
-<div id="appwiz" class="container">
+<div id="appwiz" class="">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panelOrder">
             <div class="stepwizard-step col-xs-1" > 
@@ -200,7 +178,7 @@
         </div>
     </div>
     <div id="appfrm1" align="center">
-    <form role="form" align="left" style="background-image: url('img/roof.home.wiz.bg.png'); width: 100%; height: 800px; background-size: 100% 100%;">
+    <form role="form" align="left">
      <div id="step1contain">
         <div class="panel panel-primary setup-contentOrder panel-mv1" id="step-1">
             <div id="zip-panel-heading" class="panel-heading wizhead">
@@ -218,33 +196,33 @@
                 
             </div>
 
-			<div class="panel-body" align="left">
-				<div class="list-group" id="step3OtypeService">
-					<a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
-						<input type="hidden" value="roofreport" name="typeServiceOrder">
-						<table>
-							<tr>
-								<td style="padding: 12px 12px 12px 12px;">
-									<button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
-								</td>
-								<td style="padding: 12px 12px 12px 12px;">
-								<h4>Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.</h4>
-								</td>
-							</tr>
-						</table>
-						<div class="d-flex w-100 justify-content-between">
-						
-						<span></span>
-							
-						</div>
-					</a>
-				</div>
-			</div>
         </div>
-
-		
     </div>
-    <button class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+    <button id="mainplaybtn1" class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
+     <div id="roofreportbox1" class="panel-body" align="left">
+                                <div class="list-group" id="step3OtypeService">
+ <div class="panel-heading wizhead" style="color: #fff;"><strong>If you need to order a roof report. Click Below!</strong></div>
+                                        <a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
+                                                <input type="hidden" value="roofreport" name="typeServiceOrder">
+                                                <table>
+                                                        <tr>
+                                                                <td style="padding: 12px 12px 12px 12px;">
+                                                                        <button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
+                                                                </td>
+                                                                <td style="padding: 12px 12px 12px 12px;">
+                                                                <h4 style="font-size:.8vw;text-align:justify;">Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.<a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" > See Sample below </a> </h4>
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                                <div class="d-flex w-100 justify-content-between">
+
+                                                <span></span>
+
+                                                </div>
+                                        </a>
+                                </div>
+                        </div>
+
          <div  class="panel panel-primary setup-contentOrder panel-mv1" id="step-2">
             <div class="panel-heading">
                  <h3 class="panel-title wizhead"><font size="5"><strong>Select Service</strong></font> </h3>
@@ -612,6 +590,8 @@
 					<input type="hidden" id="step5Latitude" name="step5Latitude"/>
 					<input type="hidden" id="step5Address" name="step5Address"/>
 					<input type="hidden" id="step5ZipCode" name="step5ZipCode"/>
+					<input type="hidden" id="step5State" name="step5State"/>
+					<input type="hidden" id="step5City" name="step5City"/>
                     <div class="list-group">
 							
                        
@@ -719,6 +699,8 @@
 										].join(' ');
 										$('#step5Address').val(address);
 										$('#step5ZipCode').val(place.address_components[7].short_name);
+										$('#step5State').val(place.address_components[5].long_name+' ('+place.address_components[5].short_name+')');
+										$('#step5City').val(place.address_components[4].long_name);
 									}
 									
 
@@ -790,10 +772,10 @@
                                                 <center><h4 class="h1white"><b>Please Note:&nbsp; Repair service are schedule a week in advance.</b></h4></center>
                                         </div>
 
-					<div class="col-sm-6 inpwiz1">
+					<div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 inpwiz1">
 						<span class="h1white"><h4><b>Select the date of service. </b></h4></span><input type="text" id="step6date" name="step6date" class="datepicker" style="font-size:24px;text-align:center;">
 					</div>
-					<div class="col-sm-6 inpwiz2">
+					<div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 inpwiz2">
 						<span class="h1white"><h4><b>Select the time of service. </b></h4></span>
 						<input type="text" name="step6time" id="step6time" class="timepicker1" style="z-index: 105100;font-size:24px;text-align:center;"/>
 						<!--<input type="text" id="step6time" name="step6time" class="timepicker"  style="font-size:24px;text-align:center;" />-->
@@ -967,7 +949,7 @@
 						</div>
 				</div>
                 <p>
-				<table class="logbox3" style="border-spacing: 15px;padding: 12px;margin-left: 65px;">
+				<table id="wizloginbtn1" class="logbox3" >
 					<tr>
 						<td><h1 style="margin-right: 13px;" class="labeltwht">Please</h1></td>
 						<td></td>
@@ -1016,6 +998,25 @@
 </div>
 </div>
 <div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal.</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+				<!--<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Close</button> -->
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalRespuestaOrder" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
 		<div class="modal-content"> 

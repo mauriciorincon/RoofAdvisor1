@@ -206,6 +206,7 @@ class userController{
                             $this->dashboardAdmin($this->_user);
                         }else{
                             $_SESSION['profile'] = 'company';
+                            $_SESSION['profile-employee'] = 'Admin';
                             $this->dashboardCompany($this->_user);
                         }
                         
@@ -218,7 +219,44 @@ class userController{
                     Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
                 }
             }elseif(is_string($_result)){
-                Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginContractor");
+                $_result=$this->_userModel->validateEmployee($this->_user,$this->_pass);
+                
+                if(is_array($_result) or gettype($_result)=="object"){
+                    if($_result->emailVerified==1){
+                        $_employee=$this->_userModel->getContractor($this->_user);
+                        $_data_company=$this->_userModel->getCompanyByID($_employee['CompanyID']);
+                        if(!is_null($_data_company)){
+                            $this->cleanVariables();
+                            $_SESSION['loggedin'] = true;
+                            $_SESSION['username'] = $_data_company['CompanyName'];
+                            $_SESSION['start'] = time();
+                            $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                            $_SESSION['email'] = $_data_company['CompanyEmail'];
+
+                            
+                            if(strcmp($_data_company['CompanyID'],"CO000000")==0){
+                                $_SESSION['profile'] = 'admin';
+                                $_SESSION['loggedin'] = true;
+                                $_SESSION['username'] = $_data_company['CompanyName'];
+                                $_SESSION['start'] = time();
+                                $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                                $_SESSION['email'] = $_data_company['CompanyEmail'];
+                                $this->dashboardAdmin($this->_user);
+                            }else{
+                                $_SESSION['profile'] = 'company';
+                                $_SESSION['profile-employee'] = $_employee['ContractorProfile'];
+                                $this->dashboardCompany($_data_company['CompanyEmail']);
+                            }
+                        }else{
+                            Header("Location: ?aditionalMessage=User is not related to a company&controller=user&accion=showLoginContractor");
+                        }
+                    }else{
+                        Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
+                    }
+                }else{
+                    Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginContractor");
+                }
+                
             }
         }
         
@@ -434,32 +472,24 @@ class userController{
                 
                 return "Error, the user company was no found";
             }
-
-
-
             $this->_userModel=new userModel();
             $_result=$this->_userModel->validateCustomerByID($user);
             if(is_array($_customer)){
                 //print_r($_customer);
                 if(strcmp($_customer['ComapnyLicNum'],$code)==0){
-                    $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');
-                    
+                    $this->_userModel->updateContractor($_customer['CompanyID'].'/ComapnyLicNum','');  
                     return "The code is correct";
                 }else{
                     return "Error, the code is incorrect";    
                 }
             }else{
-                
                 return "Error, the user was no found";
             }
         }else if(strcmp($table,'Customers')==0){
             $this->_userModel=new userModel();
             $_result=$this->_userModel->validateCustomerByID($user);
-            
             if(is_array($_result) or gettype($_result)=="object" ){
-                //print_r($_result);
                 if(strcmp($_result->photoUrl,$code)==0){
-                    
                     $properties = [
                         'emailVerified' => true,
                         'disabled' => false,
@@ -471,23 +501,37 @@ class userController{
                         return $_message;
                     }else{
                         $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
-
                         return $_message;
-                        
                     }
-                    
                 }else{
                     $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
                     return $_message;
                 }
             }else{
-                
                 return "Error, the user was no found";
             }
 
+        }else if(strcmp($table,'Contractors')==0){
+            $this->_userModel=new userModel();
+            $_result=$this->_userModel->validateContractorByID($user);
+            if(is_array($_result) or gettype($_result)=="object" ){
+                if(strcmp($_result->photoUrl,$code)==0){
+                    $properties = [
+                        'emailVerified' => true,
+                        'disabled' => false,
+                        'photoURL' => ''
+                    ];
+                    $_result_update=$this->_userModel->updateUserContractor($user,$properties,'driver');
+                    if(is_array($_result_update) or gettype($_result_update)=="object" ){
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        return $_message;
+                    }else{
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+                        return $_message;
+                    }
+                }
+            }
         }
-        
-
     }
 
     public function getCompany($companyID){
@@ -522,7 +566,7 @@ class userController{
 
             
 
-            //print_r($_array_customer_to_show);
+            
             $this->_userModel=new userModel();
             $_array_state=$this->_userModel->getNode('Parameters/state');
 
@@ -560,6 +604,7 @@ class userController{
             $_actual_company=$this->_userModel->getCompany($_userMail);
             //print_r($_actual_company);
             $_array_contractors_to_show=$this->_userModel->getContractorsCompany($_actual_company['CompanyID']);
+            $_array_customer_to_show=$this->_userModel->getListData('Customers','CompanyID',$_actual_company['CompanyID']);
             
             if(isset($_actual_company['stripeAccount'])){
                 $_array_stripe_info=$this->getAccount($_actual_company['stripeAccount']);

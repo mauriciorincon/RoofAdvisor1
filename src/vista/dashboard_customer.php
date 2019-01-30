@@ -614,16 +614,16 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 					<thead>
 					<tr>
 						<th>ID</th>
-						<th>Order Type</th>
-						<th>Address</th>
-						<th>Description</th>
+						<th>Order</th>
+						<th>Service Addr</th>
+						<th>Roof Desc</th>
 						<th>Status</th>
 						<th>Date</th>
 						<th>Time</th>
 						<th>Est Amt</th>
                     	<th>Tot Amt</th>
 						<th>Company</th>
-						<th>Driver</th>
+						<th>Pro</th>
 						<th>Actions</th>
 					</tr>
 					</thead>
@@ -885,6 +885,12 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="title" class="col-sm-2 control-label">Scheduled Date</label>
+				<div class="col-sm-10">
+					<input type="text" name="title" class="form-control" id="datetimeSchedule" placeholder="Titulo" readonly>
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="title" class="col-sm-2 control-label">Company</label>
 				<div class="col-sm-10">
 					<input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
@@ -960,6 +966,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 					$('#ModalEdit #companyID').val(event.company);
 					$('#ModalEdit #customerID').val(event.customer);
 					$('#ModalEdit #datetimeReg').val(event.date_register);
+					$('#ModalEdit #datetimeSchedule').val(event.date_schedule);
 					$('#ModalEdit #totalValue').val(event.total_value);
 					
 					getCustomerName(event.customer).then(function(customerName) {  
@@ -1022,6 +1029,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 						customer: data.CustomerFBID,
 						status: status,
 						date_register: data.DateTime,
+						date_schedule: data.SchDate,
 						total_value: valueMatA+valueTimeA,
 					});
 				}

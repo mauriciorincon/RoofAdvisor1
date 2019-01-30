@@ -33,6 +33,9 @@ var handler = StripeCheckout.configure({
                         if(action_type=="pay_emergency_service"){
                             jsRemoveWindowLoad('');
                             insertOrderCustomer(objStripe.id,(amount_value),action_type);
+                        }else if(action_type=="pay_customer_roofreport"){
+                            jsRemoveWindowLoad('');
+                            insertOrderCustomer(objStripe.id,(amount_value),action_type);
                         }else if(action_type=="pay_company_roofreport"){
                             jsRemoveWindowLoad('');
                             insertOrderRoofReport(objStripe.id,(amount_value),action_type);

@@ -6,9 +6,8 @@ Welcome to RoofServicenow Admin
 			<button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
 			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);">Scheduler</button>
-        </div>
-        <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Metrics
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -18,10 +17,10 @@ Welcome to RoofServicenow Admin
                     <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairDone" class="badge badge-primary" style="background:black;">4</span>Repair Done</a>
                     <a href="" class="list-group-item " onclick="" ><span class="glyphicon glyphicon-file"></span><span ></span><span name="repairOpen" class="badge badge-primary" style="background:black;">4</span>Repair Open</a>
                 </div>
-            </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
-        </div>   
+        </div>
+        
+                
+        
 </div>
 
 
@@ -124,18 +123,7 @@ Welcome to RoofServicenow Admin
                     var oMarket=addMarket(marker,fila,infowindow);
                     
                     marketrs.push(oMarket);     
-                    /*orderOpenContractor.push(fila.ContractorID);
-                    var refContractor = firebase.database().ref("/Contractors/"+fila.ContractorID);
-                    refContractor.once("value", function(snapshot) {
-                        var updateContractor = snapshot.val();
-                        var marker={
-                            lat: parseFloat(updateContractor.CurrentLocation.latitude),
-                            lng: parseFloat(updateContractor.CurrentLocation.longitude),
-                            icon: iconBase+'library_maps.png'
-                        };
-                        var oMarket=addMarketContractor(marker,updateContractor);
-                        contractorMarker.push(oMarket);
-                    });*/
+                    
                 }
             });
 
@@ -470,31 +458,7 @@ Welcome to RoofServicenow Admin
                     }
             });	
             return indice;
-            /*var value = orderID;
-            var flag=false;
-            var count=-1;
-            $("#table_orders_company tr").each(function(index) {
-                
-                if (index !== 0) {
-                    count++;
-                    $row = $(this);
-
-                    var id = $row.find("td:eq(0)").text();
-
-                    if (id.indexOf(value) !== 0) {
-                        flag=false;
-                    }
-                    else {
-                        flag=true;
-                        return false;
-                    }
-                }
-            });
-
-            if(flag==false){
-                count=-1;
-            }
-            return count;*/
+            
         }
 
         
@@ -574,14 +538,14 @@ Welcome to RoofServicenow Admin
                     <th>ID</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Name/Addr/Phone</th>
-                    <th>Description</th>
-                    <th>Req Type</th>
+                    <th>Customer Info</th>
+                    <th>Roof Desc</th>
+                    <th>Job Type</th>
                     <th>Status</th>
                     <th>Est Amt</th>
                     <th>Final Amt</th>
                     <th>Payment</th>
-                    <th>Contractor</th>
+                    <th>Pro</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -1119,6 +1083,649 @@ Welcome to RoofServicenow Admin
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+
+<!-- formulario Insertar contractor datos-->
+<div class="modal" id="myModalCompanyProfile" role="dialog" style="height: 1000px;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Company Info</h4>
+        </div>
+        <div class="modal-body"  id="myModalCompanyProfileBody">
+            
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Info
+                                    </button>
+                                    <!--<button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Basic Info</button>-->
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="control-label ">Company ID</label>
+                                        <input maxlength="100" disabled type="text" class="form-control"  id="companyID" name="companyID" value="<?php echo $_actual_company['CompanyID'] ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Company Name</label>
+                                        <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Company Name" id="compamnyName" name="compamnyName" value="<?php echo $_actual_company['CompanyName'] ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCompanyName" name="firstCompanyName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCompanyName" name="lastCompanyName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                    </div>  
+
+                                    <div class="form-group">
+                                        <label class="control-label ">Email</label>
+                                        <input maxlength="100" disabled type="text" required="required" class="form-control" placeholder="Enter Email" id="companyEmail" name="companyEmail" value="<?php echo $_actual_company['CompanyEmail'] ?>"/>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="control-label ">Contractor License Number</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter License Number" id="companyLicenseNumber" name="companyLicenseNumber" value="<?php if(isset($_actual_company['ComapnyLicNum'])){ echo $_actual_company['ComapnyLicNum'];}  ?>"/>
+                                    </div>
+                                   
+                                   
+                                    <div class="form-group">
+                                        <label class="control-label ">License Expiration Date</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter Expiration date" id="companyExpirationDate" name="companyExpirationDate" value="<?php if(isset($_actual_company['LicExpiration'])){ echo $_actual_company['LicExpiration'];}?>"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label ">License Verified</label>
+                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress1" name="companyAddress1" value="<?php echo $_actual_company['CompanyAdd1'] ?>"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">City</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress2" name="companyAddress2" value="<?php echo $_actual_company['CompanyAdd2'] ?>"/>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label">Zip Code</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="companyAddress3" name="companyAddress3" value="<?php echo $_actual_company['CompanyAdd3'] ?>"/>
+                                    </div>
+                                    -->
+                                    <div class="form-group">
+                                        <label class="control-label">Phone number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="companyPhoneNumber" name="companyPhoneNumber"  value="<?php echo $_actual_company['CompanyPhone'] ?>"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Company Type</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Type" id="companyType" name="companyType" value="<?php echo $_actual_company['CompanyType'] ?>"/>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="control-label ">In Business Since</label>
+                                        <input maxlength="100"  type="text" required="required" class="form-control datepickerdob" placeholder="Enter In Business Since" id="companyBusinessSince" name="companyBusinessSince" value="<?php if(isset($_actual_company['InBusinessSince'])){ echo $_actual_company['InBusinessSince'];} ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Billing
+                                    </button>
+                                    <!--<button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Billing Info</button>-->
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="form-group">
+
+                                    <label class="control-label">Billing Address</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address 2" id="compamnyPayAddress1" name="compamnyPayAddress1" value="<?php echo $_actual_company['PayInfoBillingAddress1'] ?>" />
+
+                                    <label class="control-label">Billing Address (Con't)</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Billing Address (Con't)" id="compamnyPayAddress2" name="compamnyPayAddress2" value="<?php echo $_actual_company['PayInfoBillingAddress2'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">City</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnyPayCity" name="compamnyPayCity" value="<?php echo $_actual_company['PayInfoBillingCity'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">State</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnyPayState" name="compamnyPayState" value="<?php echo $_actual_company['PayInfoBillingST'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Zip Code</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label">PayInfoCredit Card Number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card Expiration Year (YYYY)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year (YYYY)" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                    </div>
+                                    -->
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card Number</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Number" id="compamnyPayCCNum" name="compamnyPayCCNum" value="<?php echo $_actual_company['PayInfoCCNum'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card CSV</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card CSV" id="compamnyPaySecCode" name="compamnyPaySecCode" value="<?php echo $_actual_company['PayInfoCCSecCode'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Credit Card Expiration Month (MM)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">PayInfCredit Card Expiration Year (YYYY)</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Year" id="compamnyPayYear" name="compamnyPayYear" value="<?php echo $_actual_company['PayInfoCCExpYr'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                    <label class="control-label">Name on Cred Card</label>
+                                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name on Cred Card" id="compamnyPayName" name="compamnyPayName" value="<?php echo $_actual_company['PayInfoName'] ?>" />
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="control-label">First Name on Credit Card</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name on Credit Card" id="compamnyPayFName" name="compamnyPayFName" value="<?php echo $_actual_company['PrimaryFName'] ?>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name on Credit Card</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name on Credit Card" id="compamnyPayLName" name="compamnyPayLName" value="<?php echo $_actual_company['PrimaryLName'] ?>" />
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Company Insurance
+                                    </button>
+                                    <!--<button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Info</button>-->
+                                </h2>
+                            </div>
+
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                        <div class="form-group">
+                                            <label class="control-label">Company Insurance Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Insurance Name" id="compamnyAgencyName" name="compamnyAgencyName" value="<?php echo $_actual_company['InsLiabilityAgencyName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Agent's Name</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Name" id="compamnyAgtName" name="compamnyAgtName" value="<?php echo $_actual_company['InsLiabilityAgtName'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Agent's Phone Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Agent's Phone Number" id="compamnyAgtNum" name="compamnyAgtNum" value="<?php echo $_actual_company['InsLiabilityAgtNum'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Insurance Policy Number</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Insurance Policy Number" id="compamnyPolNum" name="compamnyPolNum" value="<?php echo $_actual_company['InsLiabilityPolNum'] ?>" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Company Rating</label>
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Company Rating" id="compamnyStatusRating" name="compamnyStatusRating" value="<?php echo $_actual_company['Status_Rating'] ?>" readonly />
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Stripe Info
+                                    </button>
+                                    <!--<button type="button" class="btn-primary btn-sm" style="float: right;" onClick="query_valid_account_stripe('<?php echo $_actual_company['stripeAccount'] ?>')" >Validate Info to Receive Payments</button>-->
+                                    <!--<button class="btn-primary btn-sm" style="float: right;" onClick="updateDataCompany()"><span class="glyphicon glyphicon-save"></span>Save Stripe Info</button>-->
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="control-label">Type</label>
+                                                <select id="compamnylegal_entity_type" name="compamnylegal_entity_type" onchange="validate_fields_stripe_account()" value="<?php echo $_array_stripe_info->legal_entity->type ?>">
+                                                    <option value="company">Company</option>
+                                                    <option value="individual">Individual</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_name">Business Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_name" id="compamnylegal_entity_business_name" name="compamnylegal_entity_business_name" value="<?php if(isset($_array_stripe_info->legal_entity->business_name)){ echo $_array_stripe_info->legal_entity->business_name;}  ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_business_tax_id">Business tax id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.business_tax_id" id="compamnylegal_entity_business_tax_id" name="compamnylegal_entity_business_tax_id" value="<?php if(isset($_array_stripe_info->legal_entity->business_tax_id_provided)){echo $_array_stripe_info->legal_entity->business_tax_id_provided;} ?>" />
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_State">State</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter State" id="compamnylegal_entity_State" name="compamnylegal_entity_State" value="<?php if(isset($_array_stripe_info->legal_entity->address->state)){echo $_array_stripe_info->legal_entity->address->state;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_City">City</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter City" id="compamnylegal_entity_City" name="compamnylegal_entity_City" value="<?php if(isset($_array_stripe_info->legal_entity->address->city)){echo $_array_stripe_info->legal_entity->address->city;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Zipcode">Zipcode</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zipcode" id="compamnylegal_entity_Zipcode" name="compamnylegal_entity_Zipcode" value="<?php if(isset($_array_stripe_info->legal_entity->address->postal_code)){echo $_array_stripe_info->legal_entity->address->postal_code;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_Address">Address</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Address" id="compamnylegal_entity_Address" name="compamnylegal_entity_Address" value="<?php if(isset($_array_stripe_info->legal_entity->address->line1)){echo $_array_stripe_info->legal_entity->address->line1;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_first_name">First Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.first_name" id="compamnylegal_entity_first_name" name="compamnylegal_entity_first_name" value="<?php if(isset($_array_stripe_info->legal_entity->first_name)){echo $_array_stripe_info->legal_entity->first_name;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last_name">Last Name</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter legal_entity.last_name" id="compamnylegal_entity_last_name" name="compamnylegal_entity_last_name" value="<?php if(isset($_array_stripe_info->legal_entity->last_name)){echo $_array_stripe_info->legal_entity->last_name;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_dob">Birthday</label>
+                                                <input maxlength="100" type="text" class="form-control datepickerdob" id="compamnylegal_entity_dob" name="compamnylegal_entity_dob" value="<?php if(isset($_array_stripe_info->legal_entity->dob->month)){echo $_array_stripe_info->legal_entity->dob->month."/".$_array_stripe_info->legal_entity->dob->day,"/".$_array_stripe_info->legal_entity->dob->year;}?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_last4">Social security number last 4</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Social security number last" id="compamnylegal_entity_last4" name="compamnylegal_entity_last4" value="<?php if(isset($_array_stripe_info->legal_entity->ssn_last_4_provided)){echo $_array_stripe_info->legal_entity->ssn_last_4_provided;} ?>" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="compamnylegal_entity_personal_id">Personal Id</label>
+                                                <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Personal Id" id="compamnylegal_entity_personal_id" name="compamnylegal_entity_personal_id" value="<?php if(isset($_array_stripe_info->legal_entity->personal_id_number_provided)){echo $_array_stripe_info->legal_entity->personal_id_number_provided;} ?>" />
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                            
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDFront" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Front
+                                                </a>
+                                                <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                    href="#myDocumentIDBack" 
+                                                    onClick=""> 
+                                                    <span class="glyphicon glyphicon-upload"></span>
+                                                    Upload Documento ID Back
+                                                </a>
+                                            </div>
+                                            
+                                            
+                                            <br>
+                                            <div>
+                                                <h3>Payment processing services Terms</h3>
+                                                <label>
+                                                Payment processing services for [account holder term, e.g. drivers or sellers] on [platform name] are provided by Stripe and are subject to the <a href="https://stripe.com/us/connect-account/legal" target="_blank">Stripe Connected Account Agreement</a>, which includes the <a href="https://stripe.com/us/legal"  target="_blank">Stripe Terms of Service</a> (collectively, the “Stripe Services Agreement”). By agreeing to [this agreement / these terms / etc.] or continuing to operate as a [account holder term] on [platform name], you agree to be bound by the Stripe Services Agreement, as the same may be modified by Stripe from time to time. As a condition of [platform name] enabling payment processing services through Stripe, you agree to provide [platform name] accurate and complete information about you and your business, and you authorize [platform name] to share it and transaction information related to your use of the payment processing services provided by Stripe.
+                                                </label>
+                                            </div>
+                                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0" style="background-color: gainsboro;">
+                                    <button class="btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Deposit Accounts
+                                    </button>
+                                    
+                                </h2>
+                            </div>
+
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="alert alert-primary" role="alert">
+                                        <h2><b>Accounts</b></h2>
+                                    </div>
+                                    <table class="table table-bordered" id="listBankCompany">
+                                        <tr>
+                                            <td>id</td>
+                                            <td>Holder  Name</td>
+                                            <td>Holder  Type</td>
+                                            <td>Bank Name</td>
+                                            <!--
+                                            <td>Country</td>
+                                            <td>Currency</td>
+                                            -->
+                                            <td>Last4</td>
+                                            <td>Routing Number</td>
+                                            <td>Action</td>
+                                        </tr>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_bank)){
+                                                foreach($_array_stripe_bank as $clave=>$bank){
+                                                echo "<tr>".
+                                                            "<td>".$n."</td>".
+                                                            "<td>".$bank->account_holder_name."</td>".
+                                                            "<td>".$bank->account_holder_type."</td>".
+                                                            "<td>".$bank->bank_name."</td>".
+                                                            "<td>".$bank->last4."</td>".
+                                                            "<td>".$bank->routing_number."</td>".
+                                                            '<td>
+                                                                <a class="btn-primary btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Set as default bank account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'setdefault\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\')" > '.
+                                                                '<span class="glyphicon glyphicon-star"></span></a>
+                                                                <a class="btn-danger btn-sm" data-toggle="modal" data-toggle1="tooltip"  title="Delete Bank Account"'.
+                                                                'href="#" '.
+                                                                'onClick="actionWithBank(\'delete\',\''.$_actual_company['stripeAccount'].'\',\''.$bank->id.'\',this)" > '.
+                                                                '<span class="glyphicon glyphicon-trash"></span></a>
+                                                            </td>'.
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                    </table>
+                                    <a class="btn-primary btn-sm" data-toggle="modal"  
+                                                        href="#myProfileBank" 
+                                                        onClick="prepareCreateBank('<?php echo $_actual_company['stripeAccount'] ?>')"> 
+                                                        <span class="glyphicon glyphicon-bitcoin"></span>
+                                                        New Bank
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                    
+                </div>
+                
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <div>
+                            Wallet Balance<br>
+                            <a href="">+ Add funds to your RoofServiceNow Wallet</a>
+                        </div>
+                        <div>
+                            <a class="btn-primary btn-sm" data-toggle="modal"  
+                                href="#myExportInfoWindow" 
+                                onClick=""> 
+                                <span class="glyphicon glyphicon-save"></span>
+                                Export Info
+                            </a> 
+                            
+                        </div>
+
+                        <div class="accordion" id="accordionPayments">
+                            <div class="card">
+                                <div class="card-header" id="headingOnep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOnep" aria-expanded="true" aria-controls="collapseOnep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Balance
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('balance','tableCompanyBalance','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOnep" class="collapse" aria-labelledby="headingOnep" data-parent="#accordionPayments">
+                                    <div class="card-body">
+                                        <table class="table table-bordered" id="tableCompanyBalance" >
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Type</th>
+                                                    <th>Amount</th>
+                                                    <!--
+                                                    <th>Currency</th>
+                                                    -->
+                                                    <th>bank_account</th>
+                                                    <!--
+                                                    <th>bitcoin_receiver</th>
+                                                    <th>card</th>
+                                                    -->
+                                                </tr> 
+                                            <thead>
+                                            <tbody>
+                                            <?php
+                                                $n=1;
+                                                if(isset($_array_stripe_balance->available)){
+                                                    foreach($_array_stripe_balance->available as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Available</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->connect_reserved)){
+                                                    foreach($_array_stripe_balance->connect_reserved as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                    echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>connect_reserved</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                
+                                                                "<td>".""."</td>".
+                                                                
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                                if(isset($_array_stripe_balance->pending)){
+                                                    foreach($_array_stripe_balance->pending as $clave=>$trancs){
+                                                        $_amount=0;
+                                                        if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                        $_amount1=0;
+                                                        if($trancs->source_types->card==0){$_amount1=0;}else{$_amount1=$trancs->source_types->card/100;}
+                                                        echo "<tr>".
+                                                                "<td>".$n."</td>".
+                                                                "<td>Pending</td>".
+                                                                "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                                
+                                                                "<td>".$trancs->source_types->bank_account."</td>".
+                                                                
+                                                            "</tr>";
+                                                        $n++;
+                                                    }
+                                                }
+                                            ?>  
+                                            </tbody>   
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                     
+                            
+
+                        
+                            <div class="card">
+                                <div class="card-header" id="headingTwop">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseTwop" aria-expanded="true" aria-controls="collapseTwop">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transfer
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transfer','tableCompanyTransfer','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        
+                                    </h2>
+                                </div>
+                                <div id="collapseTwop" class="collapse" aria-labelledby="headingTwop" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyTransfer" >
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Amount</th>
+                                                <th>Created</th>
+                                                <th>Description</th>
+                                                <th>Destination_Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transfer->data)){
+                                                foreach($_array_stripe_transfer->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=round($trancs->amount/100,2);}
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->destination_payment."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                               
+                            <div class="card">
+                                <div class="card-header" id="headingThreep">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseThreep" aria-expanded="true" aria-controls="collapseThreep">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Transactions
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('transaction','tableCompanyTransactions','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        
+                                    </h2>
+                                </div>
+                                <div id="collapseThreep" class="collapse" aria-labelledby="headingThreep" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyTransactions" >
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>available_on</th>
+                                                <th>created</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>fee</th>
+                                                <th>net</th>
+                                                <th>status</th>
+                                                <th>type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_transaction->data)){
+                                                foreach($_array_stripe_transaction->data as $clave=>$trancs){
+                                                    $_amount=0;
+                                                    if($trancs->amount==0){$_amount=0;}else{$_amount=$trancs->amount/100;}
+                                                    $_amount_1=0;
+                                                    if($trancs->net==0){$_amount_1=0;}else{$_amount_1=$trancs->net/100;}
+                                                echo "<tr>".
+                                                            "<td>".$trancs->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".$trancs->available_on."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$trancs->created)."</td>".
+                                                            "<td>".$trancs->currency."</td>".
+                                                            "<td>".$trancs->description."</td>".
+                                                            "<td>".$trancs->fee."</td>".
+                                                            "<td>".number_format($_amount_1, 2, '.', '')."</td>".
+                                                            "<td>".$trancs->status."</td>".
+                                                            "<td>".$trancs->type."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>     
+                                </div>
+                            </div>
+                                
+                            <div class="card">
+                                <div class="card-header" id="headingFourp">
+                                    <h2 class="mb-0" style="background-color: gainsboro;">
+                                        <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseFourp" aria-expanded="true" aria-controls="collapseFourp">
+                                        <span class="glyphicon glyphicon-plus-sign"></span> Pay outs
+                                        </button>
+                                        <button class="btn-primary btn-sm" style="float: right;" onClick="getStripeInfo('payout','tableCompanyPayouts','<?php echo $_actual_company['CompanyID'] ?>')"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        
+                                    </h2>
+                                </div>
+                                <div id="collapseFourp" class="collapse" aria-labelledby="headingFourp" data-parent="#accordionPayments">
+                                    <table class="table table-bordered" id="tableCompanyPayouts">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>amount</th>
+                                                <th>created</th>
+                                                <th>arrival_date</th>
+                                                <th>currency</th>
+                                                <th>description</th>
+                                                <th>destination</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $n=1;
+                                            if(isset($_array_stripe_payout->data)){
+                                                foreach($_array_stripe_payout->data as $clave=>$payout){
+                                                    $_amount=0;
+                                                    if($payout->amount==0){$_amount=0;}else{$_amount=$payout->amount/100;}
+                                                echo "<tr>".
+                                                            "<td>".$payout->id."</td>".
+                                                            "<td>".number_format($_amount, 2, '.', '')."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->created)."</td>".
+                                                            "<td>".date("F j, Y, g:i a",$payout->arrival_date)."</td>".
+                                                            "<td>".$payout->currency."</td>".
+                                                            "<td>".$payout->description."</td>".
+                                                            "<td>".$payout->destination."</td>".
+                                                        "</tr>";
+                                                    $n++;
+                                                }
+                                            }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                                
+                                
+                            
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+
+        </div>
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->
+
+
+
+
 
 <!-- formulario Insertar contractor datos-->
 <div class="modal" id="myModalSchedyleCompany" role="dialog" style="height: 1000px;">

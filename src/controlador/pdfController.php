@@ -21,7 +21,8 @@ class pdfController{
         
     }
 
-    function paymentConfirmation1($_orderID,$object_order,$_amount=0,$_stripe_id=""){
+    //USE FOR INSERT ORDERS
+    function paymentConfirmation1($_orderID,$object_order,$_amount=0,$_stripe_id="",$_action_type){
         
         if($_amount>0){
             $_amount=$_amount/100; 
@@ -181,7 +182,7 @@ class pdfController{
                 <td></td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">'.$_exp_date.'</td>
             </tr>
             <tr>
-                <td>Payment Type</td><td></td><td></td><td></td><td>Exp. Date</td><td align="rigth">Online</td>
+                <td>Payment Type</td><td></td><td></td><td></td><td></td><td align="rigth">Online</td>
             </tr>
             <tr>
                 <td colspan="6" align="center">Thank You for using RoofServiceNow</td>
@@ -221,18 +222,20 @@ class pdfController{
         </table>
         ';
         
-        $pdf->Image($_SESSION['image_path']."logo_s.png",30,180,40);
+        $pdf->Image($_SESSION['image_path']."logo_s.png",30,190,40);
         $pdf->writeHTML($_hmtl, true, 0, true, true);
 
         $pdf->Output($_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf','F'); 
 
-        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id);
+        $_result=$this->registerPathInvoice($_invoice_number,$_order['FBID'],$_amount,$_stripe_id,'Online','order',$_action_type);
         
         $_result_invoice=$this->_otherController->updateParameterValue("Parameters","InvoiceNum",$_consecutive_invoice+1);
+        
 
         $_mailController = new emailController();
 
         $_result_mail=$_mailController->sendMailSMTP($_customer['Email'],"RoofSerivceNow Invoice",$_hmtl,$_SESSION['invoice_path'].'invoice_'.$_invoice_number.'.pdf');
+        
         if($_result_mail==false){
             return $_mailController->getMessageError();
         }else{
@@ -241,6 +244,7 @@ class pdfController{
         
     }
 
+    //USE FOR UPDATES ORDERS
     function paymentConfirmation2($_orderID,$object_order,$_amount=0,$_stripe_id="",$_paymentType="",$_action_type=""){
         
         if($_amount>0){
@@ -364,7 +368,16 @@ class pdfController{
             $_actual_time=0;
             $_hour_value=0;
         }
-
+        $_text_deposit='';
+        if(strcmp($_order['Status'],'K')==0){
+            if(isset($_order['Deposit'])){
+                if(!empty($_order['Deposit'])){
+                    $_text_deposit='<tr>
+                                        <td><b>Deposit</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>- $'.$_order['Deposit'].'.00</b></td>
+                                    </tr>';
+                }
+            }
+        }
         switch($_action_type){
             case "pay_emergency_service":
                 $head_text='<tr><td colspan="5">Thank you for ordering an '.$_order_type.'. Below, please find your invoice details.  </td></tr>';
@@ -453,6 +466,7 @@ class pdfController{
                 <td><b>Summary</b></td><td></td><td></td><td>Hour</td><td>Rate</td><td></td>
             </tr>'    
         .$summary_text.
+        $_text_deposit.
             '<tr>
                 <td><b>Grand Total Paid</b></td><td></td><td></td><td></td><td></td><td align="rigth"><b>$'.$_total_invoice.'.00</b></td>
             </tr>

@@ -31,11 +31,10 @@
 
 							<h3>Here’s How It Works</h3>
 							<ul>
-								<li>Visit RoofServiceNow.com or download the RoofServiceNow app on IOS or Android and answer 5 questions</li>
-								<li>A local, pre-screened and customer-rated service professional will take your order and connect with you to repair your leaky roof.</li>
+								<li>Answer 4 questions and create your job order.</li>
+								<li>A local, pre-screened service professional will take your job order and connect with you to repair your leaky roof.</li>
 								<li>You will be able to track your service professional as he/she arrives at your residence, see when they start and complete work, review before and after pictures, approve all estimates prior to work, and easily pay on line.</li>
 							</ul>
-							<a class="btn-more" href="#">learn more</a>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4">

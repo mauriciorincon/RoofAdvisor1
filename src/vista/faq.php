@@ -21,18 +21,18 @@
                     </p>
 </div>
 <div class="faq-head">
-	<h1 style="padding-top:105px;">Contractors Section and Grow Your Business.</h1>
+	<h1 style="padding-top:105px;">Contractors Section</h1>
 </div>
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
-		<li><a class="selected" href="#roof-stuff">Roof Stuff</a></li>
+		<li><a class="selected" href="#roof-stuff">Features</a></li>
 		<li><a href="#Cost">Cost</a></li>
 		<li><a href="#Account">Sign Up</a></li>
 	</ul> <!-- cd-faq-categories -->
 
 	<div class="cd-faq-items">
 		<ul id="roof-stuff" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>Roof Stuff</h2></li>
+			<li class="cd-faq-title"><h2>The right Software for the right cost</h2></li>
 			<li>
 				<a class="cd-faq-trigger" href="#0">How does RoofServiceNow Pro work?</a>
 				<div class="cd-faq-content">

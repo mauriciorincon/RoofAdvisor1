@@ -13,7 +13,7 @@
 
 $mailController = new emailController();
 
-        $result_mail=$mailController->sendMailSMTP("mhernandez@viaplix.com",$subject,"<p>This is this regarding the following matter: </br>'".$message."'</br></br>This message was sent from : '".$name."' and can be reached at '".$email."'</p>","");
+        $result_mail=$mailController->sendMailSMTP("support@roofservicenow.com",$subject,"<p>This is this regarding the following matter: </br>'".$message."'</br></br>This message was sent from : '".$name."' and can be reached at '".$email."'</p>","");
         if($result_mail==false){
             return $mailController->getMessageError();
         }else{

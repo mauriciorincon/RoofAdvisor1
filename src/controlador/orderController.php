@@ -46,7 +46,7 @@ class orderController{
         return $_orders;
     }
 
-    public function insertOrder($arrayDataOrder,$emailCustomer=""){
+    public function insertOrder($arrayDataOrder,$emailCustomer="",$action_type){
         $_result_invoice="";
         $this->_userController=new userController();
         $this->_orderModel=new orderModel();
@@ -87,6 +87,12 @@ class orderController{
             $_scheduleDate="";
         }
         $_firstStatus="";
+        $_ActAmtMat="";
+        $_ActAmtTime="";
+        $_ActTime="";
+        $_EstAmtMat="";
+        $_EstAmtTime="";
+        $_EstTime="";
         switch($arrayDataOrder['RequestType']){
             case "E":
                 $_firstStatus="A";
@@ -103,6 +109,19 @@ class orderController{
                     $arrayDataOrder['CompanyID']="CO000000";
                 }
                 $arrayDataOrder['ContractorID']="";
+                $_otherController= new othersController();
+                $_reportValue = $_otherController->getParameterValue("Parameters"."/"."AmountReport");
+                if(empty($_reportValue)){
+                    $_reportValue=0;
+                }else{
+                    $_reportValue=$_reportValue/100;
+                }
+                $_ActAmtMat="$_reportValue";
+                $_ActAmtTime="0";
+                $_ActTime="0";
+                $_EstAmtMat="$_reportValue";
+                $_EstAmtTime="0";
+                $_EstTime="0";
                 break;
             case "P":
                 $_firstStatus="T";
@@ -112,9 +131,9 @@ class orderController{
                 break;
         }
         $Order = array(
-            "ActAmtMat" => "",
-            "ActAmtTime" => "",
-            "ActTime" => "",
+            "ActAmtMat" => $_ActAmtMat,
+            "ActAmtTime" => $_ActAmtTime,
+            "ActTime" => $_ActTime,
             "AfterPICRefID" => "",
             "AmtER" => "",
             "AppEst" => "",
@@ -126,9 +145,9 @@ class orderController{
             "CustomerFBID" => $_customerK,
             "DateTime" => date('m/d/Y H:i:s'),
             "ETA" => "",
-            "EstAmtMat" => "",
-            "EstAmtTime" => "",
-            "EstTime" => "",
+            "EstAmtMat" => $_EstAmtMat,
+            "EstAmtTime" => $_EstAmtTime,
+            "EstTime" => $_EstTime,
             "FBID" => "",
             "Hlevels" => $arrayDataOrder['Hlevels'],
             "InvoiceNum" => "",
@@ -137,8 +156,8 @@ class orderController{
             "OrderNumber" => "$_lastOrderNumber",
             "PaymentType" => "",
             "RepAddress" => $arrayDataOrder['Address'],
-            "RepCity" => $_customer['City'],
-            "RepState" => $_customer['State'],
+            "RepCity" => $arrayDataOrder['RepCity'],
+            "RepState" => $arrayDataOrder['RepState'],
             "RepZIP" => $arrayDataOrder['RepZIP'],
             "RequestType" => $arrayDataOrder['RequestType'],
             "Rtype" => $arrayDataOrder['Rtype'],
@@ -163,7 +182,8 @@ class orderController{
                 $_objPDF=new pdfController();
                 $Order['FBID']=$_result->getKey();
                 //create invoce for customer
-                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe']);
+                $_result_invoice=$_objPDF->paymentConfirmation1($_lastOrderNumber,$Order,$arrayDataOrder['amount_value'],$arrayDataOrder['id_stripe'],$action_type);
+                
             }
         }
         return $_result." - ".$_result_invoice;

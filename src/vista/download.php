@@ -21,7 +21,7 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 custom-width mb-20">
 						<div class="single-service text-center" style="height:269px;">
-							<h3>Andriod </h3>
+							<h3>Android </h3>
 							<p><img src="img/download/AndroidApp.png" style="width:450px;"  alt="" /></p>
 						</div>
 					</div>
