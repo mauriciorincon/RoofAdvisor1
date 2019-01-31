@@ -193,9 +193,7 @@
 
             </script>
             
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHuYRyZsgIxxVSt3Ec84jbBcSDk8OdloA&libraries=visualization&libraries=places&callback=initMapMobile">
-        </script>
+        
         </div>
     </div>
 </div>  

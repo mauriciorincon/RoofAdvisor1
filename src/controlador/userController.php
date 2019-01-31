@@ -9,7 +9,7 @@ require_once($_SESSION['application_path']."/controlador/emailController.php");
 require_once($_SESSION['application_path']."/controlador/calendarController.php");
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
-require_once($_SESSION['appalication_path']."/controlador/payingController.php");
+require_once($_SESSION['application_path']."/controlador/payingController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 require_once($_SESSION['application_path']."/vista/usefull_urls.php");
 

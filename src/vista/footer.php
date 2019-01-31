@@ -293,14 +293,14 @@ $("#mobnavtxt ul li a").click(function() {
 
  	// Initialize the leaveStep event
  	$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-		 alert("You are on step "+stepNumber+" now"); 
+		 //alert("You are on step "+stepNumber+" now"); 
 		 return true;
          //return confirm("Do you want to leave the step "+stepNumber+"?");
       });
       
       // Initialize the showStep event
       $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
-         alert("You are on step "+stepNumber+" now");
+         //alert("You are on step "+stepNumber+" now");
       });
  
       // Initialize the beginReset event

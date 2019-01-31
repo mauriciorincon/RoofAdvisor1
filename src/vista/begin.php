@@ -3,7 +3,8 @@
 <script>
 				function initialization(){
 					
-					initMap1();
+          initMap1();
+          initMapMobile();
 				}
 </script>
 <!-- Dashboard New Order -->
