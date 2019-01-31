@@ -1357,7 +1357,8 @@ $('#step3OtypeService').click(function() {
     $("#step3OtypeService").removeClass("active");
     $("#step2OtypeService").removeClass("active");
     $(this).addClass("active");
-    var type=$(this).find('input:hidden').val();
+    var type="roofreport";
+    $("name[typeServiceOrder]").val('roofreport');
     showHideSteps(type);
     $("#step2OtypeService").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");

@@ -13,7 +13,10 @@
 	require_once($_SESSION['application_path']."/controlador/othersController.php");
 
 	$_otherModel=new othersController();
-	$_array_state=$_otherModel->getParameterValue('Parameters/state');
+  $_array_state=$_otherModel->getParameterValue('Parameters/state');
+  
+  
+  //include_once('vista/mob-wiz.php');
 	include_once('vista/order_request.php');
 	//echo $order_request
 ?>
