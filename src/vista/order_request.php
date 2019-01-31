@@ -199,18 +199,18 @@
         </div>
     </div>
     <button id="mainplaybtn1" class="btnvid1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4" data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
-     <div id="roofreportbox1" class="panel-body" align="left">
-                                <div class="list-group" id="step3OtypeService">
+     <div id="roofreportbox1" class="panel-body roofbox1"  align="left">
+                                <div class="list-group roofreportbox2" >
  <div class="panel-heading wizhead" style="color: #fff;"><strong>If you need to order a roof report. Click Below!</strong></div>
-                                        <a href="#" class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
+                                        <div class="list-group-item" name="linkServiceType" onClick="" id="linkServiceTyperoof">
                                                 <input type="hidden" value="roofreport" name="typeServiceOrder">
                                                 <table>
                                                         <tr>
                                                                 <td style="padding: 12px 12px 12px 12px;">
-                                                                        <button class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
+                                                                        <button id="step3OtypeService" class=" btn-primary   btn-lg" type="button" style="width:160px">Order Roof Report</button>
                                                                 </td>
                                                                 <td style="padding: 12px 12px 12px 12px;">
-                                                                <h4 style="font-size:.8vw;text-align:justify;">Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.<a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" > See Sample below </a> </h4>
+                                                                <h4 id="rrtxtbox1" style="text-align:justify;">Get a detailed roof report for $29 within 2 hours. We create accurate aerial roof measurements and diagrams you can use to estimates material cost to replace your roof. If we cannot create the roof report for you due to aerial obstructions or roof complexity, we will refund your money guaranteed.<a href=<?php echo $_SESSION['rsn_documents_path']."SampleReport.pdf"; ?> style="color: #fa511a;" target="_blank" > See Sample </a> </h4>
                                                                 </td>
                                                         </tr>
                                                 </table>
@@ -219,7 +219,7 @@
                                                 <span></span>
 
                                                 </div>
-                                        </a>
+                                        </div>
                                 </div>
                         </div>
 
@@ -477,7 +477,7 @@
 				</div>-->
 
                 <button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>
-                <button class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
+                <button id="prev-step1-btn" class="btn btn-primary prevBtnOrder pull-left" type="button">Previous</button>
             </div>
 
 		</div>
@@ -951,7 +951,7 @@
                 <p>
 				<table id="wizloginbtn1" class="logbox3" >
 					<tr>
-						<td><h1 style="margin-right: 13px;" class="labeltwht">Please</h1></td>
+						<td><h1 style="margin-right: 13px;" class="logintxtbtns1 labeltwht">Please</h1></td>
 						<td></td>
 						<td><a style="margin-right:13px;" class="btn-primary btn-lg" data-toggle="modal" data-toggle1="tooltip"  
 							href="#" 
@@ -960,7 +960,7 @@
 						<!--<td><a href="#" onclick="login_customer_order_request()">login</a></td>-->
 						<!--<td>&#32;<button class="btn-primary btn-lg" type="button" id="button1" name="button1" onclick="login_customer_order_request()">login</button>&#32;</td>-->
 						<td></td>
-						<td><h1 style="margin-right: 10px;" class="labeltwht">or</h1></td>
+						<td><h1 style="margin-right: 10px;" class="logintxtbtns1 labeltwht">or</h1></td>
 						<!--<td><h1><a href="#register-modal" data-toggle="modal">register</a></h1></td>
 						<td><button class="btn-primary btn-lg" type="button" id="button2" name="button2" onclick="login_customer_order_request()">register</button></td>-->
 						<td></td>

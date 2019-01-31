@@ -32,4 +32,6 @@ class StackTest extends TestCase
         $this->assertEmpty($stack);
     }
 }
+
+
 ?>

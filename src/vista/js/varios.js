@@ -1259,12 +1259,6 @@ $(document).ready(function () {
     }
 
     $(document).ready(function(){
-    if($('#zipCodeBegin').css('display') != 'none'){
-         $('#mainplaybtn1').show();
-        }
- if($('#mainplaybtn1').css('display') != 'none'){
-         $('#roofreportbox1').show();
-       }
         $('#firstNextBegin').hide();
         $('#zipCodeBegin').keyup(function(e) {
             
@@ -1314,7 +1308,9 @@ $(document).ready(function () {
                 });
             }                    
         });       
-      });
+      
+ 
+});
 
    
 ////////////////////////////////////////////////////////////////////////////////
@@ -1357,14 +1353,14 @@ $('#step2OtypeService').on('click', 'a', function(){
    return false;
 });
 
-$('#step3OtypeService').on('click', 'a', function(){
-    $("#step3OtypeService a").removeClass("active");
-    $("#step2OtypeService a").removeClass("active");
+$('#step3OtypeService').click(function() {
+    $("#step3OtypeService").removeClass("active");
+    $("#step2OtypeService").removeClass("active");
     $(this).addClass("active");
     var type=$(this).find('input:hidden').val();
     showHideSteps(type);
-    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
-    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $("#step2OtypeService").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    $("#step3OtypeService").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService(type);
     showHideElementByService(type);
@@ -1373,7 +1369,8 @@ $('#step3OtypeService').on('click', 'a', function(){
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
     curStepWizard.attr('disabled', 'disabled');
-    
+    $('roofreportbox1').hide();
+    $('mainplaybtn1').hide(); 
    return false;
 });
 
@@ -4463,38 +4460,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                      orderIDSplit=dataSplit[2].split("/");
                      orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                 }
-                    /*if (selectionType=="newCustomer"){
-                        var firstCustomerName = $("input#firstCustomerName").val();
-                        var lastCustomerName = $("input#lastCustomerName").val();
-                        var emailValidation = $("input#emailValidationCustomer").val();
-                        var customerAddress = $("input#customerAddress").val();
-                        var customerCity = $("input#customerCity").val();
-                        var customerState = $("select#customerState").val();
-                        var customerZipCode = $("input#customerZipCode").val();
-                        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
-
-                        $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
-                                                        "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
-                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password,
-                                                    "selectionType":selectionType,"source_call":"company_dash"}, null, "text" )
-                        .done(function( dataC, textStatusC, jqXHRC ) {
-                            if ( console && console.log ) {
-                                var n = dataC.indexOf("Error");
-                                if(n==-1){
-                                    arrayChanges="CustomerID,"+dataC;
-                                    updateOrder(orderIDSplit1[0],arrayChanges)
-                                }
-                                console.log(dataC);
-                            }
-                        })
-                        .fail(function( jqXHR, textStatus, errorThrown ) {
-                            if ( console && console.log ) {
-                                console.log( "La solicitud a fallado: " +  textStatusC);
-                                result=false;
-                                
-                            }
-                        });
-                    }*/
+                   
                      $("#myOrderByCustomer").modal("hide");
 
                     //$('#myModalRespuestaOrder div#textAnswerOrder').html(data+'');

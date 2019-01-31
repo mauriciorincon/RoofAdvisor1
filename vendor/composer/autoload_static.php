@@ -81,8 +81,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         ),
         'L' => 
         array (
+            'League\\OAuth2\\Server\\' => 21,
             'League\\OAuth2\\Client\\' => 21,
             'League\\Flysystem\\' => 17,
+            'League\\Event\\' => 13,
             'Lcobucci\\JWT\\' => 13,
         ),
         'K' => 
@@ -108,6 +110,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
             'Firebase\\JWT\\' => 13,
             'Firebase\\Auth\\Token\\' => 20,
             'Fig\\Http\\Message\\' => 17,
+        ),
+        'D' => 
+        array (
+            'Defuse\\Crypto\\' => 14,
         ),
         'C' => 
         array (
@@ -156,6 +162,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'League\\OAuth2\\Server\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/oauth2-server/src',
+        ),
         'League\\OAuth2\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-client/src',
@@ -164,6 +174,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'League\\Event\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/event/src',
         ),
         'Lcobucci\\JWT\\' => 
         array (
@@ -217,6 +231,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
         ),
+        'Defuse\\Crypto\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
+        ),
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -235,6 +253,10 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
 
     public static $classMap = array (
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'Firebase\\Error' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseError.php',
+        'Firebase\\FirebaseInterface' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseInterface.php',
+        'Firebase\\FirebaseLib' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseLib.php',
+        'Firebase\\FirebaseStub' => __DIR__ . '/..' . '/ktamas77/firebase-php/src/firebaseStub.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="name-of-project" default="full-build">
-<property name="php_bin"  value="/usr/local/opt/php@7.2/bin/php"/>
+ <!-- property environment="env" / -->
+ <property name="php_bin"  value="php"/>
  <!-- By default, we assume all tools to be on the $PATH 
  <property name="pdepend" value="pdepend"/>
  <property name="phpcpd"  value="phpcpd"/>
@@ -336,7 +337,7 @@
    <arg value="${phpunit}"/>
    <arg value="--configuration"/>
    <!-- arg path="${basedir}/build/phpunit.xml"/ -->
-   <arg path="${basedir}/phpunit.xml"/>
+   <arg path="${basedir}/build/phpunit.xml"/>
   </exec>
 
   <property name="phpunit.done" value="true"/>
