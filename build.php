@@ -1,7 +1,6 @@
 <?php
 
-class BuildPhar
-{
+class BuildPhar {
   private $_sourceDirectory = null;
   private $_stubFile        = null;
   private $_outputDirectory = null;
