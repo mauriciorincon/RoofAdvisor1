@@ -1207,6 +1207,11 @@ class userController{
     }
 
     public function changePassword($table,$userId,$newPassword){
+        if(strcmp($table,"customer")==0){
+            $_extra_path="?controller=user&accion=dashboardCustomer";
+        }else if(strcmp($table,"company")==0){
+            $_extra_path="?controller=user&accion=dashboardCompany";
+        }
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
             $_dir=$_SERVER['REQUEST_URI'];
             $pos1 = strpos($_dir,"/");

@@ -4460,38 +4460,7 @@ function insertOrderRoofReport(idStripeCharge,amountValue,action_type){
                      orderIDSplit=dataSplit[2].split("/");
                      orderIDSplit1=orderIDSplit[orderIDSplit.length-1].split(' - ');
                 }
-                    /*if (selectionType=="newCustomer"){
-                        var firstCustomerName = $("input#firstCustomerName").val();
-                        var lastCustomerName = $("input#lastCustomerName").val();
-                        var emailValidation = $("input#emailValidationCustomer").val();
-                        var customerAddress = $("input#customerAddress").val();
-                        var customerCity = $("input#customerCity").val();
-                        var customerState = $("select#customerState").val();
-                        var customerZipCode = $("input#customerZipCode").val();
-                        var customerPhoneNumber = "+1"+$("input#customerPhoneNumber").val();
-
-                        $.post( "controlador/ajax/insertCustomer.php", { "firstCustomerName" : firstCustomerName,"lastCustomerName": lastCustomerName,"emailValidation":emailValidation,
-                                                        "customerAddress":customerAddress,"customerCity":customerCity,"customerState":customerState,
-                                                    "customerZipCode":customerZipCode,"customerPhoneNumber":customerPhoneNumber,"password":password,
-                                                    "selectionType":selectionType,"source_call":"company_dash"}, null, "text" )
-                        .done(function( dataC, textStatusC, jqXHRC ) {
-                            if ( console && console.log ) {
-                                var n = dataC.indexOf("Error");
-                                if(n==-1){
-                                    arrayChanges="CustomerID,"+dataC;
-                                    updateOrder(orderIDSplit1[0],arrayChanges)
-                                }
-                                console.log(dataC);
-                            }
-                        })
-                        .fail(function( jqXHR, textStatus, errorThrown ) {
-                            if ( console && console.log ) {
-                                console.log( "La solicitud a fallado: " +  textStatusC);
-                                result=false;
-                                
-                            }
-                        });
-                    }*/
+                   
                      $("#myOrderByCustomer").modal("hide");
 
                     //$('#myModalRespuestaOrder div#textAnswerOrder').html(data+'');
