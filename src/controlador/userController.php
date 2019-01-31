@@ -455,17 +455,17 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'company');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','company');
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','company');
 
                         return $_message;
                         
                     }
                     
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
+                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','company');
                     return $_message;
                 }
             }else{
@@ -497,14 +497,14 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Customers');
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Customers');
                         return $_message;
                     }
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger');
+                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
                     return $_message;
                 }
             }else{
@@ -523,10 +523,10 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserContractor($user,$properties,'driver');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success');
+                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Contractors');
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger');
+                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Contractors');
                         return $_message;
                     }
                 }
@@ -1111,16 +1111,28 @@ class userController{
         return $_message;
     }
 
-    public function messageValidateUser($message,$icon_message){
+    public function messageValidateUser($message,$icon_message,$table){
+        $_path_extra="";
+        switch($table){
+            case "company":
+                $_path_extra="?controller=user&accion=dashboardCompany";
+                break;
+            case "Customers":
+                $_path_extra="?controller=user&accion=dashboardCustomer";
+                break;
+            case "Contractors":
+                $_path_extra="?controller=user&accion=dashboardCompany";
+                break;
+        }
         if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
             $_dir=$_SERVER['REQUEST_URI'];
             $pos1 = strpos($_dir,"/");
             $pos2 = strpos($_dir,"/", $pos1 + 1);
             //echo "<br>hola:".substr($_dir,$pos1+1,$pos2-1);
             $_path2="/".substr($_dir,$pos1+1,$pos2-1);
-            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2;
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path2."/src/".$_path_extra;
         }else{
-            $_path1="http://" . $_SERVER['HTTP_HOST'];
+            $_path1="http://" . $_SERVER['HTTP_HOST'].$_path_extra;
         }
 
         return '<!-- Redirection Counter -->
