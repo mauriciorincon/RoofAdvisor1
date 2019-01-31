@@ -319,6 +319,24 @@ $("#mobnavtxt ul li a").click(function() {
       });
 
 	  $('html,body').scrollTop(0);
+
+      $('#prev-step1-btn').click(function() {
+       
+      $('#roofreportbox1').show();
+      
+
+      });
+
+      $('#step3OtypeService').click(function(){
+       $('#roofreportbox1').hide();
+       $('#mainplaybtn1').hide();
+      });
+      
+      $('#firstNextBegin').click(function(){
+       $('#roofreportbox1').hide();
+       $('#mainplaybtn1').hide();
+      });
+
 });
 
 </script>

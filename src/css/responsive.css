@@ -35,6 +35,20 @@ font-size:9px;
 }
 #appfrm1{
 margin-top:-20px !important;
+background-size:200%;
+}
+.logbox1{
+    background: url(../img/ipadloginimg.png);
+    background-color: rgba(29, 29, 29, 0.86);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position-x: 80px;
+}
+.logbox2{
+margin-left:0;
+}
+.logintxtbtns1{
+font-size:20px;
 }
 .service-box {
   padding: 35px 20px;
