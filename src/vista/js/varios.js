@@ -1334,26 +1334,30 @@ $('#step7ListCompany').on('click', 'a', function(){
 });
 
 //Select type order
-$('#step2OtypeService').on('click', 'a', function(){
-    $("#step2OtypeService a").removeClass("active");
-    $("#step3OtypeService a").removeClass("active");
-    $(this).addClass("active");
-    var type=$(this).find('input:hidden').val();
+//$('#step2OtypeService,#step2OtypeService1,#step2OtypeService2,#step2OtypeService3').on('click', function(){
+$('button[name="step2OtypeService"]').on('click', function(){
+    //$("#step2OtypeService a").removeClass("active");
+    //$("#step3OtypeService a").removeClass("active");
+    //$(this).addClass("active");
+    var type=$(this).parent().parent().parent().parent().parent().find('input:hidden').val();
     showHideSteps(type);
-    $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
-    $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
-    $(this).find('button').removeClass("btn-primary").addClass("btn-success");
+    $('button[name="step2OtypeService"]').removeClass("btn-success").addClass("btn-primary");
+    $(this).removeClass("btn-primary").addClass("btn-success");
+    //$("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    //$("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
+    //$(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService(type);
     showHideElementByService(type);
     nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
     curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
     nextStepWizard.removeAttr('disabled').trigger('click');
     curStepWizard.attr('disabled', 'disabled');
-    
+    $('#roofreportbox1').hide();
+    $('#mainplaybtn1').hide(); 
    return false;
 });
 
-$('#step3OtypeService').click(function() {
+/*$('#step3OtypeService').click(function() {
     $("#step3OtypeService").removeClass("active");
     $("#step2OtypeService").removeClass("active");
     $(this).addClass("active");
@@ -1373,7 +1377,7 @@ $('#step3OtypeService').click(function() {
     $('roofreportbox1').hide();
     $('mainplaybtn1').hide(); 
    return false;
-});
+});*/
 
 function setServiceType(){
     $("#step2OtypeService a").removeClass("active");
@@ -1548,7 +1552,8 @@ $(document).ready(function () {
                 $('#myModalRespuesta').modal({backdrop: 'static'});
             }else{
                 //var RequestType=$("a[name=linkServiceType].active > input:hidden[name='typeServiceOrder']").val();
-                var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                
+                var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                 if(RequestType==undefined || RequestType==''){
                     RequestType=$('select#typeServiceCompany').val();
                 }
@@ -1714,7 +1719,7 @@ $(document).ready(function () {
         }
 
         if (curStepBtn=="step-6"){
-            var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+            var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
             if(RequestType==undefined || RequestType==''){
                 RequestType=$('select#typeServiceCompany').val();
             }
@@ -1918,7 +1923,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         }
     }
     var RepZIP=$('input:hidden[name=step5ZipCode]').val();
-    var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
     if(RequestType==undefined || RequestType==''){
         RequestType=$('select#typeServiceCompany').val();
     }
@@ -2026,7 +2031,7 @@ function validateIsLoggedIn(){
                 if(n==-1){
 
                     if(data.profile=='customer'){
-                        var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                         
                         if(RequestType=='emergency' || RequestType=='roofreport'){
                             $('#userLoguedIn').val(true);
@@ -2064,7 +2069,7 @@ function validateIsLoggedIn(){
                         jsRemoveWindowLoad('');
                     }else if(data.profile=='company'){
                         
-                        var RequestType=$("a[name=linkServiceType] button.btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                         if(RequestType==undefined || RequestType==''){
                             RequestType=$('select#typeServiceCompany').val();
                         }
