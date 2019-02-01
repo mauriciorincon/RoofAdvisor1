@@ -1415,7 +1415,13 @@ function getValueService(RequestType){
             break;
         case 'roofreport':
             order_type_request_val='R';
-            action_type='pay_company_roofreport';
+            profile=$('companyIDhidden').val();
+            if(profile==undefined || profile=='' || profile==null){
+                action_type='pay_customer_roofreport';
+            }else{
+                action_type='pay_company_roofreport';
+            }
+            
             break;
         case 'generic':
             order_type_request_val='G';
