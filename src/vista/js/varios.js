@@ -1606,7 +1606,7 @@ $(document).ready(function () {
                 isValid=false;
             }else{
                 if(customerID==undefined || customerID=='' || customerID==null){
-                    getListContractor(); 
+                    getListContractor("step7ListCompany","list"); 
                 }else{
                     var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
                     var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
@@ -1780,12 +1780,12 @@ function hideShowOptionsTypeRequest(){
 }
 
 
-function getListContractor(){
+function getListContractor(element,typeOutput){
     jsShowWindowLoad('');
-    $.post( "controlador/ajax/getListContractor.php", { }, null, "text" )
+    $.post( "controlador/ajax/getListContractor.php", {"typeOutput":typeOutput }, null, "text" )
     .done(function( data, textStatus, jqXHR ) {
         if ( console && console.log ) {
-            $('#step7ListCompany').html(data);
+            $('#'+element).html(data);
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
         }
         jsRemoveWindowLoad();

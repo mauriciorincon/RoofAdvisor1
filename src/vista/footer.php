@@ -294,6 +294,9 @@ $("#mobnavtxt ul li a").click(function() {
  	// Initialize the leaveStep event
  	$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
 		 //alert("You are on step "+stepNumber+" now"); 
+		 if(stepNumber==4){
+			getListContractor("selectCompanyMobWizard","select"); 
+		 }
 		 return true;
          //return confirm("Do you want to leave the step "+stepNumber+"?");
       });

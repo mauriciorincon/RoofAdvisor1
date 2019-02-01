@@ -7,6 +7,10 @@
         <li><a href="#step-2">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-3">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-4">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-5">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-6">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-7">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-8">Step Title<br /><small>Step description</small></a></li>
     </ul>
 
     <div>
@@ -194,6 +198,96 @@
             </script>
             
         
+        </div>
+        <div id="step-5" class="">
+            <label>Select a Date & Time for service</label>
+            <label>Select the date of service.</label>
+            <input type="text" id="step6date" name="step6date" class="datepicker"
+                                style="font-size:24px;text-align:center;">
+            <label>Select the time of service.</label>
+            <input type="text" name="step6time" id="step6time" class="timepicker1"
+                                style="z-index: 105100;font-size:24px;text-align:center;" />
+        </div>
+        <div id="step-6" class="">
+            <label>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.
+                You can select one or the first available will respond to your work order?</label>
+            <select id="selectCompanyMobWizard">
+
+            </select>
+        </div>
+        <div id="step-7" class="">
+            <label>Review Your Order Details</label>
+            <a href="#" class="list-group-item ">
+                <span class="glyphicon glyphicon-envelope"></span> Details
+                <div class="d-flex w-100 justify-content-between">
+                    <span><b>Repair Description:</b> Roof Material: </span><span
+                        id="step8RepairDescription"></span><br>
+                    <span><b>Schedule Date: </b></span><span id="step8Schedule"></span><br>
+                    <span><b>Time: </b></span><span id="step8Time"></span>
+                </div>
+            </a>
+            <div class="list-group">
+                <a href="#" class="list-group-item ">
+                    <span class="glyphicon glyphicon-wrench"></span> Contractor
+                    <div class="d-flex w-100 justify-content-between">
+                        <span><b>Name: </b></span><span id="step8CompanyName"></span><br>
+
+                    </div>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item ">
+                    <span class="glyphicon glyphicon-map-marker"></span> Address of service
+                    <div class="d-flex w-100 justify-content-between">
+                        <span><b>Address: </b></span><span id="step8Address"></span><br>
+                        <span><b>ZipCode: </b></span><span id="step8ZipCode"></span><br>
+                        <!--<span ><b>Latitude: </b></span><span id="step8Latitude"></span><br>
+                        <span ><b>Longitude: </b></span><span id="step8Longitude"></span><br>-->
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="step-8" class="">
+            <div class="list-group">
+                <a href="#" class="list-group-item ">
+                    <span class="glyphicon glyphicon-info-sign"></span>Emergency Service
+                    <div class="d-flex w-100 justify-content-between">
+                        <b>Emergency Repair Service Charge of $79 is the initial cost to secure the same
+                            day service response from a qualified, pre-screened service professional. If
+                            the service professional is unable to provide service within 24 hours from
+                            the time you submit payment, we will refund the emergency repair charge.</b>
+                    </div>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item ">
+                    <span class="glyphicon glyphicon-info-sign"></span>Roof Report
+                    <div class="d-flex w-100 justify-content-between">
+                        <b>Ordering a Roof Report cost $29. We create detailed aerial roof measurements
+                            and diagrams that are sent to you via email and can be viewed in our web
+                            site. If we cannot create a roof report for you due to obstructions or roof
+                            complexity, we will refund your money.</b>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-12">
+                            <label class="control-label text-center h1 h1white" name="procedeText"
+                                id="procedeText"><big>To initiate the emergency repair process, click on the “Agree to
+                                    Initiate Service” button.</big></label>
+                            <?php
+							if(!isset($_SESSION)) { 
+								session_start(); 
+							} 
+							require_once($_SESSION['application_path']."/controlador/payingController.php");
+							
+						
+							$_objPay=new payingController();
+							echo "<center>";
+							$_objPay->showPayingWindow1("Agree to Initiate Service");
+							echo "</center>";
+						?>
+                        </div>
         </div>
     </div>
 </div>  
