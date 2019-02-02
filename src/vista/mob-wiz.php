@@ -271,23 +271,9 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-12">
-                            <label class="control-label text-center h1 h1white" name="procedeText"
-                                id="procedeText"><big>To initiate the emergency repair process, click on the “Agree to
-                                    Initiate Service” button.</big></label>
-                            <?php
-							if(!isset($_SESSION)) { 
-								session_start(); 
-							} 
-							require_once($_SESSION['application_path']."/controlador/payingController.php");
-							
-						
-							$_objPay=new payingController();
-							echo "<center>";
-							$_objPay->showPayingWindow1("Agree to Initiate Service");
-							echo "</center>";
-						?>
-                        </div>
+            <div>
+                <button class="btn">"Agree to Initiate Service"</button>
+            </div>
         </div>
     </div>
 </div>  
