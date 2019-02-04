@@ -5448,3 +5448,7 @@ function generateReportFile(){
 function fire_next_step(){
     $( ".sw-btn-next" ).trigger( "click" );
 }
+
+function fire_prev_step(){
+    $( ".sw-btn-prev" ).trigger( "click" );
+}

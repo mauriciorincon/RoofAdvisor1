@@ -202,10 +202,10 @@
         <div id="step-5" class="">
             <label>Select a Date & Time for service</label>
             <label>Select the date of service.</label>
-            <input type="text" id="step6date" name="step6date" class="datepicker"
+            <input type="text" id="step6date" name="step6date" class="datepicker form-control"
                                 style="font-size:24px;text-align:center;">
             <label>Select the time of service.</label>
-            <input type="text" name="step6time" id="step6time" class="timepicker1"
+            <input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
                                 style="z-index: 105100;font-size:24px;text-align:center;" />
         </div>
         <div id="step-6" class="">

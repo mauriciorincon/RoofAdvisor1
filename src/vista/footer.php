@@ -293,9 +293,22 @@ $("#mobnavtxt ul li a").click(function() {
 
  	// Initialize the leaveStep event
  	$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-		 //alert("You are on step "+stepNumber+" now"); 
-		 if(stepNumber==4){
+		switch(stepNumber){
+			 case 1:
+			 	type_service=$('#typeServiceCompany1').val();
+			 	if(type_service=="NA"){
+					 alert("Please select the service");
+					 return false;
+				 }
+				 
+			 	break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
 			getListContractor("selectCompanyMobWizard","select"); 
+
 		 }
 		 return true;
          //return confirm("Do you want to leave the step "+stepNumber+"?");
@@ -303,6 +316,41 @@ $("#mobnavtxt ul li a").click(function() {
       
       // Initialize the showStep event
       $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+		switch(stepNumber){
+			 case 1:
+			 	break;
+			case 2:
+				type_service=$('#typeServiceCompany1').val();
+				break;
+			case 3:
+				type_service=$('#typeServiceCompany1').val();
+				break;
+			case 4:
+				type_service=$('#typeServiceCompany1').val();
+				if(type_service=='schedule' || type_service=='schedule'){
+					getListContractor("selectCompanyMobWizard","select"); 
+				}else{
+					if(stepDirection=="backward"){
+						fire_prev_step();
+					}else{
+						fire_next_step();
+						fire_next_step();
+					}
+					
+				}
+			case 5:
+				type_service=$('#typeServiceCompany1').val();
+				if(type_service=='schedule' || type_service=='schedule'){
+				}else{
+					if(stepDirection=="backward"){
+						fire_prev_step();
+						fire_prev_step();
+					}else{
+						fire_next_step();
+					}
+				}
+
+		 }
          //alert("You are on step "+stepNumber+" now");
       });
  
