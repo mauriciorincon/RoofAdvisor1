@@ -300,7 +300,7 @@ $("#mobnavtxt ul li a").click(function() {
 					 alert("Please select the service");
 					 return false;
 				 }
-				 
+				 setServiceType();
 			 	break;
 			case 2:
 				break;
@@ -390,6 +390,9 @@ $("#mobnavtxt ul li a").click(function() {
 
 });
 
+</script>
+<script>
+    initMapMobile();
 </script>
 </body>
 </html>

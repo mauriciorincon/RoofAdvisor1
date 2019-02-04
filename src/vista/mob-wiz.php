@@ -21,7 +21,7 @@
         </div>
         <div id="step-2" class="">
             <label>Select Service</label>
-            <select id="typeServiceCompany1" name="typeServiceCompany1"  onchange="setServiceType()" class="form-control">
+            <select id="typeServiceCompany1" name="typeServiceCompany" class="form-control">
                 <option value="NA">---------------</option>
                 <option value="emergency">Emergency</option>
                 <option value="schedule">Schedule</option>
@@ -104,7 +104,7 @@
                 /////////////////////////////////////
 
                 var input = /** @type {!HTMLInputElement} */(
-                    document.getElementById('pac-input'));
+                    document.getElementById('pac-inputMob'));
 
                 var types = document.getElementById('type-selector');
                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -272,8 +272,9 @@
                 </a>
             </div>
             <div>
-                <button class="btn">"Agree to Initiate Service"</button>
+                <button class="btn" onclick="show_payment_window()">"Agree to Initiate Service"</button>
             </div>
         </div>
     </div>
 </div>  
+
