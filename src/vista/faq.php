@@ -15,71 +15,169 @@
 		<!--  service-area start  -->
 		<div class="service-area mobhead-area pt-80 pb-60">
 			<div class="container">
+                          <div id="faqtabphone"><img src="/img/tabphone.png"></div>
 				<div class="faq-secmob section-heading text-center">
-					<h1 >Frequently Asked Questions </h1>
-                                      <p>RoofServiceNow is a free digital marketplace for homeowners to connect with roof contractors for fast emergency roof services, scheduled repairs, and roof reports. Homeowners receive immediate responses from reliable pre-screened roofing professionals at the same time we provide the roofing company with the tools to service their customers, manage their crews, and the essential roofer resources. We combine an innovative digital marketplace with a superior roofing software. All in one platform!
-                    </p>
+					<h1 >The Right <strong>Software</strong> for your Company! </h1>
+                                      <p style="font-size:19px;">We combine superior roofing software with an innovative digital marketplace. Your smart and cautious. We are confident RoofServiceNow is the right decision now and in five years that will help you grow your company.  We are affordable for a single owner and powerful enough for a large company. We are the next generation all in one platform!</p>
 </div>
-<div class="faq-head">
-	<h1 style="padding-top:105px;">Contractors Section</h1>
+<div class="faq-head" style="height:140px;">
+	<h1 style="padding-top:55px;">Contractors Section</h1>
 </div>
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
-		<li><a class="selected" href="#roof-stuff">Features</a></li>
-		<li><a href="#Cost">Cost</a></li>
-		<li><a href="#Account">Sign Up</a></li>
-	</ul> <!-- cd-faq-categories -->
+		<li><a class="selected" href="#roof-cost">Cost</a></li>
+		<li><a href="#roof-features">Features</a></li>
+		<li><a href="#roof-leads">Our Leads</a></li>
+                <li><a href="#roof-payments">Payments</a></li>
+                <li><a href="#roof-support">Support</a></li>
+                <li><a href="#roof-customizability">Customizability</a></li>
+                <li><a href="#roof-support">Integration</a></li>
+              </ul> <!-- cd-faq-categories -->
 
 	<div class="cd-faq-items">
-		<ul id="roof-stuff" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>The right Software for the right cost</h2></li>
+        <ul id="" class="cd-faq-group">
+          <li class="cd-faq-title"><h2>The now the right Decision  for the right company</h2></li>
+         <p style="text-align:justify;">We know the roofing industry is changing fast. We are changing it together! With all this new technology improving field and office productivity, contractors now have more at stake when it comes to the early adoption and practical application of new tools as they come on the market.  We have integrated those tools into one, seamless application. <strong style="color:#fa511a">No bull!</strong></p>
+           </ul>
+		<ul id="roof-cost" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>Cost</h2></li>
 			<li>
-				<a class="cd-faq-trigger" href="#0">How does RoofServiceNow Pro work?</a>
+				<a class="cd-faq-trigger" href="#0">What does it cost?</a>
 				<div class="cd-faq-content">
-					<p>First we find homeowners looking for help with an emergency leaky roof who wants on demand roofing services. Our mobile and web applications allow the homeowner to easy submit work orders for roof repairs with all the relevant information. The work order is open to the first roof contractor who accepts the order based on service type and location preferences. The premium service comes with prepaid emergency fee. When you arrive at the residence, estimates, pictures, communication, and payment are all managed via the mobile app. <strong>It’s that easy</strong></p>
-				</div> <!-- cd-faq-content -->
-			</li>
-
-			<li>
-				<a class="cd-faq-trigger" href="#0">How much control do I have over the on demand service?</a>
-				<div class="cd-faq-content">
-					<p>Like Uber, Our online on demand service gives you full control, 24/7. You define which jobs to accept, your hours of your service and zip code preferences to ensure you only receive the types of requests you want. You can also specify in the app "offline" profiles to like your boss and customers you are not available for service. Sign up today to learn more!</p>
-				</div> <!-- cd-faq-content -->
-			</li>
-
-			<li>
-				<a class="cd-faq-trigger" href="#0">Do you offer any tools to manage the none on demand scheduled leads?</a>
-				<div class="cd-faq-content">
-					<p>Yes. We offer fully functional CRM tool with a robust master scheduler, fleet management tool, financial reporting tool that are user-friendly system that lets you categorize and organize your leads, keep track of communications, and connect with customers and your repair crew via sms, phone or email with the touch of a button. Our mobile app also lets you communicate with your repair crews, take these tools on the road to help you stay on top. And best of all, these tools of mobile and web application are all free for our customers.</p>
-				</div> <!-- cd-faq-content -->
+				<p>
+                                Our per user subscription is less than $20 per month! Its funny that our competitors think you can run a business with only one user using the software. For smaller growing companies, spending $250 for user subscriptions quickly adds up. We bundle our subscription in multiples of 3.  Whether you are small, medium, or large company, we are priced right for you. 
+                                </p>
+                                </div> <!-- cd-faq-content -->
 			</li>
 
 		</ul> <!-- cd-faq-group -->
 
-		<ul id="Cost" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>Cost</h2></li>
+		<ul id="roof-features" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>Features</h2></li>
 			<li>
-				<a class="cd-faq-trigger" href="#0">How much does RoofServiceNow cost?</a>
+				<a class="cd-faq-trigger" href="#0">What features does it have?</a>
 				<div class="cd-faq-content">
-					<p> The price of our service requests varies by whether it’s an emergency on demand request or a scheduled repair request. To learn more, <a href="?controller=user&accion=dashboardCustomer">Log In</a>, and create your account today.</p>
-				</div> <!-- cd-faq-content -->
+			        <p>More features, less cost! RoofServiceNow has powerful features that are easy to use. We are the only software to offer a digital marketplace for homeowners to submit job orders to grow your business and the software for you to manage your business. No bull! Compare for yourself.</p>	
+                             </div> <!-- cd-faq-content -->
 			</li>
 
 		
 		</ul> <!-- cd-faq-group -->
+                <ul id="roof-leads" class="cd-faq-group">
+                        <li class="cd-faq-title"><h2>Our leads</h2></li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Does RoofServiceNow provide leads?</a>
+                                <div class="cd-faq-content">
+                               <p>RoofServiceNow helps you get in front of lots of customers looking for pros like you. That’s free. <strong>You only pay for leads you take and only one contractor takes the lead.</strong></p> 
+                               </div> <!-- cd-faq-content -->
+                        </li>
+                        <li>
+				<a class="cd-faq-trigger" href="#0">So what is a lead?</a>
+				<div class="cd-faq-content">
+				<p>A customer who submits a job order in RoofServiceNow Customer portal for fulfillment by a contractor. The customer has the option of directly choosing you from a list or opts to have the first contractor respond to the job order. Leads are
+</br> </br>
+•	Customer creating a job order
+</br>
+•	Customer booking an appointment 
+</br></br>
+After that, it’s up to you to respond quickly and professionally, and show the customer you’re the best pro for the job.  
 
-		<ul id="account" class="cd-faq-group">
-			<li class="cd-faq-title"><h2>Sign up</h2></li>
+</p>
+                                </div> <!-- cd-faq-content -->
+			</li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">What affects cost? <strong style="color:#005678;">NOTHING!</strong></a>
+                                <div class="cd-faq-content">
+                               <p>Unlike other lead services, RoofServiceNow believes in forging a win-win partnership with you and charges a single, low rate for all repairs orders and a fixed, low rate for new/reroofs types. Unlike other lead service price leads based on a variable cost models, with RoofServiceNow you know exactly the cost of the qualified lead when you take it.</p>
+                               </div> <!-- cd-faq-content -->
+                        </li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">When you pay?</a>
+                                <div class="cd-faq-content">
+                               <p>It’s simple! You pay when you take the qualified job order submitted by the customer or the customer chooses you when they submit the job order and you take it. You will be able to chat with customer, call them, share pictures and documents, provide estimates, and payments all via the job order. </p>
+                               </div> <!-- cd-faq-content -->
+                        </li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Control your spending?</a>
+                                <div class="cd-faq-content">
+                                <p>You’re truly in charge of how much you spend!  You know exactly the cost of the leads and you are in charge of when you take a lead. It’s up to you of how many job orders you want to take or can handle. You can define a wallet budget that you draw down as you take leads. Or don’t have a wallet budget and pay for each lead at the time you take each lead. For instance, you don’t have a wallet budget and want to take one job order repair lead.  </p>
+                               </div> <!-- cd-faq-content -->
+                        </li>
+
+
+
+                </ul> <!-- cd-faq-group -->
+                <ul id="roof-payments" class="cd-faq-group">
+                        <li class="cd-faq-title"><h2>Payments</h2></li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Which are the accepted payment methods?</a>
+                                <div class="cd-faq-content">
+                                        <p>A part of your registration with RoofServiceNow, you need to save at least one credit or debit card to your account. The card will be used to pay for the job order leads you take, when ordering roof reports, when ordering your targeted postcard mailing, and order services.</p>
+                                </div> <!-- cd-faq-content -->
+                        </li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Add a credit card?</a>
+                                <div class="cd-faq-content">
+                               <p>  1. Go to your Profile page.</br></br>
+                                    2. Select Add a credit card in Payments Section.</br></br>
+                                    3. Enter your credit card information and select Add credit card.</br></br>
+
+                                    You’ll see a message letting you know you’ve successfully added your card.
+                                </p>
+                               </div> <!-- cd-faq-content -->
+                        </li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Anything else I need to know about payments?</a>
+                                <div class="cd-faq-content">
+                               <p>
+                                A few extra tips about payments :</br></br>
+            
+•	To remove a card, go to your Profile and update the fields and Save.</br></br>
+•	We use Stripe to process all credit card transactions. Learn more about how Stripe protects your information.</br></br>
+•	Your credit card or bank statement may show charges from Stripe. The charges will update automatically (usually within 24 hours) to show they’re from RoofServiceNow.</br></br>
+
+                                </p>
+                               </div> <!-- cd-faq-content -->
+                        </li>
+
+
+
+                </ul> <!-- cd-faq-group -->
+
+ 		<ul id="roof-support" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>Support </h2></li>
 			<li>
 				<a class="cd-faq-trigger" href="#0">How do I join?</a>
 				<div class="cd-faq-content">
-					<p><a href="?controller=user&accion=dashboardCustomer">Log In</a>, and create your account today</p>
+					<p>We know roofing and have been in the business for over 40 years in the industry. Our trained support staff are former roofers who have traded in their bull trowels for mice. They understand the software, the industry and are here to answer your questions and help you automate your business to the next level.</p>
 				</div> <!-- cd-faq-content -->
 			</li>
 
 		</ul> <!-- cd-faq-group -->
 
-		
+		<ul id="roof-customizability" class="cd-faq-group">
+                        <li class="cd-faq-title"><h2>Customizability</h2></li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">Is RoofServiceNow Customizable?</a>
+                                <div class="cd-faq-content">
+                                        <p>We love hearing from you on improving the features and software. We are open to discussing any customization of our features and software to better provide the service you need to run your business.  We encourage you to join our RSN user group of professional contractors. This is the forum for you to truly design the next iteration of RoofServiceNow. </p>
+                                </div> <!-- cd-faq-content -->
+                        </li>
+
+                </ul> <!-- cd-faq-group -->
+
+               <ul id="roof-integration" class="cd-faq-group">
+                        <li class="cd-faq-title"><h2>Integration</h2></li>
+                        <li>
+                                <a class="cd-faq-trigger" href="#0">How about intergration? </a>
+                                <div class="cd-faq-content">
+                                        <p>We know the roofing industry is changing fast. We are changing it together! With all this new technology improving field and office productivity, contractors now have more at stake when it comes to the early adoption and practical application of new tools as they come on the market.  We have integrated those tools into one, seamless application. No bull! </p>
+                                </div> <!-- cd-faq-content -->
+                        </li>
+
+                </ul> <!-- cd-faq-group -->
+
+
 	</div> <!-- cd-faq-items -->
 	<a href="#0" class="cd-close-panel">Close</a>
 </section> <!-- cd-faq -->		
