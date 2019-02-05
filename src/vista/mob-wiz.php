@@ -11,6 +11,7 @@
         <li><a href="#step-6">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-7">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-8">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-9">Step Title<br /><small>Step description</small></a></li>
     </ul>
 
     <div>
@@ -249,6 +250,15 @@
             </div>
         </div>
         <div id="step-8" class="">
+            <h2>Almost Done!</h2>
+            <label>User:</label>
+            <input type="text" name="userClientOrder" id="userClientOrderMob" class=" form-control"/>
+            <label>Password:</label>
+            <input type="text" name="passwordClientOrder" id="passwordClientOrderMob" class=" form-control"/>
+            <a style="" class="btn-primary btn-sm" href="#" onclick="login_customer_order_request()"> login</a>
+            <a class="btn-primary btn-sm" href="#" onclick=""> register</a>
+        </div>
+        <div id="step-9" class="">
             <div class="list-group">
                 <a href="#" class="list-group-item ">
                     <span class="glyphicon glyphicon-info-sign"></span>Emergency Service

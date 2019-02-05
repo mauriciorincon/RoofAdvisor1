@@ -307,7 +307,7 @@ $("#mobnavtxt ul li a").click(function() {
 			case 3:
 				break;
 			case 4:
-			getListContractor("selectCompanyMobWizard","select"); 
+				getListContractor("selectCompanyMobWizard","select"); 
 
 		 }
 		 return true;
@@ -334,21 +334,27 @@ $("#mobnavtxt ul li a").click(function() {
 						fire_prev_step();
 					}else{
 						fire_next_step();
-						fire_next_step();
+						//fire_next_step();
 					}
 					
 				}
+				break;
 			case 5:
 				type_service=$('#typeServiceCompany1').val();
 				if(type_service=='schedule' || type_service=='schedule'){
 				}else{
 					if(stepDirection=="backward"){
-						fire_prev_step();
+						//fire_prev_step();
 						fire_prev_step();
 					}else{
 						fire_next_step();
 					}
 				}
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
 
 		 }
          //alert("You are on step "+stepNumber+" now");
@@ -392,7 +398,7 @@ $("#mobnavtxt ul li a").click(function() {
 
 </script>
 <script>
-    initMapMobile();
+initMapMobile();
 </script>
 </body>
 </html>

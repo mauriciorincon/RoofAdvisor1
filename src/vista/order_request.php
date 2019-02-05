@@ -9,8 +9,12 @@ if ($(window).innerWidth() <= 767) {
         cache: false,
         success: function(html) {
             $('#mobwizmain').html(html);
+            
         }
     });
+    
+    
+
 }
 </script>
 
