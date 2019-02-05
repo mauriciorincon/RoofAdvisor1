@@ -2024,15 +2024,38 @@ Welcome to RoofServicenow Admin
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
 
- <?php
-							/*if(!isset($_SESSION)) { 
-								session_start(); 
-							} 
-							require_once($_SESSION['application_path']."/controlador/payingController.php");
-							
-						
-							$_objPay=new payingController();
-							//echo "<center>";
-							$_objPay->showPayingWindow1('Request','pay_company_roofreport');
-							//echo "</center>";*/
-						?>
+<!-- formulario Insertar contractor datos-->
+<div class="modal" id="myModalEmployeeList" role="dialog" style="height: 1000px;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Service Schedule</h4>
+      </div>
+      <div class="modal-body" id=""> 
+            
+            <div class="table-responsive">
+                <table class="table table-condensed" id="table_drivers_dashboard_admin">
+                    <thead>
+                        <tr>
+                            <td class="text-center"><strong>Id</strong></td>
+                            <td class="text-center"><strong>First Name</strong></td>
+                            <td class="text-center"><strong>Last Name</strong></td>
+                            <td class="text-center"><strong>Phone Number</strong></td>
+                            <td class="text-center"><strong>Licence Number</strong></td>
+                            <td class="text-center"><strong>Email</strong></td>
+                            <td class="text-center"><strong>Status</strong></td>
+                            <td class="text-center"><strong>Actions</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>       
+        
+
+    </div><!-- /cierro contenedor -->
+  </div><!-- /cierro dialogo-->
+</div><!-- /cierro modal -->

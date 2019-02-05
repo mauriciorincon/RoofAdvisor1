@@ -2574,6 +2574,7 @@ function getListDrivers(companyID){
             var n = data.indexOf("Error");
             if(n==-1){
                 $('#table_drivers_dashboard_admin tbody').html(data);
+                $(document).ready(function(){$("#myModalEmployeeList").modal("show"); });
             }else{
                 $('#myMensaje div.modal-body').html(data);
                 $(document).ready(function(){$("#myMensaje").modal("show"); });

@@ -354,6 +354,10 @@ $("#mobnavtxt ul li a").click(function() {
 			case 6:
 				break;
 			case 7:
+				var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+				var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+				var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+				var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
 				break;
 
 		 }
