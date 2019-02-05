@@ -955,11 +955,12 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         <label class="control-label">Zip Code</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Zip Code" id="compamnyPayZip" name="compamnyPayZip" value="<?php echo $_actual_company['PayInfoBillingZip'] ?>" />
                                     </div>
-                                    
+                                    <!--
                                     <div class="form-group">
                                         <label class="control-label">PayInfoCredit Card Number</label>
                                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Credit Card Expiration Month (MM)" id="compamnyPayMonth" name="compamnyPayMonth" value="<?php echo $_actual_company['PayInfoCCExpMon'] ?>" />
                                     </div>
+                                    -->
                                     <!--
                                     <div class="form-group">
                                         <label class="control-label">Credit Card Expiration Year (YYYY)</label>

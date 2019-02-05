@@ -717,13 +717,13 @@ function updateDataCompany(){
     var PayInfoBillingCity=$("input#compamnyPayCity").val();
     var PayInfoBillingST=$("input#compamnyPayState").val();
     var PayInfoBillingZip=$("input#compamnyPayZip").val();
-    var PayInfoCCExpMon=$("input#compamnyPayMonth").val();
+    var PayInfoCCExpMon="";
     var PayInfoCCExpYr=$("input#compamnyPayYear").val();
     var PayInfoCCNum=$("input#compamnyPayCCNum").val();
     var PayInfoCCSecCode=$("input#compamnyPaySecCode").val();
     var PayInfoName=$("input#compamnyPayName").val();
-    var PrimaryFName=$("input#compamnyPayFName").val();
-    var PrimaryLName=$("input#compamnyPayLName").val();
+    var PrimaryFName="";
+    var PrimaryLName="";
 
     var InsLiabilityAgencyName=$("input#compamnyAgencyName").val();
     var InsLiabilityAgtName=$("input#compamnyAgtName").val();
@@ -731,6 +731,7 @@ function updateDataCompany(){
     var InsLiabilityPolNum=$("input#compamnyPolNum").val();
     var Status_Rating=$("input#compamnyStatusRating").val();
 
+    
     //stripe
     var compamnylegal_entity_first_name=$("input#compamnylegal_entity_first_name").val();
     var compamnylegal_entity_last_name=$("input#compamnylegal_entity_last_name").val();
@@ -795,10 +796,11 @@ function updateDataCompany(){
     if( typeof companyAddress3 === 'undefined' || companyAddress3 === null ){
         companyAddress3="";
     }
-    if(msg!=""){
-        alert(msg);
-        return;
-    }
+    //if(msg!=""){
+    //   alert(msg);
+    //    return;
+    //}
+    
     jsShowWindowLoad('');
     $.post( "controlador/ajax/updateCompany.php", { "companyID" : companyID,"compamnyName" : compamnyName,"firstCompanyName": firstCompanyName,
     "lastCompanyName":lastCompanyName,"companyAddress1":companyAddress1,"companyAddress2":companyAddress2,
@@ -1383,7 +1385,7 @@ function setServiceType(){
     $("#step2OtypeService a").removeClass("active");
     $("#step3OtypeService a").removeClass("active");
     //$(this).addClass("active");
-    var type=$('select#typeServiceCompany').val();
+    var type=$('select[name="typeServiceCompany"]').val();
     showHideSteps(type);
     $("#step2OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
     $("#step3OtypeService a").removeClass("active").find('button').removeClass("btn-success").addClass("btn-primary");
@@ -5447,4 +5449,19 @@ function generateReportFile(){
 
 function fire_next_step(){
     $( ".sw-btn-next" ).trigger( "click" );
+}
+
+function fire_prev_step(){
+    $( ".sw-btn-prev" ).trigger( "click" );
+}
+
+function show_payment_window(){
+    if(typeof handler !== undefined){
+        handler.open({
+            name: 'RoofServiceNow',
+            description: 'pay your service',
+            amount: amount_value,
+            email:"prueba"
+        });
+    }
 }

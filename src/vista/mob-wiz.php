@@ -11,6 +11,7 @@
         <li><a href="#step-6">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-7">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-8">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-9">Step Title<br /><small>Step description</small></a></li>
     </ul>
 
     <div>
@@ -21,7 +22,7 @@
         </div>
         <div id="step-2" class="">
             <label>Select Service</label>
-            <select id="typeServiceCompany1" name="typeServiceCompany1"  onchange="setServiceType()" class="form-control">
+            <select id="typeServiceCompany1" name="typeServiceCompany" class="form-control">
                 <option value="NA">---------------</option>
                 <option value="emergency">Emergency</option>
                 <option value="schedule">Schedule</option>
@@ -104,7 +105,7 @@
                 /////////////////////////////////////
 
                 var input = /** @type {!HTMLInputElement} */(
-                    document.getElementById('pac-input'));
+                    document.getElementById('pac-inputMob'));
 
                 var types = document.getElementById('type-selector');
                 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -202,10 +203,10 @@
         <div id="step-5" class="">
             <label>Select a Date & Time for service</label>
             <label>Select the date of service.</label>
-            <input type="text" id="step6date" name="step6date" class="datepicker"
+            <input type="text" id="step6date" name="step6date" class="datepicker form-control"
                                 style="font-size:24px;text-align:center;">
             <label>Select the time of service.</label>
-            <input type="text" name="step6time" id="step6time" class="timepicker1"
+            <input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
                                 style="z-index: 105100;font-size:24px;text-align:center;" />
         </div>
         <div id="step-6" class="">
@@ -249,6 +250,15 @@
             </div>
         </div>
         <div id="step-8" class="">
+            <h2>Almost Done!</h2>
+            <label>User:</label>
+            <input type="text" name="userClientOrder" id="userClientOrderMob" class=" form-control"/>
+            <label>Password:</label>
+            <input type="text" name="passwordClientOrder" id="passwordClientOrderMob" class=" form-control"/>
+            <a style="" class="btn-primary btn-sm" href="#" onclick="login_customer_order_request()"> login</a>
+            <a class="btn-primary btn-sm" href="#" onclick=""> register</a>
+        </div>
+        <div id="step-9" class="">
             <div class="list-group">
                 <a href="#" class="list-group-item ">
                     <span class="glyphicon glyphicon-info-sign"></span>Emergency Service
@@ -272,8 +282,9 @@
                 </a>
             </div>
             <div>
-                <button class="btn">"Agree to Initiate Service"</button>
+                <button class="btn" onclick="show_payment_window()">"Agree to Initiate Service"</button>
             </div>
         </div>
     </div>
 </div>  
+
