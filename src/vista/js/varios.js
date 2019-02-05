@@ -1863,8 +1863,10 @@ $(document).ready(function() {
 
 function login_customer_order_request(){
     $('#lastFinishButtonOrder').hide();
-    var userClientOrder=$('#userClientOrder').val();
-    var passwordClientOrder=$('#passwordClientOrder').val();
+    //var userClientOrder=$('#userClientOrder').val();
+    //var passwordClientOrder=$('#passwordClientOrder').val();
+    var userClientOrder=$('input[name="userClientOrder"]').val();
+    var passwordClientOrder=$('input[name="passwordClientOrder"]').val();
     if(userClientOrder=="" || userClientOrder==undefined){
         alert("Please fill user field");
         return false;
@@ -1889,11 +1891,16 @@ function login_customer_order_request(){
                 jsRemoveWindowLoad('');
                 validateIsLoggedIn();
             }else{
-                $('#textAnswerOrder').html(data);
-                $('#headerTextAnswerOrder').html('Error');
-                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
-                $('#lastFinishButtonOrder').hide();
-                $('#myModalRespuesta').modal({backdrop: 'static'});
+                if ($(window).innerWidth() <= 767) {
+                    alert(data);
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             jsRemoveWindowLoad('');
@@ -1931,7 +1938,12 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         }
     }
     var RepZIP=$('input:hidden[name=step5ZipCode]').val();
-    var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    if ($(window).innerWidth() <= 767) {
+        var RequestType = $('#typeServiceCompany1').val();
+    }else{
+        var RequestType = $("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val();
+    }
+    
     if(RequestType==undefined || RequestType==''){
         RequestType=$('select#typeServiceCompany').val();
     }
@@ -2039,7 +2051,12 @@ function validateIsLoggedIn(){
                 if(n==-1){
 
                     if(data.profile=='customer'){
-                        var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        if ($(window).innerWidth() <= 767) {
+                            var RequestType=$('#typeServiceCompany1').val();
+                        }else{
+                            var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
+                        }
+                        
                         
                         if(RequestType=='emergency' || RequestType=='roofreport'){
                             $('#userLoguedIn').val(true);

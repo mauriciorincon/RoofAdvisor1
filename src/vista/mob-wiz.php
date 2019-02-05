@@ -254,7 +254,7 @@
             <label>User:</label>
             <input type="text" name="userClientOrder" id="userClientOrderMob" class=" form-control"/>
             <label>Password:</label>
-            <input type="text" name="passwordClientOrder" id="passwordClientOrderMob" class=" form-control"/>
+            <input type="password" name="passwordClientOrder" id="passwordClientOrderMob" class=" form-control"/>
             <a style="" class="btn-primary btn-sm" href="#" onclick="login_customer_order_request()"> login</a>
             <a class="btn-primary btn-sm" href="#" onclick=""> register</a>
         </div>
