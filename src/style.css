@@ -79,7 +79,8 @@ display: block;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 #loading-image {
 width:30%;  
