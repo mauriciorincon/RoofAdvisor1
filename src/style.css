@@ -2106,14 +2106,14 @@ font-size:20px;
     margin: 0 auto;
 }
 .mobilewizbtn1{
-    display: block !important;
+    display: block ;
     padding: 10px;
     border-radius: 15px;
     background-color: #f34e19;
     border: 1px solid #fff;
     margin: 0 auto;
     color:#fff;
-font-size:18px;
+    font-size:18px;
 }
 .btnvidmobilediv1{
 display: block !important;
@@ -2122,7 +2122,7 @@ display: block !important;
     width: 100%;
 }
 .btnwizmobilediv1{
-display: block !important;
+    display: block !important;
     position: absolute;
     margin-top: -320px;
     width: 100%;
@@ -2278,7 +2278,7 @@ margin-bottom:25px;
     left: 0;
     position: fixed;
     opacity: 0.99;
-    z-index: 2147483647;
+    
     text-align: center;
     background: #008ced;
     background: -moz-linear-gradient(top, #008ced 0%, #2989d8 39%, #2989d8 39%, #207cca 49%, #004677 100%);

@@ -1,6 +1,7 @@
 <script type="text/javascript">
 // URL to open
 // set URL depending on screen size
+
 if ($(window).innerWidth() <= 767) {
     var wizurl = 'vista/mob-wiz.php'; //change url to myUrl
     // load appropriate script into contentsDiv div
@@ -154,8 +155,10 @@ if ($(window).innerWidth() <= 767) {
     <div style="display:block;width:100%;text-align:right;"> <i id="mobwizclose" style="padding:10px;color: #fff;"
             class="fas fa-power-off fa-2x"></i></div>
     <div id="mobwizmain">
+        
     </div>
 </div>
+
 <div id="welcome-txt">
     <div class="mobiletxt1">
         <span>
@@ -164,8 +167,9 @@ if ($(window).innerWidth() <= 767) {
         </span>
     </div>
 </div>
+
 <div class="btnwizmobilediv1" style="display:none;">
-    <button id="mobilewizbtn1" class="mobilewizbtn1">START <i style="" class="fas fa-fingerprint"></i> HERE</button>
+<button id="mobilewizbtn1" class="mobilewizbtn1">START <i style="" class="fas fa-fingerprint"></i> HERE</button>    
 </div>
 <div class="btnvidmobilediv1" style="display:none;">
     <button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4"

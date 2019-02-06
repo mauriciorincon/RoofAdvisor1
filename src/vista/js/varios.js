@@ -3,7 +3,13 @@ var openService=0;
 var scheduleRepairCount=0;
 var reportRepairCount=0;
 var closeService=0;
+var email_user_logued="";
 
+$(document).on({
+    'DOMNodeInserted': function() {
+        $('.pac-item, .pac-item span', this).addClass('needsclick');
+    }
+}, '.pac-container');
 $(document).ready(function() {
     /*$('#table_orders_customer').DataTable({
         rowCallback: function(row, data, index){
@@ -13,6 +19,8 @@ $(document).ready(function() {
         }
       }
     );*/
+
+
 
 $('.aboutinfo1').slick({
             dots: true,
@@ -2051,6 +2059,7 @@ function validateIsLoggedIn(){
                 if(n==-1){
 
                     if(data.profile=='customer'){
+                        email_user_logued=data.userMail;
                         if ($(window).innerWidth() <= 767) {
                             var RequestType=$('#typeServiceCompany1').val();
                         }else{
@@ -2059,6 +2068,7 @@ function validateIsLoggedIn(){
                         
                         
                         if(RequestType=='emergency' || RequestType=='roofreport'){
+                           
                             $('#userLoguedIn').val(true);
                             nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
                             curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
@@ -2092,6 +2102,9 @@ function validateIsLoggedIn(){
                                                     $("#login-modal").removeClass('fade').modal('hide');
                                                     });
                                     */
+                            }
+                            if ($(window).innerWidth() <= 767) {
+                                fire_next_step();
                             }
                         }else{
                             jsRemoveWindowLoad('');
@@ -5485,7 +5498,49 @@ function show_payment_window(){
             name: 'RoofServiceNow',
             description: 'pay your service',
             amount: amount_value,
-            email:"prueba"
+            email:email_user_logued
         });
     }
 }
+
+
+function setQuantity(upordown,objeto) {
+    var inputname="";
+    var limit = "";
+    if(upordown=='up'){
+
+        //alert($(objeto).next('input').attr('id'));
+        inputname=$(objeto).next('input').attr('id');
+    }else {
+        //alert($(objeto).prev('input').attr('id'));
+        inputname=$(objeto).prev('input').attr('id');
+    }
+
+    switch(inputname){
+        case "quantityHour":
+            limit=12
+            break;
+        case "quantityMin":
+            limit=59
+            break;
+    }
+    var quantity = document.getElementById(inputname);
+
+    if(inputname=='quantityampm'){
+        if(quantity.value=='AM'){
+            document.getElementById(inputname).value='PM'
+        }else{
+            document.getElementById(inputname).value='AM'
+        }
+    }else{
+        if (quantity.value > 1 && quantity.value<limit) {
+            if (upordown == 'up'){++document.getElementById(inputname).value;}
+            else if (upordown == 'down'){--document.getElementById(inputname).value;}}
+        else if (quantity.value == 1) {
+            if (upordown == 'up'){++document.getElementById(inputname).value;}}
+        else
+            {document.getElementById(inputname).value=1;}
+    }
+    
+}
+

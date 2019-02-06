@@ -239,14 +239,14 @@ mobwizpoweroff($id);
 
 $('#mobilewizbtn1').click(function(){
 //alert('noob');
-   mobwizpower($('#mobwizard'),'on');
-
+   	mobwizpower($('#mobwizard'),'on');
+	$(this).hide();
 });
 
 $('#mobwizclose').click(function(){
 //alert('noob');
    mobwizpower($('#mobwizard'),'off');
-
+   $('#mobilewizbtn1').show();
 });
 
 
@@ -357,9 +357,23 @@ $("#mobnavtxt ul li a").click(function() {
 				var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
 				var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
 				var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+				var valStep6=$('input[name=step6date]').val();
+				var valStep7=$('a[name=linkCompany].active > span[name=companyName]').text();
+				var valStep5long=$('input:hidden[name=step5Logintud]').val();
+				var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+				var valStep5Address=$('input:hidden[name=step5Address]').val();
+				var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
 				$('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+' '+',  Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
+				$('#step8Schedule').html('Pending');
+				$('#step8Time').html('Pending');
+				$('#step8CompanyName').html('Pending');
+				$('#step8Longitude').html(valStep5long);
+				$('#step8Latitude').html(valStep5lat);
+				$('#step8Address').html(valStep5Address);
+				$('#step8ZipCode').html(valStep5ZipCode);
 				break;
 			case 7:
+				validateIsLoggedIn();
 				break;
 			case 8:
 				//type_service=$('#typeServiceCompany1').val();

@@ -13,6 +13,7 @@
         $_message=array(
             'message'=>"Please Mr/Mrs ".$_SESSION['username']." please press finish button to save the order.",
             'profile'=>$_SESSION['profile'],
+            'userMail'=>$_SESSION['email'],
         );
         echo json_encode($_message);
         
@@ -22,6 +23,7 @@
         $_message=array(
             'message'=>"Error not logged in",
             'profile'=>"",
+            'userMail'=>"",
         );
         echo json_encode($_message);
     }

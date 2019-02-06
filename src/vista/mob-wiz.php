@@ -59,6 +59,12 @@
             </select>
         </div>
         <div id="step-4" class="">
+                    <input type="hidden" id="step5Logintud" name="step5Logintud" />
+                    <input type="hidden" id="step5Latitude" name="step5Latitude" />
+                    <input type="hidden" id="step5Address" name="step5Address" />
+                    <input type="hidden" id="step5ZipCode" name="step5ZipCode" />
+                    <input type="hidden" id="step5State" name="step5State" />
+                    <input type="hidden" id="step5City" name="step5City" />
             <style>
                 /* Set the size of the div element that contains the map */
                 #mapMobile {
@@ -206,8 +212,32 @@
             <input type="text" id="step6date" name="step6date" class="datepicker form-control"
                                 style="font-size:24px;text-align:center;">
             <label>Select the time of service.</label>
-            <input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
-                                style="z-index: 105100;font-size:24px;text-align:center;" />
+            <!--<input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
+                                style="z-index: 999999;font-size:24px;text-align:center;" />-->
+            <div class="order-option">
+                <table>
+                    <tr>
+                        <td>Hour</td><td>Min</td><td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="up" onclick="setQuantity('up',this);">+</button>
+                            <input type="text" id="quantityHour" value="8" size="1">
+                            <button id="down" onclick="setQuantity('down',this);">-</button>
+                        </td>
+                        <td>
+                            <button id="up" onclick="setQuantity('up',this);">+</button>
+                            <input type="text" id="quantityMin" value="00" size="1">
+                            <button id="down" onclick="setQuantity('down',this);">-</button>
+                        </td>
+                        <td>
+                            <button id="up" onclick="setQuantity('up',this);">+</button>
+                            <input type="text" id="quantityampm" value="AM" size="1">
+                            <button id="down" onclick="setQuantity('down',this);">-</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="step-6" class="">
             <label>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.
@@ -287,4 +317,8 @@
         </div>
     </div>
 </div>  
-
+<script>
+/*$(document).ready(function() {
+$('.timepicker').mdtimepicker();
+});*/
+</script>
