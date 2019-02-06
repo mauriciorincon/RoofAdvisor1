@@ -316,6 +316,7 @@ $("#mobnavtxt ul li a").click(function() {
       
       // Initialize the showStep event
       $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+		type_service=$('#typeServiceCompany1').val();
 		switch(stepNumber){
 			 case 1:
 			 	break;
@@ -326,7 +327,7 @@ $("#mobnavtxt ul li a").click(function() {
 				type_service=$('#typeServiceCompany1').val();
 				break;
 			case 4:
-				type_service=$('#typeServiceCompany1').val();
+				
 				if(type_service=='schedule' || type_service=='schedule'){
 					getListContractor("selectCompanyMobWizard","select"); 
 				}else{
@@ -340,7 +341,7 @@ $("#mobnavtxt ul li a").click(function() {
 				}
 				break;
 			case 5:
-				type_service=$('#typeServiceCompany1').val();
+				//type_service=$('#typeServiceCompany1').val();
 				if(type_service=='schedule' || type_service=='schedule'){
 				}else{
 					if(stepDirection=="backward"){
@@ -352,12 +353,23 @@ $("#mobnavtxt ul li a").click(function() {
 				}
 				break;
 			case 6:
-				break;
-			case 7:
 				var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
 				var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
 				var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
 				var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+				$('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+' '+',  Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
+				break;
+			case 7:
+				break;
+			case 8:
+				//type_service=$('#typeServiceCompany1').val();
+				if(type_service=='emergency'){
+					$('#step-9 .list-group:eq(0)').show();
+					$('#step-9 .list-group:eq(1)').hide();
+				}else if(type_service=='roofreport'){
+					$('#step-9 .list-group:eq(0)').hide();
+					$('#step-9 .list-group:eq(1)').show();
+				}
 				break;
 
 		 }

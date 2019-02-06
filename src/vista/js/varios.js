@@ -2066,8 +2066,13 @@ function validateIsLoggedIn(){
                             nextStepWizard.removeAttr('disabled').trigger('click');
                             curStepWizard.attr('disabled', 'disabled');
                             if(typeof handler !== undefined){
+                                if ($(window).innerWidth() <= 767) {
+                                    fire_next_step();
+                                }else{
+
+                                }
                                     // $('#login-modal').style.display = "none";
-                                    let timerInterval; 
+                                    /*let timerInterval; 
                                         swal({ 
                                                 title: 'You have successfully logged in!',
                                                 type: 'success', 
@@ -2086,6 +2091,7 @@ function validateIsLoggedIn(){
                                                     console.log('login has been completed successfully') }
                                                     $("#login-modal").removeClass('fade').modal('hide');
                                                     });
+                                    */
                             }
                         }else{
                             jsRemoveWindowLoad('');
