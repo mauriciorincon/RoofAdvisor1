@@ -381,7 +381,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                     getContractorName(dataOrder.ContractorID).then(function(contractorName){
                         dataContractor=takeJobCompany(dataOrder,actualCompanyStatus,contractorName);
 
-                        if(dataOrder.CompanyID==""){
+                        if(dataOrder.ContractorID==""){
                             dataCustomer="XXXXX XXXXX XXXXX XXXXX";
                             companyActions=actionsCompany(dataOrder,actualCompanyStatus);
                                 t.row.add( [
@@ -481,7 +481,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             }
                             
                             
-                            if(dataOrder.CompanyID==""){
+                            if(dataOrder.ContractorID==""){
                                 customerData="XXXXX XXXXX XXXXX XXXXX";
                                 $row.cell($row, 3).data(customerData).draw(false);
                                 //$row.find("td:eq(3)").html(customerData);
@@ -727,7 +727,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <td><?php echo $order['SchDate']?></td>
                             <td><?php echo $order['SchTime']?></td>
                             <td><?php
-                                    if(empty($order['CompanyID'])){
+                                    if(empty($order['ContractorID'])){
                                         echo "XXXXX XXXXX XXXXX XXXXX";
                                     }else{
                                         $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');

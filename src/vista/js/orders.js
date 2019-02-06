@@ -29,58 +29,58 @@ function getStatus(status){
     var orderStatus="";
     switch (status) {
         case "A":
-            orderStatus = "Order Open";
+            orderStatus = "<span class = 'label label-danger'>Order Open</span>";
             break;
         case "C":
-            orderStatus = "Acepted Order";
+            orderStatus = "<span class = 'label label-info'>Acepted Order</span>";
             break;
         case "D":
-            orderStatus = "Order Assigned";
+            orderStatus = "<span class = 'label label-info'>Order Assigned</span>";
             break;
         case "E":
-            orderStatus = "Contractor Just Arrived";
+            orderStatus = "<span class = 'label label-info'>Contractor Just Arrived</span>";
             break;
         case "F":
-            orderStatus = "Estimate Sent";
+            orderStatus = "<span class = 'label label-warning'>Estimate Sent</span>";
             break;
         case "G":
-            orderStatus = "Estimate Approved";
+            orderStatus = "<span class = 'label label-warning'>Estimate Approved</span>";
             break;
         case "H":
-            orderStatus = "Work In Progress";
+            orderStatus = "<span class = 'label label-warning'>Work In Progress</span>";
             break;
         case "I":
-            orderStatus = "Work Completed";
+            orderStatus = "<span class = 'label label-warning'>Work Completed</span>";
             break;
         case "J":
-            orderStatus = "Final Bill";
+            orderStatus = "<span class = 'label label-primary'>Final Bill</span>";
             break;
         case "K":
-            orderStatus = "Order Completed Paid";
+            orderStatus = "<span class = 'label label-success'>Order Completed Paid</span>";
             break;
         case "Z":
-            orderStatus = "Cancel work";
+            orderStatus = "<span class = 'label label-default'>Cancel work</span>";
             break;
         case "P":
-            orderStatus = "Report In Progress";
+            orderStatus = "<span class = 'label label-primary'>Report In Progress</span>";
             break;
         case "R":
-            orderStatus = "Report In Progress";
+            orderStatus = "<span class = 'label label-primary'>Report In Progress</span>";
             break;
         case "S":
-            orderStatus = "Report Complete";
+            orderStatus = "<span class = 'label label-success'>Report Complete</span>";
             break;
         case "T":
-            orderStatus = "Orden In Progress";
+            orderStatus = "<span class = 'label label-warning'>Orden In Progress</span>";
             break;
         case "U":
-            orderStatus = "Orden Asigned";
+            orderStatus = "<span class = 'label label-info'>Orden Asigned</span>";
             break;
         case "M":
-            orderStatus = "Mailed";
+            orderStatus = "<span class = 'label label-success'>Mailed</span>";
             break;
         default:
-            orderStatus = "Undefined";
+            orderStatus = "<span class = 'label label-default'>Undefined</span>";
     }
     return orderStatus;
 }
