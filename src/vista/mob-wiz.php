@@ -212,9 +212,9 @@
             <input type="text" id="step6date" name="step6date" class="datepicker form-control"
                                 style="font-size:24px;text-align:center;">
             <label>Select the time of service.</label>
-            <!--<input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
-                                style="z-index: 999999;font-size:24px;text-align:center;" />-->
-            <div class="order-option">
+            <input type="text" name="step6time" id="step6time" class="timepicker1 form-control"
+                                style="z-index: 999999;font-size:24px;text-align:center;" />
+            <!--<div class="order-option">
                 <table>
                     <tr>
                         <td>Hour</td><td>Min</td><td></td>
@@ -237,7 +237,7 @@
                         </td>
                     </tr>
                 </table>
-            </div>
+            </div>-->
         </div>
         <div id="step-6" class="">
             <label>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.
