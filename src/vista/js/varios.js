@@ -1292,7 +1292,9 @@ $(document).ready(function () {
                                 $('#mainplaybtn1').hide();
                                 $('#roofreportbox1').hide();
                                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
-                                nextStepWizard.removeAttr('disabled').trigger('click');
+                                if ($(window).innerWidth() > 767) {
+                                    nextStepWizard.removeAttr('disabled').trigger('click');
+                                }
                             }else{
                                 $('#firstNextBegin').hide(); 
                                 setLocation(map,zipcode);
