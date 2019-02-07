@@ -62,6 +62,7 @@
 			}
 		}
 	}else if(strcmp($_outputType,'select')==0){
+		$_string.='<option value="">-------------------</option>';
 		foreach ($_array_company as $key => $company) {
 			$_company_name = isset($company['CompanyName']) ? $company['CompanyName'] : '';
 			$_company_first_name = isset($company['PrimaryFName']) ? $company['PrimaryFName'] : '';

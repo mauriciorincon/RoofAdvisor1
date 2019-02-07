@@ -12,6 +12,7 @@
         <li><a href="#step-7">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-8">Step Title<br /><small>Step description</small></a></li>
         <li><a href="#step-9">Step Title<br /><small>Step description</small></a></li>
+        <li><a href="#step-10">Step Title<br /><small>Step description</small></a></li>
     </ul>
 
     <div>
@@ -286,7 +287,7 @@
             <label>Password:</label>
             <input type="password" name="passwordClientOrder" id="passwordClientOrderMob" class=" form-control"/>
             <a style="" class="btn-primary btn-sm" href="#" onclick="login_customer_order_request()"> login</a>
-            <a class="btn-primary btn-sm" href="#" onclick=""> register</a>
+            <a class="btn-primary btn-sm" href="#" onclick="fire_next_step();fire_next_step();"> register</a>
         </div>
         <div id="step-9" class="">
             <div class="list-group">
@@ -314,6 +315,48 @@
             <div>
                 <button class="btn" onclick="show_payment_window()">"Agree to Initiate Service"</button>
             </div>
+        </div>
+        <div id="step-10" class="">
+            <h2>Please Enter Your Information To Register</h2>
+            <div class="form-group">
+                    <label for="firstCustomerName">First Name</label>
+                    <input maxlength="100" type="text" required="required" class="form-control"
+                        placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"/>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input maxlength="100" type="text" required="required" class="form-control"
+                        placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"/>
+
+                </div>
+                <div class="form-group">
+                    <label >Email</label>
+                    <input maxlength="100" type="email" required="required" class="form-control"
+                        placeholder="Enter Email" id="emailValidation" name="emailValidation"/>
+                    <label id="answerEmailValidate"
+                        name="answerEmailValidate">Answer</label>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input maxlength="100" type="password" required="required" data-minlength="6" placeholder="Password"
+                        id="inputPassword" name="inputPassword" onblur="validInputPassword()"/>
+                    <div class="help-block labeltwht">Minimum of 6 characters</div>
+                    <label name="answerPasswordValidateStep6"></label>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input maxlength="100" type="password" required="required" data-minlength="6"
+                        placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm"
+                        onblur="validInputRePassword()"
+                        oninvalid="this.setCustomValidity('Please Enter Confirm Password')"/>
+                    <label id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                </div>
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input maxlength="100" type="number" min="1111111111" max="9999999999"
+                        onkeypress="return isNumber(event)" required="required" class="form-control"
+                        placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"/>
+                </div>
         </div>
     </div>
 </div>  

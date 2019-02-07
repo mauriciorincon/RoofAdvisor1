@@ -1994,8 +1994,13 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         RequestType='G'
     }
     //                var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
-    if(CompanyID==undefined){
-        CompanyID="";
+    if(CompanyID==undefined || CompanyID=="" || CompanyID==null){
+        if ($(window).innerWidth() <= 767) {
+            CompanyID = $('#selectCompanyMobWizard').val();
+            if(CompanyID==undefined || CompanyID=="" || CompanyID==null){
+                CompanyID="";
+            }
+        }
     }
     SchTime=changerHourFormat(SchTime);
     if(amountValue==undefined){
@@ -2043,7 +2048,7 @@ function insertOrderCustomer(idStripeCharge,amountValue,action_type){
         if ( console && console.log ) {
             console.log( "La solicitud a fallado: " +  textStatus);
             result=false;
-            jsRemoveWindowLoad('');
+            //jsRemoveWindowLoad('');
         }
     });
 }
@@ -2109,7 +2114,7 @@ function validateIsLoggedIn(){
                                 fire_next_step();
                             }
                         }else{
-                            jsRemoveWindowLoad('');
+                            //jsRemoveWindowLoad('');
                             insertOrderCustomer();
                         }
                         jsRemoveWindowLoad('');
@@ -5546,3 +5551,133 @@ function setQuantity(upordown,objeto) {
     
 }
 
+$(document).ready(function(){
+// Initialize the leaveStep event
+$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+    switch(stepNumber){
+         case 1:
+             type_service=$('#typeServiceCompany1').val();
+             if(type_service=="NA"){
+                 alert("Please select the service");
+                 return false;
+             }
+             setServiceType();
+             break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            getListContractor("selectCompanyMobWizard","select"); 
+            break;
+        case 7:
+            $('.sw-btn-next').show();
+            break;
+
+     }
+     return true;
+     //return confirm("Do you want to leave the step "+stepNumber+"?");
+  });
+  
+
+  // Initialize the showStep event
+  $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+    type_service=$('#typeServiceCompany1').val();
+    switch(stepNumber){
+         case 1:
+             break;
+        case 2:
+            type_service=$('#typeServiceCompany1').val();
+            break;
+        case 3:
+            type_service=$('#typeServiceCompany1').val();
+            break;
+        case 4:
+            
+            if(type_service=='schedule' || type_service=='schedule'){
+                getListContractor("selectCompanyMobWizard","select"); 
+            }else{
+                if(stepDirection=="backward"){
+                    fire_prev_step();
+                }else{
+                    fire_next_step();
+                    //fire_next_step();
+                }
+                
+            }
+            break;
+        case 5:
+            //type_service=$('#typeServiceCompany1').val();
+            if(type_service=='schedule' || type_service=='schedule'){
+            }else{
+                if(stepDirection=="backward"){
+                    //fire_prev_step();
+                    fire_prev_step();
+                }else{
+                    fire_next_step();
+                }
+            }
+            break;
+        case 6:
+            var valStep3=$('input[name=estep3Option]:checked').attr('data-value');
+            var valStep5=$('input[name=estep5Option]:checked').attr('data-value');
+            var valStep5Auto=$('input[name=estep6Option]:checked').attr('data-value');
+            var valStep4=$('input[name=estep4Option]:checked').attr('data-value');
+            var valStep6=$('input[name=step6date]').val();
+            var valStep6t=$('input[name=step6time]').val();
+            var valStep7=$('#selectCompanyMobWizard').val();
+            var valStep5long=$('input:hidden[name=step5Logintud]').val();
+            var valStep5lat=$('input:hidden[name=step5Latitude]').val();
+            var valStep5Address=$('input:hidden[name=step5Address]').val();
+            var valStep5ZipCode=$('input:hidden[name=step5ZipCode]').val();
+            $('#step8RepairDescription').html(valStep3+', Stories:'+valStep5+' '+',  Leaks/Damage:'+valStep4+', Autorization:'+valStep5Auto);
+            $('#step8Schedule').html('Pending');
+            $('#step8Time').html('Pending');
+            if(valStep7=='' || valStep7==undefined || valStep7==null){
+                $('#step8CompanyName').html('Pending');
+            }else{
+                $('#step8CompanyName').html(valStep7);
+            }
+            
+            $('#step8Longitude').html(valStep5long);
+            $('#step8Latitude').html(valStep5lat);
+            $('#step8Address').html(valStep5Address);
+            $('#step8ZipCode').html(valStep5ZipCode);
+            $('#step8Schedule').html(valStep6);
+            $('#step8Time').html(valStep6t);
+            break;
+        case 7:
+            validateIsLoggedIn();
+            $('.sw-btn-next').hide();
+            break;
+        case 8:
+            //type_service=$('#typeServiceCompany1').val();
+            if(type_service=='emergency'){
+                $('#step-9 .list-group:eq(0)').show();
+                $('#step-9 .list-group:eq(1)').hide();
+            }else if(type_service=='roofreport'){
+                $('#step-9 .list-group:eq(0)').hide();
+                $('#step-9 .list-group:eq(1)').show();
+            }
+            break;
+
+     }
+     //alert("You are on step "+stepNumber+" now");
+  });
+
+  // Initialize the beginReset event
+  $("#smartwizard").on("beginReset", function(e) {
+ return confirm("Do you want to reset the wizard?");
+  });
+        
+  // Initialize the endReset event
+  $("#smartwizard").on("endReset", function(e) {
+ alert("endReset called");
+  });  
+        
+  // Initialize the themeChanged event
+  $("#smartwizard").on("themeChanged", function(e, theme) {
+ alert("Theme changed. New theme name: " + theme);
+  });
+
+});
