@@ -21,6 +21,7 @@
     require_once($_SESSION['application_path']."/modelo/order.class.php");
     require_once($_SESSION['application_path']."/modelo/user.class.php");
     require_once($_SESSION['application_path']."/vista/customerFAQ.php");
+    require_once($_SESSION['application_path']."/controlador/smsController.php");
 
 
     require_once($_SESSION['application_path']."/controlador/userController.php");
@@ -41,9 +42,13 @@
     $_result = $_objUser->updateUserContractor($userId,$properties,$profile);
     print_r($_result);*/
 
-    $_objMail=new emailController();
-    $_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
-    echo $_result;
+    $_objMessage=new smsController();
+    $_objMessage->createClientSms();
+    $_objMessage->sendMessage("+15557654321","+15551234567","hello world!");
+    $_objMessage->getAllTallNumbers();
+    //$_objMail=new emailController();
+    //$_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
+    //echo $_result;
 
     //$_objExcel=new read_excel();
     //$_objExcel->generateExcel();

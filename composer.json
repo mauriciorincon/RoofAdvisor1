@@ -7,7 +7,8 @@
         "phpmailer/phpmailer": "^6.0",
         "phpoffice/phpspreadsheet": "^1.5",
         "league/oauth2-google": "^3.0",
-        "league/oauth2-server": "^7.3"
+        "league/oauth2-server": "^7.3",
+        "signalwire/signalwire": "^1.1"
     },
     "suggest": {
         "psr/log": "For optional PSR-3 debug logging",
