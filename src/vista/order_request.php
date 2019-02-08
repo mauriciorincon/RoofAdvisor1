@@ -62,7 +62,7 @@ if ($(window).innerWidth() <= 767) {
                 <div class="form-group">
                     <label class="control-label labeltwht ">Password</label>
                     <input maxlength="100" type="password" required="required" data-minlength="6" placeholder="Password"
-                        id="inputPassword" name="inputPassword" onblur="validInputPassword()"
+                        id="inputPassword" name="inputPassword" onblur="validInputPassword(this)"
                         oninvalid="this.setCustomValidity('Please Enter Password')" oninput="setCustomValidity('')" />
                     <div class="help-block labeltwht">Minimum of 6 characters</div>
                     <label class="control-label labeltwht" id="answerPasswordValidateStep6"

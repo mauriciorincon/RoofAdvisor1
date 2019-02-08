@@ -317,45 +317,58 @@
             </div>
         </div>
         <div id="step-10" class="">
-            <h2>Please Enter Your Information To Register</h2>
             <div class="form-group">
-                    <label for="firstCustomerName">First Name</label>
+                    <label for="firstCustomerName" class="col-sm-3 control-label">First Name</label>
+                    <div class="col-sm-9">
                     <input maxlength="100" type="text" required="required" class="form-control"
                         placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"/>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Last Name</label>
-                    <input maxlength="100" type="text" required="required" class="form-control"
+                    <label class="col-sm-3 control-label">Last Name</label>
+                    <div class="col-sm-9">
+                        <input maxlength="100" type="text" required="required" class="form-control"
                         placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"/>
-
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label >Email</label>
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9">
                     <input maxlength="100" type="email" required="required" class="form-control"
-                        placeholder="Enter Email" id="emailValidation" name="emailValidation"/>
+                        placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer',this)"/>
                     <label id="answerEmailValidate"
                         name="answerEmailValidate">Answer</label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
                     <input maxlength="100" type="password" required="required" data-minlength="6" placeholder="Password"
-                        id="inputPassword" name="inputPassword" onblur="validInputPassword()"/>
-                    <div class="help-block labeltwht">Minimum of 6 characters</div>
-                    <label name="answerPasswordValidateStep6"></label>
+                        id="inputPassword" name="inputPassword" onblur="validInputPassword(this)"/>
+                    <!--<div class="help-block labeltwht">Minimum of 6 characters</div>-->
+                    <!--<label name="answerPasswordValidateStep6"></label>-->
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Confirm Password</label>
+                    <label class="col-sm-3 control-label">Confirm Password</label>
+                    <div class="col-sm-9">
                     <input maxlength="100" type="password" required="required" data-minlength="6"
                         placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm"
-                        onblur="validInputRePassword()"
+                        onblur="validInputRePassword(this)"
                         oninvalid="this.setCustomValidity('Please Enter Confirm Password')"/>
-                    <label id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
+                    <!--<label id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>-->
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Phone number</label>
+                    <label class="col-sm-3 control-label">Phone number</label>
+                    <div class="col-sm-9">
                     <input maxlength="100" type="number" min="1111111111" max="9999999999"
                         onkeypress="return isNumber(event)" required="required" class="form-control"
                         placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                <a class="btn-primary btn-sm" href="#" onclick="saveCustomerData('Order')"> register</a>
                 </div>
         </div>
     </div>

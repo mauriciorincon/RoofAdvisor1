@@ -1050,15 +1050,22 @@ function validateIsLoggedIn(){
         });
 }
 
-function validInputPassword(){
-    var password=$('input:password#inputPassword').val();
+function validInputPassword(objeto){
+    var password = "";
+    if(objeto!=undefined){
+        password = $(objeto).val();
+    }else{
+        var password=$('input:password#inputPassword').val();
+        objeto = $('input:password#inputPassword');
+    }
+    
     var flag=true;
     if(password.length<6){
-        $('input:password#inputPassword').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $(objeto).closest(".form-group").addClass("has-error").removeClass("has-success");
         $('#answerPasswordValidateStep6').html('The password must have at least 6 chararters');
         flag=false;
     }else{
-        $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $(objeto).closest(".form-group").addClass("has-success").removeClass("has-error");
         $('#answerPasswordValidateStep6').html('');
         flag=true;
     }

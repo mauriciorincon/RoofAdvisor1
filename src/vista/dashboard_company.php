@@ -2735,17 +2735,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomer" name="emailValidationCustomer" onfocusout="validateEmail('customer')"/>
                             <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                         </div>
-                        <!--<div class="form-group">
-                            <label class="control-label ">Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-                            <div class="help-block">Minimum of 6 characters</div>
-                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label ">Confirm Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-                        </div> -->
+
                         <div class="form-group">
                             <label class="control-label">Address</label>
                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddress" name="customerAddress" />
@@ -2805,17 +2795,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomerCompany" name="emailValidationCustomerCompany" onfocusout="validateEmail('customer')"/>
                             <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                         </div>
-                        <!--<div class="form-group">
-                            <label class="control-label ">Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-                            <div class="help-block">Minimum of 6 characters</div>
-                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label ">Confirm Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-                        </div> -->
+                        
                         <div class="form-group">
                             <label class="control-label">Address</label>
                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddressCompany" name="customerAddressCompany" />
@@ -3100,17 +3080,6 @@ if(!empty($_actual_company['postCardValue'])){
                             <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomerCompanyU" name="emailValidationCustomerCompanyU" onfocusout="validateEmail('customer')"/>
                             <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
                         </div>
-                        <!--<div class="form-group">
-                            <label class="control-label ">Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Password" id="inputPassword" name="inputPassword" onblur="validInputPassword()"  />
-                            <div class="help-block">Minimum of 6 characters</div>
-                            <label class="control-label" id="answerPasswordValidateStep6" name="answerPasswordValidateStep6"></label>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label ">Confirm Password</label>
-                            <input maxlength="100"  type="password" required="required"  data-minlength="6" placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm" onblur="validInputRePassword()" />
-                            <label class="control-label" id="answerRePasswordValidateStep6" name="answerRePasswordValidateStep6"></label>
-                        </div> -->
                         <div class="form-group">
                             <label class="control-label">Address</label>
                             <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddressCompanyU" name="customerAddressCompanyU" />

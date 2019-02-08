@@ -327,8 +327,14 @@ $(document).ready(function() {
 
 
 
-function validateEmail(table) {
-    var textoBusqueda = $("input#emailValidation").val();
+function validateEmail(table,objeto) {
+    var textoBusqueda = "";
+    if(objeto!=undefined){
+         textoBusqueda = $(objeto).val();
+    }else{
+         textoBusqueda = $("input#emailValidation").val();
+    }
+    
     var result=true;
      if (textoBusqueda != "") {
          //Equivalente a lo anterior
@@ -336,7 +342,8 @@ function validateEmail(table) {
             $.post( "controlador/ajax/validateEmail.php", { "emailValue" : textoBusqueda,"tableSearch": table}, null, "text" )
             .done(function( data, textStatus, jqXHR ) {
                 if ( console && console.log ) {
-                    $("#answerEmailValidate").html(data);
+                    //$("#answerEmailValidate").html(data);
+                    $("[name='answerEmailValidate']").html(data);
                     var n = data.indexOf("Error");
                     if(n==-1){
                         $("input#emailValidation").closest(".form-group").addClass("has-success").removeClass('has-error');
@@ -1402,11 +1409,12 @@ function setServiceType(){
     //$(this).find('button').removeClass("btn-primary").addClass("btn-success");
     getValueService(type);
     showHideElementByService(type);
-    nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
-    curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
-    nextStepWizard.removeAttr('disabled').trigger('click');
-    curStepWizard.attr('disabled', 'disabled');
-    
+    if ($(window).innerWidth() > 767) {
+        nextStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().next().children("a");
+        curStepWizard = $('div.setup-panelOrder div a[href="#step-2"]').parent().children("a");
+        nextStepWizard.removeAttr('disabled').trigger('click');
+        curStepWizard.attr('disabled', 'disabled');
+    }
    return false;
 }
 
@@ -2149,40 +2157,56 @@ function validateIsLoggedIn(){
         });
 }
 
-function validInputPassword(){
-    var password=$('input:password#inputPassword').val();
+function validInputPassword(objeto){
+    var password = "";
+    if(objeto!=undefined){
+        password = $(objeto).val();
+    }else{
+        var password=$('input:password#inputPassword').val();
+        objeto = $('input:password#inputPassword');
+    }
+    
     var flag=true;
     if(password.length<6){
-        $('input:password#inputPassword').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $(objeto).closest(".form-group").addClass("has-error").removeClass("has-success");
         $('#answerPasswordValidateStep6').html('The password must have at least 6 chararters');
         flag=false;
     }else{
-        $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $(objeto).closest(".form-group").addClass("has-success").removeClass("has-error");
         $('#answerPasswordValidateStep6').html('');
         flag=true;
     }
     
 }
 
-function validInputRePassword(){
+function validInputRePassword(objeto){
+    var password = "";
+    var Repassword = "";
     var password=$('input:password#inputPassword').val();
-    var Repassword=$('input:password#inputPasswordConfirm').val();
+    if(objeto!=undefined){
+        Repassword=$(objeto).val();
+    }else{
+        Repassword = $('input:password#inputPasswordConfirm').val();
+        objeto = $('input:password#inputPasswordConfirm');
+    }
+    
+    
     var flag=true;
     if(Repassword.length<6){
-        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+        $(objeto).closest(".form-group").addClass("has-error").removeClass("has-success");
         $('#answerRePasswordValidateStep6').html('The password must have at least 6 chararters');
         flag=false;
     }else{
-        $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+        $(objeto).closest(".form-group").addClass("has-success").removeClass("has-error");
         $('#answerRePasswordValidateStep6').html('');
         flag=true;
         if(Repassword!=password){
-            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-error").removeClass("has-success");
+            $(objeto).closest(".form-group").addClass("has-error").removeClass("has-success");
             $('#answerRePasswordValidateStep6').html('The confirmation password are different');
             flag=false;
         }else{
             $('input:password#inputPassword').closest(".form-group").addClass("has-success").removeClass("has-error");
-            $('input:password#inputPasswordConfirm').closest(".form-group").addClass("has-success").removeClass("has-error");
+            $(objeto).closest(".form-group").addClass("has-success").removeClass("has-error");
             $('#answerRePasswordValidateStep6').html('');
             $('#answerPasswordValidateStep6').html('');
             flag=true;
