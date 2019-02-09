@@ -1200,12 +1200,12 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                 </div>
                 
                 <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        <div>
+                    <div class="form-group" >
+                        <div  style="margin-bottom:10px;">
                             Wallet Balance<br>
                             <a href="">+ Add funds to your RoofServiceNow Wallet</a>
                         </div>
-                        <div>
+                        <div  style="margin-bottom:10px;">
                             <a class="btn-primary btn-sm" data-toggle="modal"  
                                 href="#myExportInfoWindow" 
                                 onClick=""> 
