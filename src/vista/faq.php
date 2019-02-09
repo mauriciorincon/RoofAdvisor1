@@ -47,6 +47,34 @@
 				<p>
                                 Our per user subscription is less than $20 per month! Its funny that our competitors think you can run a business with only one user using the software. For smaller growing companies, spending $250 for user subscriptions quickly adds up. We bundle our subscription in multiples of 3.  Whether you are small, medium, or large company, we are priced right for you. 
                                 </p>
+       <div class="faq-head1"><span>Price Comparison</span></div>
+<table  class="faq-table table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">RoofServiceNow</th>
+      <th scope="col">Acculynx</th>
+      <th scope="col">Service Fusion</th>
+      <th scope="col">FieldPulse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Licenses</th>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th scope="row">Per Month</th>
+      <td>$59.00</td>
+      <td>$59.00</td>
+      <td>$99.00</td>
+      <td>$59.00</td>
+    </tr>
+  </tbody>
+</table>
                                 </div> <!-- cd-faq-content -->
 			</li>
 
@@ -58,7 +86,167 @@
 				<a class="cd-faq-trigger" href="#0">What features does it have?</a>
 				<div class="cd-faq-content">
 			        <p>More features, less cost! RoofServiceNow has powerful features that are easy to use. We are the only software to offer a digital marketplace for homeowners to submit job orders to grow your business and the software for you to manage your business. No bull! Compare for yourself.</p>	
-                             </div> <!-- cd-faq-content -->
+                                <div class="faq-head1">
+ <span>RoofServiceNow (RSN) Feature Comparison</span>
+ </div>
+<table  class="faq-table table">
+  <thead>
+    <tr>
+      <th scope="col">Feature List</th>
+      <th scope="col">RSN</th>
+      <th scope="col">Acculynx</th>
+      <th scope="col">Service Fusion</th>
+      <th scope="col">Field Pulse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Integrated Market Place</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Estimating</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+     <tr>
+      <th scope="row">Invoicing</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+     <tr>
+      <th scope="row">Chat with Customer</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Share Documents</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Master Calendar</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+   <tr>
+      <th scope="row">Job Ordering</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Production Scheduling</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Online Payments</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Crew Management</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Mobile Application</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Free Storage</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Contractor Resources</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Fleet Management</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Accounting</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Time and Attendance</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Email Marketing</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Roof Reports</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Targeted Postcard Mails</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">Project Management</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+
+
+
+  </tbody>
+</table>
+
+                              </div> <!-- cd-faq-content -->
 			</li>
 
 		

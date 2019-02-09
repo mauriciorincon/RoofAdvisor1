@@ -1836,8 +1836,29 @@ font-size:100%
     margin: auto;
     margin-top: -68px;
 }
+.faq-table{
+    text-align:center;
+    
+}
+.faq-table td{
+padding-right:50px !important;
+}
+.faq-head1{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background: #005678;
+    color: #fff;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: 500;
+}
 
-
+.faq-table td .fa-check-square-o{
+   color:green;
+}
+.faq-table td .fa-times-circle-o{
+   color:red;
+}
 
 
 
