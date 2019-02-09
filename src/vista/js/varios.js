@@ -2180,7 +2180,7 @@ function validInputPassword(objeto){
 }
 
 function validInputRePassword(objeto){
-    var password = "";
+    /*var password = "";
     var Repassword = "";
     var password=$('input:password#inputPassword').val();
     if(objeto!=undefined){
@@ -2212,7 +2212,7 @@ function validInputRePassword(objeto){
             flag=true;
         }
     }
-    return flag;
+    return flag;*/
     
 }
 
