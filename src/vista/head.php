@@ -123,7 +123,7 @@ if(!isset($_SESSION)) {
 							<div id ="socico" class="social-icon text-right">
 								<a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a>
 								<a href="https://www.linkedin.com/company/viaplix.com"><i class="fab fa-linkedin"></i></a>
-								<a href="https://twitter.com/viaplix"><i class="fab fa-twitter-square"></i></a>
+								<a href="https://twitter.com/roofservicenow"><i class="fab fa-twitter-square"></i></a>
 								<a href="https://www.instagram.com/roofservicenow/?utm_source=ig_profile_share&igshid=jgt3twpfxve7"><i class="fab fa-instagram"></i></a>
 							</div>
 							
