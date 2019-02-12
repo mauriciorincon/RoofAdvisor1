@@ -9,7 +9,7 @@
 
   use SignalWire\Rest\Client;
 
-  $_ENV['SIGNALWIRE_API_HOSTNAME'] = "example.signalwire.com";
+  $_ENV['SIGNALWIRE_API_HOSTNAME'] = "mauricio.signalwire.com";
 
   class smsController{
 
@@ -23,13 +23,21 @@
             $project = '51079c5b-7c97-44a3-a0b0-4f75766d2347';
             $token = 'PTdbfb09c9492ceb2318d51770aca0328c6243540cc95e816a';
             $this->_cliente = new Client($project, $token);
+            
             echo "Creacion cliente:<br>";
             print_r($this->_cliente);
+            
+
+        
         }catch(Exception $e){
             $this->_cliente = $e;
             echo "error creacion cliente Creacion cliente:<br>";
             print_r($this->_cliente);
         }
+    }
+
+    public function getClient(){
+        return $this->_cliente;
     }
 
     public function sendMessage($_from,$_to,$_message){
@@ -39,7 +47,7 @@
                         ->create($_to, // to
                                  array("from" => $_from, "body" => $_message)
                         );
-    
+                echo "<br>Message Send<br>";
                 print($message->sid);
             }else{
                 echo "No se ha creado el cliente para enviar el mensaje";

@@ -44,8 +44,12 @@
 
     $_objMessage=new smsController();
     $_objMessage->createClientSms();
-    $_objMessage->sendMessage("+15557654321","+15551234567","hello world!");
-    $_objMessage->getAllTallNumbers();
+    $account = $_objMessage->getClient()->api->v2010->accounts("51079c5b-7c97-44a3-a0b0-4f75766d2347")->fetch();
+    print($account->friendlyName);
+    //$_objMessage->sendMessage("+12044000446","+16178987045","hello from roofservicenow");
+    $_objMessage->sendMessage("+12044000446","+573017560821","hello from roofservicenow");
+
+    //$_objMessage->getAllTallNumbers();
     //$_objMail=new emailController();
     //$_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
     //echo $_result;
