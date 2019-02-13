@@ -49,6 +49,8 @@
                         );
                 echo "<br>Message Send<br>";
                 print($message->sid);
+                echo "<br>Content<br>";
+                print_r($message);
             }else{
                 echo "No se ha creado el cliente para enviar el mensaje";
             }
