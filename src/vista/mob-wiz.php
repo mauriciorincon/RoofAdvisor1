@@ -17,9 +17,9 @@
 
     <div>
         <div id="step-1" class="">
-        Please type the zip code
-        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
-        <label class="control-label text-center h1" id="answerZipCode"><big></big></label>
+            Please type the zip code
+            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter your zip code" id="zipCodeBegin" name="zipCodeBegin" />
+            <label class="control-label text-center h1" id="answerZipCode"><big></big></label>
         </div>
         <div id="step-2" class="">
             <label>Select Service</label>
@@ -321,17 +321,17 @@
                 <tr>
                     <td>First Name</td>
                     <td><input maxlength="100" type="text" required="required" class="form-control"
-                        placeholder="Enter First Name" id="firstCustomerName" name="firstCustomerName"/></td>
+                        placeholder="Enter First Name" id="firstCustomerNameMob" name="firstCustomerNameMob"/></td>
                 </tr>
                 <tr>
                     <td>Last Name</td>
                     <td><input maxlength="100" type="text" required="required" class="form-control"
-                        placeholder="Enter Last Name" id="lastCustomerName" name="lastCustomerName"/></td>
+                        placeholder="Enter Last Name" id="lastCustomerNameMob" name="lastCustomerNameMob"/></td>
                 </tr>
                 <tr>
                     <td>Email</td>
                     <td><input maxlength="100" type="email" required="required" class="form-control"
-                        placeholder="Enter Email" id="emailValidation" name="emailValidation" onfocusout="validateEmail('customer',this)"/></td>
+                        placeholder="Enter Email" id="emailValidationMob" name="emailValidationMob" onfocusout="validateEmail('customer',this)"/></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -340,19 +340,26 @@
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input maxlength="50" type="password" required="required" data-minlength="6" placeholder="Password"
-                        id="inputPassword" name="inputPassword" onblur="validInputPassword(this)" class="form-control"/></td>
+                    <td>
+                    <div class="form-group">
+                        <input maxlength="50" type="password" required="required" data-minlength="6" placeholder="Password"
+                        id="inputPasswordMob" name="inputPasswordMob" onblur="validInputPassword(this)" class="form-control"/>
+                    </div>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td><div class="help-block col-sm-6">Minimum of 6 characters</div></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td><label class="control-label" id="answerPasswordValidateStep6"
+                        name="answerPasswordValidateStep6"></label></td>
+                </tr>
+                <tr>
                     <td>Confirm Password</td>
-                    <td><input maxlength="50" type="password" required="required" data-minlength="6"
-                        placeholder="Confirm Password" id="inputPasswordConfirm" name="inputPasswordConfirm"
-                        onblur="validInputRePassword(this)"
-                        oninvalid="this.setCustomValidity('Please Enter Confirm Password')" class="form-control"/></td>
+                    <td><input maxlength="50" type="password" required="required" data-minlength="6" placeholder="Confirm Password" 
+                    id="inputPasswordConfirmMob" name="inputPasswordConfirmMob" onblur="validInputRePassword(this)" class="form-control"/></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -362,7 +369,20 @@
                     <td>Phone number</td>
                     <td><input maxlength="100" type="number" min="1111111111" max="9999999999"
                         onkeypress="return isNumber(event)" required="required" class="form-control"
-                        placeholder="Enter phone number" id="customerPhoneNumber" name="customerPhoneNumber"/></td>
+                        placeholder="Enter phone number" id="customerPhoneNumberMob" name="customerPhoneNumberMob"/></td>
+                </tr>
+               
+                <tr>
+                    <td></td>
+                    <td>
+                    
+                    <label class="control-label ">PLEASE READ THE TERMS THOROUGHLY AND CAREFULLY. BY USING THE
+                        PLATFORM, YOU AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU MAY
+                        NOT ACCESS OR USE THE PLATFORM</label>
+                    <input type="checkbox" name="termsServiceAgreeMob" id="termsServiceAgreeMob" value="1"><span>I agree with the RoofServiceNow</span> <a
+                        href="?controller=termsconditions&accion=showinfo" data-toggle="modal" target="_blank"> Terms
+                        and Conditions</a>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>

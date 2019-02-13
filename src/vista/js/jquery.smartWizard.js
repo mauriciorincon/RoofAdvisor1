@@ -588,6 +588,9 @@
             // Trigger "endReset" event
             this._triggerEvent("endReset");
         },
+        goToStep: function (stepNum) {
+            this._showStep(stepNum);
+        },
         stepState: function (stepArray, state) {
             var mi = this;
             stepArray = $.isArray(stepArray) ? stepArray : [stepArray];

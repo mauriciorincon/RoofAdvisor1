@@ -62,10 +62,15 @@ class ComposerStaticInit0bff0aeee41bef1d0ad2a454ff51c2e5
         array (
             'libphonenumber\\' => 15,
         ),
+        'T' => 
+        array (
+            'Twilio\\' => 7,
+        ),
         'S' => 
         array (
             'Superbalist\\Flysystem\\GoogleStorage\\' => 36,
             'Stripe\\' => 7,
+            'SignalWire\\' => 11,
         ),
         'P' => 
         array (
@@ -121,6 +126,10 @@ class ComposerStaticInit0bff0aeee41bef1d0ad2a454ff51c2e5
         array (
             0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src',
         ),
+        'Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twilio/sdk/Twilio',
+        ),
         'Superbalist\\Flysystem\\GoogleStorage\\' => 
         array (
             0 => __DIR__ . '/..' . '/superbalist/flysystem-google-storage/src',
@@ -128,6 +137,10 @@ class ComposerStaticInit0bff0aeee41bef1d0ad2a454ff51c2e5
         'Stripe\\' => 
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'SignalWire\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/signalwire/signalwire/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (

@@ -172,7 +172,7 @@ if ($(window).innerWidth() <= 767) {
 <button id="mobilewizbtn1" class="mobilewizbtn1">START <i style="" class="fas fa-fingerprint"></i> HERE</button>    
 </div>
 <div class="btnvidmobilediv1" style="display:none;">
-    <button class="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4"
+    <button class="mobileplaybtn1" id="mobileplaybtn1" disabled><a style="color:#fff;font-size:18px;" href="video/roofpromo.mp4"
             data-lity><i style="margin-right:10px;" class="fas fa-play"></i>WATCH THE VIDEO</a></button>
 </div>
 <div id="appwiz" class="">

@@ -239,14 +239,20 @@ mobwizpoweroff($id);
 
 $('#mobilewizbtn1').click(function(){
 //alert('noob');
-   	mobwizpower($('#mobwizard'),'on');
+	mobwizpower($('#mobwizard'),'on');
+	$('#smartwizard').smartWizard('goToStep', 0);
+	$('.sw-btn-next').hide();
+	$(".btnvidmobilediv1").hide();
 	$(this).hide();
 });
 
 $('#mobwizclose').click(function(){
 //alert('noob');
    mobwizpower($('#mobwizard'),'off');
-   $('#mobilewizbtn1').show();
+   $('#smartwizard').smartWizard('goToStep', 0);
+   $('.sw-btn-next').hide();
+   $(".btnvidmobilediv1").hide();
+   //$('#btnvidmobilediv1').show();
 });
 
 

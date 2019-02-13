@@ -1147,19 +1147,44 @@ $(document).ready(function () {
 /////////////////////////////////////////////////////////////////////////////
 
     function saveCustomerData(p_pantalla){
-        
-        var firstCustomerName = $("input#firstCustomerName").val();
-        var lastCustomerName = $("input#lastCustomerName").val();
-        var emailValidation = $("input#emailValidation").val();
-        var customerAddress = $("input#customerAddress").val();
-        var customerCity = $("input#customerCity").val();
-        var customerState = $("select#customerState").val();
-        var customerZipCode = $("input#customerZipCode").val();
-        var customerPhoneNumber = $("input#customerPhoneNumber").val();
-        var password=$('input:password#inputPassword').val();
-        var Repassword=$('input:password#inputPasswordConfirm').val();
-        var termsServiceAgree=$("#termsServiceAgree").is(':checked');
+        var firstCustomerName = "";
+        var lastCustomerName = "";
+        var emailValidation = "";
+        var customerAddress = "";
+        var customerCity = "";
+        var customerState = "";
+        var customerZipCode = "";
+        var customerPhoneNumber = "";
+        var password = "";
+        var Repassword = "";
+        var termsServiceAgree = "";
+        if ($(window).innerWidth() <= 767) {
+            firstCustomerName = $("input#firstCustomerNameMob").val();
+            lastCustomerName = $("input#lastCustomerNameMob").val();
+            emailValidation = $("input#emailValidationMob").val();
+            customerAddress = $("input#customerAddressMob").val();
+            customerCity = $("input#customerCityMob").val();
+            customerState = $("select#customerStateMob").val();
+            customerZipCode = $("input#customerZipCodeMob").val();
+            customerPhoneNumber = $("input#customerPhoneNumberMob").val();
+            password=$('input:password#inputPasswordMob').val();
+            Repassword=$('input:password#inputPasswordConfirmMob').val();
+            termsServiceAgree=$("#termsServiceAgreeMob").is(':checked');
+       }else{
+            firstCustomerName = $("input#firstCustomerName").val();
+            lastCustomerName = $("input#lastCustomerName").val();
+            emailValidation = $("input#emailValidation").val();
+            customerAddress = $("input#customerAddress").val();
+            customerCity = $("input#customerCity").val();
+            customerState = $("select#customerState").val();
+            customerZipCode = $("input#customerZipCode").val();
+            customerPhoneNumber = $("input#customerPhoneNumber").val();
+            password=$('input:password#inputPassword').val();
+            Repassword=$('input:password#inputPasswordConfirm').val();
+            termsServiceAgree=$("#termsServiceAgree").is(':checked');
 
+       }
+       
         customerAddress = "";
         customerState = "";
         customerZipCode = "";
@@ -1301,9 +1326,13 @@ $(document).ready(function () {
                                 nextStepWizard = $('div.setup-panelOrder div a[href="#step-1"]').parent().next().children("a")
                                 if ($(window).innerWidth() > 767) {
                                     nextStepWizard.removeAttr('disabled').trigger('click');
+                                }else{
+                                    fire_next_step();
+                                    $('.sw-btn-next').show();
                                 }
                             }else{
                                 $('#firstNextBegin').hide(); 
+                                $('.sw-btn-next').hide();
                                 setLocation(map,zipcode);
                             }
                         }else{
@@ -2081,45 +2110,25 @@ function validateIsLoggedIn(){
                             var RequestType=$("button[name='step2OtypeService'].btn-success").parent().parent().parent().parent().parent().find("input:hidden[name='typeServiceOrder']").val()
                         }
                         
-                        
                         if(RequestType=='emergency' || RequestType=='roofreport'){
                            
                             $('#userLoguedIn').val(true);
-                            nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
-                            curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
-
-                            nextStepWizard.removeAttr('disabled').trigger('click');
-                            curStepWizard.attr('disabled', 'disabled');
-                            if(typeof handler !== undefined){
+                            if ($(window).innerWidth() <= 767) {
+                                $('#smartwizard').smartWizard('goToStep', 8);
+                            }else{
                                 if ($(window).innerWidth() <= 767) {
                                     fire_next_step();
                                 }else{
-
+                                    nextStepWizard = $('div.setup-panelOrder div a[href="#step-7"]').parent().next().children("a");
+                                    curStepWizard = $('div.setup-panelOrder div a[href="#step-6"]').parent().next().children("a");
+    
+                                    nextStepWizard.removeAttr('disabled').trigger('click');
+                                    curStepWizard.attr('disabled', 'disabled');
+                                    if(typeof handler !== undefined){
+                                       
+                                    }
                                 }
-                                    // $('#login-modal').style.display = "none";
-                                    /*let timerInterval; 
-                                        swal({ 
-                                                title: 'You have successfully logged in!',
-                                                type: 'success', 
-                                                html: 'You will be automatically redirected in <strong></strong> seconds.', 
-                                                timer: 1, 
-                                                onOpen: () => { 
-                                                    swal.showLoading() 
-                                                }, 
-                                                onClose: () => { 
-                                                    clearInterval(timerInterval) 
-                                                    } 
-                                                }).then((result) => { 
-                                                    if ( // Read more about handling dismissals 
-                                                result.dismiss === swal.DismissReason.timer 
-                                                    ) { 
-                                                    console.log('login has been completed successfully') }
-                                                    $("#login-modal").removeClass('fade').modal('hide');
-                                                    });
-                                    */
-                            }
-                            if ($(window).innerWidth() <= 767) {
-                                fire_next_step();
+                               
                             }
                         }else{
                             //jsRemoveWindowLoad('');
@@ -2169,11 +2178,11 @@ function validInputPassword(objeto){
     var flag=true;
     if(password.length<6){
         $(objeto).closest(".form-group").addClass("has-error").removeClass("has-success");
-        $('#answerPasswordValidateStep6').html('The password must have at least 6 chararters');
+        $('[name="answerPasswordValidateStep6"]').html('The password must have at least 6 chararters');
         flag=false;
     }else{
         $(objeto).closest(".form-group").addClass("has-success").removeClass("has-error");
-        $('#answerPasswordValidateStep6').html('');
+        $('[name="answerPasswordValidateStep6"]').html('');
         flag=true;
     }
     
@@ -5581,17 +5590,29 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
     switch(stepNumber){
          case 1:
              type_service=$('#typeServiceCompany1').val();
-             if(type_service=="NA"){
-                 alert("Please select the service");
-                 return false;
+             if(stepDirection=="forward"){
+                if(type_service=="NA"){
+                    alert("Please select the service");
+                    return false;
+                }
+                setServiceType();
              }
-             setServiceType();
+             
              break;
         case 2:
             break;
         case 3:
             break;
         case 4:
+            /*if(stepDirection=='forward'){
+                var address_type=$('#pac-inputMob').val();
+                if(address_type.length==0){
+                    alert("Please type the service address");
+                    return false;
+                }else{
+                    
+                }
+            }*/
             getListContractor("selectCompanyMobWizard","select"); 
             break;
         case 7:
@@ -5676,13 +5697,21 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
             break;
         case 8:
             //type_service=$('#typeServiceCompany1').val();
-            if(type_service=='emergency'){
-                $('#step-9 .list-group:eq(0)').show();
-                $('#step-9 .list-group:eq(1)').hide();
-            }else if(type_service=='roofreport'){
-                $('#step-9 .list-group:eq(0)').hide();
-                $('#step-9 .list-group:eq(1)').show();
+            if(stepDirection=="backward"){
+                fire_prev_step();
+            }else{
+                if(type_service=='emergency'){
+                    $('#step-9 .list-group:eq(0)').show();
+                    $('#step-9 .list-group:eq(1)').hide();
+                }else if(type_service=='roofreport'){
+                    $('#step-9 .list-group:eq(0)').hide();
+                    $('#step-9 .list-group:eq(1)').show();
+                }
             }
+            
+            break;
+        case 9:
+            
             break;
 
      }
