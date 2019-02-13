@@ -10,14 +10,10 @@
     }
     //echo  $_SERVER['DOCUMENT_ROOT'];
     
-<<<<<<< HEAD
     $_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
-=======
-    //$_SESSION['library_path']=$_SERVER['DOCUMENT_ROOT'].'/roofservicenow'.'/vendor/';
->>>>>>> 72a59bd11a7af41251f6242abc6b9896e585179e
 
     //echo $_SESSION['library_path'];
-    $_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
+    //$_SESSION['library_path']=$_SESSION['application_path'].'../vendor/';
     //define library path autoload
     $_SESSION['library_path_autoload']=$_SESSION['library_path'].'autoload.php';
     $_SESSION['library_path_autoload']=str_replace("//", "/", $_SESSION['library_path_autoload']);
