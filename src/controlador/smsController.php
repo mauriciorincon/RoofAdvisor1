@@ -20,8 +20,8 @@
 
     public function createClientSms(){
         try{
-            $project = '51079c5b-7c97-44a3-a0b0-4f75766d2347';
-            $token = 'PTdbfb09c9492ceb2318d51770aca0328c6243540cc95e816a';
+            $project = '0d749ea3-2462-4c4e-bc54-1385d0eb84b2';
+            $token = 'PT7dafd8692ae5456e2099d0d0f58eaad4ce1b379364bc3115';
             $this->_cliente = new Client($project, $token);
             echo "Creacion cliente:<br>";
             print_r($this->_cliente);

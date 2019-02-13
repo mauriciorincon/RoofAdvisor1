@@ -44,8 +44,12 @@
 
     $_objMessage=new smsController();
     $_objMessage->createClientSms();
-    $_objMessage->sendMessage("+15557654321","+15551234567","hello world!");
-    $_objMessage->getAllTallNumbers();
+    echo "<br><br>";
+    //$_objMessage->sendMessage("+12044000446","+15005550006","hello world!");
+    $_objMessage->sendMessage("+18889811812","+16178987045","hello world!");
+    
+    echo "<br><br>";
+    //$_objMessage->getAllTallNumbers();
     //$_objMail=new emailController();
     //$_result=$_objMail->sendMailSMTP("mauricio.rincon@gmail.com","test","<h4>hello world</h4>","","");
     //echo $_result;
