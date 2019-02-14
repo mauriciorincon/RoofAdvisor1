@@ -1489,5 +1489,7 @@ class userController{
         $_objPay=new payingController();
         return $_objPay->get_token_bank_account($stripeID);
     }
+    
+    
 }
 ?>

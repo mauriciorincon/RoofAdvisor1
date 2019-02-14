@@ -9,13 +9,15 @@ require_once($_SESSION['application_path']."/controlador/userController.php");
 require_once($_SESSION['application_path']."/controlador/pdfController.php");
 require_once($_SESSION['application_path']."/controlador/payingController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
+require_once($_SESSION['application_path']."/controlador/smsController.php");
 
 
 class orderController{
 
-    private $_orderModel=null;
-    private $_userController=null;
-    private $_otherController=null;
+    private $_orderModel = null;
+    private $_userController = null;
+    private $_otherController = null;
+    private $_smsController = null;
 
     function __construct()
 	{		
@@ -274,6 +276,50 @@ class orderController{
             }
             if(strcmp($arrayFields[$n],"action_type")==0){
                 $actionType=$arrayFields[$n+1];
+            }
+            if(strcmp($arrayFields[$n],"Status")==0){
+                $_status = $arrayFields[$n+1];
+                if(strcmp($_status,"D")==0 or strcmp($_status,"E")==0 or strcmp($_status,"F")==0 or strcmp($_status,"I")==0 or strcmp($_status,"J")==0 or strcmp($_status,"k")==0){
+                    if($this->_smsController ==null){
+                        $this->_smsController = new smsController();
+                    }
+                    $_msg = "";
+                    $_order=$this->getOrderByID($orderID);
+                    $_id_customer = $_order['CustomerFBID'];
+                    $this->_userController=new userController();
+                    $_companyName = $this->_userController->getNode("Company/".$_order['CompanyID']."/CompanyName");
+                    $_contractorName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameFirst");
+                    $_contractorLastName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameLast");
+                    switch($_status){
+                        case "D":
+                            $_msg = "$_companyName has taken your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
+                            break;
+                        case "E":
+                            $_msg = "$_contractorName $_contractorLastName has just arrived at your location. .";
+                            break;
+                        case "F":
+                            $_msg = "$_contractorName $_contractorLastName has sent you an estimate for the work. Please login to RoofServiceNow and approve the estimate. Https://roofservicenow.com";
+                            break;
+                        case "I":
+                            $_msg = "$_contractorName $_contractorLastName has completed the job and will send you a final invoice shortly.";
+                            break;
+                        case "J":
+                            $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
+                            break;
+                        case "K":
+                            $_msg = "Thank you for using RoofserviceNow and please remember to rate $_contractorName $_contractorLastName.";
+                            break;
+    
+                    }
+                    
+                    
+                    $_customer = $this->_userController->getNode("Customers/".$_id_customer);
+                    $_smsClient = $this->_smsController->createClientSms();
+                    print_r($_customer);
+                    $this->_smsController->sendMessage("+18889811812",$_customer['Phone'],$_msg);
+                }
+                
+
             }
 
         }

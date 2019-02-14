@@ -25,7 +25,7 @@
             $this->_cliente = new Client($project, $token);
             
             echo "Creacion cliente:<br>";
-            print_r($this->_cliente);
+            //print_r($this->_cliente);
             
 
         
