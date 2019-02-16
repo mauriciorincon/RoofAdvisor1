@@ -297,7 +297,6 @@ class orderController{
                             }else{
                                 $_msg = "$_companyName has confirmed your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
                             }
-                            
                             break;
                         case "E":
                             $_msg = "$_contractorName $_contractorLastName, from $_companyName, has just arrived at your location.";
@@ -312,7 +311,7 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
                             break;
                         case "K":
-                                $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
+                            $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
                             break;
                         case "S":
                             $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
