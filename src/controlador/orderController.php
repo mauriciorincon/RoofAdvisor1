@@ -292,22 +292,32 @@ class orderController{
                     $_contractorLastName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameLast");
                     switch($_status){
                         case "D":
-                            $_msg = "$_companyName has taken your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
+                            if(strcmp($_order['RequestType'],'R')){
+                                $_msg = "$_contractorName $_contractorLastName, from RoofServiceNow, is working on your request for a roof report.  We will let you know when completed.";
+                            }else{
+                                $_msg = "$_companyName has confirmed your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
+                            }
+                            
                             break;
                         case "E":
-                            $_msg = "$_contractorName $_contractorLastName has just arrived at your location. .";
+                            $_msg = "$_contractorName $_contractorLastName, from $_companyName, has just arrived at your location.";
                             break;
                         case "F":
-                            $_msg = "$_contractorName $_contractorLastName has sent you an estimate for the work. Please login to RoofServiceNow and approve the estimate. Https://roofservicenow.com";
+                            $_msg = "$_contractorName $_contractorLastName, from $_companyName, has sent you an estimate for your job order. Please login to RoofServiceNow and approve the estimate. Https://roofservicenow.com";
                             break;
                         case "I":
-                            $_msg = "$_contractorName $_contractorLastName has completed the job and will send you a final invoice shortly.";
+                            $_msg = "$_contractorName $_contractorLastName , from $_companyName, has completed the job and will send you a final invoice shortly.";
                             break;
                         case "J":
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
                             break;
                         case "K":
-                            $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
+                            if(strcmp($_order['RequestType'],'R')){
+                                $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
+                            }else{
+                                $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
+                            }
+                            
                             break;
     
                     }

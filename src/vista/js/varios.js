@@ -3982,6 +3982,51 @@ function disableEnableCompany(companyID,action){
 
 }
 
+function validateLicenseCompany(companyID,action){
+    jsShowWindowLoad('');
+    $.post( "controlador/ajax/validate_company.php", { "companyID" : companyID,"action" : action}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#myMensaje div.modal-body').html(data);
+
+                $('#table_list_company tr').each(function(){ 
+                    if($(this).find('td').eq(0).text()==companyID){
+                        if(action=="1"){ 
+                            $(this).find('td').eq(7).find('a:eq(2)').addClass('btn-danger').removeClass('btn-success');
+                            $(this).find('td').eq(7).find('span:eq(2)').addClass('glyphicon-remove').removeClass('glyphicon-ok');
+                            $(this).find('td').eq(7).find('a:eq(2)').attr("onclick","validateLicenseCompany('"+companyID+"','0')");
+                        }else{
+                            $(this).find('td').eq(7).find('a:eq(2)').addClass('btn-success').removeClass('btn-danger');
+                            $(this).find('td').eq(7).find('span:eq(2)').addClass('glyphicon-ok').removeClass('glyphicon-remove');
+                            $(this).find('td').eq(7).find('a:eq(2)').attr("onclick","validateLicenseCompany('"+companyID+"','1')");
+                        }
+                    }
+                 })
+                 jsRemoveWindowLoad('');
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+
+            }else{
+                $('#myMensaje div.modal-body').html(data);
+                $(document).ready(function(){$("#myMensaje").modal("show"); });
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+            }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                result1=false;
+                jsRemoveWindowLoad('');
+                return result1;
+            }
+        });
+
+}
+
 function disableEnableCustomer(customerID,action){
     jsShowWindowLoad('');
     $.post( "controlador/ajax/enable_disable_customer.php", { "customerID" : customerID,"action" : action}, null, "text" )

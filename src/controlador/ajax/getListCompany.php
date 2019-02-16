@@ -54,7 +54,7 @@ $_string="";
                         href="" 
                         onClick="alert(\'the company has not yet completed the information\')"> 
                         <span class="glyphicon glyphicon-ok"></span>
-                    </a>';
+                        </a>';
                     
                     }else{
                         $_string.=' <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Active Company"
@@ -62,6 +62,19 @@ $_string="";
                         onClick="disableEnableCompany(\''.$company['CompanyID'].'\',\'Active\')"> 
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>';
+                    }
+                    if(strcmp($company['Verified'],"")==0 or strcmp($company['Verified'],"")==0){
+                        $_string.=' <a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Validate License"
+                        href="" 
+                        onClick="validateLicenseCompany(\''.$company['CompanyID'].'\',\'1\')"> 
+                        <span class="glyphicon glyphicon-ok"></span>
+                        </a>';
+                    }else{
+                        $_string.=' <a class="btn-danger btn-sm" data-toggle="modal"  
+                        href=""  data-toggle1="tooltip"  title="Validate License"
+                        onClick="validateLicenseCompany(\''.$company['CompanyID'].'\',\'0\')"> 
+                        <span class="glyphicon glyphicon-remove"></span>
+                        </a>';
                     }
                     $_string.=' <a class="btn-warning btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Employee Info"
                         href="#myModalDrivers" 

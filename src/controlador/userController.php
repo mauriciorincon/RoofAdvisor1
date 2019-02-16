@@ -1332,6 +1332,30 @@ class userController{
         }
     }
 
+    public function invalidateCompany($_companyID){
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->updateContractor($_companyID.'/Verified','0');
+        if(is_bool($_result) === true){
+            return "The company identify by ".$_companyID." was updated corretly";
+        }else{
+            return "Error updating ".$_companyID."";
+        }
+        
+    }
+
+    public function validateCompany($_companyID){
+        $_message="";
+        $_flag=false;
+        $this->_userModel=new userModel();
+        $_result=$this->_userModel->updateContractor($_companyID.'/Verified','1');
+
+        if(is_bool($_result) === true){
+            return "The company identify by ".$_companyID."was  updated correctly, $_result";
+        }else{
+            return "Error updating ".$_companyID."";
+        }
+    }
+
     public function enableCustomer($_customerID){
         $_msg="";
         $_customer_data=$this->getCustomerById($_customerID);

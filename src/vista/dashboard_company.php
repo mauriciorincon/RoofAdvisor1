@@ -887,7 +887,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label ">License Verified</label>
-                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
+                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" <?php if(isset($_actual_company['Verified'])){if(strcmp($_actual_company['Verified'],"1")){echo "checked";} } ?> value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
                                     </div>
                                     <!--
                                     <div class="form-group">
