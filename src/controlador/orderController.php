@@ -312,14 +312,11 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
                             break;
                         case "K":
-                            if(strcmp($_order['RequestType'],'R')==0){
-                                $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
-                            }else{
                                 $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
-                            }
-                            
                             break;
-    
+                        case "S":
+                            $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
+                            break;
                     }
                     
                     
