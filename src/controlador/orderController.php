@@ -292,7 +292,7 @@ class orderController{
                     $_contractorLastName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameLast");
                     switch($_status){
                         case "D":
-                            if(strcmp($_order['RequestType'],'R')){
+                            if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "$_contractorName $_contractorLastName, from RoofServiceNow, is working on your request for a roof report.  We will let you know when completed.";
                             }else{
                                 $_msg = "$_companyName has confirmed your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
@@ -312,7 +312,7 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
                             break;
                         case "K":
-                            if(strcmp($_order['RequestType'],'R')){
+                            if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             }else{
                                 $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
