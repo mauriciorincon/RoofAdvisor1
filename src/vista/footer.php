@@ -64,7 +64,7 @@
 									<li><a href="?controller=services&accion=showinfo">service</a></li>
 									<li><a href="?controller=download&accion=showinfo">download</a></li>
                                                                         <li><a href="?controller=aboutus&accion=showinfo">Customer</a></li>
-									<li><a href="?controller=faq&accion=showinfo">PRO</a></li>
+									<li><a href="?controller=faq&accion=showinfo">Pros</a></li>
 									<li><a href="?controller=contact&accion=showinfo">contact us</a></li>
 								</ul>
 							</div>
