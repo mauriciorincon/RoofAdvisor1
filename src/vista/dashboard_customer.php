@@ -39,7 +39,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 			}
 			</style>
 
-			<a href="#" data-toggle="collapse" data-target="#onlyMapCustomerDashboard">Hide/Show Map</a>
+			<a class="maphidebtn" href="#" data-toggle="collapse" data-target="#onlyMapCustomerDashboard">Hide/Show Map</a>
         	<div id="onlyMapCustomerDashboard" class="collapse in">
 				<div id="map"></div>
 			</div>
@@ -609,7 +609,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 			</script>
 
 			<br>
-			<div class="table-responsive">          
+			<div class="table-responsive inftabletophd1">          
 				<table class="table table-striped " id="table_orders_customer">
 					<thead>
 					<tr>

@@ -40,7 +40,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                 width: 100%;  /* The width is the width of the web page */
             }
         </style>
-        <a href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide/Show Map</a>
+        <a class="maphidebtn" href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide / Show Map</a>
         <div id="onlyMapCompanyDashboard" class="collapse in">
             <div id="map"></div>
         </div>
@@ -701,7 +701,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
        
 
          
-        <div class="table-responsive">          
+        <div class="table-responsive inftabletophd1">          
             <table class="table table-striped " id="table_orders_company">
                 <thead class="">
                     <tr>

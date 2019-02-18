@@ -295,7 +295,7 @@ class orderController{
                             $_msg = "RoofServiceNow has received your job order $orderID. A service professional will be confirming shortly.";
                             break;
                         case "D":
-                            if(strcmp($_order['RequestType'],'R')){
+                            if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "$_contractorName $_contractorLastName, from RoofServiceNow, is working on your request for a roof report.  We will let you know when completed.";
                             }else{
                                 $_msg = "$_companyName has confirmed your order $orderID. $_contractorName $_contractorLastName will be contacting you shortly.";
@@ -314,12 +314,20 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "K":
+<<<<<<< HEAD
                             if(strcmp($_order['RequestType'],'R')){
                                 $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             }else{
                                 $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
                             }
                             break;
+=======
+                                $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
+                            break;
+                        case "S":
+                            $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
+                            break;
+>>>>>>> 3884e0500521a04e498c860944c4946a6f4dbbb4
                     }
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();

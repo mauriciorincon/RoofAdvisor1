@@ -38,6 +38,7 @@
 This is a same day, on-demand service for hiring pre-screened service professionals to fix your leaky roof before the damage is done. On the phone or computer you can:
 </p>
 <ul id="rhlist">
+  <li>Receive SMS notifications on the progress of your job order</li>
   <li>Track the contractor’s arrival to your home via GPS tracking</li>
   <li>Receive and approve the electronic estimate prior to start of work</li>
   <li>Get before and after pictures of the repair</li>

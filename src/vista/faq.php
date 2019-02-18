@@ -6,7 +6,7 @@
 				<div class="breadcrum-content">
 					<ol class="breadcrumb">
 					  <li><a href="#">home</a></li>
-					  <li class="active">FAQ</li>
+					  <li class="active">PROS</li>
 					</ol>
 				</div>
 			</div>
@@ -21,7 +21,7 @@
                                       <p style="font-size:19px;">We combine superior roofing software with an innovative digital marketplace. Your smart and cautious. We are confident RoofServiceNow is the right decision now and in five years that will help you grow your company.  We are affordable for a single owner and powerful enough for a large company. We are the next generation all in one platform!</p>
 </div>
 <div class="faq-head" style="height:140px;">
-	<h1 style="padding-top:55px;">Contractors Section</h1>
+	<h1 style="padding-top:55px;">Pros Section</h1>
 </div>
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
@@ -102,6 +102,13 @@
   <tbody>
     <tr>
       <th scope="row">Integrated Market Place</th>
+      <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+      <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
+    </tr>
+    <tr>
+      <th scope="row">SMS Customer Notifications</th>
       <td><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></td>
       <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>
       <td><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></td>

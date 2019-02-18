@@ -61,10 +61,10 @@
 								<h3 class="widget-title"    style="margin-top: 100px;">Site Map</h3>
 								<ul class="footer-menu">
 									<li><a href="index.php">home</a></li>
-									<li><a href="?controller=aboutus&accion=showinfo">about us</a></li>
 									<li><a href="?controller=services&accion=showinfo">service</a></li>
 									<li><a href="?controller=download&accion=showinfo">download</a></li>
-									<li><a href="?controller=faq&accion=showinfo">FAQ</a></li>
+                                                                        <li><a href="?controller=aboutus&accion=showinfo">Customer</a></li>
+									<li><a href="?controller=faq&accion=showinfo">Pros</a></li>
 									<li><a href="?controller=contact&accion=showinfo">contact us</a></li>
 								</ul>
 							</div>
