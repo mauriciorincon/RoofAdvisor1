@@ -84,7 +84,6 @@
                         "phoneNumber" => $numbers[0]->phoneNumber
                     )
                 );
-
             echo $number->sid;
             }else{
                 echo "No se ha creado el cliente para enviar el mensaje";

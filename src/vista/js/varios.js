@@ -1256,10 +1256,11 @@ $(document).ready(function () {
                         var n = data.indexOf("Error");
                         if(n==-1){
                             if(p_pantalla=="Order"){
+                                data = jQuery.parseJSON(data);
                                 $('#register-modal').modal('hide');
                                 
-                                $('#headerTextAnswerOrder').html('Mail Verification');
-                                $('#textAnswerOrder').html(data+', and clic the link to activate your acount, after that please click next step');
+                                $('#headerTextAnswerOrder').html(data.title);
+                                $('#textAnswerOrder').html(data.subtitle+'<br>'+data.content+', and clic the link to activate your acount, after that please click next step,<br>If you don’t see the email, please make sure you check your Spam folder.');
                                 dataString="'"+emailValidation+"','"+password+"','step8'";
                                 $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
@@ -3063,30 +3064,53 @@ function takeWork(){
         $("#myMensaje").modal("show");
         return;
     }
-    if((orderType=="S" || orderType=="M") && pricingWork>0 ){
-        action_type="pay_take_service";
-        order_type_request_val=orderType;
-        order_fbid=orderID;
-        if(typeof handler !== undefined){
-            handler.open({
-                name: 'RoofServiceNow',
-                description: 'pay your service',
-                amount: parseInt(amount_value),
-                email:userMailCompany
-            });
-        }
-    }else{
-        
-        if(orderType=="P"){
-            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+companyID+",ContractorID,"+",CompanyID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
-        }else if(orderType=="E") {
-            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,pay_to_company,1";
+
+    jsShowWindowLoad('Validate company info');
+    $.post( "controlador/ajax/getValidateAccount.php", { "companyID" : companyID}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        var n = data.indexOf("Error");
+        jsRemoveWindowLoad('');
+        if(n==-1){
+            
+            if((orderType=="S" || orderType=="M") && pricingWork>0 ){
+                action_type="pay_take_service";
+                order_type_request_val=orderType;
+                order_fbid=orderID;
+                if(typeof handler !== undefined){
+                    handler.open({
+                        name: 'RoofServiceNow',
+                        description: 'pay your service',
+                        amount: parseInt(amount_value),
+                        email:userMailCompany
+                    });
+                }
+            }else{
+                
+                if(orderType=="P"){
+                    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+companyID+",ContractorID,"+",CompanyID,"+driverID+",Status,J,EstAmtMat,"+amountPostCard+",ActAmtMat,"+amountPostCard;
+                }else if(orderType=="E") {
+                    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D,pay_to_company,1";
+                }else{
+                    arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
+                }
+                updateOrder(orderID,arrayChanges,'','Lead Confirmed');
+                $("#myModalGetWork").modal("hide");
+            }
+
         }else{
-            arrayChanges="SchDate,"+dateWork+",SchTime,"+timeWork+",ContractorID,"+driverID+",CompanyID,"+companyID+",Status,D";
+            $('#myMensaje > #headerMessage').html('Error validating');
+            $('#myMensaje div.modal-body').html(data);
+            $("#myMensaje").modal("show");
         }
-        updateOrder(orderID,arrayChanges,'','Lead Confirmed');
-        $("#myModalGetWork").modal("hide");
-    }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            jsRemoveWindowLoad('');
+        }
+    });
+
+    
     
 }
 
