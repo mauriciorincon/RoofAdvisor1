@@ -1263,8 +1263,8 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 				
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
+						<div style="margin-top: -40px;" class="panel-default">
+							<div style="color:#fff;" class="panel-heading">
 								<h3 class="panel-title"><strong>Amount</strong></h3>
 							</div>
 							<div class="panel-body">

@@ -1645,7 +1645,7 @@ right:-10%;
 text-align:center;
 }
 .logmodal{
-background-color:#1515159e;
+background-color: #005d6394;
 color:#fff;
 border-radius:20px;
 margin-right:35px;
@@ -2074,7 +2074,20 @@ background-size: 85%;
 }
 }
 @media (max-width:993px){
-
+.inpwiz1{
+    width: 40%;
+    margin-left: 115px;
+}
+.inpwiz2{
+    width: 40%;
+    right: -65px;
+}
+#step6time{
+font-size:15px !important;
+}
+#step6date{
+font-size:15px !important;
+}
 }
 @media (max-width:970px){
 #appdiv2{
