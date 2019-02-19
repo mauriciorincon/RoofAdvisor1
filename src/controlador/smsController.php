@@ -20,18 +20,19 @@
 
     public function createClientSms(){
         try{
+            
             $project = '0d749ea3-2462-4c4e-bc54-1385d0eb84b2';
             $token = 'PT7dafd8692ae5456e2099d0d0f58eaad4ce1b379364bc3115';
             $this->_cliente = new Client($project, $token);
             
-            echo "Creacion cliente:<br>";
+            //echo "Creacion cliente:<br>";
             //print_r($this->_cliente);
             
 
         
         }catch(Exception $e){
             $this->_cliente = $e;
-            echo "error creacion cliente Creacion cliente:<br>";
+            return "It was a problem creating the client to send message";
             print_r($this->_cliente);
         }
     }
@@ -47,12 +48,14 @@
                         ->create($_to, // to
                                  array("from" => $_from, "body" => $_message)
                         );
-                echo "<br>Message Send<br>";
-                print($message->sid);
-                echo "<br>Content<br>";
-                print_r($message);
+                //echo "<br>Message Send<br>";
+                //print($message->sid);
+                //echo "<br>Content<br>";
+                //print_r($message);
+                return "<br>Message Send<br>";
             }else{
-                echo "No se ha creado el cliente para enviar el mensaje";
+                //print_r($this->_cliente);
+                return "It was a problem creating the client to send message";
             }
         }catch(\Twilio\Exceptions\EnvironmentException $e){
             echo "<br>Error: EnvironmentException ".$e."<br>";
@@ -86,7 +89,7 @@
                 );
             echo $number->sid;
             }else{
-                echo "No se ha creado el cliente para enviar el mensaje";
+                return "It was a problem creating the client to send message";
             }
         }catch(\Twilio\Exceptions\EnvironmentException $e){
             echo "<br>Error: EnvironmentException ".$e."<br>";

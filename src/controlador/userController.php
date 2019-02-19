@@ -426,7 +426,8 @@ class userController{
             
 
             if(strcmp($_selectionType,"newCustomer")!=0){
-                $_mail_response =$_smsController->sendMessage("18889811812",'+1'+$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+                $_smsController->createClientSms();
+                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
                 return  "OK ".$_response."<br>".$_mail_response;
                 /*$this->_sendMail=new emailController();
                 $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
@@ -465,14 +466,14 @@ class userController{
                         $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','company');
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','company');
+                        $_message=$this->messageValidateUser('Error, An error occurs valdiating your user'.$_result_update,'notice-danger','company');
 
                         return $_message;
                         
                     }
                     
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','company');
+                    $_message=$this->messageValidateUser('Error, An error occurs valdiating your user','notice-danger','company');
                     return $_message;
                 }
             }else{
@@ -494,7 +495,11 @@ class userController{
             }
         }else if(strcmp($table,'Customers')==0){
             $this->_userModel=new userModel();
+            $_result=$this->_userModel->getCustomer($user);
+            $user=$_result['uid'];
             $_result=$this->_userModel->validateCustomerByID($user);
+            
+            //print_r($_result);
             if(is_array($_result) or gettype($_result)=="object" ){
                 if(strcmp($_result->photoUrl,$code)==0){
                     $properties = [
@@ -504,14 +509,17 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Customers');
+                        //$_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Customers');
+                        $_message="Your account was validated correctly. Now you can use RoofServiceNow!";
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Customers');
+                        $_message="Error, An error occurs valdiating your user $_result_update";
+                        //$_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Customers');
                         return $_message;
                     }
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
+                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again";
+                    //$_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
                     return $_message;
                 }
             }else{

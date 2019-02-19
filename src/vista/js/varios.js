@@ -1262,7 +1262,7 @@ $(document).ready(function () {
                                 $('#headerTextAnswerOrder').html(data.title);
                                 $('#textAnswerOrder').html(data.subtitle+'<br>'+data.content+',<br><h4>Type your activation code</h4><input type="text" id="activation_code_input" /> ');
                                 dataString="'"+emailValidation+"','"+password+"','step8'";
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code("c","'+emailValidation+'")">Validate Code</button><br><br>');
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code(\'c\',\''+emailValidation+'\')">Validate Code</button><br><br>');
                                 //$('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
                             }
@@ -5806,9 +5806,14 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
 });
 
 
-function validate_sms_code(t,user){
+function validate_sms_code(t,user,screen){
 
     code = $('#activation_code_input').val();
+    pass = $('#inputPassword').val();
+    if(code=="" || code==undefined || code==null){
+        alert("Please fill the code field");
+        return;
+    }
     table = t;
     email = user;
     jsShowWindowLoad('Validating code');
@@ -5817,17 +5822,28 @@ function validate_sms_code(t,user){
         if ( console && console.log ) {
             var n = data.indexOf("Error");
             if(n==-1){
-                $('#textAnswerOrder').html(data);
-                $('#headerTextAnswerOrder').html('Error registering customer');
-                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
-                $('#lastFinishButtonOrder').hide();
-                $('#myModalRespuesta').modal({backdrop: 'static'});
+                if(screen=='Customer_register'){
+                    $('#labelResponseValidationCode').html(data);
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Register Customer');
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser(\''+email+'\',\''+pass+'\',\'step8\')">Finish the order</button><br><br>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                
             }else{
-                $('#textAnswerOrder').html(data);
-                $('#headerTextAnswerOrder').html('Error registering customer');
-                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
-                $('#lastFinishButtonOrder').hide();
-                $('#myModalRespuesta').modal({backdrop: 'static'});
+                if(screen=='Customer_register'){
+                    $('#labelResponseValidationCode').html(data);
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error registering customer');
+                    //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#textAnswerOrder').html('<div class="alert alert-danger"><strong>'+data+'</strong></div><br><h4>Type your activation code</h4><input type="text" id="activation_code_input" /> ');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
             }
             console.log( "La solicitud se ha completado correctamente."+data+textStatus);
             jsRemoveWindowLoad('');

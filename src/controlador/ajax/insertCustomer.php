@@ -124,7 +124,9 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Register Customer",
                 'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly please check the code that was sent to your phone",
+                'content'=>"Customer was register correctly please check the code that was sent to your phone.",
+                'emailUser' =>$_emailValidation,
+                'passUser' =>$_password,
             );
             $_SESSION['response'] = $_message;
             $_path="../../?controller=user&accion=showMessage";
@@ -134,7 +136,7 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Register Customer",
                 'subtitle'=>"Thank you for register",
-                'content'=>"ustomer was register correctly please check the code that was sent to your phone",
+                'content'=>"Customer was register correctly please check the code that was sent to your phone.",
             );
             print_r(json_encode($_message));
             break;
@@ -142,7 +144,7 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Register Customer",
                 'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly",
+                'content'=>"Customer was register correctly $_customerID",
                 'customerID'=>$_customerID,
             );
             print_r(json_encode($_message));
