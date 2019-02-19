@@ -47,6 +47,10 @@ echo $_objUser->generarCodigo(6); // genera un código de 6 caracteres de longit
     $profile = "driver";
     $_result = $_objUser->updateUserContractor($userId,$properties,$profile);
     print_r($_result);*/
+    $_objUser = new userController();
+    echo "datos";
+    echo $_objUser->generarCodigo(6);
+    return;
 
     /*$_objMessage=new smsController();
     $_objMessage->createClientSms();

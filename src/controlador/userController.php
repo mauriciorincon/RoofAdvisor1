@@ -10,8 +10,10 @@ require_once($_SESSION['application_path']."/controlador/calendarController.php"
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
 require_once($_SESSION['application_path']."/controlador/payingController.php");
+require_once($_SESSION['application_path']."/controlador/smsController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 require_once($_SESSION['application_path']."/vista/usefull_urls.php");
+
 
 
 //include 'vendor/autoload.php';
@@ -377,7 +379,9 @@ class userController{
         }
         $this->updateCustomerLastId($_lastCustomerID);
         
-        $hashActivationCode = md5( rand(0,1000) );
+        $_smsController = new smsController();
+        $hashActivationCode = $_smsController->generateCodeSms(6);
+        //$hashActivationCode = md5( rand(0,1000) );
         if(strcmp($_selectionType,"newCustomer")!=0){
             $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');    
             if(gettype($_responseU)=="object"){
@@ -394,6 +398,7 @@ class userController{
             
             //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
             //$hashActivationCode = 'FBID';
+            $arrayCustomer['customerPhoneNumber']=str_replace("+1","",$arrayCustomer['customerPhoneNumber']);
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
@@ -402,7 +407,7 @@ class userController{
                 "FBID" =>  '',
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
-                "Phone" =>  $arrayCustomer['customerPhoneNumber'],
+                "Phone" =>  '+1'+$arrayCustomer['customerPhoneNumber'],
                 "State" =>  $arrayCustomer['customerState'],
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
@@ -421,13 +426,15 @@ class userController{
             
 
             if(strcmp($_selectionType,"newCustomer")!=0){
-                $this->_sendMail=new emailController();
+                $_mail_response =$_smsController->sendMessage("18889811812",'+1'+$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+                return  "OK ".$_response."<br>".$_mail_response;
+                /*$this->_sendMail=new emailController();
                 $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
                 if($_mail_response==false){
                     return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
                 }else{
                     //return "OK ".$_response."<br>".$_mail_response;
-                }
+                }*/
             }
         }else{
             return "Error ".$_response." response create user: ".$_responseU;
