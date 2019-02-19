@@ -666,7 +666,7 @@ if ($(window).innerWidth() <= 767) {
                 </div>
                 <div class="panel-body">
                     <span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span>
-                    <font size="5"><strong class="h1white">Enter the place for the service</strong></font>
+                    <font size="5"><strong class="h1white">Enter the address for service</strong></font>
                     <input type="hidden" id="step5Logintud" name="step5Logintud" />
                     <input type="hidden" id="step5Latitude" name="step5Latitude" />
                     <input type="hidden" id="step5Address" name="step5Address" />
@@ -700,7 +700,7 @@ if ($(window).innerWidth() <= 767) {
                         }
                         </style>
 
-                        <input id="pac-input" class="wizsrch2" type="text" placeholder="Enter a location">
+                        <input id="pac-input" class="wizsrch2" type="text" placeholder="Enter Service Location">
                         <div id="map1"></div>
 
                         <script>
@@ -787,7 +787,7 @@ if ($(window).innerWidth() <= 767) {
                                             .short_name || '')
                                     ].join(' ');
                                     $('#step5Address').val(address);
-                                    $('#step5ZipCode').val(place.address_components[7].short_name);
+                                    $('#step5ZipCode').val(place.address_components[6].short_name);
                                     $('#step5State').val(place.address_components[5].long_name + ' (' + place
                                         .address_components[5].short_name + ')');
                                     $('#step5City').val(place.address_components[4].long_name);
@@ -863,8 +863,7 @@ if ($(window).innerWidth() <= 767) {
                         <div class="col-sm-12">
                             <br>
                             <center>
-                                <h4 class="h1white"><b>Please Note:&nbsp; Repair service are schedule a week in
-                                        advance.</b></h4>
+                                <h4 class="h1white"><b>Please Note:&nbsp; Repair services are scheduled a week in advance.</b></h4>
                             </center>
                         </div>
 

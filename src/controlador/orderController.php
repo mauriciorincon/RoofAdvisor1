@@ -291,35 +291,44 @@ class orderController{
                     $_contractorName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameFirst");
                     $_contractorLastName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameLast");
                     switch($_status){
+                        case "A":
+                            $_msg = "RoofServiceNow has received your job order $orderID. A service professional will be confirming shortly.";
+                            break;
                         case "D":
                             if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "$_contractorName $_contractorLastName, from RoofServiceNow, is working on your request for a roof report.  We will let you know when completed.";
                             }else{
-                                $_msg = "$_companyName has confirmed your job order and $_contractorName $_contractorLastName will be contacting you shortly.";
+                                $_msg = "$_companyName has confirmed your order $orderID. $_contractorName $_contractorLastName will be contacting you shortly.";
                             }
-                            
                             break;
                         case "E":
-                            $_msg = "$_contractorName $_contractorLastName, from $_companyName, has just arrived at your location.";
+                            $_msg = "$_contractorName $_contractorLastName<Pro> has just arrived at your location.";
                             break;
                         case "F":
-                            $_msg = "$_contractorName $_contractorLastName, from $_companyName, has sent you an estimate for your job order. Please login to RoofServiceNow and approve the estimate. Https://roofservicenow.com";
+                            $_msg = "$_contractorName $_contractorLastName has sent you an estimate for order $orderID. Please login to RoofServiceNow and approve the estimate. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "I":
-                            $_msg = "$_contractorName $_contractorLastName , from $_companyName, has completed the job and will send you a final invoice shortly.";
+                            $_msg = "$_contractorName $_contractorLastName has completed the job and will send you a final invoice shortly.";
                             break;
                         case "J":
-                            $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. Https://roofservicenow.com";
+                            $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "K":
+<<<<<<< HEAD
                                 $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
                             break;
                         case "S":
                             $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             break;
+=======
+                            if(strcmp($_order['RequestType'],'R')){
+                                $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
+                            }else{
+                                $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
+                            }
+                            break;
+>>>>>>> d039abee0cff1e585600670d2165108a7831ff82
                     }
-                    
-                    
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();
                     print_r($_customer);
