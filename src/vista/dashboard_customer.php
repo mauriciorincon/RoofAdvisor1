@@ -1281,13 +1281,13 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Amount Materials</td>
+												<td>Materials</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Amount Time</td>
+												<td>Time</td>
 												<td class="text-center">$00.00</td>
 												<td class="text-center">1</td>
 												<td class="text-right">$00.00</td>

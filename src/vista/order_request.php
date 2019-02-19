@@ -786,7 +786,7 @@ if ($(window).innerWidth() <= 767) {
                                             .short_name || '')
                                     ].join(' ');
                                     $('#step5Address').val(address);
-                                    $('#step5ZipCode').val(place.address_components[7].short_name);
+                                    $('#step5ZipCode').val(place.address_components[6].short_name);
                                     $('#step5State').val(place.address_components[5].long_name + ' (' + place
                                         .address_components[5].short_name + ')');
                                     $('#step5City').val(place.address_components[4].long_name);
