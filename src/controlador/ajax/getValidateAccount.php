@@ -26,14 +26,14 @@ if (isset($_POST['account'])){
     $_companyID =$_POST['companyID'];
     $_comapnyInfo = $_userController->getCompanyById($_companyID);
 
-    if(strcmp($_POST['companyID'],"CO000000")){
+    if(strcmp($_POST['companyID'],"CO000000")==0){
         $_account="";
     }else{
         $_account=$_comapnyInfo['stripeAccount'];
     }
     
 
-    if(!empty($_account) or strcmp($_POST['companyID'],"CO000000")){
+    if(!empty($_account) or strcmp($_POST['companyID'],"CO000000")==0){
         $account = $_userController->getAccount($_account);
         if(is_object($account) or is_array($account)){
             $_result=$_userController->getValidateAccount($_account);
