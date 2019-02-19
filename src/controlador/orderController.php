@@ -314,20 +314,12 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "K":
-<<<<<<< HEAD
-                                $_msg = "Thank you for the payment and using RoofServiceNow. Please remember to rate $_contractorName $_contractorLastName.";
-                            break;
-                        case "S":
-                            $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
-                            break;
-=======
                             if(strcmp($_order['RequestType'],'R')){
                                 $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             }else{
                                 $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
                             }
                             break;
->>>>>>> d039abee0cff1e585600670d2165108a7831ff82
                     }
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();
