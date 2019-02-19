@@ -104,6 +104,14 @@
             echo "<br>Error: TwimlException ".$e."<br>";
         }
     }
+
+    function generateCodeSms($length) {
+        $key = '';
+        $pattern = '1234567890';
+        $max = strlen($pattern)-1;
+        for($i=0;$i < $length;$i++) $key .= $pattern{mt_rand(0,$max)};
+        return $key;
+    }
     
   }
   

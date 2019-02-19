@@ -1260,9 +1260,10 @@ $(document).ready(function () {
                                 $('#register-modal').modal('hide');
                                 
                                 $('#headerTextAnswerOrder').html(data.title);
-                                $('#textAnswerOrder').html(data.subtitle+'<br>'+data.content+', and clic the link to activate your acount, after that please click next step,<br>If you don’t see the email, please make sure you check your Spam folder.');
+                                $('#textAnswerOrder').html(data.subtitle+'<br>'+data.content+',<br><h4>Type your activation code</h4><input type="text" id="activation_code_input" /> ');
                                 dataString="'"+emailValidation+"','"+password+"','step8'";
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code("c","'+emailValidation+'")">Validate Code</button><br><br>');
+                                //$('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
                             }
                             //$("#firstNextValidation").show();
@@ -5803,3 +5804,43 @@ $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDire
   });
 
 });
+
+
+function validate_sms_code(t,user){
+
+    code = $('#activation_code_input').val();
+    table = t;
+    email = user;
+    jsShowWindowLoad('Validating code');
+    $.post( "controlador/ajax/validateCodeSMS.php", { "verify" : code,"t" : table,"u":email}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+                $('#textAnswerOrder').html(data);
+                $('#headerTextAnswerOrder').html('Error registering customer');
+                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                $('#lastFinishButtonOrder').hide();
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }else{
+                $('#textAnswerOrder').html(data);
+                $('#headerTextAnswerOrder').html('Error registering customer');
+                $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                $('#lastFinishButtonOrder').hide();
+                $('#myModalRespuesta').modal({backdrop: 'static'});
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    }); 
+
+    
+}
