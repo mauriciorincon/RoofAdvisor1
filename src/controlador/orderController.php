@@ -327,12 +327,9 @@ class orderController{
                                 $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
                             }
                             break;
-<<<<<<< HEAD
-=======
                         case "S":
                             $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             break;
->>>>>>> a7a3fb1e78ceb785362ca37380b17a2c8a576cdf
                     }
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();

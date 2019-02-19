@@ -31,7 +31,7 @@
 $_objUser = new userModel();
 echo $_objUser->generarCodigo(6); // genera un código de 6 caracteres de longitud.
 
-    //echo $_SESSION['application_path']."declare user controller";
+    //echo $_SESSION['application_path']."declare user controller";GIT PU
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
     /*$_objPay=new payingController();

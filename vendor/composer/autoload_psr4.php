@@ -18,8 +18,10 @@ return array(
     'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'League\\OAuth2\\Server\\' => array($vendorDir . '/league/oauth2-server/src'),
     'League\\OAuth2\\Client\\' => array($vendorDir . '/league/oauth2-client/src', $vendorDir . '/league/oauth2-google/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
+    'League\\Event\\' => array($vendorDir . '/league/event/src'),
     'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
     'Kreait\\Firebase\\' => array($vendorDir . '/kreait/firebase-php/src/Firebase'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
@@ -33,5 +35,6 @@ return array(
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Firebase\\Auth\\Token\\' => array($vendorDir . '/kreait/firebase-tokens/src'),
     'Fig\\Http\\Message\\' => array($vendorDir . '/fig/http-message-util/src'),
+    'Defuse\\Crypto\\' => array($vendorDir . '/defuse/php-encryption/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );

@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Datamatrix' => $vendorDir . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
-    'Firebase\\Error' => $vendorDir . '/ktamas77/firebase-php/src/firebaseStub.php',
+    'Firebase\\Error' => $vendorDir . '/ktamas77/firebase-php/src/firebaseError.php',
     'Firebase\\FirebaseInterface' => $vendorDir . '/ktamas77/firebase-php/src/firebaseInterface.php',
     'Firebase\\FirebaseLib' => $vendorDir . '/ktamas77/firebase-php/src/firebaseLib.php',
     'Firebase\\FirebaseStub' => $vendorDir . '/ktamas77/firebase-php/src/firebaseStub.php',
