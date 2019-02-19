@@ -28,7 +28,7 @@ if (isset($_POST['account'])){
 
     $_account=$_comapnyInfo['stripeAccount'];
 
-    if(!empty($_account)){
+    if(!empty($_account) or strcmp($_POST['companyID'],"CO000000")){
         $account = $_userController->getAccount($_account);
         if(is_object($account) or is_array($account)){
             $_result=$_userController->getValidateAccount($_account);
