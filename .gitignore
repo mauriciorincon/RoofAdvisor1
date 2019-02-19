@@ -11,3 +11,6 @@ composer.lock
 cache.properties
 .vscode
 src/tmp/*
+src/conf.php
+!src/conf.php
+/src/conf.php

@@ -21,7 +21,7 @@ if ($(window).innerWidth() <= 767) {
 
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" style="width:1200px" role="document">
+    <div class="modal-dialog" style="width:65%;" role="document">
         <div class="modal-content logmodal">
             <div class="modal-header mheadr">
                 <h3 class="modal-title" id="wizlogin">Please Enter Your Information To Register</h3>
@@ -99,8 +99,7 @@ if ($(window).innerWidth() <= 767) {
                         href="?controller=termsconditions&accion=showinfo" data-toggle="modal" target="_blank"> Terms
                         and Conditions</a>
                 </div>
-                <center><button class="btn btn-primary" type="button" id="firstNextValidation"
-                        name="firstNextValidation" onclick="saveCustomerData('Order')">Register</button></center>
+                <center><button class="btn btn-primary" type="button" id="firstNextValidation" name="firstNextValidation" onclick="saveCustomerData('Order')">Register</button></center>
                 <!--<center><button class=" btn-primary  btn-lg nextBtnOrder" type="button" id="buttonLoginCustomer1" onclick="saveCustomerData('Order')">Register</button></center>-->
             </div>
 
@@ -666,7 +665,7 @@ if ($(window).innerWidth() <= 767) {
                 </div>
                 <div class="panel-body">
                     <span id="srchinftxt1" class="glyphicon glyphicon-info-sign h1white"></span>
-                    <font size="5"><strong class="h1white">Enter the address for service</strong></font>
+                    <font size="5"><strong class="h1white">Enter the address for service.</strong></font>
                     <input type="hidden" id="step5Logintud" name="step5Logintud" />
                     <input type="hidden" id="step5Latitude" name="step5Latitude" />
                     <input type="hidden" id="step5Address" name="step5Address" />
@@ -863,7 +862,7 @@ if ($(window).innerWidth() <= 767) {
                         <div class="col-sm-12">
                             <br>
                             <center>
-                                <h4 class="h1white"><b>Please Note:&nbsp; Repair services are scheduled a week in advance.</b></h4>
+                                <h4 class="h1white"><b>Please Note:&nbsp; Repair services are scheduled a week in advance.</br></br></h4>
                             </center>
                         </div>
 
@@ -1052,7 +1051,7 @@ if ($(window).innerWidth() <= 767) {
                     <div class="row">
                         <div class="list-group logbox2">
                             <div class="list-group-item login-list1">
-                                <div class="d-flex w-100 justify-content-between">
+                                <div class="d-flex w-100 justify-content-between" style="z-index:1;">
                                     <div class="form-group">
                                         <label class="loglable" style="display: inline-block;margin-left:73px;"><i
                                                 class="fa fa-user" aria-hidden="true" style="color:#fa511a"></i></label>
@@ -1079,8 +1078,8 @@ if ($(window).innerWidth() <= 767) {
                                         name="answerValidateUserOrder">Answer</label>
                                 </div>
                             </div>
-                            <p>
-                                <table id="wizloginbtn1" class="logbox3">
+                            
+                                <table id="wizloginbtn1"  style="z-index: 5;position: relative;" class="logbox3">
                                     <tr>
                                         <td>
                                             <h1 style="margin-right: 13px;" class="logintxtbtns1 labeltwht">Please</h1>
@@ -1104,7 +1103,6 @@ if ($(window).innerWidth() <= 767) {
                                         </td>
                                     </tr>
                                 </table>
-                            </p>
                             <!--<button class="btn btn-primary nextBtnOrder pull-right" type="button">Next</button>-->
                             <!--<button  style="margin-top:5px;margin-right:8px;" class=" btn btn-lg nextBtnOrder pull-right" type="button" id="buttonLoginCustomer">Login</button>-->
                         </div>

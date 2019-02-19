@@ -279,7 +279,14 @@ class orderController{
             }
             if(strcmp($arrayFields[$n],"Status")==0){
                 $_status = $arrayFields[$n+1];
-                if(strcmp($_status,"D")==0 or strcmp($_status,"E")==0 or strcmp($_status,"F")==0 or strcmp($_status,"I")==0 or strcmp($_status,"J")==0 or strcmp($_status,"K")==0){
+                if(strcmp($_status,"A")==0 or 
+                    strcmp($_status,"D")==0 or 
+                    strcmp($_status,"E")==0 or 
+                    strcmp($_status,"F")==0 or 
+                    strcmp($_status,"I")==0 or 
+                    strcmp($_status,"J")==0 or 
+                    strcmp($_status,"K")==0 or 
+                    strcmp($_status,"S")==0){
                     if($this->_smsController ==null){
                         $this->_smsController = new smsController();
                     }
@@ -320,6 +327,12 @@ class orderController{
                                 $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
                             }
                             break;
+<<<<<<< HEAD
+=======
+                        case "S":
+                            $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
+                            break;
+>>>>>>> a7a3fb1e78ceb785362ca37380b17a2c8a576cdf
                     }
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();
