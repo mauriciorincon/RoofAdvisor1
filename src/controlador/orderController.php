@@ -279,7 +279,14 @@ class orderController{
             }
             if(strcmp($arrayFields[$n],"Status")==0){
                 $_status = $arrayFields[$n+1];
-                if(strcmp($_status,"D")==0 or strcmp($_status,"E")==0 or strcmp($_status,"F")==0 or strcmp($_status,"I")==0 or strcmp($_status,"J")==0 or strcmp($_status,"K")==0){
+                if(strcmp($_status,"A")==0 or 
+                    strcmp($_status,"D")==0 or 
+                    strcmp($_status,"E")==0 or 
+                    strcmp($_status,"F")==0 or 
+                    strcmp($_status,"I")==0 or 
+                    strcmp($_status,"J")==0 or 
+                    strcmp($_status,"K")==0 or 
+                    strcmp($_status,"S")==0){
                     if($this->_smsController ==null){
                         $this->_smsController = new smsController();
                     }

@@ -11,7 +11,7 @@
     document.getElementById("countdowntimer").textContent = timeleft;
     if(timeleft <= 0){
         clearInterval(downloadTimer);
-        window.location.href = "index.php";
+        window.location.href = "index.php?controller=user&accion=dashboardCustomer";
     }
     },1000);
 </script>
