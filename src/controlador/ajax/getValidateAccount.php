@@ -26,7 +26,12 @@ if (isset($_POST['account'])){
     $_companyID =$_POST['companyID'];
     $_comapnyInfo = $_userController->getCompanyById($_companyID);
 
-    $_account=$_comapnyInfo['stripeAccount'];
+    if(strcmp($_POST['companyID'],"CO000000")){
+        $_account="";
+    }else{
+        $_account=$_comapnyInfo['stripeAccount'];
+    }
+    
 
     if(!empty($_account) or strcmp($_POST['companyID'],"CO000000")){
         $account = $_userController->getAccount($_account);
