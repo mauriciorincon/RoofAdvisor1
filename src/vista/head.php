@@ -146,9 +146,9 @@ if(!isset($_SESSION)) {
 								<nav id="navtxt">
 									<ul>
 										<li class="active"><a href="index.php">HOME&nbsp;&nbsp;</a></li>
-										<li><a href="?controller=aboutus&accion=showinfo">ABOUT US&nbsp;&nbsp;</a></li>
 										<li><a href="?controller=services&accion=showinfo">SERVICE&nbsp;&nbsp;</a></li>
-										<li><a href="?controller=faq&accion=showinfo">FAQ&nbsp;&nbsp;</a></li>
+										<li><a href="?controller=aboutus&accion=showinfo">CUSTOMERS&nbsp;&nbsp;</a></li>
+                                                                                <li><a href="?controller=faq&accion=showinfo">PROS&nbsp;&nbsp;</a></li>
 										<li><a href="?controller=download&accion=showinfo">DOWNLOAD&nbsp;&nbsp;</a></li>
 										<li><a href="?controller=contact&accion=showinfo">CONTACT</a></li>
 									</ul>

@@ -1859,8 +1859,30 @@ padding-right:50px !important;
 .faq-table td .fa-times-circle-o{
    color:red;
 }
+.maphidebtn{
+    margin-left: 10px;
+    background-color: #fa511a !important;
+    color: white !important;
+    padding: 5px;
+    border-radius: 10px 10px 0px 0px;
+}
+.inftabletophd1{
+    z-index: 50;
+    display: block;
+   position: relative;
+}
+#map{
+    border-radius: 10px;
+}
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
 
-
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
 
 
 

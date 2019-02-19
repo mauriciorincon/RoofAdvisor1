@@ -40,7 +40,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                 width: 100%;  /* The width is the width of the web page */
             }
         </style>
-        <a href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide/Show Map</a>
+        <a class="maphidebtn" href="#" data-toggle="collapse" data-target="#onlyMapCompanyDashboard">Hide / Show Map</a>
         <div id="onlyMapCompanyDashboard" class="collapse in">
             <div id="map"></div>
         </div>
@@ -701,7 +701,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
        
 
          
-        <div class="table-responsive">          
+        <div class="table-responsive inftabletophd1">          
             <table class="table table-striped " id="table_orders_company">
                 <thead class="">
                     <tr>
@@ -2545,7 +2545,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 					<div class="list-group">
 					
 							<input id="pac-inputC" class="controls" type="text"
-								placeholder="Enter a location" >
+								placeholder="Enter Service Location" >
                             
                                 <style>
 						/* Set the size of the div element that contains the map */
@@ -2636,7 +2636,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 										(place.address_components[2] && place.address_components[2].short_name || '')
 										].join(' ');
 										$('#step5Address').val(address);
-										$('#step5ZipCode').val(place.address_components[7].short_name);
+										$('#step5ZipCode').val(place.address_components[6].short_name);
 									}
 									
 
@@ -2918,13 +2918,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Amount Materials</td>
+												<td>Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompanyF" name="estMatCompanyF" class="form-control input-sm"  onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompanyF" name="estMatCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Amount Time</td>
+												<td>Time</td>
 												<td class="text-center"><input type="text" id="estHourCompanyF" name="estHourCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompanyF" name="estHourCntCompanyF" class="form-control input-sm" onfocusout="calculateFinalAmount()"/></td>
 												<td class="text-right">$00.00</td>
@@ -3237,13 +3237,13 @@ if(!empty($_actual_company['postCardValue'])){
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>Amount Materials</td>
+												<td>Materials</td>
 												<td class="text-center"><input type="text" id="estMatCompany" name="estMatCompany" class="form-control input-sm"  onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estMatCntCompany" name="estMatCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
 											</tr>
 											<tr>
-												<td>Amount Time</td>
+												<td>Time</td>
 												<td class="text-center"><input type="text" id="estHourCompany" name="estHourCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-center"><input type="text" id="estHourCntCompany" name="estHourCntCompany" class="form-control input-sm" onfocusout="calculateEstAmount()"/></td>
 												<td class="text-right">$00.00</td>
