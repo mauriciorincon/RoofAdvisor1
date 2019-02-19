@@ -166,10 +166,22 @@ if(!isset($_SESSION)) {
                                                 <b class="caret"></b></a>
                                         	<ul id="logindrop" class="dropdown-menu">
                                                                         <li><a href="?controller=user&accion=dashboardCustomer">Homeowner</a></li>
+																		<?php if(isset($_SESSION['username'])){
+																			if(strcmp($_SESSION['profile'],'customer')==0){
+																				echo '<li><a href="?controller=user&accion=dashboardCustomer">Orders</a></li>';
+																			}elseif(strcmp($_SESSION['profile'],'company')==0){
+																				echo '<li><a href="?controller=user&accion=dashboardCompany">Orders</a></li>';
+																			}else{
+																				echo '<li><a href="?controller=user&accion=dashboardAdmin">Orders</a></li>';
+																			}
+																			
+																		} ?>
                                                                         <li><a href="?controller=user&accion=dashboardCompany">ContractPro</a></li>
 																		<li class="divider"></li>
 																		<?php if(isset($_SESSION['username'])){
+
 																			echo '<li><a href="?controller=user&accion=logout">Log Out</a></li>';
+
                                                 } ?>
                                                                         
                                             </ul>
