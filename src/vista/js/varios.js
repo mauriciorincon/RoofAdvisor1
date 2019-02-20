@@ -1262,7 +1262,8 @@ $(document).ready(function () {
                                 $('#headerTextAnswerOrder').html(data.title);
                                 $('#textAnswerOrder').html(data.subtitle+'<br>'+data.content+',<br><h4>Type your activation code</h4><input type="text" id="activation_code_input" /> ');
                                 dataString="'"+emailValidation+"','"+password+"','step8'";
-                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code(\'c\',\''+emailValidation+'\')">Validate Code</button><br><br>');
+                                $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code(\'c\',\''+emailValidation+'\')">Validate Code</button><br><br>'+
+                                'If you do not recived your activation code, you can resend it, with the pressing button <button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\''+emailValidation+'\')">Resend Code</button>');
                                 //$('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser('+dataString+')">Next Step</button><br><br>');
                                 $('#myModalRespuesta').modal({backdrop: 'static',keyboard: false});
                             }
@@ -5828,7 +5829,8 @@ function validate_sms_code(t,user,screen){
                     $('#textAnswerOrder').html(data);
                     $('#headerTextAnswerOrder').html('Register Customer');
                     $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
-                    $('#buttonAnswerOrder').html('<br><br><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser(\''+email+'\',\''+pass+'\',\'step8\')">Finish the order</button><br><br>');
+                    $('#buttonAnswerOrder').html('<br><br>'+
+                                                    '<button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser(\''+email+'\',\''+pass+'\',\'step8\')">Finish the order</button><br><br>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
@@ -5840,7 +5842,8 @@ function validate_sms_code(t,user,screen){
                     $('#textAnswerOrder').html(data);
                     $('#headerTextAnswerOrder').html('Error registering customer');
                     //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
-                    $('#textAnswerOrder').html('<div class="alert alert-danger"><strong>'+data+'</strong></div><br><h4>Type your activation code</h4><input type="text" id="activation_code_input" /> ');
+                    $('#textAnswerOrder').html('<div class="alert alert-danger"><strong>'+data+'</strong></div><br><h4>Type your activation code</h4><input type="text" id="activation_code_input" />'+
+                     '<br><br>If you do not receive your activation code, you can resend it, with the pressing button <button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\''+email+'\')">Resend Code</button>');
                     $('#lastFinishButtonOrder').hide();
                     $('#myModalRespuesta').modal({backdrop: 'static'});
                 }
@@ -5859,4 +5862,53 @@ function validate_sms_code(t,user,screen){
     }); 
 
     
+}
+
+function resendValidationCode(user){
+    
+    jsShowWindowLoad('Validating code');
+    $.post( "controlador/ajax/sendSMSMessage.php", {"t" : "c","u":user}, null, "text" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            var n = data.indexOf("Error");
+            if(n==-1){
+
+                if(screen=='Customer_register'){
+                    $('#labelResponseValidationCode').html(data);
+                }else{
+                    data = jQuery.parseJSON(data);                               
+                    $('#headerTextAnswerOrder').html(data.title);
+                    $("#answerValidateUserOrder").html('<div class="alert alert-success"><strong>'+data+'</strong></div>');
+                    $('#buttonAnswerOrder').html('<div class="alert alert-success">'+data.subtitle+'<br>'+data.content+'</div><br>'+
+                                                    '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'+
+                                                    '<br><br>If you do not recived your activation code, you can resend it, with the pressing button <button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\''+user+'\')">Resend Code</button>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+                
+            }else{
+                if(screen=='Customer_register'){
+                    $('#labelResponseValidationCode').html(data);
+                }else{
+                    $('#textAnswerOrder').html(data);
+                    $('#headerTextAnswerOrder').html('Error registering customer');
+                    //$("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>');
+                    $('#textAnswerOrder').html('<div class="alert alert-danger"><strong>'+data+'</strong></div><br><h4>Type your activation code</h4><input type="text" id="activation_code_input" />'+
+                     '<br><br>If you do not recived your activation code, you can resend it, with the pressing button <button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\''+user+'\')">Resend Code</button>');
+                    $('#lastFinishButtonOrder').hide();
+                    $('#myModalRespuesta').modal({backdrop: 'static'});
+                }
+            }
+            console.log( "La solicitud se ha completado correctamente."+data+textStatus);
+            jsRemoveWindowLoad('');
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            result1=false;
+            jsRemoveWindowLoad('');
+            return result1;
+        }
+    });
 }
