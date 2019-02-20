@@ -51,7 +51,7 @@
 									</li>
 									<li>
 										<i class="fa fa-envelope-o"></i>
-										<span><a href="mailto:info@roofservicenow.com">info@roofservicenow.com</a> </span>
+										<span><a href="mailto:support@roofservicenow.com">support@roofservicenow.com</a> </span>
 									</li>
 								</ul>
 						    </div>
