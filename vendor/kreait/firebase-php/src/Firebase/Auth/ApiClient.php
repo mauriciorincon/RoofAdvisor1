@@ -99,8 +99,10 @@ class ApiClient
         ]);
     }
 
-    public function downloadAccount(int $batchSize = 1000, string $nextPageToken = null): ResponseInterface
+    public function downloadAccount(int $batchSize = null, string $nextPageToken = null): ResponseInterface
     {
+        $batchSize = $batchSize ?? 1000;
+
         return $this->request('downloadAccount', array_filter([
             'maxResults' => $batchSize,
             'nextPageToken' => $nextPageToken,
@@ -191,23 +193,26 @@ class ApiClient
 
     /**
      * @param string $idToken
+     * @param string $continueUrl
      *
      * @return ResponseInterface
      */
-    public function sendEmailVerification(string $idToken): ResponseInterface
+    public function sendEmailVerification(string $idToken, string $continueUrl = null): ResponseInterface
     {
-        return $this->request('getOobConfirmationCode', [
+        return $this->request('getOobConfirmationCode', array_filter([
             'requestType' => 'VERIFY_EMAIL',
             'idToken' => $idToken,
-        ]);
+            'continueUrl' => $continueUrl,
+        ]));
     }
 
-    public function sendPasswordResetEmail(string $email): ResponseInterface
+    public function sendPasswordResetEmail(string $email, string $continueUrl = null): ResponseInterface
     {
-        return $this->request('getOobConfirmationCode', [
+        return $this->request('getOobConfirmationCode', array_filter([
             'email' => $email,
             'requestType' => 'PASSWORD_RESET',
-        ]);
+            'continueUrl' => $continueUrl,
+        ]));
     }
 
     public function revokeRefreshTokens(string $uid): ResponseInterface
@@ -228,6 +233,10 @@ class ApiClient
 
     private function request(string $uri, $data): ResponseInterface
     {
+        if ($data instanceof \JsonSerializable && empty($data->jsonSerialize())) {
+            $data = (object) []; // Will be '{}' instead of '[]' when JSON encoded
+        }
+
         try {
             return $this->client->request('POST', $uri, ['json' => $data]);
         } catch (RequestException $e) {
