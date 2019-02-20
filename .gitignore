@@ -5,7 +5,7 @@ src/invoice/
 src/roofreport/
 src/roofreport
 .DS_Store
-build/*
+build/*git 
 composer.lock
 cache.properties
 .vscode

@@ -11,13 +11,14 @@
  */
 
 return array (
+  38590 => 'Tele2',
   38591 => 'Vip',
   38592 => 'Vip',
   38595 => 'Tele2',
   385970 => 'Hrvatski Telekom',
-  3859751 => 'Telefocus',
-  385976 => 'bonbon',
-  385977 => 'bonbon',
+  385975 => 'Telefocus',
+  385976 => 'Hrvatski Telekom',
+  385977 => 'Hrvatski Telekom',
   385979 => 'Hrvatski Telekom',
   38598 => 'Hrvatski Telekom',
   38599 => 'Hrvatski Telekom',
