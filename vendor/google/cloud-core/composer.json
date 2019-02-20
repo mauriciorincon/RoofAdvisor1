@@ -8,6 +8,7 @@
         "rize/uri-template": "~0.3",
         "google/auth": "^1.2",
         "guzzlehttp/guzzle": "^5.3|^6.0",
+        "guzzlehttp/promises": "^1.3",
         "guzzlehttp/psr7": "^1.2",
         "monolog/monolog": "~1",
         "psr/http-message": "1.0.*"
@@ -17,7 +18,7 @@
         "squizlabs/php_codesniffer": "2.*",
         "phpdocumentor/reflection": "^3.0",
         "erusev/parsedown": "^1.6",
-        "google/gax": "^0.31.1",
+        "google/gax": "^0.38.0",
         "opis/closure": "^3"
     },
     "suggest": {
@@ -27,7 +28,7 @@
     "extra": {
         "component": {
             "id": "cloud-core",
-            "target": "GoogleCloudPlatform/google-cloud-php-core.git",
+            "target": "googleapis/google-cloud-php-core.git",
             "path": "Core",
             "entry": "src/ServiceBuilder.php"
         }

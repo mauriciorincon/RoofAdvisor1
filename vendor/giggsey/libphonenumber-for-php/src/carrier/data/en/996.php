@@ -20,6 +20,7 @@ return array (
   99656 => 'Winline',
   99657 => 'Sotel',
   99670 => 'Nur Telecom',
-  996755 => 'ALFA Telecom',
+  99675 => 'ALFA Telecom',
   99677 => 'Sky mobile',
+  9969 => 'Sky mobile',
 );

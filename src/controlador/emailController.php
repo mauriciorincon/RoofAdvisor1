@@ -3,7 +3,6 @@
 if(!isset($_SESSION)) { 
     session_start(); 
 } 
-//require $_SESSION['application_path'].'/vendor/autoload.php';
 require $_SESSION['library_path_autoload'];
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -73,6 +72,7 @@ class emailController{
             
         }
     }
+
  public function sendMail3($subject,$body){
         $mail = new PHPMailer;
         //$mail = new PHPMailer;
@@ -217,7 +217,4 @@ class emailController{
         return $this->_message_error;
     }
 }
-
 ?>
-
-

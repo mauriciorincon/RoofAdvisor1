@@ -19,6 +19,7 @@ namespace Google\Cloud\Core;
 
 use DateTime;
 use DateTimeZone;
+use Google\ApiCore\CredentialsWrapper;
 use Google\Auth\Cache\MemoryCacheItemPool;
 use Google\Auth\FetchAuthTokenCache;
 use Google\Cloud\Core\ArrayTrait;
@@ -97,14 +98,29 @@ trait GrpcTrait
      */
     private function getGaxConfig($version, callable $authHttpHandler = null)
     {
-        return [
-            'credentialsLoader' => $this->requestWrapper->getCredentialsFetcher(),
-            'enableCaching' => false,
+        $config = [
             'libName' => 'gccl',
             'libVersion' => $version,
-            'transport' => 'grpc',
-            'authHttpHandler' => $authHttpHandler
+            'transport' => 'grpc'
         ];
+
+        // GAX v0.32.0 introduced the CredentialsWrapper class and a different
+        // way to configure credentials. If the class exists, use this new method
+        // otherwise default to legacy usage.
+        if (class_exists(CredentialsWrapper::class)) {
+            $config['credentials'] = new CredentialsWrapper(
+                $this->requestWrapper->getCredentialsFetcher(),
+                $authHttpHandler
+            );
+        } else {
+            $config += [
+                'credentialsLoader' => $this->requestWrapper->getCredentialsFetcher(),
+                'authHttpHandler' => $authHttpHandler,
+                'enableCaching' => false
+            ];
+        }
+
+        return $config;
     }
 
     /**
