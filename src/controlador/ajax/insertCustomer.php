@@ -134,9 +134,9 @@ if(strpos($_customerID,"Error")!==false){
             break;
         case "Order":
             $_message=array(
-                'title'=>"Register Customer",
-                'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly please check the code that was sent to your phone.",
+                'title'=>"Verification Checkpoint",
+                'subtitle'=>"Customer was register correctly",
+                'content'=>"We sent a Verification Code to your phone: $_customerPhoneNumber",
             );
             print_r(json_encode($_message));
             break;
