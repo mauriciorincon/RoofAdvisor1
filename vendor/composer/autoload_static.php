@@ -194,13 +194,6 @@ class ComposerStaticInit247ce9ecd68cd7aaff47637b9e2be2b2
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-<<<<<<< HEAD
-=======
-        'Matrix\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
-        ),
->>>>>>> fd0b9898d8511d837ffd06e569e5a70e692bafe2
         'League\\OAuth2\\Server\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-server/src',
