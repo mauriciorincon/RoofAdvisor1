@@ -21,6 +21,7 @@
         <div id="zip-panel-heading" class="panel-heading wizhead ">
             <h3 class="panel-title colorStandarWhite"><?php echo $_SESSION['response']['title'] ?></h3>
         </div>
+        <input type="hidden" value="<?php echo $_SESSION['response']['passUser'] ?>" id="inputPassword" />
         <div class="panel-body">
             <div class="form-group">
                 <label class="control-label text-center h1 colorStandarWhite"><big><?php echo $_SESSION['response']['subtitle'] ?></big></label>
@@ -32,7 +33,22 @@
                     <input type="text" id="activation_code_input" />
                 </div>
                 <div>
-                    <button type="button" id="finishService" class="btn btn-default" data-dismiss="modal" onclick="validate_sms_code('c','<?php echo $_SESSION['response']['emailUser'];?>','Customer_register')">Validate Code</button>
+                    <div class="alert alert-danger" role="alert">    
+                        <table>
+                            <tr>
+                                <td><strong>Did not get a code?</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Check your cell phone</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="btn-primary" onclick="resendValidationCode('<?php echo $_SESSION['response']['emailUser'];?>','Customer_register')">REQUEST A NEW</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                
+                    <button type="button" id="finishService" class="btn-success" data-dismiss="modal" onclick="validate_sms_code('c','<?php echo $_SESSION['response']['emailUser'];?>','Customer_register')">Validate Code</button>
                 </div>
                 <div>
                     <div class="alert alert-primary" role="alert" id="labelResponseValidationCode">

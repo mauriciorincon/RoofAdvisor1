@@ -5615,7 +5615,7 @@ $(document).ready(function () {
   })
 })
 
-function validate_sms_code (t, user, screen) {
+function validate_sms_code (t, user, screenPar) {
   code = $('#activation_code_input').val()
   pass = $('#inputPassword').val()
   if (code == '' || code == undefined || code == null) {
@@ -5630,8 +5630,9 @@ function validate_sms_code (t, user, screen) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
+            window.location.href = '?controller=user&accion=loginContractor';
           }else {
             $('#textAnswerOrder').html(data)
             $('#headerTextAnswerOrder').html('Register Customer')
@@ -5642,7 +5643,7 @@ function validate_sms_code (t, user, screen) {
             $('#myModalRespuesta').modal({backdrop: 'static'})
           }
         }else {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
           }else {
             $('#textAnswerOrder').html(data)
@@ -5687,15 +5688,16 @@ function validate_sms_code (t, user, screen) {
     })
 }
 
-function resendValidationCode (user) {
+function resendValidationCode (user,screenPar) {
   jsShowWindowLoad('Validating code')
   $.post('controlador/ajax/sendSMSMessage.php', {'t': 'c','u': user}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screen == 'Customer_register') {
-            $('#labelResponseValidationCode').html(data)
+          if (screenPar == 'Customer_register') {
+            data = jQuery.parseJSON(data)
+            $('#labelResponseValidationCode').html(data.content)
           }else {
             data = jQuery.parseJSON(data)
             $('#textAnswerOrder').html(data)
@@ -5726,7 +5728,7 @@ function resendValidationCode (user) {
 
           }
         }else {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
           }else {
             $('#textAnswerOrder').html(data + `,<br><br><label>Verification Code</label><input type="text" class="form-control" id="activation_code_input" /> 
