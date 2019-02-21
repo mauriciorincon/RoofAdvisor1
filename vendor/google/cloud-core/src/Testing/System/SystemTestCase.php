@@ -18,8 +18,11 @@
 namespace Google\Cloud\Core\Testing\System;
 
 use Google\Cloud\BigQuery\BigQueryClient;
+use Google\Cloud\BigQuery\Dataset;
 use Google\Cloud\Core\ExponentialBackoff;
 use Google\Cloud\PubSub\PubSubClient;
+use Google\Cloud\PubSub\Topic;
+use Google\Cloud\Storage\Bucket;
 use Google\Cloud\Storage\StorageClient;
 use Google\Cloud\Core\Testing\System\DeletionQueue;
 use PHPUnit\Framework\TestCase;
@@ -84,7 +87,7 @@ class SystemTestCase extends TestCase
      * @param StorageClient $client
      * @param string $bucketName
      * @param array $options
-     * @return Google\Cloud\Storage\Bucket
+     * @return Bucket
      *
      * @experimental
      * @internal
@@ -97,14 +100,12 @@ class SystemTestCase extends TestCase
             return $client->createBucket($bucketName, $options);
         });
 
-        self::$deletionQueue->add(function () use ($backoff, $bucket) {
-            $backoff->execute(function () use ($bucket) {
-                foreach ($bucket->objects() as $object) {
-                    $object->delete();
-                }
+        self::$deletionQueue->add(function () use ($bucket) {
+            foreach ($bucket->objects() as $object) {
+                $object->delete();
+            }
 
-                $bucket->delete();
-            });
+            $bucket->delete();
         });
 
         return $bucket;
@@ -123,7 +124,7 @@ class SystemTestCase extends TestCase
      * @param BigQueryClient $client
      * @param string $datasetName
      * @param array $options
-     * @return Google\Cloud\BigQuery\Dataset
+     * @return Dataset
      *
      * @experimental
      * @internal
@@ -152,7 +153,7 @@ class SystemTestCase extends TestCase
      * @param PubSubClient $client
      * @param string $topicName
      * @param array $options
-     * @return Google\Cloud\PubSub\Topic
+     * @return Topic
      *
      * @experimental
      * @internal
@@ -165,14 +166,12 @@ class SystemTestCase extends TestCase
             return $client->createTopic($topicName, $options);
         });
 
-        self::$deletionQueue->add(function () use ($backoff, $topic) {
-            $backoff->execute(function () use ($topic) {
-                foreach ($topic->subscriptions() as $subscription) {
-                    $subscription->delete();
-                }
+        self::$deletionQueue->add(function () use ($topic) {
+            foreach ($topic->subscriptions() as $subscription) {
+                $subscription->delete();
+            }
 
-                $topic->delete();
-            });
+            $topic->delete();
         });
 
         return $topic;

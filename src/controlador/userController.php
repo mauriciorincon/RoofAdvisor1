@@ -10,8 +10,10 @@ require_once($_SESSION['application_path']."/controlador/calendarController.php"
 require_once($_SESSION['application_path']."/controlador/orderController.php");
 require_once($_SESSION['application_path']."/controlador/othersController.php");
 require_once($_SESSION['application_path']."/controlador/payingController.php");
+require_once($_SESSION['application_path']."/controlador/smsController.php");
 require_once($_SESSION['application_path']."/vista/customerFAQ.php");
 require_once($_SESSION['application_path']."/vista/usefull_urls.php");
+
 
 
 //include 'vendor/autoload.php';
@@ -377,7 +379,9 @@ class userController{
         }
         $this->updateCustomerLastId($_lastCustomerID);
         
-        $hashActivationCode = md5( rand(0,1000) );
+        $_smsController = new smsController();
+        $hashActivationCode = $_smsController->generateCodeSms(6);
+        //$hashActivationCode = md5( rand(0,1000) );
         if(strcmp($_selectionType,"newCustomer")!=0){
             $_responseU=$this->insertUserDatabase($arrayCustomer['emailValidation'],$arrayCustomer['customerPhoneNumber'],$arrayCustomer['firstCustomerName'].' '.$arrayCustomer['lastCustomerName'],$hashActivationCode,$arrayCustomer['password'],'customer');    
             if(gettype($_responseU)=="object"){
@@ -394,6 +398,7 @@ class userController{
             
             //$hashActivationCode = $this->_userModel->getKeyNode('Customers');
             //$hashActivationCode = 'FBID';
+            $arrayCustomer['customerPhoneNumber']=str_replace("+1","",$arrayCustomer['customerPhoneNumber']);
             $Customer = array(
                 "Address" =>  $arrayCustomer['customerAddress'],
                 "City" =>  $arrayCustomer['customerCity'],
@@ -402,7 +407,7 @@ class userController{
                 "FBID" =>  '',
                 "Fname" =>  $arrayCustomer['firstCustomerName'],
                 "Lname" =>  $arrayCustomer['lastCustomerName'],
-                "Phone" =>  $arrayCustomer['customerPhoneNumber'],
+                "Phone" =>  '+1'+$arrayCustomer['customerPhoneNumber'],
                 "State" =>  $arrayCustomer['customerState'],
                 "Timestamp" =>  date("m-d-Y H:i:s"),
                 "ZIP" =>  $arrayCustomer['customerZipCode'],
@@ -421,13 +426,16 @@ class userController{
             
 
             if(strcmp($_selectionType,"newCustomer")!=0){
-                $this->_sendMail=new emailController();
+                $_smsController->createClientSms();
+                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+                return  "OK ".$_response."<br>".$_mail_response;
+                /*$this->_sendMail=new emailController();
                 $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
                 if($_mail_response==false){
                     return "Error ".$_response."<br>".$this->_sendMail->getMessageError();
                 }else{
                     //return "OK ".$_response."<br>".$_mail_response;
-                }
+                }*/
             }
         }else{
             return "Error ".$_response." response create user: ".$_responseU;
@@ -458,14 +466,14 @@ class userController{
                         $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','company');
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','company');
+                        $_message=$this->messageValidateUser('Error, An error occurs valdiating your user'.$_result_update,'notice-danger','company');
 
                         return $_message;
                         
                     }
                     
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','company');
+                    $_message=$this->messageValidateUser('Error, An error occurs valdiating your user','notice-danger','company');
                     return $_message;
                 }
             }else{
@@ -487,7 +495,11 @@ class userController{
             }
         }else if(strcmp($table,'Customers')==0){
             $this->_userModel=new userModel();
+            $_result=$this->_userModel->getCustomer($user);
+            $user=$_result['uid'];
             $_result=$this->_userModel->validateCustomerByID($user);
+            
+            //print_r($_result);
             if(is_array($_result) or gettype($_result)=="object" ){
                 if(strcmp($_result->photoUrl,$code)==0){
                     $properties = [
@@ -497,14 +509,17 @@ class userController{
                     ];
                     $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'customer');
                     if(is_array($_result_update) or gettype($_result_update)=="object" ){
-                        $_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Customers');
+                        //$_message=$this->messageValidateUser('Your account was validated correctly. Now you can use RoofServiceNow!','notice-success','Customers');
+                        $_message="Your account was validated correctly. Now you can use RoofServiceNow!";
                         return $_message;
                     }else{
-                        $_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Customers');
+                        $_message="Error, An error occurs valdiating your user $_result_update";
+                        //$_message=$this->messageValidateUser('An error occurs valdiating your user'.$_result_update,'notice-danger','Customers');
                         return $_message;
                     }
                 }else{
-                    $_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
+                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again";
+                    //$_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
                     return $_message;
                 }
             }else{
@@ -1514,6 +1529,16 @@ class userController{
         return $_objPay->get_token_bank_account($stripeID);
     }
     
+    
+    function generarCodigo($longitud) {
+        $key = '';
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+        $max = strlen($pattern)-1;
+        for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
+        return $key;
+    }
+
+
     
 }
 ?>

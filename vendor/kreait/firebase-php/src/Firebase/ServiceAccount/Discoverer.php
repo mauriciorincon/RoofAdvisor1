@@ -16,9 +16,9 @@ class Discoverer
     /**
      * @param callable[] $methods
      */
-    public function __construct(array $methods = [])
+    public function __construct(array $methods = null)
     {
-        $this->methods = $methods ?: $this->getDefaultMethods();
+        $this->methods = $methods ?? $this->getDefaultMethods();
     }
 
     public function getDefaultMethods(): array
@@ -27,6 +27,7 @@ class Discoverer
             new Discovery\FromEnvironmentVariable('FIREBASE_CREDENTIALS'),
             new Discovery\FromEnvironmentVariable(CredentialsLoader::ENV_VAR),
             new Discovery\FromGoogleWellKnownFile(),
+            new Discovery\OnGoogleCloudPlatform(),
         ];
     }
 

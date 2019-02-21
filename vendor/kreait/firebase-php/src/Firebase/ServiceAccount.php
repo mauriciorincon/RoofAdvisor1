@@ -9,6 +9,7 @@ use Kreait\Firebase\Util\JSON;
 class ServiceAccount
 {
     private $projectId;
+    private $sanitizedProjectId;
     private $clientId;
     private $clientEmail;
     private $privateKey;
@@ -18,12 +19,27 @@ class ServiceAccount
         return $this->projectId;
     }
 
+    public function getSanitizedProjectId(): string
+    {
+        if (!$this->sanitizedProjectId) {
+            $this->sanitizedProjectId = preg_replace('/[^A-Za-z0-9\-]/', '-', $this->projectId);
+        }
+
+        return $this->sanitizedProjectId;
+    }
+
     public function withProjectId(string $value): self
     {
         $serviceAccount = clone $this;
         $serviceAccount->projectId = $value;
+        $serviceAccount->sanitizedProjectId = null;
 
         return $serviceAccount;
+    }
+
+    public function hasClientId(): bool
+    {
+        return (bool) $this->clientId;
     }
 
     public function getClientId(): string
@@ -53,6 +69,11 @@ class ServiceAccount
         $serviceAccount->clientEmail = $value;
 
         return $serviceAccount;
+    }
+
+    public function hasPrivateKey(): bool
+    {
+        return (bool) $this->privateKey;
     }
 
     public function getPrivateKey(): string
@@ -98,8 +119,20 @@ class ServiceAccount
 
     public static function fromArray(array $config): self
     {
-        if (!isset($config['project_id'], $config['client_id'], $config['client_email'], $config['private_key'])) {
-            throw new InvalidArgumentException('Missing/empty values in Service Account Config.');
+        $requiredFields = ['project_id', 'client_id', 'client_email', 'private_key'];
+        $missingFields = [];
+
+        foreach ($requiredFields as $field) {
+            if (!isset($config[$field])) {
+                $missingFields[] = $field;
+            }
+        }
+
+        if (!empty($missingFields)) {
+            throw new InvalidArgumentException(
+                'The following fields are missing/empty in the Service Account specification: '
+                .implode(', ', $missingFields)
+            );
         }
 
         return (new self())
@@ -118,25 +151,27 @@ class ServiceAccount
 
     public static function fromJsonFile(string $filePath): self
     {
-        if (!file_exists($filePath)) {
-            throw new InvalidArgumentException(sprintf('%s does not exist.', $filePath));
+        try {
+            $file = new \SplFileObject($filePath);
+            $json = $file->fread($file->getSize());
+        } catch (\Throwable $e) {
+            throw new InvalidArgumentException(sprintf('%s can not be read: %s', $filePath, $e->getMessage()));
         }
 
-        if (is_link($filePath)) {
-            $filePath = (string) realpath($filePath);
+        try {
+            return self::fromJson($json);
+        } catch (\Throwable $e) {
+            throw new InvalidArgumentException(sprintf('%s could not be parsed to a Service Account: %s', $filePath, $e->getMessage()));
         }
+    }
 
-        if (!is_file($filePath)) {
-            throw new InvalidArgumentException(sprintf('%s is not a file.', $filePath));
-        }
+    public static function withProjectIdAndServiceAccountId(string $projectId, string $serviceAccountId): self
+    {
+        $serviceAccount = new self();
+        $serviceAccount->projectId = $projectId;
+        $serviceAccount->clientEmail = $serviceAccountId;
 
-        if (!is_readable($filePath)) {
-            throw new InvalidArgumentException(sprintf('%s is not readable.', $filePath));
-        }
-
-        $jsonString = file_get_contents($filePath);
-
-        return self::fromJson($jsonString);
+        return $serviceAccount;
     }
 
     /**

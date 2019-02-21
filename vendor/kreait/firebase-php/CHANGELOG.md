@@ -1,5 +1,185 @@
 # CHANGELOG
 
+## 4.19.0 - 2019-02-09
+
+* When verifying ID tokens, allowed time inconsistencies now include the `auth_time` clime, in addition to the `iat` claim. ([#278](https://github.com/kreait/firebase-php/issues/278))
+
+## 4.18.2 - 2019-01-14
+
+### Bugfixes
+
+* When creating `Kreait\Firebase\Exception\MessagingException` from a `GuzzleHttp\Exception\RequestException`, 
+  the HTTP response returned was lost.
+
+## 4.18.1 - 2019-01-14
+
+### Enhancements
+
+* Instances of `Kreait\Firebase\Exception\MessagingException` now have better messages 
+  ([#274](https://github.com/kreait/firebase-php/issues/274)).
+
+## 4.18.0 - 2018-10-29
+
+### Enhancements
+
+* `Kreait\Firebase\Messaging\CloudMessage`: You can now create a new message with a different target from an existing message by using the
+  `withChangedTarget()` method ([Documentation](https://firebase-php.readthedocs.io/en/latest/cloud-messaging.html#changing-the-message-target)).
+
+## 4.17.1 - 2018-10-27
+
+### Bugfixes
+
+* The signature of an ID Token is now verified even if a prior error occured (thanks [@kanoblake](https://github.com/kanoblake) for reporting the issue and providing a test case) 
+
+### Enhancements
+
+* ID Tokens must have a valid "auth_time" claim.
+* Tokens with an invalid signature now throw a `Firebase\Auth\Token\Exception\InvalidSignature` exception. It extends the previously thrown `Firebase\Auth\Token\Exception\InvalidToken`,
+so existing behaviour doesn't change.
+* Service Account related errors are now more fine grained.
+
+## 4.17.0 - 2018-09-12
+
+### Changes
+
+* When loading a non-existing/invalid service account file, error details are now included.
+* Database rules are now updated with prettified JSON to improve editing them in the web console.
+
+## 4.16.0 - 2018-08-24
+
+### Features
+
+* Added support for Remote Config Template validation ([Documentation](https://firebase-php.readthedocs.io/en/latest/remote-config.html#validation))
+* Added support for working with the Remote Config History ([Documentation](https://firebase-php.readthedocs.io/en/latest/remote-config.html#change-history))
+
+## 4.15.1 - 2018-08-07
+
+### Bugfixes
+
+* When on GCP/GCE, the environment was overriding an explicitely injected service account for API request authentication.   
+
+## 4.15.0 - 2018-08-05
+
+### Features
+
+* The SDK can now be used configuration-free on Google Cloud Engine.
+
+## 4.14.0 - 2018-08-05
+
+### Features
+
+* `Kreait\Firebase\Messaging\CloudMessage` can handle all currently supported types of messages and supersedes
+  the specialized message types.
+
+### Deprecations
+
+* `Kreait\Firebase\Messaging\MessageToTopic::fromArray()`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::fromArray()`
+* `Kreait\Firebase\Messaging\MessageToTopic::create($topic)`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::withTarget('topic', $topic)`
+* `Kreait\Firebase\Messaging\ConditionalMessage::fromArray()`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::fromArray()`
+* `Kreait\Firebase\Messaging\ConditionalMessage::create($condition)`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::withTarget('condition', $condition)`
+* `Kreait\Firebase\Messaging\MessageToRegistrationToken::fromArray()`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::fromArray()`
+* `Kreait\Firebase\Messaging\MessageToRegistrationToken::create($token)`
+  * Use `Kreait\Firebase\Messaging\CloudMessage::withTarget('token', $token)`
+
+## 4.13.3 - 2018-07-25
+
+### Bugfixes
+
+* Sanitizing the project ID by default changed the output of the method `\Kreait\Firebase\ServiceAccount::getProjectId()`,
+  so a new method `\Kreait\Firebase\ServiceAccount::getSanitizedProjectId()` is now used instead.
+
+## 4.13.2 - 2018-07-25
+
+### Bugfixes
+
+* Project IDs that cannot be used for database URIs directly are sanitized when configuring a Service Account ([#228](https://github.com/kreait/firebase-php/issues/228))
+
+### Non-breaking changes
+
+* When publishing an outdated Remote Config, Firebase previously returned an "OPERATION ABORTED" error,
+  resulting in a `Kreait\Firebase\Exception\RemoteConfig\OperationAborted` exception. Firebase has
+  changed the error to "VERSION MISMATCH", which now results in a `Kreait\Firebase\Exception\RemoteConfig\VersionMismatch` exception.
+  The new exception inherits from the old exception, so no code changes are required.
+* A `Kreait\Firebase\Exception\RemoteConfigException` now includes the full error as returned by the Firebase API.
+
+## 4.13.1 - 2018-07-17
+
+### Bugfixes
+
+* Fixed generating a random child key with `$reference->push()->getKey()` ([#222](https://github.com/kreait/firebase-php/issues/222))
+* Fixed deleting a reference by setting it to `null` ([#222](https://github.com/kreait/firebase-php/issues/222))
+
+## 4.13.0 - 2018-07-16
+
+### Features
+
+* Added support for setting a continueUrl to email actions ([#220](https://github.com/kreait/firebase-php/pull/220), thanks to [Wade Womersley](https://github.com/wadewomersley))
+
+## 4.12.1 - 2018-07-08
+
+### Bugfixes
+
+* Fixed the import of existing Remote Config conditions ([#218](https://github.com/kreait/firebase-php/issues/218))
+
+### Changes
+
+* A more descriptive exception is thrown when adding a parameter to a Remote Config template that refers 
+  to a condition that doesn't exist.
+
+## 4.12.0 - 2018-06-28
+
+* Added support for validating FCM messages without actually sending them ([#216](https://github.com/kreait/firebase-php/issues/216)) 
+  ([Documentation](https://firebase-php.readthedocs.io/en/latest/cloud-messaging.html#validating-messages))
+
+## 4.11.0 - 2018-06-26
+
+### New features
+
+* Enabled custom configuration and middlewares for the underlying HTTP client
+  ([Documentation](https://firebase-php.readthedocs.io/en/latest/setup.html#http-client-options-and-middlewares))
+
+### Bugfixes
+
+* Fixed issue when creating anonymous users: The Firebase REST API now requires empty payloads to be objects, not arrays (`{}` instead of `[]`)
+
+## 4.10.1 - 2018-06-19
+
+### Bugfixes
+
+* Added support for non-alphabetical chars in keys in Database snapshots ([#212](https://github.com/kreait/firebase-php/issues/212))
+
+## 4.10.0 - 2018-06-15
+
+### New features
+
+* Enabled the caching of Google's public keys used for ID Token verification 
+  ([#210](https://github.com/kreait/firebase-php/issues/210)) 
+  ([Documentation](https://firebase-php.readthedocs.io/en/latest/authentication.html#caching-google-s-public-keys))
+
+## 4.9.0 - 2018-06-09
+
+* Added a flag to `Kreait\Firebase\Auth::verifyIdToken()` to ignore `IssuedInTheFuture` exceptions
+  ([Documentation](https://firebase-php.readthedocs.io/en/latest/authentication.html#verify-a-firebase-id-token))
+
+## 4.8.0 - 2018-05-25
+
+### New features
+
+* Added support for FCM Topic management ([Documentation](https://firebase-php.readthedocs.io/en/latest/cloud-messaging.html#topic-management))
+  * `Kreait\Firebase\Messaging::subscribeToTopic($topic, $registrationTokens)`
+  * `Kreait\Firebase\Messaging::unsubscribeFromTopic($topic, $registrationTokens)`
+
+### Changes
+
+* Made `Kreait\Firebase\Factory` extensible so that it can be extended by libraries that want to build on it.
+  * [morrislaptop/firestore-php](https://github.com/morrislaptop/firestore-php) is a new project that aims to
+    provide support for the Firestore without the need to install the `grpc` PHP extension.
+
 ## 4.7.1 - 2018-05-09
 
 ### Bugfixes

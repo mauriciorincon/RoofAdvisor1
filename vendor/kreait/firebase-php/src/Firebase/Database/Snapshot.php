@@ -2,8 +2,8 @@
 
 namespace Kreait\Firebase\Database;
 
-use Kreait\Firebase\Exception\InvalidArgumentException;
 use function JmesPath\search;
+use Kreait\Firebase\Exception\InvalidArgumentException;
 
 /**
  * A Snapshot contains data from a database location.
@@ -85,7 +85,7 @@ class Snapshot
     public function getChild(string $path): self
     {
         $path = trim($path, '/');
-        $expression = str_replace('/', '.', $path);
+        $expression = '"'.str_replace('/', '"."', $path).'"';
 
         $childValue = search($expression, $this->value);
 
@@ -103,7 +103,7 @@ class Snapshot
      */
     public function exists(): bool
     {
-        return null !== $this->value;
+        return $this->value !== null;
     }
 
     /**
@@ -118,9 +118,9 @@ class Snapshot
     public function hasChild(string $path): bool
     {
         $path = trim($path, '/');
-        $expression = str_replace('/', '.', $path);
+        $expression = '"'.str_replace('/', '"."', $path).'"';
 
-        return null !== search($expression, $this->value);
+        return search($expression, $this->value) !== null;
     }
 
     /**
@@ -137,7 +137,7 @@ class Snapshot
      */
     public function hasChildren(): bool
     {
-        return \is_array($this->value) && \count($this->value);
+        return \is_array($this->value) && !empty($this->value);
     }
 
     /**

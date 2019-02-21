@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Library/WebServer/Documents/RoofServiceNow/src/controlador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../.css/style.css" rel="stylesheet" type="text/css">
+  <link href="../.css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/Library/WebServer/Documents/RoofServiceNow/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">controlador</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="aboutusController.php.html#3">aboutusController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#9">othersController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="termsconditionsController.php.html#3">termsconditionsController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="servicesController.php.html#3">servicesController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="readXLSXController.php.html#7">read_excel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#10">ratingController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#15">pdfController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#11">payingController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#14">orderController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#10">CCreditCard</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="faqController.php.html#3">faqController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#12">emailController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#10">driverController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="downloadController.php.html#3">downloadController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="contactController.php.html#3">contactController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="calendarController.php.html#7">calendar</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#29">userController</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="userController.php.html#29">userController</a></td><td class="text-right">52670</td></tr>
+       <tr><td><a href="payingController.php.html#11">payingController</a></td><td class="text-right">18906</td></tr>
+       <tr><td><a href="pdfController.php.html#15">pdfController</a></td><td class="text-right">4422</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#10">CCreditCard</a></td><td class="text-right">3422</td></tr>
+       <tr><td><a href="orderController.php.html#14">orderController</a></td><td class="text-right">2450</td></tr>
+       <tr><td><a href="calendarController.php.html#7">calendar</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="driverController.php.html#10">driverController</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="emailController.php.html#12">emailController</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="ratingController.php.html#10">ratingController</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="readXLSXController.php.html#7">read_excel</a></td><td class="text-right">20</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="aboutusController.php.html#5"><abbr title="aboutusController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#274"><abbr title="userController::insertCompany">insertCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#79"><abbr title="userController::resetPasswordCustomer">resetPasswordCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#86"><abbr title="userController::resetPasswordCompany">resetPasswordCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#93"><abbr title="userController::changePasswordS">changePasswordS</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#100"><abbr title="userController::loginCustomer">loginCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#129"><abbr title="userController::loginCustomerOrden">loginCustomerOrden</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#175"><abbr title="userController::loginContractor">loginContractor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#268"><abbr title="userController::validateEmail">validateEmail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#354"><abbr title="userController::getListCompany">getListCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#62"><abbr title="userController::showRegisterContractor">showRegisterContractor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#359"><abbr title="userController::getListData">getListData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#365"><abbr title="userController::insertCustomer">insertCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#442"><abbr title="userController::validateCode">validateCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#537"><abbr title="userController::getCompany">getCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#549"><abbr title="userController::dashboardCustomer">dashboardCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#594"><abbr title="userController::dashboardCompany">dashboardCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#687"><abbr title="userController::dashboardAdmin">dashboardAdmin</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#720"><abbr title="userController::updateCompany">updateCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#71"><abbr title="userController::showRegisterCustomer">showRegisterCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#55"><abbr title="userController::showLoginClient">showLoginClient</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#842"><abbr title="userController::updateCompanyFields">updateCompanyFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#43"><abbr title="ratingController::insertRating">insertRating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#248"><abbr title="pdfController::paymentConfirmation2">paymentConfirmation2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#547"><abbr title="pdfController::paymentConfirmation3">paymentConfirmation3</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#743"><abbr title="pdfController::registerPathInvoice">registerPathInvoice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#15"><abbr title="ratingController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#19"><abbr title="ratingController::getCountRating">getCountRating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#25"><abbr title="ratingController::getRatingsContractor">getRatingsContractor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#31"><abbr title="ratingController::getRatingsByCompany">getRatingsByCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ratingController.php.html#37"><abbr title="ratingController::getRatingByOrder">getRatingByOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="readXLSXController.php.html#11"><abbr title="read_excel::read_file_excel">read_file_excel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#43"><abbr title="userController::showLoginContractor">showLoginContractor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="readXLSXController.php.html#39"><abbr title="read_excel::generateExcel">generateExcel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="readXLSXController.php.html#87"><abbr title="read_excel::generateRandomString">generateRandomString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="servicesController.php.html#5"><abbr title="servicesController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="servicesController.php.html#9"><abbr title="servicesController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="termsconditionsController.php.html#5"><abbr title="termsconditionsController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="termsconditionsController.php.html#9"><abbr title="termsconditionsController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="termsconditionsController.php.html#15"><abbr title="termsconditionsController::privacyinfo">privacyinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#38"><abbr title="userController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#809"><abbr title="userController::updateInfoCompanyStripe">updateInfoCompanyStripe</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#868"><abbr title="userController::updateCustomer">updateCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#20"><abbr title="pdfController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1412"><abbr title="userController::getAccount">getAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1299"><abbr title="userController::enableCompany">enableCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1312"><abbr title="userController::enableCustomer">enableCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1351"><abbr title="userController::disableCustomer">disableCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1369"><abbr title="userController::is_valid_email">is_valid_email</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1374"><abbr title="userController::is_valid_phone">is_valid_phone</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1381"><abbr title="userController::showMessage">showMessage</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1387"><abbr title="userController::showCalendar">showCalendar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1393"><abbr title="userController::createAccount">createAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1417"><abbr title="userController::getBalanceAccount">getBalanceAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1247"><abbr title="userController::validateAllFieldsCompany">validateAllFieldsCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1422"><abbr title="userController::get_transaction_account">get_transaction_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1427"><abbr title="userController::get_transfer_account">get_transfer_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1432"><abbr title="userController::get_payout_account">get_payout_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1437"><abbr title="userController::getValidateAccount">getValidateAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1442"><abbr title="userController::updateAccount">updateAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1450"><abbr title="userController::create_bank_account">create_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1455"><abbr title="userController::upload_file">upload_file</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1460"><abbr title="userController::get_token_bank_account">get_token_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1288"><abbr title="userController::disableCompany">disableCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1242"><abbr title="userController::getNode">getNode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#884"><abbr title="userController::updateCustomerByField">updateCustomerByField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#953"><abbr title="userController::getCompanyById">getCompanyById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#891"><abbr title="userController::insertUserDatabase">insertUserDatabase</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#914"><abbr title="userController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#920"><abbr title="userController::cleanVariables">cleanVariables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#930"><abbr title="userController::getCustomer">getCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#934"><abbr title="userController::getCompanyE">getCompanyE</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#938"><abbr title="userController::getCustomerK">getCustomerK</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#943"><abbr title="userController::getCustomerById">getCustomerById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#948"><abbr title="userController::getContractorById">getContractorById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#958"><abbr title="userController::fillInformationMenu">fillInformationMenu</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1237"><abbr title="userController::updateCustomerLastId">updateCustomerLastId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#989"><abbr title="userController::getItemMenu">getItemMenu</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1000"><abbr title="userController::getItemMenuURLS">getItemMenuURLS</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1014"><abbr title="userController::welcomeMail">welcomeMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1046"><abbr title="userController::welcomeMailCompany">welcomeMailCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1073"><abbr title="userController::resetMail">resetMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1108"><abbr title="userController::messageValidateUser">messageValidateUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1165"><abbr title="userController::resetPassword">resetPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1203"><abbr title="userController::changePassword">changePassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="pdfController.php.html#25"><abbr title="pdfController::paymentConfirmation1">paymentConfirmation1</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#624"><abbr title="payingController::selectPaying">selectPaying</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="aboutusController.php.html#9"><abbr title="aboutusController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="faqController.php.html#5"><abbr title="faqController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#122"><abbr title="driverController::disableDriver">disableDriver</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#130"><abbr title="driverController::enableDriver">enableDriver</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#16"><abbr title="emailController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#20"><abbr title="emailController::sendMail">sendMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#42"><abbr title="emailController::sendMail2">sendMail2</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#70"><abbr title="emailController::sendMail3">sendMail3</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#95"><abbr title="emailController::sendMailSMTP">sendMailSMTP</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="emailController.php.html#137"><abbr title="emailController::getMessageError">getMessageError</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="faqController.php.html#9"><abbr title="faqController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#103"><abbr title="driverController::updateDriver">updateDriver</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#20"><abbr title="orderController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#24"><abbr title="orderController::getOrder">getOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#31"><abbr title="orderController::getOrders">getOrders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#37"><abbr title="orderController::getOrdersAll">getOrdersAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#43"><abbr title="orderController::getOrderByID">getOrderByID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#49"><abbr title="orderController::insertOrder">insertOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#192"><abbr title="orderController::getCountRating">getCountRating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#198"><abbr title="orderController::getRatingsContractor">getRatingsContractor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#115"><abbr title="driverController::updateDriverState">updateDriverState</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#42"><abbr title="driverController::insertDrivers">insertDrivers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#210"><abbr title="orderController::getOrderByCompany">getOrderByCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="calendarController.php.html#9"><abbr title="calendar::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#20"><abbr title="CCreditCard::CCreditCard">CCreditCard</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#100"><abbr title="CCreditCard::Name">Name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#104"><abbr title="CCreditCard::Type">Type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#129"><abbr title="CCreditCard::Number">Number</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#133"><abbr title="CCreditCard::ExpiryMonth">ExpiryMonth</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#137"><abbr title="CCreditCard::ExpiryYear">ExpiryYear</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#141"><abbr title="CCreditCard::SafeNumber">SafeNumber</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#160"><abbr title="CCreditCard::IsValid">IsValid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="calendarController.php.html#14"><abbr title="calendar::draw_controls">draw_controls</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#25"><abbr title="driverController::getDrivers">getDrivers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="calendarController.php.html#50"><abbr title="calendar::draw_calendar">draw_calendar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="calendarController.php.html#133"><abbr title="calendar::getEvents">getEvents</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="contactController.php.html#5"><abbr title="contactController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="contactController.php.html#9"><abbr title="contactController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="downloadController.php.html#5"><abbr title="downloadController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="downloadController.php.html#9"><abbr title="downloadController::showinfo">showinfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#15"><abbr title="driverController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="driverController.php.html#19"><abbr title="driverController::getDriver">getDriver</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#204"><abbr title="orderController::getRatingsByCompany">getRatingsByCompany</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#217"><abbr title="orderController::updateOrder">updateOrder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#615"><abbr title="payingController::create_token_for_charge">create_token_for_charge</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#454"><abbr title="payingController::get_transaction_account">get_transaction_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#384"><abbr title="payingController::getAccount">getAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#393"><abbr title="payingController::getValidateAccount">getValidateAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#401"><abbr title="payingController::validate_bank_account">validate_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#415"><abbr title="payingController::create_bank_account">create_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#424"><abbr title="payingController::update_bank_account">update_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#431"><abbr title="payingController::link_bank_to_account">link_bank_to_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#439"><abbr title="payingController::delete_bank_account">delete_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#447"><abbr title="payingController::get_balance_account">get_balance_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#462"><abbr title="payingController::get_payout_account">get_payout_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#366"><abbr title="payingController::createAccount">createAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#470"><abbr title="payingController::get_transfer_account">get_transfer_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#478"><abbr title="payingController::update_file_stripe">update_file_stripe</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#487"><abbr title="payingController::update_file_stripe_validation">update_file_stripe_validation</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#570"><abbr title="payingController::get_token_bank_account">get_token_bank_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#579"><abbr title="payingController::get_bank_for_account">get_bank_for_account</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#588"><abbr title="payingController::createTransfer">createTransfer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#597"><abbr title="payingController::createChargeOther">createChargeOther</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#606"><abbr title="payingController::createChargeDestination">createChargeDestination</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#375"><abbr title="payingController::updateAccount">updateAccount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#358"><abbr title="payingController::createCustomer">createCustomer</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#292"><abbr title="orderController::updateOrderLastId">updateOrderLastId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#30"><abbr title="othersController::getParameterValue">getParameterValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#297"><abbr title="orderController::getOrderInvoices">getOrderInvoices</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#303"><abbr title="orderController::getOrderCommentaries">getOrderCommentaries</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#309"><abbr title="orderController::insertOrderComentary">insertOrderComentary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#326"><abbr title="orderController::getOrderFilesInfo">getOrderFilesInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="orderController.php.html#332"><abbr title="orderController::insertOrderFile">insertOrderFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#13"><abbr title="othersController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#17"><abbr title="othersController::verifyZipCode">verifyZipCode</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#23"><abbr title="othersController::setInvoicePath">setInvoicePath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="othersController.php.html#36"><abbr title="othersController::updateParameterValue">updateParameterValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#345"><abbr title="payingController::getRoofReport">getRoofReport</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#16"><abbr title="payingController::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#20"><abbr title="payingController::setPaying">setPaying</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#120"><abbr title="payingController::showPayingWindow">showPayingWindow</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#136"><abbr title="payingController::showPayingWindow1">showPayingWindow1</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#194"><abbr title="payingController::getPayingStatus">getPayingStatus</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#236"><abbr title="payingController::getPayingData">getPayingData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#281"><abbr title="payingController::json_validate">json_validate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="payingController.php.html#332"><abbr title="payingController::getEmergencyValue">getEmergencyValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="userController.php.html#1465"><abbr title="userController::get_bank_for_account">get_bank_for_account</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="pdfController.php.html#248"><abbr title="pdfController::paymentConfirmation2">paymentConfirmation2</abbr></a></td><td class="text-right">1056</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#20"><abbr title="CCreditCard::CCreditCard">CCreditCard</abbr></a></td><td class="text-right">992</td></tr>
+       <tr><td><a href="userController.php.html#1247"><abbr title="userController::validateAllFieldsCompany">validateAllFieldsCompany</abbr></a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="payingController.php.html#487"><abbr title="payingController::update_file_stripe_validation">update_file_stripe_validation</abbr></a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="userController.php.html#442"><abbr title="userController::validateCode">validateCode</abbr></a></td><td class="text-right">462</td></tr>
+       <tr><td><a href="userController.php.html#594"><abbr title="userController::dashboardCompany">dashboardCompany</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="orderController.php.html#217"><abbr title="orderController::updateOrder">updateOrder</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="orderController.php.html#49"><abbr title="orderController::insertOrder">insertOrder</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="pdfController.php.html#25"><abbr title="pdfController::paymentConfirmation1">paymentConfirmation1</abbr></a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="userController.php.html#175"><abbr title="userController::loginContractor">loginContractor</abbr></a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="payingController.php.html#20"><abbr title="payingController::setPaying">setPaying</abbr></a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="calendarController.php.html#50"><abbr title="calendar::draw_calendar">draw_calendar</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="payingController.php.html#624"><abbr title="payingController::selectPaying">selectPaying</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#160"><abbr title="CCreditCard::IsValid">IsValid</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="payingController.php.html#281"><abbr title="payingController::json_validate">json_validate</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="payingController.php.html#194"><abbr title="payingController::getPayingStatus">getPayingStatus</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="pdfController.php.html#547"><abbr title="pdfController::paymentConfirmation3">paymentConfirmation3</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="payingController.php.html#236"><abbr title="payingController::getPayingData">getPayingData</abbr></a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="userController.php.html#365"><abbr title="userController::insertCustomer">insertCustomer</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="userController.php.html#842"><abbr title="userController::updateCompanyFields">updateCompanyFields</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="calendarController.php.html#14"><abbr title="calendar::draw_controls">draw_controls</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="userController.php.html#1165"><abbr title="userController::resetPassword">resetPassword</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#104"><abbr title="CCreditCard::Type">Type</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="userController.php.html#100"><abbr title="userController::loginCustomer">loginCustomer</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="userController.php.html#809"><abbr title="userController::updateInfoCompanyStripe">updateInfoCompanyStripe</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="userController.php.html#1312"><abbr title="userController::enableCustomer">enableCustomer</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="pdfController.php.html#743"><abbr title="pdfController::registerPathInvoice">registerPathInvoice</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="userController.php.html#687"><abbr title="userController::dashboardAdmin">dashboardAdmin</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="userController.php.html#129"><abbr title="userController::loginCustomerOrden">loginCustomerOrden</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="userController.php.html#549"><abbr title="userController::dashboardCustomer">dashboardCustomer</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="userController.php.html#1203"><abbr title="userController::changePassword">changePassword</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="userController.php.html#274"><abbr title="userController::insertCompany">insertCompany</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="ajax/CCreditCard.php.html#141"><abbr title="CCreditCard::SafeNumber">SafeNumber</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="driverController.php.html#130"><abbr title="driverController::enableDriver">enableDriver</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="payingController.php.html#332"><abbr title="payingController::getEmergencyValue">getEmergencyValue</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="payingController.php.html#401"><abbr title="payingController::validate_bank_account">validate_bank_account</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="payingController.php.html#345"><abbr title="payingController::getRoofReport">getRoofReport</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="userController.php.html#1073"><abbr title="userController::resetMail">resetMail</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="userController.php.html#1351"><abbr title="userController::disableCustomer">disableCustomer</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="driverController.php.html#25"><abbr title="driverController::getDrivers">getDrivers</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="emailController.php.html#95"><abbr title="emailController::sendMailSMTP">sendMailSMTP</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="userController.php.html#537"><abbr title="userController::getCompany">getCompany</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="userController.php.html#1014"><abbr title="userController::welcomeMail">welcomeMail</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="userController.php.html#720"><abbr title="userController::updateCompany">updateCompany</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="userController.php.html#1393"><abbr title="userController::createAccount">createAccount</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="payingController.php.html#136"><abbr title="payingController::showPayingWindow1">showPayingWindow1</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="driverController.php.html#42"><abbr title="driverController::insertDrivers">insertDrivers</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="emailController.php.html#42"><abbr title="emailController::sendMail2">sendMail2</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="payingController.php.html#615"><abbr title="payingController::create_token_for_charge">create_token_for_charge</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1108"><abbr title="userController::messageValidateUser">messageValidateUser</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#989"><abbr title="userController::getItemMenu">getItemMenu</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1000"><abbr title="userController::getItemMenuURLS">getItemMenuURLS</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1046"><abbr title="userController::welcomeMailCompany">welcomeMailCompany</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="orderController.php.html#332"><abbr title="orderController::insertOrderFile">insertOrderFile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="emailController.php.html#70"><abbr title="emailController::sendMail3">sendMail3</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="orderController.php.html#309"><abbr title="orderController::insertOrderComentary">insertOrderComentary</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#358"><abbr title="payingController::createCustomer">createCustomer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1288"><abbr title="userController::disableCompany">disableCompany</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1299"><abbr title="userController::enableCompany">enableCompany</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="calendarController.php.html#133"><abbr title="calendar::getEvents">getEvents</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1369"><abbr title="userController::is_valid_email">is_valid_email</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#1374"><abbr title="userController::is_valid_phone">is_valid_phone</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="userController.php.html#958"><abbr title="userController::fillInformationMenu">fillInformationMenu</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#366"><abbr title="payingController::createAccount">createAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#606"><abbr title="payingController::createChargeDestination">createChargeDestination</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#462"><abbr title="payingController::get_payout_account">get_payout_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#597"><abbr title="payingController::createChargeOther">createChargeOther</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#588"><abbr title="payingController::createTransfer">createTransfer</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#570"><abbr title="payingController::get_token_bank_account">get_token_bank_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#478"><abbr title="payingController::update_file_stripe">update_file_stripe</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ratingController.php.html#43"><abbr title="ratingController::insertRating">insertRating</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="readXLSXController.php.html#11"><abbr title="read_excel::read_file_excel">read_file_excel</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#470"><abbr title="payingController::get_transfer_account">get_transfer_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#454"><abbr title="payingController::get_transaction_account">get_transaction_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#375"><abbr title="payingController::updateAccount">updateAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#447"><abbr title="payingController::get_balance_account">get_balance_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#439"><abbr title="payingController::delete_bank_account">delete_bank_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#431"><abbr title="payingController::link_bank_to_account">link_bank_to_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#424"><abbr title="payingController::update_bank_account">update_bank_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#415"><abbr title="payingController::create_bank_account">create_bank_account</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#393"><abbr title="payingController::getValidateAccount">getValidateAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#384"><abbr title="payingController::getAccount">getAccount</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="payingController.php.html#579"><abbr title="payingController::get_bank_for_account">get_bank_for_account</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 6.1.4</a> using <a href="https://secure.php.net/" target="_top">PHP 7.2.14</a> with <a href="https://xdebug.org/">Xdebug 2.6.1</a> and <a href="https://phpunit.de/">PHPUnit 7.5.2</a> at Thu Jan 24 0:52:07 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../.js/jquery.min.js" type="text/javascript"></script>
+  <script src="../.js/d3.min.js" type="text/javascript"></script>
+  <script src="../.js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([17,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([174,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"aboutusController.php.html#3\">aboutusController<\/a>"],[0,58,"<a href=\"ajax\/CCreditCard.php.html#10\">CCreditCard<\/a>"],[0,24,"<a href=\"calendarController.php.html#7\">calendar<\/a>"],[0,2,"<a href=\"contactController.php.html#3\">contactController<\/a>"],[0,2,"<a href=\"downloadController.php.html#3\">downloadController<\/a>"],[0,16,"<a href=\"driverController.php.html#10\">driverController<\/a>"],[0,12,"<a href=\"emailController.php.html#12\">emailController<\/a>"],[0,2,"<a href=\"faqController.php.html#3\">faqController<\/a>"],[0,49,"<a href=\"orderController.php.html#14\">orderController<\/a>"],[0,5,"<a href=\"othersController.php.html#9\">othersController<\/a>"],[0,137,"<a href=\"payingController.php.html#11\">payingController<\/a>"],[0,66,"<a href=\"pdfController.php.html#15\">pdfController<\/a>"],[0,7,"<a href=\"ratingController.php.html#10\">ratingController<\/a>"],[0,4,"<a href=\"readXLSXController.php.html#7\">read_excel<\/a>"],[0,2,"<a href=\"servicesController.php.html#3\">servicesController<\/a>"],[0,3,"<a href=\"termsconditionsController.php.html#3\">termsconditionsController<\/a>"],[0,229,"<a href=\"userController.php.html#29\">userController<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"aboutusController.php.html#5\">aboutusController::__construct<\/a>"],[0,1,"<a href=\"aboutusController.php.html#9\">aboutusController::showinfo<\/a>"],[0,31,"<a href=\"ajax\/CCreditCard.php.html#20\">CCreditCard::CCreditCard<\/a>"],[0,1,"<a href=\"ajax\/CCreditCard.php.html#100\">CCreditCard::Name<\/a>"],[0,7,"<a href=\"ajax\/CCreditCard.php.html#104\">CCreditCard::Type<\/a>"],[0,1,"<a href=\"ajax\/CCreditCard.php.html#129\">CCreditCard::Number<\/a>"],[0,1,"<a href=\"ajax\/CCreditCard.php.html#133\">CCreditCard::ExpiryMonth<\/a>"],[0,1,"<a href=\"ajax\/CCreditCard.php.html#137\">CCreditCard::ExpiryYear<\/a>"],[0,4,"<a href=\"ajax\/CCreditCard.php.html#141\">CCreditCard::SafeNumber<\/a>"],[0,12,"<a href=\"ajax\/CCreditCard.php.html#160\">CCreditCard::IsValid<\/a>"],[0,1,"<a href=\"calendarController.php.html#9\">calendar::__construct<\/a>"],[0,9,"<a href=\"calendarController.php.html#14\">calendar::draw_controls<\/a>"],[0,12,"<a href=\"calendarController.php.html#50\">calendar::draw_calendar<\/a>"],[0,2,"<a href=\"calendarController.php.html#133\">calendar::getEvents<\/a>"],[0,1,"<a href=\"contactController.php.html#5\">contactController::__construct<\/a>"],[0,1,"<a href=\"contactController.php.html#9\">contactController::showinfo<\/a>"],[0,1,"<a href=\"downloadController.php.html#5\">downloadController::__construct<\/a>"],[0,1,"<a href=\"downloadController.php.html#9\">downloadController::showinfo<\/a>"],[0,1,"<a href=\"driverController.php.html#15\">driverController::__construct<\/a>"],[0,1,"<a href=\"driverController.php.html#19\">driverController::getDriver<\/a>"],[0,4,"<a href=\"driverController.php.html#25\">driverController::getDrivers<\/a>"],[0,3,"<a href=\"driverController.php.html#42\">driverController::insertDrivers<\/a>"],[0,1,"<a href=\"driverController.php.html#103\">driverController::updateDriver<\/a>"],[0,1,"<a href=\"driverController.php.html#115\">driverController::updateDriverState<\/a>"],[0,1,"<a href=\"driverController.php.html#122\">driverController::disableDriver<\/a>"],[0,4,"<a href=\"driverController.php.html#130\">driverController::enableDriver<\/a>"],[0,1,"<a href=\"emailController.php.html#16\">emailController::__construct<\/a>"],[0,1,"<a href=\"emailController.php.html#20\">emailController::sendMail<\/a>"],[0,3,"<a href=\"emailController.php.html#42\">emailController::sendMail2<\/a>"],[0,2,"<a href=\"emailController.php.html#70\">emailController::sendMail3<\/a>"],[0,4,"<a href=\"emailController.php.html#95\">emailController::sendMailSMTP<\/a>"],[0,1,"<a href=\"emailController.php.html#137\">emailController::getMessageError<\/a>"],[0,1,"<a href=\"faqController.php.html#5\">faqController::__construct<\/a>"],[0,1,"<a href=\"faqController.php.html#9\">faqController::showinfo<\/a>"],[0,1,"<a href=\"orderController.php.html#20\">orderController::__construct<\/a>"],[0,1,"<a href=\"orderController.php.html#24\">orderController::getOrder<\/a>"],[0,1,"<a href=\"orderController.php.html#31\">orderController::getOrders<\/a>"],[0,1,"<a href=\"orderController.php.html#37\">orderController::getOrdersAll<\/a>"],[0,1,"<a href=\"orderController.php.html#43\">orderController::getOrderByID<\/a>"],[0,16,"<a href=\"orderController.php.html#49\">orderController::insertOrder<\/a>"],[0,1,"<a href=\"orderController.php.html#192\">orderController::getCountRating<\/a>"],[0,1,"<a href=\"orderController.php.html#198\">orderController::getRatingsContractor<\/a>"],[0,1,"<a href=\"orderController.php.html#204\">orderController::getRatingsByCompany<\/a>"],[0,1,"<a href=\"orderController.php.html#210\">orderController::getOrderByCompany<\/a>"],[0,16,"<a href=\"orderController.php.html#217\">orderController::updateOrder<\/a>"],[0,1,"<a href=\"orderController.php.html#292\">orderController::updateOrderLastId<\/a>"],[0,1,"<a href=\"orderController.php.html#297\">orderController::getOrderInvoices<\/a>"],[0,1,"<a href=\"orderController.php.html#303\">orderController::getOrderCommentaries<\/a>"],[0,2,"<a href=\"orderController.php.html#309\">orderController::insertOrderComentary<\/a>"],[0,1,"<a href=\"orderController.php.html#326\">orderController::getOrderFilesInfo<\/a>"],[0,2,"<a href=\"orderController.php.html#332\">orderController::insertOrderFile<\/a>"],[0,1,"<a href=\"othersController.php.html#13\">othersController::__construct<\/a>"],[0,1,"<a href=\"othersController.php.html#17\">othersController::verifyZipCode<\/a>"],[0,1,"<a href=\"othersController.php.html#23\">othersController::setInvoicePath<\/a>"],[0,1,"<a href=\"othersController.php.html#30\">othersController::getParameterValue<\/a>"],[0,1,"<a href=\"othersController.php.html#36\">othersController::updateParameterValue<\/a>"],[0,1,"<a href=\"payingController.php.html#16\">payingController::__construct<\/a>"],[0,13,"<a href=\"payingController.php.html#20\">payingController::setPaying<\/a>"],[0,1,"<a href=\"payingController.php.html#120\">payingController::showPayingWindow<\/a>"],[0,3,"<a href=\"payingController.php.html#136\">payingController::showPayingWindow1<\/a>"],[0,11,"<a href=\"payingController.php.html#194\">payingController::getPayingStatus<\/a>"],[0,11,"<a href=\"payingController.php.html#236\">payingController::getPayingData<\/a>"],[0,11,"<a href=\"payingController.php.html#281\">payingController::json_validate<\/a>"],[0,4,"<a href=\"payingController.php.html#332\">payingController::getEmergencyValue<\/a>"],[0,4,"<a href=\"payingController.php.html#345\">payingController::getRoofReport<\/a>"],[0,2,"<a href=\"payingController.php.html#358\">payingController::createCustomer<\/a>"],[0,2,"<a href=\"payingController.php.html#366\">payingController::createAccount<\/a>"],[0,2,"<a href=\"payingController.php.html#375\">payingController::updateAccount<\/a>"],[0,2,"<a href=\"payingController.php.html#384\">payingController::getAccount<\/a>"],[0,2,"<a href=\"payingController.php.html#393\">payingController::getValidateAccount<\/a>"],[0,4,"<a href=\"payingController.php.html#401\">payingController::validate_bank_account<\/a>"],[0,2,"<a href=\"payingController.php.html#415\">payingController::create_bank_account<\/a>"],[0,2,"<a href=\"payingController.php.html#424\">payingController::update_bank_account<\/a>"],[0,2,"<a href=\"payingController.php.html#431\">payingController::link_bank_to_account<\/a>"],[0,2,"<a href=\"payingController.php.html#439\">payingController::delete_bank_account<\/a>"],[0,2,"<a href=\"payingController.php.html#447\">payingController::get_balance_account<\/a>"],[0,2,"<a href=\"payingController.php.html#454\">payingController::get_transaction_account<\/a>"],[0,2,"<a href=\"payingController.php.html#462\">payingController::get_payout_account<\/a>"],[0,2,"<a href=\"payingController.php.html#470\">payingController::get_transfer_account<\/a>"],[0,2,"<a href=\"payingController.php.html#478\">payingController::update_file_stripe<\/a>"],[0,22,"<a href=\"payingController.php.html#487\">payingController::update_file_stripe_validation<\/a>"],[0,2,"<a href=\"payingController.php.html#570\">payingController::get_token_bank_account<\/a>"],[0,2,"<a href=\"payingController.php.html#579\">payingController::get_bank_for_account<\/a>"],[0,2,"<a href=\"payingController.php.html#588\">payingController::createTransfer<\/a>"],[0,2,"<a href=\"payingController.php.html#597\">payingController::createChargeOther<\/a>"],[0,2,"<a href=\"payingController.php.html#606\">payingController::createChargeDestination<\/a>"],[0,2,"<a href=\"payingController.php.html#615\">payingController::create_token_for_charge<\/a>"],[0,12,"<a href=\"payingController.php.html#624\">payingController::selectPaying<\/a>"],[0,1,"<a href=\"pdfController.php.html#20\">pdfController::__construct<\/a>"],[0,16,"<a href=\"pdfController.php.html#25\">pdfController::paymentConfirmation1<\/a>"],[0,32,"<a href=\"pdfController.php.html#248\">pdfController::paymentConfirmation2<\/a>"],[0,11,"<a href=\"pdfController.php.html#547\">pdfController::paymentConfirmation3<\/a>"],[0,6,"<a href=\"pdfController.php.html#743\">pdfController::registerPathInvoice<\/a>"],[0,1,"<a href=\"ratingController.php.html#15\">ratingController::__construct<\/a>"],[0,1,"<a href=\"ratingController.php.html#19\">ratingController::getCountRating<\/a>"],[0,1,"<a href=\"ratingController.php.html#25\">ratingController::getRatingsContractor<\/a>"],[0,1,"<a href=\"ratingController.php.html#31\">ratingController::getRatingsByCompany<\/a>"],[0,1,"<a href=\"ratingController.php.html#37\">ratingController::getRatingByOrder<\/a>"],[0,2,"<a href=\"ratingController.php.html#43\">ratingController::insertRating<\/a>"],[0,2,"<a href=\"readXLSXController.php.html#11\">read_excel::read_file_excel<\/a>"],[0,1,"<a href=\"readXLSXController.php.html#39\">read_excel::generateExcel<\/a>"],[0,1,"<a href=\"readXLSXController.php.html#87\">read_excel::generateRandomString<\/a>"],[0,1,"<a href=\"servicesController.php.html#5\">servicesController::__construct<\/a>"],[0,1,"<a href=\"servicesController.php.html#9\">servicesController::showinfo<\/a>"],[0,1,"<a href=\"termsconditionsController.php.html#5\">termsconditionsController::__construct<\/a>"],[0,1,"<a href=\"termsconditionsController.php.html#9\">termsconditionsController::showinfo<\/a>"],[0,1,"<a href=\"termsconditionsController.php.html#15\">termsconditionsController::privacyinfo<\/a>"],[0,1,"<a href=\"userController.php.html#38\">userController::__construct<\/a>"],[0,1,"<a href=\"userController.php.html#43\">userController::showLoginContractor<\/a>"],[0,1,"<a href=\"userController.php.html#55\">userController::showLoginClient<\/a>"],[0,1,"<a href=\"userController.php.html#62\">userController::showRegisterContractor<\/a>"],[0,1,"<a href=\"userController.php.html#71\">userController::showRegisterCustomer<\/a>"],[0,1,"<a href=\"userController.php.html#79\">userController::resetPasswordCustomer<\/a>"],[0,1,"<a href=\"userController.php.html#86\">userController::resetPasswordCompany<\/a>"],[0,1,"<a href=\"userController.php.html#93\">userController::changePasswordS<\/a>"],[0,7,"<a href=\"userController.php.html#100\">userController::loginCustomer<\/a>"],[0,6,"<a href=\"userController.php.html#129\">userController::loginCustomerOrden<\/a>"],[0,14,"<a href=\"userController.php.html#175\">userController::loginContractor<\/a>"],[0,1,"<a href=\"userController.php.html#268\">userController::validateEmail<\/a>"],[0,5,"<a href=\"userController.php.html#274\">userController::insertCompany<\/a>"],[0,1,"<a href=\"userController.php.html#354\">userController::getListCompany<\/a>"],[0,1,"<a href=\"userController.php.html#359\">userController::getListData<\/a>"],[0,10,"<a href=\"userController.php.html#365\">userController::insertCustomer<\/a>"],[0,21,"<a href=\"userController.php.html#442\">userController::validateCode<\/a>"],[0,3,"<a href=\"userController.php.html#537\">userController::getCompany<\/a>"],[0,6,"<a href=\"userController.php.html#549\">userController::dashboardCustomer<\/a>"],[0,16,"<a href=\"userController.php.html#594\">userController::dashboardCompany<\/a>"],[0,6,"<a href=\"userController.php.html#687\">userController::dashboardAdmin<\/a>"],[0,3,"<a href=\"userController.php.html#720\">userController::updateCompany<\/a>"],[0,7,"<a href=\"userController.php.html#809\">userController::updateInfoCompanyStripe<\/a>"],[0,9,"<a href=\"userController.php.html#842\">userController::updateCompanyFields<\/a>"],[0,1,"<a href=\"userController.php.html#868\">userController::updateCustomer<\/a>"],[0,1,"<a href=\"userController.php.html#884\">userController::updateCustomerByField<\/a>"],[0,1,"<a href=\"userController.php.html#891\">userController::insertUserDatabase<\/a>"],[0,1,"<a href=\"userController.php.html#914\">userController::logout<\/a>"],[0,1,"<a href=\"userController.php.html#920\">userController::cleanVariables<\/a>"],[0,1,"<a href=\"userController.php.html#930\">userController::getCustomer<\/a>"],[0,1,"<a href=\"userController.php.html#934\">userController::getCompanyE<\/a>"],[0,1,"<a href=\"userController.php.html#938\">userController::getCustomerK<\/a>"],[0,1,"<a href=\"userController.php.html#943\">userController::getCustomerById<\/a>"],[0,1,"<a href=\"userController.php.html#948\">userController::getContractorById<\/a>"],[0,1,"<a href=\"userController.php.html#953\">userController::getCompanyById<\/a>"],[0,2,"<a href=\"userController.php.html#958\">userController::fillInformationMenu<\/a>"],[0,2,"<a href=\"userController.php.html#989\">userController::getItemMenu<\/a>"],[0,2,"<a href=\"userController.php.html#1000\">userController::getItemMenuURLS<\/a>"],[0,3,"<a href=\"userController.php.html#1014\">userController::welcomeMail<\/a>"],[0,2,"<a href=\"userController.php.html#1046\">userController::welcomeMailCompany<\/a>"],[0,4,"<a href=\"userController.php.html#1073\">userController::resetMail<\/a>"],[0,2,"<a href=\"userController.php.html#1108\">userController::messageValidateUser<\/a>"],[0,8,"<a href=\"userController.php.html#1165\">userController::resetPassword<\/a>"],[0,6,"<a href=\"userController.php.html#1203\">userController::changePassword<\/a>"],[0,1,"<a href=\"userController.php.html#1237\">userController::updateCustomerLastId<\/a>"],[0,1,"<a href=\"userController.php.html#1242\">userController::getNode<\/a>"],[0,26,"<a href=\"userController.php.html#1247\">userController::validateAllFieldsCompany<\/a>"],[0,2,"<a href=\"userController.php.html#1288\">userController::disableCompany<\/a>"],[0,2,"<a href=\"userController.php.html#1299\">userController::enableCompany<\/a>"],[0,7,"<a href=\"userController.php.html#1312\">userController::enableCustomer<\/a>"],[0,4,"<a href=\"userController.php.html#1351\">userController::disableCustomer<\/a>"],[0,2,"<a href=\"userController.php.html#1369\">userController::is_valid_email<\/a>"],[0,2,"<a href=\"userController.php.html#1374\">userController::is_valid_phone<\/a>"],[0,1,"<a href=\"userController.php.html#1381\">userController::showMessage<\/a>"],[0,1,"<a href=\"userController.php.html#1387\">userController::showCalendar<\/a>"],[0,3,"<a href=\"userController.php.html#1393\">userController::createAccount<\/a>"],[0,1,"<a href=\"userController.php.html#1412\">userController::getAccount<\/a>"],[0,1,"<a href=\"userController.php.html#1417\">userController::getBalanceAccount<\/a>"],[0,1,"<a href=\"userController.php.html#1422\">userController::get_transaction_account<\/a>"],[0,1,"<a href=\"userController.php.html#1427\">userController::get_transfer_account<\/a>"],[0,1,"<a href=\"userController.php.html#1432\">userController::get_payout_account<\/a>"],[0,1,"<a href=\"userController.php.html#1437\">userController::getValidateAccount<\/a>"],[0,1,"<a href=\"userController.php.html#1442\">userController::updateAccount<\/a>"],[0,1,"<a href=\"userController.php.html#1450\">userController::create_bank_account<\/a>"],[0,1,"<a href=\"userController.php.html#1455\">userController::upload_file<\/a>"],[0,1,"<a href=\"userController.php.html#1460\">userController::get_token_bank_account<\/a>"],[0,1,"<a href=\"userController.php.html#1465\">userController::get_bank_for_account<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
