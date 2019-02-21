@@ -15,7 +15,7 @@ $_smsController->createClientSms();
 $_result = $_userController->getCustomer($email);
 if(is_array($_result) or is_object($_result)){
     $phoneNumeber = $_result['Phone'];
-    $_mail_response = $_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+    $_mail_response = $_smsController->sendMessage("+18889811812",'+1'.$phoneNumeber,"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
     $_message=array(
         'title'=>"Register Customer",
         'subtitle'=>"Validation Code",
