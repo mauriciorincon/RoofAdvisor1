@@ -5616,7 +5616,7 @@ $(document).ready(function () {
   })
 })
 
-function validate_sms_code (t, user, screen) {
+function validate_sms_code (t, user, screenPar) {
   code = $('#activation_code_input').val()
   pass = $('#inputPassword').val()
   if (code == '' || code == undefined || code == null) {
@@ -5631,8 +5631,9 @@ function validate_sms_code (t, user, screen) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
+            window.location.href = '?controller=user&accion=loginContractor';
           }else {
             $('#textAnswerOrder').html(data)
             $('#headerTextAnswerOrder').html('Register Customer')
@@ -5643,7 +5644,7 @@ function validate_sms_code (t, user, screen) {
             $('#myModalRespuesta').modal({backdrop: 'static'})
           }
         }else {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
           }else {
             $('#textAnswerOrder').html(data)
@@ -5660,15 +5661,16 @@ function validate_sms_code (t, user, screen) {
                                             <td>Check your cell phone</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\')">REQUEST A NEW</a></td>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\')">REQUEST A NEW</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
+                                            
                                         </tr>
                                     </table>
                                 </div>`)
             $('#buttonAnswerOrder').html(`<br><br>
                                                               
             <div class="alert alert-warning" role="alert">
-                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" data-dismiss="modal" onclick="validate_sms_code(\'c\',\'`+emailValidation+`\')">Validate Code</button></center>
+                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" data-dismiss="modal" onclick="validate_sms_code(\'c\',\'`+email+`\')">Validate Code</button></center>
             </div>`);
 
             $('#myModalRespuesta').modal({backdrop: 'static'})
@@ -5699,8 +5701,9 @@ function resendValidationCode (user,sendWay) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screen == 'Customer_register') {
-            $('#labelResponseValidationCode').html(data)
+          if (screenPar == 'Customer_register') {
+            data = jQuery.parseJSON(data)
+            $('#labelResponseValidationCode').html(data.content)
           }else {
             data = jQuery.parseJSON(data)
             $('#headerTextAnswerOrder').html(data.title)
@@ -5711,10 +5714,35 @@ function resendValidationCode (user,sendWay) {
               '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\',\'phone\')">Resend Code</button>'+
               '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
             $('#lastFinishButtonOrder').hide()
+            $('#textAnswerOrder').html(data)
+            $('#headerTextAnswerOrder').html("Verification Checkpoint")
+            // $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>')
+            
+            $('#textAnswerOrder').html(data.content + `,<br><br><label>Verification Code</label><input type="text" class="form-control" id="activation_code_input" /> 
+                                <div class="alert alert-danger" role="alert">    
+                                    <table>
+                                        <tr>
+                                            <td><strong>Did not get a code?</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Check your cell phone</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `\')">REQUEST A NEW</a></td>
+                                        </tr>
+                                    </table>
+                                </div>`)
+            $('#buttonAnswerOrder').html(`<br><br>
+                                                              
+            <div class="alert alert-warning" role="alert">
+                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" data-dismiss="modal" onclick="validate_sms_code(\'c\',\'`+user+`\')">Validate Code</button></center>
+            </div>`);
+
             $('#myModalRespuesta').modal({backdrop: 'static'})
+
           }
         }else {
-          if (screen == 'Customer_register') {
+          if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data)
           }else {
             $('#textAnswerOrder').html(data)
@@ -5725,6 +5753,26 @@ function resendValidationCode (user,sendWay) {
               '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\')">Resend Code</button>'+
               '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
             $('#lastFinishButtonOrder').hide()
+            $('#textAnswerOrder').html(data + `,<br><br><label>Verification Code</label><input type="text" class="form-control" id="activation_code_input" /> 
+                                <div class="alert alert-danger" role="alert">    
+                                    <table>
+                                        <tr>
+                                            <td><strong>Did not get a code?</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Check your cell phone</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `\')">REQUEST A NEW</a></td>
+                                        </tr>
+                                    </table>
+                                </div>`)
+            $('#buttonAnswerOrder').html(`<br><br>
+                                                              
+            <div class="alert alert-warning" role="alert">
+                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" data-dismiss="modal" onclick="validate_sms_code(\'c\',\'`+user+`\')">Validate Code</button></center>
+            </div>`);
+
             $('#myModalRespuesta').modal({backdrop: 'static'})
           }
         }

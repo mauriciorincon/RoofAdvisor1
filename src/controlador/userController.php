@@ -427,7 +427,8 @@ class userController{
 
             if(strcmp($_selectionType,"newCustomer")!=0){
                 $_smsController->createClientSms();
-                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering. To verify your account, please enter the verification code: Verification code: $hashActivationCode  This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
+                registration will be blocked.");
                 return  "OK ".$_response."<br>".$_mail_response;
                 /*$this->_sendMail=new emailController();
                 $_mail_response=$this->_sendMail->sendMailSMTP($arrayCustomer['emailValidation'],"Email Verification",$_mail_body,"",$_SESSION['image_path']."logo_s.png");
