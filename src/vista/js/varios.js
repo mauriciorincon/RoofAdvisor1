@@ -1221,8 +1221,8 @@ function saveCustomerData (p_pantalla) {
                                             <td>Check your cell phone</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\','phone')">REQUEST A NEW</a></td>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\','','phone')">REQUEST A NEW</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + emailValidation + `\','','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
                                         </tr>
                                     </table>
                                 </div>`)
@@ -2976,7 +2976,7 @@ function takeWork () {
           if (orderType == 'P') {
             arrayChanges = 'SchDate,' + dateWork + ',SchTime,' + timeWork + companyID + ',ContractorID,' + ',CompanyID,' + driverID + ',Status,J,EstAmtMat,' + amountPostCard + ',ActAmtMat,' + amountPostCard
           }else if (orderType == 'E') {
-            arrayChanges = 'SchDate,' + dateWork + ',SchTime,' + timeWork + ',ContractorID,' + driverID + ',CompanyID,' + companyID + ',Status,D,pay_to_company,1'
+            arrayChanges = 'SchDate,' + dateWork +'ETA,' + dateWork + ',SchTime,' + timeWork + ',ContractorID,' + driverID + ',CompanyID,' + companyID + ',Status,D,pay_to_company,1'
           }else {
             arrayChanges = 'SchDate,' + dateWork + ',SchTime,' + timeWork + ',ContractorID,' + driverID + ',CompanyID,' + companyID + ',Status,D'
           }
@@ -5661,8 +5661,8 @@ function validate_sms_code (t, user, screenPar) {
                                             <td>Check your cell phone</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\')">REQUEST A NEW</a></td>
-                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\','','phone')">REQUEST A NEW</a></td>
+                                            <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + email + `\','','mail')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
                                             
                                         </tr>
                                     </table>
@@ -5691,7 +5691,10 @@ function validate_sms_code (t, user, screenPar) {
     })
 }
 
-function resendValidationCode (user,sendWay) {
+function resendValidationCode (user,screenPar,sendWay) {
+  if(screenPar==undefined || screenPar==null){
+    screenPar = 'Customer_register';
+  }
   if(sendWay==undefined || sendWay==null){
     sendWay='phone';
   }
@@ -5711,12 +5714,11 @@ function resendValidationCode (user,sendWay) {
             $('#buttonAnswerOrder').html('<div class="alert alert-success">' + data.subtitle + '<br>' + data.content + '</div><br>' +
               '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />' +
               '<br><br>If you do not recived your activation code, you can resend it, with the pressing button '+
-              '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\',\'phone\')">Resend Code</button>'+
-              '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
+              '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\',\'\',\'phone\')">Resend Code</button>'+
+              '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
             $('#lastFinishButtonOrder').hide()
-            $('#textAnswerOrder').html(data)
-            $('#headerTextAnswerOrder').html("Verification Checkpoint")
-            // $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>')
+            
+            
             
             $('#textAnswerOrder').html(data.content + `,<br><br><label>Verification Code</label><input type="text" class="form-control" id="activation_code_input" /> 
                                 <div class="alert alert-danger" role="alert">    
@@ -5728,7 +5730,8 @@ function resendValidationCode (user,sendWay) {
                                             <td>Check your cell phone</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `\')">REQUEST A NEW</a></td>
+                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `'\',\'\',\'phone\')">REQUEST A NEW</a></td>
+                                            <td>'<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'` + user + `\',\'\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
                                         </tr>
                                     </table>
                                 </div>`)
@@ -5750,8 +5753,8 @@ function resendValidationCode (user,sendWay) {
             // $("#answerValidateUserOrder").html('<div class="alert alert-danger"><strong>'+data+'</strong></div>')
             $('#textAnswerOrder').html('<div class="alert alert-danger"><strong>' + data + '</strong></div><br><h4>Type your activation code</h4><input type="text" id="activation_code_input" />' +
               '<br><br>If you do not recived your activation code, you can resend it, with the pressing button '+
-              '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\')">Resend Code</button>'+
-              '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
+              '<button type="button" id="resendCode" class="btn btn-default" data-dismiss="modal" onclick="resendValidationCode(\'' + user + '\',\'\',\'phone\')">Resend Code</button>'+
+              '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' + user + '\',\'\',\'mail\')">SEND ME THE VALIDATION CODE BY EMAIL</a>');
             $('#lastFinishButtonOrder').hide()
             $('#textAnswerOrder').html(data + `,<br><br><label>Verification Code</label><input type="text" class="form-control" id="activation_code_input" /> 
                                 <div class="alert alert-danger" role="alert">    
@@ -5763,7 +5766,7 @@ function resendValidationCode (user,sendWay) {
                                             <td>Check your cell phone</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `\')">REQUEST A NEW</a></td>
+                                            <td><a href="#" class="btn-primary" onclick="resendValidationCode(\'` + user + `\',\'\',\'phone\')">REQUEST A NEW</a></td>
                                         </tr>
                                     </table>
                                 </div>`)

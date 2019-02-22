@@ -1000,6 +1000,8 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 			var date = new Date($('#calendar').fullCalendar('getDate'));
 			var month_int = date.getMonth();
 			
+			
+
 			var ref = firebase.database().ref("Orders");
 			ref.orderByChild("CustomerID").equalTo(customerID).once("value", function(snapshot) {
 

@@ -21,12 +21,19 @@ if($sendType=='phone'){
 $_result = $_userController->getCustomer($email);
 if(is_array($_result) or is_object($_result)){
     $phoneNumber = $_result['Phone'];
-
+    $email = $_result['Email'];
+    
     if($sendType=='phone'){
-        $_mail_response = $_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode");
+        $_mail_response = $_smsController->sendMessage("+18889811812",'+1'.$phoneNumber,
+        "Thank you for registering. To verify your account, please enter the verification code: Verification code: 
+            $hashActivationCode  This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
+        registration will be blocked.");
     }else{
         $
-        $_mail_response = $_mailController->sendMailSMTP($toAddress,"Validation Code","Thank you for registering at RoofServiceNow.com, your verification code is: $hashActivationCode","","");
+        $_mail_response = $_mailController->sendMailSMTP($email,"Validation Code","Thank you for registering. 
+        To verify your account, please enter the verification code:<br><br> Verification code: <strong> $hashActivationCode </strong><br><br>
+        This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
+        registration will be blocked.","","");
     }
     $user = $_result['uid'];
     $_userModel = new userModel();
@@ -34,13 +41,10 @@ if(is_array($_result) or is_object($_result)){
         'photoURL' => $hashActivationCode,
     ];
     $_result_update=$_userModel->updateUserCustomer($user,$properties,'customer');
-    $phoneNumber = $_result['Phone'];
-    $_mail_response = $_smsController->sendMessage("+18889811812",'+1'.$phoneNumber,"Thank you for registering. To verify your account, please enter the verification code: Verification code: $hashActivationCode  This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
-    registration will be blocked.");
     $_message=array(
         'title'=>"Register Customer",
         'subtitle'=>"Validation Code",
-        'content'=>"A new validation code, was sent to your phone, please check and type it, to terminate registration ".$_mail_response,
+        'content'=>"A new validation code, was sent to your $sendType, please check and type it, to terminate registration ".$_mail_response,
     );
 //return  "OK ".$_response."<br>".$_mail_response;
 }else{
