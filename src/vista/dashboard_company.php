@@ -3624,4 +3624,5 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+<script src="vista/js/roofchat-contractor.js"></script>
 

@@ -13,3 +13,9 @@ src/tmp/*
 src/conf.php
 !src/conf.php
 /src/conf.php
+src/vista/js/roofchat-pub.js
+src/vista/js/roofchat-contractor.js
+!src/vista/js/roofchat-pub.js
+!src/vista/js/roofchat-contractor.js
+/src/vista/js/roofchat-pub.js
+/src/vista/js/roofchat-contractor.js
