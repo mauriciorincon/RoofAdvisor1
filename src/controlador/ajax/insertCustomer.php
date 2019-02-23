@@ -136,7 +136,7 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Verification Checkpoint",
                 'subtitle'=>"Customer was register correctly",
-                'content'=>"We sent a Verification Code to your phone: $_customerPhoneNumber",
+                'content'=>"We sent a Verification Code to your phone: $_customerPhoneNumber "
             );
             print_r(json_encode($_message));
             break;

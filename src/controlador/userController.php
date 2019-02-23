@@ -427,7 +427,7 @@ class userController{
 
             if(strcmp($_selectionType,"newCustomer")!=0){
                 $_smsController->createClientSms();
-                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering. To verify your account, please enter the verification code:<br> Verification code: $hashActivationCode <br> This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
+                $_mail_response =$_smsController->sendMessage("+18889811812",'+1'.$arrayCustomer['customerPhoneNumber'],"Thank you for registering. To verify your account, please enter the verification code: Verification code: $hashActivationCode  This code expires in 10 minutes. To prevent fraud, if this code is not entered before it expires, the
                 registration will be blocked.");
                 return  "OK ".$_response."<br>".$_mail_response;
                 /*$this->_sendMail=new emailController();
