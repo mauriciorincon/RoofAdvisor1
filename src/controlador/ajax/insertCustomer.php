@@ -136,7 +136,8 @@ if(strpos($_customerID,"Error")!==false){
                 'subtitle'=>"Thank you for register",
                 'content'=>"Customer was register correctly please check your email, to validate the user",
             );
-            print_r($_message);
+            print_r(json_encode($_message));
+            break;
         case "Company":
             $_message=array(
                 'title'=>"Register Customer",
@@ -145,6 +146,7 @@ if(strpos($_customerID,"Error")!==false){
                 'customerID'=>$_customerID,
             );
             print_r(json_encode($_message));
+            break;
     }
 }
 
