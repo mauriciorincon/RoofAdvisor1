@@ -905,7 +905,7 @@ if ($(window).innerWidth() <= 767) {
                         <!--</label>-->
                         <!--<label class="control-label" for="exampleRadios5">-->
                         <h4 class="h1white"><b>You can select one or the first available will respond to your work
-                                order?</b></h4>
+                                order.</b></h4>
                         <!--</label>-->
 
 

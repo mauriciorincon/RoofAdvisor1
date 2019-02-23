@@ -242,7 +242,7 @@
         </div>
         <div id="step-6" class="">
             <label>These Service Professionals are best suited for your scheduled repair and are all rated 4+ by previous customers.
-                You can select one or the first available will respond to your work order?</label>
+                You can select one or the first available will respond to your work order.</label>
             <select id="selectCompanyMobWizard">
 
             </select>
