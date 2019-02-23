@@ -25,7 +25,13 @@
 
 
     require_once($_SESSION['application_path']."/controlador/userController.php");
-    //echo $_SESSION['application_path']."declare user controller";
+
+     
+//Ejemplo de uso
+//$_objUser = new userModel();
+//echo $_objUser->generarCodigo(6); // genera un código de 6 caracteres de longitud.
+
+    //echo $_SESSION['application_path']."declare user controller";GIT PU
     //require_once($_SESSION['application_path']."/modelo/user.class.php");
 
     /*$_objPay=new payingController();
@@ -41,8 +47,12 @@
     $profile = "driver";
     $_result = $_objUser->updateUserContractor($userId,$properties,$profile);
     print_r($_result);*/
+    //$_objUser = new userController();
+    //echo "datos";
+    //echo $_objUser->generarCodigo(6);
+    //return;
 
-    $_objMessage=new smsController();
+    /*$_objMessage=new smsController();
     $_objMessage->createClientSms();
     //$account = $_objMessage->getClient()->api->v2010->accounts("51079c5b-7c97-44a3-a0b0-4f75766d2347")->fetch();
     //print($account->friendlyName);
@@ -81,11 +91,12 @@
     echo "<br><br>";
     //print_r($_objPago);
     */
+
     $_userModel=new userController();
-    $_companyArray=$_userModel->getCompanyById('CO000008');
+    /*$_companyArray=$_userModel->getCompanyById('CO000008');
     $_validation_code='34dsidherhfh';
     $_userData='4errerrer';
-    echo $_userModel->welcomeMailCompany($_companyArray,$_validation_code,$_userData);
+    echo $_userModel->welcomeMailCompany($_companyArray,$_validation_code,$_userData);*/
     //$_result=$_userModel->createAccount('CO000008','mauricio.rincon@gmail.com');
     //echo $_result;
 
@@ -93,7 +104,7 @@
     //var_dump($_result);
 
     echo "<br><br>";
-    $var_usr=$_userModel->getAccount('acct_1DiBU7B2zQatABj9');
+    $var_usr=$_userModel->getAccount();
     print_r($var_usr->keys);
     echo "<br><br>";
     echo $var_usr->legal_entity->ssn_last_4 ;

@@ -34,21 +34,26 @@ if (isset($_POST['account'])){
     
 
     if(!empty($_account) or strcmp($_POST['companyID'],"CO000000")==0){
-        $account = $_userController->getAccount($_account);
-        if(is_object($account) or is_array($account)){
-            $_result=$_userController->getValidateAccount($_account);
-            if(is_array($_result)){
-                echo "Error, for make payments to your company it is necessary to fill stripe info on your profile, the next fields <br>";
-                print_r($_result);
-            }else{
-                echo $_result;
-                //." account[$_account]";
-                //print_r($account);
-            }
-            
+        if(strcmp($_POST['companyID'],"CO000000")==0){
+            echo "ok";
         }else{
-            echo "Error, the account was not found, for make payments to your company it is necessary to fill stripe info on your profile";
+            $account = $_userController->getAccount($_account);
+            if(is_object($account) or is_array($account)){
+                $_result=$_userController->getValidateAccount($_account);
+                if(is_array($_result)){
+                    echo "Error, for make payments to your company it is necessary to fill stripe info on your profile, the next fields <br>";
+                    print_r($_result);
+                }else{
+                    echo $_result;
+                    //." account[$_account]";
+                    //print_r($account);
+                }
+                
+            }else{
+                echo "Error, the account was not found, for make payments to your company it is necessary to fill stripe info on your profile.";
+            }
         }
+        
     }else{
         echo "Error, the compamny [".$_comapnyInfo['CompanyName']."] does not have an account";   
     }

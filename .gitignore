@@ -5,9 +5,11 @@ src/invoice/
 src/roofreport/
 src/roofreport
 .DS_Store
-build/*
-vendor/**
+build/*git 
 composer.lock
 cache.properties
 .vscode
 src/tmp/*
+src/conf.php
+!src/conf.php
+/src/conf.php

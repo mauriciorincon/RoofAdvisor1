@@ -124,17 +124,32 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Register Customer",
                 'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly please check your email, to validate the user",
+                'content'=>"Customer was register correctly please check the code that was sent to your phone.",
+                'emailUser' =>$_emailValidation,
+                'passUser' =>$_password,
             );
             $_SESSION['response'] = $_message;
             $_path="../../?controller=user&accion=showMessage";
             header("Location: $_path");
             break;
         case "Order":
+            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your phone, please check and type 
+                it, to complete registration <br>Your registration phone:<a href="#">'. $_arrayCustomer['customerPhoneNumber'] .
+                '</a><br>Your registration email:<a href="#">'. $_arrayCustomer['emailValidation'] .'</a></div><br>'.
+                '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+                '<br><br><strong>Did not get a code?</strong>'.
+                '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_arrayCustomer['customerPhoneNumber'] . '\',\'\',\'phone\',\''.'c'.'\')">Resend Code</button>'.
+                '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_arrayCustomer['emailValidation'] .  '\',\'\',\'mail\',\''.'c'.'\')">SEND ME THE VALIDATION CODE BY EMAIL</a>';
+            $_string_button = '<br><br>                                                                                  
+                <div class="alert alert-warning" role="alert">
+                    <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg"  onclick="validate_sms_code(\''.'c'.'\',\''.$_arrayCustomer['emailValidation'].'\')">Validate Code</button></center>
+                </div>';
+            
             $_message=array(
-                'title'=>"Register Customer",
-                'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly please check your email, to validate the user",
+                'title'=>"Verification Checkpoint",
+                'subtitle'=>"Customer was register correctly",
+                'content'=>$_string_message,
+                'button' =>$_string_button
             );
             print_r(json_encode($_message));
             break;
@@ -142,7 +157,7 @@ if(strpos($_customerID,"Error")!==false){
             $_message=array(
                 'title'=>"Register Customer",
                 'subtitle'=>"Thank you for register",
-                'content'=>"Customer was register correctly",
+                'content'=>"Customer was register correctly $_customerID",
                 'customerID'=>$_customerID,
             );
             print_r(json_encode($_message));

@@ -22,14 +22,25 @@ class ApiClient
 
     public function sendMessage(Message $message): ResponseInterface
     {
-        // echo JSON::prettyPrint($message); exit;
         return $this->request('POST', 'messages:send', [
             'json' => ['message' => $message->jsonSerialize()],
         ]);
     }
 
-    private function request($method, $endpoint, array $options = []): ResponseInterface
+    public function validateMessage(Message $message): ResponseInterface
     {
+        return $this->request('POST', 'messages:send', [
+            'json' => [
+                'message' => $message->jsonSerialize(),
+                'validate_only' => true,
+            ],
+        ]);
+    }
+
+    private function request($method, $endpoint, array $options = null): ResponseInterface
+    {
+        $options = $options ?? [];
+
         /** @var UriInterface $uri */
         $uri = $this->client->getConfig('base_uri');
         $path = rtrim($uri->getPath(), '/').'/'.ltrim($endpoint, '/');

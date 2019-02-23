@@ -57,8 +57,24 @@ $_companyID=$_userController->insertCompany($_arrayCompany);
 
 $_consecutive="";
 if(strpos($_companyID,"Error")!==false){
-    echo "Error register company,try again ".$_companyID."";
+    
+    $_string_message = "Error register company,try again $_companyID";
+    $_message=array(
+        'title'=>"Register Company",
+        'subtitle'=>"",
+        'content'=>$_string_message,
+    );
 }else{
+    $_string_message = '<div class="alert alert-success">Registration success<br>Your registration phone:<a href="#">'. $_arrayCompany['phoneContactCompany'] .'</a><br>Your registration email:<a href="#">'. $_arrayCompany['emailValidation'] .'</a></div><br>'.
+    '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+    '<br><br><strong>Did not get a code?</strong>'.
+    '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_arrayCompany['emailValidation'] . '\',\'\',\'phone\',\'co\')">Resend Code</button>'.
+    '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_arrayCompany['emailValidation'] .  '\',\'\',\'mail\',\'co\')">SEND ME THE VALIDATION CODE BY EMAIL</a>';
+    $_string_button = '<br><br>                                       
+    <div class="alert alert-warning" role="alert">
+        <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" data-dismiss="modal" onclick="validate_sms_code(\'co\',\''. $_arrayCompany['emailValidation'] .'\')">Validate Code</button></center>
+    </div>';
+
     if(count($_array_drivers)>0){
         $_pos=strpos($_companyID,"*");
         if($_pos!==false){
@@ -67,6 +83,15 @@ if(strpos($_companyID,"Error")!==false){
         $_driverController=new driverController();
         $_driverController->insertDrivers($_consecutive,$_array_drivers);
     }
-    echo "Continue, Company was register correctly please check your email, to validate the user".$_consecutive;
+    
+    $_message=array(
+        'title'=>"Register Company",
+        'subtitle'=>"",
+        'content'=>$_string_message,
+        'button' =>$_string_button,
+        'extra' =>$_companyID,
+    );
+
 }
+print_r(json_encode($_message));
 ?>

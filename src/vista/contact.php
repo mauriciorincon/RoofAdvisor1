@@ -46,7 +46,7 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 							<div class="contact-text">
-								<p>info@roofservicenow.com<br>www.roofservicenow.com</p>
+								<p>support@roofservicenow.com<br>www.roofservicenow.com</p>
                             </div>
 						</div>
 					</div>

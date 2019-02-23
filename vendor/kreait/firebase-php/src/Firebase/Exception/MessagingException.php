@@ -6,37 +6,103 @@ namespace Kreait\Firebase\Exception;
 
 use GuzzleHttp\Exception\RequestException;
 use Kreait\Firebase\Exception\Messaging\AuthenticationError;
-use Kreait\Firebase\Exception\Messaging\InvalidArgument;
+use Kreait\Firebase\Exception\Messaging\InvalidMessage;
 use Kreait\Firebase\Exception\Messaging\NotFound;
 use Kreait\Firebase\Exception\Messaging\ServerError;
 use Kreait\Firebase\Exception\Messaging\ServerUnavailable;
 use Kreait\Firebase\Exception\Messaging\UnknownError;
+use Kreait\Firebase\Util\JSON;
+use Psr\Http\Message\ResponseInterface;
 
 class MessagingException extends \RuntimeException implements FirebaseException
 {
+    /**
+     * @var ResponseInterface|null
+     */
+    private $response;
+
+    /**
+     * @var array
+     */
+    private $errors = [];
+
     public static function fromRequestException(RequestException $e): self
     {
-        $message = $e->getMessage();
+        $errors = [];
+        $reasonPhrase = null;
 
-        if ($e->hasResponse()) {
-            /** @noinspection NullPointerExceptionInspection */
-            $message = 'Raw server response: '.$e->getResponse()->getBody()->getContents();
+        if ($response = $e->getResponse()) {
+            $errors = self::getErrorsFromResponse($response);
+            $reasonPhrase = $response->getReasonPhrase();
         }
 
-        switch ($code = $e->getCode()) {
+        $code = (int) ($errors['error']['code'] ?? $e->getCode());
+        $message = $errors['error']['message'] ?? $reasonPhrase;
+
+        switch ($code) {
             case 400:
-                return new InvalidArgument('Invalid Argument: '.$message, $code, $e);
+                $error = new InvalidMessage($message ?: 'Invalid message', $code);
+                break;
             case 401:
             case 403:
-                return new AuthenticationError('Authentication error: '.$message, $code, $e);
+                $error = new AuthenticationError($message ?: 'Authentication error', $code);
+                break;
             case 404:
-                return new NotFound('Not found: '.$message, $code, $e);
+                $error = new NotFound($message ?: 'Not found', $code);
+                break;
             case 500:
-                return new ServerError('Server Error: '.$message, $code, $e);
+                $error = new ServerError($message ?: 'Server error', $code);
+                break;
             case 503:
-                return new ServerUnavailable('Server Unavailable: '.$message, $code, $e);
+                $error = new ServerUnavailable($message ?: 'Server unavailable', $code);
+                break;
             default:
-                return new UnknownError('Unknown error: '.$message, $code);
+                $error = new UnknownError($message ?: 'Unknown error', $code);
+                break;
+        }
+
+        return $error
+            ->withResponse($response)
+            ->withErrors($errors);
+    }
+
+    public function errors(): array
+    {
+        return $this->errors;
+    }
+
+    public function withErrors(array $errors = [])
+    {
+        $e = new static($this->getMessage(), $this->getCode());
+        $e->response = $this->response;
+        $e->errors = $errors;
+
+        return $e;
+    }
+
+    /**
+     * @return ResponseInterface|null
+     */
+    public function response()
+    {
+        return $this->response;
+    }
+
+    public function withResponse(ResponseInterface $response = null)
+    {
+        $e = new static($this->getMessage(), $this->getCode());
+        $e->errors = $this->errors;
+        $e->response = $response;
+
+        return $e;
+    }
+
+    private static function getErrorsFromResponse(ResponseInterface $response): array
+    {
+        try {
+            return JSON::decode((string) $response->getBody(), true);
+        } catch (\InvalidArgumentException $e) {
+            return [];
         }
     }
 }

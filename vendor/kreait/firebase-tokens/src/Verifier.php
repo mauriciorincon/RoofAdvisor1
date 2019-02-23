@@ -4,6 +4,7 @@ namespace Firebase\Auth\Token;
 
 use Firebase\Auth\Token\Domain\KeyStore;
 use Firebase\Auth\Token\Exception\ExpiredToken;
+use Firebase\Auth\Token\Exception\InvalidSignature;
 use Firebase\Auth\Token\Exception\InvalidToken;
 use Firebase\Auth\Token\Exception\IssuedInTheFuture;
 use Firebase\Auth\Token\Exception\UnknownKey;
@@ -42,10 +43,22 @@ final class Verifier implements Domain\Verifier
             $token = (new Parser())->parse($token);
         }
 
-        $this->verifyExpiry($token);
-        $this->verifyIssuedAt($token);
-        $this->verifyIssuer($token);
+        $errorBeforeSignatureCheck = null;
+
+        try {
+            $this->verifyExpiry($token);
+            $this->verifyAuthTime($token);
+            $this->verifyIssuedAt($token);
+            $this->verifyIssuer($token);
+        } catch (\Throwable $e) {
+            $errorBeforeSignatureCheck = $e;
+        }
+
         $this->verifySignature($token, $this->getKey($token));
+
+        if ($errorBeforeSignatureCheck) {
+            throw $errorBeforeSignatureCheck;
+        }
 
         return $token;
     }
@@ -58,6 +71,17 @@ final class Verifier implements Domain\Verifier
 
         if ($token->isExpired()) {
             throw new ExpiredToken($token);
+        }
+    }
+
+    private function verifyAuthTime(Token $token)
+    {
+        if (!$token->hasClaim('auth_time')) {
+            throw new InvalidToken($token, 'The claim "auth_time" is missing.');
+        }
+
+        if ($token->getClaim('auth_time') > time()) {
+            throw new InvalidToken($token, "The user's authentication time must be in the past");
         }
     }
 
@@ -103,11 +127,11 @@ final class Verifier implements Domain\Verifier
         try {
             $isVerified = $token->verify($this->signer, $key);
         } catch (\Throwable $e) {
-            throw new InvalidToken($token, $e->getMessage());
+            throw new InvalidSignature($token, $e->getMessage());
         }
 
         if (!$isVerified) {
-            throw new InvalidToken($token, 'This token has an invalid signature.');
+            throw new InvalidSignature($token);
         }
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Project Test Suite" tests="3" assertions="5" errors="0" failures="0" skipped="0" time="0.007454">
+    <testsuite name="StackTest" file="/Library/WebServer/Documents/RoofServiceNow/tests/phony.php" tests="3" assertions="5" errors="0" failures="0" skipped="0" time="0.007454">
+      <testcase name="testEmpty" class="StackTest" classname="StackTest" file="/Library/WebServer/Documents/RoofServiceNow/tests/phony.php" line="6" assertions="1" time="0.002329"/>
+      <testcase name="testPush" class="StackTest" classname="StackTest" file="/Library/WebServer/Documents/RoofServiceNow/tests/phony.php" line="17" assertions="2" time="0.003343"/>
+      <testcase name="testPop" class="StackTest" classname="StackTest" file="/Library/WebServer/Documents/RoofServiceNow/tests/phony.php" line="29" assertions="2" time="0.001782"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

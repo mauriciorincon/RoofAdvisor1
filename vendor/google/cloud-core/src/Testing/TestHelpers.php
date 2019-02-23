@@ -18,6 +18,7 @@
 
 namespace Google\Cloud\Core\Testing;
 
+use Google\Cloud\Core\Testing\RegexFileFilter;
 use Google\Cloud\Core\Testing\Snippet\Container;
 use Google\Cloud\Core\Testing\Snippet\Coverage\Coverage;
 use Google\Cloud\Core\Testing\Snippet\Coverage\ExcludeFilter;
@@ -109,7 +110,11 @@ class TestHelpers
         putenv('GOOGLE_APPLICATION_CREDENTIALS='. \Google\Cloud\Core\Testing\Snippet\Fixtures::KEYFILE_STUB_FIXTURE());
 
         $parser = new Parser;
-        $scanner = new Scanner($parser, self::projectRoot(), ['/vendor/', '/dev/']);
+        $scanner = new Scanner($parser, self::projectRoot(), [
+            '/vendor/',
+            '/dev/',
+            new RegexFileFilter('/\w{0,}\/vendor\//')
+        ]);
         $coverage = new Coverage($scanner);
         $coverage->buildListToCover();
 
@@ -192,6 +197,22 @@ class TestHelpers
         });
 
         $started = true;
+    }
+
+    /**
+     * Setup stuff needed for the generated system tests.
+     * @internal
+     * @experimental
+     */
+    public static function generatedSystemTestBootstrap()
+    {
+        // For generated system tests, we need to set GOOGLE_APPLICATION_CREDENTIALS
+        // and PROJECT_ID to appropriate values
+        $keyFilePath = getenv('GOOGLE_CLOUD_PHP_TESTS_KEY_PATH');
+        putenv("GOOGLE_APPLICATION_CREDENTIALS=$keyFilePath");
+        $keyFileData = json_decode(file_get_contents($keyFilePath), true);
+        putenv('PROJECT_ID=' . $keyFileData['project_id']);
+
     }
 
     /**
