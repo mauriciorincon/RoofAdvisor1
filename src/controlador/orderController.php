@@ -54,17 +54,23 @@ class orderController{
         $this->_orderModel=new orderModel();
         
         if(strcmp($arrayDataOrder['RequestType'],"P")!=0){
+            echo "customer que llego";
             if(empty($emailCustomer)){
+                echo "entro al primero: ".$_SESSION['email'];
                 $_customer=$this->_userController->getCustomer($_SESSION['email']);
                 $_customerK=$this->_userController->getCustomerK($_SESSION['email']);
             }else{
+                echo "entro al segundo";
                 if(strcmp($createdTo,"0")==0){
+                    echo "entro al tercero";
                     $_customer=$this->_userController->getCustomer($emailCustomer);
                     $_customerK=$this->_userController->getCustomerK($emailCustomer);
                 }else{
+                    echo "entro al cuarto";
                     $_customer=$this->_userController->getCustomerById($createdTo);
                     $_customerK=$this->_userController->getCustomerKById($createdTo);
                 }
+                echo "entro al quinto";
             }
         }else{
             $_customer=array(
@@ -74,7 +80,7 @@ class orderController{
             );
             $_customerK="";
         }
-        
+        echo "entro al sexto";
         //echo $_customer;
         //echo $_customerK;
         //exit;
