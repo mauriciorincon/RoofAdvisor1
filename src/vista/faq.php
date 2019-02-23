@@ -382,4 +382,5 @@ After that, it’s up to you to respond quickly and professionally, and show the
 <div>
 <!--<img src="../img/faq-sheet1.png" style="    margin: auto;display: block;width: 50%;">-->
 </div>	
-<script src="vista/js/faq-main.js"></script>	
+<script src="vista/js/faq-main.js"></script>
+<script src="vista/js/roofchat-pub.js"></script>	
