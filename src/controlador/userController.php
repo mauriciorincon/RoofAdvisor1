@@ -1551,6 +1551,15 @@ class userController{
         return $key;
     }
 
+    function updateUserPorperty($field){
+        $properties = [
+            'emailVerified' => true,
+            'disabled' => false,
+            'photoURL' => ''
+        ];
+        $_result_update=$this->_userModel->updateUserCustomer($user,$properties,'company');
+    }
+
 
     
 }

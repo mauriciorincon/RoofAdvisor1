@@ -5,12 +5,14 @@
     } 
     require_once($_SESSION['application_path']."/controlador/userController.php");
 
+
+
     $value = $_POST['value'];
     $table = $_POST['t'];
     $email = $_POST['u'];
-    $pass = $_POST['p'];
+    $type = $_POST['type'];
 
     $_userController = new userController();
 
-    
+
 ?>
