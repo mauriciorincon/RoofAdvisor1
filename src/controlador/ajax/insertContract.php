@@ -65,7 +65,7 @@ if(strpos($_companyID,"Error")!==false){
         'content'=>$_string_message,
     );
 }else{
-    $_string_message = '<div class="alert alert-success">Registration success<br>Your registration phone:<a href="#">'. $_arrayCompany['phoneContactCompany'] .'</a><br>Your registration email:<a href="#">'. $_arrayCompany['emailValidation'] .'</a></div><br>'.
+    $_string_message = '<div class="alert alert-success">Registration success<br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $_arrayCompany['emailValidation'] .'\',\'co\',\''. $_arrayCompany['phoneContactCompany'] .'\',\'phone\')">'. $_arrayCompany['phoneContactCompany'] .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $_arrayCompany['emailValidation'] .'\',\'co\',\''. $_arrayCompany['emailValidation'] .'\',\'email\')">'. $_arrayCompany['emailValidation'] .'</a></div><br>'.
     '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
     '<br><br><strong>Did not get a code?</strong>'.
     '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_arrayCompany['emailValidation'] . '\',\'\',\'phone\',\'co\')">Resend Code</button>'.

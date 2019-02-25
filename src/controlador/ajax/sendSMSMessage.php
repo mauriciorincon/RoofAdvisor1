@@ -61,7 +61,7 @@ if(is_array($_result) or is_object($_result)){
     $_result_update=$_userModel->updateUserCustomer($user,$properties,$table1);
     switch($table){
         case "c":
-            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#">'. $phoneNumber .'</a><br>Your registration email:<a href="#">'. $email .'</a></div><br>'.
+            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div><br>'.
             '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
             '<br><br><strong>Did not get a code?</strong>'.
             '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
@@ -72,7 +72,7 @@ if(is_array($_result) or is_object($_result)){
             </div>';
             break;
         case "co":
-            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#">'. $phoneNumber .'</a><br>Your registration email:<a href="#">'.$email .'</a></div><br>'.
+            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'.$email .'</a></div><br>'.
             '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
             '<br><br><strong>Did not get a code?</strong>'.
             '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
@@ -85,14 +85,14 @@ if(is_array($_result) or is_object($_result)){
     }
     $_message=array(
         'title'=>"Register $table1",
-        'subtitle'=>"",
+        'subtitle'=>'<div class="alert alert-success">A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration </div>',
         'content'=>$_string_message,
         'button' =>$_string_button,
         'extra' =>$_result_update,
     );
     
 }else{        
-    $_string_message = '<div class="alert alert-danger"><strong>Error register '.$table1.' user was not found</strong><br>Your registration phone:<a href="#">'. $phoneNumber .'</a><br>Your registration email:<a href="#">'. $email .'</a></div>'.
+    $_string_message = '<div class="alert alert-danger"><strong>Error register '.$table1.' user was not found</strong><br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')" >'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div>'.
         '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
         '<br><br><strong>Did not get a code?</strong>'.
         '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
@@ -103,7 +103,7 @@ if(is_array($_result) or is_object($_result)){
         </div>';
     $_message=array(
         'title'=>"Register $table1",
-        'subtitle'=>"",
+        'subtitle'=>'<div class="alert alert-danger"><strong>Error register '.$table1.' user was not found</strong></div>',
         'content'=>$_string_message,
         'button' =>$_string_button,
         'extra' =>$_result_update,

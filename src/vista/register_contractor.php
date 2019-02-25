@@ -61,15 +61,15 @@
                     <label class="control-label labeltwht">Phone of Primary Contact</label>
                     <input maxlength="100" type="text" required="required" class="form-control" placeholder="Phone of Primary Contact"  id="phoneContactCompany" name="phoneContactCompany"/>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="control-label labeltwht">Company Type</label>
                     <select id="typeCompany" name="typeCompany">
                         <option value="Corp">Corp</option>
                         <option value="LLC">LLC</option>
                         <option value="Sole Prope">Sole Prope</option>
                     </select>
-                    <!--<input maxlength="100" type="text" required="required" class="form-control" placeholder="Company Type" />-->
-                </div>
+                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Company Type" />
+                </div>-->
                 <!--
                 <div class="form-group">
                     <label class="control-label labeltwht">In business since</label>
@@ -197,24 +197,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="myModalRespuesta" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4>
-            </div>
-            <div class="modal-body" id="textAnswerOrder">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer" id="buttonAnswerOrder">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <!--<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Close</button> -->
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="modal fade" id="termsServiceWindow" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -393,4 +376,51 @@
 			</div> 
 		</div> 
 	</div>
+</div>
+
+<div class="modal fade" id="myModalRespuesta" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4>
+            </div>
+            <div class="modal-body" id="textAnswerOrder">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer" id="buttonAnswerOrder">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Close</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalChagePhoneEmail" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <input type="hidden" id="id_user_mail" value="" />
+        <input type="hidden" id="id_change_type" value="" />
+        <input type="hidden" id="id_table" value=""  />
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="headerTextAnswerOrder">Change Phone/Mail</h4>
+            </div>
+            <div class="modal-body" id="textAnswerOrder">
+                <label class="control-label" for="actualidPhoneMail">Actual Phone/Email</label>
+                <input class="form-control" type="text" id="actualidPhoneMail" disabled />
+            </div>
+            <div class="modal-body" id="textAnswerOrder">
+                <label class="control-label" for="newidPhoneMail">New Phone/Email</label>
+                <input class="form-control" type="text" id="newidPhoneMail" />
+            </div>
+            <div class="modal-footer" id="buttonAnswerOrder">
+                <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn-primary" data-dismiss="modal" onlcick="changeMailPhone()">Change</button>
+            </div>
+        </div>
+    </div>
 </div>

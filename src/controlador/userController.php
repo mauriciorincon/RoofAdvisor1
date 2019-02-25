@@ -531,7 +531,7 @@ class userController{
                         return $_message;
                     }
                 }else{
-                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again";
+                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again Home:".$_result->photoUrl." Typed:".$code;
                     //$_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
                     return $_message;
                 }

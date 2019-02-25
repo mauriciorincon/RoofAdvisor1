@@ -365,7 +365,7 @@ function insertCompany () {
   var lastNameField = $('input#lastNameCompany').val()
   var phoneContactField = $('input#phoneContactCompany').val()
   var emailField = $('input#emailValidation').val()
-  var typeCompanyField = $('select#typeCompany').val()
+  var typeCompanyField ="";// $('select#typeCompany').val()
   var password = $('input:password#inputPassword').val()
   var Repassword = $('input:password#inputPasswordConfirm').val()
   var inBussinessSince = "";//$('input#inBusinessSinceCompany').val()
@@ -415,14 +415,15 @@ function insertCompany () {
           $('#headerTextAnswerOrder').html(data.title);
           $('#myModalRespuesta div.modal-body').html(data.content);
           $('#buttonAnswerOrder').html(data.button);
-          $(document).ready(function () {$('#myModalRespuesta').modal('show'); })
+          $(document).ready(function () {$('#myModalRespuesta').modal({backdrop: 'static'}) })
           
 
 
         }else {
-          $('#headerTextAnswerOrder div.modal-body').html('Error Register Company')
-          $('#myRegisterMessage div.modal-body').html(data)
-          $(document).ready(function () {$('#myModalRespuesta').modal('show'); })
+            data = jQuery.parseJSON(data)
+          $('#headerTextAnswerOrder').html(data.title);
+          $('#myModalRespuesta div.modal-body').html(data.content);
+          $(document).ready(function () {$('#myModalRespuesta').modal({backdrop: 'static'}) })
           result = false
         }
 
@@ -5615,21 +5616,24 @@ function validate_sms_code (t, user, screenPar) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screenPar == 'Customer_register') {
-            $('#labelResponseValidationCode').html(data)
-            window.location.href = '?controller=user&accion=loginContractor';
-          }else {
             data = jQuery.parseJSON(data)
+          if (screenPar == 'Customer_register') {
+            $('#labelResponseValidationCode').html(data.subtitle);
+            window.location.href = '?controller=user&accion=dashboardCustomer';
+          }else {
+            
             $('#headerTextAnswerOrder').html(data.title)
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
           }
         }else {
-          if (screenPar == 'Customer_register') {
-            $('#labelResponseValidationCode').html(data)
-          }else {
             data = jQuery.parseJSON(data)
+          if (screenPar == 'Customer_register') {
+
+            $('#labelResponseValidationCode').html(data.subtitle);
+          }else {
+            
             $('#headerTextAnswerOrder').html(data.title)
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
@@ -5666,7 +5670,7 @@ function resendValidationCode (user,screenPar,sendWay,table) {
         if (n == -1) {
           if (screenPar == 'Customer_register') {
             data = jQuery.parseJSON(data)
-            $('#labelResponseValidationCode').html(data.content)
+            $('#labelResponseValidationCode').html(data.subtitle)
           }else {
             data = jQuery.parseJSON(data)
             $('#headerTextAnswerOrder').html(data.title)
@@ -5677,7 +5681,62 @@ function resendValidationCode (user,screenPar,sendWay,table) {
         }else {
           data = jQuery.parseJSON(data)
           if (screenPar == 'Customer_register') {
-            $('#labelResponseValidationCode').html(data)
+            $('#labelResponseValidationCode').html(data.subtitle)
+          }else {
+             $('#headerTextAnswerOrder').html(data.title)
+              $('#textAnswerOrder').html(data.content)
+              $('#buttonAnswerOrder').html(data.button)
+              $('#myModalRespuesta').modal({backdrop: 'static'})
+          }
+        }
+        console.log('La solicitud se ha completado correctamente.' + data + textStatus)
+        jsRemoveWindowLoad('')
+      }
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      if (console && console.log) {
+        console.log('La solicitud a fallado: ' + textStatus)
+        result1 = false
+        jsRemoveWindowLoad('')
+        return result1
+      }
+    })
+}
+
+function setDataChangePhoneMail(user,table,dataChange,typeChange){
+    $('#id_user_mail').val(user);
+    $('#id_change_type').val(typeChange);
+    $('#id_table').val(table);
+    $('#actualidPhoneMail').val(dataChange);
+    $('#myModalChagePhoneEmail').modal({backdrop: 'static'})
+}
+
+function changeMailPhone(){
+    var user = $('#id_user_mail').val();
+    var type = $('#id_change_type').val();
+    var table = $('#id_table').val();
+    var value = $('#newidPhoneMail').val();
+    
+    jsShowWindowLoad('Changing info')
+    $.post('controlador/ajax/changeUserInfo.php', {'t': table,'u': user,'type':type,'value':value}, null, 'text')
+    .done(function (data, textStatus, jqXHR) {
+      if (console && console.log) {
+        var n = data.indexOf('Error')
+        if (n == -1) {
+          if (screenPar == 'Customer_register') {
+            data = jQuery.parseJSON(data)
+            $('#labelResponseValidationCode').html(data.subtitle)
+          }else {
+            data = jQuery.parseJSON(data)
+            $('#headerTextAnswerOrder').html(data.title)
+            $('#textAnswerOrder').html(data.content)
+            $('#buttonAnswerOrder').html(data.button)
+            $('#myModalRespuesta').modal({backdrop: 'static'})
+          }
+        }else {
+          data = jQuery.parseJSON(data)
+          if (screenPar == 'Customer_register') {
+            $('#labelResponseValidationCode').html(data.subtitle)
           }else {
              $('#headerTextAnswerOrder').html(data.title)
               $('#textAnswerOrder').html(data.content)
