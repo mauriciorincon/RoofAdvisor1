@@ -1933,12 +1933,24 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                 var employeeSelected=$('#dashBoardCompanyListEmployee').val();
                 ref.orderByChild("SchDate").endAt(year).once("value", function(snapshot) {
 
+                    var month11=month1+1;
+                    var month12=month1+2;
+                    if (month1.toString.length==1){
+                        month1 = "0".concat(month1);
+                    }
+                    if (month11.toString.length==1){
+                        month11 = "0".concat(month11);
+                    }
+                    if (month12.toString.length==1){
+                        month12 = "0".concat(month12);
+                    }
                     datos=snapshot.val();
                     for(r in datos){
                         data=datos[r];
                         if(data.CompanyID==companyID || data.CompanyID=='' || data.CompanyID==null){
                             if(employeeSelected==''){
-                                if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
+                                
+                                if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month11) || data.SchDate.startsWith(month12)){
                                     var start = data.SchDate.split("/");
                                     var start1=start[2]+"-"+start[0]+"-"+start[1];
                                     var end1=start[2]+"-"+start[0]+"-"+start[1];
@@ -1966,8 +1978,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                     
                                 }
                             }else{
-                                if(data.ContractorID==employeeSelected){
-                                    if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month1+1) || data.SchDate.startsWith(month1+2)){
+                                    if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month11) || data.SchDate.startsWith(month12)){
                                         var start = data.SchDate.split("/");
                                         var start1=start[2]+"-"+start[0]+"-"+start[1];
                                         var end1=start[2]+"-"+start[0]+"-"+start[1];
@@ -1993,7 +2004,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                         });
                         
                                     }
-                                }
+                                
                             }
                             
                         }
@@ -2855,6 +2866,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 <?php 
 //echo $_actual_company['postCardValue'];
 if(!empty($_actual_company['postCardValue'])){
+    if(!is_numeric( $_actual_company['postCardValue'])){
+        $_actual_company['postCardValue']=0;
+    }
     echo '
     <div class="modal fade" id="myMessagePostCardsPay" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
