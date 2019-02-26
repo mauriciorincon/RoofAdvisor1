@@ -42,13 +42,12 @@
                                 <td>Check your cell phone</td>
                             </tr>
                             <tr>
-                                <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode('<?php echo $_SESSION['response']['emailUser'];?>','Customer_register','phone')">REQUEST A NEW</a></td>
-                                <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode('<?php echo $_SESSION['response']['emailUser'];?>','Customer_register','email')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
+                                <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode('<?php echo $_SESSION['response']['emailUser'];?>','Customer_register','phone','c')">REQUEST A NEW</a></td>
+                                <td><a href="#" class="btn-primary btn-sm" onclick="resendValidationCode('<?php echo $_SESSION['response']['emailUser'];?>','Customer_register','email','c')">SEND ME THE VALIDATION CODE BY EMAIL</a></td>
                             </tr>
                         </table>
                     </div>
                     
-                
                     <button type="button" id="finishService" class="btn-success" data-dismiss="modal" onclick="validate_sms_code('c','<?php echo $_SESSION['response']['emailUser'];?>','Customer_register')">Validate Code</button>
                 </div>
                 <div>

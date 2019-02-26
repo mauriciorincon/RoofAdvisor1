@@ -531,7 +531,7 @@ class userController{
                         return $_message;
                     }
                 }else{
-                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again";
+                    $_message="Error, An error occurs valdiating your user, the code is incorrect please try again Home:".$_result->photoUrl." Typed:".$code;
                     //$_message=$this->messageValidateUser('An error occurs valdiating your user','notice-danger','Customers');
                     return $_message;
                 }
@@ -1549,6 +1549,14 @@ class userController{
         $max = strlen($pattern)-1;
         for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
         return $key;
+    }
+
+    function updateUserPorperty($user,$table,$field,$value){
+        $properties = [
+            $field => $value,
+        ];
+        $_result_update=$this->_userModel->updateUserCustomer($user,$properties,$table);
+        return $_result_update;
     }
 
 

@@ -305,7 +305,7 @@ class orderController{
                     $_contractorLastName = $this->_userController->getNode("Contractors/".$_order['ContractorID']."/ContNameLast");
                     switch($_status){
                         case "A":
-                            $_msg = "RoofServiceNow has received your job order $orderID. A service professional will be confirming shortly.";
+                            $_msg = "RoofServiceNow has received your job order ".$_order['OrderNumber'].". A service professional will be confirming shortly.";
                             break;
                         case "D":
                             if(strcmp($_order['RequestType'],'R')==0){
@@ -318,7 +318,7 @@ class orderController{
                             $_msg = "$_contractorName $_contractorLastName<Pro> has just arrived at your location.";
                             break;
                         case "F":
-                            $_msg = "$_contractorName $_contractorLastName has sent you an estimate for order $orderID. Please login to RoofServiceNow and approve the estimate. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
+                            $_msg = "$_contractorName $_contractorLastName has sent you an estimate for order ".$_order['OrderNumber'].". Please login to RoofServiceNow and approve the estimate. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "I":
                             $_msg = "$_contractorName $_contractorLastName has completed the job and will send you a final invoice shortly.";
@@ -327,7 +327,7 @@ class orderController{
                             $_msg = "$_companyName has sent you a final invoice. Please login to RoofServiceNow and to make final payment. https://roofservicenow.com/index.php?controller=user&accion=dashboardCustomer";
                             break;
                         case "K":
-                            if(strcmp($_order['RequestType'],'R')){
+                            if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "Your report is complete. Please login to RoofserviceNow to download your report. Thank you for using RoofServiceNow.";
                             }else{
                                 $_msg = "Thank you for using RoofserviceNow. Please take a minute to rate your experience with $_contractorName $_contractorLastName.";
@@ -339,7 +339,7 @@ class orderController{
                     }
                     $_customer = $this->_userController->getNode("Customers/".$_id_customer);
                     $_smsClient = $this->_smsController->createClientSms();
-                    print_r($_customer);
+                    //print_r($_customer);
                     $this->_smsController->sendMessage("+18889811812",$_customer['Phone'],$_msg);
                 }
                 

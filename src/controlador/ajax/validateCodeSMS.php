@@ -37,15 +37,33 @@
         //echo $_result;
         if(strpos($_result,"Error")===false){
             //echo "entro bien:".strpos("Error",$_result);
-            $_string_message = '<div class="alert alert-success">Registration success<br> welcome to RoofServiceNow now you can login';
+            $_string_message = '<div class="alert alert-success">Registration success<br> welcome to RoofServiceNow now you can login</div>';
+            $_string_subtitle = '<div class="alert alert-success">Registration success<br> welcome to RoofServiceNow now you can login</div>';
             switch($table1){
                 case "Customers":
+                    $_userController->cleanVariables();
+                    $_result=$_userController->getCustomer($email);
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_result['Fname']." ".$_result['Lname'];
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                    $_SESSION['email'] = $email;
+                    $_SESSION['profile'] = 'customer';
                     $_string_button = '<br><br>'.
                     '<div class="alert alert-warning" role="alert">
                         <center><button type="button" id="lastFinishButtonOrder" class="btn btn-default" data-dismiss="modal" onclick="loginUser(\''.$email."','".$pass.'\',\'step8\')">Finish the order</button></center>
                     </div>';
                     break;
                 case "Company":
+                    $_userController->cleanVariables();
+                    $_result=$_userController->getCompanyE($email);
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $_result['CompanyName'];
+                    $_SESSION['start'] = time();
+                    $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+                    $_SESSION['email'] = $email;
+                    $_SESSION['profile'] = 'company';
+                    $_SESSION['profile-employee'] = '';
                     $_string_button = '<br><br>                                       
                     <div class="alert alert-warning" role="alert">
                         <center><a  id="lastFinishButtonOrder" class="btn-success btn-lg" href="?controller=user&accion=dashboardCompany">Accept</button></center>
@@ -64,11 +82,12 @@
                 <div class="alert alert-warning" role="alert">
                     <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\''.$table.'\',\''. $email .'\')">Validate Code</button></center>
                 </div>';
+            $_string_subtitle = '<div class="alert alert-danger">Error register '.$table1.', validation code is incorrect</div>';
             
         }
         $_message=array(
             'title'=>"Register $table1",
-            'subtitle'=>"",
+            'subtitle'=>$_string_subtitle,
             'content'=>$_string_message,
             'button' =>$_string_button,
             'extra' =>$_result,
@@ -85,7 +104,7 @@
             </div>';
         $_message=array(
             'title'=>"Register $table1",
-            'subtitle'=>"",
+            'subtitle'=>'<div class="alert alert-danger">Error register '.$table1.' user was not found</div>',
             'content'=>$_string_message,
             'button' =>$_string_button,
             'extra' =>$_result,
