@@ -1355,9 +1355,9 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="" style="margin-top: -60px;">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Final Amount</strong></h3>
+								<h3 class="panel-title" style="color:#fff;"><strong>Final Amount</strong></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
