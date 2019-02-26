@@ -5728,20 +5728,20 @@ function changeMailPhone(){
             $('#labelResponseValidationCode').html(data.subtitle)
           }else {
             data = jQuery.parseJSON(data)
-            $('#headerTextAnswerOrder').html(data.title)
-            $('#textAnswerOrder').html(data.content)
-            $('#buttonAnswerOrder').html(data.button)
-            $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#headerTextAnswerOrder2').html(data.title)
+            $('#textAnswerOrder2').html(data.content)
+            $('#buttonAnswerOrder2').html(data.button)
+            $('#myModalRespuesta2').modal({backdrop: 'static'})
           }
         }else {
           data = jQuery.parseJSON(data)
           if (screenPar == 'Customer_register') {
             $('#labelResponseValidationCode').html(data.subtitle)
           }else {
-             $('#headerTextAnswerOrder').html(data.title)
-              $('#textAnswerOrder').html(data.content)
-              $('#buttonAnswerOrder').html(data.button)
-              $('#myModalRespuesta').modal({backdrop: 'static'})
+             $('#headerTextAnswerOrder2').html(data.title)
+              $('#textAnswerOrder2').html(data.content)
+              $('#buttonAnswerOrder2').html(data.button)
+              $('#myModalRespuesta2').modal({backdrop: 'static'})
           }
         }
         console.log('La solicitud se ha completado correctamente.' + data + textStatus)

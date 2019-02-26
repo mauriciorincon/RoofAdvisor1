@@ -1556,6 +1556,7 @@ class userController{
             $field => $value,
         ];
         $_result_update=$this->_userModel->updateUserCustomer($user,$properties,$table);
+        return $_result_update;
     }
 
 

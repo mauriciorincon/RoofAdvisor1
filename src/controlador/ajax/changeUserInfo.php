@@ -14,5 +14,14 @@
 
     $_userController = new userController();
 
+    $_result = $_userController->updateUserPorperty($email,$table,$field,$value);
+    $_message=array(
+        'title'=>"Change phone/email",
+        'subtitle'=>'',
+        'content'=>$_result,
+        'button' =>'',
+        'extra' =>'',
+    );
+    print_r(json_encode($_message));
 
 ?>
