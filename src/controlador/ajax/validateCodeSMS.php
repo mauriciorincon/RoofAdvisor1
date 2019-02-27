@@ -63,7 +63,7 @@
                     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
                     $_SESSION['email'] = $email;
                     $_SESSION['profile'] = 'company';
-                    $_SESSION['profile-employee'] = '';
+                    $_SESSION['profile-employee'] = 'admin';
                     $_string_button = '<br><br>                                       
                     <div class="alert alert-warning" role="alert">
                         <center><a  id="lastFinishButtonOrder" class="btn-success btn-lg" href="?controller=user&accion=dashboardCompany">Accept</button></center>

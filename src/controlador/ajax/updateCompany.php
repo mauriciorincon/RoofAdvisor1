@@ -72,7 +72,7 @@ $_result1=$_userController->updateInfoCompanyStripe($_companyID,$_compamnylegal_
                                                     $_compamnylegal_entity_last4,$_compamnylegal_entity_personal_id,$_path_file,
                                                     $_compamnylegal_entity_business_name,$_compamnylegal_entity_business_tax_id);
 if(is_object($_result1) or is_array($_result1)){
-    $_result1="<br>The account was updated successfully";
+    $_result1='<br><div class="alert alert-success">The Stripe account was updated successfully</div>';
 }                                    
 echo $result." ".$_result1;
 

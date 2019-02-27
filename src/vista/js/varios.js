@@ -5725,7 +5725,12 @@ function changeMailPhone(screenPar){
     if(screenPar==undefined){
       screenPar='';
     }
-    
+    if(type=='phone'){
+      if(value.length!=10){
+        alert('The phone number is incorrect, please verify');
+        return;
+      }
+    }
     jsShowWindowLoad('Changing info')
     $.post('controlador/ajax/changeUserInfo.php', {'t': table,'u': user,'type':type,'value':value}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
@@ -5738,10 +5743,14 @@ function changeMailPhone(screenPar){
           }else {
             data = jQuery.parseJSON(data)
             $('#headerTextAnswerOrder2').html(data.title)
-            $('#textAnswerOrder2').html(data.content)
-            $('#buttonAnswerOrder2').html(data.button)
+            $('#textAnswerOrder2').html(data.subtitle)
+            $('#buttonAnswerOrder2').html('')
             $('#myModalRespuesta2').modal({backdrop: 'static'})
+          
+            $('#textAnswerOrder').html(data.content)
+            $('#buttonAnswerOrder').html(data.button)
 
+            $('#myModalChagePhoneEmail').modal('hide')
             //$('#textAnswerOrder').html('');
           }
         }else {
@@ -5751,7 +5760,7 @@ function changeMailPhone(screenPar){
           }else {
              $('#headerTextAnswerOrder2').html(data.title)
               $('#textAnswerOrder2').html(data.content)
-              $('#buttonAnswerOrder2').html(data.button)
+              $('#buttonAnswerOrder2').html('')
               $('#myModalRespuesta2').modal({backdrop: 'static'})
           }
           $('#myModalChagePhoneEmail').modal('hide')

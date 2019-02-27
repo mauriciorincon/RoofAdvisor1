@@ -13,8 +13,12 @@
       <div class="modal-body">
         <?php
         if(isset($_GET['aditionalMessage'])){
-          echo $_GET['aditionalMessage'];
-        }
+					echo $_GET['aditionalMessage'];
+					
+				}
+				if(isset($_SESSION['extra_message_customer'])){
+					echo $_SESSION['extra_message_customer'];
+				}
         ?>
       </div>
       <div class="modal-footer">
