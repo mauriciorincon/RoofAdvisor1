@@ -705,6 +705,7 @@ class userController{
             $_information=new usefullURLS();
             $_array_urls=$_information->fillInfoUrls();
             
+            $_result_validation = $this->verifyCompany($_actual_company);
             require_once("vista/head.php");
             require_once("vista/dashboard_company.php");
             require_once("vista/footer.php");
@@ -755,13 +756,7 @@ class userController{
                                     $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany){
         
         $_aditional_message="";
-    $_result=$this->validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
-    $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
-    $_companyType,$_PayInfoBillingAddress1,$_PayInfoBillingAddress2,$_PayInfoBillingCity,
-    $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
-    $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
-    $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
-    $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany);
+    
 
         $this->_userModel=new userModel(); 
         $_array_update=[
@@ -796,42 +791,30 @@ class userController{
             'Company/'.$_companyID.'/Verified' => $_verifiedCompany,
         ]; 
         $_result=$this->_userModel->updateArray($_array_update);
-        /*$this->_userModel->updateContractor($_companyID.'/CompanyName',$_compamnyName);
-        $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_firstCompanyName);
-        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_lastCompanyName);
-        $this->_userModel->updateContractor($_companyID.'/CompanyAdd1',$_companyAddress1);
-        $this->_userModel->updateContractor($_companyID.'/CompanyAdd2',$_companyAddress2);
-        $this->_userModel->updateContractor($_companyID.'/CompanyAdd3',$_companyAddress3);
-        $this->_userModel->updateContractor($_companyID.'/CompanyPhone',$_companyPhoneNumber);
-        $this->_userModel->updateContractor($_companyID.'/CompanyType',$_companyType);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingAddress1',$_PayInfoBillingAddress1);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingAddress2',$_PayInfoBillingAddress2);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingCity',$_PayInfoBillingCity);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingST',$_PayInfoBillingST);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoBillingZip',$_PayInfoBillingZip);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoCCExpMon',$_PayInfoCCExpMon);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoCCExpYr',$_PayInfoCCExpYr);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoCCNum',$_PayInfoCCNum);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoCCSecCode',$_PayInfoCCSecCode);
-        $this->_userModel->updateContractor($_companyID.'/PayInfoName',$_PayInfoName);
-        $this->_userModel->updateContractor($_companyID.'/PrimaryFName',$_PrimaryFName);
-        $this->_userModel->updateContractor($_companyID.'/PrimaryLName',$_PrimaryLName);
-        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgencyName',$_InsLiabilityAgencyName);
-        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtName',$_InsLiabilityAgtName);
-        $this->_userModel->updateContractor($_companyID.'/InsLiabilityAgtNum',$_InsLiabilityAgtNum);
-        $this->_userModel->updateContractor($_companyID.'/InsLiabilityPolNum',$_InsLiabilityPolNum);
-        $this->_userModel->updateContractor($_companyID.'/Status_Rating',$_Status_Rating);*/
+        
 
-        if ($_result==true){
+        $_result_validation=$this->validateAllFieldsCompany($_companyID,$_compamnyName,$_firstCompanyName,$_lastCompanyName,
+            $_companyAddress1,$_companyAddress2,$_companyAddress3,$_companyPhoneNumber,
+            $_companyType,$_PayInfoBillingAddress1,$_PayInfoBillingAddress2,$_PayInfoBillingCity,
+            $_PayInfoBillingST,$_PayInfoBillingZip,$_PayInfoCCExpMon,$_PayInfoCCExpYr,
+            $_PayInfoCCNum,$_PayInfoCCSecCode,$_PayInfoName,$_PrimaryFName,
+            $_PrimaryLName,$_InsLiabilityAgencyName,$_InsLiabilityAgtName,$_InsLiabilityAgtNum,
+            $_InsLiabilityPolNum,$_Status_Rating,$_licenseNumber,$_businessSince,$_expirationDate,$_verifiedCompany);
+
+        if ($_result_validation==true){
             $_actual_status=$this->_userModel->getNode("Company/".$_companyID."/CompanyStatus");
             if(strcmp($_actual_status,"Inactive")==0){
+                $_smsController = new smsController();
+                $_smsController->createClientSms();
+                $_sms_response =$_smsController->sendMessage("+18889811812",'+16178987045',"Company $_compamnyName [$_companyID] filled all fields, it is ready for validation");
                 $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Validating");
-                $_aditional_message="<br>,Now that all the fields are filled, the company passes to RoofServiceNow validation";
+                $_aditional_message='<br>,<div class="alert alert-success">Now that all the fields are filled, the company passes to RoofServiceNow validation</div>';
             }
         }else{
             $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
+            $_aditional_message = '<br><div class="alert alert-danger">To enjoy all the features of RoofServiceNow, it is necessary to complete your profile</div>';
         }
-        return "The company identify by ".$_companyID." was updated corretly".$_aditional_message;
+        return '<div class="alert alert-success">The company identify by '.$_companyID.' was updated corretly</div>'.$_aditional_message;
 
     }
 
@@ -1304,31 +1287,31 @@ class userController{
     $_InsLiabilityPolNum,$_Status_Rating){
         $_flag_fill=true;
 
-        if (empty($_companyID)){$_flag_fill=false;}
-        if (empty($_compamnyName)){$_flag_fill=false;}
-        if (empty($_firstCompanyName)){$_flag_fill=false;}
-        if (empty($_lastCompanyName)){$_flag_fill=false;}
-        if (empty($_companyAddress1)){$_flag_fill=false;}
-        if (empty($_companyAddress2)){$_flag_fill=false;}
-        if (empty($_companyAddress3)){$_flag_fill=false;}
-        if (empty($_companyPhoneNumber)){$_flag_fill=false;}
-        if (empty($_PayInfoBillingAddress1)){$_flag_fill=false;}
-        if (empty($_PayInfoBillingAddress2)){$_flag_fill=false;}
-        if (empty($_PayInfoBillingCity)){$_flag_fill=false;}
-        if (empty($_PayInfoBillingST)){$_flag_fill=false;}
-        if (empty($_PayInfoBillingZip)){$_flag_fill=false;}
-        if (empty($_PayInfoCCExpMon)){$_flag_fill=false;}
-        if (empty($_PayInfoCCExpYr)){$_flag_fill=false;}
-        if (empty($_PayInfoCCNum)){$_flag_fill=false;}
-        if (empty($_PayInfoCCSecCode)){$_flag_fill=false;}
-        if (empty($_PayInfoName)){$_flag_fill=false;}
-        if (empty($_PrimaryFName)){$_flag_fill=false;}
-        if (empty($_PrimaryLName)){$_flag_fill=false;}
-        if (empty($_InsLiabilityAgencyName)){$_flag_fill=false;}
-        if (empty($_InsLiabilityAgtName)){$_flag_fill=false;}
-        if (empty($_InsLiabilityAgtNum)){$_flag_fill=false;}
-        if (empty($_InsLiabilityPolNum)){$_flag_fill=false;}
-        if (empty($_Status_Rating)){$_flag_fill=false;}
+        if (empty($_companyID)){$_flag_fill=false; echo "_companyID";}
+        if (empty($_compamnyName)){$_flag_fill=false; echo "_compamnyName";}
+        if (empty($_firstCompanyName)){$_flag_fill=false;echo "_firstCompanyName";}
+        if (empty($_lastCompanyName)){$_flag_fill=false;echo "_lastCompanyName";}
+        if (empty($_companyAddress1)){$_flag_fill=false;echo "_companyAddress1";}
+        if (empty($_companyAddress2)){$_flag_fill=false;echo "_companyAddress2";}
+        if (empty($_companyAddress3)){$_flag_fill=false;echo "_companyAddress3";}
+        if (empty($_companyPhoneNumber)){$_flag_fill=false;echo "_companyPhoneNumber";}
+        if (empty($_PayInfoBillingAddress1)){$_flag_fill=false;echo "_PayInfoBillingAddress1";}
+        if (empty($_PayInfoBillingAddress2)){$_flag_fill=false;echo "_PayInfoBillingAddress2";}
+        if (empty($_PayInfoBillingCity)){$_flag_fill=false;echo "_PayInfoBillingCity";}
+        if (empty($_PayInfoBillingST)){$_flag_fill=false;echo "_PayInfoBillingST";}
+        if (empty($_PayInfoBillingZip)){$_flag_fill=false;echo "_PayInfoBillingZip";}
+        if (empty($_PayInfoCCExpMon)){$_flag_fill=false;echo "_PayInfoCCExpMon";}
+        if (empty($_PayInfoCCExpYr)){$_flag_fill=false;echo "_PayInfoCCExpYr";}
+        if (empty($_PayInfoCCNum)){$_flag_fill=false;echo "_PayInfoCCNum";}
+        if (empty($_PayInfoCCSecCode)){$_flag_fill=false;echo "_PayInfoCCSecCode";}
+        if (empty($_PayInfoName)){$_flag_fill=false;echo "_PayInfoName";}
+        if (empty($_PrimaryFName)){$_flag_fill=false;echo "_PrimaryFName";}
+        if (empty($_PrimaryLName)){$_flag_fill=false;echo "_PrimaryLName";}
+        if (empty($_InsLiabilityAgencyName)){$_flag_fill=false;echo "_InsLiabilityAgencyName";}
+        if (empty($_InsLiabilityAgtName)){$_flag_fill=false;echo "_InsLiabilityAgtName";}
+        if (empty($_InsLiabilityAgtNum)){$_flag_fill=false;echo "_InsLiabilityAgtNum";}
+        if (empty($_InsLiabilityPolNum)){$_flag_fill=false;echo "_InsLiabilityPolNum";}
+        if (empty($_Status_Rating)){$_flag_fill=false;echo "_Status_Rating";}
         
         return $_flag_fill;
 
@@ -1559,6 +1542,26 @@ class userController{
         return $_result_update;
     }
 
+    function verifyCompany($_company_data){
+        $_company = $_company_data;
+        //print_r($_company_data);
+        if(is_object($_company) or is_array($_company)){
+            $_result = $this->validateAllFieldsCompany($_company['CompanyID'],$_company['CompanyName'],$_company['PrimaryFName'],$_company['PrimaryLName'],
+            $_company['CompanyAdd1'],$_company['CompanyAdd2'],$_company['CompanyAdd3'],$_company['CompanyPhone'],
+            $_company['companyType'],$_company['PayInfoBillingAddress1'],$_company['PayInfoBillingAddress2'],$_company['PayInfoBillingCity'],
+            $_company['PayInfoBillingST'],$_company['PayInfoBillingZip'],$_company['PayInfoCCExpMon'],$_company['PayInfoCCExpYr'],
+            $_company['PayInfoCCNum'],$_company['PayInfoCCSecCode'],$_company['PayInfoName'],$_company['PrimaryFName'],
+            $_company['PrimaryLName'],$_company['InsLiabilityAgencyName'],$_company['InsLiabilityAgtName'],$_company['InsLiabilityAgtNum'],
+            $_company['InsLiabilityPolNum'],$_company['Status_Rating'],$_company['licenseNumber'],$_company['businessSince'],$_company['expirationDate'],$_company['verifiedCompany']);
+
+            if($_result==false){
+                return "To enjoy all the features of RoofServiceNow, it is necessary to complete your profile";
+            }else{
+                return "OK";
+            }
+        }
+        
+    }
 
     
 }
