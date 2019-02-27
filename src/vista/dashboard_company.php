@@ -887,7 +887,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label ">License Verified</label>
-                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" <?php if(isset($_actual_company['Verified'])){if(strcmp($_actual_company['Verified'],"1")){echo "checked";} } ?> value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
+                                        <input maxlength="100"  type="checkbox" disabled class="form-control" placeholder="Enter Verified" id="companyVerified" name="companyVerified" <?php if(isset($_actual_company['Verified'])){if(strcmp($_actual_company['Verified'],"1")==0){echo "checked";} } ?> value="<?php if(isset($_actual_company['Verified'])){ echo $_actual_company['Verified'];} ?>"/>
                                     </div>
                                     <!--
                                     <div class="form-group">
@@ -3638,5 +3638,36 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+<?php
+
+if(strcmp($_result_validation,"OK")==0){
+
+}else{
+    echo '
+    <div class="modal fade" id="myMessageEmptyProfile" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            
+            <!-- Modal content--> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    
+                    <h4 class="modal-title" id="headermyMessageEmptyProfile">Profile Info</h4> 
+                </div> 
+                <div class="modal-body" id="textmyMessageEmptyProfile">
+                    <p>'.
+                    $_result_validation
+                    .'</p>              
+                </div>
+                <div class="modal-footer" id="buttonmyMessageEmptyProfile"> 
+                    <button type="button" class="btn-danger btn-sm"  data-dismiss="modal" onClick="closeExtraWindows(\'myMessageEmptyProfile\')">Close</button>
+                </div> 
+            </div> 
+        </div>
+    </div>
+    ';
+}
+?>
+
 <script src="vista/js/roofchat-contractor.js"></script>
 

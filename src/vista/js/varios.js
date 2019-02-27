@@ -28,6 +28,7 @@ $(document).ready(function () {
     cssEase: 'linear'
   })
   $('#myMessagePostCardsPay').modal('show')
+  $('#myMessageEmptyProfile').modal('show')
 
   $('[data-toggle1="tooltip"]').tooltip()
 
@@ -699,13 +700,13 @@ function updateDataCompany () {
   var PayInfoBillingCity = $('input#compamnyPayCity').val()
   var PayInfoBillingST = $('input#compamnyPayState').val()
   var PayInfoBillingZip = $('input#compamnyPayZip').val()
-  var PayInfoCCExpMon = ''
+  var PayInfoCCExpMon = $('input#compamnyPayMonth').val()
   var PayInfoCCExpYr = $('input#compamnyPayYear').val()
   var PayInfoCCNum = $('input#compamnyPayCCNum').val()
   var PayInfoCCSecCode = $('input#compamnyPaySecCode').val()
   var PayInfoName = $('input#compamnyPayName').val()
-  var PrimaryFName = ''
-  var PrimaryLName = ''
+  var PrimaryFName = firstCompanyName
+  var PrimaryLName = lastCompanyName
 
   var InsLiabilityAgencyName = $('input#compamnyAgencyName').val()
   var InsLiabilityAgtName = $('input#compamnyAgtName').val()
@@ -4864,8 +4865,11 @@ function showPayPostCards (totalValue) {
   }
 }
 
-function closeExtraWindows () {
-  $(document).ready(function () {$('#myPostCard').modal('hide'); })
+function closeExtraWindows (window_modal) {
+  if(window_modal==undefined){
+    window_modal = "myPostCard";
+  }
+  $(document).ready(function () {$('#'+window_modal).modal('hide'); })
 }
 
 function isNumber (evt) {
@@ -5708,14 +5712,19 @@ function setDataChangePhoneMail(user,table,dataChange,typeChange){
     $('#id_change_type').val(typeChange);
     $('#id_table').val(table);
     $('#actualidPhoneMail').val(dataChange);
+    $('#newidPhoneMail').val('');
     $('#myModalChagePhoneEmail').modal({backdrop: 'static'})
 }
 
-function changeMailPhone(){
+function changeMailPhone(screenPar){
     var user = $('#id_user_mail').val();
     var type = $('#id_change_type').val();
     var table = $('#id_table').val();
     var value = $('#newidPhoneMail').val();
+    
+    if(screenPar==undefined){
+      screenPar='';
+    }
     
     jsShowWindowLoad('Changing info')
     $.post('controlador/ajax/changeUserInfo.php', {'t': table,'u': user,'type':type,'value':value}, null, 'text')
@@ -5732,6 +5741,8 @@ function changeMailPhone(){
             $('#textAnswerOrder2').html(data.content)
             $('#buttonAnswerOrder2').html(data.button)
             $('#myModalRespuesta2').modal({backdrop: 'static'})
+
+            //$('#textAnswerOrder').html('');
           }
         }else {
           data = jQuery.parseJSON(data)
@@ -5743,6 +5754,7 @@ function changeMailPhone(){
               $('#buttonAnswerOrder2').html(data.button)
               $('#myModalRespuesta2').modal({backdrop: 'static'})
           }
+          $('#myModalChagePhoneEmail').modal('hide')
         }
         console.log('La solicitud se ha completado correctamente.' + data + textStatus)
         jsRemoveWindowLoad('')
