@@ -11,7 +11,7 @@
     $table = $_POST['t'];
     $email = $_POST['u'];
     $pass = $_POST['p'];
-    $screenPar = $_POST['screenPar'];
+
     /*echo $code;
     echo $table;
     echo $email;
