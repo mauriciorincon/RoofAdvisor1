@@ -58,7 +58,7 @@
     $_SESSION['firebase_path_driver_php']=$_SESSION['library_path'].'roofadvisorz-driver-firebase.json';
 
     //define path temporal
-    $_SESSION['temporal_path']=$_SESSION['application_path']."/tmp/";
+    $_SESSION['temporal_path']=$_SESSION['application_path']."tmp/";
 
     if(strcmp($_SERVER['HTTP_HOST'],'localhost')==0){
         $_dir=$_SERVER['REQUEST_URI'];
