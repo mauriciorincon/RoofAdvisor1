@@ -5614,7 +5614,9 @@ function validate_sms_code (t, user, screenPar) {
   }
   table = t
   email = user
-  
+  if(code==undefined){
+    pass = '';
+  }
   jsShowWindowLoad('Validating code')
   $.post('controlador/ajax/validateCodeSMS.php', { 'verify': code,'t': table,'u': email,'p':pass}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
