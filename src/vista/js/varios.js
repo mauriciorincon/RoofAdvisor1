@@ -5614,6 +5614,7 @@ function validate_sms_code (t, user, screenPar) {
   }
   table = t
   email = user
+  
   jsShowWindowLoad('Validating code')
   $.post('controlador/ajax/validateCodeSMS.php', { 'verify': code,'t': table,'u': email,'p':pass}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
@@ -5630,6 +5631,7 @@ function validate_sms_code (t, user, screenPar) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
           }
         }else {
             data = jQuery.parseJSON(data)
@@ -5642,6 +5644,7 @@ function validate_sms_code (t, user, screenPar) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
 
           }
         }
@@ -5681,6 +5684,7 @@ function resendValidationCode (user,screenPar,sendWay,table) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
           }
         }else {
           data = jQuery.parseJSON(data)
@@ -5691,6 +5695,7 @@ function resendValidationCode (user,screenPar,sendWay,table) {
               $('#textAnswerOrder').html(data.content)
               $('#buttonAnswerOrder').html(data.button)
               $('#myModalRespuesta').modal({backdrop: 'static'})
+              $('#myMensaje').modal('hide')
           }
         }
         console.log('La solicitud se ha completado correctamente.' + data + textStatus)
@@ -5725,7 +5730,12 @@ function changeMailPhone(screenPar){
     if(screenPar==undefined){
       screenPar='';
     }
-    
+    if(type=='phone'){
+      if(value.length!=10){
+        alert('The phone number is incorrect, please verify');
+        return;
+      }
+    }
     jsShowWindowLoad('Changing info')
     $.post('controlador/ajax/changeUserInfo.php', {'t': table,'u': user,'type':type,'value':value}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
@@ -5738,10 +5748,14 @@ function changeMailPhone(screenPar){
           }else {
             data = jQuery.parseJSON(data)
             $('#headerTextAnswerOrder2').html(data.title)
-            $('#textAnswerOrder2').html(data.content)
-            $('#buttonAnswerOrder2').html(data.button)
+            $('#textAnswerOrder2').html(data.subtitle)
+            $('#buttonAnswerOrder2').html('')
             $('#myModalRespuesta2').modal({backdrop: 'static'})
+          
+            $('#textAnswerOrder').html(data.content)
+            $('#buttonAnswerOrder').html(data.button)
 
+            $('#myModalChagePhoneEmail').modal('hide')
             //$('#textAnswerOrder').html('');
           }
         }else {
@@ -5751,7 +5765,7 @@ function changeMailPhone(screenPar){
           }else {
              $('#headerTextAnswerOrder2').html(data.title)
               $('#textAnswerOrder2').html(data.content)
-              $('#buttonAnswerOrder2').html(data.button)
+              $('#buttonAnswerOrder2').html('')
               $('#myModalRespuesta2').modal({backdrop: 'static'})
           }
           $('#myModalChagePhoneEmail').modal('hide')

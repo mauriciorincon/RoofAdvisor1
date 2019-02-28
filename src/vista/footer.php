@@ -2,7 +2,7 @@
 <div id="lhc_status_container_page" ></div>
  <!-- Message Area-->
 <div class="modal fade" id="myMensaje" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog ">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -13,8 +13,12 @@
       <div class="modal-body">
         <?php
         if(isset($_GET['aditionalMessage'])){
-          echo $_GET['aditionalMessage'];
-        }
+					echo $_GET['aditionalMessage'];
+					
+				}
+				if(isset($_SESSION['extra_message_customer'])){
+					echo $_SESSION['extra_message_customer'];
+				}
         ?>
       </div>
       <div class="modal-footer">
@@ -177,7 +181,7 @@
 <?php
         if(isset($_GET['aditionalMessage'])){?>
             <script type="text/javascript">
-            $(document).ready(function(){$("#myMensaje").modal("show"); });
+            $(document).ready(function(){$("#myMensaje").modal({backdrop: 'static'}); });
             </script>    
     <?php
         }  

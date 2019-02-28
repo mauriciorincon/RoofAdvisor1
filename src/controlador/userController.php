@@ -120,7 +120,21 @@ class userController{
                     $_SESSION['profile'] = 'customer';
                     $this->dashboardCustomer($this->_user);
                 }else{
-                    Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email&controller=user&accion=showLoginClient");
+                    $_data_customer=$this->_userModel->getCustomer($this->_user);
+
+                $_string_message = '<div class="alert alert-danger"><strong>Complete registration</strong>
+                <br>Your registration phone:<a href="#">'. $_data_customer['Phone'] .'</a>
+                <br>Your registration email:<a href="#">'. $_data_customer['Email'] .'</a></div>'.
+            '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+            '<br><br><strong>Did not get a code?</strong>'.
+            '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user  . '\',\'\',\'phone\',\'c\')">Resend Code</button>'.
+            '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user   .  '\',\'\',\'mail\',\'c\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
+            '<br><br>                                       
+                <div class="alert alert-warning" role="alert">
+                    <center><button type="button" id="validateCodeSMS" class="btn-success btn-lg" onclick="validate_sms_code(\'c\',\''. $this->_user .'\',\'Customer_register\')">Validate Code</button></center>
+                </div>';
+                    $_SESSION['extra_message_customer']=$_string_message;
+                    Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email/phone for validation code<br><br>&controller=user&accion=showLoginClient");
                 }
             }elseif(is_string($_result)){
                 Header("Location: ?aditionalMessage=User or password are incorrect, please try again&controller=user&accion=showLoginClient");
@@ -163,7 +177,7 @@ class userController{
                 }
                 
             }else{
-                //echo " 3 ";
+                
                 return "Error, It seems that you have not validated your email, please check your email";
             }
             //echo " 4 ";
@@ -218,7 +232,7 @@ class userController{
                         return "Error, please comunicate with RoofServiceNow for help";
                     }
                 }else{
-                    Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email&controller=user&accion=showLoginContractor");
+                    Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email or&controller=user&accion=showLoginContractor");
                 }
             }elseif(is_string($_result)){
                 $_result=$this->_userModel->validateEmployee($this->_user,$this->_pass);
@@ -808,7 +822,7 @@ class userController{
                 $_smsController->createClientSms();
                 $_sms_response =$_smsController->sendMessage("+18889811812",'+16178987045',"Company $_compamnyName [$_companyID] filled all fields, it is ready for validation");
                 $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Validating");
-                $_aditional_message='<br>,<div class="alert alert-success">Now that all the fields are filled, the company passes to RoofServiceNow validation</div>';
+                $_aditional_message='<br><div class="alert alert-success">Thank you for completing your company registration.<br>RoofServiceNow is in the process of reviewing your registration and will provide you with an update shortly. </div>';
             }
         }else{
             $this->_userModel->updateContractor($_companyID.'/CompanyStatus',"Inactive");
@@ -1287,31 +1301,31 @@ class userController{
     $_InsLiabilityPolNum,$_Status_Rating){
         $_flag_fill=true;
 
-        if (empty($_companyID)){$_flag_fill=false; echo "_companyID";}
-        if (empty($_compamnyName)){$_flag_fill=false; echo "_compamnyName";}
-        if (empty($_firstCompanyName)){$_flag_fill=false;echo "_firstCompanyName";}
-        if (empty($_lastCompanyName)){$_flag_fill=false;echo "_lastCompanyName";}
-        if (empty($_companyAddress1)){$_flag_fill=false;echo "_companyAddress1";}
-        if (empty($_companyAddress2)){$_flag_fill=false;echo "_companyAddress2";}
-        if (empty($_companyAddress3)){$_flag_fill=false;echo "_companyAddress3";}
-        if (empty($_companyPhoneNumber)){$_flag_fill=false;echo "_companyPhoneNumber";}
-        if (empty($_PayInfoBillingAddress1)){$_flag_fill=false;echo "_PayInfoBillingAddress1";}
-        if (empty($_PayInfoBillingAddress2)){$_flag_fill=false;echo "_PayInfoBillingAddress2";}
-        if (empty($_PayInfoBillingCity)){$_flag_fill=false;echo "_PayInfoBillingCity";}
-        if (empty($_PayInfoBillingST)){$_flag_fill=false;echo "_PayInfoBillingST";}
-        if (empty($_PayInfoBillingZip)){$_flag_fill=false;echo "_PayInfoBillingZip";}
-        if (empty($_PayInfoCCExpMon)){$_flag_fill=false;echo "_PayInfoCCExpMon";}
-        if (empty($_PayInfoCCExpYr)){$_flag_fill=false;echo "_PayInfoCCExpYr";}
-        if (empty($_PayInfoCCNum)){$_flag_fill=false;echo "_PayInfoCCNum";}
-        if (empty($_PayInfoCCSecCode)){$_flag_fill=false;echo "_PayInfoCCSecCode";}
-        if (empty($_PayInfoName)){$_flag_fill=false;echo "_PayInfoName";}
-        if (empty($_PrimaryFName)){$_flag_fill=false;echo "_PrimaryFName";}
-        if (empty($_PrimaryLName)){$_flag_fill=false;echo "_PrimaryLName";}
-        if (empty($_InsLiabilityAgencyName)){$_flag_fill=false;echo "_InsLiabilityAgencyName";}
-        if (empty($_InsLiabilityAgtName)){$_flag_fill=false;echo "_InsLiabilityAgtName";}
-        if (empty($_InsLiabilityAgtNum)){$_flag_fill=false;echo "_InsLiabilityAgtNum";}
-        if (empty($_InsLiabilityPolNum)){$_flag_fill=false;echo "_InsLiabilityPolNum";}
-        if (empty($_Status_Rating)){$_flag_fill=false;echo "_Status_Rating";}
+        if (empty($_companyID)){$_flag_fill=false; }
+        if (empty($_compamnyName)){$_flag_fill=false; }
+        if (empty($_firstCompanyName)){$_flag_fill=false;}
+        if (empty($_lastCompanyName)){$_flag_fill=false;}
+        if (empty($_companyAddress1)){$_flag_fill=false;}
+        if (empty($_companyAddress2)){$_flag_fill=false;}
+        if (empty($_companyAddress3)){$_flag_fill=false;}
+        if (empty($_companyPhoneNumber)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingAddress1)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingAddress2)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingCity)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingST)){$_flag_fill=false;}
+        if (empty($_PayInfoBillingZip)){$_flag_fill=false;}
+        if (empty($_PayInfoCCExpMon)){$_flag_fill=false;}
+        if (empty($_PayInfoCCExpYr)){$_flag_fill=false;}
+        if (empty($_PayInfoCCNum)){$_flag_fill=false;}
+        if (empty($_PayInfoCCSecCode)){$_flag_fill=false;}
+        if (empty($_PayInfoName)){$_flag_fill=false;}
+        if (empty($_PrimaryFName)){$_flag_fill=false;}
+        if (empty($_PrimaryLName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgencyName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgtName)){$_flag_fill=false;}
+        if (empty($_InsLiabilityAgtNum)){$_flag_fill=false;}
+        if (empty($_InsLiabilityPolNum)){$_flag_fill=false;}
+        if (empty($_Status_Rating)){$_flag_fill=false;}
         
         return $_flag_fill;
 
@@ -1548,16 +1562,25 @@ class userController{
         if(is_object($_company) or is_array($_company)){
             $_result = $this->validateAllFieldsCompany($_company['CompanyID'],$_company['CompanyName'],$_company['PrimaryFName'],$_company['PrimaryLName'],
             $_company['CompanyAdd1'],$_company['CompanyAdd2'],$_company['CompanyAdd3'],$_company['CompanyPhone'],
-            $_company['companyType'],$_company['PayInfoBillingAddress1'],$_company['PayInfoBillingAddress2'],$_company['PayInfoBillingCity'],
+            $_company['CompanyType'],$_company['PayInfoBillingAddress1'],$_company['PayInfoBillingAddress2'],$_company['PayInfoBillingCity'],
             $_company['PayInfoBillingST'],$_company['PayInfoBillingZip'],$_company['PayInfoCCExpMon'],$_company['PayInfoCCExpYr'],
             $_company['PayInfoCCNum'],$_company['PayInfoCCSecCode'],$_company['PayInfoName'],$_company['PrimaryFName'],
             $_company['PrimaryLName'],$_company['InsLiabilityAgencyName'],$_company['InsLiabilityAgtName'],$_company['InsLiabilityAgtNum'],
-            $_company['InsLiabilityPolNum'],$_company['Status_Rating'],$_company['licenseNumber'],$_company['businessSince'],$_company['expirationDate'],$_company['verifiedCompany']);
+            $_company['InsLiabilityPolNum'],$_company['Status_Rating'],$_company['ComapnyLicNum'],$_company['InBusinessSince'],$_company['LicExpiration'],$_company['Verified']);
 
             if($_result==false){
                 return "To enjoy all the features of RoofServiceNow, it is necessary to complete your profile";
             }else{
-                return "OK";
+                if(empty($_company['stripeAccount'])){
+                    return "To enjoy all the features of RoofServiceNow, it is necessary to complete your profile, it is neccesary fill Stripe info on profile";
+                }
+                $_result_stripe_validation = $this->getValidateAccount($_company['stripeAccount']);
+                if(is_array($_result_stripe_validation) or is_object($_result_stripe_validation)){
+                    return "To enjoy all the features of RoofServiceNow, it is necessary to complete your profile, complete Stripe info";
+                }else{
+                    return "OK";
+                }
+                
             }
         }
         
