@@ -5614,7 +5614,7 @@ function validate_sms_code (t, user, screenPar) {
   }
   table = t
   email = user
-  if(code==undefined){
+  if(pass==undefined){
     pass = '';
   }
   jsShowWindowLoad('Validating code')
