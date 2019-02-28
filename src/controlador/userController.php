@@ -123,7 +123,7 @@ class userController{
                     $_data_customer=$this->_userModel->getCustomer($this->_user);
 
                 $_string_message = '<div class="alert alert-danger"><strong>Complete registration</strong>
-<br>Your registration phone:<a href="#">'. $_data_customer['Phone'] .'</a>
+                <br>Your registration phone:<a href="#">'. $_data_customer['Phone'] .'</a>
                 <br>Your registration email:<a href="#">'. $_data_customer['Email'] .'</a></div>'.
             '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
             '<br><br><strong>Did not get a code?</strong>'.
@@ -131,7 +131,7 @@ class userController{
             '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user   .  '\',\'\',\'mail\',\'c\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
             '<br><br>                                       
                 <div class="alert alert-warning" role="alert">
-                    <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\'c\',\''. $this->_user .'\')">Validate Code</button></center>
+                    <center><button type="button" id="validateCodeSMS" class="btn-success btn-lg" onclick="validate_sms_code(\'c\',\''. $this->_user .'\',\'Customer_register\')">Validate Code</button></center>
                 </div>';
                     $_SESSION['extra_message_customer']=$_string_message;
                     Header("Location: ?aditionalMessage=It seems that you have not validated your email, please check your email/phone for validation code<br><br>&controller=user&accion=showLoginClient");

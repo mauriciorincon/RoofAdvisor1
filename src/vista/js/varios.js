@@ -5614,6 +5614,7 @@ function validate_sms_code (t, user, screenPar) {
   }
   table = t
   email = user
+  
   jsShowWindowLoad('Validating code')
   $.post('controlador/ajax/validateCodeSMS.php', { 'verify': code,'t': table,'u': email,'p':pass}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
@@ -5630,6 +5631,7 @@ function validate_sms_code (t, user, screenPar) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
           }
         }else {
             data = jQuery.parseJSON(data)
@@ -5642,6 +5644,7 @@ function validate_sms_code (t, user, screenPar) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
 
           }
         }
@@ -5681,6 +5684,7 @@ function resendValidationCode (user,screenPar,sendWay,table) {
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
+            $('#myMensaje').modal('hide')
           }
         }else {
           data = jQuery.parseJSON(data)
@@ -5691,6 +5695,7 @@ function resendValidationCode (user,screenPar,sendWay,table) {
               $('#textAnswerOrder').html(data.content)
               $('#buttonAnswerOrder').html(data.button)
               $('#myModalRespuesta').modal({backdrop: 'static'})
+              $('#myMensaje').modal('hide')
           }
         }
         console.log('La solicitud se ha completado correctamente.' + data + textStatus)
