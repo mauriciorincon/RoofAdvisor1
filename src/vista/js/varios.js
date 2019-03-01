@@ -5617,8 +5617,11 @@ function validate_sms_code (t, user, screenPar) {
   if(pass==undefined){
     pass = '';
   }
+  if(screenPar==undefined){
+    screenPar = '';
+  }
   jsShowWindowLoad('Validating code')
-  $.post('controlador/ajax/validateCodeSMS.php', { 'verify': code,'t': table,'u': email,'p':pass}, null, 'text')
+  $.post('controlador/ajax/validateCodeSMS.php', { 'verify': code,'t': table,'u': email,'p':pass,'screenPar':screenPar}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
       if (console && console.log) {
         var n = data.indexOf('Error')
@@ -5672,22 +5675,17 @@ function resendValidationCode (user,screenPar,sendWay,table) {
     sendWay='phone';
   }
   jsShowWindowLoad('Validating code')
-  $.post('controlador/ajax/sendSMSMessage.php', {'t': table,'u': user,'sendway':sendWay}, null, 'text')
+  $.post('controlador/ajax/sendSMSMessage.php', {'t': table,'u': user,'sendway':sendWay,"screenPar":screenPar}, null, 'text')
     .done(function (data, textStatus, jqXHR) {
       if (console && console.log) {
         var n = data.indexOf('Error')
         if (n == -1) {
-          if (screenPar == 'Customer_register') {
-            data = jQuery.parseJSON(data)
-            $('#labelResponseValidationCode').html(data.subtitle)
-          }else {
             data = jQuery.parseJSON(data)
             $('#headerTextAnswerOrder').html(data.title)
             $('#textAnswerOrder').html(data.content)
             $('#buttonAnswerOrder').html(data.button)
             $('#myModalRespuesta').modal({backdrop: 'static'})
             $('#myMensaje').modal('hide')
-          }
         }else {
           data = jQuery.parseJSON(data)
           if (screenPar == 'Customer_register') {
