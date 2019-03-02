@@ -48,29 +48,23 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="vista/css/fullcalendar.css">
 		
 		<link rel="stylesheet" href="vista/timepicker/stylesheets/wickedpicker.css">
-        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
-        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>		
+        <link href='vista/css/poppins.css' rel='stylesheet'>		
 		<link href='static/vendor/sweetalert2/sweetalert2.min.css' rel='stylesheet'>	
 		
-		<script src="js/vendor/modernizr-2.8.3.min.js"></script>
-		<script src="https://checkout.stripe.com/checkout.js"></script>
 
 		<link rel="stylesheet" href="css/lity.min.css">
-		<script src="vista/js/jquery-3.3.1.js"></script>
 				
-		<script src="js/jquery-ui.js"></script>
 				
-		<script src="js/bootstrap.min.js"></script>	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	        <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->	
 
-		<script src="vista/js/orders.js"></script>
       
                 <link rel="stylesheet" href="vista/css/smart_wizard.css">
                 <link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
                 <link rel="stylesheet" href="vista/css/mobmenu.css">
 
              
+<script src="vista/js/jquery-3.3.1.js"></script>
+<script src="vista/js/stripe.checkout.js"></script>
 
 <style>
 .checked {
@@ -79,7 +73,6 @@ if(!isset($_SESSION)) {
 </style>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126810340-1"></script>
 
 <script>
 
@@ -95,9 +88,10 @@ if(!isset($_SESSION)) {
     </head>
     <body>
     <div id="loading5">
-   <img id="loading-txt" src="img/pre-load.png" alt="This loading is taking quite some time isn't it?" />
+   <img id="loading-txt" src="img/pre-load-1.png" alt="This is taking quite some time isn't it?" />
   <img id="loading-image" src="img/load1.gif" alt="Don't worry we can wait, we are here to help!" />
-     </div>
+    <img id="loading-txt-2" src="img/pre-load-2.png" alt="Feel at rest know we've got your back." />
+  </div>
     <div  >
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

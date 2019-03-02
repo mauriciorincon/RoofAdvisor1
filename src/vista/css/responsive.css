@@ -31,7 +31,6 @@ font-size: 45px;}
 .blog-post ul li .post-text {
   margin-left:0;
 }
-
 /* small mobile :320px. */
 @media (max-width: 767px) {
 .container {}

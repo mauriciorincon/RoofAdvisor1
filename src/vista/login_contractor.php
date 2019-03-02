@@ -20,7 +20,7 @@
 					<div class ="col-md-4">&nbsp;
 						</div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-4" align="center">
+                    <div class="logformresp1 col-lg-4 col-md-4 col-sm-4" align="center">
 						<div class="contact-form">
 							<form action="?controller=user&accion=loginContractor" method="post">
 								<label>User Name<span class="required">*</span></label>

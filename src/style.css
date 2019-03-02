@@ -82,6 +82,13 @@ display: block;
     margin-top: 5%;
     margin-bottom: 5%;
 }
+#loading-txt-2{
+    display: block;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10%;
+}
 #loading-image {
 width:30%;  
 z-index: 10002;
@@ -2092,6 +2099,11 @@ font-size:15px !important;
 @media (max-width:970px){
 #appdiv2{
 margin-left:400px !important;
+}
+}
+@media (min-width: 768px) and (max-width: 991px;{
+.logformresp1{
+width:100% !important;
 }
 }
 @media (max-width:767px){
