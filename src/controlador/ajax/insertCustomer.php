@@ -129,7 +129,20 @@ if(strpos($_customerID,"Error")!==false){
                 'passUser' =>$_password,
             );
             $_SESSION['response'] = $_message;
-            $_path="../../?controller=user&accion=showMessage";
+            $_string_message = '<div class="alert alert-danger"><strong>Complete registration</strong><br>
+            Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $_emailValidation .'\',\''.$table.'\',\''. $_customerPhoneNumber .'\',\'phone\')">'. $_customerPhoneNumber .'</a><br>
+            Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $_emailValidation .'\',\''.$table.'\',\''. $_emailValidation .'\',\'email\')">'. $_emailValidation .'</a></div><br>'.
+            '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+            '<br><br><strong>Did not get a code?</strong>'.
+            '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_emailValidation . '\',\'Customer_register\',\'phone\',\'c\')">Resend Code</button>'.
+            '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $_emailValidation   .  '\',\'Customer_register\',\'mail\',\'c\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
+            '<br><br>                                       
+                <div class="alert alert-warning" role="alert">
+                    <center><button type="button" id="validateCodeSMS" class="btn-success btn-lg" onclick="validate_sms_code(\'c\',\''. $_emailValidation .'\',\'Customer_register\')">Validate Code</button></center>
+                </div>';
+                    $_SESSION['extra_message_customer']=$_string_message;
+
+            $_path="../../?controller=user&accion=loginCustomer&aditionalMessage=It seems that you have not validated your email, please check your email/phone for validation code";
             header("Location: $_path");
             break;
         case "Order":

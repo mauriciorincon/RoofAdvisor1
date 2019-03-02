@@ -11,6 +11,7 @@ $table = $_POST['t'];
 $email = $_POST['u'];
 $sendType = $_POST['sendway'];
 $table1 = "";
+$screenPar = $_POST['screenPar'];
 
 $_smsController = new smsController();
 $_userController = new userController();
@@ -61,25 +62,29 @@ if(is_array($_result) or is_object($_result)){
     $_result_update=$_userModel->updateUserCustomer($user,$properties,$table1);
     switch($table){
         case "c":
-            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div><br>'.
+            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>
+            Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>
+            Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div><br>'.
             '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
             '<br><br><strong>Did not get a code?</strong>'.
             '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
             '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email .  '\',\'\',\'mail\',\''.$table.'\')">SEND ME THE VALIDATION CODE BY EMAIL</a>';
             $_string_button = '<br><br>                                                                                  
             <div class="alert alert-warning" role="alert">
-                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg"  onclick="validate_sms_code(\''.$table.'\',\''. $email .'\')">Validate Code</button></center>
+                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg"  onclick="validate_sms_code(\''.$table.'\',\''. $email .'\',\''.$screenPar.'\')">Validate Code</button></center>
             </div>';
             break;
         case "co":
-            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'.$email .'</a></div><br>'.
+            $_string_message = '<div class="alert alert-success">Registration success<br>A new validation code, was sent to your '.$sendType.', please check and type it, to complete registration <br>
+            Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')">'. $phoneNumber .'</a><br>
+            Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'.$email .'</a></div><br>'.
             '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
             '<br><br><strong>Did not get a code?</strong>'.
             '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
             '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  .  '\',\'\',\'mail\',\''.$table.'\')">SEND ME THE VALIDATION CODE BY EMAIL</a>';
             $_string_button = '<br><br>                                       
             <div class="alert alert-warning" role="alert">
-                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\''.$table.'\',\''. $email .'\')">Validate Code</button></center>
+                <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\''.$table.'\',\''. $email .'\',\''.$screenPar.'\')">Validate Code</button></center>
             </div>';
             break;
     }
@@ -92,14 +97,16 @@ if(is_array($_result) or is_object($_result)){
     );
     
 }else{        
-    $_string_message = '<div class="alert alert-danger"><strong>Error register '.$table1.' user was not found</strong><br>Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')" >'. $phoneNumber .'</a><br>Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div>'.
+    $_string_message = '<div class="alert alert-danger"><strong>Error register '.$table1.' user was not found</strong><br>
+    Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $phoneNumber .'\',\'phone\')" >'. $phoneNumber .'</a><br>
+    Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $email .'\',\''.$table.'\',\''. $email .'\',\'email\')">'. $email .'</a></div>'.
         '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
         '<br><br><strong>Did not get a code?</strong>'.
         '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  . '\',\'\',\'phone\',\''.$table.'\')">Resend Code</button>'.
         '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $email  .  '\',\'\',\'mail\',\'co\')">SEND ME THE VALIDATION CODE BY EMAIL</a>';
     $_string_button = '<br><br>                                       
         <div class="alert alert-warning" role="alert">
-            <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\''.$table.'\',\''. $email .'\')">Validate Code</button></center>
+            <center><button type="button" id="lastFinishButtonOrder" class="btn-success btn-lg" onclick="validate_sms_code(\''.$table.'\',\''. $email .'\',\''.$screenPar.'\')">Validate Code</button></center>
         </div>';
     $_message=array(
         'title'=>"Register $table1",

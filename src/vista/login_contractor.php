@@ -41,3 +41,49 @@
 			</div>
 		</div>
 		<!-- map-area end-->
+
+		<div class="modal fade" id="myModalRespuesta" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerTextAnswerOrder">Modal Header</h4> 
+			</div> 
+			<div class="modal-body" id="textAnswerOrder"> 
+				<p >Some text in the modal. myModalRespuesta</p> 
+			</div> 
+			<div class="modal-footer" id="buttonAnswerOrder"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myModalChagePhoneEmail" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <input type="hidden" id="id_user_mail" value="" />
+        <input type="hidden" id="id_change_type" value="" />
+        <input type="hidden" id="id_table" value=""  />
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="headerTextAnswerOrder">Change Phone/Mail</h4>
+            </div>
+            <div class="modal-body" id="textAnswerOrder">
+                <label class="control-label" for="actualidPhoneMail">Actual Phone/Email</label>
+                <input class="form-control" type="text" id="actualidPhoneMail" disabled />
+            </div>
+            <div class="modal-body" id="textAnswerOrder">
+                <label class="control-label" for="newidPhoneMail">New Phone/Email</label>
+                <input class="form-control" type="text" id="newidPhoneMail" />
+            </div>
+            <div class="modal-footer" id="buttonAnswerOrder">
+                <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn-primary" onclick="changeMailPhone()">Change</button>
+            </div>
+        </div>
+    </div>
+</div>
