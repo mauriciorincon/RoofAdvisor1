@@ -123,13 +123,13 @@ class userController{
                     $_data_customer=$this->_userModel->getCustomer($this->_user);
 
                 $_string_message = '<div class="alert alert-danger"><strong>Complete registration</strong>
-                <br>Your registration phone:<a href="#">'. $_data_customer['Phone'] .'</a>
-                <br>Your registration email:<a href="#">'. $_data_customer['Email'] .'</a></div>'.
-            '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
-            '<br><br><strong>Did not get a code?</strong>'.
-            '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user  . '\',\'\',\'phone\',\'c\')">Resend Code</button>'.
-            '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user   .  '\',\'\',\'mail\',\'c\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
-            '<br><br>                                       
+                Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $_data_customer['Email'] .'\',\''.$table.'\',\''. $_data_customer['Phone'] .'\',\'phone\')">'. $_data_customer['Phone'] .'</a><br>
+                Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $_data_customer['Email'] .'\',\''.$table.'\',\''. $_data_customer['Email'] .'\',\'email\')">'. $_data_customer['Email'] .'</a></div><br>'.
+                '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+                '<br><br><strong>Did not get a code?</strong>'.
+                '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user  . '\',\'Customer_register\',\'phone\',\'c\')">Resend Code</button>'.
+                '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user   .  '\',\'Customer_register\',\'mail\',\'c\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
+                '<br><br>                                       
                 <div class="alert alert-warning" role="alert">
                     <center><button type="button" id="validateCodeSMS" class="btn-success btn-lg" onclick="validate_sms_code(\'c\',\''. $this->_user .'\',\'Customer_register\')">Validate Code</button></center>
                 </div>';
@@ -232,6 +232,20 @@ class userController{
                         return "Error, please comunicate with RoofServiceNow for help";
                     }
                 }else{
+                    $_data_company=$this->_userModel->getCompany($this->_user);
+                    $table = 'co';
+                    $_string_message = '<div class="alert alert-danger"><strong>Complete registration</strong>
+                    Your registration phone:<a href="#" onclick="setDataChangePhoneMail(\''. $_data_company['CompanyEmail'] .'\',\''.$table.'\',\''. $_data_company['CompanyPhone'] .'\',\'phone\')">'. $_data_company['CompanyPhone'] .'</a><br>
+                    Your registration email:<a href="#" onclick="setDataChangePhoneMail(\''. $_data_company['CompanyEmail'] .'\',\''.$table.'\',\''. $_data_company['CompanyEmail'] .'\',\'email\')">'. $_data_company['CompanyEmail'] .'</a></div><br>'.
+                    '<h4>Type your activation code</h4><input type="text" id="activation_code_input" />'.
+                    '<br><br><strong>Did not get a code?</strong>'.
+                    '<button type="button" id="resendCode" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user  . '\',\'\',\'phone\',\'co\')">Resend Code</button>'.
+                    '<a href="#" class="btn-primary btn-sm" onclick="resendValidationCode(\'' . $this->_user   .  '\',\'\',\'mail\',\'co\')">SEND ME THE VALIDATION CODE BY EMAIL</a>'.
+                    '<br><br>                                       
+                    <div class="alert alert-warning" role="alert">
+                        <center><button type="button" id="validateCodeSMS" class="btn-success btn-lg" onclick="validate_sms_code(\'co\',\''. $this->_user .'\',\'\')">Validate Code</button></center>
+                    </div>';
+                    $_SESSION['extra_message_customer']=$_string_message;
                     Header("Location: ?aditionalMessage=It seems that your acount is not validate, please check your email or&controller=user&accion=showLoginContractor");
                 }
             }elseif(is_string($_result)){
