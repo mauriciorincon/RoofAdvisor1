@@ -1,7 +1,5 @@
-!/src/.imgrepo*
 src/.imgrepo
 src/invoice/
-!/src/roofreport/
 src/roofreport/
 src/roofreport
 .DS_Store
@@ -15,10 +13,7 @@ src/conf.php
 /src/conf.php
 src/vista/js/roofchat-pub.js
 src/vista/js/roofchat-contractor.js
-!src/vista/js/roofchat-pub.js
-!src/vista/js/roofchat-contractor.js
 /src/vista/js/roofchat-pub.js
 /src/vista/js/roofchat-contractor.js
-src/tmp/*
+src/tmp/**
 src/tmp
-!src/tmp
