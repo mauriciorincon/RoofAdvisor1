@@ -1,3 +1,4 @@
+
 var handler = StripeCheckout.configure({
     key: public_key,
     //key: 'pk_test_iubKDaao3vNKYYrr45bJPUOl',
