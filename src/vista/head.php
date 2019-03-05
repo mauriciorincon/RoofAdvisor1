@@ -43,8 +43,8 @@ if(!isset($_SESSION)) {
 		<!--<link rel="stylesheet" href="vista/css/fontawesome.css">
 		<link rel="stylesheet" href="vista/css/font-awesome.min.css">-->
 		
-	        <link rel="stylesheet" href="vista/css/slick.css">
-                <link rel="stylesheet" href="vista/css/slick-theme.css">
+		<link rel="stylesheet" href="vista/css/slick.css">
+		<link rel="stylesheet" href="vista/css/slick-theme.css">
 		<link rel="stylesheet" href="vista/css/fullcalendar.css">
 		
 		<link rel="stylesheet" href="vista/timepicker/stylesheets/wickedpicker.css">
@@ -58,13 +58,14 @@ if(!isset($_SESSION)) {
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
       
-                <link rel="stylesheet" href="vista/css/smart_wizard.css">
-                <link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
-                <link rel="stylesheet" href="vista/css/mobmenu.css">
+		<link rel="stylesheet" href="vista/css/smart_wizard.css">
+		<link rel="stylesheet" href="vista/css/smart_wizard_theme_dots.css">
+		<link rel="stylesheet" href="vista/css/mobmenu.css">
 
              
-<script src="vista/js/jquery-3.3.1.js"></script>
-<script src="vista/js/stripe.checkout.js"></script>
+		<script src="vista/js/jquery-3.3.1.js"></script>
+		<script src="vista/js/stripe.checkout.js"></script>
+		<script src="vista/js/orders.js"></script>
 
 <style>
 .checked {

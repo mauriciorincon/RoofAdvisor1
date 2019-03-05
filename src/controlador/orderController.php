@@ -179,9 +179,10 @@ class orderController{
             "Status" => "$_firstStatus",
             "TransNum" => "",
             "Water" => $arrayDataOrder['Water'],
-            "StripeID"=>$arrayDataOrder['id_stripe'],
-            "postCardValue"=>$arrayDataOrder['postCardValue'],
-            "CreateBy"=>$arrayDataOrder['CreateBy'],
+            "StripeID"=> $arrayDataOrder['id_stripe'],
+            "postCardValue"=> $arrayDataOrder['postCardValue'],
+            "CreateBy"=> $arrayDataOrder['CreateBy'],
+            "Archived" => "0",
         );
        // print_r($Order);
         $_result=$this->_orderModel->insertOrder("FBID",$Order);

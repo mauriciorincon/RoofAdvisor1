@@ -51,9 +51,15 @@ $(document).ready(function () {
       { 'width': '120', 'targets': 11 }
     ]
   }
-
-
   )
+
+  $('#table_orders_company_archived').DataTable({
+    'columnDefs': [
+      { className: 'text-right', 'targets': [7, 8] },
+      { 'width': '200', 'targets': 10 },
+      { 'width': '120', 'targets': 11 }
+    ]
+  })
 
 
 

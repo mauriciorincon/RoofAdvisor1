@@ -228,7 +228,21 @@ function actionsCompany(dataOrder,companyStatus){
         'href="#myRatingScore" '+
         'onClick="setOrderSelected(\''+dataOrder.OrderNumber+'\',\''+dataOrder.FBID+'\')"> '+ 
         '<span class="glyphicon glyphicon-star"></span>'+
-        '</a>';   
+        '</a>';
+        if(dataOrder.Archived=="0" && dataOrder.Status=="K"){
+            actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Archive order" '+
+            'href="#" '+
+            'onClick="updateOrder(\''+dataOrder.OrderNumber+'\', \'Archived,1\'")'+ 
+            '<span class="glyphicon glyphicon-folder-close"></span>'+
+            '</a>';
+        }
+        if(dataOrder.Archived=="1" && dataOrder.Status=="K"){
+            actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Unarchive order" '+
+            'href="#" '+
+            'onClick="updateOrder(\''+dataOrder.OrderNumber+'\', \'Archived,0\'")'+ 
+            '<span class="glyphicon glyphicon-folder-close"></span>'+
+            '</a>';
+        }
     return actions;
 }
 

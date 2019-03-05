@@ -137,7 +137,7 @@
                 <script src="js/bootstrap.min.js"></script>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <script src="vista/js/modernizr.js"></script> <!-- Modernizr -->
-                <script src="vista/js/orders.js"></script>
+                
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126810340-1"></script>
         gtag('js', new Date());

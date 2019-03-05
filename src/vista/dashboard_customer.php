@@ -54,6 +54,7 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 				var marketrs=[];
 				var contractorMarker=[];
 				var mapObject;
+				<?php echo 'var zipCodeCustomer = "'.$_actual_customer['ZIP'].'";'; ?>
 				var infowindow;
 				var orderOpenContractor=[];
 				<?php echo 'var iconBase = "'. $_SESSION['image_path'].'"';?>
@@ -192,7 +193,9 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
                     
 					});
 					
-					
+					if (zipCodeCustomer.length>0){
+						setLocation(mapObject,zipCodeCustomer);
+					}
 				}
 			
 
@@ -598,6 +601,31 @@ echo '<script>var userProfileLogin=\''.$_SESSION['profile'].'\'; </script>';
 					$row.cell($row, fieldNumber).data(value).draw();
 
 				}
+
+				function setLocation(map, zipcode) {
+                            //var address = $('#zipCodeBegin').val();
+                            var address = zipcode;
+                            if (address == undefined || address == "") {
+                                address = '02201';
+                            }
+                            console.log("zipcode: " + address);
+                            geocoder = new google.maps.Geocoder();
+
+                            geocoder.geocode({
+                                'address': address
+                            }, function(results, status) {
+                                if (status == 'OK') {
+                                    map.setCenter(results[0].geometry.location);
+                                    var marker = new google.maps.Marker({
+                                        map: map,
+                                        position: results[0].geometry.location
+                                    });
+                                } else {
+                                    alert('Geocode was not successful for the following reason: ' + status);
+                                }
+                            });
+                        }
+
 			</script>
 
 			<script>

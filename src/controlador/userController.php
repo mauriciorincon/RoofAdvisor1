@@ -713,11 +713,19 @@ class userController{
             
             
 
-            $_array_orders_to_show=array();
+            $_array_orders_to_show = array();
+            $_array_orders_to_archived = array();
 
             
             $_orderController=new orderController();
-            $_array_orders_to_show=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
+            $_array_orders_to_show_1=$_orderController->getOrderByCompany($_actual_company['CompanyID']);
+            foreach($_array_orders_to_show_1 as $key => $order){
+                if(strcmp($order['Archived'],"0")==0){
+                    array_push($_array_orders_to_show,$order);
+                }else{
+                    array_push($_array_orders_to_archived,$order);
+                }
+            }
             
             $_array_orders_without_comapny=$_orderController->getOrderByCompany("");
             foreach($_array_orders_without_comapny as $key => $order){
