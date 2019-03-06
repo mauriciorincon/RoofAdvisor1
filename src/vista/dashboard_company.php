@@ -174,11 +174,12 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     pendingOrders.push(updateOrder.OrderNumber);    
                                     addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
                                 }
-                                
-                                
-								
 						}else{
-								updateOrderOnTable(updateOrder,row);
+                                updateOrderOnTable(updateOrder,row);
+                                if(updateOrder.Archived == "1"){
+                                    removeOrderOnTable(updateOrder);
+                                }
+                                
 						}
                         removeMarket(updateOrder.OrderNumber);
                         var marker={

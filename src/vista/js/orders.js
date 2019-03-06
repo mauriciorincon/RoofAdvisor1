@@ -232,14 +232,14 @@ function actionsCompany(dataOrder,companyStatus){
         if(dataOrder.Archived=="0" && dataOrder.Status=="K"){
             actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Archive order" '+
             'href="#" '+
-            'onClick="updateOrder(\''+dataOrder.OrderNumber+'\', \'Archived,1\'")'+ 
+            'onClick="updateOrder(\''+dataOrder.FBID+'\', \'Archived,1\')">'+ 
             '<span class="glyphicon glyphicon-folder-close"></span>'+
             '</a>';
         }
         if(dataOrder.Archived=="1" && dataOrder.Status=="K"){
             actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Unarchive order" '+
             'href="#" '+
-            'onClick="updateOrder(\''+dataOrder.OrderNumber+'\', \'Archived,0\'")'+ 
+            'onClick="updateOrder(\''+dataOrder.FBID+'\', \'Archived,0\')">'+ 
             '<span class="glyphicon glyphicon-folder-close"></span>'+
             '</a>';
         }
