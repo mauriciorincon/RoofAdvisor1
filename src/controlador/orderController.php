@@ -183,6 +183,8 @@ class orderController{
             "postCardValue"=> $arrayDataOrder['postCardValue'],
             "CreateBy"=> $arrayDataOrder['CreateBy'],
             "Archived" => "0",
+            "TotalComments" => "0",
+            "TotalFilesUploaded" => "0",
         );
        // print_r($Order);
         $_result=$this->_orderModel->insertOrder("FBID",$Order);
@@ -312,7 +314,7 @@ class orderController{
                             if(strcmp($_order['RequestType'],'R')==0){
                                 $_msg = "$_contractorName $_contractorLastName, from RoofServiceNow, is working on your request for a roof report.  We will let you know when completed.";
                             }else{
-                                $_msg = "$_companyName has confirmed your order $orderID. $_contractorName $_contractorLastName will be contacting you shortly.";
+                                $_msg = "$_companyName has confirmed your order ".$_order['OrderNumber'].". $_contractorName $_contractorLastName will be contacting you shortly.";
                             }
                             break;
                         case "E":
@@ -383,6 +385,7 @@ class orderController{
     }
 
     public function insertOrderComentary($orderID,$comment){
+        $_total=0;
         $_commenary=[
             "user_comment" => $_SESSION['username'],
             "date_comment" => date('m-d-Y h:m:s'),
@@ -390,7 +393,18 @@ class orderController{
             ];
         $this->_orderModel=new orderModel();
         $_result=$this->_orderModel->insertOrderCommentary($orderID,$_commenary);
-            
+    
+
+        $_order = $this->getOrder("FBID",$orderID);
+        if(is_object($_order) or is_array($_order)){
+            if(isset($_order['TotalComments'])){
+                $_total = $_order['TotalComments']+1;
+            }else{
+                $_total = 1;
+            }
+            $_arrayFields=explode(",","TotalComments,$_total");
+            $this->updateOrder($orderID,$_arrayFields);
+        }
         if(strpos($_result,'Error')>-1){
             return "Error, An error occur while saving the comment";
         }else{

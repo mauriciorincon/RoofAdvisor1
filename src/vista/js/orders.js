@@ -120,6 +120,12 @@ function getIconImage(Status){
 }
 
 function actionsCustomer(dataOrder){
+    var alertComments = '';
+        if(dataOrder.TotalComments!=undefined){
+            if(dataOrder.TotalComments != "0"){
+                alertComments = '<span class="badge badge-notify" style="background:red;">'+dataOrder.TotalComments+'</span>';
+            }
+        }
     if((dataOrder.Status=="A" || dataOrder.Status=="D" || dataOrder.Status=="E" || dataOrder.Status=="F") && dataOrder.RequestType!="R"){
         actions='<a class="btn-danger btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Cancel service" '+  
                 'href="" '+
@@ -168,7 +174,7 @@ function actionsCustomer(dataOrder){
                         'href="" '+
                         'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
                         '<span class="glyphicon glyphicon-comment"></span>'+
-                    '</a>';
+                    '</a>'+alertComments;
     actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Doc Share"  '+
                     'href="#" '+
                     'onClick="getListReportFile(\''+dataOrder.FBID+'\')"> '+
@@ -181,7 +187,12 @@ function actionsCustomer(dataOrder){
 
 
 function actionsCompany(dataOrder,companyStatus){
-    
+        var alertComments = '';
+        if(dataOrder.TotalComments!=undefined){
+            if(dataOrder.TotalComments != "0"){
+                alertComments = '<span class="badge badge-notify" style="background:red;">'+dataOrder.TotalComments+'</span>';
+            }
+        }
         actions='<a class="btn-info btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Invoice Info" '+
                                     'href="" '+ 
                                     'onClick="getInvoices(\''+dataOrder.FBID+'\',\'company\')">'+ 
@@ -217,7 +228,8 @@ function actionsCompany(dataOrder,companyStatus){
                             'href="" '+
                             'onClick="getCommentary(\''+dataOrder.FBID+'\')">'+ 
                             '<span class="glyphicon glyphicon-comment"></span>'+
-                        '</a>';    
+                            ''+
+                        '</a>'+alertComments;    
             actions+='<a class="btn-success btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Upload Files" '+ 
                         'href="" ' +
                         'onClick="getListReportFile(\''+dataOrder.FBID+'\')">'+ 

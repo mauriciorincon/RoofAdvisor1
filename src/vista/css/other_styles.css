@@ -8,3 +8,9 @@
   color: #333;
   background-color:rgba(18, 9, 100, 0.699);
 }
+
+.badge-notify{
+  background:red;
+   position:relative;
+   transform: (-100%, -100%);
+}

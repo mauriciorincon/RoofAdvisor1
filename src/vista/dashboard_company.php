@@ -174,12 +174,20 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     pendingOrders.push(updateOrder.OrderNumber);    
                                     addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
                                 }
+                                if(updateOrder.Archived == "0"){
+                                    var rowa = validateExistArchived(updateOrder.OrderNumber);
+                                    if(rowa!=-1 && rowa!=undefined){
+                                        removeOrderOnTableArchived(updateOrder);
+                                        //addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
+                                    }
+                                    
+                                }
 						}else{
                                 updateOrderOnTable(updateOrder,row);
                                 if(updateOrder.Archived == "1"){
                                     removeOrderOnTable(updateOrder);
+                                    addOrderToArchivedTable(updateOrder);
                                 }
-                                
 						}
                         removeMarket(updateOrder.OrderNumber);
                         var marker={
@@ -303,10 +311,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                         }); 
                     });
 					return oMarket;
-                }
+            }
 
                 
-            
             function geocodeAddress(geocoder, resultsMap,varAddress,path) {
                 var address = varAddress;
                 geocoder.geocode({'address': address}, function(results, status) {
@@ -457,6 +464,101 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                     });
             }
 
+            function addOrderToArchivedTable(dataOrder){
+                var t = $('#table_orders_company_archived').DataTable();
+                var requestType=getRequestType(dataOrder.RequestType);
+                var status=getStatus(dataOrder.Status);
+                
+                var dataCustomer="";
+                var companyActions="";
+                var dataContractor="";
+                                       
+                valueMat=isNaN(parseInt(dataOrder.EstAmtMat)) ? 0 : parseInt(dataOrder.EstAmtMat);
+                valueTime=isNaN(parseInt(dataOrder.EstAmtTime)) ? 0 : parseInt(dataOrder.EstAmtTime);
+
+                valueMatA=isNaN(parseInt(dataOrder.ActAmtMat)) ? 0 : parseInt(dataOrder.ActAmtMat);
+                valueTimeA=isNaN(parseInt(dataOrder.ActAmtTime)) ? 0 : parseInt(dataOrder.ActAmtTime);
+                        
+                if(dataOrder.Status=="F" && dataOrder.RequestType=="P"){
+                        
+						valorTotal=(parseInt(valueMat)+parseInt(valueTime));
+						
+						estimateAmount='<a class="btn-warning btn-sm" data-toggle="modal"'+
+											'href="#myEstimateAmount" '+
+											'onClick="getEstimateAmount(\''+dataOrder.FBID+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
+										'</a>';
+					}else{
+
+						estimateAmount=(parseInt(valueMat)+parseInt(valueTime));
+						estimateAmount = estimateAmount ? '$'+estimateAmount : '$0';		
+                }
+                if(dataOrder.Status=="J" && dataOrder.RequestType=="P"){
+						valorTotal=(parseInt(valueMatA)+parseInt(valueTimeA));
+						finalAmount='<a class="btn-success btn-sm" data-toggle="modal"'+
+											'href="#myFinalAmount" '+
+											'onClick="getFinalAmount(\''+dataOrder.FBID+'\')"> '+
+											'<span class="glyphicon glyphicon-check"></span>Approve Amt:'+valorTotal+
+										'</a>';
+                }else{
+                    finalAmount=parseInt(valueMatA)+parseInt(valueTimeA);
+                    finalAmount = finalAmount ? '$'+finalAmount : '$0';
+                }
+                if(dataOrder.RequestType=='P'){
+                    description='Number of Postcard: '+dataOrder.postCardValue;
+                }else{
+                    description=dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water;
+                }
+
+                actualCompanyId=$('#companyIDhidden').val();
+
+                
+                
+                    getContractorName(dataOrder.ContractorID).then(function(contractorName){
+                        dataContractor=takeJobCompany(dataOrder,actualCompanyStatus,contractorName);
+
+                        if(dataOrder.ContractorID==""){
+                            dataCustomer="XXXXX XXXXX XXXXX XXXXX";
+                            companyActions=actionsCompany(dataOrder,actualCompanyStatus);
+                                t.row.add( [
+                                        dataOrder.OrderNumber,
+                                        dataOrder.SchDate,
+                                        dataOrder.SchTime,
+                                        dataCustomer,
+                                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                                        requestType,
+                                        status,
+                                        estimateAmount,
+                                        finalAmount,
+                                        dataOrder.PaymentType,
+                                        dataContractor,
+                                        companyActions,
+                                    ] ).draw( false );
+                        }else{
+                            getCustomerData(dataOrder.CustomerFBID,dataOrder.RepAddress).then(function(customerDataX) {  
+                                dataCustomer=customerDataX;
+
+                                companyActions=actionsCompany(dataOrder,actualCompanyStatus);
+                                t.row.add( [
+                                        dataOrder.OrderNumber,
+                                        dataOrder.SchDate,
+                                        dataOrder.SchTime,
+                                        dataCustomer,
+                                        dataOrder.Hlevels+', '+dataOrder.Rtype+', '+dataOrder.Water,
+                                        requestType,
+                                        status,
+                                        estimateAmount,
+                                        finalAmount,
+                                        dataOrder.PaymentType,
+                                        dataContractor,
+                                        companyActions,
+                                    ] ).draw( false );
+                                
+                            });
+                        } 
+                    });
+            }
+
             function updateOrderOnTable(dataOrder,row){
                 var value = dataOrder.OrderNumber;
                 
@@ -571,6 +673,16 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 					.draw();
             }
 
+            function removeOrderOnTableArchived(dataOrder){
+                var value = dataOrder.OrderNumber;
+					var t = $('#table_orders_company_archived').DataTable();
+					t.rows( function ( idx, data, node ) {
+						return data[0] === value;
+					} )
+					.remove()
+					.draw();
+            }
+
             function validateExist(orderID){
                 var t = $('#table_orders_company').DataTable();
                 var data = t.rows().data();
@@ -581,11 +693,19 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                         }
                 });	
                 return indice;
-                
-              
-
             }
 
+            function validateExistArchived(orderID){
+                var t = $('#table_orders_company_archived').DataTable();
+                var data = t.rows().data();
+                var indice=-1;
+                var row = data.each(function (value, index) {
+                    if (value[0] === orderID){
+                        indice=index;
+                        }
+                });	
+                return indice;
+            }
            
             function addMarketContractor(data,fila){
                 var image="contractor.png";
@@ -2128,7 +2248,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 <div id="listArchivedOrders" class="collapse container">
 
         <div class="table-responsive inftabletophd1">          
-            <table class="table table-striped " id="table_orders_company_archived">
+            <table class="table table-striped " id="table_orders_company_archived" style="width:100%">
                 <thead class="">
                     <tr>
                         <th>ID</th>
