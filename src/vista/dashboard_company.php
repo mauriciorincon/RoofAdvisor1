@@ -11,16 +11,17 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 <div id="db-cus-main" style="margin-bottom:-5px !important;">
     <div class="btn-toolbar" style="margin-bottom:20px;" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary active" id="orderButtonCompany"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
+            <button type="button" class="btn btn-primary active" id="orderButtonCompany"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');hideShowDivs('listArchivedOrders');setActiveItemMenu(this);">Orders</button>
             <?php if($_SESSION['profile-employee']=='Admin'){ ?>
-                <button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
-                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
+                <button type="button" class="btn btn-primary "  data-toggle="collapse" data-target="#companyDashProfile1"   onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');hideShowDivs('listArchivedOrders');setActiveItemMenu(this);">Profile</button>
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1"    onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');hideShowDivs('listArchivedOrders');setActiveItemMenu(this);" >Employee</button>
             <?php } ?>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany"             onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('listCustomerByCompany');hideShowDivs('listArchivedOrders');setActiveItemMenu(this);">Scheduler</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard" onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany" onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myPostCard"                     onclick="showPostCardInfo('<?php echo trim($_actual_company['CompanyID'])?>')">Post Card</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listCustomerByCompany"       onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listArchivedOrders');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
             <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myUrls" onclick="">Resources</button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#listArchivedOrders"          onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Archived Orders</button>
         </div>
     </div>
 
@@ -65,7 +66,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
             var emergencyRepairCount=0;
             var reportRepairCount=0;
             var postCardCount=0;
-
+            <?php echo 'var zipCodeCompany = "'.$_actual_company['PayInfoBillingZip'].'";'; ?>
             var openService=0;
             var closeService=0;
             // Initialize and add the map
@@ -173,11 +174,12 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     pendingOrders.push(updateOrder.OrderNumber);    
                                     addOrderToTable(updateOrder,customerID,map,infowindow,iconBase);
                                 }
-                                
-                                
-								
 						}else{
-								updateOrderOnTable(updateOrder,row);
+                                updateOrderOnTable(updateOrder,row);
+                                if(updateOrder.Archived == "1"){
+                                    removeOrderOnTable(updateOrder);
+                                }
+                                
 						}
                         removeMarket(updateOrder.OrderNumber);
                         var marker={
@@ -260,6 +262,9 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                     }
                 });
                 
+                if (zipCodeCompany.length>0){
+						setLocation(mapObject,zipCodeCompany);
+					}
             }
 
             function addMarket(data,fila,infowindow){
@@ -722,6 +727,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                 <tbody>
                     
                     <?php foreach ($_array_orders_to_show as $key => $order) { ?>
+                        
                         <tr>
                             <td><?php echo $order['OrderNumber']?></td>
                             <td><?php echo $order['SchDate']?></td>
@@ -812,9 +818,11 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                             </td>
                             <td>
                                 <?php 
-										echo '<script type="text/javascript">',
-											'document.write(actionsCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\'));',
-											'</script>';	
+                                       //echo actionsCompany();
+                                       echo '<script type="text/javascript">',
+                                       'document.write(actionsCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\'));',
+                                       '</script>';	
+                                       
 								?>
                             </td>
                            
@@ -1959,6 +1967,17 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                                     var color=getRequestColor(data.RequestType,data.Status);
                                     var status=getStatus(data.Status);
 
+                                    var n = status.indexOf("<");
+                                    var n1 = status.indexOf(">");
+                                    if(n!=-1){
+                                        status = status.substring(n, n1-1);
+                                    }
+                                    n = status.indexOf("<");
+                                    n1 = status.indexOf(">");
+                                    if(n!=-1){
+                                        status = status.substring(n, n1-1);
+                                    }
+
                                     valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
                                     valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
 
@@ -2106,6 +2125,136 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 </div><!-- /close modal schedule -->
 
+<div id="listArchivedOrders" class="collapse container">
+
+        <div class="table-responsive inftabletophd1">          
+            <table class="table table-striped " id="table_orders_company_archived">
+                <thead class="">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Customer Info</th>
+                        <th>Roof Desc</th>
+                        <th>Job Type</th>
+                        <th>Status</th>
+                        <th>Est. Amt</th>
+                        <th>Final Amt</th>
+                        <th>Payment</th>
+                        <th>Pro</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <?php foreach ($_array_orders_to_archived as $key => $order) { ?>
+                        
+                        <tr>
+                            <td><?php echo $order['OrderNumber']?></td>
+                            <td><?php echo $order['SchDate']?></td>
+                            <td><?php echo $order['SchTime']?></td>
+                            <td><?php
+                                    if(empty($order['ContractorID'])){
+                                        echo "XXXXX XXXXX XXXXX XXXXX";
+                                    }else{
+                                        $_customerName=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Fname');
+                                        $_customerName.=" ".$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Lname');
+
+                                        $_phone_number=$this->_userModel->getNode('Customers/'.$order['CustomerFBID'].'/Phone');
+                                        $_phone_number=str_replace("+1","",$_phone_number);
+                                        echo $_customerName.' / '.$order['RepAddress'].' / '.$_phone_number;
+                                    }
+                                    
+                                ?></td>
+                            
+                            <td><?php 
+                                if(strcmp($order['RequestType'],"P")==0){
+                                    echo 'Number of Postcard: '.$order['postCardValue'];
+                                }else{
+                                    echo $order['Hlevels'].", ".$order['Rtype'].", ".$order['Water'];
+                                }
+                                
+
+                                ?></td>
+                            <td><?php 
+                                    echo '<script type="text/javascript">',
+                                        'document.write(getRequestType(\''.$order['RequestType'].'\'));',
+                                    '</script>';
+                                ?>
+                            </td>
+                            <td><?php 
+                                    echo '<script type="text/javascript">',
+                                        'document.write(getStatus(\''.$order['Status'].'\'));',
+                                    '</script>';	
+                                ?>
+                            </td>                            
+
+                            <td align="right"><?php 
+                                    if($order['Status']=='F' and $order['RequestType']=='P' ){
+                                ?>
+                                        <a class="btn-warning btn-sm" data-toggle="modal"  
+                                            href="#myEstimateAmount" 
+                                            onClick="getEstimateAmount('<?php echo $order['FBID']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime'])); ?> 
+                                        </a>
+                                <?php
+                                    }else{
+                                        echo "$".(intval($order['EstAmtMat'])+intval($order['EstAmtTime']));
+                                    }
+                                    
+                                ?>
+                            </td>                            
+                            <td align="right"><?php 
+                                    if($order['Status']=='J'){											
+                                ?>
+                                    <a class="btn-success btn-sm" data-toggle="modal"  
+                                            href="#myFinalAmount" 
+                                            onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                        </a>
+                                <?php 
+                                    }else if ( $order['RequestType']=='P' ){
+                                ?>
+                                    <a class="btn-success btn-sm" data-toggle="modal"  
+                                            href="#" 
+                                            onClick="getFinalAmount('<?php echo $order['FBID']?>')"> 
+                                            <span class="glyphicon glyphicon-check"></span>Approve Amt: <?php echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime'])); ?> 
+                                        </a>
+                                <?php
+                                    }else{
+                                        echo "$".(intval($order['ActAmtMat'])+intval($order['ActAmtTime']));
+                                    }
+                                ?>
+                            </td>
+                            <td><?php echo $order['PaymentType']?></td>
+                            <td><?php 
+                                    $_contractorName=$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameFirst');
+                                    $_contractorName.=" ".$this->_userModel->getNode('Contractors/'.$order['ContractorID'].'/ContNameLast');
+                                     echo '<script type="text/javascript">',
+                                     'document.write(takeJobCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\',\''.$_contractorName.'\'));',
+                                     '</script>';
+                                    ?>
+                                    
+                                    
+                            </td>
+                            <td>
+                                <?php 
+                                       //echo actionsCompany();
+                                       echo '<script type="text/javascript">',
+                                       'document.write(actionsCompany('.json_encode($order,JSON_FORCE_OBJECT).',\''.$_actual_company['CompanyStatus'].'\'));',
+                                       '</script>';	
+                                       
+								?>
+                            </td>
+                           
+                           
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div> 
+</div>
+
 <!-- formulario Insertar contractor datos-->
 <div class="modal" id="myModalGetWork" role="dialog" >
   <div class="modal-dialog modal-dialog-centered">
@@ -2184,8 +2333,6 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
 		</div> 
 	</div>
 </div>
-
-
 
 <div class="modal fade" id="myInvoiceInfo" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
@@ -3601,8 +3748,6 @@ if(!empty($_actual_company['postCardValue'])){
 	</div>
 </div>
 
-
-
 <div class="modal fade" id="myModalRespuesta" role="dialog">
 	<div class="modal-dialog modal-dialog-centered"> 
 		<!-- Modal content--> 
@@ -3638,6 +3783,8 @@ if(!empty($_actual_company['postCardValue'])){
 		</div> 
 	</div>
 </div>
+
+
 
 <?php
 
