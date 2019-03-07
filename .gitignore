@@ -17,3 +17,6 @@ src/vista/js/roofchat-contractor.js
 /src/vista/js/roofchat-contractor.js
 src/tmp/**
 src/tmp
+vendor/roofadvisorz-company-firebase.json
+vendor/roofadvisorz-driver-firebase.json
+vendor/roofadvizorz-firebase.json
