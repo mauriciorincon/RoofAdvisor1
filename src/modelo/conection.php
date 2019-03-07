@@ -33,7 +33,7 @@ class connection{
         //->withDatabaseUri('https://pruebabasedatos-eacf6.firebaseio.com')
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvisorzapp.firebaseio.com')
+            ->withDatabaseUri($_SESSION['firebase_path_customer_php_1'])
             ->create();
 
         $this->_firebase = $firebase_tmp->getDatabase();
@@ -46,7 +46,7 @@ class connection{
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvisorz-company.firebaseio.com')
+            ->withDatabaseUri($_SESSION['firebase_path_company_php_1'])
             ->create();
 
         $this->_firebase_company = $firebase_tmp->getDatabase();
@@ -58,7 +58,7 @@ class connection{
 
         $firebase_tmp = (new Factory)
             ->withServiceAccount($serviceAccount)
-            ->withDatabaseUri('https://roofadvisorz-driver.firebaseio.com')
+            ->withDatabaseUri($_SESSION['firebase_path_driver_php_1'])
             ->create();
 
         $this->_firebase_driver = $firebase_tmp->getDatabase();

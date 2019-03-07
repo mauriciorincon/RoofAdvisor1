@@ -773,8 +773,13 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                    }else{
                     var ref = firebase.database().ref("Customers/"+customerFBID);
                     ref.once('value').then(function(snapshot) {
-							data=snapshot.val();
-							return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
+                            try {
+                            data=snapshot.val();
+                            
+                            return resolve(data.Fname+' '+data.Lname+' / '+RepAddress+' / '+data.Phone);
+                            }catch(error){
+                                return error;
+                            }
 						});
                         //return reject("Undefined");
                     
