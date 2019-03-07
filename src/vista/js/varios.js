@@ -4644,7 +4644,7 @@ function validateInfoCustomer (suffix) {
   var customerCity = $('input#customerCity' + suffix).val()
   var customerState = $('select#customerState' + suffix).val()
   var customerZipCode = $('input#customerZipCode' + suffix).val()
-  var customerPhoneNumber = '+1' + $('input#customerPhoneNumber' + suffix).val()
+  var customerPhoneNumber = $('input#customerPhoneNumber' + suffix).val()
   var message = ''
   var companyID = $('#companyIDhidden').val()
 
@@ -5788,4 +5788,14 @@ function changeMailPhone(screenPar){
         return result1
       }
     })
+}
+
+function clearFieldsNewCustomer(){
+    $('#firstCustomerNameCompany').val('');
+    $('#lastCustomerNameCompany').val('');
+    $('#emailValidationCustomerCompany').val('');
+    $('#customerAddressCompany').val('');
+    $('#customerCityCompany').val('');
+    $('#customerZipCodeCompany').val('');
+    $('#customerPhoneNumberCompany').val('');
 }

@@ -1417,14 +1417,15 @@ class userController{
             return "Error ".$_msg;
         }else{
             $hashActivationCode = md5( rand(0,1000) );
-            $_responseU=$this->insertUserDatabase($_customer_data['Email'],$_customer_data['Phone'],$_customer_data['Fname'].' '.$_customer_data['Lname'],$hashActivationCode,'123456','customer');
+            $_customer_data['Phone'] = str_replace("+1", "", $_customer_data['Phone']);
+            $_responseU=$this->insertUserDatabase($_customer_data['Email'],"+1".$_customer_data['Phone'],$_customer_data['Fname'].' '.$_customer_data['Lname'],$hashActivationCode,'123456','customer');
             if(gettype($_responseU)=="object"){
                 $_uid_user=$_responseU->uid;
             }else{
                 $_uid_user="undefined";
             }
             if(strcmp($_uid_user,"undefined")==0){
-                return "Error ".$_responseU;
+                return "Error, ".$_responseU;
             }else{
                 $this->_userModel=new userModel();
                 $this->updateCustomerByField($_customer_data['FBID'],'uid',$_uid_user);
@@ -1466,7 +1467,7 @@ class userController{
     }
 
     function is_valid_phone($str){
-        if(strlen($str)!=12){
+        if(strlen($str)!=10){
             return false;
         }else{
             return true;

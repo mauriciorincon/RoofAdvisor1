@@ -1992,6 +1992,7 @@ echo '<script>var userProfileLoginEmployee=\''.$_SESSION['profile-employee'].'\'
                     myCustomButtonNCus:{
                         text: 'Create Client',
                         click: function() {
+                            clearFieldsNewCustomer();
                             $('#myRegisterNewCustomerCompany').modal('show');
                         }
                     },
@@ -3315,7 +3316,7 @@ if(!empty($_actual_company['postCardValue'])){
         </table>
     </div>
     <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myUploadListCustomer" onclick="">Upload Clients</button>
-    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="">New Client</button>
+    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="clearFieldsNewCustomer()">New Client</button>
 </div>         
 
 <div class="modal fade" id="myUploadListCustomer" role="dialog">

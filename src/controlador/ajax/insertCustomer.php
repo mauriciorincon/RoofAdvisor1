@@ -75,10 +75,12 @@ if(strcmp('Customer_register',$_source_call)==0){
 $_firstCustomerName = $_POST['firstCustomerName'];
 $_lastCustomerName = $_POST['lastCustomerName'];
 $_emailValidation = $_POST['emailValidation'];
-$_customerAddress = "";
-$_customerCity = "";
-$_customerState = "";
-$_customerZipCode = "";
+if(strcmp($_source_call,'Company')==0){
+    $_customerAddress = $_POST['customerAddress'];
+    $_customerCity = $_POST['customerCity'];
+    $_customerState = $_POST['customerState'];
+    $_customerZipCode = $_POST['customerZipCode'];
+}
 $_customerPhoneNumber = $_POST['customerPhoneNumber'];
 $_password=$_POST['inputPassword'];
 
