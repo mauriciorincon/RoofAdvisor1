@@ -882,7 +882,7 @@ function updateDataCustomerFromCompany () {
     updateDataCustomer(customerObj)
     index = validateExistT('table_list_customer_by_company', customerID)
     if (index != -1) {
-      var value = customerID
+      var value = customerID.toString();
       var t = $('#table_list_customer_by_company').DataTable()
       var row = t.rows(function (idx, data, node) {
         return data[0] === value
@@ -3913,10 +3913,10 @@ function disableEnableCustomer (customerID, action) {
           if (action == 'Active') {
             index = validateExistT('table_list_customer_by_company', customerID)
             if (index != -1) {
-              var value = customerID
+              var value = customerID.toString();
               var t = $('#table_list_customer_by_company').DataTable()
-              var row = t.rows(function (idx, data, node) {
-                return data[0] === value
+              var row = t.rows(function (idx, dataT, node) {
+                return dataT[0] === value
               }).indexes()
 
               var $row = t.row(row)
@@ -3928,17 +3928,19 @@ function disableEnableCustomer (customerID, action) {
               actions += '<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' +
                 'id="inactivate-customer-button" name="inactivate-customer-button" ' +
                 'data-toggle="tooltip" onclick="disableEnableCustomer(' + customerID + ',\'Inactive\')"> ' +
-                '<span class="glyphicon glyphicon-trash"></span></a>'
-              $row.cell($row, 8).data(actions).draw()
+                '<span class="glyphicon glyphicon-trash"></span></a>';
+
+                
+              $row.cell($row, 8).data(actions).draw();
             }
           }
           if (action == 'Inactive') {
             index = validateExistT('table_list_customer_by_company', customerID)
             if (index != -1) {
-              var value = customerID
+              var value = customerID.toString();
               var t = $('#table_list_customer_by_company').DataTable()
-              var row = t.rows(function (idx, data, node) {
-                return data[0] === value
+              var row = t.rows(function (idx, dataT, node) {
+                return dataT[0] === value
               }).indexes()
 
               var $row = t.row(row)
@@ -3950,9 +3952,11 @@ function disableEnableCustomer (customerID, action) {
               actions += '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
                 'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
                 'data-toggle1="tooltip" onclick="disableEnableCustomer(' + customerID + ',\'Active\')"> ' +
-                '<span class="glyphicon glyphicon-ok"></span></a>'
+                '<span class="glyphicon glyphicon-ok"></span></a>';
+                
               $row.cell($row, 8).data(actions).draw()
             }
+
           }
           jsRemoveWindowLoad('')
           $(document).ready(function () {$('#myMensaje').modal('show'); })
