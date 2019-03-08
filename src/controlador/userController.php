@@ -774,6 +774,8 @@ class userController{
             $_orderController=new orderController();
             $_array_orders_to_show=$_orderController->getOrdersAll();
             
+            $this->_userModel=new userModel();
+            $_array_state=$this->_userModel->getNode('Parameters/state');
                         
             require_once("vista/head.php");
             require_once("vista/dashboard_admin.php");
@@ -1444,6 +1446,7 @@ class userController{
     }
 
     public function disableCustomer($_customerID){
+        $message = "";
         $_customer_data=$this->getCustomerById($_customerID);
         if(strcmp($_customer_data['uid'],"undefined")==0){
             $message="User not found";
@@ -1452,7 +1455,7 @@ class userController{
                 'disabled' => true
             ];
             $_result_update=$this->_userModel->updateUserCustomer($_customer_data['uid'],$properties,"customer");
-            if(is_array($_result) or gettype($_result)=="object" ){
+            if(is_array($_result_update) or gettype($_result_update)=="object" ){
                 $message.="User disabled \n";
             }else{
                 $message.=$_result_update;

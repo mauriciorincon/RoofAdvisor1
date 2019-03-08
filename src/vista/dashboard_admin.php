@@ -1,12 +1,14 @@
 Welcome to RoofServicenow Admin 
+<input type="hidden" value="<?php echo $_actual_company['CompanyID']?>" id="companyIDhidden" >
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		<div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Orders</button>
-            <button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#companyDashBoard" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);getListCompany('table_list_company')">Company</button>
-			<button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#companyDashProfile1" onclick="hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);">Profile</button>
-			<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#companyDashEmployee1" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');setActiveItemMenu(this);" >Employee</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#scheduleCompany" onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('mapDashBoard1');setActiveItemMenu(this);">Scheduler</button>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
+            <button type="button" class="btn btn-primary active"  data-toggle="collapse" data-target="#mapDashBoard1"               onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Orders</button>
+            <button type="button" class="btn btn-primary"         data-toggle="collapse" data-target="#companyDashBoard"            onclick="hideShowDivs('companyDashProfile1');hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);getListCompany('table_list_company')">Company</button>
+			<button type="button" class="btn btn-primary"         data-toggle="collapse" data-target="#companyDashProfile1"         onclick="hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Profile</button>
+			<button type="button" class="btn btn-primary"         data-toggle="collapse" data-target="#companyDashEmployee1"        onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('mapDashBoard1');hideShowDivs('scheduleCompany');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);" >Employee</button>
+            <button type="button" class="btn btn-primary"         data-toggle="collapse" data-target="#listCustomerByCompany"       onclick="hideShowDivs('mapDashBoard1');hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('scheduleCompany');getListCustomer('table_list_customer_by_company','<?php echo $_actual_company['CompanyID'] ?>');setActiveItemMenu(this);">Customers</button>
+            <button type="button" class="btn btn-primary"         data-toggle="collapse" data-target="#scheduleCompany"             onclick="hideShowDivs('companyDashProfile1');hideShowDivs('companyDashBoard');hideShowDivs('companyDashEmployee1');hideShowDivs('mapDashBoard1');hideShowDivs('listCustomerByCompany');setActiveItemMenu(this);">Scheduler</button>
+            <button type="button" class="btn btn-primary "        data-toggle="modal" data-target="#myFilterWindow" onclick="">Filter Options</button>
             <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Metrics
                 </button>
@@ -930,31 +932,459 @@ Welcome to RoofServicenow Admin
 
 </div>
 
-<!-- formulario Insertar contractor datos-->
+<div class="collapse container" id="listCustomerByCompany">
+    <div class="table-responsive">          
+        <table class="table" id="table_list_customer_by_company">
+            <thead>
+            <tr>
+                <th>CustomerID</th>
+                <th>Customer Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Email</th>
+                <th>Phone</th>
+                
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!--<button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myUploadListCustomer" onclick="">Upload Clients</button>
+    <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#myRegisterNewCustomerCompany" onclick="clearFieldsNewCustomer()">New Client</button>-->
+</div> 
+
 <div class="collapse container" id="scheduleCompany">
-            <?php   $_year=date("Y");
-                    $_month=date("m");
-                    echo "<h2>$_month $_year </h2>";
-                    $_eventsArray=array();
-                    $oCalendar=new calendar();
-                    echo $oCalendar->draw_controls($_month,$_year);
-                    if(strlen($_month)==1){
-						$_eventsArrayAux=$oCalendar->getEvents("0".$_month,$_year);
-					}else{
-						$_eventsArrayAux=$oCalendar->getEvents($_month,$_year);
-					}
-					
-						foreach($_eventsArrayAux as $key => $orderData){
-							if(strcmp( $orderData['CustomerID'], $_actual_customer['CustomerID']) == 0){
-								array_push($_eventsArray,$order);
-							}
-						}
-					
-                    //print_r($_eventsArray);
-                    echo $oCalendar->draw_calendar($_month,$_year,$_eventsArray);
-            ?>
-     
-</div><!-- /cierro modal -->
+
+    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <!-- Page Content -->
+    <div class="container">
+ 
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div id="calendar" class="col-centered">
+                </div>
+            </div>
+			
+        </div>
+        <!-- /.row -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<form class="form-horizontal" method="POST" action="addEvent.php">
+			
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Agregar Evento</h4>
+			  </div>
+			  <div class="modal-body">
+				
+				  <div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Titulo</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="color" class="col-sm-2 control-label">Color</label>
+					<div class="col-sm-10">
+					  <select name="color" class="form-control" id="color">
+									  <option value="">Seleccionar</option>
+						  <option style="color:#0071c5;" value="#0071c5">&#9724; Azul oscuro</option>
+						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquesa</option>
+						  <option style="color:#008000;" value="#008000">&#9724; Verde</option>						  
+						  <option style="color:#FFD700;" value="#FFD700">&#9724; Amarillo</option>
+						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Naranja</option>
+						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rojo</option>
+						  <option style="color:#000;"    value="#000">&#9724; Negro</option>
+						  
+						</select>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="start" class="col-sm-2 control-label">Fecha Inicial</label>
+					<div class="col-sm-10">
+					  <input type="text" name="start" class="form-control" id="start" readonly>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label for="end" class="col-sm-2 control-label">Fecha Final</label>
+					<div class="col-sm-10">
+					  <input type="text" name="end" class="form-control" id="end" readonly>
+					</div>
+				  </div>
+				
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			  </div>
+			</form>
+			</div>
+		  </div>
+		</div>
+		
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<form class="form-horizontal" method="POST" action="editEventTitle.php">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Order Detail</h4>
+			  </div>
+			  <div class="modal-body">
+				
+				<div class="form-group">
+					<label for="title" class="col-sm-2 control-label">Order ID</label>
+					<div class="col-sm-10">
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo" readonly>
+					</div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Order Created</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="datetimeReg" placeholder="Titulo" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+				<label for="title" class="col-sm-2 control-label">Scheduled Date</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="datetimeSchedule" placeholder="Titulo" readonly>
+                    </div>
+			    </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Company</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="companyID" placeholder="Titulo" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Customer</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="customerID" placeholder="Titulo" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Total Value</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="totalValue" placeholder="Titulo" readonly>
+                    </div>
+                </div>
+                <input type="hidden" name="id" class="form-control" id="id">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<!--<button type="submit" class="btn btn-primary">Guardar</button>-->
+			  </div>
+			</form>
+			</div>
+		  </div>
+		</div>
+ 
+    </div>
+    <!-- /.container -->
+
+
+   <!-- <script src="vista/js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>-->
+    
+    
+    <script>
+        $(document).ready(function() {
+        var date = new Date();
+        var yyyy = date.getFullYear().toString();
+        var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
+        var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
+        
+
+    
+
+            $('#calendar').fullCalendar({
+                customButtons: {
+                    myCustomButton: {
+                    text: 'Refresh Calendar',
+                        click: function() {
+                            refreshCalendarV2();
+                            alert('the calendar was updated correctly');
+                        }
+                    },
+                    myCustomButtonF:{
+                        text: 'Filter by employee',
+                        click: function() {
+                            $('#myModalEmployeeList').modal('show');
+                        }
+                    },
+                    myCustomButtonNCus:{
+                        text: 'Create Client',
+                        click: function() {
+                            clearFieldsNewCustomer();
+                            $('#myRegisterNewCustomerCompany').modal('show');
+                        }
+                    },
+                    myCustomButtonNOrder:{
+                        text: 'Create Order',
+                        click: function() {
+                            $('#myModalCustomerList').modal('show');
+                        }
+                    },
+                },
+                locale: 'en',
+                header: {
+                    left: 'prev,next today myCustomButton myCustomButtonF myCustomButtonNCus myCustomButtonNOrder',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay',
+
+                },
+                defaultDate: yyyy+"-"+mm+"-"+dd,
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                selectable: true,
+                selectHelper: true,
+                select: function(start, end) {
+                    
+                    $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#ModalAdd').modal('show');
+                },
+                eventRender: function(event, element) {
+                    element.bind('dblclick', function() {
+                        $('#ModalEdit #id').val(event.id);
+                        $('#ModalEdit #title').val(event.title);
+                        $('#ModalEdit #color').val(event.color);
+                        $('#ModalEdit #companyID').val(event.company);
+                        $('#ModalEdit #customerID').val(event.customer);
+                        $('#ModalEdit #datetimeReg').val(event.date_register);
+                        $('#ModalEdit #datetimeSchedule').val(event.date_schedule);
+                        
+                        $('#ModalEdit #totalValue').val(event.total_value);
+                        
+                        getCustomerName(event.customer).then(function(customerName) {  
+                        $('#ModalEdit #customerID').val(customerName);
+                                        //alert(customerName);
+                                        });
+                        getCompanyName(event.company).then(function(companyName) {  
+                        $('#ModalEdit #companyID').val(companyName);
+                                        //alert(customerName);
+                                        });
+
+                        $('#ModalEdit').modal('show');
+                    });
+                },
+                eventDrop: function(event, delta, revertFunc) { // si changement de position
+
+                    edit(event);
+
+                },
+                eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
+
+                    edit(event);
+
+                },
+                events: function(start, end, timezone, callback) {
+                var events = [];
+                var month =moment($('#calendar').fullCalendar('getView').intervalStart).format('MM');
+                var year =moment($('#calendar').fullCalendar('getView').intervalStart).format('YYYY');
+                var ref = firebase.database().ref("Orders");
+                var month1=jQuery("#calendar").fullCalendar('getDate').month();
+                var month2=moment($('#calendar').fullCalendar('getView').intervalEnd).format('MM');
+                var date = new Date($('#calendar').fullCalendar('getDate'));
+                var month_int = date.getMonth();
+                var employeeSelected=$('#dashBoardCompanyListEmployee').val();
+                ref.orderByChild("SchDate").endAt(year).once("value", function(snapshot) {
+
+                    var month11=month1+1;
+                    var month12=month1+2;
+                    if (month1.toString.length==1){
+                        month1 = "0".concat(month1);
+                    }
+                    if (month11.toString.length==1){
+                        month11 = "0".concat(month11);
+                    }
+                    if (month12.toString.length==1){
+                        month12 = "0".concat(month12);
+                    }
+                    datos=snapshot.val();
+                    for(r in datos){
+                        data=datos[r];
+                        //if(data.CompanyID==companyID || data.CompanyID=='' || data.CompanyID==null){
+                            if(employeeSelected==''){
+                                
+                                if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month11) || data.SchDate.startsWith(month12)){
+                                    var start = data.SchDate.split("/");
+                                    var start1=start[2]+"-"+start[0]+"-"+start[1];
+                                    var end1=start[2]+"-"+start[0]+"-"+start[1];
+
+                                    var typeR=getRequestType(data.RequestType);
+                                    var color=getRequestColor(data.RequestType,data.Status);
+                                    var status=getStatus(data.Status);
+
+                                    var n = status.indexOf("<");
+                                    var n1 = status.indexOf(">");
+                                    if(n!=-1){
+                                        status = status.substring(n, n1-1);
+                                    }
+                                    n = status.indexOf("<");
+                                    n1 = status.indexOf(">");
+                                    if(n!=-1){
+                                        status = status.substring(n, n1-1);
+                                    }
+
+                                    valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
+                                    valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
+
+                                    events.push({
+                                        id: data.OrderNumber,
+                                        title: data.OrderNumber+' - '+typeR+' - '+status,
+                                        start: start1,
+                                        end: end1,
+                                        color: color,
+                                        company: data.CompanyID,
+                                        customer: data.CustomerFBID,
+                                        status: status,
+                                        date_register: data.DateTime,
+                                        date_schedule: data.SchDate,
+                                        total_value: valueMatA+valueTimeA,
+                                    });
+                    
+                                }
+                            }else{
+                                    if(data.SchDate.startsWith(month1) || data.SchDate.startsWith(month11) || data.SchDate.startsWith(month12)){
+                                        var start = data.SchDate.split("/");
+                                        var start1=start[2]+"-"+start[0]+"-"+start[1];
+                                        var end1=start[2]+"-"+start[0]+"-"+start[1];
+
+                                        var typeR=getRequestType(data.RequestType);
+                                        var color=getRequestColor(data.RequestType,data.Status);
+                                        var status=getStatus(data.Status);
+
+                                        valueMatA=isNaN(parseInt(data.ActAmtMat)) ? 0 : parseInt(data.ActAmtMat);
+                                        valueTimeA=isNaN(parseInt(data.ActAmtTime)) ? 0 : parseInt(data.ActAmtTime);
+
+                                        events.push({
+                                            id: data.OrderNumber,
+                                            title: data.OrderNumber+' - '+typeR+' - '+status,
+                                            start: start1,
+                                            end: end1,
+                                            color: color,
+                                            company: data.CompanyID,
+                                            customer: data.CustomerFBID,
+                                            status: status,
+                                            date_register: data.DateTime,
+                                            total_value: valueMatA+valueTimeA,
+                                        });
+                        
+                                    }
+                                
+                            }
+                            
+                        //}
+                    }
+                    callback(events);
+                });
+                
+                }
+                
+            });
+            
+            function edit(event){
+                start = event.start.format('YYYY-MM-DD HH:mm:ss');
+                if(event.end){
+                    end = event.end.format('YYYY-MM-DD HH:mm:ss');
+                }else{
+                    end = start;
+                }
+                
+                id =  event.id;
+                
+                Event = [];
+                Event[0] = id;
+                Event[1] = start;
+                Event[2] = end;
+                
+                $.ajax({
+                url: 'editEventDate.php',
+                type: "POST",
+                data: {Event:Event},
+                success: function(rep) {
+                        if(rep == 'OK'){
+                            alert('Evento se ha guardado correctamente');
+                        }else{
+                            alert('No se pudo guardar. Inténtalo de nuevo.'); 
+                        }
+                    }
+                });
+            }
+            
+            });
+
+            function getCustomerName(customerFBID) {
+            return new Promise(function (resolve, reject) {
+                    
+                var ref = firebase.database().ref("Customers/"+customerFBID);
+                ref.once('value').then(function(snapshot) {
+                data=snapshot.val();
+                return resolve(data.Fname+' '+data.Lname);
+            });
+                        //return reject("Undefined");
+            });  
+            }
+
+            function getCompanyName(companyID) {
+                return new Promise(function (resolve, reject) {
+                    
+                var ref = firebase.database().ref("Company/"+companyID);
+                ref.once('value').then(function(snapshot) {
+                data=snapshot.val();
+                return resolve(data.CompanyName);
+            });
+            });
+                
+            }
+
+            
+
+            function getRequestColor(requestType,status){
+                var colorType="";
+                if(status=='K'){
+                    colorType = "#008000";
+                }else{
+                    switch (requestType) {
+                        case "E":
+                            colorType = "#FF0000";
+                            break;
+                        case "S":
+                            colorType = "#0071c5";
+                            break;
+                        case "R":
+                            colorType = "#FFD700";
+                            break;
+                        case "P":
+                            colorType = "#40E0D0";
+                            break;
+                        default:
+                            colorType = "#000";
+                    }
+                }
+                
+                return colorType;
+            }
+
+        </script>
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+</div><!-- /close modal schedule -->
 
 
 <!-- formulario Modal Actualizar datos-->
@@ -2059,3 +2489,100 @@ Welcome to RoofServicenow Admin
     </div><!-- /cierro contenedor -->
   </div><!-- /cierro dialogo-->
 </div><!-- /cierro modal -->
+
+<div class="modal fade" id="myRegisterUpdateCustomerCompany" role="dialog">
+	<div class="modal-dialog modal-dialog-centered"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headerRegisterUpdateCustomer">Customer Info</h4> 
+			</div> 
+            <div class="modal-body" id="textRegisterUpdateCustomer">
+                <div class="list-group1" id="myCustomerListGroup">
+                        <input type="hidden" id="customerIdCompanyFBIDU" name="customerIdCompanyFBIDU" />
+                        <input type="hidden" id="customerIdCompanyU" name="customerIdCompanyU" />
+                        <div class="form-group">
+                            <label class="control-label">First Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" id="firstCustomerNameCompanyU" name="firstCustomerNameCompanyU"  />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Last Name</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" id="lastCustomerNameCompanyU" name="lastCustomerNameCompanyU"  />
+                        </div>  
+                        <div class="form-group">
+                            <label class="control-label ">Email</label>
+                            <input maxlength="100"  type="text" required="required" class="form-control" placeholder="Enter Email" id="emailValidationCustomerCompanyU" name="emailValidationCustomerCompanyU" onfocusout="validateEmail('customer')"/>
+                            <label class="control-label" id="answerEmailValidate" name="answerEmailValidate">Answer</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter address" id="customerAddressCompanyU" name="customerAddressCompanyU" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">City</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter city" id="customerCityCompanyU" name="customerCityCompanyU" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">State</label>
+                            <select id="customerStateCompanyU" name="customerStateCompanyU" required="required" class="form-control" placeholder="Select state">
+                                <?php foreach ($_array_state as $key => $value1) { ?>
+                                    <option value="<?php echo $value1 ?>"><?php echo $value1 ?></option>
+                                <?php } ?>
+                            </select>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Zip code</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter zip code" id="customerZipCodeCompanyU" name="customerZipCodeCompanyU" />
+                        </div> 
+                        <div class="form-group">
+                            <label class="control-label">Phone number</label>
+                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter phone number" id="customerPhoneNumberCompanyU" name="customerPhoneNumberCompanyU"  />
+                        </div>
+                </div>
+            </div>
+			<div class="modal-footer" id="buttonUploadReport"> 
+                <button type="button" class="btn-primary btn-sm" onclick="updateDataCustomerFromCompany()">Update Info</button> 
+				<button type="button" class="btn-danger btn-sm" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="myListOrderByCustomer" role="dialog">
+	<div class="modal-dialog modal-dialog-centered modal-lg"> 
+		<!-- Modal content--> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="headermyListOrderByCustomer">Job Orders</h4> 
+			</div> 
+			<div class="modal-body" id="textmyListOrderByCustomerr"> 
+                <div class="table-responsive">          
+                    <table class="table" id="table_list_orders_by_company">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Company ID</th>
+                            <th>Contractor ID</th>
+                            <th>Created By</th>
+                            <th>Create Date</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+			</div> 
+			<div class="modal-footer" id="buttonmyOrderByCustomer"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div>
+</div>

@@ -61,8 +61,9 @@ $(document).ready(function () {
     ]
   })
 
-
-
+  $('#table_drivers_dashboard_company').DataTable({})
+  
+  
 
 
   step0 = $('.stepwizard-step:eq(0)')
@@ -2408,6 +2409,7 @@ function getListCompany (tableName) {
         if (console && console.log) {
           $('#' + tableName + ' tbody').html(data)
           $('[data-toggle1="tooltip"]').tooltip()
+          $('#table_list_company').DataTable()
           console.log('La solicitud se ha completado correctamente.' + jqXHR + textStatus)
         }
         jsRemoveWindowLoad('')
@@ -3920,46 +3922,25 @@ function disableEnableCustomer (customerID, action) {
               }).indexes()
 
               var $row = t.row(row)
-
-              if(isset($customer['uid'])){
-                if(strcmp($customer['uid'],"undefined")==0){
-                    $_actions+='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
-                    'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
-                    'data-toggle1="tooltip" onclick="disableEnableCustomer('+customerID+',\'Active\')"> ' +
-                    '<span class="glyphicon glyphicon-ok"></span></a>';
-                    
-                } else{
-                    $_actions+='<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' +
-                    'id="inactivate-customer-button" name="inactivate-customer-button" ' +
-                    'data-toggle="tooltip" onclick="disableEnableCustomer('+customerID+',\'Inactive\')"> ' +
-                    '<span class="glyphicon glyphicon-trash"></span></a>';
-                }
-              }else{
-                  $_actions+='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
-                      'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
-                      'data-toggle1="tooltip" onclick="disableEnableCustomer('+customerID+',\'Active\')"> ' +
-                      '<span class="glyphicon glyphicon-ok"></span></a>';
-              }
-              $_actions+='<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' +
+              actions = '<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" ' +
+                      'href="#myRegisterUpdateCustomerCompany" ' +
+                      'onClick="getCustomerInfoTable(' + customerID + ')"> ' +
+                      '<span class="glyphicon glyphicon-pencil"></span>' +
+                      '</a>'
+              actions +='<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' +
+                      'id="inactivate-customer-button" name="inactivate-customer-button" ' +
+                      'data-toggle="tooltip" onclick="disableEnableCustomer('+customerID+',\'Inactive\')"> ' +
+                      '<span class="glyphicon glyphicon-trash"></span></a>';
+              
+              actions +='<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' +
                       'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
                       'data-toggle1="tooltip" onclick="newOrderByCompany('+customerID+',\''+customerID+'\')"> ' +
                       '<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>';
-              $_actions+='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' +
+              actions +='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' +
                       'id="list-orders-customer" name="list-orders-customer"  ' +
                       'data-toggle1="tooltip" onclick="getListOrders('+customerID+')"> ' +
                       '<span class="glyphicon glyphicon glyphicon-th-list"></span></a>';
 
-              /*actions = '<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" ' +
-                'href="#myRegisterUpdateCustomerCompany" ' +
-                'onClick="getCustomerInfoTable(' + customerID + ')"> ' +
-                '<span class="glyphicon glyphicon-pencil"></span>' +
-                '</a>'
-              actions += '<a href="#" class="inactivate-contractor-button btn-danger btn-sm"  data-toggle1="tooltip"  title="Inactive Customer" ' +
-                'id="inactivate-customer-button" name="inactivate-customer-button" ' +
-                'data-toggle="tooltip" onclick="disableEnableCustomer(' + customerID + ',\'Inactive\')"> ' +
-                '<span class="glyphicon glyphicon-trash"></span></a>';*/
-
-                
               $row.cell($row, 8).data(actions).draw();
             }
           }
@@ -3974,15 +3955,22 @@ function disableEnableCustomer (customerID, action) {
 
               var $row = t.row(row)
               actions = '<a class="btn-primary btn-sm" data-toggle="modal"  data-toggle1="tooltip"  title="Edit Customer Info" ' +
-                'href="#myRegisterUpdateCustomerCompany" ' +
-                'onClick="getCustomerInfoTable(' + customerID + ')"> ' +
-                '<span class="glyphicon glyphicon-pencil"></span>' +
-                '</a>'
+                      'href="#myRegisterUpdateCustomerCompany" ' +
+                      'onClick="getCustomerInfoTable(' + customerID + ')"> ' +
+                      '<span class="glyphicon glyphicon-pencil"></span>' +
+                      '</a>'
               actions += '<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="Active Customer" ' +
-                'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
-                'data-toggle1="tooltip" onclick="disableEnableCustomer(' + customerID + ',\'Active\')"> ' +
-                '<span class="glyphicon glyphicon-ok"></span></a>';
-                
+                      'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
+                      'data-toggle1="tooltip" onclick="disableEnableCustomer(' + customerID + ',\'Active\')"> ' +
+                      '<span class="glyphicon glyphicon-ok"></span></a>';
+              actions +='<a href="#" class="inactivate-contractor-button btn-warning btn-sm"  data-toggle="tooltip" title="New Order" ' +
+                      'id="inactivate-customer-button" name="inactivate-customer-button"  ' +
+                      'data-toggle1="tooltip" onclick="newOrderByCompany('+customerID+',\''+customerID+'\')"> ' +
+                      '<span class="glyphicon glyphicon glyphicon-map-marker"></span></a>';
+              actions +='<a href="#" class="inactivate-contractor-button btn-success btn-sm"  data-toggle="tooltip" title="List Orders" ' +
+                      'id="list-orders-customer" name="list-orders-customer"  ' +
+                      'data-toggle1="tooltip" onclick="getListOrders('+customerID+')"> ' +
+                      '<span class="glyphicon glyphicon glyphicon-th-list"></span></a>';
               $row.cell($row, 8).data(actions).draw()
             }
 

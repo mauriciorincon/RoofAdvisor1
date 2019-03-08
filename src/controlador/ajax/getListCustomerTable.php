@@ -14,8 +14,12 @@ if(isset($_POST['field'])){
 if(isset($_POST['value'])){
     $_value=$_POST['value'];
 }
-
+if(strcmp($_field,'CO000000')==0){
+    $_field = '';
+    $_value = '';
+}
 $_contractorController=new userController();
+
 $_array_customer=$_contractorController->getListData('Customers',$_field,$_value);
 //echo "Field ".$_field." Value ".$_value;
 //print_r($_array_customer);
